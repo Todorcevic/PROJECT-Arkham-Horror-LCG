@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-namespace Michsky.UI.Dark
+namespace Arkham.UI
 {
     public class BlurManager : MonoBehaviour
     {
