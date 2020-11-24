@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace Arkham.UI
 {
-    public class BlurManager : MonoBehaviour
+    public class HomeBlurComponent : MonoBehaviour
     {
         private readonly string customProperty = "_Size";
 
@@ -20,8 +20,6 @@ namespace Arkham.UI
         private Tween BlurIn => blurMaterial.DOFloat(maxBlurValue, customProperty, timeAnimation);
 
         private Tween BlurOut => blurMaterial.DOFloat(minBlurValue, customProperty, timeAnimation);
-
-        private void Start() => blurMaterial.SetFloat(customProperty, minBlurValue);
 
         public void BlurInAnim()
         {
