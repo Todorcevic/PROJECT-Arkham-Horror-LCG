@@ -144,12 +144,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4716696262168546615}
   - component: {fileID: 5793376374306019755}
-  - component: {fileID: -4165779537063651695}
+  - component: {fileID: 6391501865670595397}
   - component: {fileID: 4731165547400152392}
   - component: {fileID: 4860891258169784540}
   - component: {fileID: 1788881073398416496}
   m_Layer: 5
-  m_Name: Main Button
+  m_Name: Tab Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,7 +183,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8656333651208386103}
   m_CullTransparentMesh: 0
---- !u!114 &-4165779537063651695
+--- !u!114 &6391501865670595397
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8656333651208386103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f22a98ac76689be498d043387acbab87, type: 3}
+  m_Script: {fileID: 11500000, guid: 15dd065d3f7792b4784bf84d78d3256d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 4731165547400152392}
