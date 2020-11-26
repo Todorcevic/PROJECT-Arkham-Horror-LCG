@@ -1,54 +1,40 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Arkham.UI;
+﻿using Arkham.UI;
 
 namespace Arkham.Controller
 {
     public class TabController : IButtonController
     {
         private static TabComponent currentTab;
+        private readonly TabComponent tab;
 
-        public void Click(ButtonComponent tab)
+        public TabController(TabComponent tab) => this.tab = tab;
+
+        public void Click()
         {
-            TabComponent tabb = (TabComponent)tab;
-            if (currentTab == tabb) return;
-            tabb.PlaySound(tabb.ClickSound);
-            Selected(tabb);
+            if (currentTab == tab) return;
+            tab.PlaySound(tab.ClickSound);
+            Selected();
+            tab.ClickAction.Invoke();
         }
 
-        public void HoverEnter(ButtonComponent tab)
+        public void HoverEnter()
         {
-            TabComponent tabb = (TabComponent)tab;
-            if (currentTab == tabb) return;
-            tabb.PlaySound(tabb.HoverEnterSound);
-            Activate(tabb);
+            if (currentTab == tab) return;
+            tab.PlaySound(tab.HoverEnterSound);
+            tab.Activate();
         }
 
-        public void HoverExit(ButtonComponent tab)
+        public void HoverExit()
         {
-            TabComponent tabb = (TabComponent)tab;
-            if (currentTab == tabb) return;
-            Desactivate(tabb);
+            if (currentTab == tab) return;
+            tab.Desactivate();
         }
 
-        void Selected(TabComponent tab)
+        void Selected()
         {
-            if (currentTab != null) Desactivate(currentTab);
-            Activate(tab);
+            if (currentTab != null) currentTab.Desactivate();
+            tab.Activate();
             currentTab = tab;
-        }
-
-        void Activate(TabComponent tab)
-        {
-            tab.ChangeTextColor(tab.HoverColor);
-            tab.FillBackground(true);
-        }
-
-        void Desactivate(TabComponent tab)
-        {
-            tab.ChangeTextColor(tab.SimpleColor);
-            tab.FillBackground(false);
         }
     }
 }

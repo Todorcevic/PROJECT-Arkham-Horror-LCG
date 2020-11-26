@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 using TMPro;
 using DG.Tweening;
 using Arkham.Controller;
@@ -15,8 +16,11 @@ namespace Arkham.UI
         [SerializeField] private Image background;
         [SerializeField] private TextMeshProUGUI text;
 
+        [Header("CLICK EVENT")]
+        [SerializeField] private UnityEvent clickAction;
+
         [Header("SETTINGS")]
-        [SerializeField] [Range(0f, 1f)] private float timeAnimation;
+        [SerializeField] [Range(0f, 1f)] private float timeHoverAnimation;
 
         [Header("AUDIO")]
         [SerializeField] private AudioSource audioSource;
@@ -29,13 +33,14 @@ namespace Arkham.UI
         public AudioClip ClickSound => clickSound;
         public AudioClip HoverEnterSound => hoverEnterSound;
         public AudioClip HoverExitSound => hoverExitSound;
+        public UnityEvent ClickAction => clickAction;
 
-        private void Start() => controller = new ButtonController();
-        public void ChangeTextColor(Color color) => text.DOColor(color, timeAnimation);
-        public void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, timeAnimation);
+        private void Awake() => controller = new ButtonController(this);
+        public void ChangeTextColor(Color color) => text.DOColor(color, timeHoverAnimation);
+        public void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, timeHoverAnimation);
         public void PlaySound(AudioClip clip) => audioSource.PlayOneShot(clip);
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => controller.Click(this);
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => controller.HoverEnter(this);
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => controller.HoverExit(this);
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => controller.Click();
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => controller.HoverEnter();
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => controller.HoverExit();
     }
 }

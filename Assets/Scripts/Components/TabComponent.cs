@@ -1,18 +1,12 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using TMPro;
-using DG.Tweening;
-using Arkham.Controller;
+﻿using Arkham.Controller;
 
 namespace Arkham.UI
 {
     public class TabComponent : ButtonComponent
     {
-        private void Start()
-        {
-            controller = new TabController();
-        }
+        private void Awake() => controller = new TabController(this);
+
+        public void Click() => controller.Click();
 
         public void Activate()
         {
