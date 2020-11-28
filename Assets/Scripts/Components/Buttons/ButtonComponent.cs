@@ -1,37 +1,38 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using TMPro;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 
 namespace Arkham.UI
 {
     public class ButtonComponent : MonoBehaviour
     {
-        private readonly Color SimpleColor = Color.white;
-        private readonly Color HoverColor = Color.black;
+        [Title("RESOURCES")]
+        [SerializeField, Required, ChildGameObjectsOnly] private Image background;
+        [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI text;
 
-        [Header("RESOURCES")]
-        [SerializeField] private Image background;
-        [SerializeField] private TextMeshProUGUI text;
+        [Title("CLICK EVENT")]
+        [SerializeField] protected UnityEvent clickAction;
 
-        [Header("CLICK EVENT")]
-        [SerializeField] private UnityEvent clickAction;
+        [Title("SETTINGS")]
+        [SerializeField, ColorPalette] private Color simpleTextColor;
+        [SerializeField, ColorPalette] private Color hoverTextColor;
+        [SerializeField, ColorPalette] private Color hoverColor;
+        [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
 
-        [Header("SETTINGS")]
-        [SerializeField] [Range(0f, 1f)] private readonly float timeHoverAnimation;
+        [Title("AUDIO")]
+        [SerializeField, Required] private AudioSource audioSource;
+        [SerializeField] protected AudioClip clickSound;
+        [SerializeField] protected AudioClip hoverEnterSound;
+        [SerializeField] protected AudioClip hoverExitSound;
 
-        [Header("AUDIO")]
-        [SerializeField] private AudioSource audioSource;
-        [SerializeField] private AudioClip clickSound;
-        [SerializeField] private AudioClip hoverEnterSound;
-        [SerializeField] private AudioClip hoverExitSound;
-
-        protected AudioClip ClickSound => clickSound;
-        protected AudioClip HoverEnterSound => hoverEnterSound;
-        protected AudioClip HoverExitSound => hoverExitSound;
-        protected UnityEvent ClickAction => clickAction;
+        private void Start()
+        {
+            text.color = simpleTextColor;
+            background.color = hoverColor;
+        }
 
         protected void PlaySound(AudioClip clip)
         {
@@ -42,13 +43,13 @@ namespace Arkham.UI
 
         public void HoverActivate()
         {
-            ChangeTextColor(HoverColor);
+            ChangeTextColor(hoverTextColor);
             FillBackground(true);
         }
 
         public void HoverDesactivate()
         {
-            ChangeTextColor(SimpleColor);
+            ChangeTextColor(simpleTextColor);
             FillBackground(false);
         }
     }

@@ -9,17 +9,17 @@ namespace Arkham.UI
     {
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            PlaySound(ClickSound);
-            ClickAction.Invoke();
+            PlaySound(clickSound);
+            clickAction.Invoke();
         }
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            PlaySound(HoverEnterSound);
+            PlaySound(hoverEnterSound);
             HoverActivate();
         }
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            PlaySound(HoverExitSound);
+            PlaySound(hoverExitSound);
             HoverDesactivate();
         }
     }

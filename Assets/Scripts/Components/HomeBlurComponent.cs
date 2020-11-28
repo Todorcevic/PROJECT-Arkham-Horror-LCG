@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 
 namespace Arkham.UI
 {
@@ -9,10 +8,10 @@ namespace Arkham.UI
     {
         private readonly string customProperty = "_Size";
 
-        [Header("RESOURCES")]
+        [Title("RESOURCES")]
         [SerializeField] private Material blurMaterial;
 
-        [Header("SETTINGS")]
+        [Title("SETTINGS")]
         [SerializeField] [Range(0f, 30f)] private float minBlurValue;
         [SerializeField] [Range(0f, 30f)] private float maxBlurValue;
         [SerializeField] [Range(0f, 1f)] private float timeAnimation;
