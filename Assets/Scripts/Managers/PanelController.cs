@@ -4,7 +4,7 @@ using Arkham.UI;
 
 namespace Arkham.Manager
 {
-    public class PanelManager : MonoBehaviour
+    public class PanelController : MonoBehaviour
     {
         [Header("RESOURCES")]
         [SerializeField] protected PanelComponent currentPanel;

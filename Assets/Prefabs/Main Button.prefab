@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4716696262168546615}
   - component: {fileID: 5793376374306019755}
-  - component: {fileID: -4165779537063651695}
+  - component: {fileID: -5545139659100891299}
   - component: {fileID: 4731165547400152392}
   - component: {fileID: 1788881073398416496}
   m_Layer: 5
@@ -182,7 +182,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8656333651208386103}
   m_CullTransparentMesh: 0
---- !u!114 &-4165779537063651695
+--- !u!114 &-5545139659100891299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8656333651208386103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f22a98ac76689be498d043387acbab87, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b5bd2eb8d49bb04ea635a22ef4da980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 4731165547400152392}
@@ -199,11 +199,10 @@ MonoBehaviour:
   clickAction:
     m_PersistentCalls:
       m_Calls: []
-  timeHoverAnimation: 0
   audioSource: {fileID: 1788881073398416496}
   clickSound: {fileID: 8300000, guid: 776d909e0ee83c74383b98ae5271c2e1, type: 3}
   hoverEnterSound: {fileID: 8300000, guid: 3b5395abc17f33f4a941a4c9e0c91e28, type: 3}
-  hoverExitSound: {fileID: 8300000, guid: 87bb853647ac1d84a8314bad31eab671, type: 3}
+  hoverExitSound: {fileID: 0}
 --- !u!114 &4731165547400152392
 MonoBehaviour:
   m_ObjectHideFlags: 0
