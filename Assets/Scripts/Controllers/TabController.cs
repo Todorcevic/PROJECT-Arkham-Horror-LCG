@@ -1,19 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Arkham.UI;
+using Sirenix.OdinInspector;
 
 namespace Arkham.Manager
 {
     public class TabController : MonoBehaviour
     {
-        [SerializeField] private TabButton currentTab;
-
-        public TabButton CurrentTab { get => currentTab; set => currentTab = value; }
+        [Title("RESOURCES")]
+        [SerializeField, Required, SceneObjectsOnly] private TabButton currentTab;
 
         private void Start() => SelectTab(currentTab);
 
-        public bool IsCurrentTab(TabButton tab) => CurrentTab == tab;
+        public bool IsCurrentTab(TabButton tab) => currentTab == tab;
 
         public void SelectTab(TabButton tab)
         {

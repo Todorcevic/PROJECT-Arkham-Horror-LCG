@@ -9,6 +9,9 @@ namespace Arkham.UI
 {
     public class ButtonComponent : MonoBehaviour
     {
+        private Color simpleTextColor = Color.white;
+        private Color hoverTextColor = Color.black;
+
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image background;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI text;
@@ -17,22 +20,13 @@ namespace Arkham.UI
         [SerializeField] protected UnityEvent clickAction;
 
         [Title("SETTINGS")]
-        [SerializeField, ColorPalette] private Color simpleTextColor;
-        [SerializeField, ColorPalette] private Color hoverTextColor;
-        [SerializeField, ColorPalette] private Color hoverColor;
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
 
         [Title("AUDIO")]
-        [SerializeField, Required] private AudioSource audioSource;
+        [SerializeField, Required, ChildGameObjectsOnly] private AudioSource audioSource;
         [SerializeField] protected AudioClip clickSound;
         [SerializeField] protected AudioClip hoverEnterSound;
         [SerializeField] protected AudioClip hoverExitSound;
-
-        private void Start()
-        {
-            text.color = simpleTextColor;
-            background.color = hoverColor;
-        }
 
         protected void PlaySound(AudioClip clip)
         {

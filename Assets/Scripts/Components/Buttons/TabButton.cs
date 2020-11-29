@@ -7,7 +7,7 @@ namespace Arkham.UI
 {
     public class TabButton : ButtonComponent, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [Title("TAB MANAGER")]
+        [Title("RESOURCES")]
         [SerializeField, SceneObjectsOnly] private TabController tabManager;
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)

@@ -1,20 +1,21 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 using Arkham.UI;
+using Sirenix.OdinInspector;
 
 namespace Arkham.Manager
 {
     public class PanelController : MonoBehaviour
     {
         [Header("RESOURCES")]
-        [SerializeField] protected PanelComponent currentPanel;
+        [SerializeField, Required, SceneObjectsOnly] protected PanelComponent currentPanel;
 
         private void Start() => SelectPanel(currentPanel);
 
         public virtual void SelectPanel(PanelComponent panel)
         {
-            if (currentPanel != null) currentPanel.Desactivate();
-            panel.Activate();
+            currentPanel.Activate(false);
+            panel.Activate(true);
             currentPanel = panel;
         }
     }
