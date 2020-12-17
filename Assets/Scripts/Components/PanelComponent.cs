@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 
@@ -13,11 +14,17 @@ namespace Arkham.UI
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeFadeAnimation;
 
-        private string ButtonName => gameObject.activeInHierarchy ? "Desactivate Alpha" : "Activate Alpha";
-        private Color ButtonColor => gameObject.activeInHierarchy ? Color.red : Color.green;
+        private bool IsCanvasVisible => canvasGroup.alpha == 1;
+        private string ButtonName => IsCanvasVisible ? "Desactivate Alpha" : "Activate Alpha";
+        private Color ButtonColor => IsCanvasVisible ? Color.red : Color.green;
 
         [Button("$ButtonName", ButtonSizes.Gigantic), GUIColor("$ButtonColor")]
-        private void ToogleCanvasAlpha() => canvasGroup.alpha = canvasGroup.alpha == 0 ? 1 : 0;
+        private void ToogleCanvasAlpha()
+        {
+            canvasGroup.alpha = IsCanvasVisible ? 0 : 1;
+            canvasGroup.blocksRaycasts = IsCanvasVisible;
+            canvasGroup.interactable = IsCanvasVisible;
+        }
 
         public void Activate(bool toActivate)
         {

@@ -7,16 +7,21 @@ namespace Arkham.Manager
 {
     public class PanelController : MonoBehaviour
     {
-        [Header("RESOURCES")]
-        [SerializeField, Required, SceneObjectsOnly] protected PanelComponent currentPanel;
+        [Title("RESOURCES")]
+        [SerializeField, Required, SceneObjectsOnly] private PanelComponent currentPanel;
 
         private void Start() => SelectPanel(currentPanel);
 
-        public virtual void SelectPanel(PanelComponent panel)
+        public void SelectPanel(PanelComponent panel)
         {
             currentPanel.Activate(false);
             panel.Activate(true);
             currentPanel = panel;
+        }
+
+        public void DisableCurrentPanel()
+        {
+            currentPanel.Activate(false);
         }
     }
 }
