@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
+using System;
 
-namespace Arkham.UI
+namespace Arkham.Adapters
 {
     public class JsonNewtonsoftAdapter : ISerializer
     {

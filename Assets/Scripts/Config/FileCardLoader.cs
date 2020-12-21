@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using Zenject;
+using Arkham.Adapters;
 
 namespace Arkham.UI
 {

@@ -9,6 +9,7 @@ namespace Arkham.UI
         private IDataCardsLoader dataCardsLoader;
         private IDataPlayerLoader dataPlayerLoader;
         private ICardFactory cardFactory;
+        //[Inject] GameData gameData;
 
         [Inject]
         public void Initialize(IResolutionSet resolutionSetter, IDataCardsLoader dataCardsLoader/*, IDataPlayerLoader dataPlayerLoader, ICardFactory cardFactory*/)
@@ -23,6 +24,7 @@ namespace Arkham.UI
         {
             resolutionSetter.SettingResolution();
             dataCardsLoader.LoadDataCards();
+            //Debug.Log(gameData.AllDataCardsDictionary["01001"].Name);
             //cardFactory.BuildCards();
         }
     }

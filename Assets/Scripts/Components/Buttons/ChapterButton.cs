@@ -16,6 +16,7 @@ namespace Arkham.UI
         [SerializeField, Required, ChildGameObjectsOnly] private Transform highlightedTextBox;
 
         [Title("SETTINGS")]
+        [SerializeField] private string scenarioId;
         [SerializeField] private bool isLocked;
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
         [SerializeField, Range(0f, 100f)] private float yoffsetHoverHighlighted;
