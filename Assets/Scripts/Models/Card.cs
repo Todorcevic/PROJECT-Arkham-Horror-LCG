@@ -1,4 +1,4 @@
-﻿namespace Arkham.UI
+﻿namespace Arkham.Model
 {
     public class Card
     {

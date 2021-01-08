@@ -3,7 +3,7 @@ using DG.Tweening;
 using Arkham.UI;
 using Sirenix.OdinInspector;
 
-namespace Arkham.Manager
+namespace Arkham.Controller
 {
     public class PanelController : MonoBehaviour
     {

@@ -32,6 +32,7 @@ namespace Arkham.UI
         {
             if (clip != null) audioSource.PlayOneShot(clip);
         }
+
         private void ChangeTextColor(Color color) => text.DOColor(color, timeHoverAnimation);
         private void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, timeHoverAnimation);
 

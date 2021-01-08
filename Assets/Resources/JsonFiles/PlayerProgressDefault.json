@@ -1,0 +1,12 @@
+{
+  "CurrentScenario": "CORE1",
+  "CampaignsState": {
+    "CORE": "Open",
+    "TDL": "Lock",
+    "TPC": "Lock",
+    "TFA": "Lock",
+    "TCU": "Lock",
+    "TDE": "Lock",
+    "OS": "Lock"
+  }
+}
