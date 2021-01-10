@@ -21,7 +21,7 @@ namespace Arkham.Scenarios
         public Scenario LoadScenario(string scenarioId)
         {
             Scenario scenario = LoadScenarioData(scenarioId);
-            scenario.ScenarioLogic = InstantiateScenarioLogic(scenarioId);
+            scenario.ScenarioLogic = instanceAdapter.CreateInstance<ScenarioLogic>(scenarioId);
             return scenario;
         }
 
@@ -29,12 +29,6 @@ namespace Arkham.Scenarios
         {
             string scenarioPath = gameFiles.JSON_ROOT_DIRECTORY + gameFiles.CAMPAIGNS_DIRECTORY + scenarioId + "/" + gameFiles.SCENARIO_DATA_FILE;
             return serializer.CreateDataFromResources<Scenario>(scenarioPath);
-        }
-
-        private ScenarioLogic InstantiateScenarioLogic(string scenarioId)
-        {
-            ObjectHandle handle = instanceAdapter.CreateInstance(typeof(ScenarioLogic).Namespace + "." + scenarioId);
-            return (ScenarioLogic)handle.Unwrap();
         }
     }
 }

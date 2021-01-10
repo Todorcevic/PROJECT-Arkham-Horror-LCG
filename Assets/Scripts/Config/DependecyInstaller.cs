@@ -7,6 +7,7 @@ using Arkham.Services;
 using Arkham.Scenarios;
 using Arkham.UI;
 using Arkham.Factories;
+using Arkham.Investigators;
 using System.Linq;
 using Sirenix.OdinInspector;
 
@@ -16,12 +17,15 @@ namespace Arkham.Config
     {
         [Title("CAMPAIGN STATES")]
         [SerializeField] private List<CampaignState> campaignStates;
-        private Dictionary<string, CampaignState> campaignsStateDictionary;
 
-        [Title("CARD PREFABS")]
-        [SerializeField] private CardVComponent cardVPrefab;
-        [SerializeField] private CardHComponent cardHPrefab;
-        [SerializeField] private CardRowComponent cardRow;
+        //[Title("CARD PREFABS")]
+        //[SerializeField] private CardVComponent cardVPrefab;
+        //[SerializeField] private CardHComponent cardHPrefab;
+        //[SerializeField] private CardRowComponent cardRow;
+
+        //[Title("CARD IMAGES")]
+        //[SerializeField] private List<Sprite> cardImagesEN;
+        //[SerializeField] private List<Sprite> cardImagesES;
 
         public override void InstallBindings()
         {
@@ -33,19 +37,13 @@ namespace Arkham.Config
             Container.Bind<IDataCardsLoader>().To<FileCardLoader>().AsSingle();
             Container.Bind<ISerializer>().To<JsonNewtonsoftAdapter>().AsSingle();
             Container.Bind<IScreenResolutionAdapter>().To<ScreenResolutionAdapter>().AsSingle();
-            Container.Bind<IFileAdapter>().To<CSharpAdapter>().AsSingle();
-            Container.Bind<IInstanceAdapter>().To<CSharpAdapter>().AsSingle();
+            Container.Bind<IFileAdapter>().To<FileAdapter>().AsSingle();
+            Container.Bind<IInstanceAdapter>().To<InstantiatorAdapter>().AsSingle();
             Container.Bind<IScenarioLoader>().To<ScenarioLoader>().AsSingle();
             Container.Bind<ILoadSaveProgress>().To<PlayerProgressIO>().AsSingle();
             Container.Bind<ICardFactory>().To<CardFactory>().AsSingle();
 
-            Container.BindInstance(campaignsStateDictionary);
-            Container.Bind<CardVComponent>().FromNewComponentOnNewPrefab(cardVPrefab);
-            Container.Bind<CardHComponent>().FromNewComponentOnNewPrefab(cardHPrefab);
-            Container.Bind<CardRowComponent>().FromNewComponentOnNewPrefab(cardRow);
+            Container.BindInstance(campaignStates.ToDictionary(campaign => campaign.Id)).AsSingle();
         }
-
-        public void CampaignStateToDictionary() =>
-            campaignsStateDictionary = campaignStates.ToDictionary(campaign => campaign.Id);
     }
 }

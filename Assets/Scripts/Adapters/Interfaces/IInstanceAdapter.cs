@@ -4,6 +4,6 @@ namespace Arkham.Adapters
 {
     public interface IInstanceAdapter
     {
-        ObjectHandle CreateInstance(string typeName);
+        T CreateInstance<T>(string typeName);
     }
 }

@@ -27,7 +27,7 @@ namespace Tests
             ISerializer serializer = Substitute.For<ISerializer>();
             serializer.CreateDataFromResources<Scenario>(default).ReturnsForAnyArgs(scenarioExpected);
             IInstanceAdapter instanceAdapter = Substitute.For<IInstanceAdapter>();
-            instanceAdapter.CreateInstance(Arg.Is<string>(s => s.Contains(scenarioId))).Returns(objectHand);
+            instanceAdapter.CreateInstance<ScenarioLogic>(Arg.Is<string>(s => s.Contains(scenarioId))).Returns(new ScenarioLogicMock());
             ScenarioLoader scenarioLoader = new ScenarioLoader(serializer, instanceAdapter, gameFiles);
 
             //Act
