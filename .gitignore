@@ -20,7 +20,7 @@
 [Aa]ssets/Plugins/Editor/JetBrains*
 
 # Cards Image
-/[Aa]ssets/Medias/Images/AllCardsEN/
+/[Aa]ssets/Medias/Images/Cards/AllCardsEN/
 
 # Visual Studio cache directory
 .vs/
