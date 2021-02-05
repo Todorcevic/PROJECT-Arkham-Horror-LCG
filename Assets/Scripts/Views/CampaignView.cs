@@ -16,7 +16,7 @@ namespace Arkham.Views
     public class CampaignView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ICampaignView
     {
         [Inject] private readonly IPresenter<ICampaignView> presenter;
-        [Inject] private readonly IFullController<ICampaignView> controller;
+        [Inject] private readonly ISemiFullController<ICampaignView> controller;
 
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image chapterImage;
@@ -49,19 +49,19 @@ namespace Arkham.Views
         private void Start() => presenter.CreateReactiveViewModel(this);
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => controller.Click(this);
+        public void OnPointerClick(PointerEventData eventData) => controller.Click(this);
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
+        public void OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
+        public void OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
 
-        void ICampaignView.ClickEffect()
+        public void ClickEffect()
         {
             audioSource.PlayOneShot(clickSound);
             clickAction.Invoke();
         }
 
-        void ICampaignView.HoverOnEffect()
+        public void HoverOnEffect()
         {
             audioSource.PlayOneShot(hoverEnterSound);
             chapterImage.transform.DOScale(zoomParallaxHoverEffect, timeHoverAnimation);
@@ -69,14 +69,14 @@ namespace Arkham.Views
             highlightedTextBox.transform.DOLocalMoveY(yoffsetHoverHighlighted, timeHoverAnimation);
         }
 
-        void ICampaignView.HoverOffEffect()
+        public void HoverOffEffect()
         {
             chapterImage.transform.DOScale(1f, timeHoverAnimation);
             highlighted.DOFade(0, timeHoverAnimation);
             highlightedTextBox.transform.DOLocalMoveY(0, timeHoverAnimation);
         }
 
-        void ICampaignView.SetImageState(Sprite icon)
+        public void SetImageState(Sprite icon)
         {
             stateCanvas.alpha = icon == null ? 0 : 1;
             stateImage.sprite = icon;

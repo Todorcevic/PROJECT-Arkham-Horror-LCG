@@ -362,19 +362,19 @@
     ],
     "InvestigatorsSelectedList": [
         {
-            "Position": "ONE",
-            "InvestigatorId": ""
+            "Position": 1,
+            "InvestigatorId": "01002"
         },
         {
-            "Position": "TWO",
-            "InvestigatorId": ""
+            "Position": 2,
+            "InvestigatorId": "01001"
         },
         {
-            "Position": "THREE",
-            "InvestigatorId": ""
+            "Position": 3,
+            "InvestigatorId": "01005"
         },
         {
-            "Position": "FOUR",
+            "Position": 4,
             "InvestigatorId": ""
         }
     ]

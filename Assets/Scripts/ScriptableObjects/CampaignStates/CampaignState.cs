@@ -3,14 +3,7 @@ using Sirenix.OdinInspector;
 
 namespace Arkham.Views
 {
-    //public enum CampaignState
-    //{
-    //    Completed,
-    //    Locked,
-    //    Open
-    //}
-
-    public abstract class CampaignSetting : ScriptableObject
+    public abstract class CampaignState : ScriptableObject
     {
         [SerializeField, Required] private string id;
         [SerializeField, Required] protected bool isOpen;

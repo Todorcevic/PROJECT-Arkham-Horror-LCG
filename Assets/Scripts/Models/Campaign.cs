@@ -5,9 +5,8 @@ using UnityEngine;
 
 namespace Arkham.Models
 {
-    public class Campaign : IEntity
+    public class Campaign
     {
-        string IEntity.Identity => Id;
         public string Id { get; set; }
         public string State { get; set; }
     }

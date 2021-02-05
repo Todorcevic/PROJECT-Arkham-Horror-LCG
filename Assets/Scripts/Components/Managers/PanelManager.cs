@@ -19,9 +19,6 @@ namespace Arkham.Managers
             currentPanel = panel;
         }
 
-        public void DisableCurrentPanel()
-        {
-            currentPanel.Activate(false);
-        }
+        public void DisableCurrentPanel() => currentPanel.Activate(false);
     }
 }

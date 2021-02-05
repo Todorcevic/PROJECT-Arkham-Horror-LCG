@@ -16,23 +16,23 @@ namespace Arkham.Presenters
             this.repository = repository;
         }
 
-        void IPresenter<CardInvestigatorView>.CreateReactiveViewModel(CardInvestigatorView objectView)
+        public void CreateReactiveViewModel(CardInvestigatorView objectView)
         {
             CreateReactiveModel(objectView);
         }
 
-        void IClickPresenter<CardInvestigatorView>.Click(CardInvestigatorView cardInvestigatorView, PointerEventData eventData)
+        public void Click(CardInvestigatorView cardInvestigatorView, PointerEventData eventData)
         {
             //CardInvestigatorView cardInView = objectView as CardInvestigatorView;
             //repository.AllInvestigatorSelectors["ONE"].InvestigatorId = cardInvestigatorView.Id;
         }
 
-        void IFullInteractablePresenter<CardInvestigatorView>.HoverOff(CardInvestigatorView cardInvestigatorView, PointerEventData eventData)
+        public void HoverOff(CardInvestigatorView cardInvestigatorView, PointerEventData eventData)
         {
 
         }
 
-        void IFullInteractablePresenter<CardInvestigatorView>.HoverOn(CardInvestigatorView cardInvestigatorView, PointerEventData eventData)
+        public void HoverOn(CardInvestigatorView cardInvestigatorView, PointerEventData eventData)
         {
 
         }

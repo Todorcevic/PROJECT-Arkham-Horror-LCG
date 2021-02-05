@@ -8,6 +8,7 @@ using Arkham.Factories;
 using Arkham.Presenters;
 using Arkham.Controllers;
 using Arkham.Models;
+using Arkham.UseCases;
 
 namespace Arkham.Config
 {
@@ -16,9 +17,12 @@ namespace Arkham.Config
         public override void InstallBindings()
         {
             Container.Bind<GameFiles>().AsSingle();
+            Container.Bind<GameData>().AsSingle();
             Container.Bind<CardRepository>().AsSingle();
             Container.Bind<Repository>().AsSingle();
+            Container.Bind<DeselectInvestigator>().AsSingle();
 
+            Container.Bind<IDoubleClick>().To<DoubleClick>().AsSingle();
             Container.Bind<IResolutionSet>().To<ScreenResolutionAutoDetect>().AsSingle();
             Container.Bind<ISerializer>().To<JsonNewtonsoftAdapter>().AsSingle();
             Container.Bind<IScreenResolutionAdapter>().To<ScreenResolutionAdapter>().AsSingle();
@@ -31,7 +35,7 @@ namespace Arkham.Config
             Container.Bind<IPresenter<ICampaignView>>().To<CampaignPresenter>().AsSingle();
             Container.Bind<IPresenter<IInvestigatorSelectorView>>().To<InvestigatorSelectorPresenter>().AsSingle();
 
-            Container.Bind<IFullController<ICampaignView>>().To<CampaignController>().AsSingle();
+            Container.Bind<ISemiFullController<ICampaignView>>().To<CampaignController>().AsSingle();
             Container.Bind<IFullController<IInvestigatorSelectorView>>().To<InvestigatorSelectorController>().AsSingle();
         }
     }

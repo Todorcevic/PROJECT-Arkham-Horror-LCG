@@ -9,18 +9,10 @@ using Zenject;
 
 namespace Arkham.Repositories
 {
-    public class CardDeck
+    public class CardDeck : CardBase
     {
-        [Inject] public readonly Repository allData;
-
-        public CardDeck(string id, ICardDeckView view)
+        public CardDeck(string id, ICardDeckView view) : base(id, view)
         {
-            Id = id;
-            View = view;
         }
-
-        public string Id { get; }
-        public CardInfo Info => allData.AllCardsInfo[Id];
-        public ICardDeckView View { get; }
     }
 }

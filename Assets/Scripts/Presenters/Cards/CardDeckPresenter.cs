@@ -8,22 +8,22 @@ namespace Arkham.Presenters
 {
     public class CardDeckPresenter : IFullInteractablePresenter<CardDeckView>
     {
-        void IClickPresenter<CardDeckView>.Click(CardDeckView objectView, PointerEventData eventData)
+        public void Click(CardDeckView objectView, PointerEventData eventData)
         {
 
         }
 
-        void IFullInteractablePresenter<CardDeckView>.HoverOff(CardDeckView objectView, PointerEventData eventData)
+        public void HoverOff(CardDeckView objectView, PointerEventData eventData)
         {
 
         }
 
-        void IFullInteractablePresenter<CardDeckView>.HoverOn(CardDeckView objectView, PointerEventData eventData)
+        public void HoverOn(CardDeckView objectView, PointerEventData eventData)
         {
 
         }
 
-        void IPresenter<CardDeckView>.CreateReactiveViewModel(CardDeckView objectView)
+        public void CreateReactiveViewModel(CardDeckView objectView)
         {
 
         }

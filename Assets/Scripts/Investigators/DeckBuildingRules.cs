@@ -8,7 +8,6 @@ namespace Arkham.Investigators
     public class DeckBuildingRules
     {
         [Inject] private readonly Repository allData;
-        public string Id { get; set; }
         public virtual int DeckSize => 30;
         public virtual List<string> DeckBuildingFactionConditions => new List<string>();
         public virtual List<int> DeckBuildingXpConditions => new List<int>();

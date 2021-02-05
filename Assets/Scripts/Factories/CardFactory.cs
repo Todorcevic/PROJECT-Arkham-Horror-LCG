@@ -50,7 +50,9 @@ namespace Arkham.Factories
             {
                 CardInvestigatorView investigatorView = GameObject.Instantiate(cardFactoryComponent.CardInvestigatorPrefab, cardFactoryComponent.InvestigatorZone);
                 SetData(investigatorView, investigator.Code);
-                SetCardInvestigator(investigatorView, investigator.Code);
+                DeckBuildingRules deckBuildingRules = instantiator.CreateInstance<DeckBuildingRules>(investigator.Code);
+                CardInvestigator cardInvestigator = new CardInvestigator(investigator.Code, investigatorView, deckBuildingRules);
+                cardRepository.AllCard.Add(investigator.Code, cardInvestigator);
             }
         }
 
@@ -62,7 +64,7 @@ namespace Arkham.Factories
             {
                 CardDeckView cardDeckView = GameObject.Instantiate(cardFactoryComponent.CardDeckPrefab, cardFactoryComponent.CardZone);
                 SetData(cardDeckView, card.Code);
-                SetDeckCard(cardDeckView, card.Code);
+                cardRepository.AllCard.Add(card.Code, new CardDeck(card.Code, cardDeckView));
             }
         }
 
@@ -72,20 +74,6 @@ namespace Arkham.Factories
             cardView.name = id;
             cardView.CardImage.sprite = cardImage[id];
             InjectDependency(cardView);
-        }
-
-
-        private void SetCardInvestigator(CardInvestigatorView cardView, string idCard)
-        {
-            DeckBuildingRules deckBuildingRules = instantiator.CreateInstance<DeckBuildingRules>(idCard);
-            CardInvestigator card = new CardInvestigator(idCard, cardView, deckBuildingRules);
-            cardRepository.AllCardInvestigator.Add(idCard, card);
-        }
-
-        private void SetDeckCard(CardDeckView cardView, string idCard)
-        {
-            CardDeck card = new CardDeck(idCard, cardView);
-            cardRepository.AllCardDeck.Add(idCard, card);
         }
 
         private void InjectDependency(CardView cardInstance) => diContainer.Inject(cardInstance);

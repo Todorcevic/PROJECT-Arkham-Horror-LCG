@@ -20,7 +20,7 @@ namespace Arkham.Presenters
         }
 
         /*******************************************************************/
-        void IPresenter<ICampaignView>.CreateReactiveViewModel(ICampaignView campaignView)
+        public void CreateReactiveViewModel(ICampaignView campaignView)
         {
             Campaign campaign = allData.AllCampaigns[campaignView.Id];
             campaign.ObserveEveryValueChanged(c => c.State)

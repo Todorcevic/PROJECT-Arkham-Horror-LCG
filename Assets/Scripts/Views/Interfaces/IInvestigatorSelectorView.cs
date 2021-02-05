@@ -6,7 +6,7 @@ namespace Arkham.Views
 {
     public interface IInvestigatorSelectorView
     {
-        string Id { get; }
+        int Id { get; }
         void ChangeImage(Sprite sprite);
     }
 }

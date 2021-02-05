@@ -1,8 +1,7 @@
 ﻿namespace Arkham.Models
 {
-    public class CardInfo : IEntity
+    public class CardInfo
     {
-        string IEntity.Identity => Code;
         public string Pack_code { get; set; }
         public string Pack_name { get; set; }
         public string Type_code { get; set; }

@@ -1,13 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Arkham.Models
+﻿namespace Arkham.Models
 {
-    public class InvestigatorSelector : IEntity
+    public class InvestigatorSelector
     {
-        string IEntity.Identity => Position;
-        public string Position { get; set; }
+        public int Position { get; set; }
         public string InvestigatorId { get; set; }
     }
 }

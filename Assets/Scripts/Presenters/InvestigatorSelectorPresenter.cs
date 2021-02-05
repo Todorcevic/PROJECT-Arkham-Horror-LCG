@@ -19,17 +19,20 @@ namespace Arkham.Presenters
         }
 
         /*******************************************************************/
-        void IPresenter<IInvestigatorSelectorView>.CreateReactiveViewModel(IInvestigatorSelectorView investigatorSelectorView)
+        public void CreateReactiveViewModel(IInvestigatorSelectorView investigatorSelectorView)
         {
-            InvestigatorSelector investigatorSelector = allData.AllInvestigatorSelectors[investigatorSelectorView.Id];
-            investigatorSelector.ObserveEveryValueChanged(i => i.InvestigatorId)
+            allData.InvestigatorsSelectedList.ObserveEveryValueChanged(invSelectedList => invSelectedList[investigatorSelectorView.Id])
                 .Subscribe(investigatorId =>
                 {
+
+
+
                     Sprite sprite = null;
                     if (investigatorId != string.Empty)
-                        sprite = cardRepository.AllCards[investigatorId].GetCardImage();
+                        sprite = cardRepository.GetCardView(investigatorId).GetCardImage();
                     investigatorSelectorView.ChangeImage(sprite);
-                });
+                }
+                );
         }
     }
 }

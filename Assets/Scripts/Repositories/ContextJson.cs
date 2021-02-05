@@ -23,7 +23,7 @@ namespace Arkham.Repositories
             this.allData = allData;
         }
 
-        void IContext.LoadDataCards()
+        public void LoadDataCards()
         {
             allData.CardInfoList = serializer.CreateDataFromResources<List<CardInfo>>(gameFiles.CardsDataFilePath);
             MultiplyX2CoreSetQuantity();
@@ -39,10 +39,10 @@ namespace Arkham.Repositories
                 card.Quantity *= 2;
         }
 
-        void IContext.SaveProgress() =>
+        public void SaveProgress() =>
           serializer.SaveFileFromData(allData, gameFiles.PlayerProgressFilePath);
 
-        void IContext.LoadProgress()
+        public void LoadProgress()
         {
             if (fileAdapter.FileExist(gameFiles.PlayerProgressFilePath))
                 serializer.UpdateDataFromFile(gameFiles.PlayerProgressFilePath, allData);

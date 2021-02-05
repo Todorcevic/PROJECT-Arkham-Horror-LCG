@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace Arkham.Views
 {
     [CreateAssetMenu(fileName = "BasicCampaignState", menuName = "BasicCampaignState", order = 1)]
-    public class BasicCampaignSetting : CampaignSetting
+    public class BasicCampaignState : CampaignState
     {
         [SerializeField] private Sprite icon;
 
