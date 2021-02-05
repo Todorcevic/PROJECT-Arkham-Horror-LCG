@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Open
   m_EditorClassIdentifier: 
   id: Open
-  icon: {fileID: 0}
   isOpen: 1
+  icon: {fileID: 0}

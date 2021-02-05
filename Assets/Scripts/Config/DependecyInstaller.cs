@@ -1,49 +1,38 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-using Zenject;
+﻿using Zenject;
 using Arkham.Adapters;
-using Arkham.Model;
+using Arkham.Repositories;
 using Arkham.Services;
 using Arkham.Scenarios;
-using Arkham.UI;
+using Arkham.Views;
 using Arkham.Factories;
-using Arkham.Investigators;
-using System.Linq;
-using Sirenix.OdinInspector;
+using Arkham.Presenters;
+using Arkham.Controllers;
+using Arkham.Models;
 
 namespace Arkham.Config
 {
     public class DependecyInstaller : MonoInstaller
     {
-        [Title("CAMPAIGN STATES")]
-        [SerializeField] private List<CampaignState> campaignStates;
-
-        //[Title("CARD PREFABS")]
-        //[SerializeField] private CardVComponent cardVPrefab;
-        //[SerializeField] private CardHComponent cardHPrefab;
-        //[SerializeField] private CardRowComponent cardRow;
-
-        //[Title("CARD IMAGES")]
-        //[SerializeField] private List<Sprite> cardImagesEN;
-        //[SerializeField] private List<Sprite> cardImagesES;
-
         public override void InstallBindings()
         {
             Container.Bind<GameFiles>().AsSingle();
-            Container.Bind<GameData>().AsSingle();
-            Container.Bind<PlayerData>().AsSingle();
+            Container.Bind<CardRepository>().AsSingle();
+            Container.Bind<Repository>().AsSingle();
 
             Container.Bind<IResolutionSet>().To<ScreenResolutionAutoDetect>().AsSingle();
-            Container.Bind<IDataCardsLoader>().To<FileCardLoader>().AsSingle();
             Container.Bind<ISerializer>().To<JsonNewtonsoftAdapter>().AsSingle();
             Container.Bind<IScreenResolutionAdapter>().To<ScreenResolutionAdapter>().AsSingle();
             Container.Bind<IFileAdapter>().To<FileAdapter>().AsSingle();
             Container.Bind<IInstanceAdapter>().To<InstantiatorAdapter>().AsSingle();
             Container.Bind<IScenarioLoader>().To<ScenarioLoader>().AsSingle();
-            Container.Bind<ILoadSaveProgress>().To<PlayerProgressIO>().AsSingle();
             Container.Bind<ICardFactory>().To<CardFactory>().AsSingle();
+            Container.Bind<IContext>().To<ContextJson>().AsSingle();
 
-            Container.BindInstance(campaignStates.ToDictionary(campaign => campaign.Id)).AsSingle();
+            Container.Bind<IPresenter<ICampaignView>>().To<CampaignPresenter>().AsSingle();
+            Container.Bind<IPresenter<IInvestigatorSelectorView>>().To<InvestigatorSelectorPresenter>().AsSingle();
+
+            Container.Bind<IFullController<ICampaignView>>().To<CampaignController>().AsSingle();
+            Container.Bind<IFullController<IInvestigatorSelectorView>>().To<InvestigatorSelectorController>().AsSingle();
         }
     }
 }

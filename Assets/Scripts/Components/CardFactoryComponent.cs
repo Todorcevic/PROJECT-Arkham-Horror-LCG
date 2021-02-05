@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using Arkham.Model;
+using Arkham.Views;
 using Zenject;
 
 namespace Arkham.UI
@@ -10,9 +10,9 @@ namespace Arkham.UI
     public class CardFactoryComponent : MonoBehaviour
     {
         [Title("CARD PREFABS")]
-        [SerializeField] private CardVComponent cardVPrefab;
-        [SerializeField] private CardHComponent cardHPrefab;
-        [SerializeField] private CardRowComponent cardRow;
+        [SerializeField] private CardDeckView cardDeckPrefab;
+        [SerializeField] private CardInvestigatorView cardInvestigatorPrefab;
+        [SerializeField] private CardRowView cardRow;
 
         [Title("CARD IMAGES")]
         [SerializeField] private List<Sprite> cardImagesEN;
@@ -22,9 +22,9 @@ namespace Arkham.UI
         [SerializeField] private Transform investigatorZone;
         [SerializeField] private Transform cardZone;
 
-        public CardVComponent CardVPrefab => cardVPrefab;
-        public CardHComponent CardHPrefab => cardHPrefab;
-        public CardRowComponent CardRow => cardRow;
+        public CardDeckView CardDeckPrefab => cardDeckPrefab;
+        public CardInvestigatorView CardInvestigatorPrefab => cardInvestigatorPrefab;
+        public CardRowView CardRow => cardRow;
         public List<Sprite> CardImagesEN => cardImagesEN;
         public List<Sprite> CardImagesES => cardImagesES;
         public Transform InvestigatorZone => investigatorZone;

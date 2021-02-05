@@ -1,33 +1,33 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using Arkham.Controller;
+using Arkham.Managers;
 using Sirenix.OdinInspector;
 
 namespace Arkham.UI
 {
     public class TabButton : ButtonComponent, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [Title("RESOURCES")]
-        [SerializeField, SceneObjectsOnly] private TabController tabController;
+        [Title("MANAGER"), PropertyOrder(-1)]
+        [SerializeField, SceneObjectsOnly] private TabManager tabManager;
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            if (tabController.IsCurrentTab(this)) return;
-            tabController.SelectTab(this);
+            if (tabManager.IsCurrentTab(this)) return;
+            tabManager.SelectTab(this);
             PlaySound(clickSound);
             clickAction?.Invoke();
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            if (tabController.IsCurrentTab(this)) return;
+            if (tabManager.IsCurrentTab(this)) return;
             PlaySound(hoverEnterSound);
             HoverActivate();
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            if (tabController.IsCurrentTab(this)) return;
+            if (tabManager.IsCurrentTab(this)) return;
             PlaySound(hoverExitSound);
             HoverDesactivate();
         }

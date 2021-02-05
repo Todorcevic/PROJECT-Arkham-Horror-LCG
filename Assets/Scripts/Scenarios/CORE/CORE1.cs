@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Arkham.Model;
+using Arkham.Models;
 
 namespace Arkham.Scenarios
 {

@@ -1,14 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Arkham.Model;
+using UnityEngine;
+using Arkham.Models;
 using Arkham.UI;
-using System;
-using Zenject;
-using Arkham.Investigators;
+using Arkham.Views;
 using Arkham.Adapters;
-using System.Runtime.Remoting;
+using Arkham.Investigators;
+using Arkham.Repositories;
+using Zenject;
 
 namespace Arkham.Factories
 {
@@ -16,16 +15,18 @@ namespace Arkham.Factories
     {
         private readonly CardFactoryComponent cardFactoryComponent;
         private readonly Dictionary<string, Sprite> cardImage;
-        private readonly GameData gameData;
-        private readonly PlayerData playerData;
+        private readonly Repository allData;
+        private readonly CardRepository cardRepository;
         private readonly IInstanceAdapter instantiator;
+        private readonly DiContainer diContainer;
 
-        public CardFactory(CardFactoryComponent cardFactoryComponent, GameData gameData, PlayerData playerData, IInstanceAdapter instantiator)
+        public CardFactory(CardFactoryComponent cardFactoryComponent, Repository allData, CardRepository cardRepository, DiContainer diContainer, IInstanceAdapter instantiator)
         {
             this.cardFactoryComponent = cardFactoryComponent;
-            this.gameData = gameData;
-            this.playerData = playerData;
+            this.allData = allData;
+            this.cardRepository = cardRepository;
             this.instantiator = instantiator;
+            this.diContainer = diContainer;
             cardImage = BuildDictionaryImage(cardFactoryComponent);
         }
 
@@ -43,34 +44,50 @@ namespace Arkham.Factories
 
         private void BuildInvestigators()
         {
-            var allInvestigators = gameData.AllDataCards
-                .Where(c => c.Type_code == "investigator" && cardImage.ContainsKey(c.Code))
-                .OrderBy(c => c.Faction_code);
-            foreach (Card investigator in allInvestigators)
+            var allInvestigators = allData.CardInfoList.FindAll(c => c.Type_code == "investigator" && cardImage.ContainsKey(c.Code))
+                .OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
+            foreach (CardInfo investigator in allInvestigators)
             {
-                cardFactoryComponent.CardHPrefab.Info = investigator;
-                cardFactoryComponent.CardHPrefab.name = investigator.Code;
-                cardFactoryComponent.CardHPrefab.CardImage.sprite = cardImage[investigator.Code];
-                cardFactoryComponent.CardHPrefab.Investigator = playerData.AllInvestigatorsDictionary[investigator.Code];
-                cardFactoryComponent.CardHPrefab.Investigator.DeckBuilding = instantiator.CreateInstance<DeckBuildingRules>(investigator.Code);
-                GameObject.Instantiate(cardFactoryComponent.CardHPrefab, cardFactoryComponent.InvestigatorZone);
+                CardInvestigatorView investigatorView = GameObject.Instantiate(cardFactoryComponent.CardInvestigatorPrefab, cardFactoryComponent.InvestigatorZone);
+                SetData(investigatorView, investigator.Code);
+                SetCardInvestigator(investigatorView, investigator.Code);
             }
         }
 
         private void BuildDeckCards()
         {
-            var allDeckCards = gameData.AllDataCards
-                .Where(c => (c.Type_code == "asset" || c.Type_code == "event" || c.Type_code == "skill") && cardImage.ContainsKey(c.Code))
-                .OrderBy(c => c.Faction_code);
-            foreach (Card card in allDeckCards)
+            var allDeckCards = allData.CardInfoList.FindAll(c => (c.Type_code == "asset" || c.Type_code == "event" || c.Type_code == "skill") && cardImage.ContainsKey(c.Code))
+                .OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
+            foreach (CardInfo card in allDeckCards)
             {
-                cardFactoryComponent.CardVPrefab.Info = card;
-                cardFactoryComponent.CardVPrefab.name = card.Code;
-                cardFactoryComponent.CardVPrefab.CardImage.sprite = cardImage[card.Code];
-                GameObject.Instantiate(cardFactoryComponent.CardVPrefab, cardFactoryComponent.CardZone);
+                CardDeckView cardDeckView = GameObject.Instantiate(cardFactoryComponent.CardDeckPrefab, cardFactoryComponent.CardZone);
+                SetData(cardDeckView, card.Code);
+                SetDeckCard(cardDeckView, card.Code);
             }
         }
 
+        private void SetData(CardView cardView, string id)
+        {
+            cardView.Id = id;
+            cardView.name = id;
+            cardView.CardImage.sprite = cardImage[id];
+            InjectDependency(cardView);
+        }
 
+
+        private void SetCardInvestigator(CardInvestigatorView cardView, string idCard)
+        {
+            DeckBuildingRules deckBuildingRules = instantiator.CreateInstance<DeckBuildingRules>(idCard);
+            CardInvestigator card = new CardInvestigator(idCard, cardView, deckBuildingRules);
+            cardRepository.AllCardInvestigator.Add(idCard, card);
+        }
+
+        private void SetDeckCard(CardDeckView cardView, string idCard)
+        {
+            CardDeck card = new CardDeck(idCard, cardView);
+            cardRepository.AllCardDeck.Add(idCard, card);
+        }
+
+        private void InjectDependency(CardView cardInstance) => diContainer.Inject(cardInstance);
     }
 }

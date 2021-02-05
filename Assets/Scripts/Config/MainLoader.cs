@@ -1,27 +1,30 @@
 ﻿using UnityEngine;
 using Zenject;
 using Arkham.Services;
-using Arkham.Model;
+using Arkham.Repositories;
 using Arkham.Factories;
+using Arkham.Models;
 
 namespace Arkham.Config
 {
     public class MainLoader : MonoBehaviour
     {
-        [Inject] private PlayerData playerData;
-
-        [Inject] private IResolutionSet resolutionSetter;
-        [Inject] private ILoadSaveProgress progressIO;
-        [Inject] private IDataCardsLoader dataCardsLoader;
-        [Inject] private ICardFactory cardFactory;
+        [Inject] private readonly IContext context;
+        [Inject] private readonly IResolutionSet resolutionSetter;
+        [Inject] private readonly ICardFactory cardFactory;
 
         private void Awake()
         {
             resolutionSetter.SettingResolution();
-            progressIO.LoadProgress();
-            dataCardsLoader.LoadDataCards();
+            context.LoadDataCards();
+            context.LoadProgress();
             cardFactory.BuildCards();
-            //Debug.Log(playerData.AllInvestigatorsDictionary["01001"].DeckBuilding.DeckBuilding());
+            //context.SaveProgress();
         }
+
+        //private void Update()
+        //{
+        //    if (Input.GetKeyDown("space")) repository.AllCampaigns["CORE"].State = Views.CampaignState.Completed;
+        //}
     }
 }

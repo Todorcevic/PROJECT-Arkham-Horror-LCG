@@ -322,16 +322,15 @@ MonoBehaviour:
   stateCanvas: {fileID: 1143711315986413296}
   highlighted: {fileID: 6801058822832394089}
   highlightedTextBox: {fileID: 8914362415478176639}
-  campaignStates:
-  - {fileID: 11400000, guid: e4ed5b90125d9864f8b28cef6f6ac901, type: 2}
-  - {fileID: 11400000, guid: d5262e54f8d236741a02dda91ff25388, type: 2}
-  - {fileID: 11400000, guid: a6089a746feec0c4fa1cd88ce0f515f8, type: 2}
   id: 
   firstScenarioId: 
-  campaignState: {fileID: 0}
   timeHoverAnimation: 0.25
   yoffsetHoverHighlighted: 40
   zoomParallaxHoverEffect: 1.1
+  settings:
+  - {fileID: 11400000, guid: e4ed5b90125d9864f8b28cef6f6ac901, type: 2}
+  - {fileID: 11400000, guid: d5262e54f8d236741a02dda91ff25388, type: 2}
+  - {fileID: 11400000, guid: a6089a746feec0c4fa1cd88ce0f515f8, type: 2}
   clickAction:
     m_PersistentCalls:
       m_Calls: []
