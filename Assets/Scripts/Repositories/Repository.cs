@@ -22,5 +22,8 @@ namespace Arkham.Repositories
         public Dictionary<string, Investigator> AllInvestigators => allInvestigators ?? (allInvestigators = InvestigatorsList.ToDictionary(i => i.Id));
         public Dictionary<string, Campaign> AllCampaigns => allCampaigns ?? (allCampaigns = CampaignList.ToDictionary(c => c.Id));
         public string InvestigatorSelected { get; set; }
+
+        public int InvestigatorSelectorPosition(string investigatorId) =>
+            InvestigatorsSelectedList.IndexOf(investigatorId);
     }
 }

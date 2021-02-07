@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using Arkham.Views;
-using Arkham.Models;
+using Arkham.Managers;
 using Arkham.Repositories;
 using UniRx;
 
@@ -22,17 +22,15 @@ namespace Arkham.Presenters
         public void CreateReactiveViewModel(IInvestigatorSelectorView investigatorSelectorView)
         {
             allData.InvestigatorsSelectedList.ObserveEveryValueChanged(invSelectedList => invSelectedList[investigatorSelectorView.Id])
-                .Subscribe(investigatorId =>
-                {
+                .Select(investigatorId => GetSprite(investigatorId))
+                .Subscribe(sprite => investigatorSelectorView.ChangeImage(sprite));
+        }
 
-
-
-                    Sprite sprite = null;
-                    if (investigatorId != string.Empty)
-                        sprite = cardRepository.GetCardView(investigatorId).GetCardImage();
-                    investigatorSelectorView.ChangeImage(sprite);
-                }
-                );
+        private Sprite GetSprite(string investigatorId)
+        {
+            if (investigatorId != string.Empty)
+                return cardRepository.GetCardView(investigatorId).GetCardImage();
+            return null;
         }
     }
 }

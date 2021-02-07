@@ -12,14 +12,16 @@ namespace Arkham.Controllers
     public class InvestigatorSelectorController : IFullController<IInvestigatorSelectorView>
     {
         private readonly Repository allData;
-        DeselectInvestigator deselect;
+        private readonly IInvestigatorSelector selectorLogic;
 
-        public InvestigatorSelectorController(GameData gameData, Repository allData, DeselectInvestigator deselect)
+        /*******************************************************************/
+        public InvestigatorSelectorController(Repository allData, IInvestigatorSelector selectorLogic)
         {
             this.allData = allData;
-            this.deselect = deselect;
+            this.selectorLogic = selectorLogic;
         }
 
+        /*******************************************************************/
         public void Click(IInvestigatorSelectorView investigatorSelectorView, PointerEventData eventData)
         {
             allData.InvestigatorSelected = allData.InvestigatorsSelectedList[investigatorSelectorView.Id];
@@ -27,18 +29,22 @@ namespace Arkham.Controllers
 
         public void DoubleClick(IInvestigatorSelectorView investigatorSelectorView, PointerEventData eventData)
         {
-            deselect.Deselect(investigatorSelectorView.Id);
-            //allData.InvestigatorsSelectedList[investigatorSelectorView.Id] = string.Empty;
-        }
-
-        public void HoverOff(IInvestigatorSelectorView investigatorSelectorView, PointerEventData eventData)
-        {
-
+            selectorLogic.RemoveInvestigator(investigatorSelectorView.Id);
         }
 
         public void HoverOn(IInvestigatorSelectorView investigatorSelectorView, PointerEventData eventData)
         {
-
+            if (HasInvestigator(investigatorSelectorView))
+                investigatorSelectorView.HoverOnEffect();
         }
+
+        public void HoverOff(IInvestigatorSelectorView investigatorSelectorView, PointerEventData eventData)
+        {
+            if (HasInvestigator(investigatorSelectorView))
+                investigatorSelectorView.HoverOffEffect();
+        }
+
+        private bool HasInvestigator(IInvestigatorSelectorView investigatorSelectorView) =>
+            allData.InvestigatorsSelectedList[investigatorSelectorView.Id].Length > 0;
     }
 }

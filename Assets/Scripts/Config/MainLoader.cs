@@ -4,11 +4,15 @@ using Arkham.Services;
 using Arkham.Repositories;
 using Arkham.Factories;
 using Arkham.Models;
+using Arkham.UseCases;
 
 namespace Arkham.Config
 {
     public class MainLoader : MonoBehaviour
     {
+        [Inject] Repository repository;
+        [Inject] IInvestigatorSelector selector;
+
         [Inject] private readonly IContext context;
         [Inject] private readonly IResolutionSet resolutionSetter;
         [Inject] private readonly ICardFactory cardFactory;
@@ -22,9 +26,10 @@ namespace Arkham.Config
             //context.SaveProgress();
         }
 
-        //private void Update()
-        //{
-        //    if (Input.GetKeyDown("space")) repository.AllCampaigns["CORE"].State = Views.CampaignState.Completed;
-        //}
+        private void Update()
+        {
+            if (Input.GetKeyDown("space"))
+                selector.AddInvestigator("01004");
+        }
     }
 }

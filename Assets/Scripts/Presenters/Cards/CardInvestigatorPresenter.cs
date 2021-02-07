@@ -7,7 +7,7 @@ using Arkham.Adapters;
 
 namespace Arkham.Presenters
 {
-    public class CardInvestigatorPresenter : IFullInteractablePresenter<CardInvestigatorView>
+    public class CardInvestigatorPresenter : IPresenter<ICardInvestigatorView>
     {
         private readonly ContextJson repository;
 
@@ -16,31 +16,11 @@ namespace Arkham.Presenters
             this.repository = repository;
         }
 
-        public void CreateReactiveViewModel(CardInvestigatorView objectView)
-        {
-            CreateReactiveModel(objectView);
-        }
-
-        public void Click(CardInvestigatorView cardInvestigatorView, PointerEventData eventData)
-        {
-            //CardInvestigatorView cardInView = objectView as CardInvestigatorView;
-            //repository.AllInvestigatorSelectors["ONE"].InvestigatorId = cardInvestigatorView.Id;
-        }
-
-        public void HoverOff(CardInvestigatorView cardInvestigatorView, PointerEventData eventData)
-        {
-
-        }
-
-        public void HoverOn(CardInvestigatorView cardInvestigatorView, PointerEventData eventData)
-        {
-
-        }
-
-        private void CreateReactiveModel(CardInvestigatorView cardInvestigatorComponent)
+        public void CreateReactiveViewModel(ICardInvestigatorView objectView)
         {
             //playerData.ObserveEveryValueChanged(playerData => playerData.Campaigns[campaignButton.Id])
             //    .Subscribe(campaignStateId => campaignStates[campaignStateId].SetState(campaignButton));
         }
+
     }
 }

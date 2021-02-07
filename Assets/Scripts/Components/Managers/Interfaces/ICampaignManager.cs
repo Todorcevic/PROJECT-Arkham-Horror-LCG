@@ -4,7 +4,7 @@ namespace Arkham.Managers
 {
     public interface ICampaignManager
     {
-        void SetState(ICampaignView campaign, string idState);
+        void SetState(ICampaignView campaign);
     }
 }
 

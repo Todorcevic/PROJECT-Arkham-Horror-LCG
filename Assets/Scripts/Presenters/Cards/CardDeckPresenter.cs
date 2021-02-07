@@ -6,26 +6,12 @@ using UnityEngine.EventSystems;
 
 namespace Arkham.Presenters
 {
-    public class CardDeckPresenter : IFullInteractablePresenter<CardDeckView>
+    public class CardDeckPresenter : IPresenter<ICardDeckView>
     {
-        public void Click(CardDeckView objectView, PointerEventData eventData)
+
+        public void CreateReactiveViewModel(ICardDeckView objectView)
         {
-
-        }
-
-        public void HoverOff(CardDeckView objectView, PointerEventData eventData)
-        {
-
-        }
-
-        public void HoverOn(CardDeckView objectView, PointerEventData eventData)
-        {
-
-        }
-
-        public void CreateReactiveViewModel(CardDeckView objectView)
-        {
-
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -13,5 +13,9 @@ namespace Arkham.Views
         string Id { get; set; }
         void SetCardImage(Sprite sprite);
         Sprite GetCardImage();
+        void HoverOnEffect();
+        void HoverOffEffect();
+        void Enable(bool isEnable);
+        void Show(bool isEnable);
     }
 }

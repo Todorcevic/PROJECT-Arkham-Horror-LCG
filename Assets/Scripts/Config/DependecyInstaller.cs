@@ -9,6 +9,7 @@ using Arkham.Presenters;
 using Arkham.Controllers;
 using Arkham.Models;
 using Arkham.UseCases;
+using Arkham.Managers;
 
 namespace Arkham.Config
 {
@@ -17,10 +18,8 @@ namespace Arkham.Config
         public override void InstallBindings()
         {
             Container.Bind<GameFiles>().AsSingle();
-            Container.Bind<GameData>().AsSingle();
             Container.Bind<CardRepository>().AsSingle();
             Container.Bind<Repository>().AsSingle();
-            Container.Bind<DeselectInvestigator>().AsSingle();
 
             Container.Bind<IDoubleClick>().To<DoubleClick>().AsSingle();
             Container.Bind<IResolutionSet>().To<ScreenResolutionAutoDetect>().AsSingle();
@@ -32,11 +31,18 @@ namespace Arkham.Config
             Container.Bind<ICardFactory>().To<CardFactory>().AsSingle();
             Container.Bind<IContext>().To<ContextJson>().AsSingle();
 
-            Container.Bind<IPresenter<ICampaignView>>().To<CampaignPresenter>().AsSingle();
+            /** Presenters **/
             Container.Bind<IPresenter<IInvestigatorSelectorView>>().To<InvestigatorSelectorPresenter>().AsSingle();
+            Container.Bind<IPresenter<IInvestigatorSelectorManager>>().To<InvestigatorSelectorManagerPresenter>().AsSingle();
 
+            /** Controllers **/
             Container.Bind<ISemiFullController<ICampaignView>>().To<CampaignController>().AsSingle();
             Container.Bind<IFullController<IInvestigatorSelectorView>>().To<InvestigatorSelectorController>().AsSingle();
+            Container.Bind<IHoverController<ICardView>>().To<CardController>().AsSingle();
+            Container.Bind<IDoubleClickController<ICardInvestigatorView>>().To<CardInvestigatorController>().AsSingle();
+
+            /** Use Cases ***/
+            Container.Bind<IInvestigatorSelector>().To<InvestigatorSelector>().AsSingle();
         }
     }
 }

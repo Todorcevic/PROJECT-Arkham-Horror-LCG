@@ -8,5 +8,8 @@ namespace Arkham.Views
     {
         int Id { get; }
         void ChangeImage(Sprite sprite);
+        void ActivateGlow(bool activate);
+        void HoverOnEffect();
+        void HoverOffEffect();
     }
 }

@@ -8,14 +8,12 @@ using Arkham.Presenters;
 using UnityEngine.EventSystems;
 using Arkham.Controllers;
 using System.Collections.Generic;
+using Arkham.Managers;
 
 namespace Arkham.Views
 {
-    //public enum CampaignId { CORE, TDL, TPC, TFA, TCU, TDE, OS }
-
     public class CampaignView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ICampaignView
     {
-        [Inject] private readonly IPresenter<ICampaignView> presenter;
         [Inject] private readonly ISemiFullController<ICampaignView> controller;
 
         [Title("RESOURCES")]
@@ -41,12 +39,9 @@ namespace Arkham.Views
         [SerializeField] protected AudioClip hoverEnterSound;
         [SerializeField] protected AudioClip hoverExitSound;
 
-        string ICampaignView.Id => id;
-        bool ICampaignView.IsOpen { get; set; }
-        string ICampaignView.FirstScenarioId => firstScenarioId;
-
-        /*******************************************************************/
-        private void Start() => presenter.CreateReactiveViewModel(this);
+        public string Id => id;
+        public bool IsOpen { get; set; }
+        public string FirstScenarioId => firstScenarioId;
 
         /*******************************************************************/
         public void OnPointerClick(PointerEventData eventData) => controller.Click(this);
