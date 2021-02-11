@@ -3,48 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using Arkham.Views;
 using UnityEngine.EventSystems;
-using Arkham.Models;
+using Zenject;
 using Arkham.Repositories;
-using Arkham.UseCases;
+using Arkham.UI;
+using Arkham.Managers;
 
 namespace Arkham.Controllers
 {
-    public class InvestigatorSelectorController : IFullController<IInvestigatorSelectorView>
+    public class InvestigatorSelectorController : IInvestigatorSelectorController
     {
-        private readonly Repository allData;
-        private readonly IInvestigatorSelector selectorLogic;
+        [Inject] IInvestigatorSelectorsManager selectorManager;
+        private InvestigatorSelectorView currentSelectorSelected;
 
         /*******************************************************************/
-        public InvestigatorSelectorController(Repository allData, IInvestigatorSelector selectorLogic)
+
+        public void Click(InvestigatorSelectorView selectorView)
         {
-            this.allData = allData;
-            this.selectorLogic = selectorLogic;
+            currentSelectorSelected?.ActivateGlow(false);
+            selectorView.ActivateGlow(true);
+            selectorView.ClickEffect();
+            currentSelectorSelected = selectorView;
         }
 
-        /*******************************************************************/
-        public void Click(IInvestigatorSelectorView investigatorSelectorView, PointerEventData eventData)
-        {
-            allData.InvestigatorSelected = allData.InvestigatorsSelectedList[investigatorSelectorView.Id];
-        }
+        public void DoubleClick(InvestigatorSelectorView selectorView) =>
+            selectorManager.RemoveSelector(selectorView);
 
-        public void DoubleClick(IInvestigatorSelectorView investigatorSelectorView, PointerEventData eventData)
-        {
-            selectorLogic.RemoveInvestigator(investigatorSelectorView.Id);
-        }
+        public void HoverOn(InvestigatorSelectorView selectorView) =>
+            selectorView.HoverOnEffect();
 
-        public void HoverOn(IInvestigatorSelectorView investigatorSelectorView, PointerEventData eventData)
-        {
-            if (HasInvestigator(investigatorSelectorView))
-                investigatorSelectorView.HoverOnEffect();
-        }
-
-        public void HoverOff(IInvestigatorSelectorView investigatorSelectorView, PointerEventData eventData)
-        {
-            if (HasInvestigator(investigatorSelectorView))
-                investigatorSelectorView.HoverOffEffect();
-        }
-
-        private bool HasInvestigator(IInvestigatorSelectorView investigatorSelectorView) =>
-            allData.InvestigatorsSelectedList[investigatorSelectorView.Id].Length > 0;
+        public void HoverOff(InvestigatorSelectorView selectorView) =>
+            selectorView.HoverOffEffect();
     }
 }

@@ -8,7 +8,7 @@ namespace Arkham.Repositories
     public class CardInvestigator : CardBase
     {
         public DeckBuildingRules DeckBuildingRules { get; }
-        public CardInvestigator(string id, ICardInvestigatorView view, DeckBuildingRules rules) : base(id, view)
+        public CardInvestigator(string id, CardInvestigatorView view, DeckBuildingRules rules) : base(id, view)
         {
             DeckBuildingRules = rules;
         }

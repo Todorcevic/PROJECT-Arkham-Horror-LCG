@@ -4,18 +4,19 @@ using Arkham.Services;
 using Arkham.Repositories;
 using Arkham.Factories;
 using Arkham.Models;
-using Arkham.UseCases;
+using Arkham.Controllers;
+using Arkham.Managers;
 
 namespace Arkham.Config
 {
     public class MainLoader : MonoBehaviour
     {
-        [Inject] Repository repository;
-        [Inject] IInvestigatorSelector selector;
-
         [Inject] private readonly IContext context;
         [Inject] private readonly IResolutionSet resolutionSetter;
         [Inject] private readonly ICardFactory cardFactory;
+        [Inject] private readonly ICampaignsManager campaignsManager;
+        [Inject] private readonly IInvestigatorSelectorsManager selectorsManager;
+
 
         private void Awake()
         {
@@ -23,13 +24,15 @@ namespace Arkham.Config
             context.LoadDataCards();
             context.LoadProgress();
             cardFactory.BuildCards();
+            campaignsManager.Init();
+            selectorsManager.Init();
             //context.SaveProgress();
         }
 
         private void Update()
         {
             if (Input.GetKeyDown("space"))
-                selector.AddInvestigator("01004");
+                return;
         }
     }
 }

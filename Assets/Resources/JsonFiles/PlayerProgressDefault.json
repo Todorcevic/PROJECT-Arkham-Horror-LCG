@@ -330,7 +330,7 @@
             "MandatoryCards": null
         }
     ],
-    "CampaignList": [
+    "CampaignsList": [
         {
             "Id": "CORE",
             "State": "Open"
@@ -361,21 +361,8 @@
         }
     ],
     "InvestigatorsSelectedList": [
-        {
-            "Position": 1,
-            "InvestigatorId": "01002"
-        },
-        {
-            "Position": 2,
-            "InvestigatorId": "01001"
-        },
-        {
-            "Position": 3,
-            "InvestigatorId": "01005"
-        },
-        {
-            "Position": 4,
-            "InvestigatorId": ""
-        }
+        "01005",
+        "01001",
+        "01002"
     ]
 }

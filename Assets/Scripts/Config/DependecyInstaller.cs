@@ -5,10 +5,8 @@ using Arkham.Services;
 using Arkham.Scenarios;
 using Arkham.Views;
 using Arkham.Factories;
-using Arkham.Presenters;
 using Arkham.Controllers;
 using Arkham.Models;
-using Arkham.UseCases;
 using Arkham.Managers;
 
 namespace Arkham.Config
@@ -18,10 +16,10 @@ namespace Arkham.Config
         public override void InstallBindings()
         {
             Container.Bind<GameFiles>().AsSingle();
-            Container.Bind<CardRepository>().AsSingle();
-            Container.Bind<Repository>().AsSingle();
+            Container.BindInterfacesAndSelfTo<Repository>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CardRepository>().AsSingle();
 
-            Container.Bind<IDoubleClick>().To<DoubleClick>().AsSingle();
+            Container.Bind<IDoubleClickDetector>().To<DoubleClickDetector>().AsSingle();
             Container.Bind<IResolutionSet>().To<ScreenResolutionAutoDetect>().AsSingle();
             Container.Bind<ISerializer>().To<JsonNewtonsoftAdapter>().AsSingle();
             Container.Bind<IScreenResolutionAdapter>().To<ScreenResolutionAdapter>().AsSingle();
@@ -31,18 +29,25 @@ namespace Arkham.Config
             Container.Bind<ICardFactory>().To<CardFactory>().AsSingle();
             Container.Bind<IContext>().To<ContextJson>().AsSingle();
 
-            /** Presenters **/
-            Container.Bind<IPresenter<IInvestigatorSelectorView>>().To<InvestigatorSelectorPresenter>().AsSingle();
-            Container.Bind<IPresenter<IInvestigatorSelectorManager>>().To<InvestigatorSelectorManagerPresenter>().AsSingle();
-
             /** Controllers **/
-            Container.Bind<ISemiFullController<ICampaignView>>().To<CampaignController>().AsSingle();
-            Container.Bind<IFullController<IInvestigatorSelectorView>>().To<InvestigatorSelectorController>().AsSingle();
-            Container.Bind<IHoverController<ICardView>>().To<CardController>().AsSingle();
-            Container.Bind<IDoubleClickController<ICardInvestigatorView>>().To<CardInvestigatorController>().AsSingle();
+            //Container.Bind(x => x.AllTypes().WithSuffix("Controller").InNamespace("Arkham.Controllers"))
+            //    .To(x => x.AllClasses().WithSuffix("Controller").InNamespace("Arkham.Controllers")).AsSingle();
 
-            /** Use Cases ***/
-            Container.Bind<IInvestigatorSelector>().To<InvestigatorSelector>().AsSingle();
+            //Container.Bind(x => x.AllTypes().WithSuffix("Controller").InNamespace("Arkham.Controllers"))
+            //    .To(x => x.AllAbstractClasses().WithSuffix("Controllero").InNamespace("Arkham.Controllers")).AsSingle();
+
+            Container.BindInterfacesAndSelfTo<CampaignController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<InvestigatorSelectorController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CardInvestigatorController>().AsSingle()
+                .WhenInjectedInto<CardInvestigatorView>();
+            Container.BindInterfacesAndSelfTo<CardRowController>().AsSingle()
+                .WhenInjectedInto<CardRowView>();
+            Container.BindInterfacesAndSelfTo<CardDeckController>().AsSingle()
+                .WhenInjectedInto<CardDeckView>();
+
+            /** Managers **/
+            Container.Bind<ICampaignsManager>().To<CampaignsManager>().AsSingle();
+            Container.Bind<IInvestigatorSelectorsManager>().To<InvestigatorSelectorsManager>().AsSingle();
         }
     }
 }

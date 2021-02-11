@@ -9,7 +9,7 @@ namespace Arkham.Views
     {
         [SerializeField] private Sprite icon;
 
-        public override void ExecuteState(ICampaignView campaignView)
+        public override void ExecuteState(CampaignView campaignView)
         {
             campaignView.IsOpen = isOpen;
             campaignView.SetImageState(icon);

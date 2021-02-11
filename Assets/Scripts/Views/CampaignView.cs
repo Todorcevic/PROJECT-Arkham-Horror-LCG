@@ -4,7 +4,6 @@ using UnityEngine.Events;
 using Sirenix.OdinInspector;
 using DG.Tweening;
 using Zenject;
-using Arkham.Presenters;
 using UnityEngine.EventSystems;
 using Arkham.Controllers;
 using System.Collections.Generic;
@@ -12,9 +11,9 @@ using Arkham.Managers;
 
 namespace Arkham.Views
 {
-    public class CampaignView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ICampaignView
+    public class CampaignView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [Inject] private readonly ISemiFullController<ICampaignView> controller;
+        [Inject] private readonly ICampaignController controller;
 
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image chapterImage;
@@ -44,11 +43,11 @@ namespace Arkham.Views
         public string FirstScenarioId => firstScenarioId;
 
         /*******************************************************************/
-        public void OnPointerClick(PointerEventData eventData) => controller.Click(this);
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => controller.Click(this);
 
-        public void OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
 
-        public void OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
 
         public void ClickEffect()
         {

@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Arkham.Views;
+using UnityEngine;
 
 namespace Arkham.Repositories
 {
-    public class CardRepository
+    public class CardRepository : ISpriteCardRepository
     {
         public List<CardBase> CardList => AllCard.Values.ToList();
         public Dictionary<string, CardBase> AllCard { get; set; } = new Dictionary<string, CardBase>();
 
-        public ICardView GetCardView(string id) => AllCard[id].View;
+        public CardView GetCardView(string id) => AllCard[id].View;
+        public Sprite GetSpriteCard(string id) => AllCard[id].View.GetCardImage;
 
         public CardInvestigator GetCardInvestigator(string id)
         {

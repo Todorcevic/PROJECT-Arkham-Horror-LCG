@@ -13,25 +13,27 @@ namespace Arkham.Repositories
         private readonly GameFiles gameFiles;
         private readonly ISerializer serializer;
         private readonly IFileAdapter fileAdapter;
-        private readonly Repository allData;
+        private readonly IBuildRepository repository;
+        private readonly ICardInfoRepository infoRepository;
 
-        public ContextJson(GameFiles gameFiles, ISerializer serializer, IFileAdapter fileAdapter, Repository allData)
+        public ContextJson(GameFiles gameFiles, ISerializer serializer, IFileAdapter fileAdapter, IBuildRepository repository, ICardInfoRepository infoRepository)
         {
             this.gameFiles = gameFiles;
             this.serializer = serializer;
             this.fileAdapter = fileAdapter;
-            this.allData = allData;
+            this.repository = repository;
+            this.infoRepository = infoRepository;
         }
 
         public void LoadDataCards()
         {
-            allData.CardInfoList = serializer.CreateDataFromResources<List<CardInfo>>(gameFiles.CardsDataFilePath);
+            repository.CardInfoList = serializer.CreateDataFromResources<List<CardInfo>>(gameFiles.CardsDataFilePath);
             MultiplyX2CoreSetQuantity();
         }
 
         private void MultiplyX2CoreSetQuantity()
         {
-            var allCards = allData.CardInfoList.FindAll(card => card.Pack_code == "core"
+            var allCards = infoRepository.CardInfoList.FindAll(card => card.Pack_code == "core"
             && (card.Type_code == "asset"
             || card.Type_code == "event"
             || card.Type_code == "skill"));
@@ -40,14 +42,14 @@ namespace Arkham.Repositories
         }
 
         public void SaveProgress() =>
-          serializer.SaveFileFromData(allData, gameFiles.PlayerProgressFilePath);
+          serializer.SaveFileFromData(repository, gameFiles.PlayerProgressFilePath);
 
         public void LoadProgress()
         {
             if (fileAdapter.FileExist(gameFiles.PlayerProgressFilePath))
-                serializer.UpdateDataFromFile(gameFiles.PlayerProgressFilePath, allData);
+                serializer.UpdateDataFromFile(gameFiles.PlayerProgressFilePath, repository);
             else
-                serializer.UpdateDataFromResources(gameFiles.PlayerProgressDefaultFilePath, allData);
+                serializer.UpdateDataFromResources(gameFiles.PlayerProgressDefaultFilePath, repository);
         }
     }
 }

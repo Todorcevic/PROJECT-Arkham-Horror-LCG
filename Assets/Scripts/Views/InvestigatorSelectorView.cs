@@ -5,22 +5,22 @@ using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using UnityEngine.EventSystems;
 using Arkham.Services;
-using Arkham.Presenters;
 using Zenject;
 using Arkham.Controllers;
 using DG.Tweening;
+using Arkham.Repositories;
 
 namespace Arkham.Views
 {
-    public class InvestigatorSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IInvestigatorSelectorView
+    public class InvestigatorSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [Inject] private readonly IDoubleClick doubleClick;
-        [Inject] private readonly IFullController<IInvestigatorSelectorView> controller;
-        [Inject] private readonly IPresenter<IInvestigatorSelectorView> presenter;
+        [Inject] private readonly IDoubleClickDetector doubleClick;
+        [Inject] private readonly IInvestigatorSelectorController controller;
 
         [Title("SETTINGS")]
-        [SerializeField, Required] private int id;
+        [SerializeField, Required] private string id;
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
+        [SerializeField, Range(0f, 1f)] private float timeReorderAnimation;
         [SerializeField, Range(1f, 2f)] private float scaleHoverEffect;
 
         [Title("RESOURCES")]
@@ -28,6 +28,7 @@ namespace Arkham.Views
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
         [SerializeField, Required, ChildGameObjectsOnly] private Image glow;
         [SerializeField, Required, ChildGameObjectsOnly] private Image leaderIcon;
+        [SerializeField, Required, ChildGameObjectsOnly] private Transform placeHolder;
 
         [Title("AUDIO")]
         [SerializeField, Required, ChildGameObjectsOnly] private AudioSource audioSource;
@@ -35,30 +36,27 @@ namespace Arkham.Views
         [SerializeField] protected AudioClip hoverEnterSound;
         [SerializeField] protected AudioClip hoverExitSound;
 
-        public int Id => id;
+        public string Id => id;
+        public string InvestigatorId { get; set; }
+        public bool IsEmpty => InvestigatorId == null;
+        public Transform Transform => transform;
 
         /*******************************************************************/
-        private void Start() => presenter.CreateReactiveViewModel(this);
-
-        /*******************************************************************/
-        public void OnPointerClick(PointerEventData eventData)
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             controller.Click(this);
             if (doubleClick.CheckDoubleClick(eventData.clickTime, eventData.pointerPress))
                 controller.DoubleClick(this);
         }
 
-        public void OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
 
-        public void OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
 
-        public void ChangeImage(Sprite sprite)
+        public void ClickEffect()
         {
-            canvas.alpha = sprite == null ? 0 : 1;
-            image.sprite = sprite;
+            audioSource.PlayOneShot(clickSound);
         }
-
-        public void ActivateGlow(bool activate) => glow.enabled = activate;
 
         public void HoverOnEffect()
         {
@@ -69,6 +67,30 @@ namespace Arkham.Views
         public void HoverOffEffect()
         {
             transform.DOScale(1f, timeHoverAnimation);
+        }
+
+        public void ActivateGlow(bool activate) => glow.enabled = activate;
+
+        public void SetInvestigator(CardView cardView)
+        {
+            InvestigatorId = cardView?.Id;
+            canvas.interactable = cardView != null;
+            canvas.blocksRaycasts = cardView != null;
+            ChangeImage(cardView?.GetCardImage);
+        }
+
+        public IEnumerator Reorder()
+        {
+            yield return null;
+            transform.DOMove(placeHolder.position, timeReorderAnimation);
+        }
+
+        public void MovePlaceHolder(Transform transform) => placeHolder.SetParent(transform);
+
+        public void ChangeImage(Sprite sprite)
+        {
+            canvas.alpha = sprite == null ? 0 : 1;
+            image.sprite = sprite;
         }
     }
 }

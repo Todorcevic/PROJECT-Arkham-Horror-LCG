@@ -1,32 +1,26 @@
-﻿using Arkham.Repositories;
-using Arkham.UseCases;
+﻿using Arkham.Managers;
+using Arkham.Repositories;
 using Arkham.Views;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine.EventSystems;
+using Zenject;
 
 namespace Arkham.Controllers
 {
-    public class CardInvestigatorController : IDoubleClickController<ICardInvestigatorView>
+    public class CardInvestigatorController : CardController, ICardInvestigatorController
     {
-        private readonly Repository allData;
-        private readonly IInvestigatorSelector selectorLogic;
+        [Inject] public readonly ISelectorRepository selectorRepository;
+        [Inject] private readonly IInvestigatorSelectorsManager selectorsManager;
 
+        private List<string> InvestigatorsSelected => selectorRepository.InvestigatorsSelectedList;
         /*******************************************************************/
-        public CardInvestigatorController(Repository allData, IInvestigatorSelector selectorLogic)
-        {
-            this.allData = allData;
-            this.selectorLogic = selectorLogic;
-        }
+        protected override int AmountSelected(string investigatorId) =>
+            InvestigatorsSelected.FindAll(s => s == investigatorId).Count;
 
-        /*******************************************************************/
-
-        public void DoubleClick(ICardInvestigatorView cardInvestigatorView, PointerEventData eventData = null)
+        public void DoubleClick(CardView cardView)
         {
-            selectorLogic.AddInvestigator(cardInvestigatorView.Id);
+            selectorsManager.AddInvestigator(cardView);
+            SwitchEnable(cardView);
         }
     }
 }

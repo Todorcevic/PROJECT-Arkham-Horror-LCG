@@ -15,15 +15,15 @@ namespace Arkham.Factories
     {
         private readonly CardFactoryComponent cardFactoryComponent;
         private readonly Dictionary<string, Sprite> cardImage;
-        private readonly Repository allData;
+        private readonly ICardInfoRepository infoRepository;
         private readonly CardRepository cardRepository;
         private readonly IInstanceAdapter instantiator;
         private readonly DiContainer diContainer;
 
-        public CardFactory(CardFactoryComponent cardFactoryComponent, Repository allData, CardRepository cardRepository, DiContainer diContainer, IInstanceAdapter instantiator)
+        public CardFactory(CardFactoryComponent cardFactoryComponent, ICardInfoRepository infoRepository, CardRepository cardRepository, DiContainer diContainer, IInstanceAdapter instantiator)
         {
             this.cardFactoryComponent = cardFactoryComponent;
-            this.allData = allData;
+            this.infoRepository = infoRepository;
             this.cardRepository = cardRepository;
             this.instantiator = instantiator;
             this.diContainer = diContainer;
@@ -44,7 +44,7 @@ namespace Arkham.Factories
 
         private void BuildInvestigators()
         {
-            var allInvestigators = allData.CardInfoList.FindAll(c => c.Type_code == "investigator" && cardImage.ContainsKey(c.Code))
+            var allInvestigators = infoRepository.CardInfoList.FindAll(c => c.Type_code == "investigator" && cardImage.ContainsKey(c.Code))
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
             foreach (CardInfo investigator in allInvestigators)
             {
@@ -58,7 +58,7 @@ namespace Arkham.Factories
 
         private void BuildDeckCards()
         {
-            var allDeckCards = allData.CardInfoList.FindAll(c => (c.Type_code == "asset" || c.Type_code == "event" || c.Type_code == "skill") && cardImage.ContainsKey(c.Code))
+            var allDeckCards = infoRepository.CardInfoList.FindAll(c => (c.Type_code == "asset" || c.Type_code == "event" || c.Type_code == "skill") && cardImage.ContainsKey(c.Code))
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
             foreach (CardInfo card in allDeckCards)
             {

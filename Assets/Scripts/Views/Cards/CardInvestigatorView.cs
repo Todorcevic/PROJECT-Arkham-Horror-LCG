@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Arkham.Models;
 using Arkham.Investigators;
-using Arkham.Presenters;
 using Zenject;
 using Arkham.Services;
 using UnityEngine.EventSystems;
@@ -11,15 +10,16 @@ using Arkham.Controllers;
 
 namespace Arkham.Views
 {
-    public class CardInvestigatorView : CardView, IPointerClickHandler, ICardInvestigatorView
+    public class CardInvestigatorView : CardView, IPointerClickHandler
     {
-        [Inject] private readonly IDoubleClickController<ICardInvestigatorView> controller;
-        [Inject] private readonly IDoubleClick doubleClick;
+        [Inject] private readonly IDoubleClickDetector doubleClick;
+        [Inject] private readonly ICardInvestigatorController investigatorController;
 
-        public void OnPointerClick(PointerEventData eventData)
+        /*******************************************************************/
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             if (doubleClick.CheckDoubleClick(eventData.clickTime, eventData.pointerPress))
-                controller.DoubleClick(this);
+                investigatorController.DoubleClick(this);
         }
     }
 }

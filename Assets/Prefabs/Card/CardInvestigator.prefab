@@ -726,6 +726,7 @@ MonoBehaviour:
   cardImage: {fileID: 6939591346607468995}
   canvas: {fileID: 7192597132227724208}
   timeHoverAnimation: 0.25
+  timeMoveAnimation: 0.25
   scaleHoverEffect: 1.1
   disableColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
   audioSource: {fileID: 1559855385181699942}

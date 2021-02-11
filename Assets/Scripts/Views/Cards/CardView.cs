@@ -1,5 +1,4 @@
 ﻿using Arkham.Controllers;
-using Arkham.Presenters;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -9,11 +8,10 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ICardView
+    public class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private const float ORIGINAL_SCALE = 1.0f;
-        [Inject] private readonly IHoverController<ICardView> controller;
-        [Inject] private readonly IPresenter<ICardView> presenter;
+        [Inject] protected readonly ICardController controller;
 
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image cardImage;
@@ -21,6 +19,7 @@ namespace Arkham.Views
 
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
+        [SerializeField, Range(0f, 1f)] private float timeMoveAnimation;
         [SerializeField, Range(1f, 2f)] private float scaleHoverEffect;
         [SerializeField] private Color disableColor;
 
@@ -32,17 +31,20 @@ namespace Arkham.Views
 
         public string Id { get; set; }
         public Image CardImage => cardImage;
+        public Sprite GetCardImage => cardImage.sprite;
+        public Transform Transform => transform;
 
         /*******************************************************************/
-        private void Start() => presenter.CreateReactiveViewModel(this);
+        private void Start()
+        {
+            if (Id != null)
+                controller.Init(this);
+        }
 
         /*******************************************************************/
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
 
-        public void OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
-
-        public void OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
-
-        public Sprite GetCardImage() => cardImage.sprite;
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
 
         public void SetCardImage(Sprite sprite) => cardImage.sprite = sprite;
 

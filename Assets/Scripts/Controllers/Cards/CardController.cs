@@ -1,23 +1,46 @@
-﻿using Arkham.Views;
+﻿using Arkham.Models;
+using Arkham.Repositories;
+using Arkham.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 namespace Arkham.Controllers
 {
-    public class CardController : IHoverController<ICardView>
+    public abstract class CardController : ICardController
     {
-        public void HoverOn(ICardView cardView, PointerEventData eventData = null)
+        [Inject] protected readonly ICardInfoRepository infoRepository;
+        [Inject] protected readonly CardRepository cardRepository;
+
+        /*******************************************************************/
+        protected abstract int AmountSelected(string cardId);
+
+        public void Init(CardView cardView)
+        {
+            SwitchEnable(cardView);
+        }
+
+        protected void SwitchEnable(CardView cardView)
+        {
+            cardView.Enable(TotalAmount(cardView.Id) > 0);
+        }
+
+        public void HoverOn(CardView cardView)
         {
             cardView.HoverOnEffect();
         }
 
-        public void HoverOff(ICardView cardView, PointerEventData eventData = null)
+        public void HoverOff(CardView cardView)
         {
             cardView.HoverOffEffect();
         }
+
+        private int TotalAmount(string cardId) =>
+            (infoRepository.AllCardsInfo[cardId].Quantity ?? 0) - AmountSelected(cardId);
     }
 }

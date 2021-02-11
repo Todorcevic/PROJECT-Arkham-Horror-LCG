@@ -11,7 +11,7 @@ namespace Arkham.Repositories
 {
     public class CardDeck : CardBase
     {
-        public CardDeck(string id, ICardDeckView view) : base(id, view)
+        public CardDeck(string id, CardDeckView view) : base(id, view)
         {
         }
     }

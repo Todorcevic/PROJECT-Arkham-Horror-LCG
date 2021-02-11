@@ -1,29 +1,28 @@
 ﻿using Arkham.Repositories;
+using Arkham.UI;
 using Arkham.Views;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Arkham.Controllers
 {
-    public class CampaignController : ISemiFullController<ICampaignView>
+    public class CampaignController : ICampaignController
     {
-        private readonly Repository repository;
+        [Inject] private readonly ICampaignRepository repository;
 
         /*******************************************************************/
-        public CampaignController(Repository repository) => this.repository = repository;
-
-        /*******************************************************************/
-        public void Click(ICampaignView campaignView, PointerEventData eventData)
+        public void Click(CampaignView campaignView)
         {
             if (!campaignView.IsOpen) return;
-            repository.CurrentScenario = campaignView.FirstScenarioId;
             campaignView.ClickEffect();
+            repository.CurrentScenario = campaignView.FirstScenarioId;
         }
 
-        public void HoverOn(ICampaignView campaignView, PointerEventData eventData) =>
-           campaignView.HoverOnEffect();
+        public void HoverOn(CampaignView campaignView) =>
+            campaignView.HoverOnEffect();
 
-        public void HoverOff(ICampaignView campaignView, PointerEventData eventData) =>
-           campaignView.HoverOffEffect();
+        public void HoverOff(CampaignView campaignView) =>
+            campaignView.HoverOffEffect();
     }
 }

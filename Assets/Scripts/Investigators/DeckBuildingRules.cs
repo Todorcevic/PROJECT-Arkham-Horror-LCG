@@ -7,7 +7,7 @@ namespace Arkham.Investigators
 {
     public class DeckBuildingRules
     {
-        [Inject] private readonly Repository allData;
+        [Inject] private readonly ICardInfoRepository infoRepository;
         public virtual int DeckSize => 30;
         public virtual List<string> DeckBuildingFactionConditions => new List<string>();
         public virtual List<int> DeckBuildingXpConditions => new List<int>();
@@ -18,7 +18,7 @@ namespace Arkham.Investigators
             int i = 0;
             foreach (string faction in DeckBuildingFactionConditions)
             {
-                deckBuildingResult.AddRange(allData.CardInfoList.FindAll(c => c.Faction_code == faction && c.Xp <= DeckBuildingXpConditions[i])
+                deckBuildingResult.AddRange(infoRepository.CardInfoList.FindAll(c => c.Faction_code == faction && c.Xp <= DeckBuildingXpConditions[i])
                     .ConvertAll(c => c.Code));
                 i++;
             }

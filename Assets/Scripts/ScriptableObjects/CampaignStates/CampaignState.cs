@@ -11,6 +11,6 @@ namespace Arkham.Views
         public string Id => id;
         public bool IsOpen => isOpen;
 
-        public abstract void ExecuteState(ICampaignView campaignView);
+        public abstract void ExecuteState(CampaignView campaignView);
     }
 }
