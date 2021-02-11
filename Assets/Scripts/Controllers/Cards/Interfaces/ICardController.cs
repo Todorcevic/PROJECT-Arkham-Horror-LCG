@@ -12,5 +12,6 @@ namespace Arkham.Controllers
         void Init(CardView cardView);
         void HoverOn(CardView cardView);
         void HoverOff(CardView cardView);
+        void SwitchEnable(CardView cardView);
     }
 }

@@ -28,6 +28,6 @@ namespace Arkham.Managers
         private void SetState(CampaignView campaign) => GetState(campaign.Id).ExecuteState(campaign);
 
         private CampaignState GetState(string campaignId) =>
-            States.Find(state => state.Id == repository.AllCampaigns[campaignId].State);
+            States.Find(state => state.Id == repository.GetCampaign(campaignId).State);
     }
 }

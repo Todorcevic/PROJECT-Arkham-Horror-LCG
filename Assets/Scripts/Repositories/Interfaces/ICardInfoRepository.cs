@@ -5,7 +5,7 @@ namespace Arkham.Repositories
 {
     public interface ICardInfoRepository
     {
-        Dictionary<string, CardInfo> AllCardsInfo { get; }
         List<CardInfo> CardInfoList { get; }
+        CardInfo AllCardsInfo(string id);
     }
 }

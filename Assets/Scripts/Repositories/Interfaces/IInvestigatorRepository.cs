@@ -9,7 +9,7 @@ namespace Arkham.Repositories
 {
     public interface IInvestigatorRepository
     {
-        Dictionary<string, Investigator> AllInvestigators { get; }
         List<Investigator> InvestigatorsList { get; }
+        Investigator AllInvestigators(string id);
     }
 }

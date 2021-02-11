@@ -9,9 +9,9 @@ namespace Arkham.Managers
 {
     public class InvestigatorSelectorsManager : IInvestigatorSelectorsManager
     {
-        [Inject] private readonly ISelectorRepository selectorRepository;
         [Inject] private readonly InvestigatorSelectorComponent components;
-        [Inject] private readonly CardRepository cardRepository;
+        [Inject] private readonly ISelectorRepository selectorRepository;
+        [Inject] private readonly ICardViewsRepository cardRepository;
         private List<string> InvestigatorsSelected => selectorRepository.InvestigatorsSelectedList;
         private List<InvestigatorSelectorView> Selectors => components.Selectors;
         private Transform PlaceHolder => components.PlaceHolder;
@@ -41,7 +41,7 @@ namespace Arkham.Managers
 
         private void SetSelector(string investigatorId)
         {
-            CardView cardView = cardRepository.GetCardView(investigatorId);
+            CardView cardView = cardRepository.AllCardViews[investigatorId];
             SetSelector(cardView);
         }
 

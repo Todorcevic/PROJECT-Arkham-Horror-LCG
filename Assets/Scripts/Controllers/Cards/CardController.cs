@@ -15,7 +15,6 @@ namespace Arkham.Controllers
     public abstract class CardController : ICardController
     {
         [Inject] protected readonly ICardInfoRepository infoRepository;
-        [Inject] protected readonly CardRepository cardRepository;
 
         /*******************************************************************/
         protected abstract int AmountSelected(string cardId);
@@ -25,7 +24,7 @@ namespace Arkham.Controllers
             SwitchEnable(cardView);
         }
 
-        protected void SwitchEnable(CardView cardView)
+        public void SwitchEnable(CardView cardView)
         {
             cardView.Enable(TotalAmount(cardView.Id) > 0);
         }
@@ -41,6 +40,6 @@ namespace Arkham.Controllers
         }
 
         private int TotalAmount(string cardId) =>
-            (infoRepository.AllCardsInfo[cardId].Quantity ?? 0) - AmountSelected(cardId);
+            (infoRepository.AllCardsInfo(cardId).Quantity ?? 0) - AmountSelected(cardId);
     }
 }

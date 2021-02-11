@@ -7,24 +7,10 @@ using UnityEngine;
 
 namespace Arkham.Repositories
 {
-    public class CardRepository : ISpriteCardRepository
+    public class CardRepository : ICardViewsRepository, ISpriteCardRepository
     {
-        public List<CardBase> CardList => AllCard.Values.ToList();
-        public Dictionary<string, CardBase> AllCard { get; set; } = new Dictionary<string, CardBase>();
-
-        public CardView GetCardView(string id) => AllCard[id].View;
-        public Sprite GetSpriteCard(string id) => AllCard[id].View.GetCardImage;
-
-        public CardInvestigator GetCardInvestigator(string id)
-        {
-            if (AllCard[id] is CardInvestigator cardInvestigator) return cardInvestigator;
-            throw new Exception(id + " not is CardInvestigator");
-        }
-
-        public CardDeck GetCardDeck(string id)
-        {
-            if (AllCard[id] is CardDeck cardDeck) return cardDeck;
-            throw new Exception(id + " not is CardDeck");
-        }
+        public List<CardView> CardViewsList => AllCardViews.Values.ToList();
+        public Dictionary<string, CardView> AllCardViews { get; set; } = new Dictionary<string, CardView>();
+        public Sprite GetSpriteCard(string id) => AllCardViews[id].GetCardImage;
     }
 }

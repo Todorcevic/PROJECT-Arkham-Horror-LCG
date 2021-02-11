@@ -4,26 +4,18 @@ using Arkham.Models;
 using Arkham.Config;
 using Arkham.Adapters;
 using UnityEngine;
+using Zenject;
 
 namespace Arkham.Repositories
 {
     [DataContract]
     public class ContextJson : IContext
     {
-        private readonly GameFiles gameFiles;
-        private readonly ISerializer serializer;
-        private readonly IFileAdapter fileAdapter;
-        private readonly IBuildRepository repository;
-        private readonly ICardInfoRepository infoRepository;
-
-        public ContextJson(GameFiles gameFiles, ISerializer serializer, IFileAdapter fileAdapter, IBuildRepository repository, ICardInfoRepository infoRepository)
-        {
-            this.gameFiles = gameFiles;
-            this.serializer = serializer;
-            this.fileAdapter = fileAdapter;
-            this.repository = repository;
-            this.infoRepository = infoRepository;
-        }
+        [Inject] private readonly GameFiles gameFiles;
+        [Inject] private readonly ISerializer serializer;
+        [Inject] private readonly IFileAdapter fileAdapter;
+        [Inject] private readonly IBuildRepository repository;
+        [Inject] private readonly ICardInfoRepository infoRepository;
 
         public void LoadDataCards()
         {
