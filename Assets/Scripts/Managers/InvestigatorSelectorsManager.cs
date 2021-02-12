@@ -9,9 +9,11 @@ namespace Arkham.Managers
 {
     public class InvestigatorSelectorsManager : IInvestigatorSelectorsManager
     {
+        private InvestigatorSelectorView currentSelectorSelected;
         [Inject] private readonly InvestigatorSelectorComponent components;
         [Inject] private readonly ISelectorRepository selectorRepository;
         [Inject] private readonly ICardViewsRepository cardRepository;
+
         private List<string> InvestigatorsSelected => selectorRepository.InvestigatorsSelectedList;
         private List<InvestigatorSelectorView> Selectors => components.Selectors;
         private Transform PlaceHolder => components.PlaceHolder;
@@ -22,6 +24,13 @@ namespace Arkham.Managers
             foreach (string investigatorId in InvestigatorsSelected)
                 SetSelector(investigatorId);
             OrderSelectors();
+        }
+
+        public void SelectSelector(InvestigatorSelectorView selectorView)
+        {
+            currentSelectorSelected?.ActivateGlow(false);
+            selectorView.ActivateGlow(true);
+            currentSelectorSelected = selectorView;
         }
 
         public void AddInvestigator(CardView investigator)

@@ -15,7 +15,6 @@ namespace Arkham.Views
     public class InvestigatorSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [Inject] private readonly IDoubleClickDetector doubleClick;
-        [Inject] private readonly IInvestigatorSelectorController controller;
 
         [Title("SETTINGS")]
         [SerializeField, Required] private string id;
@@ -40,23 +39,28 @@ namespace Arkham.Views
         public string InvestigatorId { get; set; }
         public bool IsEmpty => InvestigatorId == null;
         public Transform Transform => transform;
+        public IInvestigatorSelectorController Controller { get; set; }
 
         /*******************************************************************/
+        [Inject]
+        private void Init(IInvestigatorSelectorController controller)
+        {
+            Controller = controller;
+            Controller.Init(this);
+        }
+
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            controller.Click(this);
+            Controller.Click();
             if (doubleClick.CheckDoubleClick(eventData.clickTime, eventData.pointerPress))
-                controller.DoubleClick(this);
+                Controller.DoubleClick();
         }
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => Controller.HoverOn();
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => Controller.HoverOff();
 
-        public void ClickEffect()
-        {
-            audioSource.PlayOneShot(clickSound);
-        }
+        public void ClickEffect() => audioSource.PlayOneShot(clickSound);
 
         public void HoverOnEffect()
         {
@@ -64,10 +68,7 @@ namespace Arkham.Views
             transform.DOScale(scaleHoverEffect, timeHoverAnimation);
         }
 
-        public void HoverOffEffect()
-        {
-            transform.DOScale(1f, timeHoverAnimation);
-        }
+        public void HoverOffEffect() => transform.DOScale(1f, timeHoverAnimation);
 
         public void ActivateGlow(bool activate) => glow.enabled = activate;
 

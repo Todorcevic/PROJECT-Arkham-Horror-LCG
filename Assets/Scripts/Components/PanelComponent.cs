@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using Arkham.Managers;
 
 namespace Arkham.UI
 {
@@ -18,6 +19,7 @@ namespace Arkham.UI
         private string ButtonName => IsCanvasVisible ? "Desactivate Alpha" : "Activate Alpha";
         private Color ButtonColor => IsCanvasVisible ? Color.red : Color.green;
 
+        /*******************************************************************/
         [Button("$ButtonName", ButtonSizes.Gigantic), GUIColor("$ButtonColor")]
         private void ToogleCanvasAlpha()
         {

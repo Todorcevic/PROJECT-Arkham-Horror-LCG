@@ -12,32 +12,21 @@ using Zenject;
 
 namespace Arkham.Controllers
 {
-    public abstract class CardController : ICardController
+    public abstract class CardController
     {
         [Inject] protected readonly ICardInfoRepository infoRepository;
+        protected CardView cardView;
 
         /*******************************************************************/
-        protected abstract int AmountSelected(string cardId);
+        protected abstract int AmountSelected(string investigatorId);
 
-        public void Init(CardView cardView)
-        {
-            SwitchEnable(cardView);
-        }
+        public void Init(CardView cardView) => this.cardView = cardView;
 
-        public void SwitchEnable(CardView cardView)
-        {
-            cardView.Enable(TotalAmount(cardView.Id) > 0);
-        }
+        public void HoverOn() => cardView.HoverOnEffect();
 
-        public void HoverOn(CardView cardView)
-        {
-            cardView.HoverOnEffect();
-        }
+        public void HoverOff() => cardView.HoverOffEffect();
 
-        public void HoverOff(CardView cardView)
-        {
-            cardView.HoverOffEffect();
-        }
+        public void SwitchEnable() => cardView.Enable(TotalAmount(cardView.Id) > 0);
 
         private int TotalAmount(string cardId) =>
             (infoRepository.AllCardsInfo(cardId).Quantity ?? 0) - AmountSelected(cardId);

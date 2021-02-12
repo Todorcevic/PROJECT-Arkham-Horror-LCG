@@ -16,8 +16,8 @@ namespace Arkham.Config
         public override void InstallBindings()
         {
             Container.Bind<GameFiles>().AsSingle();
-            Container.BindInterfacesAndSelfTo<Repository>().AsSingle();
-            Container.BindInterfacesAndSelfTo<CardRepository>().AsSingle();
+            Container.BindInterfacesTo<Repository>().AsSingle();
+            Container.BindInterfacesTo<CardRepository>().AsSingle();
 
             Container.Bind<IDoubleClickDetector>().To<DoubleClickDetector>().AsSingle();
             Container.Bind<IResolutionSet>().To<ScreenResolutionAutoDetect>().AsSingle();
@@ -30,24 +30,24 @@ namespace Arkham.Config
             Container.Bind<IContext>().To<ContextJson>().AsSingle();
 
             /** Controllers **/
-            //Container.Bind(x => x.AllTypes().WithSuffix("Controller").InNamespace("Arkham.Controllers"))
-            //    .To(x => x.AllClasses().WithSuffix("Controller").InNamespace("Arkham.Controllers")).AsSingle();
-
-            //Container.Bind(x => x.AllTypes().WithSuffix("Controller").InNamespace("Arkham.Controllers"))
-            //    .To(x => x.AllAbstractClasses().WithSuffix("Controllero").InNamespace("Arkham.Controllers")).AsSingle();
-
-            Container.BindInterfacesAndSelfTo<CampaignController>().AsSingle();
-            Container.BindInterfacesAndSelfTo<InvestigatorSelectorController>().AsSingle();
-            Container.BindInterfacesAndSelfTo<CardInvestigatorController>().AsSingle()
+            Container.Bind<ICampaignController>().To<CampaignController>().AsTransient();
+            Container.Bind<IInvestigatorSelectorController>().To<InvestigatorSelectorController>().AsTransient();
+            Container.Bind<ICardController>().To<CardInvestigatorController>().AsTransient()
                 .WhenInjectedInto<CardInvestigatorView>();
-            Container.BindInterfacesAndSelfTo<CardRowController>().AsSingle()
-                .WhenInjectedInto<CardRowView>();
-            Container.BindInterfacesAndSelfTo<CardDeckController>().AsSingle()
-                .WhenInjectedInto<CardDeckView>();
+
+            //Container.BindInterfacesTo<CardInvestigatorController>().AsTransient()
+            //    .WhenInjectedInto<CardInvestigatorView>();
+            //Container.BindInterfacesTo<CardRowController>().AsTransient()
+            //    .WhenInjectedInto<CardRowView>();
+            //Container.BindInterfacesTo<CardDeckController>().AsTransient()
+            //    .WhenInjectedInto<CardDeckView>();
 
             /** Managers **/
             Container.Bind<ICampaignsManager>().To<CampaignsManager>().AsSingle();
             Container.Bind<IInvestigatorSelectorsManager>().To<InvestigatorSelectorsManager>().AsSingle();
+            Container.BindInterfacesTo<CardsInvestigatorManager>().AsSingle();
+            Container.BindInterfacesTo<CardsDeckManager>().AsSingle();
+
         }
     }
 }

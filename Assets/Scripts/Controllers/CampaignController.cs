@@ -10,19 +10,25 @@ namespace Arkham.Controllers
     public class CampaignController : ICampaignController
     {
         [Inject] private readonly ICampaignRepository repository;
+        private CampaignView campaignView;
 
         /*******************************************************************/
-        public void Click(CampaignView campaignView)
+        public void Init(CampaignView campaignView)
+        {
+            this.campaignView = campaignView;
+        }
+
+        public void Click()
         {
             if (!campaignView.IsOpen) return;
             campaignView.ClickEffect();
             repository.CurrentScenario = campaignView.FirstScenarioId;
         }
 
-        public void HoverOn(CampaignView campaignView) =>
+        public void HoverOn() =>
             campaignView.HoverOnEffect();
 
-        public void HoverOff(CampaignView campaignView) =>
+        public void HoverOff() =>
             campaignView.HoverOffEffect();
     }
 }

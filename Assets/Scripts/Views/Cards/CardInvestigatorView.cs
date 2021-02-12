@@ -13,13 +13,19 @@ namespace Arkham.Views
     public class CardInvestigatorView : CardView, IPointerClickHandler
     {
         [Inject] private readonly IDoubleClickDetector doubleClick;
-        [Inject] private readonly ICardInvestigatorController investigatorController;
 
         /*******************************************************************/
+        [Inject]
+        private void Init(ICardController controller)
+        {
+            Controller = controller;
+            Controller.Init(this);
+        }
+
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             if (doubleClick.CheckDoubleClick(eventData.clickTime, eventData.pointerPress))
-                investigatorController.DoubleClick(this);
+                Controller.DoubleClick();
         }
     }
 }

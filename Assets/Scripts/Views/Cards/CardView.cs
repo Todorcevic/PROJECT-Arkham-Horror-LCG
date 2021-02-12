@@ -11,7 +11,6 @@ namespace Arkham.Views
     public class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private const float ORIGINAL_SCALE = 1.0f;
-        [Inject] protected readonly ICardController controller;
 
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image cardImage;
@@ -33,18 +32,12 @@ namespace Arkham.Views
         public Image CardImage => cardImage;
         public Sprite GetCardImage => cardImage.sprite;
         public Transform Transform => transform;
+        public ICardController Controller { get; set; }
 
         /*******************************************************************/
-        private void Start()
-        {
-            if (Id != null)
-                controller.Init(this);
-        }
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => Controller.HoverOn();
 
-        /*******************************************************************/
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
-
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => Controller.HoverOff();
 
         public void SetCardImage(Sprite sprite) => cardImage.sprite = sprite;
 

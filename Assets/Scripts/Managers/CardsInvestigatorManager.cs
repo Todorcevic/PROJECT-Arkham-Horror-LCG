@@ -6,22 +6,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 namespace Arkham.Managers
 {
-    public class CardsInvestigatorManager
+    public class CardsInvestigatorManager : ICardsInvestigatorManager, IInvestigatorsZone
     {
-        [Inject] protected readonly ICardInfoRepository infoRepository;
-        [Inject] protected readonly ICardInvestigatorController invController;
-        [Inject] protected readonly ICardController cardController;
-        [Inject] protected readonly ICardViewsRepository cardRepository;
+        public Dictionary<string, CardInvestigatorView> InvestigatorsCards { get; } = new Dictionary<string, CardInvestigatorView>();
+        public List<CardInvestigatorView> InvestigatorsListCards => InvestigatorsCards.Values.ToList();
 
         /*******************************************************************/
         public void Init()
         {
-            foreach (CardView cardView in cardRepository.CardViewsList)
-                cardController.SwitchEnable(cardView);
+            foreach (CardInvestigatorView investigatorView in InvestigatorsListCards)
+                investigatorView.Controller.SwitchEnable();
         }
     }
 }

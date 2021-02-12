@@ -13,8 +13,6 @@ namespace Arkham.Views
 {
     public class CampaignView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [Inject] private readonly ICampaignController controller;
-
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image chapterImage;
         [SerializeField, Required, ChildGameObjectsOnly] private Image stateImage;
@@ -41,13 +39,16 @@ namespace Arkham.Views
         public string Id => id;
         public bool IsOpen { get; set; }
         public string FirstScenarioId => firstScenarioId;
+        [Inject] public ICampaignController Controller { get; }
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => controller.Click(this);
+        private void Start() => Controller.Init(this);
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => Controller.Click();
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => Controller.HoverOn();
+
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => Controller.HoverOff();
 
         public void ClickEffect()
         {

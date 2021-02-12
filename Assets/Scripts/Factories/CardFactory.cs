@@ -8,6 +8,7 @@ using Arkham.Adapters;
 using Arkham.Investigators;
 using Arkham.Repositories;
 using Zenject;
+using Arkham.Managers;
 
 namespace Arkham.Factories
 {
@@ -15,6 +16,8 @@ namespace Arkham.Factories
     {
         [Inject] private readonly DiContainer diContainer;
         [Inject] private readonly CardFactoryComponent cardFactoryComponent;
+        [Inject] private readonly IInvestigatorsZone investigatorsZone;
+        [Inject] private readonly IDeckZone deckZone;
         [Inject] private readonly ICardInfoRepository infoRepository;
         [Inject] private readonly ICardViewsRepository cardViewsRepository;
         [Inject] private readonly IInstanceAdapter instantiator;
@@ -34,9 +37,10 @@ namespace Arkham.Factories
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
             foreach (CardInfo investigator in allInvestigators)
             {
-                CardInvestigatorView investigatorView = GameObject.Instantiate(cardFactoryComponent.CardInvestigatorPrefab, cardFactoryComponent.InvestigatorZone);
+                CardInvestigatorView investigatorView = GameObject.Instantiate(cardFactoryComponent.CardInvestigatorPrefab, cardFactoryComponent.InvestigatorsZone);
                 SetData(investigatorView, investigator.Code);
                 DeckBuildingRules deckBuildingRules = instantiator.CreateInstance<DeckBuildingRules>(investigator.Code);
+                investigatorsZone.InvestigatorsCards.Add(investigator.Code, investigatorView);
                 cardViewsRepository.AllCardViews.Add(investigator.Code, investigatorView);
             }
         }
@@ -47,8 +51,9 @@ namespace Arkham.Factories
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
             foreach (CardInfo card in allDeckCards)
             {
-                CardDeckView cardDeckView = GameObject.Instantiate(cardFactoryComponent.CardDeckPrefab, cardFactoryComponent.CardZone);
+                CardDeckView cardDeckView = GameObject.Instantiate(cardFactoryComponent.CardDeckPrefab, cardFactoryComponent.DeckZone);
                 SetData(cardDeckView, card.Code);
+                deckZone.InvestigatorsCards.Add(card.Code, cardDeckView);
                 cardViewsRepository.AllCardViews.Add(card.Code, cardDeckView);
             }
         }
