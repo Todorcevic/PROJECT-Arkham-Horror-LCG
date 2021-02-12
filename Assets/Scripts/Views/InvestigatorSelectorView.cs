@@ -12,7 +12,7 @@ using Arkham.Repositories;
 
 namespace Arkham.Views
 {
-    public class InvestigatorSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class InvestigatorSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IInvestigatorSelectorView
     {
         [Inject] private readonly IDoubleClickDetector doubleClick;
 
@@ -72,7 +72,7 @@ namespace Arkham.Views
 
         public void ActivateGlow(bool activate) => glow.enabled = activate;
 
-        public void SetInvestigator(CardView cardView)
+        public void SetInvestigator(ICardComponent cardView)
         {
             InvestigatorId = cardView?.Id;
             canvas.interactable = cardView != null;

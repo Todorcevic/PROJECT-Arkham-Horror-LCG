@@ -11,7 +11,6 @@ namespace Arkham.Controllers
     {
         [Inject] private readonly ISelectorRepository selectorRepository;
         [Inject] private readonly IInvestigatorSelectorsManager selectorsManager;
-        private CardInvestigatorView CardView => (CardInvestigatorView)cardView;
         private List<string> InvestigatorsSelected => selectorRepository.InvestigatorsSelectedList;
 
         /*******************************************************************/
@@ -20,7 +19,7 @@ namespace Arkham.Controllers
 
         public void DoubleClick()
         {
-            selectorsManager.AddInvestigator(CardView);
+            selectorsManager.AddInvestigator(cardView);
             SwitchEnable();
         }
     }

@@ -9,13 +9,13 @@ namespace Arkham.Managers
 {
     public class InvestigatorSelectorsManager : IInvestigatorSelectorsManager
     {
-        private InvestigatorSelectorView currentSelectorSelected;
+        private IInvestigatorSelectorView currentSelectorSelected;
         [Inject] private readonly InvestigatorSelectorComponent components;
         [Inject] private readonly ISelectorRepository selectorRepository;
-        [Inject] private readonly ICardViewsRepository cardRepository;
+        [Inject] private readonly ICardComponentRepository cardRepository;
 
         private List<string> InvestigatorsSelected => selectorRepository.InvestigatorsSelectedList;
-        private List<InvestigatorSelectorView> Selectors => components.Selectors;
+        private List<IInvestigatorSelectorView> Selectors => components.Selectors;
         private Transform PlaceHolder => components.PlaceHolder;
 
         /*******************************************************************/
@@ -26,22 +26,22 @@ namespace Arkham.Managers
             OrderSelectors();
         }
 
-        public void SelectSelector(InvestigatorSelectorView selectorView)
+        public void SelectSelector(IInvestigatorSelectorView selectorView)
         {
             currentSelectorSelected?.ActivateGlow(false);
             selectorView.ActivateGlow(true);
             currentSelectorSelected = selectorView;
         }
 
-        public void AddInvestigator(CardView investigator)
+        public void AddInvestigator(ICardComponent investigator)
         {
             SetSelector(investigator);
-            GetSelectorByInvestigator(investigator.Id).transform.position = investigator.Transform.position;
+            GetSelectorByInvestigator(investigator.Id).Transform.position = investigator.Transform.position;
             OrderSelectors();
             InvestigatorsSelected.Add(investigator.Id);
         }
 
-        public void RemoveSelector(InvestigatorSelectorView selector)
+        public void RemoveSelector(IInvestigatorSelectorView selector)
         {
             InvestigatorsSelected.Remove(selector.InvestigatorId);
             selector.SetInvestigator(null);
@@ -50,24 +50,24 @@ namespace Arkham.Managers
 
         private void SetSelector(string investigatorId)
         {
-            CardView cardView = cardRepository.AllCardViews[investigatorId];
+            ICardComponent cardView = cardRepository.AllCardComponents[investigatorId];
             SetSelector(cardView);
         }
 
-        private void SetSelector(CardView investigator) => GetVoidSelector().SetInvestigator(investigator);
+        private void SetSelector(ICardComponent investigator) => GetVoidSelector().SetInvestigator(investigator);
 
         private void OrderSelectors()
         {
-            foreach (InvestigatorSelectorView selector in Selectors)
+            foreach (IInvestigatorSelectorView selector in Selectors)
             {
-                selector.MovePlaceHolder(selector.IsEmpty ? selector.transform : PlaceHolder);
-                selector.StartCoroutine(selector.Reorder());
+                selector.MovePlaceHolder(selector.IsEmpty ? selector.Transform : PlaceHolder);
+                components.StartCoroutine(selector.Reorder());
             }
         }
 
-        private InvestigatorSelectorView GetVoidSelector() =>
+        private IInvestigatorSelectorView GetVoidSelector() =>
             Selectors.Find(s => s.InvestigatorId == null);
-        private InvestigatorSelectorView GetSelectorByInvestigator(string investigatorId) =>
+        private IInvestigatorSelectorView GetSelectorByInvestigator(string investigatorId) =>
             Selectors.Find(s => s.InvestigatorId == investigatorId);
     }
 }

@@ -1,4 +1,7 @@
 ﻿using Arkham.Controllers;
+using Arkham.Investigators;
+using Arkham.Models;
+using Arkham.Services;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -8,8 +11,9 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class CardComponent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ICardComponent
     {
+        [Inject] protected readonly IDoubleClickDetector doubleClick;
         private const float ORIGINAL_SCALE = 1.0f;
 
         [Title("RESOURCES")]
@@ -28,28 +32,18 @@ namespace Arkham.Views
         [SerializeField] protected AudioClip hoverEnterSound;
         [SerializeField] protected AudioClip hoverExitSound;
 
-        public string Id { get; set; }
-        public Image CardImage => cardImage;
+        public string Id => Info.Code;
         public Sprite GetCardImage => cardImage.sprite;
         public Transform Transform => transform;
-        public ICardController Controller { get; set; }
+        public ICardController Controller { get; protected set; }
+        public CardInfo Info { get; private set; }
 
         /*******************************************************************/
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => Controller.HoverOn();
-
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => Controller.HoverOff();
-
-        public void SetCardImage(Sprite sprite) => cardImage.sprite = sprite;
-
-        public void HoverOnEffect()
+        public void Initialize(CardInfo info, Sprite sprite)
         {
-            audioSource.PlayOneShot(hoverEnterSound);
-            transform.DOScale(scaleHoverEffect, timeHoverAnimation);
-        }
-
-        public void HoverOffEffect()
-        {
-            transform.DOScale(ORIGINAL_SCALE, timeHoverAnimation);
+            name = info.Code;
+            cardImage.sprite = sprite;
+            Info = info;
         }
 
         public void Enable(bool isEnable)
@@ -63,5 +57,17 @@ namespace Arkham.Views
         {
             gameObject.SetActive(isShow);
         }
+
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => HoverOnEffect();
+
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => HoverOffEffect();
+
+        private void HoverOnEffect()
+        {
+            audioSource.PlayOneShot(hoverEnterSound);
+            transform.DOScale(scaleHoverEffect, timeHoverAnimation);
+        }
+
+        private void HoverOffEffect() => transform.DOScale(ORIGINAL_SCALE, timeHoverAnimation);
     }
 }

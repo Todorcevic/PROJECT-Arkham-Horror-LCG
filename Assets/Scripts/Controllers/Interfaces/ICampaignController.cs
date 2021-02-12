@@ -9,7 +9,7 @@ namespace Arkham.Controllers
 {
     public interface ICampaignController
     {
-        void Init(CampaignView campaignView);
+        void Init(ICampaignView campaignView);
         void Click();
         void HoverOn();
         void HoverOff();

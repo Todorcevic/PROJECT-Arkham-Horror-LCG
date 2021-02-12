@@ -11,15 +11,14 @@ using Zenject;
 
 namespace Arkham.Managers
 {
-    public class CardsInvestigatorManager : ICardsInvestigatorManager, IInvestigatorsZone
+    public class CardsInvestigatorManager : ICardsInvestigatorManager
     {
-        public Dictionary<string, CardInvestigatorView> InvestigatorsCards { get; } = new Dictionary<string, CardInvestigatorView>();
-        public List<CardInvestigatorView> InvestigatorsListCards => InvestigatorsCards.Values.ToList();
+        [Inject] ICardComponentRepository cardRepository;
 
         /*******************************************************************/
         public void Init()
         {
-            foreach (CardInvestigatorView investigatorView in InvestigatorsListCards)
+            foreach (ICardComponent investigatorView in cardRepository.InvestigatorListCards)
                 investigatorView.Controller.SwitchEnable();
         }
     }

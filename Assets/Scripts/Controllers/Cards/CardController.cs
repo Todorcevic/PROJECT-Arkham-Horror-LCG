@@ -15,16 +15,12 @@ namespace Arkham.Controllers
     public abstract class CardController
     {
         [Inject] protected readonly ICardInfoRepository infoRepository;
-        protected CardView cardView;
+        protected ICardComponent cardView;
 
         /*******************************************************************/
         protected abstract int AmountSelected(string investigatorId);
 
-        public void Init(CardView cardView) => this.cardView = cardView;
-
-        public void HoverOn() => cardView.HoverOnEffect();
-
-        public void HoverOff() => cardView.HoverOffEffect();
+        public void Init(ICardComponent cardView) => this.cardView = cardView;
 
         public void SwitchEnable() => cardView.Enable(TotalAmount(cardView.Id) > 0);
 

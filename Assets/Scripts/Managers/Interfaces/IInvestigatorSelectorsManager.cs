@@ -10,8 +10,8 @@ namespace Arkham.Managers
     public interface IInvestigatorSelectorsManager
     {
         void Init();
-        void SelectSelector(InvestigatorSelectorView selectorView);
-        void AddInvestigator(CardView investigator);
-        void RemoveSelector(InvestigatorSelectorView selector);
+        void SelectSelector(IInvestigatorSelectorView selectorView);
+        void AddInvestigator(ICardComponent investigator);
+        void RemoveSelector(IInvestigatorSelectorView selector);
     }
 }

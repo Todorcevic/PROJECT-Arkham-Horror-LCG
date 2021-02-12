@@ -13,10 +13,10 @@ namespace Arkham.Controllers
     public class InvestigatorSelectorController : IInvestigatorSelectorController
     {
         [Inject] private readonly IInvestigatorSelectorsManager selectorManager;
-        private InvestigatorSelectorView selectorView;
+        private IInvestigatorSelectorView selectorView;
 
         /*******************************************************************/
-        public void Init(InvestigatorSelectorView selectorView) => this.selectorView = selectorView;
+        public void Init(IInvestigatorSelectorView selectorView) => this.selectorView = selectorView;
 
         public void Click()
         {

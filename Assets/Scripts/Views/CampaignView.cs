@@ -11,7 +11,7 @@ using Arkham.Managers;
 
 namespace Arkham.Views
 {
-    public class CampaignView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class CampaignView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ICampaignView
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image chapterImage;

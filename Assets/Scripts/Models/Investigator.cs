@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Arkham.Investigators;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 
@@ -14,5 +15,6 @@ namespace Arkham.Models
         [DataMember] public List<string> Deck { get; set; }
         [DataMember] public List<string> MandatoryCards { get; set; }
         public List<string> FullDeck => MandatoryCards.Concat(Deck).ToList();
+        public DeckBuildingRules DeckBuilding { get; set; }
     }
 }

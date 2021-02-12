@@ -681,9 +681,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7131878188277760170}
   - component: {fileID: 6950638181576210403}
+  - component: {fileID: 1559855385181699942}
   - component: {fileID: 7192597132227724208}
   - component: {fileID: 7918799787899769508}
-  - component: {fileID: 1559855385181699942}
   m_Layer: 5
   m_Name: CardInvestigator
   m_TagString: Untagged
@@ -720,7 +720,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9120494878094766683}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d1bfa36ad2102e4798d143df9bb7e24, type: 3}
+  m_Script: {fileID: 11500000, guid: e91dfed0b96743e4b834bac733dbb0e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardImage: {fileID: 6939591346607468995}
@@ -733,38 +733,6 @@ MonoBehaviour:
   clickSound: {fileID: 8300000, guid: 8320444c3aaad7d45b4960a427cbb131, type: 3}
   hoverEnterSound: {fileID: 8300000, guid: 4596d1f5a91b3a04285c634a11339593, type: 3}
   hoverExitSound: {fileID: 0}
---- !u!225 &7192597132227724208
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120494878094766683}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
---- !u!114 &7918799787899769508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120494878094766683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: -1
-  m_PreferredHeight: -1
-  m_FlexibleWidth: 1
-  m_FlexibleHeight: 1
-  m_LayoutPriority: 1
 --- !u!82 &1559855385181699942
 AudioSource:
   m_ObjectHideFlags: 0
@@ -861,6 +829,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!225 &7192597132227724208
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120494878094766683}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &7918799787899769508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120494878094766683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: 1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
 --- !u!1001 &4715985345489359459
 PrefabInstance:
   m_ObjectHideFlags: 0

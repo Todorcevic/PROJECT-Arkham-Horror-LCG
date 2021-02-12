@@ -10,15 +10,15 @@ using Zenject;
 
 namespace Arkham.Managers
 {
-    public class CardsDeckManager : IDeckZone
+    public class CardsDeckManager : ICardsDeckManager
     {
-        public Dictionary<string, CardDeckView> InvestigatorsCards { get; } = new Dictionary<string, CardDeckView>();
-        public List<CardDeckView> InvestigatorsListCards => InvestigatorsCards.Values.ToList();
+        [Inject] private readonly ICardComponentRepository cardViewsRepository;
+        public List<CardDeckComponent> InvestigatorsListCards => cardViewsRepository.CardComponentsList.OfType<CardDeckComponent>().ToList();
 
         /*******************************************************************/
         public void Init()
         {
-            foreach (CardDeckView investigatorView in InvestigatorsListCards)
+            foreach (CardDeckComponent investigatorView in InvestigatorsListCards)
                 investigatorView.Controller.SwitchEnable();
         }
     }

@@ -10,9 +10,9 @@ using Arkham.Controllers;
 
 namespace Arkham.Views
 {
-    public class CardInvestigatorView : CardView, IPointerClickHandler
+    public class CardInvestigatorComponent : CardComponent, IPointerClickHandler, IInvestigatorComponent
     {
-        [Inject] private readonly IDoubleClickDetector doubleClick;
+        public Investigator Investigator { get; set; }
 
         /*******************************************************************/
         [Inject]

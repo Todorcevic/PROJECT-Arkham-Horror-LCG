@@ -10,10 +10,10 @@ namespace Arkham.Controllers
     public class CampaignController : ICampaignController
     {
         [Inject] private readonly ICampaignRepository repository;
-        private CampaignView campaignView;
+        private ICampaignView campaignView;
 
         /*******************************************************************/
-        public void Init(CampaignView campaignView)
+        public void Init(ICampaignView campaignView)
         {
             this.campaignView = campaignView;
         }

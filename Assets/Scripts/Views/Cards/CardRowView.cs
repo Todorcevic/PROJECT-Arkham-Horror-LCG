@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public class CardRowView : CardView
+    public class CardRowView : CardComponent
     {
     }
 }

@@ -10,9 +10,11 @@ namespace Arkham.Views
 {
     public interface IInvestigatorSelectorView : IView
     {
+        string InvestigatorId { get; }
+        bool IsEmpty { get; }
         Transform Transform { get; }
         void ActivateGlow(bool activate);
-        void SetInvestigator(CardView cardView);
+        void SetInvestigator(ICardComponent cardView);
         IEnumerator Reorder();
         void MovePlaceHolder(Transform transform);
         void ChangeImage(Sprite sprite);

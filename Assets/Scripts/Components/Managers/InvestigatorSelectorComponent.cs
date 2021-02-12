@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Arkham.UI
@@ -12,6 +13,6 @@ namespace Arkham.UI
         [SerializeField, Required, ChildGameObjectsOnly] private List<InvestigatorSelectorView> selectors;
 
         public Transform PlaceHolder => placeHolder;
-        public List<InvestigatorSelectorView> Selectors => selectors;
+        public List<IInvestigatorSelectorView> Selectors => selectors.OfType<IInvestigatorSelectorView>().ToList();
     }
 }
