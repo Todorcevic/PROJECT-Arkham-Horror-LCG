@@ -8,13 +8,13 @@ using UnityEngine.EventSystems;
 using Arkham.Controllers;
 using System.Collections.Generic;
 using Arkham.Managers;
+using System;
+using Arkham.Components;
 
 namespace Arkham.Views
 {
-    public class CampaignView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ICampaignView
+    public class CampaignView : InteractableComponent, ICampaignView
     {
-        [Inject] private readonly ICampaignController controller;
-
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image chapterImage;
         [SerializeField, Required, ChildGameObjectsOnly] private Image stateImage;
@@ -43,16 +43,10 @@ namespace Arkham.Views
         public string FirstScenarioId => firstScenarioId;
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => controller.Click(this);
-
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
-
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
-
         public void ClickEffect()
         {
             audioSource.PlayOneShot(clickSound);
-            clickAction.Invoke();
+            clickAction?.Invoke();
         }
 
         public void HoverOnEffect()

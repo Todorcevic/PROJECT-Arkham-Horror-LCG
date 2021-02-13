@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Arkham.UI;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 
 namespace Arkham.Managers
 {
@@ -8,16 +9,31 @@ namespace Arkham.Managers
     {
         [Title("RESOURCES")]
         [SerializeField, Required, SceneObjectsOnly] private TabButton currentTab;
+        [SerializeField, ChildGameObjectsOnly] private List<TabButton> tabButtons;
 
-        private void Start() => SelectTab(currentTab);
+        private void Start()
+        {
+            foreach (TabButton tabButton in tabButtons)
+            {
+                tabButton.AddClickAction(() => Click(tabButton));
+                tabButton.AddHoverOnAction(tabButton.HoverOnEffect);
+                tabButton.AddHoverOffAction(tabButton.HoverOffEffect);
+            }
+            SelectTab(currentTab);
+        }
 
-        public bool IsCurrentTab(TabButton tab) => currentTab == tab;
+        void Click(TabButton tabButton)
+        {
+            if (currentTab == tabButton) return;
+            SelectTab(tabButton);
+            tabButton.ClickEffect();
+        }
 
-        public void SelectTab(TabButton tab)
+        public void SelectTab(TabButton tabButton)
         {
             currentTab.HoverDesactivate();
-            tab.HoverActivate();
-            currentTab = tab;
+            tabButton.HoverActivate();
+            currentTab = tabButton;
         }
     }
 }

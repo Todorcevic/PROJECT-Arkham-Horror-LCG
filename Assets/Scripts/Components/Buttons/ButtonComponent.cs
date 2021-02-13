@@ -4,10 +4,11 @@ using UnityEngine.Events;
 using TMPro;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using Arkham.Components;
 
 namespace Arkham.UI
 {
-    public class ButtonComponent : MonoBehaviour
+    public class ButtonComponent : InteractableComponent
     {
         private Color simpleTextColor = Color.white;
         private Color hoverTextColor = Color.black;

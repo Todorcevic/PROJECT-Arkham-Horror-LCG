@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using Arkham.Managers;
 
 namespace Arkham.UI
 {

@@ -1,4 +1,5 @@
-﻿using Arkham.Repositories;
+﻿using Arkham.Controllers;
+using Arkham.Repositories;
 using Arkham.UI;
 using Arkham.Views;
 using System;
@@ -14,6 +15,7 @@ namespace Arkham.Managers
     {
         [Inject] private readonly CampaignsComponent components;
         [Inject] private readonly ICampaignRepository repository;
+        [Inject] private readonly ICampaignController controller;
 
         private List<ICampaignView> Campaigns => components.Campaigns;
         private List<ICampaignState> States => components.States;
@@ -22,7 +24,12 @@ namespace Arkham.Managers
         public void Init()
         {
             foreach (ICampaignView campaign in Campaigns)
+            {
                 SetState(campaign);
+                campaign.AddClickAction(() => controller.Click(campaign));
+                campaign.AddHoverOnAction(() => controller.HoverOn(campaign));
+                campaign.AddHoverOffAction(() => controller.HoverOff(campaign));
+            }
         }
 
         private void SetState(ICampaignView campaign) => GetState(campaign.Id).ExecuteState(campaign);

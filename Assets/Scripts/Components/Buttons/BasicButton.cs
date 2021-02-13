@@ -5,19 +5,27 @@ using UnityEngine.EventSystems;
 
 namespace Arkham.UI
 {
-    public class BasicButton : ButtonComponent, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class BasicButton : ButtonComponent
     {
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        private void Start()
+        {
+            AddClickAction(ClickEffect);
+            AddHoverOnAction(HoverOnEffect);
+            AddHoverOffAction(HoverOffEffect);
+        }
+
+        private void ClickEffect()
         {
             PlaySound(clickSound);
-            clickAction.Invoke();
+            clickAction?.Invoke();
         }
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+
+        private void HoverOnEffect()
         {
             PlaySound(hoverEnterSound);
             HoverActivate();
         }
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        private void HoverOffEffect()
         {
             PlaySound(hoverExitSound);
             HoverDesactivate();
