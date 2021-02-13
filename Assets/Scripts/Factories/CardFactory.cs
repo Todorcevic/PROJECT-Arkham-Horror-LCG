@@ -36,7 +36,7 @@ namespace Arkham.Factories
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
             foreach (CardInfo investigatorInfo in allInvestigators)
             {
-                CardInvestigatorComponent investigatorComponent = GameObject.Instantiate(cardFactoryComponent.CardInvestigatorPrefab, cardFactoryComponent.InvestigatorsZone);
+                CardInvestigatorView investigatorComponent = GameObject.Instantiate(cardFactoryComponent.CardInvestigatorPrefab, cardFactoryComponent.InvestigatorsZone);
                 SetData(investigatorComponent, investigatorInfo.Code);
                 Investigator investigator = investigatorRepository.AllInvestigators(investigatorInfo.Code);
                 investigator.DeckBuilding = instantiator.CreateInstance<DeckBuildingRules>(investigatorInfo.Code);
@@ -51,13 +51,13 @@ namespace Arkham.Factories
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
             foreach (CardInfo card in allDeckCards)
             {
-                CardDeckComponent cardDeckView = GameObject.Instantiate(cardFactoryComponent.CardDeckPrefab, cardFactoryComponent.DeckZone);
+                CardDeckView cardDeckView = GameObject.Instantiate(cardFactoryComponent.CardDeckPrefab, cardFactoryComponent.DeckZone);
                 SetData(cardDeckView, card.Code);
                 cardViewsRepository.AllCardComponents.Add(card.Code, cardDeckView);
             }
         }
 
-        private void SetData(CardComponent cardComponent, string id)
+        private void SetData(CardView cardComponent, string id)
         {
             CardInfo cardInfo = infoRepository.AllCardsInfo(id);
             Sprite cardSprite = GetSprite(id);
@@ -65,7 +65,7 @@ namespace Arkham.Factories
             InjectDependency(cardComponent);
         }
 
-        private void InjectDependency(CardComponent cardInstance) => diContainer.Inject(cardInstance);
+        private void InjectDependency(CardView cardInstance) => diContainer.Inject(cardInstance);
 
         private Sprite GetSprite(string id) => ImageListEN.Find(c => c.name == id);
     }

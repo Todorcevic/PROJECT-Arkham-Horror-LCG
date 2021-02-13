@@ -11,9 +11,11 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class CardComponent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ICardComponent
+    public class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ICardView
     {
         [Inject] protected readonly IDoubleClickDetector doubleClick;
+        protected ICardController controller;
+
         private const float ORIGINAL_SCALE = 1.0f;
 
         [Title("RESOURCES")]
@@ -35,7 +37,6 @@ namespace Arkham.Views
         public string Id => Info.Code;
         public Sprite GetCardImage => cardImage.sprite;
         public Transform Transform => transform;
-        public ICardController Controller { get; protected set; }
         public CardInfo Info { get; private set; }
 
         /*******************************************************************/
@@ -58,16 +59,16 @@ namespace Arkham.Views
             gameObject.SetActive(isShow);
         }
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => HoverOnEffect();
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => HoverOffEffect();
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
 
-        private void HoverOnEffect()
+        public void HoverOnEffect()
         {
             audioSource.PlayOneShot(hoverEnterSound);
             transform.DOScale(scaleHoverEffect, timeHoverAnimation);
         }
 
-        private void HoverOffEffect() => transform.DOScale(ORIGINAL_SCALE, timeHoverAnimation);
+        public void HoverOffEffect() => transform.DOScale(ORIGINAL_SCALE, timeHoverAnimation);
     }
 }

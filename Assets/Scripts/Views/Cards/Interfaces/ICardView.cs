@@ -9,13 +9,14 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public interface ICardComponent
+    public interface ICardView
     {
         string Id { get; }
         Sprite GetCardImage { get; }
         Transform Transform { get; }
-        ICardController Controller { get; }
         CardInfo Info { get; }
+        void HoverOnEffect();
+        void HoverOffEffect();
         void Enable(bool isEnable);
         void Show(bool isShow);
     }

@@ -14,17 +14,18 @@ namespace Arkham.Controllers
 {
     public abstract class CardController
     {
-        [Inject] protected readonly ICardInfoRepository infoRepository;
-        protected ICardComponent cardView;
-
         /*******************************************************************/
         protected abstract int AmountSelected(string investigatorId);
+        public abstract void DoubleClick(ICardView cardView);
 
-        public void Init(ICardComponent cardView) => this.cardView = cardView;
+        public void HoverOn(ICardView cardView) => cardView.HoverOnEffect();
 
-        public void SwitchEnable() => cardView.Enable(TotalAmount(cardView.Id) > 0);
+        public void HoverOff(ICardView cardView) => cardView.HoverOffEffect();
 
-        private int TotalAmount(string cardId) =>
-            (infoRepository.AllCardsInfo(cardId).Quantity ?? 0) - AmountSelected(cardId);
+        public void UpdateVisualState(ICardView cardView)
+        {
+            bool isEnable = ((cardView.Info.Quantity ?? 0) - AmountSelected(cardView.Id)) > 0;
+            cardView.Enable(isEnable);
+        }
     }
 }

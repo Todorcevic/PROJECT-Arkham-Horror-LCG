@@ -11,7 +11,7 @@ namespace Arkham.Managers
     {
         void Init();
         void SelectSelector(IInvestigatorSelectorView selectorView);
-        void AddInvestigator(ICardComponent investigator);
+        void AddInvestigator(ICardView investigator);
         void RemoveSelector(IInvestigatorSelectorView selector);
     }
 }

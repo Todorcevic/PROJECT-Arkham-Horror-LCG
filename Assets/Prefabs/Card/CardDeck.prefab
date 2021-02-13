@@ -259,7 +259,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9120494878094766683}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6999395a65ec4e74bbdb72fe94ada64d, type: 3}
+  m_Script: {fileID: 11500000, guid: 807d04cc393011e41b5a18ced51b969b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardImage: {fileID: 6939591346607468995}
@@ -269,7 +269,7 @@ MonoBehaviour:
   scaleHoverEffect: 1.1
   disableColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
   audioSource: {fileID: 9216517577296812839}
-  clickSound: {fileID: 8300000, guid: 8320444c3aaad7d45b4960a427cbb131, type: 3}
+  clickSound: {fileID: 8300000, guid: 776d909e0ee83c74383b98ae5271c2e1, type: 3}
   hoverEnterSound: {fileID: 8300000, guid: 4596d1f5a91b3a04285c634a11339593, type: 3}
   hoverExitSound: {fileID: 0}
 --- !u!225 &7192597132227724208

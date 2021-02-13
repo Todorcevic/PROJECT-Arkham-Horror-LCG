@@ -14,7 +14,7 @@ namespace Arkham.Views
         bool IsEmpty { get; }
         Transform Transform { get; }
         void ActivateGlow(bool activate);
-        void SetInvestigator(ICardComponent cardView);
+        void SetInvestigator(ICardView cardView);
         IEnumerator Reorder();
         void MovePlaceHolder(Transform transform);
         void ChangeImage(Sprite sprite);

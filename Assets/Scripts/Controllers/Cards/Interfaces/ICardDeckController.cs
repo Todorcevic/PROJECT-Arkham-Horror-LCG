@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arkham.UseCases
+namespace Arkham.Controllers
 {
-    public interface IShowCard
+    public interface ICardDeckController : ICardController
     {
-        bool IsInvestigatorEnable(string cardId);
     }
 }

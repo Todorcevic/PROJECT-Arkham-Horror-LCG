@@ -9,10 +9,9 @@ namespace Arkham.Controllers
 {
     public interface IInvestigatorSelectorController
     {
-        void Init(IInvestigatorSelectorView selectorView);
-        void Click();
-        void DoubleClick();
-        void HoverOn();
-        void HoverOff();
+        void Click(IInvestigatorSelectorView selectorView);
+        void DoubleClick(IInvestigatorSelectorView selectorView);
+        void HoverOn(IInvestigatorSelectorView selectorView);
+        void HoverOff(IInvestigatorSelectorView selectorView);
     }
 }

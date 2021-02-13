@@ -13,21 +13,19 @@ namespace Arkham.Controllers
     public class InvestigatorSelectorController : IInvestigatorSelectorController
     {
         [Inject] private readonly IInvestigatorSelectorsManager selectorManager;
-        private IInvestigatorSelectorView selectorView;
 
         /*******************************************************************/
-        public void Init(IInvestigatorSelectorView selectorView) => this.selectorView = selectorView;
-
-        public void Click()
+        public void Click(IInvestigatorSelectorView selectorView)
         {
             selectorManager.SelectSelector(selectorView);
             selectorView.ClickEffect();
         }
 
-        public void DoubleClick() => selectorManager.RemoveSelector(selectorView);
+        public void DoubleClick(IInvestigatorSelectorView selectorView) =>
+            selectorManager.RemoveSelector(selectorView);
 
-        public void HoverOn() => selectorView.HoverOnEffect();
+        public void HoverOn(IInvestigatorSelectorView selectorView) => selectorView.HoverOnEffect();
 
-        public void HoverOff() => selectorView.HoverOffEffect();
+        public void HoverOff(IInvestigatorSelectorView selectorView) => selectorView.HoverOffEffect();
     }
 }

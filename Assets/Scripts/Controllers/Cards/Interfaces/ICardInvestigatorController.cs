@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arkham.Views
+namespace Arkham.Controllers
 {
-    public interface IInvestigatorComponent
+    public interface ICardInvestigatorController : ICardController
     {
-
-
     }
 }

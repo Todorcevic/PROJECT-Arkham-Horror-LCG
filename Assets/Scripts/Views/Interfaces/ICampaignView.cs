@@ -9,6 +9,7 @@ namespace Arkham.Views
 {
     public interface ICampaignView : IView
     {
+        string Id { get; }
         bool IsOpen { get; set; }
         string FirstScenarioId { get; }
         void SetImageState(Sprite icon);

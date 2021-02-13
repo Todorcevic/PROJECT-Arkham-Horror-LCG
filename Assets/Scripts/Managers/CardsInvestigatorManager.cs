@@ -14,12 +14,13 @@ namespace Arkham.Managers
     public class CardsInvestigatorManager : ICardsInvestigatorManager
     {
         [Inject] ICardComponentRepository cardRepository;
+        [Inject] ICardInvestigatorController cardController;
 
         /*******************************************************************/
         public void Init()
         {
-            foreach (ICardComponent investigatorView in cardRepository.InvestigatorListCards)
-                investigatorView.Controller.SwitchEnable();
+            foreach (ICardView investigatorView in cardRepository.InvestigatorListCards)
+                cardController.UpdateVisualState(investigatorView);
         }
     }
 }

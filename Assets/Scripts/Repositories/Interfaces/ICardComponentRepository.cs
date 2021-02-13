@@ -5,9 +5,9 @@ namespace Arkham.Repositories
 {
     public interface ICardComponentRepository
     {
-        List<ICardComponent> CardComponentsList { get; }
-        Dictionary<string, ICardComponent> AllCardComponents { get; }
-        List<IInvestigatorComponent> InvestigatorListCards { get; }
-        List<IDeckComponent> DeckListCards { get; }
+        List<ICardView> CardComponentsList { get; }
+        Dictionary<string, ICardView> AllCardComponents { get; }
+        List<IInvestigatorView> InvestigatorListCards { get; }
+        List<IDeckView> DeckListCards { get; }
     }
 }

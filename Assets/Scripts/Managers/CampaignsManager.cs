@@ -12,22 +12,22 @@ namespace Arkham.Managers
 {
     public class CampaignsManager : ICampaignsManager
     {
-        [Inject] private readonly ICampaignRepository repository;
         [Inject] private readonly CampaignsComponent components;
+        [Inject] private readonly ICampaignRepository repository;
 
-        private List<CampaignView> Campaigns => components.Campaigns;
-        private List<CampaignState> States => components.States;
+        private List<ICampaignView> Campaigns => components.Campaigns;
+        private List<ICampaignState> States => components.States;
 
         /*******************************************************************/
         public void Init()
         {
-            foreach (CampaignView campaign in Campaigns)
+            foreach (ICampaignView campaign in Campaigns)
                 SetState(campaign);
         }
 
-        private void SetState(CampaignView campaign) => GetState(campaign.Id).ExecuteState(campaign);
+        private void SetState(ICampaignView campaign) => GetState(campaign.Id).ExecuteState(campaign);
 
-        private CampaignState GetState(string campaignId) =>
+        private ICampaignState GetState(string campaignId) =>
             States.Find(state => state.Id == repository.GetCampaign(campaignId).State);
     }
 }

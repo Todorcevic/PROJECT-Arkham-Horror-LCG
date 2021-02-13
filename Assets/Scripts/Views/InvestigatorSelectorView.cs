@@ -14,6 +14,7 @@ namespace Arkham.Views
 {
     public class InvestigatorSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IInvestigatorSelectorView
     {
+        [Inject] public IInvestigatorSelectorController controller;
         [Inject] private readonly IDoubleClickDetector doubleClick;
 
         [Title("SETTINGS")]
@@ -39,26 +40,19 @@ namespace Arkham.Views
         public string InvestigatorId { get; set; }
         public bool IsEmpty => InvestigatorId == null;
         public Transform Transform => transform;
-        public IInvestigatorSelectorController Controller { get; set; }
 
         /*******************************************************************/
-        [Inject]
-        private void Init(IInvestigatorSelectorController controller)
-        {
-            Controller = controller;
-            Controller.Init(this);
-        }
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            Controller.Click();
+            controller.Click(this);
             if (doubleClick.CheckDoubleClick(eventData.clickTime, eventData.pointerPress))
-                Controller.DoubleClick();
+                controller.DoubleClick(this);
         }
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => Controller.HoverOn();
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => Controller.HoverOff();
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
 
         public void ClickEffect() => audioSource.PlayOneShot(clickSound);
 
@@ -72,7 +66,7 @@ namespace Arkham.Views
 
         public void ActivateGlow(bool activate) => glow.enabled = activate;
 
-        public void SetInvestigator(ICardComponent cardView)
+        public void SetInvestigator(ICardView cardView)
         {
             InvestigatorId = cardView?.Id;
             canvas.interactable = cardView != null;

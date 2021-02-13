@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Arkham.Controllers
 {
-    public class CardInvestigatorController : CardController, ICardController
+    public class CardInvestigatorController : CardController, ICardInvestigatorController
     {
         [Inject] private readonly ISelectorRepository selectorRepository;
         [Inject] private readonly IInvestigatorSelectorsManager selectorsManager;
@@ -17,10 +17,10 @@ namespace Arkham.Controllers
         protected override int AmountSelected(string investigatorId) =>
             InvestigatorsSelected.FindAll(s => s == investigatorId).Count;
 
-        public void DoubleClick()
+        public override void DoubleClick(ICardView cardView)
         {
             selectorsManager.AddInvestigator(cardView);
-            SwitchEnable();
+
         }
     }
 }

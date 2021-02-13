@@ -9,10 +9,10 @@ namespace Arkham.Repositories
 {
     public class CardRepository : ICardComponentRepository, ISpriteCardRepository
     {
-        public List<ICardComponent> CardComponentsList => AllCardComponents.Values.ToList();
-        public Dictionary<string, ICardComponent> AllCardComponents { get; set; } = new Dictionary<string, ICardComponent>();
-        public List<IDeckComponent> DeckListCards => CardComponentsList.OfType<IDeckComponent>().ToList();
-        public List<IInvestigatorComponent> InvestigatorListCards => CardComponentsList.OfType<IInvestigatorComponent>().ToList();
+        public List<ICardView> CardComponentsList => AllCardComponents.Values.ToList();
+        public Dictionary<string, ICardView> AllCardComponents { get; set; } = new Dictionary<string, ICardView>();
+        public List<IDeckView> DeckListCards => CardComponentsList.OfType<IDeckView>().ToList();
+        public List<IInvestigatorView> InvestigatorListCards => CardComponentsList.OfType<IInvestigatorView>().ToList();
         public Sprite GetSpriteCard(string id) => AllCardComponents[id].GetCardImage;
     }
 }

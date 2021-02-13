@@ -10,22 +10,21 @@ using Arkham.Controllers;
 
 namespace Arkham.Views
 {
-    public class CardInvestigatorComponent : CardComponent, IPointerClickHandler, IInvestigatorComponent
+    public class CardInvestigatorView : CardView, IPointerClickHandler, IInvestigatorView
     {
         public Investigator Investigator { get; set; }
 
         /*******************************************************************/
         [Inject]
-        private void Init(ICardController controller)
+        private void Init(ICardInvestigatorController controller)
         {
-            Controller = controller;
-            Controller.Init(this);
+            base.controller = controller;
         }
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             if (doubleClick.CheckDoubleClick(eventData.clickTime, eventData.pointerPress))
-                Controller.DoubleClick();
+                controller.DoubleClick(this);
         }
     }
 }

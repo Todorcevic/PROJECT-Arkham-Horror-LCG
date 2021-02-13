@@ -8,7 +8,6 @@ using Arkham.Factories;
 using Arkham.Controllers;
 using Arkham.Models;
 using Arkham.Managers;
-using Arkham.UseCases;
 
 namespace Arkham.Config
 {
@@ -31,19 +30,16 @@ namespace Arkham.Config
             Container.Bind<IContext>().To<ContextJson>().AsSingle();
 
             /** Controllers **/
-            Container.Bind<ICampaignController>().To<CampaignController>().AsTransient();
-            Container.Bind<IInvestigatorSelectorController>().To<InvestigatorSelectorController>().AsTransient();
-            Container.Bind<ICardController>().To<CardInvestigatorController>().AsTransient()
-                .WhenInjectedInto<CardInvestigatorComponent>();
+            Container.Bind<ICampaignController>().To<CampaignController>().AsSingle();
+            Container.Bind<IInvestigatorSelectorController>().To<InvestigatorSelectorController>().AsSingle();
+            Container.Bind<ICardInvestigatorController>().To<CardInvestigatorController>().AsSingle();
+            Container.Bind<ICardDeckController>().To<CardDeckController>().AsSingle();
 
             /** Managers **/
             Container.Bind<ICampaignsManager>().To<CampaignsManager>().AsSingle();
             Container.Bind<IInvestigatorSelectorsManager>().To<InvestigatorSelectorsManager>().AsSingle();
             Container.BindInterfacesTo<CardsInvestigatorManager>().AsSingle();
             Container.BindInterfacesTo<CardsDeckManager>().AsSingle();
-
-            /** UseCases **/
-            Container.Bind<IShowCard>().To<ShowCard>().AsSingle();
         }
     }
 }

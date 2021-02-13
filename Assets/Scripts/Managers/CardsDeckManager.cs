@@ -1,4 +1,5 @@
-﻿using Arkham.Repositories;
+﻿using Arkham.Controllers;
+using Arkham.Repositories;
 using Arkham.Views;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,14 @@ namespace Arkham.Managers
     public class CardsDeckManager : ICardsDeckManager
     {
         [Inject] private readonly ICardComponentRepository cardViewsRepository;
-        public List<CardDeckComponent> InvestigatorsListCards => cardViewsRepository.CardComponentsList.OfType<CardDeckComponent>().ToList();
+        [Inject] ICardDeckController cardController;
+        public List<CardDeckView> InvestigatorsListCards => cardViewsRepository.CardComponentsList.OfType<CardDeckView>().ToList();
 
         /*******************************************************************/
         public void Init()
         {
-            foreach (CardDeckComponent investigatorView in InvestigatorsListCards)
-                investigatorView.Controller.SwitchEnable();
+            foreach (CardDeckView investigatorView in InvestigatorsListCards)
+                cardController.UpdateVisualState(investigatorView);
         }
     }
 }
