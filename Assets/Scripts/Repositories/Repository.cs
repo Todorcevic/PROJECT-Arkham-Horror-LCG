@@ -16,13 +16,12 @@ namespace Arkham.Repositories
         [DataMember] public List<string> InvestigatorsSelectedList { get; set; }
 
         /**** Investigator ****/
-        [DataMember] public List<Investigator> InvestigatorsList { get; set; }
-        public Investigator AllInvestigators(string id) => InvestigatorsList.Find(investigator => investigator.Id == id);
-
+        [DataMember] public List<InvestigatorInfo> InvestigatorsList { get; set; }
+        public InvestigatorInfo AllInvestigators(string id) => InvestigatorsList.Find(investigator => investigator.Id == id);
 
         /**** Campaigns ****/
         [DataMember] public string CurrentScenario { get; set; }
-        [DataMember] public List<Campaign> CampaignsList { get; set; }
-        public Campaign GetCampaign(string id) => CampaignsList.Find(campaign => campaign.Id == id);
+        [DataMember] public List<CampaignInfo> CampaignsList { get; set; }
+        public CampaignInfo GetCampaign(string id) => CampaignsList.Find(campaign => campaign.Id == id);
     }
 }

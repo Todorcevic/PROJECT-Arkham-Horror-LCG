@@ -30,13 +30,11 @@ namespace Arkham.Config
             Container.Bind<IContext>().To<ContextJson>().AsSingle();
 
             /** Controllers **/
-            Container.Bind<ICampaignController>().To<CampaignController>().AsSingle();
             Container.Bind<IInvestigatorSelectorController>().To<InvestigatorSelectorController>().AsSingle();
             Container.Bind<ICardInvestigatorController>().To<CardInvestigatorController>().AsSingle();
             Container.Bind<ICardDeckController>().To<CardDeckController>().AsSingle();
 
             /** Managers **/
-            Container.Bind<ICampaignsManager>().To<CampaignsManager>().AsSingle();
             Container.Bind<IInvestigatorSelectorsManager>().To<InvestigatorSelectorsManager>().AsSingle();
             Container.BindInterfacesTo<CardsInvestigatorManager>().AsSingle();
             Container.BindInterfacesTo<CardsDeckManager>().AsSingle();

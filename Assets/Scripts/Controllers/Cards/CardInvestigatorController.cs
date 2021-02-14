@@ -17,10 +17,6 @@ namespace Arkham.Controllers
         protected override int AmountSelected(string investigatorId) =>
             InvestigatorsSelected.FindAll(s => s == investigatorId).Count;
 
-        public override void DoubleClick(ICardView cardView)
-        {
-            selectorsManager.AddInvestigator(cardView);
-
-        }
+        public override void DoubleClick(ICardView cardView) => selectorsManager.AddInvestigator(cardView);
     }
 }

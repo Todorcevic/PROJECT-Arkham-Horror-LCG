@@ -14,7 +14,6 @@ namespace Arkham.Config
         [Inject] private readonly IContext context;
         [Inject] private readonly IResolutionSet resolutionSetter;
         [Inject] private readonly ICardFactory cardFactory;
-        [Inject] private readonly ICampaignsManager campaignsManager;
         [Inject] private readonly IInvestigatorSelectorsManager selectorsManager;
         [Inject] private readonly ICardsInvestigatorManager cardsInvestigatorManager;
 
@@ -24,7 +23,6 @@ namespace Arkham.Config
             context.LoadDataCards();
             context.LoadProgress();
             cardFactory.BuildCards();
-            campaignsManager.Init();
             selectorsManager.Init();
             cardsInvestigatorManager.Init();
             //context.SaveProgress();

@@ -9,7 +9,7 @@ using UnityEngine.Events;
 
 namespace Arkham.Views
 {
-    public interface ICampaignView : IView, IInteractable
+    public interface ICampaignView : IInteractable
     {
         string Id { get; }
         bool IsOpen { get; set; }

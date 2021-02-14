@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 namespace Arkham.Models
 {
     [DataContract]
-    public class Investigator
+    public class InvestigatorInfo
     {
         [DataMember] public string Id { get; set; }
         [DataMember] public int PhysicTrauma { get; set; }

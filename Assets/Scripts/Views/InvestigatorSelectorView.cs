@@ -9,14 +9,12 @@ using Zenject;
 using Arkham.Controllers;
 using DG.Tweening;
 using Arkham.Repositories;
+using Arkham.Components;
 
 namespace Arkham.Views
 {
-    public class InvestigatorSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IInvestigatorSelectorView
+    public class InvestigatorSelectorView : InteractableComponent, IInvestigatorSelectorView
     {
-        [Inject] public IInvestigatorSelectorController controller;
-        [Inject] private readonly IDoubleClickDetector doubleClick;
-
         [Title("SETTINGS")]
         [SerializeField, Required] private string id;
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
@@ -42,18 +40,6 @@ namespace Arkham.Views
         public Transform Transform => transform;
 
         /*******************************************************************/
-
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
-        {
-            controller.Click(this);
-            if (doubleClick.CheckDoubleClick(eventData.clickTime, eventData.pointerPress))
-                controller.DoubleClick(this);
-        }
-
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
-
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
-
         public void ClickEffect() => audioSource.PlayOneShot(clickSound);
 
         public void HoverOnEffect()
@@ -66,14 +52,6 @@ namespace Arkham.Views
 
         public void ActivateGlow(bool activate) => glow.enabled = activate;
 
-        public void SetInvestigator(ICardView cardView)
-        {
-            InvestigatorId = cardView?.Id;
-            canvas.interactable = cardView != null;
-            canvas.blocksRaycasts = cardView != null;
-            ChangeImage(cardView?.GetCardImage);
-        }
-
         public IEnumerator Reorder()
         {
             yield return null;
@@ -81,6 +59,12 @@ namespace Arkham.Views
         }
 
         public void MovePlaceHolder(Transform transform) => placeHolder.SetParent(transform);
+
+        public void Activate(bool isEnable)
+        {
+            canvas.interactable = isEnable;
+            canvas.blocksRaycasts = isEnable;
+        }
 
         public void ChangeImage(Sprite sprite)
         {

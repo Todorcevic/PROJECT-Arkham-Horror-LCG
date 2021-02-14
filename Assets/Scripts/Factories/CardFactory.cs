@@ -38,10 +38,10 @@ namespace Arkham.Factories
             {
                 CardInvestigatorView investigatorComponent = GameObject.Instantiate(cardFactoryComponent.CardInvestigatorPrefab, cardFactoryComponent.InvestigatorsZone);
                 SetData(investigatorComponent, investigatorInfo.Code);
-                Investigator investigator = investigatorRepository.AllInvestigators(investigatorInfo.Code);
+                InvestigatorInfo investigator = investigatorRepository.AllInvestigators(investigatorInfo.Code);
                 investigator.DeckBuilding = instantiator.CreateInstance<DeckBuildingRules>(investigatorInfo.Code);
                 investigatorComponent.Investigator = investigator;
-                cardViewsRepository.AllCardComponents.Add(investigatorInfo.Code, investigatorComponent);
+                cardViewsRepository.AllCardViews.Add(investigatorInfo.Code, investigatorComponent);
             }
         }
 
@@ -53,7 +53,7 @@ namespace Arkham.Factories
             {
                 CardDeckView cardDeckView = GameObject.Instantiate(cardFactoryComponent.CardDeckPrefab, cardFactoryComponent.DeckZone);
                 SetData(cardDeckView, card.Code);
-                cardViewsRepository.AllCardComponents.Add(card.Code, cardDeckView);
+                cardViewsRepository.AllCardViews.Add(card.Code, cardDeckView);
             }
         }
 

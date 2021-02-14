@@ -6,7 +6,7 @@ namespace Arkham.Repositories
     public interface ICampaignRepository
     {
         string CurrentScenario { get; set; }
-        Campaign GetCampaign(string id);
-        List<Campaign> CampaignsList { get; }
+        CampaignInfo GetCampaign(string id);
+        List<CampaignInfo> CampaignsList { get; }
     }
 }

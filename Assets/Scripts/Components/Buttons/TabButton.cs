@@ -10,18 +10,18 @@ namespace Arkham.UI
     {
         public void ClickEffect()
         {
-            PlaySound(clickSound);
+            audioButton.ClickSound();
             clickAction?.Invoke();
         }
 
         public void HoverOnEffect()
         {
-            PlaySound(hoverEnterSound);
+            audioButton.HoverOnSound();
             HoverActivate();
         }
         public void HoverOffEffect()
         {
-            PlaySound(hoverExitSound);
+            audioButton.HoverOffSound();
             HoverDesactivate();
         }
     }

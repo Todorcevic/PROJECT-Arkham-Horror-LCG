@@ -8,7 +8,7 @@ namespace Arkham.Components
 {
     public class InteractableComponent : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [Inject] private readonly IDoubleClickDetector doubleClick;
+        [Inject] private readonly IDoubleClickDetector clickDetector;
         private event Action ClickAction;
         private event Action DoubleClickAction;
         private event Action HoverOnAction;
@@ -22,7 +22,7 @@ namespace Arkham.Components
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            if (doubleClick.CheckDoubleClick(eventData.clickTime, eventData.pointerPress))
+            if (clickDetector.CheckDoubleClick(eventData.clickTime, eventData.pointerPress))
                 DoubleClickAction?.Invoke();
             else ClickAction?.Invoke();
         }

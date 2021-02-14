@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Arkham.Components;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +9,15 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public interface IInvestigatorSelectorView : IView
+    public interface IInvestigatorSelectorView : IView, IInteractable
     {
-        string InvestigatorId { get; }
+        string InvestigatorId { get; set; }
         bool IsEmpty { get; }
         Transform Transform { get; }
         void ActivateGlow(bool activate);
-        void SetInvestigator(ICardView cardView);
         IEnumerator Reorder();
         void MovePlaceHolder(Transform transform);
+        void Activate(bool isEnable);
         void ChangeImage(Sprite sprite);
     }
 }

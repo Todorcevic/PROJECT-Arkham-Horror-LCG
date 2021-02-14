@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arkham.Views
 {
-    public interface IDeckView
+    public interface IDeckView : ICardView
     {
     }
 }

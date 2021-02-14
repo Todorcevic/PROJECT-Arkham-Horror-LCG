@@ -13,16 +13,21 @@ namespace Arkham.Managers
         private IInvestigatorSelectorView currentSelectorSelected;
         [Inject] private readonly InvestigatorSelectorComponent components;
         [Inject] private readonly ISelectorRepository selectorRepository;
+        [Inject] private readonly IInvestigatorSelectorController selectorController;
         [Inject] private readonly ICardComponentRepository cardRepository;
         [Inject] private readonly ICardInvestigatorController cardController;
 
         private List<string> InvestigatorsSelected => selectorRepository.InvestigatorsSelectedList;
         private List<IInvestigatorSelectorView> Selectors => components.Selectors;
         private Transform PlaceHolder => components.PlaceHolder;
+        private Dictionary<string, ICardView> AllCardViews => cardRepository.AllCardViews;
 
         /*******************************************************************/
         public void Init()
         {
+            foreach (IInvestigatorSelectorView selector in Selectors)
+                selectorController.InitializeSelector(selector);
+
             foreach (string investigatorId in InvestigatorsSelected)
                 SetSelector(investigatorId);
             OrderSelectors();
@@ -47,18 +52,15 @@ namespace Arkham.Managers
         public void RemoveSelector(IInvestigatorSelectorView selector)
         {
             InvestigatorsSelected.Remove(selector.InvestigatorId);
-            cardController.UpdateVisualState(cardRepository.AllCardComponents[selector.InvestigatorId]);
-            selector.SetInvestigator(null);
+            cardController.UpdateVisualState(AllCardViews[selector.InvestigatorId]);
+            selectorController.SetInvestigator(selector, null);
             OrderSelectors();
         }
 
-        private void SetSelector(string investigatorId)
-        {
-            ICardView cardView = cardRepository.AllCardComponents[investigatorId];
-            SetSelector(cardView);
-        }
+        private void SetSelector(string investigatorId) => SetSelector(AllCardViews[investigatorId]);
 
-        private void SetSelector(ICardView investigator) => GetVoidSelector().SetInvestigator(investigator);
+        private void SetSelector(ICardView investigator) =>
+            selectorController.SetInvestigator(GetVoidSelector(), investigator);
 
         private void OrderSelectors()
         {

@@ -15,6 +15,14 @@ namespace Arkham.Controllers
         [Inject] private readonly IInvestigatorSelectorsManager selectorManager;
 
         /*******************************************************************/
+        public void InitializeSelector(IInvestigatorSelectorView selectorView)
+        {
+            selectorView.AddClickAction(() => Click(selectorView));
+            selectorView.AddDoubleClickAction(() => DoubleClick(selectorView));
+            selectorView.AddHoverOnAction(() => HoverOn(selectorView));
+            selectorView.AddHoverOffAction(() => HoverOff(selectorView));
+        }
+
         public void Click(IInvestigatorSelectorView selectorView)
         {
             selectorManager.SelectSelector(selectorView);
@@ -27,5 +35,12 @@ namespace Arkham.Controllers
         public void HoverOn(IInvestigatorSelectorView selectorView) => selectorView.HoverOnEffect();
 
         public void HoverOff(IInvestigatorSelectorView selectorView) => selectorView.HoverOffEffect();
+
+        public void SetInvestigator(IInvestigatorSelectorView selectorView, ICardView cardView)
+        {
+            selectorView.InvestigatorId = cardView?.Id;
+            selectorView.Activate(cardView != null);
+            selectorView.ChangeImage(cardView?.GetCardImage);
+        }
     }
 }

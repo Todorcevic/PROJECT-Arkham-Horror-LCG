@@ -8,12 +8,14 @@ using Arkham.Components;
 
 namespace Arkham.UI
 {
-    public class ButtonComponent : InteractableComponent
+    public class ButtonComponent : MonoBehaviour
     {
         private Color simpleTextColor = Color.white;
         private Color hoverTextColor = Color.black;
 
         [Title("RESOURCES")]
+        [SerializeField, Required, ChildGameObjectsOnly] protected AudioButtonComponent audioButton;
+        [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
         [SerializeField, Required, ChildGameObjectsOnly] private Image background;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI text;
 
@@ -23,19 +25,30 @@ namespace Arkham.UI
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
 
-        [Title("AUDIO")]
-        [SerializeField, Required, ChildGameObjectsOnly] private AudioSource audioSource;
-        [SerializeField] protected AudioClip clickSound;
-        [SerializeField] protected AudioClip hoverEnterSound;
-        [SerializeField] protected AudioClip hoverExitSound;
-
-        protected void PlaySound(AudioClip clip)
+        /*******************************************************************/
+        private void Start()
         {
-            if (clip != null) audioSource.PlayOneShot(clip);
+            interactable.AddClickAction(ClickEffect);
+            interactable.AddHoverOnAction(HoverOnEffect);
+            interactable.AddHoverOffAction(HoverOffEffect);
         }
 
-        private void ChangeTextColor(Color color) => text.DOColor(color, timeHoverAnimation);
-        private void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, timeHoverAnimation);
+        private void ClickEffect()
+        {
+            audioButton.ClickSound();
+            clickAction?.Invoke();
+        }
+
+        private void HoverOnEffect()
+        {
+            audioButton.HoverOnSound();
+            HoverActivate();
+        }
+        private void HoverOffEffect()
+        {
+            audioButton.HoverOffSound();
+            HoverDesactivate();
+        }
 
         public void HoverActivate()
         {
@@ -48,5 +61,8 @@ namespace Arkham.UI
             ChangeTextColor(simpleTextColor);
             FillBackground(false);
         }
+
+        private void ChangeTextColor(Color color) => text.DOColor(color, timeHoverAnimation);
+        private void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, timeHoverAnimation);
     }
 }

@@ -8,7 +8,7 @@ namespace Arkham.Repositories
         string CurrentScenario { set; }
         List<CardInfo> CardInfoList { set; }
         List<string> InvestigatorsSelectedList { set; }
-        List<Investigator> InvestigatorsList { set; }
-        List<Campaign> CampaignsList { set; }
+        List<InvestigatorInfo> InvestigatorsList { set; }
+        List<CampaignInfo> CampaignsList { set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Arkham.Views
 {
     public class CardInvestigatorView : CardView, IPointerClickHandler, IInvestigatorView
     {
-        public Investigator Investigator { get; set; }
+        public InvestigatorInfo Investigator { get; set; }
 
         /*******************************************************************/
         [Inject]

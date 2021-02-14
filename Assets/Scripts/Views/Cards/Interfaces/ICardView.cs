@@ -1,4 +1,5 @@
-﻿using Arkham.Controllers;
+﻿using Arkham.Components;
+using Arkham.Controllers;
 using Arkham.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public interface ICardView
+    public interface ICardView : IInteractable
     {
         string Id { get; }
         Sprite GetCardImage { get; }

@@ -9,6 +9,7 @@ namespace Arkham.Controllers
 {
     public interface ICardController
     {
+        void InitializeCard(ICardView cardView);
         void HoverOn(ICardView cardView);
         void HoverOff(ICardView cardView);
         void UpdateVisualState(ICardView cardView);

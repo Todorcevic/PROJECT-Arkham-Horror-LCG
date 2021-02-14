@@ -19,8 +19,11 @@ namespace Arkham.Managers
         /*******************************************************************/
         public void Init()
         {
-            foreach (ICardView investigatorView in cardRepository.InvestigatorListCards)
+            foreach (IInvestigatorView investigatorView in cardRepository.InvestigatorListCards)
+            {
+                cardController.InitializeCard(investigatorView);
                 cardController.UpdateVisualState(investigatorView);
+            }
         }
     }
 }

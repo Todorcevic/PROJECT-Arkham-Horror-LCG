@@ -14,14 +14,16 @@ namespace Arkham.Managers
     public class CardsDeckManager : ICardsDeckManager
     {
         [Inject] private readonly ICardComponentRepository cardViewsRepository;
-        [Inject] ICardDeckController cardController;
-        public List<CardDeckView> InvestigatorsListCards => cardViewsRepository.CardComponentsList.OfType<CardDeckView>().ToList();
+        [Inject] private readonly ICardDeckController cardController;
 
         /*******************************************************************/
         public void Init()
         {
-            foreach (CardDeckView investigatorView in InvestigatorsListCards)
-                cardController.UpdateVisualState(investigatorView);
+            foreach (IDeckView deckView in cardViewsRepository.DeckListCards)
+            {
+                cardController.InitializeCard(deckView);
+                cardController.UpdateVisualState(deckView);
+            }
         }
     }
 }

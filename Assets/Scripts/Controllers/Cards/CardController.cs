@@ -18,6 +18,13 @@ namespace Arkham.Controllers
         protected abstract int AmountSelected(string investigatorId);
         public abstract void DoubleClick(ICardView cardView);
 
+        public void InitializeCard(ICardView cardView)
+        {
+            cardView.AddHoverOnAction(() => HoverOn(cardView));
+            cardView.AddHoverOffAction(() => HoverOff(cardView));
+            cardView.AddDoubleClickAction(() => DoubleClick(cardView));
+        }
+
         public void HoverOn(ICardView cardView) => cardView.HoverOnEffect();
 
         public void HoverOff(ICardView cardView) => cardView.HoverOffEffect();

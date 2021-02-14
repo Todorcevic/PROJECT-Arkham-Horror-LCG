@@ -9,7 +9,7 @@ namespace Arkham.UI
 {
     public class CampaignsComponent : MonoBehaviour
     {
-        [SerializeField, SceneObjectsOnly] private List<CampaignView> campaigns;
+        [SerializeField, SceneObjectsOnly] private List<CampaignController> campaigns;
         [SerializeField, AssetsOnly] private List<CampaignState> states;
 
         public List<ICampaignView> Campaigns => campaigns.OfType<ICampaignView>().ToList();

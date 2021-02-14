@@ -1,4 +1,5 @@
-﻿using Arkham.Controllers;
+﻿using Arkham.Components;
+using Arkham.Controllers;
 using Arkham.Investigators;
 using Arkham.Models;
 using Arkham.Services;
@@ -11,7 +12,7 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class CardView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ICardView
+    public class CardView : InteractableComponent
     {
         [Inject] protected readonly IDoubleClickDetector doubleClick;
         protected ICardController controller;
@@ -58,10 +59,6 @@ namespace Arkham.Views
         {
             gameObject.SetActive(isShow);
         }
-
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => controller.HoverOn(this);
-
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => controller.HoverOff(this);
 
         public void HoverOnEffect()
         {
