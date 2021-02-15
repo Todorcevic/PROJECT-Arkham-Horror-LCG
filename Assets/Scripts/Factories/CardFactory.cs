@@ -36,7 +36,7 @@ namespace Arkham.Factories
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
             foreach (CardInfo investigatorInfo in allInvestigators)
             {
-                CardInvestigatorView investigatorComponent = GameObject.Instantiate(cardFactoryComponent.CardInvestigatorPrefab, cardFactoryComponent.InvestigatorsZone);
+                CardInvestigatorController investigatorComponent = GameObject.Instantiate(cardFactoryComponent.CardInvestigatorPrefab, cardFactoryComponent.InvestigatorsZone);
                 SetData(investigatorComponent, investigatorInfo.Code);
                 InvestigatorInfo investigator = investigatorRepository.AllInvestigators(investigatorInfo.Code);
                 investigator.DeckBuilding = instantiator.CreateInstance<DeckBuildingRules>(investigatorInfo.Code);
@@ -51,21 +51,25 @@ namespace Arkham.Factories
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
             foreach (CardInfo card in allDeckCards)
             {
-                CardDeckView cardDeckView = GameObject.Instantiate(cardFactoryComponent.CardDeckPrefab, cardFactoryComponent.DeckZone);
+                CardDeckController cardDeckView = GameObject.Instantiate(cardFactoryComponent.CardDeckPrefab, cardFactoryComponent.DeckZone);
                 SetData(cardDeckView, card.Code);
                 cardViewsRepository.AllCardViews.Add(card.Code, cardDeckView);
             }
         }
 
-        private void SetData(CardView cardComponent, string id)
+        private void SetData(CardController cardComponent, string id)
         {
+            InjectDependency(cardComponent);
             CardInfo cardInfo = infoRepository.AllCardsInfo(id);
             Sprite cardSprite = GetSprite(id);
             cardComponent.Initialize(cardInfo, cardSprite);
-            InjectDependency(cardComponent);
         }
 
-        private void InjectDependency(CardView cardInstance) => diContainer.Inject(cardInstance);
+        private void InjectDependency(CardController cardInstance)
+        {
+            diContainer.Inject(cardInstance);
+            diContainer.Inject(cardInstance.Interactable);
+        }
 
         private Sprite GetSprite(string id) => ImageListEN.Find(c => c.name == id);
     }

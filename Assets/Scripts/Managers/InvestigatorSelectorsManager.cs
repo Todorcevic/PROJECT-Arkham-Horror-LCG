@@ -1,79 +1,68 @@
-﻿using Arkham.Controllers;
-using Arkham.Repositories;
+﻿using Arkham.Repositories;
 using Arkham.UI;
 using Arkham.Views;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 namespace Arkham.Managers
 {
-    public class InvestigatorSelectorsManager : IInvestigatorSelectorsManager
+    public class InvestigatorSelectorsManager : MonoBehaviour
     {
-        private IInvestigatorSelectorView currentSelectorSelected;
-        [Inject] private readonly InvestigatorSelectorComponent components;
+        private InvestigatorSelectorController currentSelectorSelected;
         [Inject] private readonly ISelectorRepository selectorRepository;
-        [Inject] private readonly IInvestigatorSelectorController selectorController;
         [Inject] private readonly ICardComponentRepository cardRepository;
-        [Inject] private readonly ICardInvestigatorController cardController;
+        [SerializeField, Required, ChildGameObjectsOnly] private Transform placeHolder;
+        [SerializeField, Required, ChildGameObjectsOnly] private List<InvestigatorSelectorController> Selectors;
 
-        private List<string> InvestigatorsSelected => selectorRepository.InvestigatorsSelectedList;
-        private List<IInvestigatorSelectorView> Selectors => components.Selectors;
-        private Transform PlaceHolder => components.PlaceHolder;
-        private Dictionary<string, ICardView> AllCardViews => cardRepository.AllCardViews;
+        public List<string> InvestigatorsSelected => selectorRepository.InvestigatorsSelectedList;
 
         /*******************************************************************/
-        public void Init()
+        private void Start()
         {
-            foreach (IInvestigatorSelectorView selector in Selectors)
-                selectorController.InitializeSelector(selector);
+            foreach (InvestigatorSelectorController selector in Selectors)
+            {
+                selector.Interactable.AddClickAction(() => SelectSelector(selector));
+                selector.Interactable.AddDoubleClickAction(() => RemoveSelector(selector));
+            }
 
             foreach (string investigatorId in InvestigatorsSelected)
-                SetSelector(investigatorId);
-            OrderSelectors();
+                GetVoidSelector().SetInvestigator(cardRepository.GetInvestigator(investigatorId));
+            SortSelectors();
         }
 
-        public void SelectSelector(IInvestigatorSelectorView selectorView)
+        public void SelectSelector(InvestigatorSelectorController selector)
         {
             currentSelectorSelected?.ActivateGlow(false);
-            selectorView.ActivateGlow(true);
-            currentSelectorSelected = selectorView;
+            selector.ActivateGlow(true);
+            currentSelectorSelected = selector;
         }
 
-        public void AddInvestigator(ICardView investigator)
+        public void AddInvestigator(CardInvestigatorController investigator)
         {
             InvestigatorsSelected.Add(investigator.Id);
-            cardController.UpdateVisualState(investigator);
-            SetSelector(investigator);
-            GetSelectorByInvestigator(investigator.Id).Transform.position = investigator.Transform.position;
-            OrderSelectors();
+            InvestigatorSelectorController selector = GetVoidSelector();
+            selector.SetInvestigator(investigator);
+            selector.MoveTo(investigator.Transform);
+            SortSelectors();
         }
 
-        public void RemoveSelector(IInvestigatorSelectorView selector)
+        public void RemoveSelector(InvestigatorSelectorController selector)
         {
-            InvestigatorsSelected.Remove(selector.InvestigatorId);
-            cardController.UpdateVisualState(AllCardViews[selector.InvestigatorId]);
-            selectorController.SetInvestigator(selector, null);
-            OrderSelectors();
+            InvestigatorsSelected.Remove(selector.Investigator.Id);
+            selector.Investigator.UpdateVisualState();
+            selector.SetInvestigator(null);
+            SortSelectors();
         }
 
-        private void SetSelector(string investigatorId) => SetSelector(AllCardViews[investigatorId]);
-
-        private void SetSelector(ICardView investigator) =>
-            selectorController.SetInvestigator(GetVoidSelector(), investigator);
-
-        private void OrderSelectors()
+        private void SortSelectors()
         {
-            foreach (IInvestigatorSelectorView selector in Selectors)
-            {
-                selector.MovePlaceHolder(selector.IsEmpty ? selector.Transform : PlaceHolder);
-                components.StartCoroutine(selector.Reorder());
-            }
+            foreach (InvestigatorSelectorController selector in Selectors)
+                selector.SortIn(selector.IsEmpty ? selector.transform : placeHolder);
         }
 
-        private IInvestigatorSelectorView GetVoidSelector() =>
-            Selectors.Find(s => s.InvestigatorId == null);
-        private IInvestigatorSelectorView GetSelectorByInvestigator(string investigatorId) =>
-            Selectors.Find(s => s.InvestigatorId == investigatorId);
+        private InvestigatorSelectorController GetVoidSelector() =>
+            Selectors.Find(s => s.Investigator == null);
     }
 }

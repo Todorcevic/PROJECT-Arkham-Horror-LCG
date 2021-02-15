@@ -1,38 +1,81 @@
-﻿using Arkham.Models;
-using Arkham.Repositories;
-using Arkham.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Arkham.Components;
+using Arkham.Investigators;
+using Arkham.Models;
+using Arkham.Services;
+using DG.Tweening;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Zenject;
 
-namespace Arkham.Controllers
+namespace Arkham.Views
 {
-    public abstract class CardController
+    public abstract class CardController : MonoBehaviour
     {
+        private const float ORIGINAL_SCALE = 1.0f;
+
+        [Title("RESOURCES")]
+        [SerializeField, Required, AssetsOnly] private AudioInteractable audioInteractable;
+        [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
+        [SerializeField, Required, ChildGameObjectsOnly] private Image cardImage;
+        [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvas;
+
+        [Title("SETTINGS")]
+        [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
+        [SerializeField, Range(0f, 1f)] private float timeMoveAnimation;
+        [SerializeField, Range(1f, 2f)] private float scaleHoverEffect;
+        [SerializeField] private Color disableColor;
+
+        public string Id => Info.Code;
+        public Sprite GetCardImage => cardImage.sprite;
+        public Transform Transform => transform;
+        public CardInfo Info { get; private set; }
+        public InteractableComponent Interactable => interactable;
+
         /*******************************************************************/
-        protected abstract int AmountSelected(string investigatorId);
-        public abstract void DoubleClick(ICardView cardView);
-
-        public void InitializeCard(ICardView cardView)
+        protected abstract int AmountSelected();
+        public abstract void DoubleClick();
+        public void Initialize(CardInfo info, Sprite sprite)
         {
-            cardView.AddHoverOnAction(() => HoverOn(cardView));
-            cardView.AddHoverOffAction(() => HoverOff(cardView));
-            cardView.AddDoubleClickAction(() => DoubleClick(cardView));
+            name = info.Code;
+            cardImage.sprite = sprite;
+            Info = info;
+            Init();
         }
 
-        public void HoverOn(ICardView cardView) => cardView.HoverOnEffect();
-
-        public void HoverOff(ICardView cardView) => cardView.HoverOffEffect();
-
-        public void UpdateVisualState(ICardView cardView)
+        protected void Init()
         {
-            bool isEnable = ((cardView.Info.Quantity ?? 0) - AmountSelected(cardView.Id)) > 0;
-            cardView.Enable(isEnable);
+            Interactable.AddHoverOnAction(() => HoverOnEffect());
+            Interactable.AddHoverOffAction(() => HoverOffEffect());
+            Interactable.AddDoubleClickAction(() => DoubleClick());
+            UpdateVisualState();
         }
+
+        public void UpdateVisualState()
+        {
+            bool isEnable = ((Info.Quantity ?? 0) - AmountSelected()) > 0;
+            Enable(isEnable);
+        }
+
+        private void Enable(bool isEnable)
+        {
+            cardImage.color = isEnable ? Color.white : disableColor;
+            canvas.interactable = isEnable;
+            canvas.blocksRaycasts = isEnable;
+        }
+
+        public void Show(bool isShow)
+        {
+            gameObject.SetActive(isShow);
+        }
+
+        public void HoverOnEffect()
+        {
+            audioInteractable.HoverOnSound();
+            transform.DOScale(scaleHoverEffect, timeHoverAnimation);
+        }
+
+        public void HoverOffEffect() => transform.DOScale(ORIGINAL_SCALE, timeHoverAnimation);
     }
 }

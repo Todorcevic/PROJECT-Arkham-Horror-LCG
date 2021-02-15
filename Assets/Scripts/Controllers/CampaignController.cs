@@ -14,8 +14,12 @@ namespace Arkham.Views
     {
         [Inject] private readonly ICampaignRepository campaignRepository;
 
+        [Title("ID")]
+        [SerializeField, Required, HideInPrefabAssets] private string id;
+        [SerializeField, Required, HideInPrefabAssets] private string firstScenarioId;
+
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private AudioButtonComponent audioButton;
+        [SerializeField, Required, AssetsOnly] private AudioInteractable audioInteractable;
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
         [SerializeField, Required, ChildGameObjectsOnly] private Image chapterImage;
         [SerializeField, Required, ChildGameObjectsOnly] private Image stateImage;
@@ -24,8 +28,6 @@ namespace Arkham.Views
         [SerializeField, Required, ChildGameObjectsOnly] private Transform highlightedTextBox;
 
         [Title("SETTINGS")]
-        [SerializeField, Required] private string id;
-        [SerializeField, Required] private string firstScenarioId;
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
         [SerializeField, Range(0f, 100f)] private float yoffsetHoverHighlighted;
         [SerializeField, Range(1f, 2f)] private float zoomParallaxHoverEffect;
@@ -43,9 +45,9 @@ namespace Arkham.Views
         /*******************************************************************/
         private void Start()
         {
-            interactable.AddClickAction(() => Click());
-            interactable.AddHoverOnAction(() => HoverOn());
-            interactable.AddHoverOffAction(() => HoverOff());
+            Interactable.AddClickAction(() => Click());
+            Interactable.AddHoverOnAction(() => HoverOn());
+            Interactable.AddHoverOffAction(() => HoverOff());
             SetState();
         }
 
@@ -58,14 +60,14 @@ namespace Arkham.Views
         private void Click()
         {
             if (!IsOpen) return;
-            audioButton.ClickSound();
+            audioInteractable.ClickSound();
             campaignRepository.CurrentScenario = FirstScenarioId;
             clickAction?.Invoke();
         }
 
         private void HoverOn()
         {
-            audioButton.HoverOnSound();
+            audioInteractable.HoverOnSound();
             chapterImage.transform.DOScale(zoomParallaxHoverEffect, timeHoverAnimation);
             highlighted.DOFade(1, timeHoverAnimation);
             highlightedTextBox.transform.DOLocalMoveY(yoffsetHoverHighlighted, timeHoverAnimation);
@@ -73,7 +75,7 @@ namespace Arkham.Views
 
         private void HoverOff()
         {
-            audioButton.HoverOffSound();
+            audioInteractable.HoverOffSound();
             chapterImage.transform.DOScale(1f, timeHoverAnimation);
             highlighted.DOFade(0, timeHoverAnimation);
             highlightedTextBox.transform.DOLocalMoveY(0, timeHoverAnimation);

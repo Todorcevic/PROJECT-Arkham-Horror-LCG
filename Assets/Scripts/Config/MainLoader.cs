@@ -4,7 +4,6 @@ using Arkham.Services;
 using Arkham.Repositories;
 using Arkham.Factories;
 using Arkham.Models;
-using Arkham.Controllers;
 using Arkham.Managers;
 
 namespace Arkham.Config
@@ -14,8 +13,6 @@ namespace Arkham.Config
         [Inject] private readonly IContext context;
         [Inject] private readonly IResolutionSet resolutionSetter;
         [Inject] private readonly ICardFactory cardFactory;
-        [Inject] private readonly IInvestigatorSelectorsManager selectorsManager;
-        [Inject] private readonly ICardsInvestigatorManager cardsInvestigatorManager;
 
         private void Awake()
         {
@@ -23,8 +20,6 @@ namespace Arkham.Config
             context.LoadDataCards();
             context.LoadProgress();
             cardFactory.BuildCards();
-            selectorsManager.Init();
-            cardsInvestigatorManager.Init();
             //context.SaveProgress();
         }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public class CardDeckController : CardController
+    public class CardRowController : CardController
     {
         public override void DoubleClick()
         {

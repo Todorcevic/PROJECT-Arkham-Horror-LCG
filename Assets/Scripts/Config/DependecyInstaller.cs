@@ -5,7 +5,6 @@ using Arkham.Services;
 using Arkham.Scenarios;
 using Arkham.Views;
 using Arkham.Factories;
-using Arkham.Controllers;
 using Arkham.Models;
 using Arkham.Managers;
 
@@ -30,14 +29,9 @@ namespace Arkham.Config
             Container.Bind<IContext>().To<ContextJson>().AsSingle();
 
             /** Controllers **/
-            Container.Bind<IInvestigatorSelectorController>().To<InvestigatorSelectorController>().AsSingle();
-            Container.Bind<ICardInvestigatorController>().To<CardInvestigatorController>().AsSingle();
-            Container.Bind<ICardDeckController>().To<CardDeckController>().AsSingle();
 
             /** Managers **/
-            Container.Bind<IInvestigatorSelectorsManager>().To<InvestigatorSelectorsManager>().AsSingle();
-            Container.BindInterfacesTo<CardsInvestigatorManager>().AsSingle();
-            Container.BindInterfacesTo<CardsDeckManager>().AsSingle();
+            //Container.BindInterfacesAndSelfTo<InvestigatorSelectorsManager>().AsSingle();
         }
     }
 }

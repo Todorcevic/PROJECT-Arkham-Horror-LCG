@@ -11,9 +11,9 @@ namespace Arkham.UI
     public class CardFactoryComponent : MonoBehaviour
     {
         [Title("CARD PREFABS")]
-        [SerializeField, Required, AssetsOnly] private CardDeckView cardDeckPrefab;
-        [SerializeField, Required, AssetsOnly] private CardInvestigatorView cardInvestigatorPrefab;
-        [SerializeField, Required, AssetsOnly] private CardRowView cardRow;
+        [SerializeField, Required, AssetsOnly] private CardDeckController cardDeckPrefab;
+        [SerializeField, Required, AssetsOnly] private CardInvestigatorController cardInvestigatorPrefab;
+        [SerializeField, Required, AssetsOnly] private CardRowController cardRow;
 
         [Title("CARD IMAGES")]
         [SerializeField, AssetsOnly] private List<Sprite> cardImagesEN;
@@ -23,9 +23,9 @@ namespace Arkham.UI
         [SerializeField, Required, SceneObjectsOnly] private Transform investigatorsZone;
         [SerializeField, Required, SceneObjectsOnly] private Transform deckZone;
 
-        public CardDeckView CardDeckPrefab => cardDeckPrefab;
-        public CardInvestigatorView CardInvestigatorPrefab => cardInvestigatorPrefab;
-        public CardRowView CardRow => cardRow;
+        public CardDeckController CardDeckPrefab => cardDeckPrefab;
+        public CardInvestigatorController CardInvestigatorPrefab => cardInvestigatorPrefab;
+        public CardRowController CardRow => cardRow;
         public List<Sprite> CardImagesEN => cardImagesEN;
         public List<Sprite> CardImagesES => cardImagesES;
         public Transform InvestigatorsZone => investigatorsZone;
