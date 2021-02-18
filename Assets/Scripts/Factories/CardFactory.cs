@@ -3,12 +3,12 @@ using System.Linq;
 using UnityEngine;
 using Arkham.Models;
 using Arkham.UI;
-using Arkham.Views;
 using Arkham.Adapters;
 using Arkham.Investigators;
 using Arkham.Repositories;
 using Zenject;
 using Arkham.Managers;
+using Arkham.Controllers;
 
 namespace Arkham.Factories
 {
@@ -20,6 +20,7 @@ namespace Arkham.Factories
         [Inject] private readonly IInvestigatorRepository investigatorRepository;
         [Inject] private readonly ICardComponentRepository cardViewsRepository;
         [Inject] private readonly IInstanceAdapter instantiator;
+
         private List<Sprite> ImageListEN => cardFactoryComponent.CardImagesEN;
         private List<Sprite> ImageListES => cardFactoryComponent.CardImagesES;
 
@@ -37,10 +38,10 @@ namespace Arkham.Factories
             foreach (CardInfo investigatorInfo in allInvestigators)
             {
                 CardInvestigatorController investigatorComponent = GameObject.Instantiate(cardFactoryComponent.CardInvestigatorPrefab, cardFactoryComponent.InvestigatorsZone);
-                SetData(investigatorComponent, investigatorInfo.Code);
                 InvestigatorInfo investigator = investigatorRepository.AllInvestigators(investigatorInfo.Code);
                 investigator.DeckBuilding = instantiator.CreateInstance<DeckBuildingRules>(investigatorInfo.Code);
                 investigatorComponent.Investigator = investigator;
+                SetData(investigatorComponent, investigatorInfo.Code);
                 cardViewsRepository.AllCardViews.Add(investigatorInfo.Code, investigatorComponent);
             }
         }

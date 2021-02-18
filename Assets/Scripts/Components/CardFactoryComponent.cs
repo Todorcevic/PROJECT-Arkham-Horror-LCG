@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using Arkham.Views;
 using Zenject;
 using Arkham.Managers;
+using Arkham.Controllers;
+using Arkham.Components;
 
 namespace Arkham.UI
 {
-    public class CardFactoryComponent : MonoBehaviour
+    public class CardFactoryComponent : MonoBehaviour, ICardFactoryComponents
     {
         [Title("CARD PREFABS")]
         [SerializeField, Required, AssetsOnly] private CardDeckController cardDeckPrefab;

@@ -1,6 +1,7 @@
 ﻿using Arkham.Components;
 using Arkham.Investigators;
 using Arkham.Models;
+using Arkham.ScriptableObjects;
 using Arkham.Services;
 using DG.Tweening;
 using Sirenix.OdinInspector;
@@ -9,14 +10,14 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Arkham.Views
+namespace Arkham.Controllers
 {
     public abstract class CardController : MonoBehaviour
     {
         private const float ORIGINAL_SCALE = 1.0f;
 
         [Title("RESOURCES")]
-        [SerializeField, Required, AssetsOnly] private AudioInteractable audioInteractable;
+        [SerializeField, Required, ChildGameObjectsOnly] private AudioInteractable audioInteractable;
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
         [SerializeField, Required, ChildGameObjectsOnly] private Image cardImage;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvas;
@@ -27,6 +28,7 @@ namespace Arkham.Views
         [SerializeField, Range(1f, 2f)] private float scaleHoverEffect;
         [SerializeField] private Color disableColor;
 
+        protected abstract int AmountSelected { get; }
         public string Id => Info.Code;
         public Sprite GetCardImage => cardImage.sprite;
         public Transform Transform => transform;
@@ -34,28 +36,28 @@ namespace Arkham.Views
         public InteractableComponent Interactable => interactable;
 
         /*******************************************************************/
-        protected abstract int AmountSelected();
-        public abstract void DoubleClick();
+        protected abstract void DoubleClick();
+
         public void Initialize(CardInfo info, Sprite sprite)
         {
             name = info.Code;
             cardImage.sprite = sprite;
             Info = info;
-            Init();
-        }
-
-        protected void Init()
-        {
-            Interactable.AddHoverOnAction(() => HoverOnEffect());
-            Interactable.AddHoverOffAction(() => HoverOffEffect());
-            Interactable.AddDoubleClickAction(() => DoubleClick());
+            InteractbleBehaviour();
             UpdateVisualState();
         }
 
         public void UpdateVisualState()
         {
-            bool isEnable = ((Info.Quantity ?? 0) - AmountSelected()) > 0;
+            bool isEnable = ((Info.Quantity ?? 0) - AmountSelected) > 0;
             Enable(isEnable);
+        }
+
+        private void InteractbleBehaviour()
+        {
+            Interactable.AddHoverOnAction(() => HoverOnEffect());
+            Interactable.AddHoverOffAction(() => HoverOffEffect());
+            Interactable.AddDoubleClickAction(() => DoubleClick());
         }
 
         private void Enable(bool isEnable)
@@ -65,17 +67,17 @@ namespace Arkham.Views
             canvas.blocksRaycasts = isEnable;
         }
 
-        public void Show(bool isShow)
+        private void Show(bool isShow)
         {
             gameObject.SetActive(isShow);
         }
 
-        public void HoverOnEffect()
+        private void HoverOnEffect()
         {
             audioInteractable.HoverOnSound();
             transform.DOScale(scaleHoverEffect, timeHoverAnimation);
         }
 
-        public void HoverOffEffect() => transform.DOScale(ORIGINAL_SCALE, timeHoverAnimation);
+        private void HoverOffEffect() => transform.DOScale(ORIGINAL_SCALE, timeHoverAnimation);
     }
 }

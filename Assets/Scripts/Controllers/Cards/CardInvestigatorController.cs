@@ -8,22 +8,17 @@ using Arkham.Services;
 using UnityEngine.EventSystems;
 using Arkham.Managers;
 using Arkham.Repositories;
+using Arkham.Iterators;
 
-namespace Arkham.Views
+namespace Arkham.Controllers
 {
-    public class CardInvestigatorController : CardController
+    public class CardInvestigatorController : CardController, ICardInvestigatorController
     {
-        [Inject] InvestigatorSelectorsManager selectorsManager;
+        [Inject] IInvestigatorsSelectedInteractor selectorIterator;
         public InvestigatorInfo Investigator { get; set; }
-        private List<string> InvestigatorsSelected => selectorsManager.InvestigatorsSelected;
+        protected override int AmountSelected => selectorIterator.AmountInvestigators(Investigator.Id);
 
         /*******************************************************************/
-        public override void DoubleClick()
-        {
-            selectorsManager.AddInvestigator(this);
-            UpdateVisualState();
-        }
-
-        protected override int AmountSelected() => InvestigatorsSelected.FindAll(s => s == Id).Count;
+        protected override void DoubleClick() => selectorIterator.AddInvestigator(Investigator.Id);
     }
 }

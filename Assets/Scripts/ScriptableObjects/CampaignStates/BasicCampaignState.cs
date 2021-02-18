@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using Sirenix.OdinInspector;
-using UnityEngine.UI;
+﻿using Arkham.Controllers;
+using UnityEngine;
 
-namespace Arkham.Views
+namespace Arkham.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "BasicCampaignState", menuName = "BasicCampaignState", order = 1)]
     public class BasicCampaignState : CampaignState
@@ -10,8 +9,9 @@ namespace Arkham.Views
         [SerializeField] private Sprite icon;
 
         /*******************************************************************/
-        public override void ExecuteState(CampaignController campaignView)
+        public override void ExecuteState(ICampaignView campaignView)
         {
+            campaignView.CurrentState = this;
             campaignView.SetImageState(icon);
         }
     }

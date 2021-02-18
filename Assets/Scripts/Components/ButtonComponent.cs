@@ -5,8 +5,8 @@ using TMPro;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using Arkham.Components;
-using Arkham.Views;
 using System.Collections.Generic;
+using Arkham.ScriptableObjects;
 
 namespace Arkham.UI
 {
@@ -16,7 +16,7 @@ namespace Arkham.UI
         private Color hoverTextColor = Color.black;
 
         [Title("RESOURCES")]
-        [SerializeField, Required, AssetsOnly] private AudioInteractable audioInteractable;
+        [SerializeField, Required, ChildGameObjectsOnly] private AudioInteractable audioInteractable;
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
         [SerializeField, Required, ChildGameObjectsOnly] private Image background;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI text;

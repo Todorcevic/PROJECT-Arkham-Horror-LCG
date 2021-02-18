@@ -1,89 +1,38 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
-using Sirenix.OdinInspector;
-using DG.Tweening;
-using Zenject;
+﻿using Arkham.Iterators;
+using System;
 using System.Collections.Generic;
-using Arkham.Components;
-using Arkham.Repositories;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Zenject;
 
-namespace Arkham.Views
+namespace Arkham.Controllers
 {
-    public class CampaignController : MonoBehaviour
+    public class CampaignController : ICampaignController
     {
-        [Inject] private readonly ICampaignRepository campaignRepository;
-
-        [Title("ID")]
-        [SerializeField, Required, HideInPrefabAssets] private string id;
-        [SerializeField, Required, HideInPrefabAssets] private string firstScenarioId;
-
-        [Title("RESOURCES")]
-        [SerializeField, Required, AssetsOnly] private AudioInteractable audioInteractable;
-        [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
-        [SerializeField, Required, ChildGameObjectsOnly] private Image chapterImage;
-        [SerializeField, Required, ChildGameObjectsOnly] private Image stateImage;
-        [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup stateCanvas;
-        [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup highlighted;
-        [SerializeField, Required, ChildGameObjectsOnly] private Transform highlightedTextBox;
-
-        [Title("SETTINGS")]
-        [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
-        [SerializeField, Range(0f, 100f)] private float yoffsetHoverHighlighted;
-        [SerializeField, Range(1f, 2f)] private float zoomParallaxHoverEffect;
-
-        [Title("CLICK EVENT")]
-        [SerializeField] private UnityEvent clickAction;
-
-        [Title("STATES")]
-        [SerializeField, AssetsOnly] private List<CampaignState> states;
-
-        private bool IsOpen => GetState(id).IsOpen;
-        public string FirstScenarioId => firstScenarioId;
-        public InteractableComponent Interactable => interactable;
+        private readonly ICampaignView campaignView;
+        private readonly ICampaignInteractor campaignIterator;
 
         /*******************************************************************/
-        private void Start()
+        public CampaignController(ICampaignView campaignView, ICampaignInteractor campaignIterator)
         {
-            Interactable.AddClickAction(() => Click());
-            Interactable.AddHoverOnAction(() => HoverOn());
-            Interactable.AddHoverOffAction(() => HoverOff());
-            SetState();
+            this.campaignView = campaignView;
+            this.campaignIterator = campaignIterator;
+            Init();
         }
 
-        public void SetImageState(Sprite icon)
+        public void Init()
         {
-            stateCanvas.alpha = icon == null ? 0 : 1;
-            stateImage.sprite = icon;
+            campaignView.Interactable.AddClickAction(() => Click());
+            campaignView.Interactable.AddHoverOnAction(() => campaignView.HoverOn());
+            campaignView.Interactable.AddHoverOffAction(() => campaignView.HoverOff());
         }
 
         private void Click()
         {
-            if (!IsOpen) return;
-            audioInteractable.ClickSound();
-            campaignRepository.CurrentScenario = FirstScenarioId;
-            clickAction?.Invoke();
+            if (!campaignView.CurrentState.IsOpen) return;
+            campaignIterator.AddScenarioToPlay(campaignView.FirstScenarioId);
+            campaignView.Click();
         }
-
-        private void HoverOn()
-        {
-            audioInteractable.HoverOnSound();
-            chapterImage.transform.DOScale(zoomParallaxHoverEffect, timeHoverAnimation);
-            highlighted.DOFade(1, timeHoverAnimation);
-            highlightedTextBox.transform.DOLocalMoveY(yoffsetHoverHighlighted, timeHoverAnimation);
-        }
-
-        private void HoverOff()
-        {
-            audioInteractable.HoverOffSound();
-            chapterImage.transform.DOScale(1f, timeHoverAnimation);
-            highlighted.DOFade(0, timeHoverAnimation);
-            highlightedTextBox.transform.DOLocalMoveY(0, timeHoverAnimation);
-        }
-
-        private void SetState() => GetState(id).ExecuteState(this);
-
-        private CampaignState GetState(string campaignId) =>
-            states.Find(state => state.Id == campaignRepository.GetCampaign(campaignId).State);
     }
 }

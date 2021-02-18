@@ -8,35 +8,39 @@ using Arkham.Adapters;
 using Arkham.Scenarios;
 using Arkham.Config;
 using System.Runtime.Remoting;
+using Zenject;
 
 namespace Tests
 {
     [TestFixture]
-    public class ScenarioLoaderTest
+    public class ScenarioLoaderTest : ZenjectUnitTestFixture
     {
-        private class ScenarioLogicMock : ScenarioLogic { }
+        [Inject] private readonly IScenarioLoader scenarioLoader;
+
+        [SetUp]
+        public void CommonInstall()
+        {
+            DependecyInstaller.Install(Container);
+            Container.Inject(this);
+            //scenarioLoader = Container.Resolve<IScenarioLoader>();
+        }
 
         [Test]
         public void LoadScenario_WhenCall_ScenarioIsCorrect()
         {
             //Arrange
-            GameFiles gameFiles = new GameFiles();
-            const string scenarioId = "ScenarioMock";
-            Scenario scenarioExpected = new Scenario() { Id = "ScenarioMock", Name = "scenarioExpected" };
-            ObjectHandle objectHand = new ObjectHandle(new ScenarioLogicMock());
-            ISerializer serializer = Substitute.For<ISerializer>();
-            serializer.CreateDataFromResources<Scenario>(default).ReturnsForAnyArgs(scenarioExpected);
-            IInstanceAdapter instanceAdapter = Substitute.For<IInstanceAdapter>();
-            instanceAdapter.CreateInstance<ScenarioLogic>(Arg.Is<string>(s => s.Contains(scenarioId))).Returns(new ScenarioLogicMock());
-            ScenarioLoader scenarioLoader = new ScenarioLoader(serializer, instanceAdapter, gameFiles);
+            const string scenarioId = "CORE1";
+            const string expectedId = "CORE1";
+            const string expectedName = "The Gathering";
 
             //Act
             Scenario scenarioRecived = scenarioLoader.LoadScenario(scenarioId);
 
             //Assert
-            Assert.That(scenarioRecived.Id, Is.EqualTo(scenarioExpected.Id), "ScenarioId not is Correct: " + scenarioRecived.Id);
-            Assert.That(scenarioRecived.Name, Is.EqualTo(scenarioExpected.Name), "ScenarioName not is Correct: " + scenarioRecived.Name);
-            Assert.That(scenarioRecived.ScenarioLogic, Is.InstanceOf<ScenarioLogicMock>(), "ScenarioLogic not is Correct: " + scenarioRecived.ScenarioLogic);
+            Assert.That(scenarioRecived.Id, Is.EqualTo(expectedId), "ScenarioId not is Correct: " + scenarioRecived.Id);
+            Assert.That(scenarioRecived.Name, Is.EqualTo(expectedName), "ScenarioName not is Correct: " + scenarioRecived.Name);
+            Assert.That(scenarioRecived.ScenarioLogic, Is.TypeOf<ScenarioLogicCORE1>(), "ScenarioLogic not is Correct: " + scenarioRecived.ScenarioLogic);
         }
+
     }
 }
