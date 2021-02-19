@@ -1,4 +1,5 @@
-﻿using Arkham.Iterators;
+﻿using Arkham.Interactors;
+using Arkham.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,13 @@ namespace Arkham.Controllers
     public class CampaignController : ICampaignController
     {
         private readonly ICampaignView campaignView;
-        private readonly ICampaignInteractor campaignIterator;
+        private readonly ICampaignInteractor campaignInteractor;
 
         /*******************************************************************/
         public CampaignController(ICampaignView campaignView, ICampaignInteractor campaignIterator)
         {
             this.campaignView = campaignView;
-            this.campaignIterator = campaignIterator;
+            this.campaignInteractor = campaignIterator;
             Init();
         }
 
@@ -31,7 +32,7 @@ namespace Arkham.Controllers
         private void Click()
         {
             if (!campaignView.CurrentState.IsOpen) return;
-            campaignIterator.AddScenarioToPlay(campaignView.FirstScenarioId);
+            campaignInteractor.AddScenarioToPlay(campaignView.FirstScenarioId);
             campaignView.Click();
         }
     }

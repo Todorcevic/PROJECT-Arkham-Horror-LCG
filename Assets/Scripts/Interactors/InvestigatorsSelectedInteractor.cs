@@ -1,4 +1,5 @@
-﻿using Arkham.Presenters;
+﻿using Arkham.Managers;
+using Arkham.Presenters;
 using Arkham.Repositories;
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,11 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-namespace Arkham.Iterators
+namespace Arkham.Interactors
 {
     public class InvestigatorsSelectedInteractor : IInvestigatorsSelectedInteractor
     {
+        [Inject] private readonly ICardInfoRepository cardInfo;
         [Inject] private readonly ISelectorPresenter selectorPresenter;
         [Inject] private readonly IInvestigatorsSelectedRepository investigatorsSelectedModel;
 
@@ -26,7 +28,7 @@ namespace Arkham.Iterators
         public void AddInvestigator(string investigatorId)
         {
             investigatorsSelectedModel.InvestigatorsSelectedList.Add(investigatorId);
-            selectorPresenter.AddInvestigator(investigatorId);
+            selectorPresenter.AddInvestigator(investigatorId, IsEnable(investigatorId));
         }
 
         public void RemoveInvestigator(string investigatorId)
@@ -35,7 +37,10 @@ namespace Arkham.Iterators
             selectorPresenter.RemoveInvestigator(investigatorId);
         }
 
-        public int AmountInvestigators(string investigatorId) =>
+        private int AmountInvestigators(string investigatorId) =>
            investigatorsSelectedModel.InvestigatorsSelectedList.FindAll(i => i == investigatorId).Count;
+
+        private bool IsEnable(string investigatorId) =>
+            ((cardInfo.AllCardsInfo(investigatorId).Quantity ?? 0) - AmountInvestigators(investigatorId)) > 0;
     }
 }

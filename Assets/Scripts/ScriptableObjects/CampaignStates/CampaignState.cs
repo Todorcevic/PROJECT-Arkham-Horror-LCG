@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using Arkham.Controllers;
+using Arkham.Views;
 
 namespace Arkham.ScriptableObjects
 {

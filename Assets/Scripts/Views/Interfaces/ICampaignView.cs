@@ -1,7 +1,7 @@
 ﻿using Arkham.Components;
 using Arkham.ScriptableObjects;
 
-namespace Arkham.Controllers
+namespace Arkham.Views
 {
     public interface ICampaignView
     {

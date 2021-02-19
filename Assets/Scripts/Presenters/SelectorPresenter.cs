@@ -1,4 +1,5 @@
 ﻿using Arkham.Controllers;
+using Arkham.Interactors;
 using Arkham.Managers;
 using Arkham.Repositories;
 using Arkham.Views;
@@ -15,21 +16,23 @@ namespace Arkham.Presenters
 {
     public class SelectorPresenter : ISelectorPresenter
     {
-        [Inject] private readonly ISelectorsManager selectorManager;
-        [Inject] private readonly ICardComponentRepository cardRepository;
+        [Inject] private readonly IInvestigatorSelectorsManager selectorManager;
+        [Inject] private readonly IInvestigatorCardsManager investigatorManager;
 
-        public (ISelectorView selector, CardController investigatorcard) SetInvestigator(string investigatorId)
+        public ISelectorView SetInvestigator(string investigatorId)
         {
             ISelectorView selector = selectorManager.GetSelectorVoid();
-            CardController investigatorcard = cardRepository.AllCardViews[investigatorId];
-            selector.SetInvestigator(investigatorId, investigatorcard.GetCardImage);
-            return (selector, investigatorcard);
+            Sprite spriteCard = investigatorManager.GetSpriteCard(investigatorId);
+            selector.SetInvestigator(investigatorId, spriteCard);
+            return selector;
         }
 
-        public void AddInvestigator(string investigatorId)
+        public void AddInvestigator(string investigatorId, bool isEnable)
         {
-            (ISelectorView selector, CardController investigatorCard) = SetInvestigator(investigatorId);
-            selector.MoveTo(investigatorCard.Transform);
+            ISelectorView selector = SetInvestigator(investigatorId);
+            IInvestigatorCardView investigatorCardView = investigatorManager.AllInvestigatorCards[investigatorId];
+            investigatorCardView.Enable(isEnable);
+            selector.MoveTo(investigatorCardView.Transform);
             selectorManager.ArrangeSelectors();
         }
 

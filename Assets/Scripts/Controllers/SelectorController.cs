@@ -1,4 +1,4 @@
-﻿using Arkham.Iterators;
+﻿using Arkham.Interactors;
 using Arkham.Views;
 using System;
 using System.Collections.Generic;
@@ -26,12 +26,12 @@ namespace Arkham.Controllers
         /*******************************************************************/
         private void Init()
         {
-            selectorView.Interactable.AddDoubleClickAction(() => DoubleClick());
+            selectorView.Interactable.AddDoubleClickAction(() => Click());
             selectorView.Interactable.AddHoverOnAction(() => selectorView.HoverOnEffect());
             selectorView.Interactable.AddHoverOffAction(() => selectorView.HoverOffEffect());
         }
 
-        private void DoubleClick()
+        private void Click()
         {
             selectorView.Click();
             selectorIterator.RemoveInvestigator(selectorView.InvestigatorInThisSelector);

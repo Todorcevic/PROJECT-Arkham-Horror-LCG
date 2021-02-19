@@ -11,8 +11,8 @@ namespace Arkham.Presenters
 {
     public interface ISelectorPresenter
     {
-        (ISelectorView selector, CardController investigatorcard) SetInvestigator(string investigatorId);
-        void AddInvestigator(string investigatorId);
+        ISelectorView SetInvestigator(string investigatorId);
+        void AddInvestigator(string investigatorId, bool isEnable);
         void RemoveInvestigator(string investigatorId);
     }
 }

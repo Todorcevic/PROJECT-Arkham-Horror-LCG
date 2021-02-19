@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Zenject;
 
-namespace Arkham.Iterators
+namespace Arkham.Interactors
 {
     public class CampaignInteractor : ICampaignInteractor
     {

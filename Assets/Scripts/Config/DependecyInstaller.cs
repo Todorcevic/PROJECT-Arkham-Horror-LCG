@@ -6,7 +6,8 @@ using Arkham.Scenarios;
 using Arkham.Factories;
 using Arkham.Controllers;
 using Arkham.Presenters;
-using Arkham.Iterators;
+using Arkham.Interactors;
+using Arkham.Managers;
 
 namespace Arkham.Config
 {
@@ -15,8 +16,7 @@ namespace Arkham.Config
         public override void InstallBindings()
         {
             Container.Bind<GameFiles>().AsSingle();
-            Container.BindInterfacesTo<Repositories.Repositories>().AsSingle();
-            Container.BindInterfacesTo<CardRepository>().AsSingle();
+            Container.BindInterfacesTo<AllRepositories>().AsSingle();
 
             Container.Bind<IDoubleClickDetector>().To<DoubleClickDetector>().AsSingle();
             Container.Bind<IResolutionSet>().To<ScreenResolutionAutoDetect>().AsSingle();

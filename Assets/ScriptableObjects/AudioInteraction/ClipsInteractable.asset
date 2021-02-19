@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ca4f6e6f0925604484ce14dca877de2, type: 3}
-  m_Name: AudioInteractable
+  m_Name: ClipsInteractable
   m_EditorClassIdentifier: 
-  clickSound: {fileID: 0}
-  hoverEnterSound: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 776d909e0ee83c74383b98ae5271c2e1, type: 3}
+  hoverEnterSound: {fileID: 8300000, guid: 4596d1f5a91b3a04285c634a11339593, type: 3}
   hoverExitSound: {fileID: 0}

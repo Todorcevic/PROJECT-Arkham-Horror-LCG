@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Arkham.Managers
 {
-    public interface ISelectorsManager
+    public interface IInvestigatorSelectorsManager
     {
-        List<SelectorView> Selectors { get; }
+        List<ISelectorView> Selectors { get; }
         ISelectorView GetSelectorByInvestigator(string investigatorId);
         ISelectorView GetSelectorVoid();
         void ArrangeSelectors();

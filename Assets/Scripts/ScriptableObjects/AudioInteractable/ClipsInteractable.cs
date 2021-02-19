@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Arkham.ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "AudioInteractable", menuName = "AudioInteractable", order = 1)]
+    [CreateAssetMenu(fileName = "InteractableClips", menuName = "InteractableClips", order = 1)]
     public class ClipsInteractable : ScriptableObject
     {
         public AudioClip clickSound;

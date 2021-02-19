@@ -1,5 +1,5 @@
 ﻿using Arkham.Controllers;
-using Arkham.Iterators;
+using Arkham.Interactors;
 using Arkham.Managers;
 using Arkham.Views;
 using System;
@@ -14,7 +14,7 @@ namespace Arkham.Factories
 {
     public class SelectorFactory : ISelectorFactory
     {
-        [Inject] private readonly ISelectorsManager selectorsManager;
+        [Inject] private readonly IInvestigatorSelectorsManager selectorsManager;
         [Inject] private readonly IInvestigatorsSelectedInteractor investigatorsSelectedInteractor;
 
         public void BuildSelectors()

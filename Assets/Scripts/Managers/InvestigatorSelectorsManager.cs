@@ -1,5 +1,4 @@
 ﻿using Arkham.Controllers;
-using Arkham.Iterators;
 using Arkham.Views;
 using Sirenix.OdinInspector;
 using System;
@@ -12,11 +11,11 @@ using Zenject;
 
 namespace Arkham.Managers
 {
-    public class SelectorsManager : MonoBehaviour, ISelectorsManager
+    public class InvestigatorSelectorsManager : MonoBehaviour, IInvestigatorSelectorsManager
     {
-        [SerializeField, Required, ChildGameObjectsOnly] private Transform placeHolder;
-        [SerializeField, Required, ChildGameObjectsOnly] private List<SelectorView> selectors;
-        public List<SelectorView> Selectors => selectors;
+        [SerializeField, Required, SceneObjectsOnly] private Transform placeHolder;
+        [SerializeField, Required, SceneObjectsOnly] private List<SelectorView> selectors;
+        public List<ISelectorView> Selectors => selectors.OfType<ISelectorView>().ToList();
 
         /*******************************************************************/
         public ISelectorView GetSelectorByInvestigator(string investigatorId) =>

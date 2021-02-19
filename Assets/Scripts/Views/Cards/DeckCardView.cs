@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Arkham.Controllers
+namespace Arkham.Views
 {
-    public class CardRowController : CardController
+    public class DeckCardView : CardView, IDeckCardView
     {
         protected override int AmountSelected => 0;
-        protected override void DoubleClick()
-        {
-        }
     }
 }

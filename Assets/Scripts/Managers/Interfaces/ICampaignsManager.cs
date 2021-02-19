@@ -1,5 +1,6 @@
 ﻿using Arkham.Controllers;
 using Arkham.ScriptableObjects;
+using Arkham.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;

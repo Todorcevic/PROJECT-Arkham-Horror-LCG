@@ -7,7 +7,7 @@ using Zenject;
 using Arkham.Components;
 using Arkham.ScriptableObjects;
 
-namespace Arkham.Controllers
+namespace Arkham.Views
 {
     public class CampaignView : MonoBehaviour, ICampaignView
     {

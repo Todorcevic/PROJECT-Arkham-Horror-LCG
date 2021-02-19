@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6920108898983775684}
-  - component: {fileID: -3912873284287022417}
   - component: {fileID: 8736390494462685724}
   - component: {fileID: 6396499959933405539}
   m_Layer: 5
@@ -44,26 +43,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &-3912873284287022417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1167292358315829728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dc0fd74af60ea249b9c8cd826ae9365, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioInteractable: {fileID: 3161861043085989557}
-  interactable: {fileID: 8736390494462685724}
-  cardImage: {fileID: 904807066180061608}
-  canvas: {fileID: 6396499959933405539}
-  timeHoverAnimation: 0.25
-  timeMoveAnimation: 0.25
-  scaleHoverEffect: 1.1
-  disableColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
 --- !u!114 &8736390494462685724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,14 +727,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1746173441245118772, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
   m_PrefabInstance: {fileID: 5739253692832211945}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3161861043085989557 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7225114169980597596, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
-  m_PrefabInstance: {fileID: 5739253692832211945}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a9a7fdb2de8f9c4c8d047ca9c5f8179, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

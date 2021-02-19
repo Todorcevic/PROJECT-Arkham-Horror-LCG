@@ -1,5 +1,5 @@
 ﻿using Arkham.Controllers;
-using Arkham.Iterators;
+using Arkham.Interactors;
 using Arkham.Managers;
 using Arkham.Views;
 using System;

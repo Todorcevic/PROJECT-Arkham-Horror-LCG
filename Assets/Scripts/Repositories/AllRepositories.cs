@@ -7,7 +7,7 @@ using System;
 namespace Arkham.Repositories
 {
     [DataContract]
-    public class Repositories : ICampaignRepository, IInvestigatorRepository, IInvestigatorsSelectedRepository, ICardInfoRepository, IRepositories
+    public class AllRepositories : ICampaignRepository, IInvestigatorRepository, IInvestigatorsSelectedRepository, ICardInfoRepository, IRepositories
     {
 
         /**** Info ****/

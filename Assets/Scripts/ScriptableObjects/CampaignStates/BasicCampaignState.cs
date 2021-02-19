@@ -1,4 +1,5 @@
 ﻿using Arkham.Controllers;
+using Arkham.Views;
 using UnityEngine;
 
 namespace Arkham.ScriptableObjects

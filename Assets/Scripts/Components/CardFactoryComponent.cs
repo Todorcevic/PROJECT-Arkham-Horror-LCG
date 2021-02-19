@@ -6,15 +6,15 @@ using Zenject;
 using Arkham.Managers;
 using Arkham.Controllers;
 using Arkham.Components;
+using Arkham.Views;
 
 namespace Arkham.UI
 {
     public class CardFactoryComponent : MonoBehaviour, ICardFactoryComponents
     {
         [Title("CARD PREFABS")]
-        [SerializeField, Required, AssetsOnly] private CardDeckController cardDeckPrefab;
-        [SerializeField, Required, AssetsOnly] private CardInvestigatorController cardInvestigatorPrefab;
-        [SerializeField, Required, AssetsOnly] private CardRowController cardRow;
+        [SerializeField, Required, AssetsOnly] private DeckCardView cardDeckPrefab;
+        [SerializeField, Required, AssetsOnly] private InvestigatorCardView cardInvestigatorPrefab;
 
         [Title("CARD IMAGES")]
         [SerializeField, AssetsOnly] private List<Sprite> cardImagesEN;
@@ -24,9 +24,8 @@ namespace Arkham.UI
         [SerializeField, Required, SceneObjectsOnly] private Transform investigatorsZone;
         [SerializeField, Required, SceneObjectsOnly] private Transform deckZone;
 
-        public CardDeckController CardDeckPrefab => cardDeckPrefab;
-        public CardInvestigatorController CardInvestigatorPrefab => cardInvestigatorPrefab;
-        public CardRowController CardRow => cardRow;
+        public DeckCardView CardDeckPrefab => cardDeckPrefab;
+        public InvestigatorCardView CardInvestigatorPrefab => cardInvestigatorPrefab;
         public List<Sprite> CardImagesEN => cardImagesEN;
         public List<Sprite> CardImagesES => cardImagesES;
         public Transform InvestigatorsZone => investigatorsZone;
