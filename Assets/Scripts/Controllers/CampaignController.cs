@@ -11,25 +11,17 @@ namespace Arkham.Controllers
 {
     public class CampaignController : ICampaignController
     {
-        private readonly ICampaignView campaignView;
-        private readonly ICampaignInteractor campaignInteractor;
+        [Inject] private readonly ICampaignInteractor campaignInteractor;
 
         /*******************************************************************/
-        public CampaignController(ICampaignView campaignView, ICampaignInteractor campaignIterator)
+        public void Init(ICampaignView campaignView)
         {
-            this.campaignView = campaignView;
-            this.campaignInteractor = campaignIterator;
-            Init();
-        }
-
-        public void Init()
-        {
-            campaignView.Interactable.AddClickAction(() => Click());
+            campaignView.Interactable.AddClickAction(() => Click(campaignView));
             campaignView.Interactable.AddHoverOnAction(() => campaignView.HoverOn());
             campaignView.Interactable.AddHoverOffAction(() => campaignView.HoverOff());
         }
 
-        private void Click()
+        private void Click(ICampaignView campaignView)
         {
             if (!campaignView.CurrentState.IsOpen) return;
             campaignInteractor.AddScenarioToPlay(campaignView.FirstScenarioId);

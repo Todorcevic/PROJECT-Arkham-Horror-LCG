@@ -4,6 +4,7 @@ using Arkham.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Zenject;
@@ -12,8 +13,8 @@ namespace Arkham.Interactors
 {
     public class CampaignInteractor : ICampaignInteractor
     {
-        [Inject] ICampaignRepository campaignModel;
-        [Inject] ICampaignPresenter campaignPresenter;
+        [Inject] private readonly ICampaignRepository campaignModel;
+        [Inject] private readonly ICampaignPresenter campaignPresenter;
 
         /*******************************************************************/
         public void InitializeCampaigns()

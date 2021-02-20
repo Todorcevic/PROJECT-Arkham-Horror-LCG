@@ -22,5 +22,6 @@ namespace Arkham.Views
         void Arrange(Transform transform);
         void SetInvestigator(string investigatorCard, Sprite investigatorImage = null);
         void MoveTo(Transform transform);
+        void ActivateGlow(bool activate);
     }
 }

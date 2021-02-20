@@ -7,7 +7,6 @@ using Arkham.Factories;
 using Arkham.Controllers;
 using Arkham.Presenters;
 using Arkham.Interactors;
-using Arkham.Managers;
 
 namespace Arkham.Config
 {
@@ -18,31 +17,35 @@ namespace Arkham.Config
             Container.Bind<GameFiles>().AsSingle();
             Container.BindInterfacesTo<AllRepositories>().AsSingle();
 
+            /** Services **/
+            Container.Bind<IFileAdapter>().To<FileAdapter>().AsSingle();
+            Container.Bind<IScreenResolutionAdapter>().To<ScreenResolutionAdapter>().AsSingle();
+            Container.Bind<IInstantiatorAdapter>().To<NameConventionInstantiator>().AsSingle();
+            Container.Bind<ISerializer>().To<JsonNewtonsoftAdapter>().AsSingle();
             Container.Bind<IDoubleClickDetector>().To<DoubleClickDetector>().AsSingle();
             Container.Bind<IResolutionSet>().To<ScreenResolutionAutoDetect>().AsSingle();
-            Container.Bind<ISerializer>().To<JsonNewtonsoftAdapter>().AsSingle();
-            Container.Bind<IScreenResolutionAdapter>().To<ScreenResolutionAdapter>().AsSingle();
-            Container.Bind<IFileAdapter>().To<FileAdapter>().AsSingle();
-            Container.Bind<IInstanceAdapter>().To<InstantiatorAdapter>().AsSingle();
             Container.Bind<IScenarioLoader>().To<ScenarioLoader>().AsSingle();
-            Container.Bind<ICardFactory>().To<CardFactory>().AsSingle();
-            Container.Bind<IRepositoriesIO>().To<RepositoriesIO>().AsSingle();
+            Container.Bind<IDataPersistence>().To<DataPersistence>().AsSingle();
 
             /** Controllers **/
-            Container.BindInterfacesTo<SelectorController>().AsSingle();
             Container.BindInterfacesTo<CampaignController>().AsSingle();
+            Container.BindInterfacesTo<SelectorController>().AsSingle();
+            Container.BindInterfacesTo<InvestigatorCardController>().AsSingle();
 
             /** Presenters **/
-            Container.BindInterfacesTo<SelectorPresenter>().AsSingle();
             Container.BindInterfacesTo<CampaignPresenter>().AsSingle();
+            Container.BindInterfacesTo<SelectorPresenter>().AsSingle();
+            Container.BindInterfacesTo<CardPresenter>().AsSingle();
 
             /** Interactors **/
-            Container.BindInterfacesTo<InvestigatorsSelectedInteractor>().AsSingle();
             Container.BindInterfacesTo<CampaignInteractor>().AsSingle();
+            Container.BindInterfacesTo<InvestigatorsSelectedInteractor>().AsSingle();
+            Container.BindInterfacesTo<InvestigatorCardInteractor>().AsSingle();
 
             /** Factories **/
             Container.Bind<ICampaignFactory>().To<CampaignFactory>().AsSingle();
             Container.Bind<ISelectorFactory>().To<SelectorFactory>().AsSingle();
+            Container.Bind<ICardFactory>().To<CardFactory>().AsSingle();
         }
     }
 }

@@ -1,0 +1,23 @@
+﻿using UnityEngine;
+using Sirenix.OdinInspector;
+using Arkham.Components;
+
+namespace Arkham.Managers
+{
+    public class PanelsManager : MonoBehaviour
+    {
+        [Title("RESOURCES")]
+        [SerializeField, Required, SceneObjectsOnly] private PanelComponent currentPanel;
+
+        /*******************************************************************/
+        private void Start() => SelectPanel(currentPanel);
+
+        /*******************************************************************/
+        private void SelectPanel(PanelComponent panel)
+        {
+            currentPanel.Activate(false);
+            panel.Activate(true);
+            currentPanel = panel;
+        }
+    }
+}

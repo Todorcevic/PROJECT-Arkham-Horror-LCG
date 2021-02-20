@@ -1,19 +1,17 @@
-﻿using System;
-using System.Runtime.Remoting;
-using Arkham.Adapters;
+﻿using Arkham.Adapters;
 using Arkham.Config;
-using Arkham.UI;
-using UnityEngine;
+using Arkham.Services;
 using Zenject;
 
 namespace Arkham.Scenarios
 {
     public class ScenarioLoader : IScenarioLoader
     {
-        [Inject] private readonly ISerializer serializer;
-        [Inject] private readonly IInstanceAdapter instanceAdapter;
         [Inject] private readonly GameFiles gameFiles;
+        [Inject] private readonly ISerializer serializer;
+        [Inject] private readonly IInstantiatorAdapter instanceAdapter;
 
+        /*******************************************************************/
         public Scenario LoadScenario(string scenarioId)
         {
             Scenario scenario = LoadScenarioData(scenarioId);

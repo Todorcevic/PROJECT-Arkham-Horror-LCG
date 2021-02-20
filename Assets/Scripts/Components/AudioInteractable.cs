@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Sirenix.OdinInspector;
+using Arkham.ScriptableObjects;
 
-namespace Arkham.ScriptableObjects
+namespace Arkham.Components
 {
     public class AudioInteractable : MonoBehaviour
     {
-        [SerializeField] private AudioSource audioSource;
-        [SerializeField] private ClipsInteractable clips;
+        [SerializeField, Required, ChildGameObjectsOnly] private AudioSource audioSource;
+        [SerializeField, AssetsOnly] private ClipsInteractable clips;
 
+        /*******************************************************************/
         public void ClickSound()
         {
             if (clips.clickSound != null)

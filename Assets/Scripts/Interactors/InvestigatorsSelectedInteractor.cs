@@ -14,33 +14,38 @@ namespace Arkham.Interactors
 {
     public class InvestigatorsSelectedInteractor : IInvestigatorsSelectedInteractor
     {
-        [Inject] private readonly ICardInfoRepository cardInfo;
         [Inject] private readonly ISelectorPresenter selectorPresenter;
         [Inject] private readonly IInvestigatorsSelectedRepository investigatorsSelectedModel;
+        [Inject] private readonly IInvestigatorCardInteractor investigatorCardInteractor;
 
         /*******************************************************************/
         public void InitializeSelectors()
         {
             foreach (string investigatorId in investigatorsSelectedModel.InvestigatorsSelectedList)
+            {
+                investigatorCardInteractor.ActivateCard(investigatorId);
                 selectorPresenter.SetInvestigator(investigatorId);
+            }
+        }
+
+        public void SelectInvestigator(string investigatorId)
+        {
+            selectorPresenter.FocusInvestigator(investigatorId, investigatorsSelectedModel.InvestigatorFocused);
+            investigatorsSelectedModel.InvestigatorFocused = investigatorId;
         }
 
         public void AddInvestigator(string investigatorId)
         {
             investigatorsSelectedModel.InvestigatorsSelectedList.Add(investigatorId);
-            selectorPresenter.AddInvestigator(investigatorId, IsEnable(investigatorId));
+            investigatorCardInteractor.ActivateCard(investigatorId);
+            selectorPresenter.AddInvestigator(investigatorId);
         }
 
         public void RemoveInvestigator(string investigatorId)
         {
             investigatorsSelectedModel.InvestigatorsSelectedList.Remove(investigatorId);
+            investigatorCardInteractor.ActivateCard(investigatorId);
             selectorPresenter.RemoveInvestigator(investigatorId);
         }
-
-        private int AmountInvestigators(string investigatorId) =>
-           investigatorsSelectedModel.InvestigatorsSelectedList.FindAll(i => i == investigatorId).Count;
-
-        private bool IsEnable(string investigatorId) =>
-            ((cardInfo.AllCardsInfo(investigatorId).Quantity ?? 0) - AmountInvestigators(investigatorId)) > 0;
     }
 }

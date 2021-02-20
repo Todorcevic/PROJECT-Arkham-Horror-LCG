@@ -59,17 +59,19 @@ namespace Arkham.Views
             StartCoroutine(Reorder());
         }
 
-        private IEnumerator Reorder()
-        {
-            yield return null;
-            transform.DOMove(placeHolder.position, timeReorderAnimation);
-        }
-
         public void SetInvestigator(string investigatorId, Sprite investigatorImage = null)
         {
             InvestigatorInThisSelector = investigatorId;
             Activate(investigatorId != null);
             ChangeImage(investigatorImage);
+        }
+
+        public void ActivateGlow(bool activate) => glow.enabled = activate;
+
+        private IEnumerator Reorder()
+        {
+            yield return null;
+            transform.DOMove(placeHolder.position, timeReorderAnimation);
         }
 
         private void Activate(bool isEnable)
