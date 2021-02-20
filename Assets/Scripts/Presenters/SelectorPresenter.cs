@@ -19,6 +19,7 @@ namespace Arkham.Presenters
         [Inject] private readonly IInvestigatorSelectorsManager selectorManager;
         [Inject] private readonly IInvestigatorCardsManager investigatorManager;
 
+        /*******************************************************************/
         public ISelectorView SetInvestigator(string investigatorId)
         {
             ISelectorView selector = selectorManager.GetSelectorVoid();
@@ -27,11 +28,16 @@ namespace Arkham.Presenters
             return selector;
         }
 
-        public void AddInvestigator(string investigatorId, bool isEnable)
+        public void FocusInvestigator(string activeInvestigatorId, string desactiveInvestigatorId)
+        {
+            selectorManager.GetSelectorByInvestigator(desactiveInvestigatorId).ActivateGlow(false);
+            selectorManager.GetSelectorByInvestigator(activeInvestigatorId).ActivateGlow(true);
+        }
+
+        public void AddInvestigator(string investigatorId)
         {
             ISelectorView selector = SetInvestigator(investigatorId);
             IInvestigatorCardView investigatorCardView = investigatorManager.AllInvestigatorCards[investigatorId];
-            investigatorCardView.Enable(isEnable);
             selector.MoveTo(investigatorCardView.Transform);
             selectorManager.ArrangeSelectors();
         }

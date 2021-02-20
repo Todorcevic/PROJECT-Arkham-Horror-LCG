@@ -4,7 +4,7 @@ namespace Arkham.Config
 {
     public class GameFiles
     {
-        public string FILE_EXTENSION => ".json";
+        public string DATAFILE_EXTENSION => ".json";
         public string JSON_ROOT_DIRECTORY => "JsonFiles/";
         //const string HISTORIES_PATH = "Histories/";
         public string CAMPAIGNS_DIRECTORY => "Campaigns/";
@@ -34,7 +34,7 @@ namespace Arkham.Config
         //public static string StartedGameFilePath => Application.persistentDataPath + "/" + CURRENT_INVESTIGATORS_FILE + ".json";
 
         public string CardsDataFilePath => JSON_ROOT_DIRECTORY + ALL_CARDS_DATA_FILE;
-        public string PlayerProgressFilePath => Application.persistentDataPath + "/" + PLAYER_PROGRESS_FILE + FILE_EXTENSION;
+        public string PlayerProgressFilePath => Application.persistentDataPath + "/" + PLAYER_PROGRESS_FILE + DATAFILE_EXTENSION;
         public string PlayerProgressDefaultFilePath => JSON_ROOT_DIRECTORY + PLAYER_PROGRESS_DEFAULT_FILE;
     }
 }

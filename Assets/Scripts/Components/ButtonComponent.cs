@@ -4,11 +4,8 @@ using UnityEngine.Events;
 using TMPro;
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using Arkham.Components;
-using System.Collections.Generic;
-using Arkham.ScriptableObjects;
 
-namespace Arkham.UI
+namespace Arkham.Components
 {
     public class ButtonComponent : MonoBehaviour
     {
@@ -36,6 +33,7 @@ namespace Arkham.UI
             interactable.AddHoverOffAction(HoverOffEffect);
         }
 
+        /*******************************************************************/
         public void ClickEffect()
         {
             audioInteractable.ClickSound();

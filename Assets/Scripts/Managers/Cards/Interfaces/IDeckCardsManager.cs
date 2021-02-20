@@ -10,6 +10,7 @@ namespace Arkham.Managers
 {
     public interface IDeckCardsManager
     {
+        DeckCardView DeckCardPrefab { get; }
         Dictionary<string, IDeckCardView> AllDeckCards { get; }
         List<IDeckCardView> DeckCardsList { get; }
         Transform Zone { get; }

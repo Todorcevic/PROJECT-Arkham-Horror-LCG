@@ -1,6 +1,7 @@
 ﻿using Arkham.Controllers;
 using Arkham.Interactors;
 using Arkham.Managers;
+using Arkham.Models;
 using Arkham.Views;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,14 @@ namespace Arkham.Factories
 {
     public class CampaignFactory : ICampaignFactory
     {
+        [Inject] private readonly ICampaignController campaignController;
         [Inject] private readonly ICampaignsManager campaignsManager;
         [Inject] private readonly ICampaignInteractor campaignInteractor;
 
         public void BuildCampaigns()
         {
             foreach (ICampaignView campaign in campaignsManager.Campaigns)
-                new CampaignController(campaign, campaignInteractor);
+                campaignController.Init(campaign);
 
             campaignInteractor.InitializeCampaigns();
         }

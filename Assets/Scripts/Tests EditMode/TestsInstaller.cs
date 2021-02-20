@@ -20,10 +20,10 @@ namespace Tests
             Container.Bind<ISerializer>().To<JsonNewtonsoftAdapter>().AsSingle();
             Container.Bind<IScreenResolutionAdapter>().To<ScreenResolutionAdapter>().AsSingle();
             Container.Bind<IFileAdapter>().To<FileAdapter>().AsSingle();
-            Container.Bind<IInstanceAdapter>().To<InstantiatorAdapter>().AsSingle();
+            Container.Bind<IInstantiatorAdapter>().To<NameConventionInstantiator>().AsSingle();
             Container.Bind<IScenarioLoader>().To<ScenarioLoader>().AsSingle();
             Container.Bind<ICardFactory>().To<CardFactory>().AsSingle();
-            Container.Bind<IRepositoriesIO>().To<RepositoriesIO>().AsSingle();
+            Container.Bind<IDataPersistence>().To<DataPersistence>().AsSingle();
         }
     }
 }

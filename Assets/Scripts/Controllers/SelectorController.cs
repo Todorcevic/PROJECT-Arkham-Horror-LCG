@@ -12,29 +12,24 @@ namespace Arkham.Controllers
 {
     public class SelectorController : ISelectorController
     {
-        private readonly ISelectorView selectorView;
-        private readonly IInvestigatorsSelectedInteractor selectorIterator;
+        [Inject] private readonly IInvestigatorsSelectedInteractor selectorIterator;
 
         /*******************************************************************/
-        public SelectorController(ISelectorView selectorView, IInvestigatorsSelectedInteractor selectorIterator)
+        public void Init(ISelectorView selectorView)
         {
-            this.selectorView = selectorView;
-            this.selectorIterator = selectorIterator;
-            Init();
-        }
-
-        /*******************************************************************/
-        private void Init()
-        {
-            selectorView.Interactable.AddDoubleClickAction(() => Click());
+            selectorView.Interactable.AddClickAction(() => Click(selectorView));
+            selectorView.Interactable.AddDoubleClickAction(() => DoubleClick(selectorView));
             selectorView.Interactable.AddHoverOnAction(() => selectorView.HoverOnEffect());
             selectorView.Interactable.AddHoverOffAction(() => selectorView.HoverOffEffect());
         }
 
-        private void Click()
+        private void Click(ISelectorView selectorView)
         {
             selectorView.Click();
-            selectorIterator.RemoveInvestigator(selectorView.InvestigatorInThisSelector);
+            selectorIterator.SelectInvestigator(selectorView.InvestigatorInThisSelector);
         }
+
+        private void DoubleClick(ISelectorView selectorView) =>
+            selectorIterator.RemoveInvestigator(selectorView.InvestigatorInThisSelector);
     }
 }

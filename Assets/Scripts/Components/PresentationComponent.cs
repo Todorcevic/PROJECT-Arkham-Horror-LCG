@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PresentationComponent : MonoBehaviour
+namespace Arkham.Components
 {
-    [Header("SETTINGS")]
-    [SerializeField] private bool playPresentation;
-
-    void Start()
+    public class PresentationComponent : MonoBehaviour
     {
-        if (playPresentation) PlayPresentation();
-    }
+        [Header("SETTINGS")]
+        [SerializeField] private bool playPresentation;
 
-    void PlayPresentation()
-    {
+        void Start()
+        {
+            if (playPresentation) PlayPresentation();
+        }
 
+        void PlayPresentation()
+        {
+
+        }
     }
 }

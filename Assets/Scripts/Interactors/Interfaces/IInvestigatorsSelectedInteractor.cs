@@ -9,6 +9,7 @@ namespace Arkham.Interactors
     public interface IInvestigatorsSelectedInteractor
     {
         void InitializeSelectors();
+        void SelectInvestigator(string investigatorId);
         void AddInvestigator(string investigatorId);
         void RemoveInvestigator(string investigatorId);
     }

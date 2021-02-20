@@ -2,7 +2,7 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
 
-namespace Arkham.UI
+namespace Arkham.Components
 {
     public class HomeBlurComponent : MonoBehaviour
     {

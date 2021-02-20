@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardLogic : MonoBehaviour
+namespace Arkham.CardsLogic
 {
-    // Start is called before the first frame update
-    void Start()
+    public class CardLogic
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

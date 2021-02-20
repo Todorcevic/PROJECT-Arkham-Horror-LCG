@@ -11,10 +11,12 @@ namespace Arkham.Config
     public class MainLoader : MonoBehaviour
     {
         [Inject] private readonly IResolutionSet resolutionSetter;
-        [Inject] private readonly IRepositoriesIO repositoriesIO;
+        [Inject] private readonly IDataPersistence repositoriesIO;
         [Inject] private readonly ICardFactory cardFactory;
         [Inject] private readonly ICampaignFactory campaignFactory;
         [Inject] private readonly ISelectorFactory selectorFactory;
+
+        [Inject] private readonly ICardInfoRepository cardInfo;
 
         private void Awake()
         {

@@ -12,7 +12,8 @@ namespace Arkham.Presenters
     public interface ISelectorPresenter
     {
         ISelectorView SetInvestigator(string investigatorId);
-        void AddInvestigator(string investigatorId, bool isEnable);
+        void AddInvestigator(string investigatorId);
         void RemoveInvestigator(string investigatorId);
+        void FocusInvestigator(string activeInvestigatorId, string desactiveInvestigatorId);
     }
 }
