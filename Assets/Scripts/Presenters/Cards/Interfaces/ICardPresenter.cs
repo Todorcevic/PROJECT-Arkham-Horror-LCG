@@ -8,6 +8,8 @@ namespace Arkham.Presenters
 {
     public interface ICardPresenter
     {
-        void EnableCard(string idCard, bool isEnable);
+        void Init();
+        void RefreshCardVisibility(string cardId);
+        void RefreshAllCardsVisibility();
     }
 }

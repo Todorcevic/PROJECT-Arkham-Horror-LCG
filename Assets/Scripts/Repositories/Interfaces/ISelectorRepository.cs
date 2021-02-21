@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Arkham.Repositories
 {
-    public interface IInvestigatorsSelectedRepository
+    public interface ISelectorRepository
     {
         string InvestigatorFocused { get; set; }
-        List<string> InvestigatorsSelectedList { get; }
+        List<string> InvestigatorsSelectedList { get; set; }
     }
 }

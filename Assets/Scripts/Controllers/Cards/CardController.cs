@@ -9,15 +9,13 @@ namespace Arkham.Controllers
 {
     public abstract class CardController
     {
-        protected ICardView cardView;
-
-        protected void Init()
+        public void Init(ICardView cardView)
         {
-            cardView.Interactable.AddDoubleClickAction(() => DoubleClick());
-            cardView.Interactable.AddHoverOnAction(() => cardView.HoverOnEffect());
-            cardView.Interactable.AddHoverOffAction(() => cardView.HoverOffEffect());
+            cardView.Interactable.DoubleClicked += () => DoubleClick(cardView);
+            cardView.Interactable.HoverOn += () => cardView.HoverOnEffect();
+            cardView.Interactable.HoverOff += () => cardView.HoverOffEffect();
         }
 
-        protected abstract void DoubleClick();
+        protected abstract void DoubleClick(ICardView cardView);
     }
 }

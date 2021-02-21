@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Arkham.Controllers
 {
-    public interface IInvestigatorCardController
+    public interface IInvestigatorCardController : ICardController
     {
-        void Init(IInvestigatorCardView cardInvestigatorView);
     }
 }

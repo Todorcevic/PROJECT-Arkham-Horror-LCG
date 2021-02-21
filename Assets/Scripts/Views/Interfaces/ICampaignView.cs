@@ -1,5 +1,4 @@
 ﻿using Arkham.Components;
-using Arkham.ScriptableObjects;
 
 namespace Arkham.Views
 {
@@ -7,8 +6,8 @@ namespace Arkham.Views
     {
         string Id { get; }
         string FirstScenarioId { get; }
+        bool IsOpen { get; set; }
         InteractableComponent Interactable { get; }
-        ICampaignState CurrentState { get; set; }
         void SetImageState(UnityEngine.Sprite icon);
         void Click();
         void HoverOn();

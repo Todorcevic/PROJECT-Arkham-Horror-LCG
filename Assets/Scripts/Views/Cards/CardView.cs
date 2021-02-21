@@ -12,7 +12,7 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public abstract class CardView : MonoBehaviour
+    public abstract class CardView : MonoBehaviour, ICardView
     {
         private const float ORIGINAL_SCALE = 1.0f;
         private string id;

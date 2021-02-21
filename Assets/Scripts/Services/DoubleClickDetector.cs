@@ -4,13 +4,13 @@ namespace Arkham.Services
 {
     public class DoubleClickDetector : IDoubleClickDetector
     {
-        private readonly float doubleClickTimeLimit = 0.5f;
+        private const float DOUBLE_CLICK_TIME_LIMIT = 0.5f;
         private float lastClickTime;
         private GameObject lastObjectClicked;
 
         public bool CheckDoubleClick(float clickTime, GameObject objectClicked)
         {
-            if (clickTime - lastClickTime < doubleClickTimeLimit && objectClicked == lastObjectClicked)
+            if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_LIMIT && objectClicked == lastObjectClicked)
                 return true;
             lastClickTime = clickTime;
             lastObjectClicked = objectClicked;

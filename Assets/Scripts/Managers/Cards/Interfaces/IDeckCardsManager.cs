@@ -8,12 +8,7 @@ using UnityEngine;
 
 namespace Arkham.Managers
 {
-    public interface IDeckCardsManager
+    public interface IDeckCardsManager : ICardsManager
     {
-        DeckCardView DeckCardPrefab { get; }
-        Dictionary<string, IDeckCardView> AllDeckCards { get; }
-        List<IDeckCardView> DeckCardsList { get; }
-        Transform Zone { get; }
-        Sprite GetSpriteCard(string id);
     }
 }

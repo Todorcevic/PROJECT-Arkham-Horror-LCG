@@ -34,8 +34,8 @@ namespace Arkham.Views
 
         public string Id => id;
         public string FirstScenarioId => firstScenarioId;
+        public bool IsOpen { get; set; }
         public InteractableComponent Interactable => interactable;
-        public ICampaignState CurrentState { get; set; }
 
         /*******************************************************************/
         public void Click()

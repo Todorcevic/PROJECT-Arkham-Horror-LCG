@@ -7,7 +7,7 @@ using Arkham.Factories;
 using Arkham.Controllers;
 using Arkham.Presenters;
 using Arkham.Interactors;
-using Arkham.UseCases;
+using Arkham.Managers;
 
 namespace Arkham.Config
 {
@@ -36,20 +36,16 @@ namespace Arkham.Config
             /** Presenters **/
             Container.BindInterfacesTo<CampaignPresenter>().AsSingle();
             Container.BindInterfacesTo<SelectorPresenter>().AsSingle();
-            Container.BindInterfacesTo<CardPresenter>().AsSingle();
+            Container.BindInterfacesTo<InvestigatorCardPresenter>().AsSingle();
 
             /** Interactors **/
             Container.BindInterfacesTo<CampaignInteractor>().AsSingle();
-            Container.BindInterfacesTo<InvestigatorsSelectorInteractor>().AsSingle();
-            Container.BindInterfacesTo<InvestigatorCardInteractor>().AsSingle();
+            Container.BindInterfacesTo<SelectorInteractor>().AsSingle();
 
             /** Factories **/
             Container.Bind<ICampaignFactory>().To<CampaignFactory>().AsSingle();
             Container.Bind<ISelectorFactory>().To<SelectorFactory>().AsSingle();
             Container.Bind<ICardFactory>().To<CardFactory>().AsSingle();
-
-            /** UseCases **/
-            Container.Bind<IInvestigatorCardActivator>().To<InvestigatorCardActivator>().AsSingle();
         }
     }
 }

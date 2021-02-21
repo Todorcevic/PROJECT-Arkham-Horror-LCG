@@ -7155,7 +7155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90f20d115f787f49ac585cdc9e580fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  investigatorCardPrefab: {fileID: 6950638181576210403, guid: 4727e361d0b8a48458da3e9ac6788432, type: 3}
+  cardPrefab: {fileID: 6950638181576210403, guid: 4727e361d0b8a48458da3e9ac6788432, type: 3}
   zone: {fileID: 1994157215}
 --- !u!1001 &328324917
 PrefabInstance:
@@ -21776,15 +21776,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2231417082583560155, guid: 7b9e9e2bbaaf69c438d20f156699680f, type: 3}
       propertyPath: m_Alpha
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2231417082583560155, guid: 7b9e9e2bbaaf69c438d20f156699680f, type: 3}
       propertyPath: m_Interactable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2231417082583560155, guid: 7b9e9e2bbaaf69c438d20f156699680f, type: 3}
       propertyPath: m_BlocksRaycasts
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3525952055033074685, guid: 7b9e9e2bbaaf69c438d20f156699680f, type: 3}
       propertyPath: m_Name

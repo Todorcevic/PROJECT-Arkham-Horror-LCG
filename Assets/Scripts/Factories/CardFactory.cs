@@ -10,7 +10,7 @@ using Arkham.Views;
 using Arkham.Components;
 using Arkham.Services;
 using Zenject;
-using Arkham.UseCases;
+using Arkham.Presenters;
 
 namespace Arkham.Factories
 {
@@ -21,11 +21,12 @@ namespace Arkham.Factories
         [Inject] private readonly IImagesCard imageCards;
         [Inject] private readonly ICardInfoRepository infoRepository;
         [Inject] private readonly IInvestigatorRepository investigatorRepository;
-        [Inject] private readonly IInvestigatorCardsManager investigatorsManager;
-        [Inject] private readonly IDeckCardsManager deckManager;
         [Inject] private readonly IInvestigatorCardController investigatorCardController;
+        [Inject] private readonly IInvestigatorCardsManager investigatorsManager;
+        [Inject] private readonly IInvestigatorCardPresenter investigatorPresenter;
+        [Inject] private readonly IDeckCardsManager deckManager;
+
         //[Inject] private readonly IDeckCardController deckCardController;
-        [Inject] private readonly IInvestigatorCardActivator investigatorCardActivator;
 
         private List<Sprite> ImageListEN => imageCards.CardImagesEN;
         private List<Sprite> ImageListES => imageCards.CardImagesES;
@@ -44,14 +45,15 @@ namespace Arkham.Factories
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
             foreach (CardInfo investigatorInfo in allInvestigators)
             {
-                InvestigatorCardView cardInvestigatorView = GameObject.Instantiate(investigatorsManager.InvestigatorCardPrefab, investigatorsManager.Zone);
+                CardView cardInvestigatorView = GameObject.Instantiate(investigatorsManager.CardPrefab, investigatorsManager.Zone);
                 SettingDeckBuilding(investigatorInfo.Code);
                 cardInvestigatorView.Initialize(investigatorInfo.Code, GetSprite(investigatorInfo.Code));
                 diContainer.Inject(cardInvestigatorView.Interactable);
-                investigatorsManager.AllInvestigatorCards.Add(investigatorInfo.Code, cardInvestigatorView);
+                investigatorsManager.AllCards.Add(investigatorInfo.Code, cardInvestigatorView);
                 investigatorCardController.Init(cardInvestigatorView);
             }
-            investigatorCardActivator.RefreshAllCards();
+
+            investigatorPresenter.Init();
         }
 
         private void SettingDeckBuilding(string investigatorId)
@@ -66,10 +68,10 @@ namespace Arkham.Factories
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
             foreach (CardInfo card in allDeckCards)
             {
-                DeckCardView cardDeckView = GameObject.Instantiate(deckManager.DeckCardPrefab, deckManager.Zone);
+                CardView cardDeckView = GameObject.Instantiate(deckManager.CardPrefab, deckManager.Zone);
                 cardDeckView.Initialize(card.Code, GetSprite(card.Code));
                 diContainer.Inject(cardDeckView.Interactable);
-                deckManager.AllDeckCards.Add(card.Code, cardDeckView);
+                deckManager.AllCards.Add(card.Code, cardDeckView);
             }
         }
 

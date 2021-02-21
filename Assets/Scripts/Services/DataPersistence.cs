@@ -15,6 +15,8 @@ namespace Arkham.Services
         [Inject] private readonly ISerializer serializer;
         [Inject] private readonly IFileAdapter fileAdapter;
         [Inject] private readonly IRepositories models;
+        [Inject] private readonly ICampaignRepository campaignRepository;
+        [Inject] private readonly ISelectorRepository selectorRepository;
 
         public void LoadDataCards() => models.CardInfoList = serializer.CreateDataFromResources<List<CardInfo>>(gameFiles.CardsDataFilePath);
 
@@ -23,9 +25,17 @@ namespace Arkham.Services
         public void LoadProgress()
         {
             if (fileAdapter.FileExist(gameFiles.PlayerProgressFilePath))
+            {
                 serializer.UpdateDataFromFile(gameFiles.PlayerProgressFilePath, models);
+                serializer.UpdateDataFromFile(gameFiles.PlayerProgressFilePath, campaignRepository);
+                serializer.UpdateDataFromFile(gameFiles.PlayerProgressFilePath, selectorRepository);
+            }
             else
+            {
                 serializer.UpdateDataFromResources(gameFiles.PlayerProgressDefaultFilePath, models);
+                serializer.UpdateDataFromResources(gameFiles.PlayerProgressDefaultFilePath, campaignRepository);
+                serializer.UpdateDataFromResources(gameFiles.PlayerProgressDefaultFilePath, selectorRepository);
+            }
         }
     }
 }

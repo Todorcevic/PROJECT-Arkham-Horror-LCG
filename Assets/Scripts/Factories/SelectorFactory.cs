@@ -1,8 +1,5 @@
 ﻿using Arkham.Controllers;
-using Arkham.Interactors;
-using Arkham.Managers;
-using Arkham.Repositories;
-using Arkham.UseCases;
+using Arkham.Presenters;
 using Arkham.Views;
 using Zenject;
 
@@ -11,16 +8,15 @@ namespace Arkham.Factories
     public class SelectorFactory : ISelectorFactory
     {
         [Inject] private readonly ISelectorController selectorController;
-        [Inject] private readonly IInvestigatorSelectorsManager selectorsManager;
-        [Inject] private readonly IInvestigatorsSelectorInteractor investigatorsSelectedInteractor;
+        [Inject] private readonly ISelectorPresenter selectorPresenter;
 
         /*******************************************************************/
         public void BuildSelectors()
         {
-            foreach (ISelectorView selector in selectorsManager.Selectors)
+            foreach (ISelectorView selector in selectorPresenter.Selectors)
                 selectorController.Init(selector);
 
-            investigatorsSelectedInteractor.InitializeSelectors();
+            selectorPresenter.Init();
         }
     }
 }

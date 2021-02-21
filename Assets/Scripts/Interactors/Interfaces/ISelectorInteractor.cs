@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace Arkham.Interactors
 {
-    public interface IInvestigatorsSelectorInteractor
+    public interface ISelectorInteractor
     {
-        void InitializeSelectors();
+        event Action<string> InvestigatorSelectedChanged;
+        event Action<string> InvestigatorAdded;
+        event Action<string> InvestigatorRemoved;
+        string InvestigatorFocused { get; set; }
+        List<string> InvestigatorsSelectedList { get; set; }
         void SelectInvestigator(string investigatorId);
         void AddInvestigator(string investigatorId);
         void RemoveInvestigator(string investigatorId);

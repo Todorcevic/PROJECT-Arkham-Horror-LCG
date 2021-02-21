@@ -1,14 +1,13 @@
 ﻿using Arkham.Models;
-using System;
+using Arkham.Views;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Arkham.Presenters
 {
     public interface ICampaignPresenter
     {
+        void Init();
+        List<ICampaignView> Campaigns { get; }
         void SetCampaign(CampaignInfo campaignInfo);
     }
 }

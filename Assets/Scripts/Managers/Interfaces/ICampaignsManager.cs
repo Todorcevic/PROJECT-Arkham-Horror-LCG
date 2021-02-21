@@ -1,4 +1,5 @@
 ﻿using Arkham.Controllers;
+using Arkham.Models;
 using Arkham.ScriptableObjects;
 using Arkham.Views;
 using System;
@@ -11,7 +12,7 @@ namespace Arkham.Managers
 {
     public interface ICampaignsManager
     {
-        List<CampaignView> Campaigns { get; }
+        List<ICampaignView> Campaigns { get; }
         ICampaignView GetCampaign(string campaignId);
         ICampaignState GetCampaignState(string campaignState);
     }

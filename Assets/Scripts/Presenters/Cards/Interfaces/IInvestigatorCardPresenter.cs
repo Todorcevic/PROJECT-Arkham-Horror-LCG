@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arkham.Presenters
 {
-    public interface IInvestigatorCardPresenter
+    public interface IInvestigatorCardPresenter : ICardPresenter
     {
     }
 }

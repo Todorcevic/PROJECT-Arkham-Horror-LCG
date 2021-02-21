@@ -1,27 +1,20 @@
 ﻿using Arkham.Interactors;
-using Arkham.UseCases;
 using Arkham.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 using Zenject;
 
 namespace Arkham.Controllers
 {
     public class SelectorController : ISelectorController
     {
-        [Inject] private readonly IInvestigatorsSelectorInteractor investigatorSelector;
+        [Inject] private readonly ISelectorInteractor investigatorSelector;
 
         /*******************************************************************/
         public void Init(ISelectorView selectorView)
         {
-            selectorView.Interactable.AddClickAction(() => Click(selectorView));
-            selectorView.Interactable.AddDoubleClickAction(() => DoubleClick(selectorView));
-            selectorView.Interactable.AddHoverOnAction(() => selectorView.HoverOnEffect());
-            selectorView.Interactable.AddHoverOffAction(() => selectorView.HoverOffEffect());
+            selectorView.Interactable.Clicked += () => Click(selectorView);
+            selectorView.Interactable.DoubleClicked += () => DoubleClick(selectorView);
+            selectorView.Interactable.HoverOn += () => selectorView.HoverOnEffect();
+            selectorView.Interactable.HoverOff += () => selectorView.HoverOffEffect();
         }
 
         private void Click(ISelectorView selectorView)

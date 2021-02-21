@@ -1,4 +1,6 @@
 ﻿using Arkham.Managers;
+using Arkham.Repositories;
+using Arkham.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +10,33 @@ using Zenject;
 
 namespace Arkham.Presenters
 {
-    public class CardPresenter : ICardPresenter
+    public abstract class CardPresenter
     {
-        [Inject] private readonly IInvestigatorCardsManager investigatorManager;
+        [Inject] private readonly ICardInfoRepository cardInfo;
+        protected ICardsManager cardsManager;
+        public List<ICardView> CardsList => cardsManager.CardsList;
+        public Dictionary<string, ICardView> AllCards => cardsManager.AllCards;
+        protected abstract bool SelectionIsFull { get; }
 
         /*******************************************************************/
-        public void EnableCard(string investigatorId, bool isEnable) =>
-            investigatorManager.AllInvestigatorCards[investigatorId].Enable(isEnable);
+        public abstract void Init();
+
+        protected abstract int AmountCardsSelected(string cardId);
+
+        public void RefreshCardVisibility(string cardId) =>
+            AllCards[cardId].Enable(CheckIsEnable(cardId));
+
+        public void RefreshAllCardsVisibility()
+        {
+            foreach (ICardView cardView in CardsList)
+                cardView.Enable(CheckIsEnable(cardView.Id));
+        }
+
+        private bool CheckIsEnable(string cardId)
+        {
+            if (SelectionIsFull) return false;
+            if (((cardInfo.AllCardsInfo(cardId).Quantity ?? 0) - AmountCardsSelected(cardId)) <= 0) return false;
+            return true;
+        }
     }
 }

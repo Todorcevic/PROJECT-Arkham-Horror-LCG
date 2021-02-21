@@ -16,14 +16,14 @@ namespace Arkham.Controllers
         /*******************************************************************/
         public void Init(ICampaignView campaignView)
         {
-            campaignView.Interactable.AddClickAction(() => Click(campaignView));
-            campaignView.Interactable.AddHoverOnAction(() => campaignView.HoverOn());
-            campaignView.Interactable.AddHoverOffAction(() => campaignView.HoverOff());
+            campaignView.Interactable.Clicked += () => Click(campaignView);
+            campaignView.Interactable.HoverOn += () => campaignView.HoverOn();
+            campaignView.Interactable.HoverOff += () => campaignView.HoverOff();
         }
 
         private void Click(ICampaignView campaignView)
         {
-            if (!campaignView.CurrentState.IsOpen) return;
+            if (!campaignView.IsOpen) return;
             campaignInteractor.AddScenarioToPlay(campaignView.FirstScenarioId);
             campaignView.Click();
         }

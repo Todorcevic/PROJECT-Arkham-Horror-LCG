@@ -16,9 +16,9 @@ namespace Arkham.Managers
         {
             foreach (ButtonComponent button in buttons)
             {
-                button.Interactable.AddClickAction(() => Click(button));
-                button.Interactable.RemoveHoverOffAction(button.HoverOffEffect);
-                button.Interactable.AddHoverOffAction(() => MantainHover(button));
+                button.Interactable.Clicked += () => Click(button);
+                button.Interactable.HoverOff -= button.HoverOffEffect;
+                button.Interactable.HoverOff += () => MantainHover(button);
             }
             SelectTab(currentButton);
         }
@@ -32,7 +32,8 @@ namespace Arkham.Managers
 
         private void MantainHover(ButtonComponent button)
         {
-            if (button != currentButton) button.HoverOffEffect();
+            if (button != currentButton)
+                button.HoverOffEffect();
         }
 
         private void SelectTab(ButtonComponent button)

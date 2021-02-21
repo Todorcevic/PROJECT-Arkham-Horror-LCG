@@ -28,9 +28,9 @@ namespace Arkham.Components
         /*******************************************************************/
         private void Start()
         {
-            interactable.AddClickAction(ClickEffect);
-            interactable.AddHoverOnAction(HoverOnEffect);
-            interactable.AddHoverOffAction(HoverOffEffect);
+            interactable.Clicked += ClickEffect;
+            interactable.HoverOn += HoverOnEffect;
+            interactable.HoverOff += HoverOffEffect;
         }
 
         /*******************************************************************/

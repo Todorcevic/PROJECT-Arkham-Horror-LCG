@@ -12,30 +12,8 @@ using Zenject;
 
 namespace Arkham.Managers
 {
-    public class InvestigatorCardsManager : MonoBehaviour, IInvestigatorCardsManager
+    public class InvestigatorCardsManager : CardsManager, IInvestigatorCardsManager
     {
-        [SerializeField, Required, AssetsOnly] private InvestigatorCardView investigatorCardPrefab;
-        [SerializeField, Required, SceneObjectsOnly] private Transform zone;
-        [Title("CARDS"), ShowInInspector] public List<IInvestigatorCardView> InvestigatorCardsList => AllInvestigatorCards.Values.ToList();
-        public Dictionary<string, IInvestigatorCardView> AllInvestigatorCards { get; } =
-            new Dictionary<string, IInvestigatorCardView>();
-        public Transform Zone => zone;
-        public InvestigatorCardView InvestigatorCardPrefab => investigatorCardPrefab;
-
         /*******************************************************************/
-        public void CheckEnableAllcards()
-        {
-            foreach (IInvestigatorCardView investigatorCard in InvestigatorCardsList)
-            {
-                investigatorCard.Enable(false);
-            }
-        }
-
-        public Sprite GetSpriteCard(string id) => AllInvestigatorCards[id].GetCardImage;
-
-        private bool CheckEnableCard()
-        {
-            return true;
-        }
     }
 }

@@ -12,7 +12,7 @@ namespace Arkham.ScriptableObjects
         /*******************************************************************/
         public override void ExecuteState(ICampaignView campaignView)
         {
-            campaignView.CurrentState = this;
+            campaignView.IsOpen = IsOpen;
             campaignView.SetImageState(icon);
         }
     }
