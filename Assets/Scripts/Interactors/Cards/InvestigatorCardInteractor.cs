@@ -11,8 +11,11 @@ namespace Arkham.Interactors
     public class InvestigatorCardInteractor : CardInteractor, IInvestigatorCardInteractor
     {
         [Inject] private readonly IInvestigatorsSelectedRepository investigatorsSelectedModel;
+        protected override bool SelectionIsFull =>
+            investigatorsSelectedModel.InvestigatorsSelectedList.Count >= GameData.MAX_INVESTIGATORS;
 
         /*******************************************************************/
+
         protected override int AmountCardsSelected(string cardId) =>
            investigatorsSelectedModel.InvestigatorsSelectedList.FindAll(i => i == cardId).Count;
     }

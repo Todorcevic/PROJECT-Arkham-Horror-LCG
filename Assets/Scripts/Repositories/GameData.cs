@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arkham.Presenters
+namespace Arkham.Repositories
 {
-    public class InvestigatorCardPresenter : IInvestigatorCardPresenter
+    public static class GameData
     {
-
-
+        public const int MAX_INVESTIGATORS = 4;
     }
 }

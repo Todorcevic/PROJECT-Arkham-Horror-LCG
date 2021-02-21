@@ -1,4 +1,5 @@
 ﻿using Arkham.Interactors;
+using Arkham.UseCases;
 using Arkham.Views;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Arkham.Controllers
 {
     public class SelectorController : ISelectorController
     {
-        [Inject] private readonly IInvestigatorsSelectedInteractor selectorIterator;
+        [Inject] private readonly IInvestigatorsSelectorInteractor investigatorSelector;
 
         /*******************************************************************/
         public void Init(ISelectorView selectorView)
@@ -26,10 +27,10 @@ namespace Arkham.Controllers
         private void Click(ISelectorView selectorView)
         {
             selectorView.Click();
-            selectorIterator.SelectInvestigator(selectorView.InvestigatorInThisSelector);
+            investigatorSelector.SelectInvestigator(selectorView.InvestigatorInThisSelector);
         }
 
         private void DoubleClick(ISelectorView selectorView) =>
-            selectorIterator.RemoveInvestigator(selectorView.InvestigatorInThisSelector);
+            investigatorSelector.RemoveInvestigator(selectorView.InvestigatorInThisSelector);
     }
 }

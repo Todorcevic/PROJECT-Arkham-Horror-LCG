@@ -10,6 +10,7 @@ using Arkham.Views;
 using Arkham.Components;
 using Arkham.Services;
 using Zenject;
+using Arkham.UseCases;
 
 namespace Arkham.Factories
 {
@@ -24,6 +25,7 @@ namespace Arkham.Factories
         [Inject] private readonly IDeckCardsManager deckManager;
         [Inject] private readonly IInvestigatorCardController investigatorCardController;
         //[Inject] private readonly IDeckCardController deckCardController;
+        [Inject] private readonly IInvestigatorCardActivator investigatorCardActivator;
 
         private List<Sprite> ImageListEN => imageCards.CardImagesEN;
         private List<Sprite> ImageListES => imageCards.CardImagesES;
@@ -49,6 +51,7 @@ namespace Arkham.Factories
                 investigatorsManager.AllInvestigatorCards.Add(investigatorInfo.Code, cardInvestigatorView);
                 investigatorCardController.Init(cardInvestigatorView);
             }
+            investigatorCardActivator.RefreshAllCards();
         }
 
         private void SettingDeckBuilding(string investigatorId)

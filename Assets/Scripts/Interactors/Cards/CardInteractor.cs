@@ -14,11 +14,16 @@ namespace Arkham.Interactors
         [Inject] private readonly ICardInfoRepository cardInfo;
         [Inject] private readonly ICardPresenter cardPresenter;
 
+        protected abstract bool SelectionIsFull { get; }
+
         /*******************************************************************/
-        public void ActivateCard(string cardId)
+        public void ActivateCard(string cardId) => cardPresenter.EnableCard(cardId, CheckIsEnable(cardId));
+
+        protected bool CheckIsEnable(string cardId)
         {
-            bool isEnable = ((cardInfo.AllCardsInfo(cardId).Quantity ?? 0) - AmountCardsSelected(cardId)) > 0;
-            cardPresenter.EnableCard(cardId, isEnable);
+            if (SelectionIsFull) return false;
+            if (((cardInfo.AllCardsInfo(cardId).Quantity ?? 0) - AmountCardsSelected(cardId)) <= 0) return false;
+            return true;
         }
 
         protected abstract int AmountCardsSelected(string cardId);

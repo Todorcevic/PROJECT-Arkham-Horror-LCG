@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arkham.Interactors
 {
-    public interface IInvestigatorsSelectedInteractor
+    public interface IInvestigatorsSelectorInteractor
     {
         void InitializeSelectors();
         void SelectInvestigator(string investigatorId);

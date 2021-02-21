@@ -13,7 +13,7 @@ namespace Arkham.Managers
         private void Start() => SelectPanel(currentPanel);
 
         /*******************************************************************/
-        private void SelectPanel(PanelComponent panel)
+        public void SelectPanel(PanelComponent panel)
         {
             currentPanel.Activate(false);
             panel.Activate(true);

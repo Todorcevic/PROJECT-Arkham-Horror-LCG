@@ -1,4 +1,5 @@
 ﻿using Arkham.Interactors;
+using Arkham.UseCases;
 using Arkham.Views;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Arkham.Controllers
 {
     public class InvestigatorCardController : IInvestigatorCardController
     {
-        [Inject] private readonly IInvestigatorsSelectedInteractor selectorInteractor;
+        [Inject] private readonly IInvestigatorsSelectorInteractor investigatorSelector;
 
         public void Init(IInvestigatorCardView cardInvestigatorView)
         {
@@ -23,7 +24,7 @@ namespace Arkham.Controllers
         private void DoubleClick(IInvestigatorCardView cardInvestigatorView)
         {
             cardInvestigatorView.DoubleClick();
-            selectorInteractor.AddInvestigator(cardInvestigatorView.Id);
+            investigatorSelector.AddInvestigator(cardInvestigatorView.Id);
         }
     }
 }

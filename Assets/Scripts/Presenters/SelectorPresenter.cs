@@ -30,8 +30,8 @@ namespace Arkham.Presenters
 
         public void FocusInvestigator(string activeInvestigatorId, string desactiveInvestigatorId)
         {
-            selectorManager.GetSelectorByInvestigator(desactiveInvestigatorId).ActivateGlow(false);
-            selectorManager.GetSelectorByInvestigator(activeInvestigatorId).ActivateGlow(true);
+            selectorManager.GetSelectorByInvestigator(desactiveInvestigatorId)?.ActivateGlow(false);
+            selectorManager.GetSelectorByInvestigator(activeInvestigatorId)?.ActivateGlow(true);
         }
 
         public void AddInvestigator(string investigatorId)

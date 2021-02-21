@@ -23,6 +23,19 @@ namespace Arkham.Managers
         public InvestigatorCardView InvestigatorCardPrefab => investigatorCardPrefab;
 
         /*******************************************************************/
+        public void CheckEnableAllcards()
+        {
+            foreach (IInvestigatorCardView investigatorCard in InvestigatorCardsList)
+            {
+                investigatorCard.Enable(false);
+            }
+        }
+
         public Sprite GetSpriteCard(string id) => AllInvestigatorCards[id].GetCardImage;
+
+        private bool CheckEnableCard()
+        {
+            return true;
+        }
     }
 }

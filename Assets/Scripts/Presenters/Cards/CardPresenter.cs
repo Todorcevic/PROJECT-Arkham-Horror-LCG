@@ -12,6 +12,7 @@ namespace Arkham.Presenters
     {
         [Inject] private readonly IInvestigatorCardsManager investigatorManager;
 
+        /*******************************************************************/
         public void EnableCard(string investigatorId, bool isEnable) =>
             investigatorManager.AllInvestigatorCards[investigatorId].Enable(isEnable);
     }
