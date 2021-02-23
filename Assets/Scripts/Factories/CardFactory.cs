@@ -47,7 +47,7 @@ namespace Arkham.Factories
             {
                 CardView cardInvestigatorView = GameObject.Instantiate(investigatorsManager.CardPrefab, investigatorsManager.Zone);
                 SettingDeckBuilding(investigatorInfo.Code);
-                cardInvestigatorView.Initialize(investigatorInfo.Code, GetSprite(investigatorInfo.Code));
+                cardInvestigatorView.Init(investigatorInfo.Code, GetSprite(investigatorInfo.Code));
                 diContainer.Inject(cardInvestigatorView.Interactable);
                 investigatorsManager.AllCards.Add(investigatorInfo.Code, cardInvestigatorView);
                 investigatorCardController.Init(cardInvestigatorView);
@@ -69,7 +69,7 @@ namespace Arkham.Factories
             foreach (CardInfo card in allDeckCards)
             {
                 CardView cardDeckView = GameObject.Instantiate(deckManager.CardPrefab, deckManager.Zone);
-                cardDeckView.Initialize(card.Code, GetSprite(card.Code));
+                cardDeckView.Init(card.Code, GetSprite(card.Code));
                 diContainer.Inject(cardDeckView.Interactable);
                 deckManager.AllCards.Add(card.Code, cardDeckView);
             }

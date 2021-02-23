@@ -14,7 +14,7 @@ namespace Arkham.Config
         [Inject] private readonly IDataPersistence repositoriesIO;
         [Inject] private readonly ICardFactory cardFactory;
         [Inject] private readonly ICampaignFactory campaignFactory;
-        [Inject] private readonly ISelectorFactory selectorFactory;
+        [Inject] private readonly IInvestigatorSelectorFactory selectorFactory;
 
         [Inject] private readonly ICardInfoRepository cardInfo;
 

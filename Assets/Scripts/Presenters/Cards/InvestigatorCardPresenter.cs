@@ -13,7 +13,7 @@ namespace Arkham.Presenters
 {
     public class InvestigatorCardPresenter : CardPresenter, IInvestigatorCardPresenter
     {
-        [Inject] private readonly ISelectorInteractor selectorInteractor;
+        [Inject] private readonly IInvestigatorSelectorInteractor selectorInteractor;
         protected override bool SelectionIsFull => selectorInteractor.InvestigatorsSelectedList.Count >= GameData.MAX_INVESTIGATORS;
         private bool SelectionIsNotFull => selectorInteractor.InvestigatorsSelectedList.Count == GameData.MAX_INVESTIGATORS - 1;
         public List<IInvestigatorCardView> InvestigatorCardsList => CardsList.OfType<IInvestigatorCardView>().ToList();

@@ -13,11 +13,5 @@ namespace Arkham.Views
 {
     public class InvestigatorCardView : CardView, IInvestigatorCardView
     {
-        //[Inject] IInvestigatorsSelectedInteractor selectorIterator;
-        //public InvestigatorInfo Investigator { get; set; }
-        //protected override int AmountSelected => selectorIterator.AmountInvestigators(Investigator.Id);
-
-        /*******************************************************************/
-        protected override int AmountSelected => 0;
     }
 }

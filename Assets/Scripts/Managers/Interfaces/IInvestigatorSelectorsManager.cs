@@ -9,9 +9,9 @@ namespace Arkham.Managers
 {
     public interface IInvestigatorSelectorsManager
     {
-        List<ISelectorView> Selectors { get; }
-        ISelectorView GetSelectorByInvestigator(string investigatorId);
-        ISelectorView GetSelectorVoid();
+        List<IInvestigatorSelectorView> Selectors { get; }
+        IInvestigatorSelectorView GetSelectorByInvestigator(string investigatorId);
+        IInvestigatorSelectorView GetSelectorVoid();
         void ArrangeSelectors();
     }
 }

@@ -6,12 +6,10 @@ namespace Arkham.Controllers
 {
     public class InvestigatorCardController : CardController, IInvestigatorCardController
     {
-        [Inject] private readonly ISelectorInteractor selectorInteractor;
+        [Inject] private readonly IInvestigatorSelectorInteractor selectorInteractor;
 
-        protected override void DoubleClick(ICardView cardView)
-        {
-            cardView.DoubleClick();
+        /*******************************************************************/
+        protected override void DoubleClick(ICardView cardView) =>
             selectorInteractor.AddInvestigator(cardView.Id);
-        }
     }
 }

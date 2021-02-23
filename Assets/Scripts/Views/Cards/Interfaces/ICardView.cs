@@ -15,10 +15,8 @@ namespace Arkham.Views
         Transform Transform { get; }
         InteractableComponent Interactable { get; }
         Sprite GetCardImage { get; }
-        void Initialize(string id, Sprite sprite);
-        void HoverOnEffect();
-        void HoverOffEffect();
-        void DoubleClick();
+        void Init(string id, Sprite sprite);
         void Enable(bool isEnable);
+        void Show(bool isShow);
     }
 }

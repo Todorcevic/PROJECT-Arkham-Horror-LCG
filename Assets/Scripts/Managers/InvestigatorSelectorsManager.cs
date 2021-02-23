@@ -14,19 +14,19 @@ namespace Arkham.Managers
     public class InvestigatorSelectorsManager : MonoBehaviour, IInvestigatorSelectorsManager
     {
         [SerializeField, Required, SceneObjectsOnly] private Transform placeHolder;
-        [SerializeField, Required, SceneObjectsOnly] private List<SelectorView> selectors;
-        public List<ISelectorView> Selectors => selectors.OfType<ISelectorView>().ToList();
+        [SerializeField, Required, SceneObjectsOnly] private List<InvestigatorSelectorView> selectors;
+        public List<IInvestigatorSelectorView> Selectors => selectors.OfType<IInvestigatorSelectorView>().ToList();
 
         /*******************************************************************/
-        public ISelectorView GetSelectorByInvestigator(string investigatorId) =>
+        public IInvestigatorSelectorView GetSelectorByInvestigator(string investigatorId) =>
             selectors.Find(i => i.InvestigatorInThisSelector == investigatorId);
 
-        public ISelectorView GetSelectorVoid() =>
+        public IInvestigatorSelectorView GetSelectorVoid() =>
             selectors.Find(i => i.InvestigatorInThisSelector == null);
 
         public void ArrangeSelectors()
         {
-            foreach (ISelectorView selector in selectors)
+            foreach (IInvestigatorSelectorView selector in selectors)
                 selector.Arrange(selector.IsEmpty ? selector.Transform : placeHolder);
         }
     }

@@ -21,7 +21,10 @@ namespace Arkham.Factories
         public void BuildCampaigns()
         {
             foreach (ICampaignView campaign in campaignPresenter.Campaigns)
+            {
+                campaign.Init();
                 campaignController.Init(campaign);
+            }
 
             campaignPresenter.Init();
         }

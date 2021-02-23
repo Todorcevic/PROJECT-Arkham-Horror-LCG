@@ -8,9 +8,7 @@ namespace Arkham.Views
         string FirstScenarioId { get; }
         bool IsOpen { get; set; }
         InteractableComponent Interactable { get; }
+        void Init();
         void SetImageState(UnityEngine.Sprite icon);
-        void Click();
-        void HoverOn();
-        void HoverOff();
     }
 }
