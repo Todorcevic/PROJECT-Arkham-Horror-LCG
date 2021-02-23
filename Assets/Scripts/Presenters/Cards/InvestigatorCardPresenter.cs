@@ -20,7 +20,7 @@ namespace Arkham.Presenters
 
         /*******************************************************************/
         [Inject]
-        public void InjectDependency(IInvestigatorCardsManager investigatorCardsManager)
+        public void InjectDependency(ICardsInvestigatorManager investigatorCardsManager)
         {
             cardsManager = investigatorCardsManager;
         }

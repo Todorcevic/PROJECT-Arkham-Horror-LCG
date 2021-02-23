@@ -22,6 +22,6 @@ namespace Arkham.Managers
         public CardView CardPrefab => cardPrefab;
 
         /*******************************************************************/
-        public Sprite GetSpriteCard(string id) => AllCards[id].GetCardImage;
+        public Sprite GetSpriteCard(string id) => id != null ? AllCards[id].GetCardImage : null;
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Arkham.Managers
 {
-    public class DeckCardsManager : CardsManager, IDeckCardsManager
+    public class DeckCardsManager : CardsManager, ICardsDeckManager
     {
     }
 }

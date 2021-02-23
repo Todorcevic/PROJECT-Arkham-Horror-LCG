@@ -11,7 +11,7 @@ namespace Arkham.Presenters
     {
         private string investigatorSelected;
         [Inject] private readonly IInvestigatorSelectorsManager selectorManager;
-        [Inject] private readonly IInvestigatorCardsManager investigatorManager;
+        [Inject] private readonly ICardsInvestigatorManager investigatorManager;
         [Inject] private readonly IInvestigatorSelectorInteractor selectorInteractor;
         public List<IInvestigatorSelectorView> Selectors => selectorManager.Selectors;
 
@@ -22,6 +22,7 @@ namespace Arkham.Presenters
             selectorInteractor.InvestigatorAdded += AddInvestigator;
             selectorInteractor.InvestigatorRemoved += RemoveInvestigator;
             InitializeSelectors();
+            selectorInteractor.SelectInvestigator(selectorInteractor.LeadInvestigator);
         }
 
         public void SelectInvestigator(string activeInvestigatorId)
@@ -33,7 +34,7 @@ namespace Arkham.Presenters
 
         public void AddInvestigator(string investigatorId)
         {
-            SetInvestigator(investigatorId).MoveTo(investigatorManager.AllCards[investigatorId].Transform);
+            SetInvestigatorInVoidSelector(investigatorId).MoveTo(investigatorManager.AllCards[investigatorId].Transform);
             ArrangeSelectors();
         }
 
@@ -46,10 +47,10 @@ namespace Arkham.Presenters
         private void InitializeSelectors()
         {
             foreach (string investigatorId in selectorInteractor.InvestigatorsSelectedList)
-                SetInvestigator(investigatorId);
+                SetInvestigatorInVoidSelector(investigatorId);
         }
 
-        private IInvestigatorSelectorView SetInvestigator(string investigatorId)
+        private IInvestigatorSelectorView SetInvestigatorInVoidSelector(string investigatorId)
         {
             IInvestigatorSelectorView selector = selectorManager.GetVoidSelector();
             Sprite spriteCard = investigatorManager.GetSpriteCard(investigatorId);
@@ -57,7 +58,7 @@ namespace Arkham.Presenters
             return selector;
         }
 
-        public void ArrangeSelectors()
+        private void ArrangeSelectors()
         {
             SetLeadSelector();
             foreach (IInvestigatorSelectorView selector in Selectors)

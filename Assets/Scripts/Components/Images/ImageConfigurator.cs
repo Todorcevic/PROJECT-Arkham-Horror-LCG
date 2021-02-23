@@ -9,13 +9,12 @@ using UnityEngine.UI;
 
 namespace Arkham.Components
 {
-    public class ImageConfigurator : MonoBehaviour
+    public class ImageConfigurator : MonoBehaviour, IImagesConfigurator
     {
         [SerializeField] private CanvasGroup canvas;
         [SerializeField] private Image image;
 
         /*******************************************************************/
-
         public void Activate(bool isEnable)
         {
             canvas.interactable = isEnable;

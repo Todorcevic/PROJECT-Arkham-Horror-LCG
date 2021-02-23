@@ -5,6 +5,7 @@ using Arkham.Repositories;
 using Arkham.Factories;
 using Arkham.Models;
 using Arkham.Managers;
+using Arkham.Presenters;
 
 namespace Arkham.Config
 {
@@ -14,7 +15,8 @@ namespace Arkham.Config
         [Inject] private readonly IDataPersistence repositoriesIO;
         [Inject] private readonly ICardFactory cardFactory;
         [Inject] private readonly ICampaignFactory campaignFactory;
-        [Inject] private readonly IInvestigatorSelectorFactory selectorFactory;
+        [Inject] private readonly IInvestigatorSelectorFactory investigatorSelectorFactory;
+        [Inject] private readonly IInvestigatorAvatarPresenter investigatorAvatarPresenter;
 
         [Inject] private readonly ICardInfoRepository cardInfo;
 
@@ -25,7 +27,8 @@ namespace Arkham.Config
             repositoriesIO.LoadProgress();
             cardFactory.BuildCards();
             campaignFactory.BuildCampaigns();
-            selectorFactory.BuildSelectors();
+            investigatorSelectorFactory.BuildSelectors();
+            investigatorAvatarPresenter.Init();
             //context.SaveProgress();
         }
 

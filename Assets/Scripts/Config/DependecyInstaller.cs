@@ -37,6 +37,7 @@ namespace Arkham.Config
             Container.BindInterfacesTo<CampaignPresenter>().AsSingle();
             Container.BindInterfacesTo<InvestigatorSelectorPresenter>().AsSingle();
             Container.BindInterfacesTo<InvestigatorCardPresenter>().AsSingle();
+            Container.BindInterfacesTo<InvestigatorAvatarPresenter>().AsSingle();
 
             /** Interactors **/
             Container.BindInterfacesTo<CampaignInteractor>().AsSingle();

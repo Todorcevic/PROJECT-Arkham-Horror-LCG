@@ -22,9 +22,9 @@ namespace Arkham.Factories
         [Inject] private readonly ICardInfoRepository infoRepository;
         [Inject] private readonly IInvestigatorRepository investigatorRepository;
         [Inject] private readonly IInvestigatorCardController investigatorCardController;
-        [Inject] private readonly IInvestigatorCardsManager investigatorsManager;
+        [Inject] private readonly ICardsInvestigatorManager investigatorsManager;
         [Inject] private readonly IInvestigatorCardPresenter investigatorPresenter;
-        [Inject] private readonly IDeckCardsManager deckManager;
+        [Inject] private readonly ICardsDeckManager deckManager;
 
         //[Inject] private readonly IDeckCardController deckCardController;
 

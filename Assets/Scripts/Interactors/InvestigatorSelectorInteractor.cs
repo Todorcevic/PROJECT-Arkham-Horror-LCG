@@ -28,15 +28,15 @@ namespace Arkham.Interactors
         public void AddInvestigator(string investigatorId)
         {
             InvestigatorsSelectedList.Add(investigatorId);
-            SelectInvestigator(investigatorId);
             InvestigatorAdded?.Invoke(investigatorId);
+            SelectInvestigator(investigatorId);
         }
 
         public void RemoveInvestigator(string investigatorId)
         {
             InvestigatorsSelectedList.Remove(investigatorId);
-            SelectInvestigator(InvestigatorsSelectedList.FirstOrDefault());
             InvestigatorRemoved?.Invoke(investigatorId);
+            SelectInvestigator(InvestigatorsSelectedList.FirstOrDefault());
         }
     }
 }

@@ -10,19 +10,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zenject;
+using Arkham.Interactors;
 
 namespace Arkham.Presenters
 {
     public class CampaignPresenter : ICampaignPresenter
     {
         [Inject] private readonly ICampaignsManager campaignsManager;
-        [Inject] private readonly ICampaignRepository campaignRepository;
+        [Inject] private readonly ICampaignInteractor campaignInteractor;
         public List<ICampaignView> Campaigns => campaignsManager.Campaigns;
 
         /*******************************************************************/
         public void Init()
         {
-            campaignRepository.CampaignStateChanged += SetCampaign;
+            campaignInteractor.CampaignStateChanged += SetCampaign;
             InitializeCampaigns();
         }
 
@@ -35,7 +36,7 @@ namespace Arkham.Presenters
 
         private void InitializeCampaigns()
         {
-            foreach (CampaignInfo campaign in campaignRepository.CampaignsList)
+            foreach (CampaignInfo campaign in campaignInteractor.CampaignsList)
                 SetCampaign(campaign);
         }
     }

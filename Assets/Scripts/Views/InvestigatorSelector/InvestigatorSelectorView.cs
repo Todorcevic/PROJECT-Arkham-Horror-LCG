@@ -10,7 +10,7 @@ namespace Arkham.Views
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
-        [SerializeField, Required, ChildGameObjectsOnly] private SelectorEffects selectorEffects; //TODO: put into Interactable
+        [SerializeField, Required, ChildGameObjectsOnly] private SelectorEffects selectorEffects;
         [SerializeField, Required, ChildGameObjectsOnly] private ImageConfigurator imageConfigurator;
         [SerializeField, Required, ChildGameObjectsOnly] private SelectorMovement selectorMovement;
         [SerializeField, Required, ChildGameObjectsOnly] private GlowActivator glowActivator;

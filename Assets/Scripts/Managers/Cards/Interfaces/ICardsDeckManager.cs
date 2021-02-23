@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Arkham.Managers
 {
-    public interface IInvestigatorCardsManager : ICardsManager
+    public interface ICardsDeckManager : ICardsManager
     {
     }
 }
