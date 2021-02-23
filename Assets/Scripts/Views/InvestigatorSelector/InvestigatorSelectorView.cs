@@ -18,6 +18,7 @@ namespace Arkham.Views
 
         public string InvestigatorInThisSelector { get; private set; }
         public bool IsEmpty => InvestigatorInThisSelector == null;
+        public bool IsLead => leadActivator.IsLead;
         public InteractableComponent Interactable => interactable;
         public Transform Transform => transform;
 

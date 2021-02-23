@@ -14,6 +14,7 @@ namespace Arkham.Views
         [SerializeField, Required, ChildGameObjectsOnly] private Image leaderIcon;
 
         /*******************************************************************/
+        public bool IsLead => leaderIcon.enabled;
         public void ActivateLeader(bool activate) => leaderIcon.enabled = activate;
     }
 }

@@ -11,8 +11,9 @@ namespace Arkham.Interactors
         event Action<string> InvestigatorSelectedChanged;
         event Action<string> InvestigatorAdded;
         event Action<string> InvestigatorRemoved;
-        string InvestigatorFocused { get; set; }
-        List<string> InvestigatorsSelectedList { get; set; }
+        string InvestigatorFocused { get; }
+        string LeadInvestigator { get; }
+        List<string> InvestigatorsSelectedList { get; }
         void SelectInvestigator(string investigatorId);
         void AddInvestigator(string investigatorId);
         void RemoveInvestigator(string investigatorId);

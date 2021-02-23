@@ -15,19 +15,16 @@ namespace Arkham.Managers
     {
         [SerializeField, Required, SceneObjectsOnly] private Transform placeHolder;
         [SerializeField, Required, SceneObjectsOnly] private List<InvestigatorSelectorView> selectors;
+        public Transform PlaceHolder => placeHolder;
         public List<IInvestigatorSelectorView> Selectors => selectors.OfType<IInvestigatorSelectorView>().ToList();
 
         /*******************************************************************/
         public IInvestigatorSelectorView GetSelectorByInvestigator(string investigatorId) =>
             selectors.Find(i => i.InvestigatorInThisSelector == investigatorId);
 
-        public IInvestigatorSelectorView GetSelectorVoid() =>
+        public IInvestigatorSelectorView GetVoidSelector() =>
             selectors.Find(i => i.InvestigatorInThisSelector == null);
 
-        public void ArrangeSelectors()
-        {
-            foreach (IInvestigatorSelectorView selector in selectors)
-                selector.Arrange(selector.IsEmpty ? selector.Transform : placeHolder);
-        }
+        public IInvestigatorSelectorView GetLeadSelector() => selectors.Find(i => i.IsLead);
     }
 }

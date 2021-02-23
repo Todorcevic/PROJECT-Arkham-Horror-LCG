@@ -14,8 +14,9 @@ namespace Arkham.Interactors
         public event Action<string> InvestigatorSelectedChanged;
         public event Action<string> InvestigatorAdded;
         public event Action<string> InvestigatorRemoved;
-        public string InvestigatorFocused { get; set; }
         [DataMember] public List<string> InvestigatorsSelectedList { get; set; }
+        public string InvestigatorFocused { get; private set; }
+        public string LeadInvestigator => InvestigatorsSelectedList.FirstOrDefault();
 
         /*******************************************************************/
         public void SelectInvestigator(string investigatorId)

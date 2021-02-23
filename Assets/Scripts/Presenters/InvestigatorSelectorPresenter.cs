@@ -34,13 +34,13 @@ namespace Arkham.Presenters
         public void AddInvestigator(string investigatorId)
         {
             SetInvestigator(investigatorId).MoveTo(investigatorManager.AllCards[investigatorId].Transform);
-            selectorManager.ArrangeSelectors();
+            ArrangeSelectors();
         }
 
         public void RemoveInvestigator(string investigatorId)
         {
             selectorManager.GetSelectorByInvestigator(investigatorId).SetInvestigator(null);
-            selectorManager.ArrangeSelectors();
+            ArrangeSelectors();
         }
 
         private void InitializeSelectors()
@@ -51,10 +51,24 @@ namespace Arkham.Presenters
 
         private IInvestigatorSelectorView SetInvestigator(string investigatorId)
         {
-            IInvestigatorSelectorView selector = selectorManager.GetSelectorVoid();
+            IInvestigatorSelectorView selector = selectorManager.GetVoidSelector();
             Sprite spriteCard = investigatorManager.GetSpriteCard(investigatorId);
             selector.SetInvestigator(investigatorId, spriteCard);
             return selector;
+        }
+
+        public void ArrangeSelectors()
+        {
+            SetLeadSelector();
+            foreach (IInvestigatorSelectorView selector in Selectors)
+                selector.Arrange(selector.IsEmpty ? selector.Transform : selectorManager.PlaceHolder);
+        }
+
+        private void SetLeadSelector()
+        {
+            if (selectorManager.GetLeadSelector().InvestigatorInThisSelector == selectorInteractor.LeadInvestigator) return;
+            selectorManager.GetLeadSelector().ActivateLeader(false);
+            selectorManager.GetSelectorByInvestigator(selectorInteractor.LeadInvestigator).ActivateLeader(true);
         }
     }
 }

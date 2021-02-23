@@ -13,6 +13,7 @@ namespace Arkham.Views
     public interface IInvestigatorSelectorView
     {
         bool IsEmpty { get; }
+        bool IsLead { get; }
         Transform Transform { get; }
         InteractableComponent Interactable { get; }
         string InvestigatorInThisSelector { get; }
@@ -21,5 +22,6 @@ namespace Arkham.Views
         void SetInvestigator(string investigatorCard, Sprite investigatorImage = null);
         void MoveTo(Transform transform);
         void ActivateGlow(bool activate);
+        void ActivateLeader(bool activate);
     }
 }

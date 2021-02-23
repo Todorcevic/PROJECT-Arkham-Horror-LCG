@@ -20,7 +20,12 @@ namespace Arkham.Services
 
         public void LoadDataCards() => models.CardInfoList = serializer.CreateDataFromResources<List<CardInfo>>(gameFiles.CardsDataFilePath);
 
-        public void SaveProgress() => serializer.SaveFileFromData(models, gameFiles.PlayerProgressFilePath);
+        public void SaveProgress()
+        {
+            serializer.SaveFileFromData(models, gameFiles.PlayerProgressFilePath);
+            serializer.SaveFileFromData(campaignRepository, gameFiles.PlayerProgressFilePath);
+            serializer.SaveFileFromData(selectorRepository, gameFiles.PlayerProgressFilePath);
+        }
 
         public void LoadProgress()
         {
