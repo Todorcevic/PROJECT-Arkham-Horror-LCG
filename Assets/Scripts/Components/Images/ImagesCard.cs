@@ -10,7 +10,8 @@ namespace Arkham.Components
         [SerializeField, AssetsOnly] private List<Sprite> cardImagesEN;
         [SerializeField, AssetsOnly] private List<Sprite> cardImagesES;
 
-        public List<Sprite> CardImagesEN => cardImagesEN;
-        public List<Sprite> CardImagesES => cardImagesES;
+        /*******************************************************************/
+        public bool ExistThisSprite(string id) => cardImagesEN.Exists(x => x.name == id);
+        public Sprite GetSprite(string id) => cardImagesEN.Find(c => c.name == id);
     }
 }

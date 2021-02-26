@@ -18,8 +18,11 @@ namespace Arkham.Managers
         /*******************************************************************/
         public List<T> Selectors<T>() where T : ISelectorView => selectors.OfType<T>().ToList();
 
-        public T GetVoidSelector<T>() where T : ISelectorView =>
+        public T GetEmptySelector<T>() where T : ISelectorView =>
             Selectors<T>().Find(selector => selector.CardInThisSelector == null);
+
+        public List<T> GetAllFilledSelectors<T>() where T : ISelectorView =>
+            Selectors<T>().FindAll(selector => selector.CardInThisSelector != null);
 
         public T GetSelectorById<T>(string cardId) where T : ISelectorView =>
             Selectors<T>().Find(selector => selector.CardInThisSelector == cardId);

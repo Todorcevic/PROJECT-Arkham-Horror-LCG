@@ -62,6 +62,8 @@ MonoBehaviour:
   imageState: {fileID: 5250951900939113371}
   selectorMovement: {fileID: 6808360681041059510}
   glowActivator: {fileID: 5330237612808224715}
+  cardName: {fileID: 4121154858783106769}
+  quantity: {fileID: 223955344760844326}
 --- !u!114 &8736390494462685724
 MonoBehaviour:
   m_ObjectHideFlags: 0

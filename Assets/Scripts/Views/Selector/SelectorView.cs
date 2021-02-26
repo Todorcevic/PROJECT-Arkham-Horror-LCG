@@ -37,5 +37,6 @@ namespace Arkham.Views
         }
 
         public void ActivateGlow(bool activate) => glowActivator.ActivateGlow(activate);
+
     }
 }

@@ -7,7 +7,7 @@ namespace Arkham.Components
 {
     public interface IImagesCard
     {
-        List<Sprite> CardImagesEN { get; }
-        List<Sprite> CardImagesES { get; }
+        bool ExistThisSprite(string id);
+        Sprite GetSprite(string id);
     }
 }

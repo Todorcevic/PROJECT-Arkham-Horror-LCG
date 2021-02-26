@@ -47,6 +47,7 @@ namespace Arkham.Config
             Container.BindInterfacesTo<InvestigatorSelectorInteractor>().AsSingle();
             Container.BindInterfacesTo<DeckBuilderInteractor>().AsSingle();
             Container.BindInterfacesTo<CardInfoInteractor>().AsSingle();
+            Container.BindInterfacesTo<InvestigatorInfoInteractor>().AsSingle();
 
             /** Factories **/
             Container.Bind<ICampaignFactory>().To<CampaignFactory>().AsSingle();

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using Arkham.Models;
 using Arkham.Investigators;
@@ -28,9 +27,6 @@ namespace Arkham.Factories
         [Inject(Id = "DecksManager")] private readonly ICardsManager deckCardsManager;
         [Inject] private readonly IDeckCardController deckCardController;
 
-        private List<Sprite> ImageListEN => imageCards.CardImagesEN;
-        private List<Sprite> ImageListES => imageCards.CardImagesES;
-
         /*******************************************************************/
         public void BuildCards()
         {
@@ -41,7 +37,7 @@ namespace Arkham.Factories
         private void BuildInvestigators()
         {
             var allInvestigators = infoRepository.CardInfoList
-                .FindAll(c => c.Type_code == "investigator" && ImageListEN.Exists(x => x.name == c.Code))
+                .FindAll(c => c.Type_code == "investigator" && imageCards.ExistThisSprite(c.Code))
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
 
             foreach (CardInfo investigatorInfo in allInvestigators)
@@ -67,8 +63,7 @@ namespace Arkham.Factories
                 || c.Type_code == "skill")
                 && (c.Subtype_code != "basicweakness"
                 && c.Subtype_code != "weakness")
-                && ImageListEN
-                .Exists(x => x.name == c.Code)).OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
+                && imageCards.ExistThisSprite(c.Code)).OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
 
             foreach (CardInfo card in allDeckCards)
                 Create(card.Code, deckCardsManager, deckCardController);
@@ -84,11 +79,9 @@ namespace Arkham.Factories
         private CardView Instantiate(string cardId, CardView prefab, Transform zone)
         {
             CardView cardView = GameObject.Instantiate(prefab, zone);
-            cardView.Init(cardId, GetSprite(cardId));
+            cardView.Init(cardId, imageCards.GetSprite(cardId));
             diContainer.Inject(cardView.Interactable);
             return cardView;
         }
-
-        private Sprite GetSprite(string id) => ImageListEN.Find(c => c.name == id);
     }
 }

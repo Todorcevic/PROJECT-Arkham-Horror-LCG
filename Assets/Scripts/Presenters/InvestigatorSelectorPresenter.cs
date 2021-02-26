@@ -53,7 +53,7 @@ namespace Arkham.Presenters
 
         private IInvestigatorSelectorView SetInvestigatorInVoidSelector(string investigatorId)
         {
-            IInvestigatorSelectorView selector = selectorsManager.GetVoidSelector<IInvestigatorSelectorView>();
+            IInvestigatorSelectorView selector = selectorsManager.GetEmptySelector<IInvestigatorSelectorView>();
             Sprite spriteCard = cardsManager.GetSpriteCard(investigatorId);
             selector.SetSelector(investigatorId, spriteCard);
             return selector;

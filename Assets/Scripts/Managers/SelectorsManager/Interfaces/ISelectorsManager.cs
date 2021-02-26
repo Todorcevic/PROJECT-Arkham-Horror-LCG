@@ -8,7 +8,8 @@ namespace Arkham.Managers
     {
         Transform PlaceHolder { get; }
         List<T> Selectors<T>() where T : ISelectorView;
-        T GetVoidSelector<T>() where T : ISelectorView;
+        T GetEmptySelector<T>() where T : ISelectorView;
+        List<T> GetAllFilledSelectors<T>() where T : ISelectorView;
         T GetSelectorById<T>(string cardId) where T : ISelectorView;
     }
 }
