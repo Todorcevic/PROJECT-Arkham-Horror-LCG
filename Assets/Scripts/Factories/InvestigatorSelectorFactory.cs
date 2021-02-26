@@ -7,19 +7,19 @@ namespace Arkham.Factories
 {
     public class InvestigatorSelectorFactory : IInvestigatorSelectorFactory
     {
-        [Inject] private readonly IInvestigatorSelectorController selectorController;
-        [Inject] private readonly IInvestigatorSelectorPresenter selectorPresenter;
+        [Inject] private readonly IInvestigatorSelectorController investigatorSelectorController;
+        [Inject] private readonly IInvestigatorSelectorPresenter investigatorSelectorPresenter;
 
         /*******************************************************************/
         public void BuildSelectors()
         {
-            foreach (IInvestigatorSelectorView selectorView in selectorPresenter.Selectors)
+            foreach (IInvestigatorSelectorView selectorView in investigatorSelectorPresenter.Selectors)
             {
                 selectorView.Init();
-                selectorController.Init(selectorView);
+                investigatorSelectorController.Init(selectorView);
             }
 
-            selectorPresenter.Init();
+            investigatorSelectorPresenter.Init();
         }
     }
 }

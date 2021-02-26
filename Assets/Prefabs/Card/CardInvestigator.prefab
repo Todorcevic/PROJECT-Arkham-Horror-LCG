@@ -734,8 +734,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7131878188277760170}
   - component: {fileID: 6950638181576210403}
-  - component: {fileID: 4551374922465151371}
   - component: {fileID: 5178611471373856364}
+  - component: {fileID: 7902555606089898850}
   - component: {fileID: 7192597132227724208}
   - component: {fileID: 7918799787899769508}
   m_Layer: 5
@@ -778,24 +778,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604c9ecdeaa7b644386412ef9bc4969a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardEffects: {fileID: 7565906562197907640}
   interactable: {fileID: 5178611471373856364}
-  cardActivator: {fileID: 4551374922465151371}
---- !u!114 &4551374922465151371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120494878094766683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4febdabc6571cb24aa3fa22570f062f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardImage: {fileID: 6939591346607468995}
-  canvas: {fileID: 7192597132227724208}
-  disableColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
+  imageState: {fileID: 7902555606089898850}
 --- !u!114 &5178611471373856364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -808,6 +792,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca6693a187fe1a4f9b8d7ef03232e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effects: {fileID: 7565906562197907640}
+--- !u!114 &7902555606089898850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120494878094766683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967e0670732fe494988fd141e8885530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 7192597132227724208}
+  image: {fileID: 6939591346607468995}
+  disableColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
 --- !u!225 &7192597132227724208
 CanvasGroup:
   m_ObjectHideFlags: 0

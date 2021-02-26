@@ -1,11 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
-using DG.Tweening;
-using Zenject;
 using Arkham.Components;
-using Arkham.ScriptableObjects;
 
 namespace Arkham.Views
 {
@@ -17,8 +13,7 @@ namespace Arkham.Views
 
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
-        [SerializeField, Required, ChildGameObjectsOnly] private CampaignEffects campaignEffects;
-        [SerializeField, Required, ChildGameObjectsOnly] private ImageConfigurator imageConfigurator;
+        [SerializeField, Required, ChildGameObjectsOnly] private ImageStateComponent iconImageState;
 
         [Title("CLICK EVENT")]
         [SerializeField] private UnityEvent clickAction;
@@ -31,17 +26,10 @@ namespace Arkham.Views
         /*******************************************************************/
         public void Init()
         {
-            interactable.Clicked += Click;
-            interactable.HoverOn += campaignEffects.HoverOnEffect;
-            interactable.HoverOff += campaignEffects.HoverOffEffect;
+            interactable.Init();
+            interactable.Clicked += () => clickAction?.Invoke();
         }
 
-        private void Click()
-        {
-            campaignEffects.ClickEffect();
-            clickAction?.Invoke();
-        }
-
-        public void SetImageState(Sprite icon) => imageConfigurator.ChangeImage(icon);
+        public void ChangeIconState(Sprite icon) => iconImageState.ChangeImage(icon);
     }
 }

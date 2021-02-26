@@ -1,10 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
-using TMPro;
-using DG.Tweening;
 using Sirenix.OdinInspector;
-using Arkham.ScriptableObjects;
 using Arkham.Components;
 
 namespace Arkham.View
@@ -23,20 +19,11 @@ namespace Arkham.View
         /*******************************************************************/
         private void Start()
         {
-            interactable.Clicked += ClickEffect;
-            interactable.HoverOn += HoverOnEffect;
-            interactable.HoverOff += HoverOffEffect;
+            interactable.Init();
+            interactable.Clicked += () => clickAction?.Invoke();
         }
 
         /*******************************************************************/
-        public void ClickEffect()
-        {
-            buttonEffects.ClickEffect();
-            clickAction?.Invoke();
-        }
-
-        public void HoverOnEffect() => buttonEffects.HoverOnEffect();
-        public void HoverOffEffect() => buttonEffects.HoverOffEffect();
         public void HoverActivate() => buttonEffects.HoverActivate();
         public void HoverDesactivate() => buttonEffects.HoverDesactivate();
     }

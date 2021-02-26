@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3896154658098547371}
   - component: {fileID: 1961198749190547989}
   - component: {fileID: 2502264937126802845}
-  - component: {fileID: 4909116313588831970}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -76,20 +75,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4909116313588831970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2588791632986258448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a7f2be1e849e7947afafb7c1fb08964, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 5553332038502686038}
-  image: {fileID: 2502264937126802845}
 --- !u!1 &3048177153722987982
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +211,7 @@ GameObject:
   - component: {fileID: 640894624587334985}
   - component: {fileID: 8288249651464930690}
   - component: {fileID: 7970832748505163419}
+  - component: {fileID: 3668679410626289193}
   - component: {fileID: -4806800405408187435}
   - component: {fileID: 5553332038502686038}
   m_Layer: 5
@@ -272,8 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactable: {fileID: 7970832748505163419}
-  selectorEffects: {fileID: 7512701614550199729}
-  imageConfigurator: {fileID: 4909116313588831970}
+  imageState: {fileID: 3668679410626289193}
   selectorMovement: {fileID: 5228579672496235600}
   glowActivator: {fileID: 4178966816585282234}
   leadActivator: {fileID: 3270828025641024244}
@@ -289,6 +274,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca6693a187fe1a4f9b8d7ef03232e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effects: {fileID: 7512701614550199729}
+--- !u!114 &3668679410626289193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4040927172998764470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967e0670732fe494988fd141e8885530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 5553332038502686038}
+  image: {fileID: 2502264937126802845}
+  disableColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
 --- !u!114 &-4806800405408187435
 MonoBehaviour:
   m_ObjectHideFlags: 0

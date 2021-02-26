@@ -11,28 +11,29 @@ using Zenject;
 
 namespace Arkham.Interactors
 {
-    public class CampaignInteractor : ICampaignInteractor, ICampaignRepository
+    public class CampaignInteractor : ICampaignInteractor
     {
         public event Action<CampaignInfo> CampaignStateChanged;
+        [Inject] private readonly ICampaignRepository campaignRepository;
         [Inject] private readonly ICampaignPresenter campaignPresenter;
-        [DataMember] public string CurrentScenario { get; set; }
-        [DataMember] public List<CampaignInfo> CampaignsList { get; set; }
+        public string CurrentScenario => campaignRepository.CurrentScenario;
+        public List<CampaignInfo> CampaignsList => campaignRepository.CampaignsList;
 
         /*******************************************************************/
         public void InitializeCampaigns()
         {
-            foreach (CampaignInfo campaign in CampaignsList)
+            foreach (CampaignInfo campaign in campaignRepository.CampaignsList)
                 campaignPresenter.SetCampaign(campaign);
         }
 
         public void ChangeCampaignState(CampaignInfo campaignInfo)
         {
-            CampaignsList.Find(c => c.Id == campaignInfo.Id).State = campaignInfo.State;
+            campaignRepository.CampaignsList.Find(c => c.Id == campaignInfo.Id).State = campaignInfo.State;
             CampaignStateChanged?.Invoke(campaignInfo);
         }
 
-        public void AddScenarioToPlay(string scenario) => CurrentScenario = scenario;
+        public void AddScenarioToPlay(string scenario) => campaignRepository.CurrentScenario = scenario;
 
-        public CampaignInfo GetCampaign(string id) => CampaignsList.Find(campaign => campaign.Id == id);
+        public CampaignInfo GetCampaign(string id) => campaignRepository.CampaignsList.Find(campaign => campaign.Id == id);
     }
 }

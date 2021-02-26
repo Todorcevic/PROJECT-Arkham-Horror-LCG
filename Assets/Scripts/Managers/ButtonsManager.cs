@@ -17,11 +17,11 @@ namespace Arkham.Managers
         {
             foreach (ButtonView button in buttons)
             {
-                button.Interactable.Clicked -= button.ClickEffect;
+                button.Interactable.Clicked -= button.Interactable.Effects.ClickEffect;
                 button.Interactable.Clicked += () => Click(button);
-                button.Interactable.HoverOn -= button.HoverOnEffect;
+                button.Interactable.HoverOn -= button.Interactable.Effects.HoverOnEffect;
                 button.Interactable.HoverOn += () => MantainHoverOn(button);
-                button.Interactable.HoverOff -= button.HoverOffEffect;
+                button.Interactable.HoverOff -= button.Interactable.Effects.HoverOffEffect;
                 button.Interactable.HoverOff += () => MantainHoverOff(button);
             }
             SelectTab(currentButton);
@@ -31,20 +31,20 @@ namespace Arkham.Managers
         private void Click(ButtonView button)
         {
             if (currentButton == button) return;
-            button.ClickEffect();
+            button.Interactable.Effects.ClickEffect();
             SelectTab(button);
         }
 
         private void MantainHoverOn(ButtonView button)
         {
             if (button != currentButton)
-                button.HoverOnEffect();
+                button.Interactable.Effects.HoverOnEffect();
         }
 
         private void MantainHoverOff(ButtonView button)
         {
             if (button != currentButton)
-                button.HoverOffEffect();
+                button.Interactable.Effects.HoverOffEffect();
         }
 
         private void SelectTab(ButtonView button)

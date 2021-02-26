@@ -1,6 +1,4 @@
-﻿using Arkham.Controllers;
-using Arkham.ScriptableObjects;
-using Arkham.Services;
+﻿using Arkham.Services;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
@@ -12,12 +10,21 @@ namespace Arkham.Components
     public class InteractableComponent : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [Inject] private readonly IDoubleClickDetector clickDetector;
+        [SerializeField, Required] private InteractableEffects effects;
         public event Action Clicked;
         public event Action DoubleClicked;
         public event Action HoverOn;
         public event Action HoverOff;
+        public InteractableEffects Effects => effects;
 
         /*******************************************************************/
+        public void Init()
+        {
+            Clicked += effects.ClickEffect;
+            DoubleClicked += effects.DoubleClickEffect;
+            HoverOn += effects.HoverOnEffect;
+            HoverOff += effects.HoverOffEffect;
+        }
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {

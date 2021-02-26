@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace Arkham.Views
 {
-    public class CampaignEffects : MonoBehaviour
+    public class CampaignEffects : InteractableEffects
     {
         [SerializeField, Required] private InteractableAudio InteractableAudio;
         [SerializeField, Required] private Image chapterImage;
@@ -24,9 +24,11 @@ namespace Arkham.Views
         [SerializeField, Range(1f, 2f)] private float zoomParallaxHoverEffect;
 
         /*******************************************************************/
-        public void ClickEffect() => InteractableAudio.ClickSound();
+        public override void ClickEffect() => InteractableAudio.ClickSound();
 
-        public void HoverOnEffect()
+        public override void DoubleClickEffect() { }
+
+        public override void HoverOnEffect()
         {
             InteractableAudio.HoverOnSound();
             chapterImage.transform.DOScale(zoomParallaxHoverEffect, timeHoverAnimation);
@@ -34,7 +36,7 @@ namespace Arkham.Views
             highlightedTextBox.transform.DOLocalMoveY(yoffsetHoverHighlighted, timeHoverAnimation);
         }
 
-        public void HoverOffEffect()
+        public override void HoverOffEffect()
         {
             InteractableAudio.HoverOffSound();
             chapterImage.transform.DOScale(1f, timeHoverAnimation);

@@ -1,6 +1,7 @@
 ﻿using Arkham.Adapters;
 using Arkham.Config;
 using Arkham.Factories;
+using Arkham.Interactors;
 using Arkham.Repositories;
 using Arkham.Scenarios;
 using Arkham.Services;
@@ -13,7 +14,7 @@ namespace Tests
         public override void InstallBindings()
         {
             Container.Bind<GameFiles>().AsSingle();
-            Container.BindInterfacesTo<AllRepositories>().AsSingle();
+            Container.BindInterfacesTo<CardInfoInteractor>().AsSingle();
 
             Container.Bind<IDoubleClickDetector>().To<DoubleClickDetector>().AsSingle();
             Container.Bind<IResolutionSet>().To<ScreenResolutionAutoDetect>().AsSingle();

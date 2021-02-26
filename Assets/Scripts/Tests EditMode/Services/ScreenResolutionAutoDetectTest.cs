@@ -20,7 +20,7 @@ namespace Tests
             Resolution resolutionFullHDMock = new Resolution() { width = 1920, height = 1080 };
             Resolution resolutionHDMock = new Resolution() { width = 1280, height = 720 };
             IScreenResolutionAdapter screenResolutionAdapter = Substitute.For<IScreenResolutionAdapter>();
-            screenResolutionAdapter.Resolutions.Returns(new Resolution[] { resolutionFullHDMock, resolutionHDMock });
+            screenResolutionAdapter.ResolutionsSupported.Returns(new Resolution[] { resolutionFullHDMock, resolutionHDMock });
             ScreenResolutionAutoDetect resolutionSetter = new ScreenResolutionAutoDetect(screenResolutionAdapter);
 
             //Act
@@ -36,7 +36,7 @@ namespace Tests
             //Arrange
             Resolution resolutionHDMock = new Resolution() { width = 1280, height = 720 };
             IScreenResolutionAdapter screenResolutionAdapter = Substitute.For<IScreenResolutionAdapter>();
-            screenResolutionAdapter.Resolutions.Returns(new Resolution[] { resolutionHDMock });
+            screenResolutionAdapter.ResolutionsSupported.Returns(new Resolution[] { resolutionHDMock });
             ScreenResolutionAutoDetect resolutionSetter = new ScreenResolutionAutoDetect(screenResolutionAdapter);
 
             //Act
@@ -56,7 +56,7 @@ namespace Tests
             //Arrange
             IScreenResolutionAdapter screenResolutionAdapter = Substitute.For<IScreenResolutionAdapter>();
             Resolution resolutionMock = new Resolution() { width = width, height = height };
-            screenResolutionAdapter.Resolutions.Returns(new Resolution[] { resolutionMock });
+            screenResolutionAdapter.ResolutionsSupported.Returns(new Resolution[] { resolutionMock });
             ScreenResolutionAutoDetect resolutionSetter = new ScreenResolutionAutoDetect(screenResolutionAdapter);
 
             //Assert

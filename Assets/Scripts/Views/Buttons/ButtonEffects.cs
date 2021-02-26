@@ -1,36 +1,31 @@
 ﻿using Arkham.Components;
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Arkham.View
 {
-    public class ButtonEffects : MonoBehaviour
+    public class ButtonEffects : InteractableEffects
     {
-        private Color simpleTextColor = Color.white;
-        private Color hoverTextColor = Color.black;
-
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
         [SerializeField, Required] private Image background;
         [SerializeField, Required] private TextMeshProUGUI text;
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
 
         /*******************************************************************/
-        public void ClickEffect() => interactableAudio.ClickSound();
+        public override void ClickEffect() => interactableAudio.ClickSound();
 
-        public void HoverOnEffect()
+        public override void DoubleClickEffect() { }
+
+        public override void HoverOnEffect()
         {
             interactableAudio.HoverOnSound();
             HoverActivate();
         }
-        public void HoverOffEffect()
+
+        public override void HoverOffEffect()
         {
             interactableAudio.HoverOffSound();
             HoverDesactivate();
@@ -38,13 +33,13 @@ namespace Arkham.View
 
         public void HoverActivate()
         {
-            ChangeTextColor(hoverTextColor);
+            ChangeTextColor(Color.black);
             FillBackground(true);
         }
 
         public void HoverDesactivate()
         {
-            ChangeTextColor(simpleTextColor);
+            ChangeTextColor(Color.white);
             FillBackground(false);
         }
 

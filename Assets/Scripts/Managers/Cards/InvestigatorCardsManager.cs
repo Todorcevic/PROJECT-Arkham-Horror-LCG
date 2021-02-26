@@ -12,7 +12,7 @@ using Zenject;
 
 namespace Arkham.Managers
 {
-    public class InvestigatorCardsManager : CardsManager, ICardsInvestigatorManager
+    public class InvestigatorCardsManager : CardsManager, IInvestigatorCardsManager
     {
         /*******************************************************************/
     }

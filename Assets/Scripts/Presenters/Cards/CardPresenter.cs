@@ -1,4 +1,5 @@
-﻿using Arkham.Managers;
+﻿using Arkham.Interactors;
+using Arkham.Managers;
 using Arkham.Repositories;
 using Arkham.Views;
 using System;
@@ -12,7 +13,7 @@ namespace Arkham.Presenters
 {
     public abstract class CardPresenter
     {
-        [Inject] private readonly ICardInfoRepository cardInfo;
+        [Inject] private readonly ICardInfoInteractor cardInfoInteractor;
         protected ICardsManager cardsManager;
         public List<ICardView> CardsList => cardsManager.CardsList;
         public Dictionary<string, ICardView> AllCards => cardsManager.AllCards;
@@ -24,18 +25,18 @@ namespace Arkham.Presenters
         protected abstract int AmountCardsSelected(string cardId);
 
         public void RefreshCardVisibility(string cardId) =>
-            AllCards[cardId].Enable(CheckIsEnable(cardId));
+            AllCards[cardId].Activate(CheckIsEnable(cardId));
 
         public void RefreshAllCardsVisibility()
         {
             foreach (ICardView cardView in CardsList)
-                cardView.Enable(CheckIsEnable(cardView.Id));
+                cardView.Activate(CheckIsEnable(cardView.Id));
         }
 
         private bool CheckIsEnable(string cardId)
         {
             if (SelectionIsFull) return false;
-            if (((cardInfo.AllCardsInfo(cardId).Quantity ?? 0) - AmountCardsSelected(cardId)) <= 0) return false;
+            if (((cardInfoInteractor.GetCardInfo(cardId).Quantity ?? 0) - AmountCardsSelected(cardId)) <= 0) return false;
             return true;
         }
     }

@@ -9,34 +9,35 @@ using Zenject;
 
 namespace Arkham.Interactors
 {
-    public class InvestigatorSelectorInteractor : IInvestigatorSelectorInteractor, ISelectorRepository
+    public class InvestigatorSelectorInteractor : IInvestigatorSelectorInteractor
     {
+        [Inject] private readonly IInvestigatorSelectorRepository investigatorSelectorRepository;
         public event Action<string> InvestigatorSelectedChanged;
         public event Action<string> InvestigatorAdded;
         public event Action<string> InvestigatorRemoved;
-        [DataMember] public List<string> InvestigatorsSelectedList { get; set; }
-        public string InvestigatorFocused { get; private set; }
-        public string LeadInvestigator => InvestigatorsSelectedList.FirstOrDefault();
+        public string InvestigatorSelected { get; private set; }
+        public string LeadInvestigator => investigatorSelectorRepository.InvestigatorsSelectedList.FirstOrDefault();
+        public List<string> InvestigatorsSelectedList => investigatorSelectorRepository.InvestigatorsSelectedList;
 
         /*******************************************************************/
         public void SelectInvestigator(string investigatorId)
         {
-            InvestigatorFocused = investigatorId;
+            InvestigatorSelected = investigatorId;
             InvestigatorSelectedChanged?.Invoke(investigatorId);
         }
 
         public void AddInvestigator(string investigatorId)
         {
-            InvestigatorsSelectedList.Add(investigatorId);
+            investigatorSelectorRepository.InvestigatorsSelectedList.Add(investigatorId);
             InvestigatorAdded?.Invoke(investigatorId);
             SelectInvestigator(investigatorId);
         }
 
         public void RemoveInvestigator(string investigatorId)
         {
-            InvestigatorsSelectedList.Remove(investigatorId);
+            investigatorSelectorRepository.InvestigatorsSelectedList.Remove(investigatorId);
             InvestigatorRemoved?.Invoke(investigatorId);
-            SelectInvestigator(InvestigatorsSelectedList.FirstOrDefault());
+            SelectInvestigator(investigatorSelectorRepository.InvestigatorsSelectedList.FirstOrDefault());
         }
     }
 }

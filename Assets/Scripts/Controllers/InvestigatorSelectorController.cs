@@ -7,7 +7,7 @@ namespace Arkham.Controllers
 {
     public class InvestigatorSelectorController : IInvestigatorSelectorController
     {
-        [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelector;
+        [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
 
         /*******************************************************************/
         public void Init(IInvestigatorSelectorView selectorView)
@@ -17,9 +17,9 @@ namespace Arkham.Controllers
         }
 
         private void Click(IInvestigatorSelectorView selectorView) =>
-            investigatorSelector.SelectInvestigator(selectorView.InvestigatorInThisSelector);
+            investigatorSelectorInteractor.SelectInvestigator(selectorView.CardInThisSelector);
 
         private void DoubleClick(IInvestigatorSelectorView selectorView) =>
-            investigatorSelector.RemoveInvestigator(selectorView.InvestigatorInThisSelector);
+            investigatorSelectorInteractor.RemoveInvestigator(selectorView.CardInThisSelector);
     }
 }

@@ -18,8 +18,6 @@ namespace Arkham.Config
         [Inject] private readonly IInvestigatorSelectorFactory investigatorSelectorFactory;
         [Inject] private readonly IInvestigatorAvatarPresenter investigatorAvatarPresenter;
 
-        [Inject] private readonly ICardInfoRepository cardInfo;
-
         private void Awake()
         {
             resolutionSetter.SettingResolution();

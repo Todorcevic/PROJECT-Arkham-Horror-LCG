@@ -8,14 +8,14 @@ namespace Arkham.Presenters
     public class InvestigatorAvatarPresenter : IInvestigatorAvatarPresenter
     {
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
-        [Inject] private readonly ICardsInvestigatorManager cardsInvestigatorManager;
-        [Inject(Id = "InvestigatorAvatar")] private readonly IImagesConfigurator imagesConfigurator;
+        [Inject] private readonly IInvestigatorCardsManager cardsInvestigatorManager;
+        [Inject(Id = "InvestigatorAvatar")] private readonly IImageStateComponent imagesConfigurator;
 
         /*******************************************************************/
         public void Init()
         {
             investigatorSelectorInteractor.InvestigatorSelectedChanged += SelectInvetigator;
-            SelectInvetigator(investigatorSelectorInteractor.InvestigatorFocused);
+            SelectInvetigator(investigatorSelectorInteractor.InvestigatorSelected);
         }
 
 

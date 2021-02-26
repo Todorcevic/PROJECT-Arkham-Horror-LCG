@@ -8,6 +8,7 @@ using Arkham.Controllers;
 using Arkham.Presenters;
 using Arkham.Interactors;
 using Arkham.Managers;
+using Arkham.Models;
 
 namespace Arkham.Config
 {
@@ -16,7 +17,7 @@ namespace Arkham.Config
         public override void InstallBindings()
         {
             Container.Bind<GameFiles>().AsSingle();
-            Container.BindInterfacesTo<AllRepositories>().AsSingle();
+            Container.BindInterfacesAndSelfTo<Repository>().AsSingle();
 
             /** Services **/
             Container.Bind<IFileAdapter>().To<FileAdapter>().AsSingle();
@@ -32,16 +33,21 @@ namespace Arkham.Config
             Container.BindInterfacesTo<CampaignController>().AsSingle();
             Container.BindInterfacesTo<InvestigatorSelectorController>().AsSingle();
             Container.BindInterfacesTo<InvestigatorCardController>().AsSingle();
+            Container.BindInterfacesTo<DeckCardController>().AsSingle();
+            Container.BindInterfacesTo<RowCardController>().AsSingle();
 
             /** Presenters **/
             Container.BindInterfacesTo<CampaignPresenter>().AsSingle();
             Container.BindInterfacesTo<InvestigatorSelectorPresenter>().AsSingle();
             Container.BindInterfacesTo<InvestigatorCardPresenter>().AsSingle();
+            Container.BindInterfacesTo<RowCardPresenter>().AsSingle();
             Container.BindInterfacesTo<InvestigatorAvatarPresenter>().AsSingle();
 
             /** Interactors **/
             Container.BindInterfacesTo<CampaignInteractor>().AsSingle();
             Container.BindInterfacesTo<InvestigatorSelectorInteractor>().AsSingle();
+            Container.BindInterfacesTo<DeckBuilderInteractor>().AsSingle();
+            Container.BindInterfacesTo<CardInfoInteractor>().AsSingle();
 
             /** Factories **/
             Container.Bind<ICampaignFactory>().To<CampaignFactory>().AsSingle();

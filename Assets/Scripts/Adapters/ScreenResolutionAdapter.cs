@@ -6,7 +6,7 @@ namespace Arkham.Adapters
 {
     public class ScreenResolutionAdapter : IScreenResolutionAdapter
     {
-        public Resolution[] Resolutions => Screen.resolutions;
+        public Resolution[] ResolutionsSupported => Screen.resolutions;
 
         public void SetResolution(int witdh, int height, bool fullscreen, int refreshRate) =>
             Screen.SetResolution(witdh, height, fullscreen, refreshRate);

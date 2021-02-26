@@ -10,51 +10,52 @@ namespace Arkham.Presenters
     public class InvestigatorSelectorPresenter : IInvestigatorSelectorPresenter
     {
         private string investigatorSelected;
-        [Inject] private readonly IInvestigatorSelectorsManager selectorManager;
-        [Inject] private readonly ICardsInvestigatorManager investigatorManager;
-        [Inject] private readonly IInvestigatorSelectorInteractor selectorInteractor;
-        public List<IInvestigatorSelectorView> Selectors => selectorManager.Selectors;
+        [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
+        [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
+        [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
+        private string LeadInvestigator => investigatorSelectorInteractor.LeadInvestigator;
+        public List<IInvestigatorSelectorView> Selectors => investigatorSelectorsManager.InvestigatorSelectors;
 
         /*******************************************************************/
         public void Init()
         {
-            selectorInteractor.InvestigatorSelectedChanged += SelectInvestigator;
-            selectorInteractor.InvestigatorAdded += AddInvestigator;
-            selectorInteractor.InvestigatorRemoved += RemoveInvestigator;
+            investigatorSelectorInteractor.InvestigatorSelectedChanged += SelectInvestigator;
+            investigatorSelectorInteractor.InvestigatorAdded += AddInvestigator;
+            investigatorSelectorInteractor.InvestigatorRemoved += RemoveInvestigator;
             InitializeSelectors();
-            selectorInteractor.SelectInvestigator(selectorInteractor.LeadInvestigator);
+            investigatorSelectorInteractor.SelectInvestigator(LeadInvestigator);
         }
 
         public void SelectInvestigator(string activeInvestigatorId)
         {
-            selectorManager.GetSelectorByInvestigator(investigatorSelected)?.ActivateGlow(false);
-            selectorManager.GetSelectorByInvestigator(activeInvestigatorId)?.ActivateGlow(true);
+            investigatorSelectorsManager.GetSelectorByInvestigatorId(investigatorSelected)?.ActivateGlow(false);
+            investigatorSelectorsManager.GetSelectorByInvestigatorId(activeInvestigatorId)?.ActivateGlow(true);
             investigatorSelected = activeInvestigatorId;
         }
 
         public void AddInvestigator(string investigatorId)
         {
-            SetInvestigatorInVoidSelector(investigatorId).MoveTo(investigatorManager.AllCards[investigatorId].Transform);
+            SetInvestigatorInVoidSelector(investigatorId).MoveTo(investigatorCardsManager.AllCards[investigatorId].Transform);
             ArrangeSelectors();
         }
 
         public void RemoveInvestigator(string investigatorId)
         {
-            selectorManager.GetSelectorByInvestigator(investigatorId).SetInvestigator(null);
+            investigatorSelectorsManager.GetSelectorByInvestigatorId(investigatorId).SetSelector(null);
             ArrangeSelectors();
         }
 
         private void InitializeSelectors()
         {
-            foreach (string investigatorId in selectorInteractor.InvestigatorsSelectedList)
+            foreach (string investigatorId in investigatorSelectorInteractor.InvestigatorsSelectedList)
                 SetInvestigatorInVoidSelector(investigatorId);
         }
 
-        private IInvestigatorSelectorView SetInvestigatorInVoidSelector(string investigatorId)
+        private ISelectorView SetInvestigatorInVoidSelector(string investigatorId)
         {
-            IInvestigatorSelectorView selector = selectorManager.GetVoidSelector();
-            Sprite spriteCard = investigatorManager.GetSpriteCard(investigatorId);
-            selector.SetInvestigator(investigatorId, spriteCard);
+            ISelectorView selector = investigatorSelectorsManager.GetVoidSelector();
+            Sprite spriteCard = investigatorCardsManager.GetSpriteCard(investigatorId);
+            selector.SetSelector(investigatorId, spriteCard);
             return selector;
         }
 
@@ -62,14 +63,14 @@ namespace Arkham.Presenters
         {
             SetLeadSelector();
             foreach (IInvestigatorSelectorView selector in Selectors)
-                selector.Arrange(selector.IsEmpty ? selector.Transform : selectorManager.PlaceHolder);
+                selector.Arrange(selector.IsEmpty ? selector.Transform : investigatorSelectorsManager.PlaceHolder);
         }
 
         private void SetLeadSelector()
         {
-            if (selectorManager.GetLeadSelector().InvestigatorInThisSelector == selectorInteractor.LeadInvestigator) return;
-            selectorManager.GetLeadSelector().ActivateLeader(false);
-            selectorManager.GetSelectorByInvestigator(selectorInteractor.LeadInvestigator).ActivateLeader(true);
+            if (investigatorSelectorsManager.GetLeadSelector().CardInThisSelector == LeadInvestigator) return;
+            investigatorSelectorsManager.GetLeadSelector().ActivateLeaderIcon(false);
+            investigatorSelectorsManager.GetSelectorByInvestigatorId(LeadInvestigator).ActivateLeaderIcon(true);
         }
     }
 }

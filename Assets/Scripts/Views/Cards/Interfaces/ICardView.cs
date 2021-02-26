@@ -16,7 +16,7 @@ namespace Arkham.Views
         InteractableComponent Interactable { get; }
         Sprite GetCardImage { get; }
         void Init(string id, Sprite sprite);
-        void Enable(bool isEnable);
+        void Activate(bool isEnable);
         void Show(bool isShow);
     }
 }
