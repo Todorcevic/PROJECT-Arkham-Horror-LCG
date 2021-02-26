@@ -1,6 +1,7 @@
 ﻿using Arkham.Interactors;
 using Arkham.Managers;
 using Arkham.Views;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -8,9 +9,11 @@ namespace Arkham.Presenters
 {
     public class CardSelectorPresenter : ICardSelectorPresenter
     {
-        [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
-        [Inject] private readonly IDeckCardsManager deckCardsManager;
+        [Inject(Id = "CardsSelector")] private readonly ISelectorsManager selectorsManager;
+        [Inject(Id = "DecksManager")] private readonly ICardsManager cardsManager;
         [Inject] private readonly IDeckBuilderInteractor deckBuilderInteractor;
+
+        public List<ICardSelectorView> Selectors => selectorsManager.Selectors<ICardSelectorView>();
 
         /*******************************************************************/
         public void Init()
@@ -24,23 +27,25 @@ namespace Arkham.Presenters
             //investigatorSelectorInteractor.SelectInvestigator(LeadInvestigator);
         }
 
-        public void AddCard(string cardId)
+        private void AddCard(string cardId)
+        {
+            SetCardInVoidSelector(cardId);
+            //SetInvestigatorInVoidSelector(investigatorId).MoveTo(investigatorManager.AllCards[investigatorId].Transform);
+            //ArrangeSelectors();
+        }
+
+        private void RemoveCard(string cardId)
         {
             //SetInvestigatorInVoidSelector(investigatorId).MoveTo(investigatorManager.AllCards[investigatorId].Transform);
             //ArrangeSelectors();
         }
 
-        public void RemoveCard(string cardId)
+        private ICardSelectorView SetCardInVoidSelector(string cardId)
         {
-            //SetInvestigatorInVoidSelector(investigatorId).MoveTo(investigatorManager.AllCards[investigatorId].Transform);
-            //ArrangeSelectors();
-        }
-
-        private ISelectorView SetCardInVoidSelector(string cardId)
-        {
-            ISelectorView selector = cardSelectorsManager.GetVoidSelector();
-            Sprite spriteCard = deckCardsManager.GetSpriteCard(cardId);
+            ICardSelectorView selector = selectorsManager.GetVoidSelector<ICardSelectorView>();
+            Sprite spriteCard = cardsManager.GetSpriteCard(cardId);
             selector.SetSelector(cardId, spriteCard);
+            selector.ActiveSelector(cardId != null);
             return selector;
         }
     }

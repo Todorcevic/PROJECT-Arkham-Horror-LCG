@@ -14,10 +14,14 @@ namespace Arkham.Managers
         [SerializeField, Required, SceneObjectsOnly] private Transform placeHolder;
         [SerializeField, Required, SceneObjectsOnly] private List<SelectorView> selectors;
         public Transform PlaceHolder => placeHolder;
-        protected List<ISelectorView> Selectors => selectors.OfType<ISelectorView>().ToList();
 
         /*******************************************************************/
-        public ISelectorView GetVoidSelector() =>
-            Selectors.Find(selector => selector.CardInThisSelector == null);
+        public List<T> Selectors<T>() where T : ISelectorView => selectors.OfType<T>().ToList();
+
+        public T GetVoidSelector<T>() where T : ISelectorView =>
+            Selectors<T>().Find(selector => selector.CardInThisSelector == null);
+
+        public T GetSelectorById<T>(string cardId) where T : ISelectorView =>
+            Selectors<T>().Find(selector => selector.CardInThisSelector == cardId);
     }
 }

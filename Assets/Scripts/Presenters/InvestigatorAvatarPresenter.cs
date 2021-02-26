@@ -8,7 +8,7 @@ namespace Arkham.Presenters
     public class InvestigatorAvatarPresenter : IInvestigatorAvatarPresenter
     {
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
-        [Inject] private readonly IInvestigatorCardsManager cardsInvestigatorManager;
+        [Inject(Id = "InvestigatorsManager")] private readonly ICardsManager cardsManager;
         [Inject(Id = "InvestigatorAvatar")] private readonly IImageStateComponent imagesConfigurator;
 
         /*******************************************************************/
@@ -21,7 +21,7 @@ namespace Arkham.Presenters
 
         private void SelectInvetigator(string investigatorId)
         {
-            var imageCard = cardsInvestigatorManager.GetSpriteCard(investigatorId);
+            var imageCard = cardsManager.GetSpriteCard(investigatorId);
             imagesConfigurator.ChangeImage(imageCard);
         }
     }

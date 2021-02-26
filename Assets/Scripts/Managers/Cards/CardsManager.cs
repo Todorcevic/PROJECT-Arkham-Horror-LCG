@@ -1,17 +1,12 @@
-﻿using Arkham.Repositories;
-using Arkham.Views;
+﻿using Arkham.Views;
 using Sirenix.OdinInspector;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using Zenject;
 
 namespace Arkham.Managers
 {
-    public abstract class CardsManager : MonoBehaviour
+    public class CardsManager : MonoBehaviour, ICardsManager
     {
         [SerializeField, Required, AssetsOnly] private CardView cardPrefab;
         [SerializeField, Required, SceneObjectsOnly] private Transform zone;

@@ -2,5 +2,6 @@
 {
     public interface ICardSelectorView : ISelectorView
     {
+        void ActiveSelector(bool isActive);
     }
 }

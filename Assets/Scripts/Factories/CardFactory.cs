@@ -23,13 +23,10 @@ namespace Arkham.Factories
         [Inject] private readonly ICardInfoRepository infoRepository;
         [Inject] private readonly IDeckBuilderInteractor investigatorRepository;
         [Inject] private readonly IInvestigatorCardController investigatorCardController;
-        [Inject] private readonly IInvestigatorCardsManager investigatorsCardManager;
+        [Inject(Id = "InvestigatorsManager")] private readonly ICardsManager investigatorCardsManager;
         [Inject] private readonly IInvestigatorCardPresenter investigatorCardPresenter;
-        [Inject] private readonly IDeckCardsManager deckCardManager;
+        [Inject(Id = "DecksManager")] private readonly ICardsManager deckCardsManager;
         [Inject] private readonly IDeckCardController deckCardController;
-        [Inject] private readonly IRowCardsManager rowCardManager;
-        [Inject] private readonly IRowCardController rowCardController;
-        [Inject] private readonly IRowCardPresenter rowCardPresenter;
 
         private List<Sprite> ImageListEN => imageCards.CardImagesEN;
         private List<Sprite> ImageListES => imageCards.CardImagesES;
@@ -39,7 +36,6 @@ namespace Arkham.Factories
         {
             BuildInvestigators();
             BuildDeckCards();
-            BuildRowCards();
         }
 
         private void BuildInvestigators()
@@ -50,7 +46,7 @@ namespace Arkham.Factories
 
             foreach (CardInfo investigatorInfo in allInvestigators)
             {
-                Create(investigatorInfo.Code, investigatorsCardManager, investigatorCardController);
+                Create(investigatorInfo.Code, investigatorCardsManager, investigatorCardController);
                 SettingDeckBuilding(investigatorInfo.Code);
             }
 
@@ -75,23 +71,7 @@ namespace Arkham.Factories
                 .Exists(x => x.name == c.Code)).OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
 
             foreach (CardInfo card in allDeckCards)
-                Create(card.Code, deckCardManager, deckCardController);
-        }
-
-        private void BuildRowCards()
-        {
-            var allRowCards = infoRepository.CardInfoList
-                .FindAll(c => (c.Type_code == "asset"
-                || c.Type_code == "event"
-                || c.Type_code == "skill"
-                || c.Subtype_code == "weakness"
-                || c.Subtype_code == "basicweakness") && ImageListEN
-                .Exists(x => x.name == c.Code)).OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
-
-            foreach (CardInfo rowCard in allRowCards)
-                Create(rowCard.Code, rowCardManager, rowCardController);
-
-            rowCardPresenter.Init();
+                Create(card.Code, deckCardsManager, deckCardController);
         }
 
         private void Create(string cardId, ICardsManager manager, ICardController controller)

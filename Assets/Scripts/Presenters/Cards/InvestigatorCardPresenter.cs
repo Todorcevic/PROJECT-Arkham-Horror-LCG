@@ -5,8 +5,6 @@ using Arkham.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Zenject;
 
 namespace Arkham.Presenters
@@ -20,7 +18,7 @@ namespace Arkham.Presenters
 
         /*******************************************************************/
         [Inject]
-        public void InjectDependency(IInvestigatorCardsManager investigatorCardsManager)
+        public void InjectDependency([Inject(Id = "InvestigatorsManager")] ICardsManager investigatorCardsManager)
         {
             cardsManager = investigatorCardsManager;
         }

@@ -7,6 +7,8 @@ namespace Arkham.Managers
     public interface ISelectorsManager
     {
         Transform PlaceHolder { get; }
-        ISelectorView GetVoidSelector();
+        List<T> Selectors<T>() where T : ISelectorView;
+        T GetVoidSelector<T>() where T : ISelectorView;
+        T GetSelectorById<T>(string cardId) where T : ISelectorView;
     }
 }

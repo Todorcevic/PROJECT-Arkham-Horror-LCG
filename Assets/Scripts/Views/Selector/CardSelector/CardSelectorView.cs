@@ -12,6 +12,6 @@ namespace Arkham.Views
 {
     public class CardSelectorView : SelectorView, ICardSelectorView
     {
-
+        public void ActiveSelector(bool isActive) => gameObject.SetActive(isActive);
     }
 }

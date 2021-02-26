@@ -17,6 +17,7 @@ namespace Arkham.Config
         [Inject] private readonly ICampaignFactory campaignFactory;
         [Inject] private readonly IInvestigatorSelectorFactory investigatorSelectorFactory;
         [Inject] private readonly IInvestigatorAvatarPresenter investigatorAvatarPresenter;
+        [Inject] private readonly ICardSelectorFactory cardSelectorFactory;
 
         private void Awake()
         {
@@ -26,6 +27,7 @@ namespace Arkham.Config
             cardFactory.BuildCards();
             campaignFactory.BuildCampaigns();
             investigatorSelectorFactory.BuildSelectors();
+            cardSelectorFactory.BuildSelectors();
             investigatorAvatarPresenter.Init();
             //context.SaveProgress();
         }
