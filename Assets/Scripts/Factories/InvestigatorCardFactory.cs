@@ -1,20 +1,24 @@
-﻿using System.Linq;
-using UnityEngine;
-using Arkham.Models;
-using Arkham.Investigators;
-using Arkham.Repositories;
-using Arkham.Managers;
+﻿using Arkham.Components;
 using Arkham.Controllers;
-using Arkham.Views;
-using Arkham.Components;
-using Arkham.Services;
-using Zenject;
-using Arkham.Presenters;
 using Arkham.Interactors;
+using Arkham.Investigators;
+using Arkham.Managers;
+using Arkham.Models;
+using Arkham.Presenters;
+using Arkham.Repositories;
+using Arkham.Services;
+using Arkham.Views;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UnityEngine;
+using Zenject;
 
 namespace Arkham.Factories
 {
-    public class CardFactory : ICardFactory
+    public class InvestigatorCardFactory: IInvestigatorCardFactory
     {
         [Inject] private readonly DiContainer diContainer;
         [Inject] private readonly IInstantiatorAdapter instantiator;
@@ -22,19 +26,11 @@ namespace Arkham.Factories
         [Inject] private readonly ICardInfoRepository infoRepository;
         [Inject] private readonly IDeckBuilderInteractor investigatorRepository;
         [Inject] private readonly IInvestigatorCardController investigatorCardController;
-        [Inject(Id = "InvestigatorsManager")] private readonly ICardsManager investigatorCardsManager;
+        [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
         [Inject] private readonly IInvestigatorCardPresenter investigatorCardPresenter;
-        [Inject(Id = "DecksManager")] private readonly ICardsManager deckCardsManager;
-        [Inject] private readonly IDeckCardController deckCardController;
 
         /*******************************************************************/
-        public void BuildCards()
-        {
-            BuildInvestigators();
-            BuildDeckCards();
-        }
-
-        private void BuildInvestigators()
+        public void BuildInvestigators()
         {
             var allInvestigators = infoRepository.CardInfoList
                 .FindAll(c => c.Type_code == "investigator" && imageCards.ExistThisSprite(c.Code))
@@ -55,30 +51,16 @@ namespace Arkham.Factories
             investigator.DeckBuilding = instantiator.CreateInstance<DeckBuildingRules>(investigatorId);
         }
 
-        private void BuildDeckCards()
+        private void Create(string cardId, IInvestigatorCardsManager manager, ICardController controller)
         {
-            var allDeckCards = infoRepository.CardInfoList
-                .FindAll(c => (c.Type_code == "asset"
-                || c.Type_code == "event"
-                || c.Type_code == "skill")
-                && (c.Subtype_code != "basicweakness"
-                && c.Subtype_code != "weakness")
-                && imageCards.ExistThisSprite(c.Code)).OrderBy(c => c.Faction_code).ThenBy(c => c.Code);
-
-            foreach (CardInfo card in allDeckCards)
-                Create(card.Code, deckCardsManager, deckCardController);
-        }
-
-        private void Create(string cardId, ICardsManager manager, ICardController controller)
-        {
-            CardView cardView = Instantiate(cardId, manager.CardPrefab, manager.Zone);
+            InvestigatorCardView cardView = Instantiate(cardId, manager.CardPrefab, manager.Zone);
             manager.AllCards.Add(cardId, cardView);
             controller.Init(cardView);
         }
 
-        private CardView Instantiate(string cardId, CardView prefab, Transform zone)
+        private InvestigatorCardView Instantiate(string cardId, InvestigatorCardView prefab, Transform zone)
         {
-            CardView cardView = GameObject.Instantiate(prefab, zone);
+            InvestigatorCardView cardView = GameObject.Instantiate(prefab, zone);
             cardView.Init(cardId, imageCards.GetSprite(cardId));
             diContainer.Inject(cardView.Interactable);
             return cardView;

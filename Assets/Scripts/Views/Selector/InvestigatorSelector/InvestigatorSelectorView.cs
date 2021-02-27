@@ -8,10 +8,13 @@ namespace Arkham.Views
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private LeadActivator leadActivator;
+        [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorSelectorMovement selectorMovement;
 
         public bool IsLead => leadActivator.IsLead;
 
         /*******************************************************************/
+        public void MoveTo(Transform transform) => selectorMovement.MoveTo(transform);
+        public void Arrange(Transform transform) => selectorMovement.Arrange(transform);
         public void ActivateLeaderIcon(bool activate) => leadActivator.ActivateLeaderIcon(activate);
     }
 }

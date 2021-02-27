@@ -9,25 +9,37 @@ using Zenject;
 
 namespace Arkham.Presenters
 {
-    public class InvestigatorCardPresenter : CardPresenter, IInvestigatorCardPresenter
+    public class InvestigatorCardPresenter : IInvestigatorCardPresenter
     {
+        [Inject] protected readonly ICardInfoInteractor cardInfoInteractor;
         [Inject] private readonly IInvestigatorSelectorInteractor selectorInteractor;
-        protected override bool SelectionIsFull => selectorInteractor.InvestigatorsSelectedList.Count >= GameData.MAX_INVESTIGATORS;
+        [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
+        private bool SelectionIsFull => selectorInteractor.InvestigatorsSelectedList.Count >= GameData.MAX_INVESTIGATORS;
         private bool SelectionIsNotFull => selectorInteractor.InvestigatorsSelectedList.Count == GameData.MAX_INVESTIGATORS - 1;
-        public List<IInvestigatorCardView> InvestigatorCardsList => CardsList.OfType<IInvestigatorCardView>().ToList();
+        public List<IInvestigatorCardView> InvestigatorCardsList => investigatorCardsManager.CardsList.OfType<IInvestigatorCardView>().ToList();
 
         /*******************************************************************/
-        [Inject]
-        public void InjectDependency([Inject(Id = "InvestigatorsManager")] ICardsManager investigatorCardsManager)
-        {
-            cardsManager = investigatorCardsManager;
-        }
-
-        public override void Init()
+        public void Init()
         {
             selectorInteractor.InvestigatorAdded += ResolveAddVisibility;
             selectorInteractor.InvestigatorRemoved += ResolveRemoveVisibility;
             RefreshAllCardsVisibility();
+        }
+
+        public void RefreshCardVisibility(string cardId) =>
+            investigatorCardsManager.AllCards[cardId].Activate(CheckIsEnable(cardId));
+
+        public void RefreshAllCardsVisibility()
+        {
+            foreach (ICardView cardView in InvestigatorCardsList)
+                cardView.Activate(CheckIsEnable(cardView.Id));
+        }
+
+        private bool CheckIsEnable(string cardId)
+        {
+            if (SelectionIsFull) return false;
+            if (((cardInfoInteractor.GetCardInfo(cardId).Quantity ?? 0) - AmountCardsSelected(cardId)) <= 0) return false;
+            return true;
         }
 
         private void ResolveAddVisibility(string investigatorId)
@@ -42,7 +54,7 @@ namespace Arkham.Presenters
             else RefreshCardVisibility(investigatorId);
         }
 
-        protected override int AmountCardsSelected(string cardId) =>
+        private int AmountCardsSelected(string cardId) =>
             selectorInteractor.InvestigatorsSelectedList.FindAll(i => i == cardId).Count;
     }
 }

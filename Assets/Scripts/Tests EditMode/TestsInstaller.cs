@@ -23,7 +23,6 @@ namespace Tests
             Container.Bind<IFileAdapter>().To<FileAdapter>().AsSingle();
             Container.Bind<IInstantiatorAdapter>().To<NameConventionInstantiator>().AsSingle();
             Container.Bind<IScenarioLoader>().To<ScenarioLoader>().AsSingle();
-            Container.Bind<ICardFactory>().To<CardFactory>().AsSingle();
             Container.Bind<IDataPersistence>().To<DataPersistence>().AsSingle();
         }
     }

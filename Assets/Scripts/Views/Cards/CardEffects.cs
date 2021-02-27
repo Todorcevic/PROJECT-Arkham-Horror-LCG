@@ -21,9 +21,9 @@ namespace Arkham.Views
         [SerializeField, Range(1f, 2f)] private float scaleHoverEffect;
 
         /*******************************************************************/
-        public override void ClickEffect() { }
+        public override void ClickEffect() => audioInteractable.ClickSound();
 
-        public override void DoubleClickEffect() => audioInteractable.ClickSound();
+        public override void DoubleClickEffect() { }
 
         public override void HoverOnEffect()
         {

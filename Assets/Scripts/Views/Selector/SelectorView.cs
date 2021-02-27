@@ -14,7 +14,6 @@ namespace Arkham.Views
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
         [SerializeField, Required, ChildGameObjectsOnly] private ImageStateComponent imageState;
-        [SerializeField, Required, ChildGameObjectsOnly] private SelectorMovement selectorMovement;
         [SerializeField, Required, ChildGameObjectsOnly] private GlowActivator glowActivator;
 
         public string CardInThisSelector { get; private set; }
@@ -24,10 +23,6 @@ namespace Arkham.Views
 
         /*******************************************************************/
         public void Init() => interactable.Init();
-
-        public void MoveTo(Transform transform) => selectorMovement.MoveTo(transform);
-
-        public void Arrange(Transform transform) => selectorMovement.Arrange(transform);
 
         public void SetSelector(string cardId, Sprite cardImage = null)
         {

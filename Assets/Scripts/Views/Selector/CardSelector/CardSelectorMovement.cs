@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Arkham.Components
+namespace Arkham.Views
 {
-    public class SelectorMovement : MonoBehaviour
+    public class CardSelectorMovement : MonoBehaviour
     {
         [SerializeField, Required] private Transform selector;
         [SerializeField, Required] private Transform placeHolder;

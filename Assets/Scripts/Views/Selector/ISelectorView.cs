@@ -10,8 +10,6 @@ namespace Arkham.Views
         InteractableComponent Interactable { get; }
         Transform Transform { get; }
         void Init();
-        void MoveTo(Transform transform);
-        void Arrange(Transform transform);
         void SetSelector(string cardId, Sprite cardImage = null);
         void ActivateGlow(bool activate);
     }

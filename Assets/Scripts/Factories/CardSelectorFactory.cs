@@ -7,7 +7,7 @@ namespace Arkham.Factories
 {
     public class CardSelectorFactory : ICardSelectorFactory
     {
-        //[Inject] private readonly ICardSelectorController investigatorSelectorController;
+        [Inject] private readonly ICardSelectorController investigatorSelectorController;
         [Inject] private readonly ICardSelectorPresenter cardSelectorPresenter;
 
         /*******************************************************************/
@@ -16,7 +16,7 @@ namespace Arkham.Factories
             foreach (ICardSelectorView selectorView in cardSelectorPresenter.Selectors)
             {
                 selectorView.Init();
-                //investigatorSelectorController.Init(selectorView);
+                investigatorSelectorController.Init(selectorView);
             }
 
             cardSelectorPresenter.Init();

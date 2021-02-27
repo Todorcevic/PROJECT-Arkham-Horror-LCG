@@ -13,21 +13,23 @@ namespace Arkham.Config
     {
         [Inject] private readonly IResolutionSet resolutionSetter;
         [Inject] private readonly IDataPersistence repositoriesIO;
-        [Inject] private readonly ICardFactory cardFactory;
+        [Inject] private readonly IInvestigatorCardFactory investigatorCardFactory;
+        [Inject] private readonly IDeckCardFactory deckCardFactory;
         [Inject] private readonly ICampaignFactory campaignFactory;
+        [Inject] private readonly ICardSelectorFactory cardSelectorFactory;
         [Inject] private readonly IInvestigatorSelectorFactory investigatorSelectorFactory;
         [Inject] private readonly IInvestigatorAvatarPresenter investigatorAvatarPresenter;
-        [Inject] private readonly ICardSelectorFactory cardSelectorFactory;
 
         private void Awake()
         {
             resolutionSetter.SettingResolution();
             repositoriesIO.LoadDataCards();
             repositoriesIO.LoadProgress();
-            cardFactory.BuildCards();
+            investigatorCardFactory.BuildInvestigators();
+            deckCardFactory.BuildDeckCards();
             campaignFactory.BuildCampaigns();
-            investigatorSelectorFactory.BuildSelectors();
             cardSelectorFactory.BuildSelectors();
+            investigatorSelectorFactory.BuildSelectors();
             investigatorAvatarPresenter.Init();
             //repositoriesIO.SaveProgress();
         }

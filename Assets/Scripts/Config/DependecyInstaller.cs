@@ -32,6 +32,7 @@ namespace Arkham.Config
             /** Controllers **/
             Container.BindInterfacesTo<CampaignController>().AsSingle();
             Container.BindInterfacesTo<InvestigatorSelectorController>().AsSingle();
+            Container.BindInterfacesTo<CardSelectorController>().AsSingle();
             Container.BindInterfacesTo<InvestigatorCardController>().AsSingle();
             Container.BindInterfacesTo<DeckCardController>().AsSingle();
 
@@ -53,7 +54,8 @@ namespace Arkham.Config
             Container.Bind<ICampaignFactory>().To<CampaignFactory>().AsSingle();
             Container.Bind<IInvestigatorSelectorFactory>().To<InvestigatorSelectorFactory>().AsSingle();
             Container.Bind<ICardSelectorFactory>().To<CardSelectorFactory>().AsSingle();
-            Container.Bind<ICardFactory>().To<CardFactory>().AsSingle();
+            Container.Bind<IInvestigatorCardFactory>().To<InvestigatorCardFactory>().AsSingle();
+            Container.Bind<IDeckCardFactory>().To<DeckCardFactory>().AsSingle();
         }
     }
 }

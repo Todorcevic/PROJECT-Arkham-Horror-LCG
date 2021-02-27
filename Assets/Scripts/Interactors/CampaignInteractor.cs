@@ -15,17 +15,10 @@ namespace Arkham.Interactors
     {
         public event Action<CampaignInfo> CampaignStateChanged;
         [Inject] private readonly ICampaignRepository campaignRepository;
-        [Inject] private readonly ICampaignPresenter campaignPresenter;
         public string CurrentScenario => campaignRepository.CurrentScenario;
         public List<CampaignInfo> CampaignsList => campaignRepository.CampaignsList;
 
         /*******************************************************************/
-        public void InitializeCampaigns()
-        {
-            foreach (CampaignInfo campaign in campaignRepository.CampaignsList)
-                campaignPresenter.SetCampaign(campaign);
-        }
-
         public void ChangeCampaignState(CampaignInfo campaignInfo)
         {
             campaignRepository.CampaignsList.Find(c => c.Id == campaignInfo.Id).State = campaignInfo.State;

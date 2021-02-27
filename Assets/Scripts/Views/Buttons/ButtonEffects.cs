@@ -12,6 +12,7 @@ namespace Arkham.View
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
         [SerializeField, Required] private Image background;
         [SerializeField, Required] private TextMeshProUGUI text;
+        [SerializeField] private TextMeshProUGUI secundaryText;
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
 
         /*******************************************************************/
@@ -43,7 +44,12 @@ namespace Arkham.View
             FillBackground(false);
         }
 
-        private void ChangeTextColor(Color color) => text.DOColor(color, timeHoverAnimation);
+        private void ChangeTextColor(Color color)
+        {
+            text.DOColor(color, timeHoverAnimation);
+            secundaryText?.DOColor(color, timeHoverAnimation);
+        }
+
         private void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, timeHoverAnimation);
     }
 }

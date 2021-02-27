@@ -60,7 +60,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactable: {fileID: 8736390494462685724}
   imageState: {fileID: 5250951900939113371}
-  selectorMovement: {fileID: 6808360681041059510}
   glowActivator: {fileID: 5330237612808224715}
   cardName: {fileID: 4121154858783106769}
   quantity: {fileID: 223955344760844326}
@@ -76,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bca6693a187fe1a4f9b8d7ef03232e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effects: {fileID: 3770890630450608663}
+  effects: {fileID: 5003357575180783972}
 --- !u!114 &5250951900939113371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,9 +99,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167292358315829728}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &1348962347046350789
 GameObject:
@@ -162,19 +161,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c3865e6aa0465447f97d64e1e5b711fd, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: ad248a1691d34f542bb97b4a367849dd, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -337,7 +336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4611740541953575094}
-  - component: {fileID: 3770890630450608663}
+  - component: {fileID: 5003357575180783972}
   m_Layer: 5
   m_Name: Effects
   m_TagString: Untagged
@@ -365,7 +364,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3770890630450608663
+--- !u!114 &5003357575180783972
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -374,13 +373,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3254566675939737074}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da03427808d95db4fa40a5efb992234e, type: 3}
+  m_Script: {fileID: 11500000, guid: 92e65c1ce713bc54c9ad7385c2e07e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToTransform: {fileID: 6920108898983775684}
-  audioInteractable: {fileID: 3161861043085989557}
+  interactableAudio: {fileID: 3161861043085989557}
+  background: {fileID: 4850368526312077242}
+  text: {fileID: 4121154858783106769}
+  secundaryText: {fileID: 223955344760844326}
   timeHoverAnimation: 0.25
-  scaleHoverEffect: 1.1
 --- !u!1 &4147289478210331267
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,7 +614,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.5
+  m_fontSize: 23.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

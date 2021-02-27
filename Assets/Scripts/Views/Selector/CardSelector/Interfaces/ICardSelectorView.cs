@@ -1,8 +1,10 @@
-﻿namespace Arkham.Views
+﻿using UnityEngine;
+
+namespace Arkham.Views
 {
     public interface ICardSelectorView : ISelectorView
     {
-        void ActiveSelector(bool isActive);
+        //void ActiveSelector(bool isActive);
         void SetName(string cardName);
         void SetQuantity(int amount);
     }

@@ -13,6 +13,8 @@ namespace Arkham.Views
     public interface IInvestigatorSelectorView : ISelectorView
     {
         bool IsLead { get; }
+        void MoveTo(Transform transform);
+        void Arrange(Transform transform);
         void ActivateLeaderIcon(bool activate);
     }
 }

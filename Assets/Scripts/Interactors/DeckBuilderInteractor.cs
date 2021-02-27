@@ -21,7 +21,6 @@ namespace Arkham.Interactors
 
         public void AddDeckCard(string deckCardId)
         {
-            if (InvestigatorSelected.Deck == null) InvestigatorSelected.Deck = new List<string>();
             InvestigatorSelected.Deck.Add(deckCardId);
             DeckCardAdded?.Invoke(deckCardId);
         }

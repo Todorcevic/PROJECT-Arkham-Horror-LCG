@@ -14,7 +14,7 @@ namespace Arkham.Controllers
         [Inject] private readonly IDeckBuilderInteractor investigatorsInteractor;
 
         /*******************************************************************/
-        protected override void DoubleClick(ICardView cardView) =>
+        protected override void Click(ICardView cardView) =>
             investigatorsInteractor.AddDeckCard(cardView.Id);
     }
 }

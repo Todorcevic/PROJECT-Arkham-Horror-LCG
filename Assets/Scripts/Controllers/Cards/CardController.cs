@@ -11,9 +11,9 @@ namespace Arkham.Controllers
     {
         public void Init(ICardView cardView)
         {
-            cardView.Interactable.DoubleClicked += () => DoubleClick(cardView);
+            cardView.Interactable.Clicked += () => Click(cardView);
         }
 
-        protected abstract void DoubleClick(ICardView cardView);
+        protected abstract void Click(ICardView cardView);
     }
 }

@@ -9,7 +9,6 @@ namespace Arkham.Interactors
         event Action<CampaignInfo> CampaignStateChanged;
         string CurrentScenario { get; }
         List<CampaignInfo> CampaignsList { get; }
-        void InitializeCampaigns();
         void AddScenarioToPlay(string scenario);
         CampaignInfo GetCampaign(string id);
         void ChangeCampaignState(CampaignInfo campaignInfo);
