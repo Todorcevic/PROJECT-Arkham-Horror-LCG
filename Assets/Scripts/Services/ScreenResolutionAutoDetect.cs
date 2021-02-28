@@ -1,18 +1,13 @@
 ﻿using System;
-using UnityEngine;
-using Arkham.Adapters;
+using Zenject;
 
 namespace Arkham.Services
 {
     public class ScreenResolutionAutoDetect : IResolutionSet
     {
-        private readonly IScreenResolutionAdapter screenAdapter;
+        [Inject] private readonly IScreenResolutionAdapter screenAdapter;
 
-        public ScreenResolutionAutoDetect(IScreenResolutionAdapter screenAdapter)
-        {
-            this.screenAdapter = screenAdapter;
-        }
-
+        /*******************************************************************/
         public void SettingResolution()
         {
             if (Array.Exists(screenAdapter.ResolutionsSupported, r => r.width == 1920 && r.height == 1080))

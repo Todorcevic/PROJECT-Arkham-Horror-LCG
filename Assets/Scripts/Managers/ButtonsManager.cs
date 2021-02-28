@@ -1,53 +1,53 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using Arkham.Components;
-using Arkham.View;
+using Arkham.Views;
 
 namespace Arkham.Managers
 {
     public class ButtonsManager : MonoBehaviour
     {
         [Title("RESOURCES")]
-        [SerializeField, SceneObjectsOnly] private ButtonView currentButton;
-        [SerializeField, ChildGameObjectsOnly] private List<ButtonView> buttons;
+        [SerializeField, SceneObjectsOnly] private ButtonInteractable currentButton;
+        [SerializeField, ChildGameObjectsOnly] private List<ButtonInteractable> buttons;
 
         /*******************************************************************/
         private void Start()
         {
-            foreach (ButtonView button in buttons)
+            foreach (ButtonInteractable button in buttons)
             {
-                button.Interactable.Clicked -= button.Interactable.Effects.ClickEffect;
-                button.Interactable.Clicked += () => Click(button);
-                button.Interactable.HoverOn -= button.Interactable.Effects.HoverOnEffect;
-                button.Interactable.HoverOn += () => MantainHoverOn(button);
-                button.Interactable.HoverOff -= button.Interactable.Effects.HoverOffEffect;
-                button.Interactable.HoverOff += () => MantainHoverOff(button);
+                button.Clicked -= button.ClickEffect;
+                button.DoubleClicked -= button.DoubleClickEffect;
+                button.HoverOn -= button.HoverOnEffect;
+                button.HoverOff -= button.HoverOffEffect;
+                button.Clicked += () => Click(button);
+                button.HoverOn += () => MantainHoverOn(button);
+                button.HoverOff += () => MantainHoverOff(button);
             }
             SelectTab(currentButton);
         }
 
         /*******************************************************************/
-        private void Click(ButtonView button)
+        private void Click(ButtonInteractable button)
         {
             if (currentButton == button) return;
-            button.Interactable.Effects.ClickEffect();
+            button.ClickEffect();
             SelectTab(button);
         }
 
-        private void MantainHoverOn(ButtonView button)
+        private void MantainHoverOn(ButtonInteractable button)
         {
             if (button != currentButton)
-                button.Interactable.Effects.HoverOnEffect();
+                button.HoverOnEffect();
         }
 
-        private void MantainHoverOff(ButtonView button)
+        private void MantainHoverOff(ButtonInteractable button)
         {
             if (button != currentButton)
-                button.Interactable.Effects.HoverOffEffect();
+                button.HoverOffEffect();
         }
 
-        private void SelectTab(ButtonView button)
+        private void SelectTab(ButtonInteractable button)
         {
             currentButton?.HoverDesactivate();
             button?.HoverActivate();

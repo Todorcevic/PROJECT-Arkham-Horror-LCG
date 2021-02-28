@@ -1,371 +1,378 @@
 {
-  "CurrentScenario": "CORE1",
-  "CampaignsList": [
-    {
-      "Id": "CORE",
-      "State": "Open"
-    },
-    {
-      "Id": "TDL",
-      "State": "Lock"
-    },
-    {
-      "Id": "TPC",
-      "State": "Lock"
-    },
-    {
-      "Id": "TFA",
-      "State": "Lock"
-    },
-    {
-      "Id": "TCU",
-      "State": "Lock"
-    },
-    {
-      "Id": "TDE",
-      "State": "Lock"
-    },
-    {
-      "Id": "OS",
-      "State": "Lock"
-    }
-  ],
-  "InvestigatorsList": [
-    {
-      "Id": "98010",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "01001",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [
-        "01009",
-        "01010"
-      ],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "02001",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "03001",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "05001",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "06001",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "04001",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "01004",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "02004",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "99001",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "03004",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "05004",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "05006",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "06004",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "04004",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "03006",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "04244",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "05046",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "05047",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "05048",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "05049",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "01003",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "02003",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "03003",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "05003",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "06003",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "04003",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "98007",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "01002",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "02002",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "03002",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "05002",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "06002",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "04002",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "98013",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "01005",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "02005",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "03005",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "05005",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "06005",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    },
-    {
-      "Id": "04005",
-      "PhysicTrauma": 0,
-      "MentalTrauma": 0,
-      "Xp": 0,
-      "Deck": [],
-      "MandatoryCards": []
-    }
-  ],
-  "InvestigatorsSelectedList": [
-    "01005",
-    "01001",
-    "01002"
-  ]
+    "CurrentScenario": "CORE1",
+    "CampaignsList": [
+        {
+            "Id": "CORE",
+            "State": "Open",
+            "FirstScenarioId": "CORE1"
+        },
+        {
+            "Id": "TDL",
+            "State": "Lock",
+            "FirstScenarioId": "TDL1"
+        },
+        {
+            "Id": "TPC",
+            "State": "Lock",
+            "FirstScenarioId": "TPC1"
+        },
+        {
+            "Id": "TFA",
+            "State": "Lock",
+            "FirstScenarioId": "TFA1"
+        },
+        {
+            "Id": "TCU",
+            "State": "Lock",
+            "FirstScenarioId": "TCU1"
+        },
+        {
+            "Id": "TDE",
+            "State": "Lock",
+            "FirstScenarioId": "TDE1"
+        },
+        {
+            "Id": "OS",
+            "State": "Lock",
+            "FirstScenarioId": "RCORE"
+        }
+    ],
+    "InvestigatorsList": [
+        {
+            "Id": "98010",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "01001",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [
+                "01009",
+                "01010"
+            ],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "02001",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "03001",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "05001",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "06001",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "04001",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "01004",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "02004",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "99001",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "03004",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "05004",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "05006",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "06004",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "04004",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "03006",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "04244",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "05046",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "05047",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "05048",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "05049",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "01003",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "02003",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "03003",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "05003",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "06003",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "04003",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "98007",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "01002",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "02002",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "03002",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "05002",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "06002",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "04002",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "98013",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "01005",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "02005",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "03005",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "05005",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "06005",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        },
+        {
+            "Id": "04005",
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
+            "Deck": [],
+            "MandatoryCards": []
+        }
+    ],
+    "InvestigatorsSelectedList": [
+        "01005",
+        "01001",
+        "01002"
+    ]
 }

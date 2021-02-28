@@ -2,6 +2,7 @@
 using Arkham.Controllers;
 using Arkham.Managers;
 using Arkham.Models;
+using Arkham.Presenters;
 using Arkham.Repositories;
 using Arkham.Views;
 using System.Linq;
@@ -13,10 +14,11 @@ namespace Arkham.Factories
     public class DeckCardFactory : IDeckCardFactory
     {
         [Inject] private readonly DiContainer diContainer;
-        [Inject] private readonly IImagesCard imageCards;
+        [Inject] private readonly IImageCardsManager imageCards;
         [Inject] private readonly ICardInfoRepository infoRepository;
         [Inject] private readonly IDeckCardsManager deckCardsManager;
         [Inject] private readonly IDeckCardController deckCardController;
+        [Inject] private readonly IDeckCardPresenter deckCardPresenter;
 
         /*******************************************************************/
         public void BuildDeckCards()
@@ -31,21 +33,17 @@ namespace Arkham.Factories
 
             foreach (CardInfo card in allDeckCards)
                 Create(card.Code, deckCardsManager, deckCardController);
+
+            deckCardPresenter.Init();
         }
 
         private void Create(string cardId, IDeckCardsManager manager, ICardController controller)
         {
-            DeckCardView cardView = Instantiate(cardId, manager.CardPrefab, manager.Zone);
+            var args = new object[] { cardId, imageCards.GetSprite(cardId) };
+            DeckCardView cardView =
+                diContainer.InstantiatePrefabForComponent<DeckCardView>(manager.CardPrefab, manager.Zone, args);
             manager.AllCards.Add(cardId, cardView);
             controller.Init(cardView);
-        }
-
-        private DeckCardView Instantiate(string cardId, DeckCardView prefab, Transform zone)
-        {
-            DeckCardView cardView = GameObject.Instantiate(prefab, zone);
-            cardView.Init(cardId, imageCards.GetSprite(cardId));
-            diContainer.Inject(cardView.Interactable);
-            return cardView;
         }
     }
 }

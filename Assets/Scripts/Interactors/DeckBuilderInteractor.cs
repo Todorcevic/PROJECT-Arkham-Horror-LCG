@@ -1,8 +1,7 @@
 ﻿using Arkham.Models;
 using Arkham.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+using System.Linq;
 using Zenject;
 
 namespace Arkham.Interactors
@@ -14,6 +13,10 @@ namespace Arkham.Interactors
         public event Action<string> DeckCardAdded;
         public event Action<string> DeckCardRemoved;
         private InvestigatorInfo InvestigatorSelected => GetInvestigatorById(investigatorSelectorInteractor.InvestigatorSelected);
+        public int DeckSize => InvestigatorSelected.DeckBuilding.DeckSize;
+        public int CardsAmountSelected => InvestigatorSelected.Deck.Count;
+        public bool SelectionIsFull => CardsAmountSelected >= DeckSize;
+        public bool SelectionIsNotFull => CardsAmountSelected == DeckSize - 1;
 
         /*******************************************************************/
         public InvestigatorInfo GetInvestigatorById(string investigatorId) =>
@@ -30,5 +33,8 @@ namespace Arkham.Interactors
             InvestigatorSelected.Deck.Remove(deckCardId);
             DeckCardRemoved?.Invoke(deckCardId);
         }
+
+        public int AmountSelectedOfThisCard(string idCard) =>
+            investigatorRepository.InvestigatorsList.Select(i => i.Deck.FindAll(b => b == idCard).Count).Sum();
     }
 }

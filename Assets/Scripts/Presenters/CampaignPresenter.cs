@@ -2,20 +2,22 @@
 using Arkham.Models;
 using Arkham.ScriptableObjects;
 using Arkham.Views;
-using System.Collections.Generic;
+using System.Linq;
 using Zenject;
 using Arkham.Interactors;
+using System.Collections;
 
 namespace Arkham.Presenters
 {
-    public class CampaignPresenter : ICampaignPresenter
+    public class CampaignPresenter : ICampaignPresenter, IInitializablePresenter
     {
         [Inject] private readonly ICampaignsManager campaignsManager;
         [Inject] private readonly ICampaignInteractor campaignInteractor;
-        public List<ICampaignView> Campaigns => campaignsManager.Campaigns;
+        IEnumerable IInitializablePresenter.interactableViews =>
+            campaignsManager.Campaigns.OfType<IInteractableView>();
 
         /*******************************************************************/
-        public void Init()
+        void IInitializablePresenter.Init()
         {
             campaignInteractor.CampaignStateChanged += SetCampaign;
             InitializeCampaigns();
@@ -26,6 +28,7 @@ namespace Arkham.Presenters
             ICampaignState state = campaignsManager.GetCampaignState(campaignInfo.State);
             ICampaignView campaign = campaignsManager.GetCampaign(campaignInfo.Id);
             state.ExecuteState(campaign);
+            campaignInfo.IsOpen = state.IsOpen;
         }
 
         private void InitializeCampaigns()

@@ -1,29 +1,28 @@
 ﻿using Arkham.Interactors;
 using Arkham.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Zenject;
 
 namespace Arkham.Controllers
 {
-    public class CampaignController : ICampaignController
+    public class CampaignController : IInitializableController
     {
         [Inject] private readonly ICampaignInteractor campaignInteractor;
 
         /*******************************************************************/
-        public void Init(ICampaignView campaignView)
+        void IInitializableController.Init(IInteractableView campaignView)
         {
+            campaignView.Interactable.Clicked -= campaignView.Interactable.ClickEffect;
+            campaignView.Interactable.DoubleClicked -= campaignView.Interactable.DoubleClickEffect;
             campaignView.Interactable.Clicked += () => Click(campaignView);
+            campaignView.Interactable.DoubleClicked += () => Click(campaignView);
         }
 
-        private void Click(ICampaignView campaignView)
+        private void Click(IInteractableView campaignView)
         {
-            if (!campaignView.IsOpen) return;
-            campaignInteractor.AddScenarioToPlay(campaignView.FirstScenarioId);
-
+            var campaign = campaignInteractor.GetCampaign(campaignView.Id);
+            if (!campaign.IsOpen) return;
+            campaignView.Interactable.ClickEffect();
+            campaignInteractor.AddScenarioToPlay(campaign.FirstScenarioId);
         }
     }
 }

@@ -11,6 +11,6 @@ namespace Arkham.Interactors
         List<CampaignInfo> CampaignsList { get; }
         void AddScenarioToPlay(string scenario);
         CampaignInfo GetCampaign(string id);
-        void ChangeCampaignState(CampaignInfo campaignInfo);
+        void ChangeCampaignState(string campaignId, string state, bool isOpen);
     }
 }

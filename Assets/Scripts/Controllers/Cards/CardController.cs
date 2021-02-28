@@ -1,9 +1,4 @@
 ﻿using Arkham.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Arkham.Controllers
 {
@@ -12,6 +7,7 @@ namespace Arkham.Controllers
         public void Init(ICardView cardView)
         {
             cardView.Interactable.Clicked += () => Click(cardView);
+            cardView.Interactable.DoubleClicked += () => Click(cardView);
         }
 
         protected abstract void Click(ICardView cardView);

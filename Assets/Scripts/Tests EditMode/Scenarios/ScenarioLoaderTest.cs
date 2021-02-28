@@ -4,7 +4,6 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using NSubstitute;
-using Arkham.Adapters;
 using Arkham.Scenarios;
 using Arkham.Config;
 using System.Runtime.Remoting;

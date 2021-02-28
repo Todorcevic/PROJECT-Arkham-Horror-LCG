@@ -1,5 +1,4 @@
-﻿using Arkham.Adapters;
-using Arkham.Config;
+﻿using Arkham.Config;
 using Arkham.Factories;
 using Arkham.Interactors;
 using Arkham.Repositories;

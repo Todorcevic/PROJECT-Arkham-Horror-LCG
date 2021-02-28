@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using Arkham.Components;
+using Arkham.Views;
 
 namespace Arkham.Managers
 {

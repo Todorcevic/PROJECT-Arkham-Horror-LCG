@@ -15,10 +15,9 @@ namespace Arkham.Config
         [Inject] private readonly IDataPersistence repositoriesIO;
         [Inject] private readonly IInvestigatorCardFactory investigatorCardFactory;
         [Inject] private readonly IDeckCardFactory deckCardFactory;
-        [Inject] private readonly ICampaignFactory campaignFactory;
-        [Inject] private readonly ICardSelectorFactory cardSelectorFactory;
-        [Inject] private readonly IInvestigatorSelectorFactory investigatorSelectorFactory;
+        [Inject] private readonly IAbstractFactory abstractFactory;
         [Inject] private readonly IInvestigatorAvatarPresenter investigatorAvatarPresenter;
+        [Inject] private readonly ICardsQuantityPresenter ICardsQuantityPresenter;
 
         private void Awake()
         {
@@ -27,10 +26,9 @@ namespace Arkham.Config
             repositoriesIO.LoadProgress();
             investigatorCardFactory.BuildInvestigators();
             deckCardFactory.BuildDeckCards();
-            campaignFactory.BuildCampaigns();
-            cardSelectorFactory.BuildSelectors();
-            investigatorSelectorFactory.BuildSelectors();
+            abstractFactory.Init();
             investigatorAvatarPresenter.Init();
+            ICardsQuantityPresenter.Init();
             //repositoriesIO.SaveProgress();
         }
 

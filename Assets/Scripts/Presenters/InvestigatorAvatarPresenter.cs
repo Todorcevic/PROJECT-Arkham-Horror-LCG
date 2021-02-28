@@ -9,7 +9,7 @@ namespace Arkham.Presenters
     {
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
         [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
-        [Inject(Id = "InvestigatorAvatar")] private readonly IImageStateComponent imagesConfigurator;
+        [Inject(Id = "InvestigatorAvatar")] private readonly IImageConfigurator imagesConfigurator;
 
         /*******************************************************************/
         public void Init()
@@ -17,7 +17,6 @@ namespace Arkham.Presenters
             investigatorSelectorInteractor.InvestigatorSelectedChanged += SelectInvetigator;
             SelectInvetigator(investigatorSelectorInteractor.InvestigatorSelected);
         }
-
 
         private void SelectInvetigator(string investigatorId)
         {

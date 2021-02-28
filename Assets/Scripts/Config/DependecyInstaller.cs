@@ -1,5 +1,4 @@
 ﻿using Zenject;
-using Arkham.Adapters;
 using Arkham.Repositories;
 using Arkham.Services;
 using Arkham.Scenarios;
@@ -7,8 +6,7 @@ using Arkham.Factories;
 using Arkham.Controllers;
 using Arkham.Presenters;
 using Arkham.Interactors;
-using Arkham.Managers;
-using Arkham.Models;
+using Arkham.Views;
 
 namespace Arkham.Config
 {
@@ -41,7 +39,9 @@ namespace Arkham.Config
             Container.BindInterfacesTo<InvestigatorSelectorPresenter>().AsSingle();
             Container.BindInterfacesTo<CardSelectorPresenter>().AsSingle();
             Container.BindInterfacesTo<InvestigatorCardPresenter>().AsSingle();
+            Container.BindInterfacesTo<DeckCardPresenter>().AsSingle();
             Container.BindInterfacesTo<InvestigatorAvatarPresenter>().AsSingle();
+            Container.BindInterfacesTo<CardsQuantityPresenter>().AsSingle();
 
             /** Interactors **/
             Container.BindInterfacesTo<CampaignInteractor>().AsSingle();
@@ -51,9 +51,7 @@ namespace Arkham.Config
             Container.BindInterfacesTo<InvestigatorInfoInteractor>().AsSingle();
 
             /** Factories **/
-            Container.Bind<ICampaignFactory>().To<CampaignFactory>().AsSingle();
-            Container.Bind<IInvestigatorSelectorFactory>().To<InvestigatorSelectorFactory>().AsSingle();
-            Container.Bind<ICardSelectorFactory>().To<CardSelectorFactory>().AsSingle();
+            Container.Bind<IAbstractFactory>().To<AbstractFactory>().AsSingle();
             Container.Bind<IInvestigatorCardFactory>().To<InvestigatorCardFactory>().AsSingle();
             Container.Bind<IDeckCardFactory>().To<DeckCardFactory>().AsSingle();
         }

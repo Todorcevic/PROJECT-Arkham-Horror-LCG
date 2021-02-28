@@ -1,6 +1,7 @@
 ﻿using Arkham.Components;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Zenject;
 
 namespace Arkham.Views
 {
@@ -10,23 +11,24 @@ namespace Arkham.Views
 
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
-        [SerializeField, Required, ChildGameObjectsOnly] private ImageStateComponent imageState;
+        [SerializeField, Required, ChildGameObjectsOnly] private ImageConfigurator imageConfigurator;
 
         public string Id => id;
-        public Sprite GetCardImage => imageState.GetSprite;
+        public Sprite GetCardImage => imageConfigurator.GetSprite;
         public Transform Transform => transform;
         public InteractableComponent Interactable => interactable;
 
         /*******************************************************************/
+        [Inject]
         public void Init(string id, Sprite sprite)
         {
             name = this.id = id;
-            imageState.ChangeImage(sprite);
+            imageConfigurator.ChangeImage(sprite);
             interactable.Init();
         }
 
-        public void Activate(bool isEnable) => imageState.Activate(isEnable);
+        public void Activate(bool isEnable) => imageConfigurator.Activate(isEnable);
 
-        public void Show(bool isShow) => imageState.Show(isShow);
+        public void Show(bool isShow) => imageConfigurator.Show(isShow);
     }
 }

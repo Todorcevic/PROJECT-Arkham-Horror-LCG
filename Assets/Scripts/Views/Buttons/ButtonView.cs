@@ -1,30 +1,19 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
+﻿using Arkham.Components;
 using Sirenix.OdinInspector;
-using Arkham.Components;
+using UnityEngine;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class ButtonView : MonoBehaviour
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
-        [SerializeField, Required, ChildGameObjectsOnly] private ButtonEffects buttonEffects;
-
-        [Title("CLICK EVENT")]
-        [SerializeField] protected UnityEvent clickAction;
-
         public InteractableComponent Interactable => interactable;
 
         /*******************************************************************/
         private void Start()
         {
             interactable.Init();
-            interactable.Clicked += () => clickAction?.Invoke();
         }
-
-        /*******************************************************************/
-        public void HoverActivate() => buttonEffects.HoverActivate();
-        public void HoverDesactivate() => buttonEffects.HoverDesactivate();
     }
 }

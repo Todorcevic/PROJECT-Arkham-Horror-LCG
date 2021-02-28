@@ -1,26 +1,26 @@
 ﻿using Arkham.Components;
 using Arkham.Interactors;
 using Arkham.Managers;
-using Arkham.Models;
 using Arkham.Views;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Collections;
+using System.Linq;
 using Zenject;
 
 namespace Arkham.Presenters
 {
-    public class CardSelectorPresenter : ICardSelectorPresenter
+    public class CardSelectorPresenter : IInitializablePresenter
     {
         [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
         [Inject] private readonly IDeckBuilderInteractor deckBuilderInteractor;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
         [Inject] private readonly IInvestigatorInfoInteractor investigatorInfoInteractor;
         [Inject] private readonly ICardInfoInteractor cardInfoInteractor;
-        [Inject] private readonly IImagesCard imageCards;
-        public List<ICardSelectorView> Selectors => cardSelectorsManager.Selectors;
+        [Inject] private readonly IImageCardsManager imageCards;
+        IEnumerable IInitializablePresenter.interactableViews =>
+            cardSelectorsManager.Selectors.OfType<IInteractableView>();
 
         /*******************************************************************/
-        public void Init()
+        void IInitializablePresenter.Init()
         {
             deckBuilderInteractor.DeckCardAdded += SetCardInSelector;
             deckBuilderInteractor.DeckCardRemoved += RemoveCardInSelector;
@@ -29,49 +29,36 @@ namespace Arkham.Presenters
 
         private void SetCardInSelector(string cardId)
         {
-            int quantity = investigatorInfoInteractor.GetThisCardAmountInDeck(investigatorSelectorInteractor.InvestigatorSelected, cardId);
             ICardSelectorView selector = cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardId);
-            if (selector.IsEmpty)
-            {
-                selector.SetSelector(cardId, imageCards.GetSprite(cardId));
-                ActivateSelector(selector);
-                selector.SetName(cardInfoInteractor.GetCardInfo(cardId).Real_name);
-            }
-            selector.SetQuantity(quantity);
+            if (selector.IsEmpty) ActivateSelector(selector, cardId);
+            _ = SetQuantityAndGetIt(selector, cardId);
         }
 
         private void RemoveCardInSelector(string cardId)
         {
             ICardSelectorView selector = cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardId);
-            int quantity = investigatorInfoInteractor.GetThisCardAmountInDeck(investigatorSelectorInteractor.InvestigatorSelected, cardId);
-            if (quantity <= 0)
-            {
-                selector.SetSelector(null);
-                DesactivateSelector(selector);
-            }
-            selector.SetQuantity(quantity);
+            if (SetQuantityAndGetIt(selector, cardId) <= 0) cardSelectorsManager.DesactivateSelector(selector);
         }
 
-        private void ActivateSelector(ICardSelectorView selector) =>
+        private void ActivateSelector(ICardSelectorView selector, string cardId)
+        {
+            selector.SetSelector(cardId, imageCards.GetSprite(cardId));
+            selector.SetName(cardInfoInteractor.GetCardInfo(cardId).Real_name);
             selector.Transform.SetParent(cardSelectorsManager.Zone);
+        }
 
-        private void DesactivateSelector(ICardSelectorView selector) =>
-            selector.Transform.SetParent(cardSelectorsManager.PlaceHolder);
+        private int SetQuantityAndGetIt(ICardSelectorView selector, string cardId)
+        {
+            int quantity = investigatorInfoInteractor.GetThisCardAmountInDeck(investigatorSelectorInteractor.InvestigatorSelected, cardId);
+            selector.SetQuantity(quantity);
+            return quantity;
+        }
 
         private void ShowAllCards(string investigatorId)
         {
-            CleanAllSelectors();
+            cardSelectorsManager.CleanAllSelectors();
             foreach (string cardId in investigatorInfoInteractor.GetFullDeck(investigatorId))
                 SetCardInSelector(cardId);
-        }
-
-        private void CleanAllSelectors()
-        {
-            foreach (ICardSelectorView selector in cardSelectorsManager.GetAllFilledSelectors())
-            {
-                selector.SetSelector(null);
-                DesactivateSelector(selector);
-            }
         }
     }
 }

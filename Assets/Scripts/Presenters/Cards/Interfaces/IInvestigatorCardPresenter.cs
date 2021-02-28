@@ -9,9 +9,6 @@ namespace Arkham.Presenters
 {
     public interface IInvestigatorCardPresenter
     {
-        List<IInvestigatorCardView> InvestigatorCardsList { get; }
         void Init();
-        void RefreshCardVisibility(string cardId);
-        void RefreshAllCardsVisibility();
     }
 }

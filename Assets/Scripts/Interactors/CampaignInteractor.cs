@@ -1,12 +1,7 @@
 ﻿using Arkham.Models;
-using Arkham.Presenters;
 using Arkham.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using Zenject;
 
 namespace Arkham.Interactors
@@ -19,14 +14,16 @@ namespace Arkham.Interactors
         public List<CampaignInfo> CampaignsList => campaignRepository.CampaignsList;
 
         /*******************************************************************/
-        public void ChangeCampaignState(CampaignInfo campaignInfo)
+        public void ChangeCampaignState(string campaignId, string state, bool isOpen)
         {
-            campaignRepository.CampaignsList.Find(c => c.Id == campaignInfo.Id).State = campaignInfo.State;
-            CampaignStateChanged?.Invoke(campaignInfo);
+            CampaignInfo campaign = GetCampaign(campaignId);
+            campaign.State = state;
+            campaign.IsOpen = isOpen;
+            CampaignStateChanged?.Invoke(campaign);
         }
 
         public void AddScenarioToPlay(string scenario) => campaignRepository.CurrentScenario = scenario;
 
-        public CampaignInfo GetCampaign(string id) => campaignRepository.CampaignsList.Find(campaign => campaign.Id == id);
+        public CampaignInfo GetCampaign(string campaignId) => campaignRepository.CampaignsList.Find(campaign => campaign.Id == campaignId);
     }
 }

@@ -14,6 +14,8 @@ namespace Arkham.Interactors
         List<string> InvestigatorsSelectedList { get; }
         string InvestigatorSelected { get; }
         string LeadInvestigator { get; }
+        bool SelectionIsFull { get; }
+        bool SelectionIsNotFull { get; }
         void SelectInvestigator(string investigatorId);
         void AddInvestigator(string investigatorId);
         void RemoveInvestigator(string investigatorId);

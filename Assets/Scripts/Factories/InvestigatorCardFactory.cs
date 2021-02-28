@@ -8,21 +8,17 @@ using Arkham.Presenters;
 using Arkham.Repositories;
 using Arkham.Services;
 using Arkham.Views;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
 namespace Arkham.Factories
 {
-    public class InvestigatorCardFactory: IInvestigatorCardFactory
+    public class InvestigatorCardFactory : IInvestigatorCardFactory
     {
         [Inject] private readonly DiContainer diContainer;
         [Inject] private readonly IInstantiatorAdapter instantiator;
-        [Inject] private readonly IImagesCard imageCards;
+        [Inject] private readonly IImageCardsManager imageCards;
         [Inject] private readonly ICardInfoRepository infoRepository;
         [Inject] private readonly IDeckBuilderInteractor investigatorRepository;
         [Inject] private readonly IInvestigatorCardController investigatorCardController;
@@ -53,17 +49,11 @@ namespace Arkham.Factories
 
         private void Create(string cardId, IInvestigatorCardsManager manager, ICardController controller)
         {
-            InvestigatorCardView cardView = Instantiate(cardId, manager.CardPrefab, manager.Zone);
+            var args = new object[] { cardId, imageCards.GetSprite(cardId) };
+            InvestigatorCardView cardView =
+                diContainer.InstantiatePrefabForComponent<InvestigatorCardView>(manager.CardPrefab, manager.Zone, args);
             manager.AllCards.Add(cardId, cardView);
             controller.Init(cardView);
-        }
-
-        private InvestigatorCardView Instantiate(string cardId, InvestigatorCardView prefab, Transform zone)
-        {
-            InvestigatorCardView cardView = GameObject.Instantiate(prefab, zone);
-            cardView.Init(cardId, imageCards.GetSprite(cardId));
-            diContainer.Inject(cardView.Interactable);
-            return cardView;
         }
     }
 }

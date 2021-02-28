@@ -17,6 +17,8 @@ namespace Arkham.Interactors
         public event Action<string> InvestigatorRemoved;
         public string InvestigatorSelected { get; private set; }
         public string LeadInvestigator => investigatorSelectorRepository.InvestigatorsSelectedList.FirstOrDefault();
+        public bool SelectionIsFull => InvestigatorsSelectedList.Count >= GameData.MAX_INVESTIGATORS;
+        public bool SelectionIsNotFull => InvestigatorsSelectedList.Count == GameData.MAX_INVESTIGATORS - 1;
         public List<string> InvestigatorsSelectedList => investigatorSelectorRepository.InvestigatorsSelectedList;
 
         /*******************************************************************/

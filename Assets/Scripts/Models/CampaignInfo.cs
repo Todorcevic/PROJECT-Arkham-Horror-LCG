@@ -1,8 +1,13 @@
-﻿namespace Arkham.Models
+﻿using System.Runtime.Serialization;
+
+namespace Arkham.Models
 {
+    [DataContract]
     public class CampaignInfo
     {
-        public string Id { get; set; }
-        public string State { get; set; }
+        [DataMember] public string Id { get; set; }
+        [DataMember] public string State { get; set; }
+        public bool IsOpen { get; set; }
+        public string FirstScenarioId { get; set; }
     }
 }
