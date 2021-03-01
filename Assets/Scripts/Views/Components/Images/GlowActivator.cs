@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Arkham.Components
+namespace Arkham.Views
 {
     public class GlowActivator : MonoBehaviour
     {

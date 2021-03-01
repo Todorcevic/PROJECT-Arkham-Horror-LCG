@@ -3,15 +3,23 @@ using Arkham.Models;
 using Arkham.Config;
 using Arkham.Repositories;
 using Zenject;
+using UnityEngine;
 
 namespace Arkham.Services
 {
-    public class DataPersistence : IDataPersistence
+    public class DataPersistence : IDataPersistence, IInitializable
     {
         [Inject] private readonly GameFiles gameFiles;
         [Inject] private readonly IRepository repository;
         [Inject] private readonly ISerializer serializer;
         [Inject] private readonly IFileAdapter fileAdapter;
+
+        /*******************************************************************/
+        void IInitializable.Initialize()
+        {
+            LoadDataCards();
+            LoadProgress();
+        }
 
         /*******************************************************************/
         public void LoadDataCards() =>

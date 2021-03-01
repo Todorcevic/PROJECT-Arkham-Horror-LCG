@@ -9,11 +9,19 @@ using Zenject;
 
 namespace Arkham.Presenters
 {
-    public class InvestigatorCardPresenter : IInvestigatorCardPresenter
+    public class InvestigatorCardPresenter : IInitializable
     {
         [Inject] protected readonly ICardInfoInteractor cardInfoInteractor;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
-        [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
+        [Inject(Id = "InvestigatorCardsManager")] private readonly ICardsManager investigatorCardsManager;
+
+        /*******************************************************************/
+        void IInitializable.Initialize()
+        {
+            investigatorSelectorInteractor.InvestigatorAdded += ResolveAddVisibility;
+            investigatorSelectorInteractor.InvestigatorRemoved += ResolveRemoveVisibility;
+            RefreshAllCardsVisibility();
+        }
 
         /*******************************************************************/
         public void Init()
@@ -53,5 +61,7 @@ namespace Arkham.Presenters
 
         private int AmountCardsSelected(string cardId) =>
             investigatorSelectorInteractor.InvestigatorsSelectedList.FindAll(i => i == cardId).Count;
+
+
     }
 }

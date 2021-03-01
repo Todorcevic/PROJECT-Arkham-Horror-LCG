@@ -1,25 +1,21 @@
 ﻿using Arkham.Interactors;
 using Arkham.Managers;
 using Arkham.Views;
-using System.Collections;
-using System.Linq;
 using UnityEngine;
 using Zenject;
 
 namespace Arkham.Presenters
 {
-    public class InvestigatorSelectorPresenter : IInitializablePresenter
+    public class InvestigatorSelectorPresenter : IInitializable
     {
         private string investigatorSelected;
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
-        [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
+        [Inject(Id = "InvestigatorCardsManager")] private readonly ICardsManager investigatorCardsManager;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
         private string LeadInvestigator => investigatorSelectorInteractor.LeadInvestigator;
-        IEnumerable IInitializablePresenter.interactableViews =>
-            investigatorSelectorsManager.Selectors.OfType<IInteractableView>();
 
         /*******************************************************************/
-        void IInitializablePresenter.Init()
+        void IInitializable.Initialize()
         {
             investigatorSelectorInteractor.InvestigatorSelectedChanged += SelectInvestigator;
             investigatorSelectorInteractor.InvestigatorAdded += AddInvestigator;
@@ -28,6 +24,7 @@ namespace Arkham.Presenters
             investigatorSelectorInteractor.SelectInvestigator(LeadInvestigator);
         }
 
+        /*******************************************************************/
         private void InitializeSelectors()
         {
             foreach (string investigatorId in investigatorSelectorInteractor.InvestigatorsSelectedList)

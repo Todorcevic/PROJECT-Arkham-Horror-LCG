@@ -2,13 +2,11 @@
 using Arkham.Interactors;
 using Arkham.Managers;
 using Arkham.Views;
-using System.Collections;
-using System.Linq;
 using Zenject;
 
 namespace Arkham.Presenters
 {
-    public class CardSelectorPresenter : IInitializablePresenter
+    public class CardSelectorPresenter : IInitializable
     {
         [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
         [Inject] private readonly IDeckBuilderInteractor deckBuilderInteractor;
@@ -16,17 +14,16 @@ namespace Arkham.Presenters
         [Inject] private readonly IInvestigatorInfoInteractor investigatorInfoInteractor;
         [Inject] private readonly ICardInfoInteractor cardInfoInteractor;
         [Inject] private readonly IImageCardsManager imageCards;
-        IEnumerable IInitializablePresenter.interactableViews =>
-            cardSelectorsManager.Selectors.OfType<IInteractableView>();
 
         /*******************************************************************/
-        void IInitializablePresenter.Init()
+        void IInitializable.Initialize()
         {
             deckBuilderInteractor.DeckCardAdded += SetCardInSelector;
             deckBuilderInteractor.DeckCardRemoved += RemoveCardInSelector;
             investigatorSelectorInteractor.InvestigatorSelectedChanged += ShowAllCards;
         }
 
+        /*******************************************************************/
         private void SetCardInSelector(string cardId)
         {
             ICardSelectorView selector = cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardId);

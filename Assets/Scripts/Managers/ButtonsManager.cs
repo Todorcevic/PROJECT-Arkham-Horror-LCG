@@ -2,17 +2,19 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using Arkham.Views;
+using Zenject;
 
 namespace Arkham.Managers
 {
-    public class ButtonsManager : MonoBehaviour
+    public class ButtonsManager : MonoBehaviour, IInitializable
     {
         [Title("RESOURCES")]
         [SerializeField, SceneObjectsOnly] private ButtonInteractable currentButton;
         [SerializeField, ChildGameObjectsOnly] private List<ButtonInteractable> buttons;
 
         /*******************************************************************/
-        private void Start()
+
+        void IInitializable.Initialize()
         {
             foreach (ButtonInteractable button in buttons)
             {

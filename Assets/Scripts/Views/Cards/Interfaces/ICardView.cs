@@ -9,7 +9,6 @@ namespace Arkham.Views
         Transform Transform { get; }
         InteractableComponent Interactable { get; }
         Sprite GetCardImage { get; }
-        void Init(string id, Sprite sprite);
         void Activate(bool isEnable);
         void Show(bool isShow);
     }

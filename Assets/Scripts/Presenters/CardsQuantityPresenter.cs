@@ -4,7 +4,7 @@ using Arkham.Interactors;
 
 namespace Arkham.Presenters
 {
-    public class CardsQuantityPresenter : ICardsQuantityPresenter
+    public class CardsQuantityPresenter : IInitializable
     {
         [Inject] private readonly IDeckBuilderInteractor deckBuilderInteractor;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
@@ -12,7 +12,7 @@ namespace Arkham.Presenters
         [Inject(Id = "DeckSize")] private readonly TextMeshProUGUI deckSizeText;
 
         /*******************************************************************/
-        public void Init()
+        void IInitializable.Initialize()
         {
             deckBuilderInteractor.DeckCardAdded += ChangeText;
             deckBuilderInteractor.DeckCardRemoved += ChangeText;
@@ -20,6 +20,7 @@ namespace Arkham.Presenters
             ChangeText(null);
         }
 
+        /*******************************************************************/
         private void ChangeText(string _)
         {
             cardsAmountText.text = deckBuilderInteractor.CardsAmountSelected.ToString();

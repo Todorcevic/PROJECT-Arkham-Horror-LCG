@@ -20,11 +20,10 @@ namespace Arkham.Views
 
         /*******************************************************************/
         [Inject]
-        public void Init(string id, Sprite sprite)
+        private void Init(string id, Sprite sprite)
         {
             name = this.id = id;
             imageConfigurator.ChangeImage(sprite);
-            interactable.Init();
         }
 
         public void Activate(bool isEnable) => imageConfigurator.Activate(isEnable);

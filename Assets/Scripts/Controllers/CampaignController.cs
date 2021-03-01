@@ -1,15 +1,23 @@
 ﻿using Arkham.Interactors;
+using Arkham.Managers;
 using Arkham.Views;
 using Zenject;
 
 namespace Arkham.Controllers
 {
-    public class CampaignController : IInitializableController
+    public class CampaignController : IInitializable
     {
+        [Inject] private readonly ICampaignsManager campaignsManager;
         [Inject] private readonly ICampaignInteractor campaignInteractor;
 
         /*******************************************************************/
-        void IInitializableController.Init(IInteractableView campaignView)
+        void IInitializable.Initialize()
+        {
+            foreach (IInteractableView interactableView in campaignsManager.Campaigns)
+                Suscribe(interactableView);
+        }
+
+        private void Suscribe(IInteractableView campaignView)
         {
             campaignView.Interactable.Clicked -= campaignView.Interactable.ClickEffect;
             campaignView.Interactable.DoubleClicked -= campaignView.Interactable.DoubleClickEffect;
@@ -24,5 +32,7 @@ namespace Arkham.Controllers
             campaignView.Interactable.ClickEffect();
             campaignInteractor.AddScenarioToPlay(campaign.FirstScenarioId);
         }
+
+
     }
 }

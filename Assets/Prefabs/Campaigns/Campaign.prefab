@@ -430,7 +430,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: x
-  firstScenarioId: x
   interactable: {fileID: 2422650025459318338}
   imageConfigurator: {fileID: 3868054859199124096}
 --- !u!114 &2422650025459318338
@@ -484,6 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _components:
   - {fileID: 5919814810207110816}
+  - {fileID: 2422650025459318338}
   _identifier: 
   _useSceneContext: 0
   _context: {fileID: 0}

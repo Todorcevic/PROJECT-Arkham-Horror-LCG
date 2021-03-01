@@ -10,8 +10,6 @@ namespace Arkham.Views
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI quantity;
 
         /*******************************************************************/
-        //public void ActiveSelector(bool isActive) => gameObject.SetActive(isActive);
-
         public void SetName(string cardName) => this.cardName.text = cardName;
 
         public void SetQuantity(int amount) => quantity.text = (amount <= 1) ? string.Empty : "x" + amount.ToString();

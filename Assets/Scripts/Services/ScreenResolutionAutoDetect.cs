@@ -1,11 +1,15 @@
 ﻿using System;
+using UnityEngine;
 using Zenject;
 
 namespace Arkham.Services
 {
-    public class ScreenResolutionAutoDetect : IResolutionSet
+    public class ScreenResolutionAutoDetect : IResolutionSet, IInitializable
     {
         [Inject] private readonly IScreenResolutionAdapter screenAdapter;
+
+        /*******************************************************************/
+        void IInitializable.Initialize() => SettingResolution();
 
         /*******************************************************************/
         public void SettingResolution()

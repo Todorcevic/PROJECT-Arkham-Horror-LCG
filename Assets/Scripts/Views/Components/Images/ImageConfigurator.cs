@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Arkham.Components
+namespace Arkham.Views
 {
     public class ImageConfigurator : MonoBehaviour, IImageConfigurator
     {

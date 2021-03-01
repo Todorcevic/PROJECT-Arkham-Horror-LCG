@@ -7,6 +7,7 @@ using Arkham.Controllers;
 using Arkham.Presenters;
 using Arkham.Interactors;
 using Arkham.Views;
+using Arkham.Managers;
 
 namespace Arkham.Config
 {
@@ -18,14 +19,14 @@ namespace Arkham.Config
             Container.BindInterfacesAndSelfTo<Repository>().AsSingle();
 
             /** Services **/
+            Container.BindInterfacesTo<ScreenResolutionAutoDetect>().AsSingle();
+            Container.BindInterfacesTo<DataPersistence>().AsSingle();
             Container.Bind<IFileAdapter>().To<FileAdapter>().AsSingle();
             Container.Bind<IScreenResolutionAdapter>().To<ScreenResolutionAdapter>().AsSingle();
             Container.Bind<IInstantiatorAdapter>().To<NameConventionInstantiator>().AsSingle();
             Container.Bind<ISerializer>().To<JsonNewtonsoftAdapter>().AsSingle();
             Container.Bind<IDoubleClickDetector>().To<DoubleClickDetector>().AsSingle();
-            Container.Bind<IResolutionSet>().To<ScreenResolutionAutoDetect>().AsSingle();
             Container.Bind<IScenarioLoader>().To<ScenarioLoader>().AsSingle();
-            Container.Bind<IDataPersistence>().To<DataPersistence>().AsSingle();
 
             /** Controllers **/
             Container.BindInterfacesTo<CampaignController>().AsSingle();
@@ -50,10 +51,31 @@ namespace Arkham.Config
             Container.BindInterfacesTo<CardInfoInteractor>().AsSingle();
             Container.BindInterfacesTo<InvestigatorInfoInteractor>().AsSingle();
 
-            /** Factories **/
-            Container.Bind<IAbstractFactory>().To<AbstractFactory>().AsSingle();
-            Container.Bind<IInvestigatorCardFactory>().To<InvestigatorCardFactory>().AsSingle();
-            Container.Bind<IDeckCardFactory>().To<DeckCardFactory>().AsSingle();
+            ///** Factories **/
+            Container.BindInterfacesTo<DeckCardFactory>().AsSingle();
+            Container.BindInterfacesTo<InvestigatorCardFactory>().AsSingle();
+
+            /** Execution Order**/
+            Container.BindExecutionOrder<ScreenResolutionAutoDetect>(-100);
+            Container.BindExecutionOrder<DataPersistence>(-100);
+
+            Container.BindExecutionOrder<CardFactory>(-90);
+
+            Container.BindExecutionOrder<InteractableComponent>(-80);
+
+            Container.BindExecutionOrder<CampaignPresenter>(-80);
+            Container.BindExecutionOrder<InvestigatorSelectorPresenter>(-80);
+            Container.BindExecutionOrder<CardSelectorPresenter>(-80);
+            Container.BindExecutionOrder<InvestigatorCardPresenter>(-80);
+            Container.BindExecutionOrder<DeckCardPresenter>(-80);
+            Container.BindExecutionOrder<InvestigatorAvatarPresenter>(-80);
+            Container.BindExecutionOrder<CardsQuantityPresenter>(-80);
+
+            Container.BindExecutionOrder<ButtonsManager>(-70);
+
+            Container.BindExecutionOrder<CampaignController>(-70);
+            Container.BindExecutionOrder<InvestigatorSelectorController>(-70);
+            Container.BindExecutionOrder<CardSelectorController>(-70);
         }
     }
 }
