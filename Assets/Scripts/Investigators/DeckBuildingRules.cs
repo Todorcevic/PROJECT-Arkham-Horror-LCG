@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Arkham.Repositories;
 using Zenject;
-using Arkham.Models;
+using Arkham.Entities;
 
 namespace Arkham.Investigators
 {

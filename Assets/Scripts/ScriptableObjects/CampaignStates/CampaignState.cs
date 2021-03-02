@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using Arkham.Controllers;
 using Arkham.Views;
 
-namespace Arkham.ScriptableObjects
+namespace Arkham.SettingObjects
 {
     public abstract class CampaignState : ScriptableObject, ICampaignState
     {
@@ -12,6 +12,6 @@ namespace Arkham.ScriptableObjects
         public bool IsOpen => isOpen;
 
         /*******************************************************************/
-        public abstract void ExecuteState(ICampaignView campaignView);
+        public abstract void ExecuteState(ICampaignConfigurable campaignView);
     }
 }

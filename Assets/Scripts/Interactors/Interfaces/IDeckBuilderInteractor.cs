@@ -1,4 +1,4 @@
-﻿using Arkham.Models;
+﻿using Arkham.Entities;
 using System;
 
 namespace Arkham.Interactors
@@ -7,8 +7,8 @@ namespace Arkham.Interactors
     {
         event Action<string> DeckCardAdded;
         event Action<string> DeckCardRemoved;
-        int DeckSize { get; }
-        int CardsAmountSelected { get; }
+        int? DeckSize { get; }
+        int? CardsAmountSelected { get; }
         bool SelectionIsFull { get; }
         bool SelectionIsNotFull { get; }
         InvestigatorInfo GetInvestigatorById(string investigatorId);

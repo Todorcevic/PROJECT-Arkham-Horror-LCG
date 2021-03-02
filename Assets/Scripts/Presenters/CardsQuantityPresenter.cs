@@ -1,6 +1,6 @@
 ﻿using Zenject;
-using TMPro;
 using Arkham.Interactors;
+using Arkham.Views;
 
 namespace Arkham.Presenters
 {
@@ -8,8 +8,7 @@ namespace Arkham.Presenters
     {
         [Inject] private readonly IDeckBuilderInteractor deckBuilderInteractor;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
-        [Inject(Id = "CardsAmountSelected")] private readonly TextMeshProUGUI cardsAmountText;
-        [Inject(Id = "DeckSize")] private readonly TextMeshProUGUI deckSizeText;
+        [Inject] private readonly ICardsQuantityView cardsQuantity;
 
         /*******************************************************************/
         void IInitializable.Initialize()
@@ -23,8 +22,8 @@ namespace Arkham.Presenters
         /*******************************************************************/
         private void ChangeText(string _)
         {
-            cardsAmountText.text = deckBuilderInteractor.CardsAmountSelected.ToString();
-            deckSizeText.text = deckBuilderInteractor.DeckSize.ToString();
+            cardsQuantity.SetCardsAmount = deckBuilderInteractor.CardsAmountSelected.ToString();
+            cardsQuantity.SetDeckSize = deckBuilderInteractor.DeckSize.ToString();
         }
     }
 }

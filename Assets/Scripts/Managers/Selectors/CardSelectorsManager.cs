@@ -1,4 +1,5 @@
-﻿using Arkham.Views;
+﻿using Arkham.Presenters;
+using Arkham.Views;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,26 +13,26 @@ namespace Arkham.Managers
         [SerializeField, Required, SceneObjectsOnly] private Transform placeHolder;
         [SerializeField, Required, SceneObjectsOnly] private List<CardSelectorView> selectors;
         public Transform Zone => zone;
-        public List<ICardSelectorView> Selectors =>
-            selectors.OfType<ICardSelectorView>().ToList();
+        public List<ICardSelectorable> Selectors =>
+            selectors.OfType<ICardSelectorable>().ToList();
 
         /*******************************************************************/
-        public List<ICardSelectorView> GetAllFilledSelectors() =>
+        public List<ICardSelectorable> GetAllFilledSelectors() =>
             Selectors.FindAll(selector => selector.Id != null);
 
-        public ICardSelectorView GetSelectorByCardIdOrEmpty(string cardId) =>
+        public ICardSelectorable GetSelectorByCardIdOrEmpty(string cardId) =>
             Selectors.Find(selector => selector.Id == cardId) ?? GetEmptySelector();
 
-        private ICardSelectorView GetEmptySelector() =>
+        private ICardSelectorable GetEmptySelector() =>
             Selectors.Find(selector => selector.Id == null);
 
         public void CleanAllSelectors()
         {
-            foreach (ICardSelectorView selector in GetAllFilledSelectors())
+            foreach (ICardSelectorable selector in GetAllFilledSelectors())
                 DesactivateSelector(selector);
         }
 
-        public void DesactivateSelector(ICardSelectorView selector)
+        public void DesactivateSelector(ICardSelectorable selector)
         {
             selector.SetSelector(null);
             selector.Transform.SetParent(placeHolder);

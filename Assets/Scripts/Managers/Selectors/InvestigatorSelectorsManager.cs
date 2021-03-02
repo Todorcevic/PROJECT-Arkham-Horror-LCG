@@ -1,10 +1,8 @@
-﻿using Arkham.Views;
+﻿using Arkham.Presenters;
+using Arkham.Views;
 using Sirenix.OdinInspector;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Arkham.Managers
@@ -13,23 +11,33 @@ namespace Arkham.Managers
     {
         [SerializeField, Required, SceneObjectsOnly] private Transform placeHolder;
         [SerializeField, Required, SceneObjectsOnly] private List<InvestigatorSelectorView> selectors;
-        public List<IInvestigatorSelectorView> Selectors =>
-            selectors.OfType<IInvestigatorSelectorView>().ToList();
-        public IInvestigatorSelectorView GetLeadSelector => Selectors.Find(i => i.IsLead);
+        public List<IInvestigatorSelectorable> Selectors =>
+            selectors.OfType<IInvestigatorSelectorable>().ToList();
+        public IInvestigatorSelectorable GetLeadSelector => Selectors.Find(i => i.IsLeader);
 
         /*******************************************************************/
-        public IInvestigatorSelectorView GetEmptySelector() =>
+        public IInvestigatorSelectorable GetEmptySelector() =>
             Selectors.Find(selector => selector.Id == null);
 
-        public List<IInvestigatorSelectorView> GetAllFilledSelectors() =>
-            Selectors.FindAll(selector => selector.Id != null);
-
-        public IInvestigatorSelectorView GetSelectorById(string cardId) =>
+        public IInvestigatorSelectorable GetSelectorById(string cardId) =>
             Selectors.Find(selector => selector.Id == cardId);
 
-        public void ArrangeSelectors()
+        public void SetLeadAndArrangeSelectors(string leadInvestigatorId)
         {
-            foreach (IInvestigatorSelectorView selector in Selectors)
+            SetLeadSelector(leadInvestigatorId);
+            ArrangeSelectors();
+        }
+
+        private void SetLeadSelector(string leadInvestigatorId)
+        {
+            if (leadInvestigatorId == GetLeadSelector.Id || leadInvestigatorId == null) return;
+            GetLeadSelector.ActivateLeaderIcon(false);
+            GetSelectorById(leadInvestigatorId).ActivateLeaderIcon(true);
+        }
+
+        private void ArrangeSelectors()
+        {
+            foreach (IInvestigatorSelectorable selector in Selectors)
                 selector.Arrange(selector.IsEmpty ? selector.Transform : placeHolder);
         }
     }

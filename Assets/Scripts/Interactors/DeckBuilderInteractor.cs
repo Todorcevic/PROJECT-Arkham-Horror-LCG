@@ -1,4 +1,4 @@
-﻿using Arkham.Models;
+﻿using Arkham.Entities;
 using Arkham.Repositories;
 using System;
 using System.Linq;
@@ -13,8 +13,8 @@ namespace Arkham.Interactors
         public event Action<string> DeckCardAdded;
         public event Action<string> DeckCardRemoved;
         private InvestigatorInfo InvestigatorSelected => GetInvestigatorById(investigatorSelectorInteractor.InvestigatorSelected);
-        public int DeckSize => InvestigatorSelected.DeckBuilding.DeckSize;
-        public int CardsAmountSelected => InvestigatorSelected.Deck.Count;
+        public int? DeckSize => InvestigatorSelected?.DeckBuilding.DeckSize;
+        public int? CardsAmountSelected => InvestigatorSelected?.Deck.Count;
         public bool SelectionIsFull => CardsAmountSelected >= DeckSize;
         public bool SelectionIsNotFull => CardsAmountSelected == DeckSize - 1;
 

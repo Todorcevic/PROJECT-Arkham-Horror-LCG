@@ -3,7 +3,7 @@ using Arkham.Controllers;
 using Arkham.Interactors;
 using Arkham.Investigators;
 using Arkham.Managers;
-using Arkham.Models;
+using Arkham.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using Zenject;
@@ -14,7 +14,7 @@ namespace Arkham.Factories
     {
         [Inject] private readonly IDeckBuilderInteractor investigatorRepository;
         [Inject] private readonly IInvestigatorCardController investigatorCardController;
-        [Inject(Id = "InvestigatorCardsManager")] private readonly ICardsManager investigatorCardsManager;
+        [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
         protected override ICardsManager CardsManager => investigatorCardsManager;
         protected override ICardController CardController => investigatorCardController;
         protected override IEnumerable<string> Cards => infoRepository.CardInfoList

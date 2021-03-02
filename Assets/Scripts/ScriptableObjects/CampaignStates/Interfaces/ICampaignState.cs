@@ -1,12 +1,12 @@
 ﻿using Arkham.Controllers;
 using Arkham.Views;
 
-namespace Arkham.ScriptableObjects
+namespace Arkham.SettingObjects
 {
     public interface ICampaignState
     {
         string Id { get; }
         bool IsOpen { get; }
-        void ExecuteState(ICampaignView campaignView);
+        void ExecuteState(ICampaignConfigurable campaignView);
     }
 }

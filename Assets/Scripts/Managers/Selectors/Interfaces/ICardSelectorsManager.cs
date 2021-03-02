@@ -1,9 +1,5 @@
-﻿using Arkham.Views;
-using System;
+﻿using Arkham.Presenters;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Arkham.Managers
@@ -11,10 +7,10 @@ namespace Arkham.Managers
     public interface ICardSelectorsManager
     {
         Transform Zone { get; }
-        List<ICardSelectorView> Selectors { get; }
-        List<ICardSelectorView> GetAllFilledSelectors();
-        ICardSelectorView GetSelectorByCardIdOrEmpty(string cardId);
+        List<ICardSelectorable> Selectors { get; }
+        List<ICardSelectorable> GetAllFilledSelectors();
+        ICardSelectorable GetSelectorByCardIdOrEmpty(string cardId);
         void CleanAllSelectors();
-        void DesactivateSelector(ICardSelectorView selector);
+        void DesactivateSelector(ICardSelectorable selector);
     }
 }

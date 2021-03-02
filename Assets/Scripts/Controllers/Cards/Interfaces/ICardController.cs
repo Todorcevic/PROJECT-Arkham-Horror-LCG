@@ -1,12 +1,9 @@
-﻿using Arkham.Views;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Arkham.Presenters;
 
 namespace Arkham.Controllers
 {
     public interface ICardController
     {
-        void Init(ICardView cardView);
+        void Init(ICardVisualizable cardView);
     }
 }

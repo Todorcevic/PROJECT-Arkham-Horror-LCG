@@ -1,10 +1,11 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 using TMPro;
+using Arkham.Presenters;
 
 namespace Arkham.Views
 {
-    public class CardSelectorView : SelectorView, ICardSelectorView
+    public class CardSelectorView : SelectorView, ICardSelectorable
     {
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI cardName;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI quantity;

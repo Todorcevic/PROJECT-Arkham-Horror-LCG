@@ -1,19 +1,14 @@
-﻿using Arkham.Controllers;
-using Arkham.Models;
-using Arkham.ScriptableObjects;
+﻿using Arkham.SettingObjects;
 using Arkham.Views;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Arkham.Managers
 {
     public interface ICampaignsManager
     {
-        List<ICampaignView> Campaigns { get; }
-        ICampaignView GetCampaign(string campaignId);
-        ICampaignState GetCampaignState(string campaignState);
+        List<ICampaignConfigurable> Campaigns { get; }
+        ICampaignConfigurable GetCampaign(string campaignId);
+        ICampaignState GetState(string campaignState);
+        void ExecuteStateWithCampaign(string campaignId, string state);
     }
 }

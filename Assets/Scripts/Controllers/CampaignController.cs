@@ -1,6 +1,5 @@
 ﻿using Arkham.Interactors;
 using Arkham.Managers;
-using Arkham.Views;
 using Zenject;
 
 namespace Arkham.Controllers
@@ -27,12 +26,11 @@ namespace Arkham.Controllers
 
         private void Click(IInteractableView campaignView)
         {
-            var campaign = campaignInteractor.GetCampaign(campaignView.Id);
-            if (!campaign.IsOpen) return;
+            string state = campaignInteractor.GetState(campaignView.Id);
+            string firstscenario = campaignInteractor.GetScenario(campaignView.Id);
+            if (!campaignsManager.GetState(state).IsOpen) return;
             campaignView.Interactable.ClickEffect();
-            campaignInteractor.AddScenarioToPlay(campaign.FirstScenarioId);
+            campaignInteractor.CurrentScenario = firstscenario;
         }
-
-
     }
 }

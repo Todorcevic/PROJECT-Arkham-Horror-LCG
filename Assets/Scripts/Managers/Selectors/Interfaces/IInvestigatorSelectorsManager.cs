@@ -1,15 +1,14 @@
-﻿using Arkham.Views;
+﻿using Arkham.Presenters;
 using System.Collections.Generic;
 
 namespace Arkham.Managers
 {
     public interface IInvestigatorSelectorsManager
     {
-        IInvestigatorSelectorView GetLeadSelector { get; }
-        List<IInvestigatorSelectorView> Selectors { get; }
-        IInvestigatorSelectorView GetEmptySelector();
-        List<IInvestigatorSelectorView> GetAllFilledSelectors();
-        IInvestigatorSelectorView GetSelectorById(string cardId);
-        void ArrangeSelectors();
+        IInvestigatorSelectorable GetLeadSelector { get; }
+        List<IInvestigatorSelectorable> Selectors { get; }
+        IInvestigatorSelectorable GetEmptySelector();
+        IInvestigatorSelectorable GetSelectorById(string cardId);
+        void SetLeadAndArrangeSelectors(string leadInvestigatorId);
     }
 }

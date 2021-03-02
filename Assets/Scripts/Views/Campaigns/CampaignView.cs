@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using Arkham.Controllers;
+using Arkham.SettingObjects;
 
 namespace Arkham.Views
 {
-    public class CampaignView : MonoBehaviour, ICampaignView, IInteractableView
+    public class CampaignView : MonoBehaviour, ICampaignConfigurable, IInteractableView
     {
         [Title("ID")]
         [SerializeField, Required, HideInPrefabAssets] private string id;

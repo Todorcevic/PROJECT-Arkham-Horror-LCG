@@ -1,5 +1,5 @@
 ﻿using Arkham.Interactors;
-using Arkham.Views;
+using Arkham.Presenters;
 using Zenject;
 
 namespace Arkham.Controllers
@@ -9,7 +9,7 @@ namespace Arkham.Controllers
         [Inject] private readonly IInvestigatorSelectorInteractor selectorInteractor;
 
         /*******************************************************************/
-        protected override void Click(ICardView cardView) =>
+        protected override void Click(ICardVisualizable cardView) =>
             selectorInteractor.AddInvestigator(cardView.Id);
     }
 }

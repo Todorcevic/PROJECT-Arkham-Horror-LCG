@@ -1,6 +1,5 @@
 ﻿using Arkham.Interactors;
 using Arkham.Managers;
-using Arkham.Views;
 using Zenject;
 
 namespace Arkham.Presenters
@@ -10,7 +9,7 @@ namespace Arkham.Presenters
         [Inject] protected readonly ICardInfoInteractor cardInfoInteractor;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
         [Inject] private readonly IDeckBuilderInteractor deckBuilderInteractor;
-        [Inject(Id = "DeckCardsManager")] private readonly ICardsManager deckCardsManager;
+        [Inject] private readonly IDeckCardsManager deckCardsManager;
 
         /*******************************************************************/
         void IInitializable.Initialize()
@@ -40,7 +39,7 @@ namespace Arkham.Presenters
 
         private void RefreshAllCardsVisibility()
         {
-            foreach (ICardView cardView in deckCardsManager.CardsList)
+            foreach (ICardVisualizable cardView in deckCardsManager.CardsList)
                 cardView.Activate(CheckIsEnable(cardView.Id));
         }
 
@@ -50,7 +49,5 @@ namespace Arkham.Presenters
             if ((cardInfoInteractor.GetCardInfo(cardId).Quantity ?? 0) - deckBuilderInteractor.AmountSelectedOfThisCard(cardId) <= 0) return false;
             return true;
         }
-
-
     }
 }

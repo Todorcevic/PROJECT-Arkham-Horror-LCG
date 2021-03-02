@@ -13,7 +13,6 @@ namespace Arkham.Managers
         [SerializeField, ChildGameObjectsOnly] private List<ButtonInteractable> buttons;
 
         /*******************************************************************/
-
         void IInitializable.Initialize()
         {
             foreach (ButtonInteractable button in buttons)

@@ -1,4 +1,4 @@
-﻿using Arkham.Components;
+﻿using Arkham.Controllers;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -10,7 +10,6 @@ namespace Arkham.Views
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
         [SerializeField, Required, ChildGameObjectsOnly] private ImageConfigurator imageConfigurator;
         [SerializeField, Required, ChildGameObjectsOnly] private GlowActivator glowActivator;
-
         public string Id { get; private set; }
         public bool IsEmpty => Id == null;
         public InteractableComponent Interactable => interactable;

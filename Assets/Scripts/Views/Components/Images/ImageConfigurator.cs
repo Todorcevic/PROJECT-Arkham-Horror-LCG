@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Arkham.Views
 {
-    public class ImageConfigurator : MonoBehaviour, IImageConfigurator
+    public class ImageConfigurator : MonoBehaviour
     {
         [SerializeField] private CanvasGroup canvas;
         [SerializeField] private Image image;

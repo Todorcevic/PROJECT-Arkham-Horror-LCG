@@ -1,19 +1,18 @@
-﻿using Arkham.Components;
+﻿using Arkham.Controllers;
+using Arkham.Presenters;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
 namespace Arkham.Views
 {
-    public class CardView : MonoBehaviour, ICardView
+    public class CardView : MonoBehaviour, ICardVisualizable
     {
-        private string id;
-
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
         [SerializeField, Required, ChildGameObjectsOnly] private ImageConfigurator imageConfigurator;
 
-        public string Id => id;
+        public string Id { get; private set; }
         public Sprite GetCardImage => imageConfigurator.GetSprite;
         public Transform Transform => transform;
         public InteractableComponent Interactable => interactable;
@@ -22,10 +21,12 @@ namespace Arkham.Views
         [Inject]
         private void Init(string id, Sprite sprite)
         {
-            name = this.id = id;
+            name = Id = id;
             imageConfigurator.ChangeImage(sprite);
+            ((IInitializable)interactable).Initialize();
         }
 
+        /*******************************************************************/
         public void Activate(bool isEnable) => imageConfigurator.Activate(isEnable);
 
         public void Show(bool isShow) => imageConfigurator.Show(isShow);

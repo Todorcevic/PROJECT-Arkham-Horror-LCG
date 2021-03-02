@@ -9,7 +9,7 @@ namespace Arkham.Factories
     public class DeckCardFactory : CardFactory
     {
         [Inject] private readonly IDeckCardController deckCardController;
-        [Inject(Id = "DeckCardsManager")] private readonly ICardsManager deckCardsManager;
+        [Inject] private readonly IDeckCardsManager deckCardsManager;
         protected override ICardsManager CardsManager => deckCardsManager;
         protected override ICardController CardController => deckCardController;
         protected override IEnumerable<string> Cards => infoRepository.CardInfoList

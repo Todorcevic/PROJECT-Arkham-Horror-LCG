@@ -6,7 +6,6 @@ using Arkham.Factories;
 using Arkham.Controllers;
 using Arkham.Presenters;
 using Arkham.Interactors;
-using Arkham.Views;
 using Arkham.Managers;
 
 namespace Arkham.Config
@@ -18,7 +17,7 @@ namespace Arkham.Config
             Container.Bind<GameFiles>().AsSingle();
             Container.BindInterfacesAndSelfTo<Repository>().AsSingle();
 
-            /** Services **/
+            /*** Services ***/
             Container.BindInterfacesTo<ScreenResolutionAutoDetect>().AsSingle();
             Container.BindInterfacesTo<DataPersistence>().AsSingle();
             Container.Bind<IFileAdapter>().To<FileAdapter>().AsSingle();
@@ -28,14 +27,14 @@ namespace Arkham.Config
             Container.Bind<IDoubleClickDetector>().To<DoubleClickDetector>().AsSingle();
             Container.Bind<IScenarioLoader>().To<ScenarioLoader>().AsSingle();
 
-            /** Controllers **/
+            /*** Controllers ***/
             Container.BindInterfacesTo<CampaignController>().AsSingle();
             Container.BindInterfacesTo<InvestigatorSelectorController>().AsSingle();
             Container.BindInterfacesTo<CardSelectorController>().AsSingle();
             Container.BindInterfacesTo<InvestigatorCardController>().AsSingle();
             Container.BindInterfacesTo<DeckCardController>().AsSingle();
 
-            /** Presenters **/
+            /*** Presenters ***/
             Container.BindInterfacesTo<CampaignPresenter>().AsSingle();
             Container.BindInterfacesTo<InvestigatorSelectorPresenter>().AsSingle();
             Container.BindInterfacesTo<CardSelectorPresenter>().AsSingle();
@@ -44,25 +43,21 @@ namespace Arkham.Config
             Container.BindInterfacesTo<InvestigatorAvatarPresenter>().AsSingle();
             Container.BindInterfacesTo<CardsQuantityPresenter>().AsSingle();
 
-            /** Interactors **/
+            /*** Interactors ***/
             Container.BindInterfacesTo<CampaignInteractor>().AsSingle();
             Container.BindInterfacesTo<InvestigatorSelectorInteractor>().AsSingle();
             Container.BindInterfacesTo<DeckBuilderInteractor>().AsSingle();
             Container.BindInterfacesTo<CardInfoInteractor>().AsSingle();
             Container.BindInterfacesTo<InvestigatorInfoInteractor>().AsSingle();
 
-            ///** Factories **/
+            /*** Factories ***/
             Container.BindInterfacesTo<DeckCardFactory>().AsSingle();
             Container.BindInterfacesTo<InvestigatorCardFactory>().AsSingle();
 
-            /** Execution Order**/
+            /*** Execution Order ***/
             Container.BindExecutionOrder<ScreenResolutionAutoDetect>(-100);
             Container.BindExecutionOrder<DataPersistence>(-100);
-
             Container.BindExecutionOrder<CardFactory>(-90);
-
-            Container.BindExecutionOrder<InteractableComponent>(-80);
-
             Container.BindExecutionOrder<CampaignPresenter>(-80);
             Container.BindExecutionOrder<InvestigatorSelectorPresenter>(-80);
             Container.BindExecutionOrder<CardSelectorPresenter>(-80);
@@ -70,12 +65,11 @@ namespace Arkham.Config
             Container.BindExecutionOrder<DeckCardPresenter>(-80);
             Container.BindExecutionOrder<InvestigatorAvatarPresenter>(-80);
             Container.BindExecutionOrder<CardsQuantityPresenter>(-80);
-
-            Container.BindExecutionOrder<ButtonsManager>(-70);
-
-            Container.BindExecutionOrder<CampaignController>(-70);
-            Container.BindExecutionOrder<InvestigatorSelectorController>(-70);
-            Container.BindExecutionOrder<CardSelectorController>(-70);
+            Container.BindExecutionOrder<InteractableComponent>(0);
+            Container.BindExecutionOrder<ButtonsManager>(70);
+            Container.BindExecutionOrder<CampaignController>(70);
+            Container.BindExecutionOrder<InvestigatorSelectorController>(70);
+            Container.BindExecutionOrder<CardSelectorController>(70);
         }
     }
 }

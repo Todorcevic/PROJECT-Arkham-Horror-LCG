@@ -1,10 +1,7 @@
-﻿using Arkham.Managers;
-using Arkham.Presenters;
-using Arkham.Repositories;
+﻿using Arkham.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using Zenject;
 
 namespace Arkham.Interactors
@@ -41,5 +38,9 @@ namespace Arkham.Interactors
             InvestigatorRemoved?.Invoke(investigatorId);
             SelectInvestigator(investigatorSelectorRepository.InvestigatorsSelectedList.FirstOrDefault());
         }
+
+        public int AmountSelectedOfThisCard(string cardId) => InvestigatorsSelectedList.FindAll(i => i == cardId).Count;
+
+        public void SelectLeadInvestigator() => SelectInvestigator(LeadInvestigator);
     }
 }

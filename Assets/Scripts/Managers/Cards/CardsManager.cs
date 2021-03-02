@@ -1,21 +1,19 @@
-﻿using Arkham.Views;
+﻿using Arkham.Presenters;
+using Arkham.Views;
 using Sirenix.OdinInspector;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Arkham.Managers
 {
-    public class CardsManager : MonoBehaviour, ICardsManager
+    public class CardsManager : MonoBehaviour
     {
         [SerializeField, Required, AssetsOnly] private CardView cardPrefab;
         [SerializeField, Required, SceneObjectsOnly] private Transform zone;
-        [Title("CARDS"), ShowInInspector] public List<ICardView> CardsList => AllCards.Values.ToList();
-        public Dictionary<string, ICardView> AllCards { get; } =
-            new Dictionary<string, ICardView>();
+        [Title("CARDS"), ShowInInspector] public List<ICardVisualizable> CardsList => AllCards.Values.ToList();
+        public Dictionary<string, ICardVisualizable> AllCards { get; } =
+            new Dictionary<string, ICardVisualizable>();
         public Transform Zone => zone;
         public CardView CardPrefab => cardPrefab;
 

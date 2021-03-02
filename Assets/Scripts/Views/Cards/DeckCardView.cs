@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Arkham.Presenters;
 
 namespace Arkham.Views
 {
-    public class DeckCardView : CardView, IDeckCardView
+    public class DeckCardView : CardView, IDeckCardVisualizable
     {
     }
 }

@@ -1,10 +1,5 @@
 ﻿using Arkham.Interactors;
 using Arkham.Managers;
-using Arkham.Repositories;
-using Arkham.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Zenject;
 
 namespace Arkham.Presenters
@@ -13,7 +8,7 @@ namespace Arkham.Presenters
     {
         [Inject] protected readonly ICardInfoInteractor cardInfoInteractor;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
-        [Inject(Id = "InvestigatorCardsManager")] private readonly ICardsManager investigatorCardsManager;
+        [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
 
         /*******************************************************************/
         void IInitializable.Initialize()
@@ -24,13 +19,6 @@ namespace Arkham.Presenters
         }
 
         /*******************************************************************/
-        public void Init()
-        {
-            investigatorSelectorInteractor.InvestigatorAdded += ResolveAddVisibility;
-            investigatorSelectorInteractor.InvestigatorRemoved += ResolveRemoveVisibility;
-            RefreshAllCardsVisibility();
-        }
-
         private void ResolveAddVisibility(string investigatorId)
         {
             if (investigatorSelectorInteractor.SelectionIsFull) RefreshAllCardsVisibility();
@@ -48,20 +36,15 @@ namespace Arkham.Presenters
 
         private void RefreshAllCardsVisibility()
         {
-            foreach (ICardView cardView in investigatorCardsManager.CardsList)
+            foreach (ICardVisualizable cardView in investigatorCardsManager.CardsList)
                 cardView.Activate(CheckIsEnable(cardView.Id));
         }
 
         private bool CheckIsEnable(string cardId)
         {
             if (investigatorSelectorInteractor.SelectionIsFull) return false;
-            if (((cardInfoInteractor.GetCardInfo(cardId).Quantity ?? 0) - AmountCardsSelected(cardId)) <= 0) return false;
+            if (((cardInfoInteractor.GetCardInfo(cardId).Quantity ?? 0) - investigatorSelectorInteractor.AmountSelectedOfThisCard(cardId)) <= 0) return false;
             return true;
         }
-
-        private int AmountCardsSelected(string cardId) =>
-            investigatorSelectorInteractor.InvestigatorsSelectedList.FindAll(i => i == cardId).Count;
-
-
     }
 }

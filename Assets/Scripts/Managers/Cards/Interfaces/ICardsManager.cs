@@ -1,9 +1,6 @@
-﻿using Arkham.Views;
-using System;
+﻿using Arkham.Presenters;
+using Arkham.Views;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Arkham.Managers
@@ -12,8 +9,8 @@ namespace Arkham.Managers
     {
         Transform Zone { get; }
         CardView CardPrefab { get; }
-        Dictionary<string, ICardView> AllCards { get; }
-        List<ICardView> CardsList { get; }
+        Dictionary<string, ICardVisualizable> AllCards { get; }
+        List<ICardVisualizable> CardsList { get; }
         Sprite GetSpriteCard(string id);
     }
 }

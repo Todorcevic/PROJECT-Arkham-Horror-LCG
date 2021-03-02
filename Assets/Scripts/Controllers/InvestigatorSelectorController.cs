@@ -1,7 +1,5 @@
-﻿using Arkham.Components;
-using Arkham.Interactors;
+﻿using Arkham.Interactors;
 using Arkham.Managers;
-using Arkham.Views;
 using Zenject;
 
 namespace Arkham.Controllers

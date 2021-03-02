@@ -1,4 +1,4 @@
-﻿using Arkham.Models;
+﻿using Arkham.Entities;
 using System.Collections.Generic;
 
 namespace Arkham.Repositories

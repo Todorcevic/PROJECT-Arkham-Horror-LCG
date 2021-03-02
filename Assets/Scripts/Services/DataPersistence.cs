@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Arkham.Models;
+using Arkham.Entities;
 using Arkham.Config;
 using Arkham.Repositories;
 using Zenject;

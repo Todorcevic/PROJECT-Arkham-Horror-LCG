@@ -1,9 +1,6 @@
 ﻿using Arkham.Managers;
-using Arkham.Models;
-using Arkham.ScriptableObjects;
-using Arkham.Views;
-using Zenject;
 using Arkham.Interactors;
+using Zenject;
 
 namespace Arkham.Presenters
 {
@@ -20,18 +17,16 @@ namespace Arkham.Presenters
         }
 
         /*******************************************************************/
-        public void SetCampaign(CampaignInfo campaignInfo)
+        public void SetCampaign(string campaignId)
         {
-            ICampaignState state = campaignsManager.GetCampaignState(campaignInfo.State);
-            ICampaignView campaign = campaignsManager.GetCampaign(campaignInfo.Id);
-            state.ExecuteState(campaign);
-            campaignInfo.IsOpen = state.IsOpen;
+            string stateId = campaignInteractor.GetState(campaignId);
+            campaignsManager.ExecuteStateWithCampaign(stateId, campaignId);
         }
 
         private void InitializeCampaigns()
         {
-            foreach (CampaignInfo campaign in campaignInteractor.CampaignsList)
-                SetCampaign(campaign);
+            foreach (string campaignId in campaignInteractor.CampaignsList)
+                SetCampaign(campaignId);
         }
     }
 }

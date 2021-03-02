@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace Arkham.ScriptableObjects
+namespace Arkham.SettingObjects
 {
     [CreateAssetMenu(fileName = "InteractableClips", menuName = "InteractableClips", order = 1)]
     public class ClipsInteractable : ScriptableObject

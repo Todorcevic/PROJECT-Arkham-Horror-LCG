@@ -1,10 +1,5 @@
 ﻿using Arkham.Interactors;
-using Arkham.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Arkham.Presenters;
 using Zenject;
 
 namespace Arkham.Controllers
@@ -14,7 +9,7 @@ namespace Arkham.Controllers
         [Inject] private readonly IDeckBuilderInteractor investigatorsInteractor;
 
         /*******************************************************************/
-        protected override void Click(ICardView cardView) =>
+        protected override void Click(ICardVisualizable cardView) =>
             investigatorsInteractor.AddDeckCard(cardView.Id);
     }
 }
