@@ -40,7 +40,7 @@ namespace Arkham.Presenters
         private void ActivateSelector(ICardSelectorable selector, string cardId)
         {
             selector.SetSelector(cardId, imageCards.GetSprite(cardId));
-            selector.SetName(cardInfoInteractor.GetCardInfo(cardId).Real_name);
+            selector.SetName(cardInfoInteractor.GetRealName(cardId));
             selector.Transform.SetParent(cardSelectorsManager.Zone);
         }
 

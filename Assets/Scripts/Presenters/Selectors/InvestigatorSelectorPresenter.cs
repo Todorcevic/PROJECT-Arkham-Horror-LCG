@@ -19,7 +19,6 @@ namespace Arkham.Presenters
             investigatorSelectorInteractor.InvestigatorAdded += AddInvestigator;
             investigatorSelectorInteractor.InvestigatorRemoved += RemoveInvestigator;
             InitializeSelectors();
-            investigatorSelectorInteractor.SelectLeadInvestigator();
         }
 
         /*******************************************************************/

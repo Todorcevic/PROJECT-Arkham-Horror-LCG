@@ -14,6 +14,7 @@ namespace Arkham.Interactors
         InvestigatorInfo GetInvestigatorById(string investigatorId);
         void AddDeckCard(string deckCardId);
         void RemoveDeckCard(string deckCardId);
-        int AmountSelectedOfThisCard(string idCard);
+        bool CanBeSelected(string cardId);
+        bool IsManadatoryCard(string cardId);
     }
 }

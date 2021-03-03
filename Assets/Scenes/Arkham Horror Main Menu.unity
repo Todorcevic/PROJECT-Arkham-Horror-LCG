@@ -16273,7 +16273,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 628426557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e5c11c46b797684781825891f02e4e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 36bd821c0d2e62747850dc8dea3c6ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardsAmountText: {fileID: 1739933665}
@@ -44349,7 +44349,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adca3259f9f27d24c9793a42bf4e5f9a, type: 3}
+  m_Script: {fileID: 11500000, guid: f4ca9fc18ce4274428b67b13f7ebec2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &1520606492 stripped

@@ -1,6 +1,6 @@
-﻿namespace Arkham.Views
+﻿namespace Arkham.Presenters
 {
-    public interface ICardsQuantityView
+    public interface ICardsQuantityVisualizable
     {
         string SetCardsAmount { set; }
         string SetDeckSize { set; }

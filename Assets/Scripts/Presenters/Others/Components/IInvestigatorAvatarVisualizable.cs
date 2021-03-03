@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Arkham.Views
+namespace Arkham.Presenters
 {
-    public interface IInvestigatorAvatarView
+    public interface IInvestigatorAvatarVisualizable
     {
         void ChangeImage(Sprite investigatorImage);
     }

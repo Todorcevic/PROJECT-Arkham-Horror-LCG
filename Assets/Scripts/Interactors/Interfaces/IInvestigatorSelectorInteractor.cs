@@ -19,7 +19,7 @@ namespace Arkham.Interactors
         void SelectInvestigator(string investigatorId);
         void AddInvestigator(string investigatorId);
         void RemoveInvestigator(string investigatorId);
-        int AmountSelectedOfThisCard(string cardId);
         void SelectLeadInvestigator();
+        bool CanBeSelected(string cardId);
     }
 }

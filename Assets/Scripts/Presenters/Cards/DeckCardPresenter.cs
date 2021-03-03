@@ -32,22 +32,21 @@ namespace Arkham.Presenters
             else RefreshCardVisibility(cardId);
         }
 
-        private void RefreshCardVisibility(string cardId) =>
-            deckCardsManager.AllCards[cardId].Activate(CheckIsEnable(cardId));
+        private void RefreshCardVisibility(string cardId)
+        {
+            bool canBeSelected = deckBuilderInteractor.CanBeSelected(cardId);
+            deckCardsManager.AllCards[cardId].Activate(canBeSelected);
+        }
 
         private void RefreshAllCardsVisibility(string _) => RefreshAllCardsVisibility();
 
         private void RefreshAllCardsVisibility()
         {
             foreach (ICardVisualizable cardView in deckCardsManager.CardsList)
-                cardView.Activate(CheckIsEnable(cardView.Id));
-        }
-
-        private bool CheckIsEnable(string cardId)
-        {
-            if (deckBuilderInteractor.SelectionIsFull) return false;
-            if ((cardInfoInteractor.GetCardInfo(cardId).Quantity ?? 0) - deckBuilderInteractor.AmountSelectedOfThisCard(cardId) <= 0) return false;
-            return true;
+            {
+                bool canBeSelected = deckBuilderInteractor.CanBeSelected(cardView.Id);
+                cardView.Activate(canBeSelected);
+            }
         }
     }
 }

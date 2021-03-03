@@ -1,6 +1,7 @@
 ﻿using Arkham.Entities;
 using Arkham.Repositories;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Zenject;
 
@@ -9,6 +10,7 @@ namespace Arkham.Interactors
     public class DeckBuilderInteractor : IDeckBuilderInteractor
     {
         [Inject] private readonly IInvestigatorRepository investigatorRepository;
+        [Inject] protected readonly ICardInfoInteractor cardInfoInteractor;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
         public event Action<string> DeckCardAdded;
         public event Action<string> DeckCardRemoved;
@@ -34,7 +36,20 @@ namespace Arkham.Interactors
             DeckCardRemoved?.Invoke(deckCardId);
         }
 
-        public int AmountSelectedOfThisCard(string idCard) =>
-            investigatorRepository.InvestigatorsList.Select(i => i.Deck.FindAll(b => b == idCard).Count).Sum();
+        public bool CanBeSelected(string cardId)
+        {
+            if (investigatorSelectorInteractor.InvestigatorSelected == null) return false;
+            if (SelectionIsFull) return false;
+            if (!IsThisCardAllowed(cardId)) return false;
+            if ((cardInfoInteractor.GetQuantity(cardId)) - AmountSelectedOfThisCard(cardId) <= 0) return false;
+            return true;
+        }
+
+        public bool IsManadatoryCard(string cardId) => InvestigatorSelected.MandatoryCards.Contains(cardId);
+
+        private int AmountSelectedOfThisCard(string cardId) =>
+            investigatorRepository.InvestigatorsList.Select(i => i.Deck.FindAll(b => b == cardId).Count).Sum();
+
+        private bool IsThisCardAllowed(string cardId) => InvestigatorSelected.DeckBuilding.AllowedCards().Contains(cardId);
     }
 }

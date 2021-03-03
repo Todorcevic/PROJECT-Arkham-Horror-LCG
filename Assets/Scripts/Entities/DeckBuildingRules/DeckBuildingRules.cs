@@ -9,10 +9,10 @@ namespace Arkham.Investigators
     {
         [Inject] private readonly ICardInfoRepository infoRepository;
         public virtual int DeckSize => 30;
-        public virtual List<string> DeckBuildingFactionConditions => new List<string>();
-        public virtual List<int> DeckBuildingXpConditions => new List<int>();
+        protected virtual List<string> DeckBuildingFactionConditions => new List<string>();
+        protected virtual List<int> DeckBuildingXpConditions => new List<int>();
 
-        public virtual List<string> DeckBuilding(object[] args)
+        public virtual List<string> AllowedCards()
         {
             List<string> deckBuildingResult = new List<string>();
             int i = 0;

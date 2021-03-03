@@ -8,6 +8,7 @@ namespace Arkham.Controllers
     {
         [Inject] private readonly ICampaignsManager campaignsManager;
         [Inject] private readonly ICampaignInteractor campaignInteractor;
+        [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
 
         /*******************************************************************/
         void IInitializable.Initialize()
@@ -31,6 +32,7 @@ namespace Arkham.Controllers
             if (!campaignsManager.GetState(state).IsOpen) return;
             campaignView.Interactable.ClickEffect();
             campaignInteractor.CurrentScenario = firstscenario;
+            investigatorSelectorInteractor.SelectLeadInvestigator();
         }
     }
 }

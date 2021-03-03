@@ -9,6 +9,8 @@ namespace Arkham.Interactors
     public class InvestigatorSelectorInteractor : IInvestigatorSelectorInteractor
     {
         [Inject] private readonly IInvestigatorSelectorRepository investigatorSelectorRepository;
+        [Inject] protected readonly ICardInfoInteractor cardInfoInteractor;
+        [Inject] protected readonly IDeckBuilderInteractor deckBuilderInteractor;
         public event Action<string> InvestigatorSelectedChanged;
         public event Action<string> InvestigatorAdded;
         public event Action<string> InvestigatorRemoved;
@@ -39,8 +41,15 @@ namespace Arkham.Interactors
             SelectInvestigator(investigatorSelectorRepository.InvestigatorsSelectedList.FirstOrDefault());
         }
 
-        public int AmountSelectedOfThisCard(string cardId) => InvestigatorsSelectedList.FindAll(i => i == cardId).Count;
-
         public void SelectLeadInvestigator() => SelectInvestigator(LeadInvestigator);
+
+        public bool CanBeSelected(string cardId)
+        {
+            if (SelectionIsFull) return false;
+            if (((cardInfoInteractor.GetQuantity(cardId)) - AmountSelectedOfThisCard(cardId)) <= 0) return false;
+            return true;
+        }
+
+        private int AmountSelectedOfThisCard(string cardId) => InvestigatorsSelectedList.FindAll(i => i == cardId).Count;
     }
 }

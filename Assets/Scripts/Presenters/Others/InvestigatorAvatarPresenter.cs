@@ -1,5 +1,4 @@
-﻿using Arkham.Views;
-using Arkham.Interactors;
+﻿using Arkham.Interactors;
 using Arkham.Managers;
 using Zenject;
 
@@ -9,7 +8,7 @@ namespace Arkham.Presenters
     {
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
         [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
-        [Inject] private readonly IInvestigatorAvatarView investigatorAvatar;
+        [Inject] private readonly IInvestigatorAvatarVisualizable investigatorAvatar;
 
         /*******************************************************************/
         void IInitializable.Initialize()

@@ -19,11 +19,17 @@ namespace Arkham.Controllers
         /*******************************************************************/
         private void Suscribe(IInteractableView selectorView)
         {
+            selectorView.Interactable.Clicked -= selectorView.Interactable.ClickEffect;
+            selectorView.Interactable.DoubleClicked -= selectorView.Interactable.DoubleClickEffect;
             selectorView.Interactable.Clicked += () => Click(selectorView);
             selectorView.Interactable.DoubleClicked += () => Click(selectorView);
         }
 
-        private void Click(IInteractableView selectorView) =>
+        private void Click(IInteractableView selectorView)
+        {
+            if (DeckBuilderInteractor.IsManadatoryCard(selectorView.Id)) return;
+            selectorView.Interactable.ClickEffect();
             DeckBuilderInteractor.RemoveDeckCard(selectorView.Id);
+        }
     }
 }

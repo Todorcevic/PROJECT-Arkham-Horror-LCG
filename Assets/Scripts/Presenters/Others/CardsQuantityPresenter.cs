@@ -1,6 +1,5 @@
 ﻿using Zenject;
 using Arkham.Interactors;
-using Arkham.Views;
 
 namespace Arkham.Presenters
 {
@@ -8,7 +7,7 @@ namespace Arkham.Presenters
     {
         [Inject] private readonly IDeckBuilderInteractor deckBuilderInteractor;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
-        [Inject] private readonly ICardsQuantityView cardsQuantity;
+        [Inject] private readonly ICardsQuantityVisualizable cardsQuantity;
 
         /*******************************************************************/
         void IInitializable.Initialize()

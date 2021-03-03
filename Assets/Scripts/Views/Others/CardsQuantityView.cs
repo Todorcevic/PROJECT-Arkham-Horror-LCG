@@ -1,10 +1,11 @@
-﻿using Sirenix.OdinInspector;
+﻿using Arkham.Presenters;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
 namespace Arkham.Views
 {
-    public class CardsQuantityView : MonoBehaviour, ICardsQuantityView
+    public class CardsQuantityView : MonoBehaviour, ICardsQuantityVisualizable
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI cardsAmountText;

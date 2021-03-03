@@ -9,6 +9,7 @@ namespace Arkham.Interactors
 {
     public interface ICardInfoInteractor
     {
-        CardInfo GetCardInfo(string id);
+        string GetRealName(string id);
+        int GetQuantity(string id);
     }
 }
