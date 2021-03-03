@@ -33,8 +33,7 @@ namespace Arkham.Factories
         private void Create(string cardId, ICardsManager manager, ICardController controller)
         {
             var args = new object[] { cardId, imageCards.GetSprite(cardId) };
-            ICardVisualizable cardView =
-                diContainer.InstantiatePrefabForComponent<CardView>(manager.CardPrefab, manager.Zone, args);
+            CardView cardView = diContainer.InstantiatePrefabForComponent<CardView>(manager.CardPrefab, manager.Zone, args);
             manager.AllCards.Add(cardId, cardView);
             controller.Init(cardView);
         }

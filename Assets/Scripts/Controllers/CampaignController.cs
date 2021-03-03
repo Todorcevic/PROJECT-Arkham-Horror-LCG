@@ -13,26 +13,30 @@ namespace Arkham.Controllers
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            foreach (IInteractableView interactableView in campaignsManager.Campaigns)
+            foreach (IViewInteractable interactableView in campaignsManager.Campaigns)
                 Suscribe(interactableView);
         }
 
-        private void Suscribe(IInteractableView campaignView)
+        private void Suscribe(IViewInteractable campaignView)
         {
-            campaignView.Interactable.Clicked -= campaignView.Interactable.ClickEffect;
-            campaignView.Interactable.DoubleClicked -= campaignView.Interactable.DoubleClickEffect;
             campaignView.Interactable.Clicked += () => Click(campaignView);
-            campaignView.Interactable.DoubleClicked += () => Click(campaignView);
+            campaignView.Interactable.DoubleClicked += campaignView.Interactable.DoubleClickEffect;
+            campaignView.Interactable.HoverOn += campaignView.Interactable.HoverOnEffect;
+            campaignView.Interactable.HoverOff += campaignView.Interactable.HoverOffEffect;
         }
 
-        private void Click(IInteractableView campaignView)
+        private void Click(IViewInteractable campaignView)
         {
-            string state = campaignInteractor.GetState(campaignView.Id);
-            string firstscenario = campaignInteractor.GetScenario(campaignView.Id);
-            if (!campaignsManager.GetState(state).IsOpen) return;
+            if (!IsCampaignOpen(campaignView.Id)) return;
             campaignView.Interactable.ClickEffect();
-            campaignInteractor.CurrentScenario = firstscenario;
+            campaignInteractor.CurrentScenario = campaignInteractor.GetScenario(campaignView.Id);
             investigatorSelectorInteractor.SelectLeadInvestigator();
+        }
+
+        private bool IsCampaignOpen(string campaignId)
+        {
+            string state = campaignInteractor.GetState(campaignId);
+            return campaignsManager.GetState(state).IsOpen;
         }
     }
 }

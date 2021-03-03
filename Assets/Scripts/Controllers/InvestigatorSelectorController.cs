@@ -12,21 +12,29 @@ namespace Arkham.Controllers
         /*******************************************************************/
         public void Initialize()
         {
-            foreach (IInteractableView interactableView in investigatorSelectorsManager.Selectors)
+            foreach (IViewInteractable interactableView in investigatorSelectorsManager.Selectors)
                 Suscribe(interactableView);
         }
 
         /*******************************************************************/
-        private void Suscribe(IInteractableView selectorView)
+        private void Suscribe(IViewInteractable selectorView)
         {
             selectorView.Interactable.Clicked += () => Click(selectorView);
             selectorView.Interactable.DoubleClicked += () => DoubleClick(selectorView);
+            selectorView.Interactable.HoverOn += selectorView.Interactable.HoverOnEffect;
+            selectorView.Interactable.HoverOff += selectorView.Interactable.HoverOffEffect;
         }
 
-        private void Click(IInteractableView selectorView) =>
+        private void Click(IViewInteractable selectorView)
+        {
+            selectorView.Interactable.ClickEffect();
             investigatorSelectorInteractor.SelectInvestigator(selectorView.Id);
+        }
 
-        private void DoubleClick(IInteractableView selectorView) =>
+        private void DoubleClick(IViewInteractable selectorView)
+        {
+            selectorView.Interactable.ClickEffect();
             investigatorSelectorInteractor.RemoveInvestigator(selectorView.Id);
+        }
     }
 }

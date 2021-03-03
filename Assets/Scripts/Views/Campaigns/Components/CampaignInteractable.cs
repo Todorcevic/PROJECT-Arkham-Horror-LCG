@@ -28,7 +28,7 @@ namespace Arkham.Views
             clickAction?.Invoke();
         }
 
-        public override void DoubleClickEffect() => ClickEffect();
+        public override void DoubleClickEffect() { }
 
         public override void HoverOnEffect()
         {

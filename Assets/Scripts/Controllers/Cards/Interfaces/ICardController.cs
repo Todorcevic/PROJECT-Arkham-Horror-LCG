@@ -4,6 +4,6 @@ namespace Arkham.Controllers
 {
     public interface ICardController
     {
-        void Init(ICardVisualizable cardView);
+        void Init(IViewInteractable cardView);
     }
 }

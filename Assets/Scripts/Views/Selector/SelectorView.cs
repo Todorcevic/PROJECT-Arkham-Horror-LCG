@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public class SelectorView : MonoBehaviour, IInteractableView
+    public class SelectorView : MonoBehaviour, IViewInteractable
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;

@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class CardView : MonoBehaviour, ICardVisualizable
+    public class CardView : MonoBehaviour, ICardVisualizable, IViewInteractable
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
@@ -23,7 +23,6 @@ namespace Arkham.Views
         {
             name = Id = id;
             imageConfigurator.ChangeImage(sprite);
-            ((IInitializable)interactable).Initialize();
         }
 
         /*******************************************************************/

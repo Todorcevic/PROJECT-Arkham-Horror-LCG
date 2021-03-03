@@ -18,7 +18,6 @@ namespace Arkham.Managers
             foreach (ButtonInteractable button in buttons)
             {
                 button.Clicked -= button.ClickEffect;
-                button.DoubleClicked -= button.DoubleClickEffect;
                 button.HoverOn -= button.HoverOnEffect;
                 button.HoverOff -= button.HoverOffEffect;
                 button.Clicked += () => Click(button);

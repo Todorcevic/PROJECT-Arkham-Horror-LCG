@@ -6,22 +6,13 @@ using Zenject;
 
 namespace Arkham.Controllers
 {
-    public abstract class InteractableComponent : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IInitializable
+    public abstract class InteractableComponent : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [Inject] private readonly IDoubleClickDetector clickDetector;
         public event Action Clicked;
         public event Action DoubleClicked;
         public event Action HoverOn;
         public event Action HoverOff;
-
-        /*******************************************************************/
-        void IInitializable.Initialize()
-        {
-            Clicked += ClickEffect;
-            DoubleClicked += DoubleClickEffect;
-            HoverOn += HoverOnEffect;
-            HoverOff += HoverOffEffect;
-        }
 
         /*******************************************************************/
         public abstract void ClickEffect();
@@ -39,7 +30,5 @@ namespace Arkham.Controllers
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => HoverOn?.Invoke();
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => HoverOff?.Invoke();
-
-
     }
 }

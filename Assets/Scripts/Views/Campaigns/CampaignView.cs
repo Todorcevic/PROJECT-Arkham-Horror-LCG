@@ -5,7 +5,7 @@ using Arkham.SettingObjects;
 
 namespace Arkham.Views
 {
-    public class CampaignView : MonoBehaviour, ICampaignConfigurable, IInteractableView
+    public class CampaignView : MonoBehaviour, ICampaignConfigurable, IViewInteractable
     {
         [Title("ID")]
         [SerializeField, Required, HideInPrefabAssets] private string id;

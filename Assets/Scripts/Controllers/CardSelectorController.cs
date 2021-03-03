@@ -12,20 +12,20 @@ namespace Arkham.Controllers
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            foreach (IInteractableView interactableView in cardSelectorsManager.Selectors)
+            foreach (IViewInteractable interactableView in cardSelectorsManager.Selectors)
                 Suscribe(interactableView);
         }
 
         /*******************************************************************/
-        private void Suscribe(IInteractableView selectorView)
+        private void Suscribe(IViewInteractable selectorView)
         {
-            selectorView.Interactable.Clicked -= selectorView.Interactable.ClickEffect;
-            selectorView.Interactable.DoubleClicked -= selectorView.Interactable.DoubleClickEffect;
             selectorView.Interactable.Clicked += () => Click(selectorView);
-            selectorView.Interactable.DoubleClicked += () => Click(selectorView);
+            selectorView.Interactable.DoubleClicked += selectorView.Interactable.DoubleClickEffect;
+            selectorView.Interactable.HoverOn += selectorView.Interactable.HoverOnEffect;
+            selectorView.Interactable.HoverOff += selectorView.Interactable.HoverOffEffect;
         }
 
-        private void Click(IInteractableView selectorView)
+        private void Click(IViewInteractable selectorView)
         {
             if (DeckBuilderInteractor.IsManadatoryCard(selectorView.Id)) return;
             selectorView.Interactable.ClickEffect();

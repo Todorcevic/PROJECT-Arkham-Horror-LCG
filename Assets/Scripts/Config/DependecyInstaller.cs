@@ -7,6 +7,7 @@ using Arkham.Controllers;
 using Arkham.Presenters;
 using Arkham.Interactors;
 using Arkham.Managers;
+using Arkham.Views;
 
 namespace Arkham.Config
 {
@@ -65,7 +66,7 @@ namespace Arkham.Config
             Container.BindExecutionOrder<DeckCardPresenter>(-80);
             Container.BindExecutionOrder<InvestigatorAvatarPresenter>(-80);
             Container.BindExecutionOrder<CardsQuantityPresenter>(-80);
-            Container.BindExecutionOrder<InteractableComponent>(0);
+            Container.BindExecutionOrder<ButtonView>(0);
             Container.BindExecutionOrder<ButtonsManager>(70);
             Container.BindExecutionOrder<CampaignController>(70);
             Container.BindExecutionOrder<InvestigatorSelectorController>(70);
