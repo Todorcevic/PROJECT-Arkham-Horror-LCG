@@ -30,13 +30,21 @@ Segregación de Interfaces.
 Eventos de dominio.
 
 ### Capas o modulos:
+
 Views
+
 Controllers
+
 EventsData
+
 Entities
+
 Interactors
+
 Presenters
+
 Managers
+
 Services
 
 ---
