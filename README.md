@@ -45,7 +45,7 @@ Views-->Controllers-->EventsData-->Presenters-->Views
 ## Detalles:
 
 * Debido a que es un juego con reglas complejas es necesario diseñarlo para que cualquier modificación tenga el mínimo impacto con el resto de módulos,
-ademas se debe aplicar el pricipio Open/Close en todo lo posible ya que las reglas pueden ir agregandose y modificando constantemente.
+ademas se debe aplicar el pricipio Open/Close en todo lo posible ya que las reglas se agregan y modifican constantemente.
 
 * Solo las Views y los Managers heredarán de MonoBehaviour para así poder facilitar los test unitarios.
 
