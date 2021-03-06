@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6920108898983775684}
   - component: {fileID: 6856283878978541192}
-  - component: {fileID: 8736390494462685724}
+  - component: {fileID: 8246988587003093940}
   - component: {fileID: 5250951900939113371}
   - component: {fileID: -5149845009183273786}
   - component: {fileID: 6396499959933405539}
@@ -58,12 +58,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab6e96f211313c49936da3da12a0a22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactable: {fileID: 8736390494462685724}
+  interactable: {fileID: 8246988587003093940}
   imageConfigurator: {fileID: 5250951900939113371}
   glowActivator: {fileID: 5330237612808224715}
+  background: {fileID: 4850368526312077242}
   cardName: {fileID: 4121154858783106769}
   quantity: {fileID: 223955344760844326}
---- !u!114 &8736390494462685724
+--- !u!114 &8246988587003093940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,17 +73,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1167292358315829728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2b9bafdc0df6304d82d16cc02c99104, type: 3}
+  m_Script: {fileID: 11500000, guid: b5e4e9a2525d67b41bd3b88e25c5e03e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactableAudio: {fileID: 3161861043085989557}
   background: {fileID: 4850368526312077242}
-  text: {fileID: 4121154858783106769}
-  secundaryText: {fileID: 223955344760844326}
+  cardName: {fileID: 4121154858783106769}
+  quantity: {fileID: 223955344760844326}
   timeHoverAnimation: 0.25
-  clickAction:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &5250951900939113371
 MonoBehaviour:
   m_ObjectHideFlags: 0

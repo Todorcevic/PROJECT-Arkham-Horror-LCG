@@ -5,10 +5,10 @@ namespace Arkham.Managers
 {
     public interface IInvestigatorSelectorsManager
     {
-        IInvestigatorSelectorable GetLeadSelector { get; }
-        List<IInvestigatorSelectorable> Selectors { get; }
-        IInvestigatorSelectorable GetEmptySelector();
-        IInvestigatorSelectorable GetSelectorById(string cardId);
+        IInvestigatorSelector GetLeadSelector { get; }
+        List<IInvestigatorSelector> Selectors { get; }
+        IInvestigatorSelector GetEmptySelector();
+        IInvestigatorSelector GetSelectorById(string cardId);
         void SetLeadAndArrangeSelectors(string leadInvestigatorId);
     }
 }

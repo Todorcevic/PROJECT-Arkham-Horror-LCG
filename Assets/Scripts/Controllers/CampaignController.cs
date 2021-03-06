@@ -1,4 +1,5 @@
-﻿using Arkham.Interactors;
+﻿using Arkham.EventData;
+using Arkham.Interactors;
 using Arkham.Managers;
 using Zenject;
 
@@ -6,6 +7,8 @@ namespace Arkham.Controllers
 {
     public class CampaignController : IInitializable
     {
+        [Inject] private readonly IChangeCampaign changeCampaign;
+        [Inject] private readonly ISelectInvestigator selectInvestigator;
         [Inject] private readonly ICampaignsManager campaignsManager;
         [Inject] private readonly ICampaignInteractor campaignInteractor;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
@@ -29,8 +32,8 @@ namespace Arkham.Controllers
         {
             if (!IsCampaignOpen(campaignView.Id)) return;
             campaignView.Interactable.ClickEffect();
-            campaignInteractor.CurrentScenario = campaignInteractor.GetScenario(campaignView.Id);
-            investigatorSelectorInteractor.SelectLeadInvestigator();
+            changeCampaign.SelectScenario(campaignInteractor.GetScenario(campaignView.Id));
+            selectInvestigator.SelectInvestigator(investigatorSelectorInteractor.LeadInvestigator);
         }
 
         private bool IsCampaignOpen(string campaignId)

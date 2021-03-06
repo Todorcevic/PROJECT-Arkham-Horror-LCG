@@ -13,26 +13,26 @@ namespace Arkham.Managers
         [SerializeField, Required, SceneObjectsOnly] private Transform placeHolder;
         [SerializeField, Required, SceneObjectsOnly] private List<CardSelectorView> selectors;
         public Transform Zone => zone;
-        public List<ICardSelectorable> Selectors =>
-            selectors.OfType<ICardSelectorable>().ToList();
+        public List<ICardSelector> Selectors =>
+            selectors.OfType<ICardSelector>().ToList();
 
         /*******************************************************************/
-        public List<ICardSelectorable> GetAllFilledSelectors() =>
+        public List<ICardSelector> GetAllFilledSelectors() =>
             Selectors.FindAll(selector => selector.Id != null);
 
-        public ICardSelectorable GetSelectorByCardIdOrEmpty(string cardId) =>
+        public ICardSelector GetSelectorByCardIdOrEmpty(string cardId) =>
             Selectors.Find(selector => selector.Id == cardId) ?? GetEmptySelector();
 
-        private ICardSelectorable GetEmptySelector() =>
+        private ICardSelector GetEmptySelector() =>
             Selectors.Find(selector => selector.Id == null);
 
         public void CleanAllSelectors()
         {
-            foreach (ICardSelectorable selector in GetAllFilledSelectors())
+            foreach (ICardSelector selector in GetAllFilledSelectors())
                 DesactivateSelector(selector);
         }
 
-        public void DesactivateSelector(ICardSelectorable selector)
+        public void DesactivateSelector(ICardSelector selector)
         {
             selector.SetSelector(null);
             selector.Transform.SetParent(placeHolder);

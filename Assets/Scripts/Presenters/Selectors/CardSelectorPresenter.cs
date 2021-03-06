@@ -1,52 +1,55 @@
 ﻿using Arkham.Components;
 using Arkham.Interactors;
 using Arkham.Managers;
+using Arkham.EventData;
 using Zenject;
 
 namespace Arkham.Presenters
 {
     public class CardSelectorPresenter : IInitializable
     {
+        [Inject] private readonly IRemoveCardEvent removeCardEvent;
+        [Inject] private readonly IAddCardEvent addCardEvent;
         [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
-        [Inject] private readonly IDeckBuilderInteractor deckBuilderInteractor;
-        [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
         [Inject] private readonly IInvestigatorInfoInteractor investigatorInfoInteractor;
         [Inject] private readonly ICardInfoInteractor cardInfoInteractor;
         [Inject] private readonly IImageCardsManager imageCards;
+        [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
+        [Inject] private readonly ICurrentInvestigator currentInvestigator;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            deckBuilderInteractor.DeckCardAdded += SetCardInSelector;
-            deckBuilderInteractor.DeckCardRemoved += RemoveCardInSelector;
-            investigatorSelectorInteractor.InvestigatorSelectedChanged += ShowAllCards;
+            addCardEvent.DeckCardAdded += SetCardInSelector;
+            removeCardEvent.DeckCardRemoved += RemoveCardInSelector;
+            selectInvestigatorEvent.InvestigatorSelectedChanged += ShowAllCards;
         }
 
         /*******************************************************************/
         private void SetCardInSelector(string cardId)
         {
-            ICardSelectorable selector = cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardId);
+            ICardSelector selector = cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardId);
             if (selector.IsEmpty) ActivateSelector(selector, cardId);
             _ = SetQuantityAndGetIt(selector, cardId);
         }
 
         private void RemoveCardInSelector(string cardId)
         {
-            ICardSelectorable selector = cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardId);
+            ICardSelector selector = cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardId);
             if (SetQuantityAndGetIt(selector, cardId) <= 0)
                 cardSelectorsManager.DesactivateSelector(selector);
         }
 
-        private void ActivateSelector(ICardSelectorable selector, string cardId)
+        private void ActivateSelector(ICardSelector selector, string cardId)
         {
             selector.SetSelector(cardId, imageCards.GetSprite(cardId));
             selector.SetName(cardInfoInteractor.GetRealName(cardId));
             selector.Transform.SetParent(cardSelectorsManager.Zone);
         }
 
-        private int SetQuantityAndGetIt(ICardSelectorable selector, string cardId)
+        private int SetQuantityAndGetIt(ICardSelector selector, string cardId)
         {
-            int quantity = investigatorInfoInteractor.GetThisCardAmountInDeck(investigatorSelectorInteractor.InvestigatorSelected, cardId);
+            int quantity = currentInvestigator.GetAmountOfThisCardInDeck(cardId);
             selector.SetQuantity(quantity);
             return quantity;
         }

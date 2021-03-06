@@ -6,5 +6,6 @@ namespace Arkham.Repositories
     public interface IInvestigatorRepository
     {
         List<InvestigatorInfo> InvestigatorsList { get; set; }
+        InvestigatorInfo GetInvestigatorInfo(string investigatorId);
     }
 }

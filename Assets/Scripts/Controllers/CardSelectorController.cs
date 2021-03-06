@@ -1,13 +1,15 @@
 ﻿using Arkham.Interactors;
 using Arkham.Managers;
+using Arkham.EventData;
 using Zenject;
 
 namespace Arkham.Controllers
 {
     public class CardSelectorController : IInitializable
     {
+        [Inject] private readonly IRemoveCard removeCard;
         [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
-        [Inject] private readonly IDeckBuilderInteractor DeckBuilderInteractor;
+        [Inject] private readonly IClickableCards clickableCards;
 
         /*******************************************************************/
         void IInitializable.Initialize()
@@ -27,9 +29,9 @@ namespace Arkham.Controllers
 
         private void Click(IViewInteractable selectorView)
         {
-            if (DeckBuilderInteractor.IsManadatoryCard(selectorView.Id)) return;
+            if (!clickableCards.IsClickable(selectorView.Id)) return;
             selectorView.Interactable.ClickEffect();
-            DeckBuilderInteractor.RemoveDeckCard(selectorView.Id);
+            removeCard.RemoveDeckCard(selectorView.Id);
         }
     }
 }

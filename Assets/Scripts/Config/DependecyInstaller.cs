@@ -8,6 +8,7 @@ using Arkham.Presenters;
 using Arkham.Interactors;
 using Arkham.Managers;
 using Arkham.Views;
+using Arkham.EventData;
 
 namespace Arkham.Config
 {
@@ -47,13 +48,24 @@ namespace Arkham.Config
             /*** Interactors ***/
             Container.BindInterfacesTo<CampaignInteractor>().AsSingle();
             Container.BindInterfacesTo<InvestigatorSelectorInteractor>().AsSingle();
-            Container.BindInterfacesTo<DeckBuilderInteractor>().AsSingle();
+            Container.BindInterfacesTo<CardSelectorInteractors>().AsSingle();
             Container.BindInterfacesTo<CardInfoInteractor>().AsSingle();
             Container.BindInterfacesTo<InvestigatorInfoInteractor>().AsSingle();
+
+            Container.BindInterfacesTo<ClickableCards>().AsSingle();
+            Container.BindInterfacesTo<CurrentInvestigator>().AsSingle();
 
             /*** Factories ***/
             Container.BindInterfacesTo<DeckCardFactory>().AsSingle();
             Container.BindInterfacesTo<InvestigatorCardFactory>().AsSingle();
+
+            /*** Event Data ***/
+            Container.BindInterfacesTo<AddInvestigatorEventData>().AsSingle();
+            Container.BindInterfacesTo<RemoveInvestigatorEventData>().AsSingle();
+            Container.BindInterfacesTo<SelectInvestigatorEventData>().AsSingle();
+            Container.BindInterfacesTo<CampaignEventData>().AsSingle();
+            Container.BindInterfacesTo<AddCardEventData>().AsSingle();
+            Container.BindInterfacesTo<RemoveCardEventData>().AsSingle();
 
             /*** Execution Order ***/
             Container.BindExecutionOrder<ScreenResolutionAutoDetect>(-100);

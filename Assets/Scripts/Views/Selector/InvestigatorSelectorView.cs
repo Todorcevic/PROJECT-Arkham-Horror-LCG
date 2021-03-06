@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public class InvestigatorSelectorView : SelectorView, IInvestigatorSelectorable
+    public class InvestigatorSelectorView : SelectorView, IInvestigatorSelector
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private LeadActivator leadActivator;

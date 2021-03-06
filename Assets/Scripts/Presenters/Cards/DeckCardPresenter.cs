@@ -1,50 +1,34 @@
 ﻿using Arkham.Interactors;
 using Arkham.Managers;
+using Arkham.EventData;
 using Zenject;
 
 namespace Arkham.Presenters
 {
     public class DeckCardPresenter : IInitializable
     {
-        [Inject] protected readonly ICardInfoInteractor cardInfoInteractor;
-        [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
-        [Inject] private readonly IDeckBuilderInteractor deckBuilderInteractor;
+        [Inject] private readonly IRemoveCardEvent removeCardEvent;
+        [Inject] private readonly IAddCardEvent addCardEvent;
+        [Inject] private readonly ICardSelectorInteractors deckBuilderInteractor;
         [Inject] private readonly IDeckCardsManager deckCardsManager;
+        [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            investigatorSelectorInteractor.InvestigatorSelectedChanged += RefreshAllCardsVisibility;
-            deckBuilderInteractor.DeckCardAdded += ResolveAddVisibility;
-            deckBuilderInteractor.DeckCardRemoved += ResolveRemoveVisibility;
+            selectInvestigatorEvent.InvestigatorSelectedChanged += RefreshAllCardsVisibility;
+            addCardEvent.DeckCardAdded += RefreshAllCardsVisibility;
+            removeCardEvent.DeckCardRemoved += RefreshAllCardsVisibility;
         }
 
         /*******************************************************************/
-        private void ResolveAddVisibility(string cardId)
-        {
-            if (deckBuilderInteractor.SelectionIsFull) RefreshAllCardsVisibility();
-            else RefreshCardVisibility(cardId);
-        }
-
-        private void ResolveRemoveVisibility(string cardId)
-        {
-            if (deckBuilderInteractor.SelectionIsNotFull) RefreshAllCardsVisibility();
-            else RefreshCardVisibility(cardId);
-        }
-
-        private void RefreshCardVisibility(string cardId)
-        {
-            bool canBeSelected = deckBuilderInteractor.CanBeSelected(cardId);
-            deckCardsManager.AllCards[cardId].Activate(canBeSelected);
-        }
-
         private void RefreshAllCardsVisibility(string _) => RefreshAllCardsVisibility();
 
         private void RefreshAllCardsVisibility()
         {
             foreach (ICardVisualizable cardView in deckCardsManager.CardsList)
             {
-                bool canBeSelected = deckBuilderInteractor.CanBeSelected(cardView.Id);
+                bool canBeSelected = deckBuilderInteractor.CanThisCardBeSelected(cardView.Id);
                 cardView.Activate(canBeSelected);
             }
         }

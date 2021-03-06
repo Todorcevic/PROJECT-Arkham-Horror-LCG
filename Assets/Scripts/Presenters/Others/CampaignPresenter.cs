@@ -1,32 +1,38 @@
 ﻿using Arkham.Managers;
 using Arkham.Interactors;
+using Arkham.EventData;
+using Arkham.SettingObjects;
 using Zenject;
 
 namespace Arkham.Presenters
 {
-    public class CampaignPresenter : ICampaignPresenter, IInitializable
+    public class CampaignPresenter : IInitializable
     {
         [Inject] private readonly ICampaignsManager campaignsManager;
+        [Inject] private readonly ICampaignEvent changeCampaignEventData;
         [Inject] private readonly ICampaignInteractor campaignInteractor;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            campaignInteractor.CampaignStateChanged += SetCampaign;
+            changeCampaignEventData.CampaignStateChanged += ExecuteStateWithCampaign;
             InitializeCampaigns();
         }
 
         /*******************************************************************/
-        public void SetCampaign(string campaignId)
+        private void ExecuteStateWithCampaign(string campaignId, string state)
         {
-            string stateId = campaignInteractor.GetState(campaignId);
-            campaignsManager.ExecuteStateWithCampaign(stateId, campaignId);
+            ICampaignConfigurable campaignView = campaignsManager.GetCampaign(campaignId);
+            campaignsManager.GetState(state).ExecuteState(campaignView);
         }
 
         private void InitializeCampaigns()
         {
             foreach (string campaignId in campaignInteractor.CampaignsList)
-                SetCampaign(campaignId);
+            {
+                string state = campaignInteractor.GetState(campaignId);
+                ExecuteStateWithCampaign(campaignId, state);
+            }
         }
     }
 }

@@ -2,11 +2,14 @@
 using UnityEngine;
 using TMPro;
 using Arkham.Presenters;
+using Arkham.Controllers;
+using UnityEngine.UI;
 
 namespace Arkham.Views
 {
-    public class CardSelectorView : SelectorView, ICardSelectorable
+    public class CardSelectorView : SelectorView, ICardSelector
     {
+        [SerializeField, Required, ChildGameObjectsOnly] private Image background;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI cardName;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI quantity;
 

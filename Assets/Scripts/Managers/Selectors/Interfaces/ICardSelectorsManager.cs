@@ -7,10 +7,10 @@ namespace Arkham.Managers
     public interface ICardSelectorsManager
     {
         Transform Zone { get; }
-        List<ICardSelectorable> Selectors { get; }
-        List<ICardSelectorable> GetAllFilledSelectors();
-        ICardSelectorable GetSelectorByCardIdOrEmpty(string cardId);
+        List<ICardSelector> Selectors { get; }
+        List<ICardSelector> GetAllFilledSelectors();
+        ICardSelector GetSelectorByCardIdOrEmpty(string cardId);
         void CleanAllSelectors();
-        void DesactivateSelector(ICardSelectorable selector);
+        void DesactivateSelector(ICardSelector selector);
     }
 }

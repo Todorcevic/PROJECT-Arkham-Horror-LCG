@@ -1,5 +1,6 @@
 ﻿using Arkham.Interactors;
 using Arkham.Managers;
+using Arkham.EventData;
 using Zenject;
 
 namespace Arkham.Presenters
@@ -9,39 +10,23 @@ namespace Arkham.Presenters
         [Inject] protected readonly ICardInfoInteractor cardInfoInteractor;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
         [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
+        [Inject] private readonly IAddInvestigatorEvent addInvestigatorEventData;
+        [Inject] private readonly IRemoveInvestigatorEvent removeInvestigatorEvent;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            investigatorSelectorInteractor.InvestigatorAdded += ResolveAddVisibility;
-            investigatorSelectorInteractor.InvestigatorRemoved += ResolveRemoveVisibility;
-            RefreshAllCardsVisibility();
+            addInvestigatorEventData.InvestigatorAdded += RefreshAllCardsVisibility;
+            removeInvestigatorEvent.InvestigatorRemoved += RefreshAllCardsVisibility;
+            RefreshAllCardsVisibility(null);
         }
 
         /*******************************************************************/
-        private void ResolveAddVisibility(string investigatorId)
-        {
-            if (investigatorSelectorInteractor.SelectionIsFull) RefreshAllCardsVisibility();
-            else RefreshCardVisibility(investigatorId);
-        }
-
-        private void ResolveRemoveVisibility(string investigatorId)
-        {
-            if (investigatorSelectorInteractor.SelectionIsNotFull) RefreshAllCardsVisibility();
-            else RefreshCardVisibility(investigatorId);
-        }
-
-        private void RefreshCardVisibility(string cardId)
-        {
-            bool canBeSelected = investigatorSelectorInteractor.CanBeSelected(cardId);
-            investigatorCardsManager.AllCards[cardId].Activate(canBeSelected);
-        }
-
-        private void RefreshAllCardsVisibility()
+        private void RefreshAllCardsVisibility(string _)
         {
             foreach (ICardVisualizable cardView in investigatorCardsManager.CardsList)
             {
-                bool canBeSelected = investigatorSelectorInteractor.CanBeSelected(cardView.Id);
+                bool canBeSelected = investigatorSelectorInteractor.CanThisCardBeSelected(cardView.Id);
                 cardView.Activate(canBeSelected);
             }
         }

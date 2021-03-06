@@ -1,6 +1,8 @@
 ﻿using Arkham.Interactors;
 using Arkham.Managers;
+using Arkham.EventData;
 using Zenject;
+using System.Linq;
 
 namespace Arkham.Controllers
 {
@@ -8,6 +10,8 @@ namespace Arkham.Controllers
     {
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
+        [Inject] private readonly ISelectInvestigator selectInvestigator;
+        [Inject] private readonly IRemoveInvestigator removeInvestigator;
 
         /*******************************************************************/
         public void Initialize()
@@ -28,13 +32,14 @@ namespace Arkham.Controllers
         private void Click(IViewInteractable selectorView)
         {
             selectorView.Interactable.ClickEffect();
-            investigatorSelectorInteractor.SelectInvestigator(selectorView.Id);
+            selectInvestigator.SelectInvestigator(selectorView.Id);
         }
 
         private void DoubleClick(IViewInteractable selectorView)
         {
             selectorView.Interactable.ClickEffect();
-            investigatorSelectorInteractor.RemoveInvestigator(selectorView.Id);
+            removeInvestigator.RemoveInvestigator(selectorView.Id);
+            selectInvestigator.SelectInvestigator(investigatorSelectorInteractor.LeadInvestigator);
         }
     }
 }

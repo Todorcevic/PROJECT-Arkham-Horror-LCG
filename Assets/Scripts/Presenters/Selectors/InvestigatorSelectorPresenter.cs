@@ -1,7 +1,9 @@
 ﻿using Arkham.Interactors;
 using Arkham.Managers;
+using Arkham.EventData;
 using UnityEngine;
 using Zenject;
+using Arkham.Repositories;
 
 namespace Arkham.Presenters
 {
@@ -11,22 +13,26 @@ namespace Arkham.Presenters
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
+        [Inject] private readonly IInvestigatorSelectorRepository investigatorSelectorRepository;
+        [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
+        [Inject] private readonly IAddInvestigatorEvent addInvestigatorEventData;
+        [Inject] private readonly IRemoveInvestigatorEvent removeInvestigatorEvent;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            investigatorSelectorInteractor.InvestigatorSelectedChanged += SelectInvestigator;
-            investigatorSelectorInteractor.InvestigatorAdded += AddInvestigator;
-            investigatorSelectorInteractor.InvestigatorRemoved += RemoveInvestigator;
+            selectInvestigatorEvent.InvestigatorSelectedChanged += SelectInvestigator;
+            addInvestigatorEventData.InvestigatorAdded += AddInvestigator;
+            removeInvestigatorEvent.InvestigatorRemoved += RemoveInvestigator;
             InitializeSelectors();
         }
 
         /*******************************************************************/
         private void InitializeSelectors()
         {
-            foreach (string investigatorId in investigatorSelectorInteractor.InvestigatorsSelectedList)
+            foreach (string investigatorId in investigatorSelectorRepository.InvestigatorsSelectedList)
             {
-                IInvestigatorSelectorable selector = investigatorSelectorsManager.GetEmptySelector();
+                IInvestigatorSelector selector = investigatorSelectorsManager.GetEmptySelector();
                 SetInvestigatorInSelector(investigatorId, selector);
             }
         }
@@ -40,7 +46,7 @@ namespace Arkham.Presenters
 
         private void AddInvestigator(string investigatorId)
         {
-            IInvestigatorSelectorable selector = investigatorSelectorsManager.GetEmptySelector();
+            IInvestigatorSelector selector = investigatorSelectorsManager.GetEmptySelector();
             SetInvestigatorInSelector(investigatorId, selector);
             selector.MoveTo(investigatorCardsManager.AllCards[investigatorId].Transform);
             investigatorSelectorsManager.SetLeadAndArrangeSelectors(investigatorSelectorInteractor.LeadInvestigator);
@@ -52,7 +58,7 @@ namespace Arkham.Presenters
             investigatorSelectorsManager.SetLeadAndArrangeSelectors(investigatorSelectorInteractor.LeadInvestigator);
         }
 
-        private void SetInvestigatorInSelector(string investigatorId, IInvestigatorSelectorable selector)
+        private void SetInvestigatorInSelector(string investigatorId, IInvestigatorSelector selector)
         {
             Sprite spriteCard = investigatorCardsManager.GetSpriteCard(investigatorId);
             selector.SetSelector(investigatorId, spriteCard);

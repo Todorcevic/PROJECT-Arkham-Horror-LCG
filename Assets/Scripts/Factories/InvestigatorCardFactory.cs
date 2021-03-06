@@ -7,12 +7,13 @@ using Arkham.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using Zenject;
+using Arkham.Repositories;
 
 namespace Arkham.Factories
 {
     public class InvestigatorCardFactory : CardFactory
     {
-        [Inject] private readonly IDeckBuilderInteractor investigatorRepository;
+        [Inject] private readonly IInvestigatorRepository investigatorRepository;
         [Inject] private readonly IInvestigatorCardController investigatorCardController;
         [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
         protected override ICardsManager CardsManager => investigatorCardsManager;
@@ -22,10 +23,10 @@ namespace Arkham.Factories
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Code).Select(c => c.Code);
 
         /*******************************************************************/
-        protected override void ExtraSettings(string cardId)
+        protected override void ExtraSettings(string investigatorId)
         {
-            InvestigatorInfo investigator = investigatorRepository.GetInvestigatorById(cardId);
-            investigator.DeckBuilding = instantiator.CreateInstance<DeckBuildingRules>(cardId);
+            InvestigatorInfo investigatorInfo = investigatorRepository.InvestigatorsList.Find(i => i.Id == investigatorId);
+            investigatorInfo.DeckBuilding = instantiator.CreateInstance<DeckBuildingRules>(investigatorId);
         }
     }
 }

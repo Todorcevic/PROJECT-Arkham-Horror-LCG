@@ -1,28 +1,30 @@
 ﻿using Zenject;
 using Arkham.Interactors;
+using Arkham.EventData;
 
 namespace Arkham.Presenters
 {
     public class CardsQuantityPresenter : IInitializable
     {
-        [Inject] private readonly IDeckBuilderInteractor deckBuilderInteractor;
-        [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
-        [Inject] private readonly ICardsQuantityVisualizable cardsQuantity;
+        [Inject] private readonly IAddCardEvent addCardEvent;
+        [Inject] private readonly IRemoveCardEvent removeCardEvent;
+        [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
+        [Inject] private readonly ICurrentInvestigator currentInvestigator;
+        [Inject] private readonly ICardsQuantityVisualizable cardsQuantityView;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            deckBuilderInteractor.DeckCardAdded += ChangeText;
-            deckBuilderInteractor.DeckCardRemoved += ChangeText;
-            investigatorSelectorInteractor.InvestigatorSelectedChanged += ChangeText;
-            ChangeText(null);
+            addCardEvent.DeckCardAdded += ChangeText;
+            removeCardEvent.DeckCardRemoved += ChangeText;
+            selectInvestigatorEvent.InvestigatorSelectedChanged += ChangeText;
         }
 
         /*******************************************************************/
         private void ChangeText(string _)
         {
-            cardsQuantity.SetCardsAmount = deckBuilderInteractor.CardsAmountSelected.ToString();
-            cardsQuantity.SetDeckSize = deckBuilderInteractor.DeckSize.ToString();
+            cardsQuantityView.SetCardsAmount = currentInvestigator.AmountCardsSelected.ToString();
+            cardsQuantityView.SetDeckSize = currentInvestigator.DeckSize.ToString();
         }
     }
 }

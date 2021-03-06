@@ -12,7 +12,7 @@ namespace Arkham.Views
         [SerializeField, Required, ChildGameObjectsOnly] private GlowActivator glowActivator;
         public string Id { get; private set; }
         public bool IsEmpty => Id == null;
-        public InteractableComponent Interactable => interactable;
+        public virtual InteractableComponent Interactable => interactable;
         public Transform Transform => transform;
 
         /*******************************************************************/

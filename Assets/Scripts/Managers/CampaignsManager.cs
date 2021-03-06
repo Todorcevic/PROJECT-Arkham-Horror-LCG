@@ -17,11 +17,5 @@ namespace Arkham.Managers
         /*******************************************************************/
         public ICampaignState GetState(string campaignState) => states.Find(s => s.Id == campaignState);
         public ICampaignConfigurable GetCampaign(string campaignId) => campaigns.Find(c => c.Id == campaignId);
-
-        public void ExecuteStateWithCampaign(string state, string campaignId)
-        {
-            ICampaignConfigurable campaignView = GetCampaign(campaignId);
-            GetState(state).ExecuteState(campaignView);
-        }
     }
 }

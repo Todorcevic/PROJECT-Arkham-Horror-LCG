@@ -1,24 +1,23 @@
-﻿using Arkham.Interactors;
-using Arkham.Managers;
+﻿using Arkham.Managers;
+using Arkham.EventData;
 using Zenject;
 
 namespace Arkham.Presenters
 {
     public class InvestigatorAvatarPresenter : IInitializable
     {
-        [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
-        [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
         [Inject] private readonly IInvestigatorAvatarVisualizable investigatorAvatar;
+        [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
+        [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            investigatorSelectorInteractor.InvestigatorSelectedChanged += SelectInvetigator;
-            SelectInvetigator(investigatorSelectorInteractor.InvestigatorSelected);
+            selectInvestigatorEvent.InvestigatorSelectedChanged += ShowInvetigator;
         }
 
         /*******************************************************************/
-        private void SelectInvetigator(string investigatorId)
+        private void ShowInvetigator(string investigatorId)
         {
             var imageCard = investigatorCardsManager.GetSpriteCard(investigatorId);
             investigatorAvatar.ChangeImage(imageCard);
