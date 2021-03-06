@@ -1,4 +1,4 @@
-# PROJECT Arkham Horror - Menu
+# PROJECT Arkham Horror
 
 ![PROJECT Arkham Horror](https://www.rosalesnavas.com/images/logo_with_text_black.png)
 ---
@@ -12,8 +12,8 @@ El objetivo es conseguir una version profesional del juego aplicando una arquite
 * [La página del proyecto](https://www.rosalesnavas.com/arkham)
 
 * La información e imágenes de las cartas han sido obtenidas de: https://arkhamdb.com/
- 
- ![GamePlay](https://www.rosalesnavas.com/images/portfolio/arkham/2.jpg)
+---
+ ![GamePlay](https://www.rosalesnavas.com/images/ProjectArkhamHorrorGithub.jpg)
 ---
 
 ## Detalles de la arquitectura:
