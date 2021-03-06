@@ -58,7 +58,7 @@ es que implimenten IViewInteractable, que es la interface que utiliza el Control
 
 * El Controller cuando reciba una notificación actuará llamando a EventData para modificar alguna Entity, o ejecutando directamente un metodo de algún Presenter si no fuera necesario modificar ninguna Entity.
 
-* Un EventData modifica alguna Entity y lanza una notificación por evento, que será recibida por los Presenters que estén suscrito (puede ser 1 o varios presenters).
+* Un EventData modifica alguna Entity y lanza una notificación que será recibida por los Presenters que estén suscrito (puede ser 1 o varios presenters).
 
 * Una Entity representa el estado y las caracteristicas de algo en el juego mediante valores primitivos y serializables.
 
@@ -71,7 +71,7 @@ actua en concecuencia con una Interface que es implementada por una determinada 
 
 * La View contiene los componentes visuales cuyos metodos serán implementados en interfaces para invertir la dependencia que existe entre Presenter-View.
 
-* Los Services proporcionan ayuda o efectua una tarea especifica, por ejemplo: CardFactory, DoubleClickDetector, etc. Suele ser inyectado el modulo que lo necesite.
+* Los Services proporcionan ayuda o efectua una tarea especifica, por ejemplo: CardFactory, DoubleClickDetector, etc. Suele ser inyectado al modulo que lo necesite.
 
 ---
 ## Herramientas:
