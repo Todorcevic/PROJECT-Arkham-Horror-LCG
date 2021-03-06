@@ -17,7 +17,7 @@ El objetivo es conseguir una version profesional del juego aplicando una arquite
 
 ### Objetivos:
 
-Buscar la máxima testabilidad y escalabilidad.
+* Buscar la máxima testabilidad y escalabilidad.
 
 ### Claves:
 
@@ -72,12 +72,12 @@ actua en concecuencia con una Interface que es implementada por una determinada 
 
 ---
 ## Herramientas:
-[Zenject](https://github.com/modesttree/Zenject) imprescindible para injetar las dependencias.
+* [Zenject](https://github.com/modesttree/Zenject) imprescindible para injetar las dependencias.
 
-[DOTween](http://dotween.demigiant.com/index.php) para implementar animaciones y contenido visual.
+* [DOTween](http://dotween.demigiant.com/index.php) para implementar animaciones y contenido visual.
 
-[JsonDotNet](https://www.newtonsoft.com/json) para la persistencia de datos. Se implementa con un Adapter por si fuera necesario cambiarlo a otro sistema de almacenamiento como una base de datos.
+* [JsonDotNet](https://www.newtonsoft.com/json) para la persistencia de datos. Se implementa con un Adapter por si fuera necesario cambiarlo a otro sistema de almacenamiento como una base de datos.
 
-[Odin Inspector](https://odininspector.com/) para crear herramientas que ayuden al diseño visual.
+* [Odin Inspector](https://odininspector.com/) para crear herramientas que ayuden al diseño visual.
 
-[NSubstitute](https://nsubstitute.github.io/) para la creacion de Mocks en los tests.
+* [NSubstitute](https://nsubstitute.github.io/) para la creacion de Mocks en los tests.
