@@ -35,7 +35,7 @@ El objetivo es conseguir una version profesional del juego aplicando una arquite
 ---
 ## Flujo de la aplicación:
 
-![GamePlay](https://www.rosalesnavas.com/images/esquema.jpg)
+*TODO
 
 ---
 ## Detalles:
