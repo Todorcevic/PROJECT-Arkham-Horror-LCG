@@ -22,7 +22,7 @@ namespace Arkham.Controllers
         private void Suscribe(IViewInteractable selectorView)
         {
             selectorView.Interactable.Clicked += () => Click(selectorView);
-            selectorView.Interactable.DoubleClicked += selectorView.Interactable.DoubleClickEffect;
+            selectorView.Interactable.DoubleClicked += () => Click(selectorView);
             selectorView.Interactable.HoverOn += selectorView.Interactable.HoverOnEffect;
             selectorView.Interactable.HoverOff += selectorView.Interactable.HoverOffEffect;
         }

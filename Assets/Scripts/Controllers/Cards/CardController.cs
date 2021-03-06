@@ -7,7 +7,7 @@ namespace Arkham.Controllers
         public void Init(IViewInteractable cardView)
         {
             cardView.Interactable.Clicked += () => Click(cardView);
-            cardView.Interactable.DoubleClicked += cardView.Interactable.DoubleClickEffect;
+            cardView.Interactable.DoubleClicked += () => Click(cardView);
             cardView.Interactable.HoverOn += cardView.Interactable.HoverOnEffect;
             cardView.Interactable.HoverOff += cardView.Interactable.HoverOffEffect;
         }

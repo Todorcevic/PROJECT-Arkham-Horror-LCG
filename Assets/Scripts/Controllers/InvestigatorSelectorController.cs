@@ -37,7 +37,7 @@ namespace Arkham.Controllers
 
         private void DoubleClick(IViewInteractable selectorView)
         {
-            selectorView.Interactable.ClickEffect();
+            selectorView.Interactable.DoubleClickEffect();
             removeInvestigator.RemoveInvestigator(selectorView.Id);
             selectInvestigator.SelectInvestigator(investigatorSelectorInteractor.LeadInvestigator);
         }

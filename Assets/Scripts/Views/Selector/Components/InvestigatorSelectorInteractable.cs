@@ -17,7 +17,7 @@ namespace Arkham.Views
         /*******************************************************************/
         public override void ClickEffect() => audioInteractable.ClickSound();
 
-        public override void DoubleClickEffect() { }
+        public override void DoubleClickEffect() => ClickEffect();
 
         public override void HoverOnEffect()
         {
