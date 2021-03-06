@@ -25,7 +25,7 @@ namespace Arkham.Factories
         /*******************************************************************/
         protected override void ExtraSettings(string investigatorId)
         {
-            InvestigatorInfo investigatorInfo = investigatorRepository.InvestigatorsList.Find(i => i.Id == investigatorId);
+            InvestigatorInfo investigatorInfo = investigatorRepository.GetInvestigatorInfo(investigatorId);
             investigatorInfo.DeckBuilding = instantiator.CreateInstance<DeckBuildingRules>(investigatorId);
         }
     }

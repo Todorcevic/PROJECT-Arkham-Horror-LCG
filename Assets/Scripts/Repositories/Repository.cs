@@ -14,7 +14,8 @@ namespace Arkham.Repositories
 
         /**** CardsInfo ****/
         public List<CardInfo> CardInfoList { get; set; }
-        public CardInfo GetCardInfo(string cardId) => CardInfoList.Find(c => c.Code == cardId);
+        public Dictionary<string, CardInfo> CardInfoDict { private get; set; }
+        public CardInfo GetCardInfo(string cardId) => CardInfoDict[cardId];
 
         /**** Investigators ****/
         [DataMember] public List<InvestigatorInfo> InvestigatorsList { get; set; }

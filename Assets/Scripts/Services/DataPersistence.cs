@@ -3,7 +3,7 @@ using Arkham.Entities;
 using Arkham.Config;
 using Arkham.Repositories;
 using Zenject;
-using UnityEngine;
+using System.Linq;
 
 namespace Arkham.Services
 {
@@ -22,8 +22,11 @@ namespace Arkham.Services
         }
 
         /*******************************************************************/
-        public void LoadDataCards() =>
+        public void LoadDataCards()
+        {
             repository.CardInfoList = serializer.CreateDataFromResources<List<CardInfo>>(gameFiles.CardsDataFilePath);
+            repository.CardInfoDict = repository.CardInfoList.ToDictionary(c => c.Code);
+        }
 
         public void SaveProgress() => serializer.SaveFileFromData(repository, gameFiles.PlayerProgressFilePath);
 
