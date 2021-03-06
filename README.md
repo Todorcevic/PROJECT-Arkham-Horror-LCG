@@ -1,7 +1,7 @@
 # PROJECT Arkham Horror - Menu
 
 ![PROJECT Arkham Horror](https://www.rosalesnavas.com/images/logo_with_text_black.png)
-
+---
 Este proyecto está basado en el juego de cartas LCG Arkham Horror de Fantasy Flight Games.
 El objetivo es conseguir una version profesional del juego aplicando una arquitectura limpia y principios SOLID.
 
