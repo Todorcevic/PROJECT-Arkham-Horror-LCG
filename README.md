@@ -13,6 +13,7 @@ El objetivo es conseguir una version profesional del juego aplicando una arquite
 
 * La información e imágenes de las cartas han sido obtenidas de: https://arkhamdb.com/
  
+ ![GamePlay](https://www.rosalesnavas.com/images/portfolio/arkham/2.jpg)
 ---
 
 ## Detalles de la arquitectura:
@@ -83,3 +84,5 @@ actua en concecuencia con una Interface que es implementada por una determinada 
 * [Odin Inspector](https://odininspector.com/) para crear herramientas que ayuden al diseño visual.
 
 * [NSubstitute](https://nsubstitute.github.io/) para la creacion de Mocks en los tests.
+
+![Menu](https://www.rosalesnavas.com/images/portfolio/arkham/3.jpg)
