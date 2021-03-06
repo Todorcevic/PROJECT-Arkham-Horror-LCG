@@ -45,9 +45,9 @@ ademas se debe aplicar el pricipio Open/Close en todo lo posible ya que las regl
 
 * Solo las Views y los Managers heredarán de MonoBehaviour para así poder facilitar los test unitarios.
 
-* Una View es un unico elemento visual: un boton, una carta, etc.
+* Una View es un único elemento visual: un boton, una carta, etc.
 
-* Un Manager contiene una colección de abstracciones de las Views para poder suministrarselos a quien lo necesite, en su mayor parte a los Presenters.
+* Un Manager contiene una colección de abstracciones de las Views para poder suministrárselos a quien lo necesite, en su mayor parte a los Presenters.
 
 * Cuando el usuario interactua con una View, esta lanza un evento al que está suscrito el Controller destinado a esa View, el requisito para estas Views
 es que implimenten IViewInteractable, que es la interface que utiliza el Controller para suscribirse y manejar la parte visual.
@@ -56,22 +56,22 @@ es que implimenten IViewInteractable, que es la interface que utiliza el Control
 
 * Un EventData modifica alguna Entity y lanza una notificación que será recibida por los Presenters que estén suscrito (puede ser 1 o varios presenters).
 
-* Una Entity representa el estado y las caracteristicas de algo en el juego mediante valores primitivos y serializables.
+* Una Entity representa el estado y las características de algo en el juego mediante valores primitivos y serializables.
 
 * Cuando un Presenter recibe una notificación de EventData o una llamada de Controller, consulta con los Interactors para obtener los datos necesarios y 
-actua en concecuencia con una Interface que es implementada por una determinada View. 
+actua en concecuencia con una Interface que es implementada por la View correspondiente. 
 
-* Los Interactors contienen la logica del juego, obtieniendo los datos de las Entities y suminitrando información al Presenter según este último la pida. La comunicación Presenter - Interactor tiene las dependencias invertidas para que la logica no se vea afectada si algún componente visual cambia o se agregan nuevos.
+* Los Interactors contienen la lógica del juego, obtieniendo los datos de las Entities y suminitrando información al Presenter según este último la pida. La comunicación Presenter - Interactor tiene las dependencias invertidas para que la lógica no se vea afectada si algún componente visual cambia o se agregan nuevos.
 
 * Los Managers suministran al Presenter una o varias instancias de las Interfaces que implementa la View.
 
-* La View contiene los componentes visuales cuyos metodos serán implementados en interfaces para invertir la dependencia que existe entre Presenter-View.
+* La View contiene los componentes visuales cuyos métodos serán implementados en interfaces para invertir la dependencia que existe entre Presenter-View.
 
-* Los Services proporcionan ayuda o efectua una tarea especifica, por ejemplo: CardFactory, DoubleClickDetector, etc. Suele ser inyectado al modulo que lo necesite.
+* Los Services proporcionan ayuda o efectua una tarea específica, por ejemplo: CardFactory, DoubleClickDetector, etc. Suele ser inyectado al módulo que lo necesite.
 
 ---
 ## Herramientas:
-* [Zenject](https://github.com/modesttree/Zenject) imprescindible para injetar las dependencias.
+* [Zenject](https://github.com/modesttree/Zenject) imprescindible para inyectar las dependencias.
 
 * [DOTween](http://dotween.demigiant.com/index.php) para implementar animaciones y contenido visual.
 
@@ -79,6 +79,6 @@ actua en concecuencia con una Interface que es implementada por una determinada 
 
 * [Odin Inspector](https://odininspector.com/) para crear herramientas que ayuden al diseño visual.
 
-* [NSubstitute](https://nsubstitute.github.io/) para la creacion de Mocks en los tests.
+* [NSubstitute](https://nsubstitute.github.io/) para la creación de Mocks en los tests.
 
 ![Menu](https://www.rosalesnavas.com/images/portfolio/arkham/3.jpg)
