@@ -17,13 +17,14 @@ namespace Arkham.Interactors
         public bool CanThisCardBeSelected(string cardId)
         {
             if (SelectionIsFull) return false;
-            if (IsThisCardWasted(cardId)) return false;
+            if (IsThisInvestigatorWasted(cardId)) return false;
             return true;
         }
 
-        private int AmountSelectedOfThisCard(string cardId) =>
-            investigatorSelectorRepository.InvestigatorsSelectedList.FindAll(i => i == cardId).Count;
+        private int AmountSelectedOfThisInvestigator(string investigatorId) =>
+            investigatorSelectorRepository.InvestigatorsSelectedList.FindAll(i => i == investigatorId).Count;
 
-        private bool IsThisCardWasted(string cardId) => cardInfoInteractor.GetQuantity(cardId) - AmountSelectedOfThisCard(cardId) <= 0;
+        private bool IsThisInvestigatorWasted(string investigatorId) =>
+            cardInfoInteractor.GetQuantity(investigatorId) - AmountSelectedOfThisInvestigator(investigatorId) <= 0;
     }
 }
