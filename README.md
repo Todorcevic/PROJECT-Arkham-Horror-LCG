@@ -33,10 +33,6 @@ El objetivo es conseguir una version profesional del juego aplicando una arquite
 * Eventos de dominio.
 
 ---
-## Flujo de la aplicación:
-
-
----
 ## Detalles:
 
 * Debido a que es un juego con reglas complejas es necesario diseñarlo para que cualquier modificación tenga el mínimo impacto con el resto de módulos,
