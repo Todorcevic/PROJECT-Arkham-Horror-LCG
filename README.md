@@ -35,11 +35,7 @@ El objetivo es conseguir una version profesional del juego aplicando una arquite
 ---
 ## Flujo de la aplicación:
 
-					 Entities --> Interactors
-						  |	   		   |
-Views-->Controllers-->EventsData-->Presenters-->Views
-									       |
-									    Managers
+![GamePlay](https://www.rosalesnavas.com/images/esquema.jpg)
 
 ---
 ## Detalles:
