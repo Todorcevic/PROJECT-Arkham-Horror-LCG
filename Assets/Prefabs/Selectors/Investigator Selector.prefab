@@ -258,11 +258,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5607064fade8c614e8ceaf0fcbce0b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactable: {fileID: 7970832748505163419}
   imageConfigurator: {fileID: 3668679410626289193}
   glowActivator: {fileID: 4178966816585282234}
   leadActivator: {fileID: 3270828025641024244}
   selectorMovement: {fileID: 3905956588092644237}
+  investigatorSelectorInteractable: {fileID: 7970832748505163419}
 --- !u!114 &7970832748505163419
 MonoBehaviour:
   m_ObjectHideFlags: 0

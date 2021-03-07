@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: x
-  interactable: {fileID: 2422650025459318338}
+  campaignInteractable: {fileID: 2422650025459318338}
   imageConfigurator: {fileID: 3868054859199124096}
 --- !u!114 &2422650025459318338
 MonoBehaviour:

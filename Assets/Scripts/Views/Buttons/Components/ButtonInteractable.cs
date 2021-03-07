@@ -1,4 +1,4 @@
-﻿using Arkham.Controllers;
+﻿using Arkham.Managers;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -8,9 +8,10 @@ using UnityEngine.UI;
 
 namespace Arkham.Views
 {
-    public class ButtonInteractable : InteractableComponent
+    public class ButtonInteractable : MonoBehaviour, IInteractableEffects
     {
         [Title("RESOURCES")]
+        [SerializeField] private ButtonsManager manager;
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
         [SerializeField, Required, ChildGameObjectsOnly] private Image background;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI text;
@@ -18,25 +19,29 @@ namespace Arkham.Views
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
         [Title("CLICK EVENT")]
-        [SerializeField] protected UnityEvent clickAction;
+        [SerializeField] private UnityEvent clickAction;
 
         /*******************************************************************/
-        public override void ClickEffect()
+        public void ClickEffect()
         {
+            if (manager?.CurrentButton == this) return;
+            manager?.SelectTab(this);
             interactableAudio.ClickSound();
             clickAction?.Invoke();
         }
 
-        public override void DoubleClickEffect() { }
+        public void DoubleClickEffect() { }
 
-        public override void HoverOnEffect()
+        public void HoverOnEffect()
         {
+            if (manager?.CurrentButton == this) return;
             interactableAudio.HoverOnSound();
             HoverActivate();
         }
 
-        public override void HoverOffEffect()
+        public void HoverOffEffect()
         {
+            if (manager?.CurrentButton == this) return;
             interactableAudio.HoverOffSound();
             HoverDesactivate();
         }

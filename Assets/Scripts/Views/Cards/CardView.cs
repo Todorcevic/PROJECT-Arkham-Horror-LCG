@@ -6,22 +6,23 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class CardView : MonoBehaviour, ICardVisualizable, IViewInteractable
+    public class CardView : ViewInteractable, ICardVisualizable
     {
+        private string id;
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
+        [SerializeField, Required, ChildGameObjectsOnly] private CardInteractable cardInteractable;
         [SerializeField, Required, ChildGameObjectsOnly] private ImageConfigurator imageConfigurator;
 
-        public string Id { get; private set; }
         public Sprite GetCardImage => imageConfigurator.GetSprite;
         public Transform Transform => transform;
-        public InteractableComponent Interactable => interactable;
+        public override string Id => id;
+        public override IInteractableEffects InteractableEffects => cardInteractable;
 
         /*******************************************************************/
         [Inject]
         private void Init(string id, Sprite sprite)
         {
-            name = Id = id;
+            name = this.id = id;
             imageConfigurator.ChangeImage(sprite);
         }
 

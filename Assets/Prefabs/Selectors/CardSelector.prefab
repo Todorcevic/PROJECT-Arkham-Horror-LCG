@@ -58,12 +58,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab6e96f211313c49936da3da12a0a22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactable: {fileID: 8246988587003093940}
   imageConfigurator: {fileID: 5250951900939113371}
   glowActivator: {fileID: 5330237612808224715}
   background: {fileID: 4850368526312077242}
   cardName: {fileID: 4121154858783106769}
   quantity: {fileID: 223955344760844326}
+  cardSelectorInteractable: {fileID: 8246988587003093940}
 --- !u!114 &8246988587003093940
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -725,7 +725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604c9ecdeaa7b644386412ef9bc4969a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactable: {fileID: 5178611471373856364}
+  cardInteractable: {fileID: 5178611471373856364}
   imageConfigurator: {fileID: 7902555606089898850}
 --- !u!114 &5178611471373856364
 MonoBehaviour:

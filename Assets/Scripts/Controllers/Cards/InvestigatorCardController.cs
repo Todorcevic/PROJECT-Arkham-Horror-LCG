@@ -1,21 +1,28 @@
-﻿using Arkham.Interactors;
-using Arkham.Presenters;
-using Arkham.EventData;
+﻿using Arkham.EventData;
 using Zenject;
 
 namespace Arkham.Controllers
 {
-    public class InvestigatorCardController : CardController, IInvestigatorCardController
+    public class InvestigatorCardController : IController
     {
         [Inject] private readonly IAddInvestigator addInvestigator;
         [Inject] private readonly ISelectInvestigator selectInvestigator;
 
         /*******************************************************************/
-        protected override void Click(IViewInteractable investigatorCardview)
+        public void Click(IViewInteractable investigatorCardview)
         {
-            investigatorCardview.Interactable.ClickEffect();
+            investigatorCardview.InteractableEffects.ClickEffect();
             addInvestigator.AddInvestigator(investigatorCardview.Id);
             selectInvestigator.SelectInvestigator(investigatorCardview.Id);
         }
+
+        public void DoubleClick(IViewInteractable investigatorCardview) =>
+            investigatorCardview.InteractableEffects.DoubleClickEffect();
+
+        public void HoverOn(IViewInteractable investigatorCardview) =>
+            investigatorCardview.InteractableEffects.HoverOnEffect();
+
+        public void HoverOff(IViewInteractable investigatorCardview) =>
+            investigatorCardview.InteractableEffects.HoverOffEffect();
     }
 }

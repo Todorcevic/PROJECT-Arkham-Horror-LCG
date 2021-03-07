@@ -3,15 +3,24 @@ using Zenject;
 
 namespace Arkham.Controllers
 {
-    public class DeckCardController : CardController, IDeckCardController
+    public class DeckCardController : IController
     {
         [Inject] private readonly IAddCard addCard;
 
         /*******************************************************************/
-        protected override void Click(IViewInteractable cardView)
+        public void Click(IViewInteractable deckCardView)
         {
-            cardView.Interactable.ClickEffect();
-            addCard.AddDeckCard(cardView.Id);
+            deckCardView.InteractableEffects.ClickEffect();
+            addCard.AddDeckCard(deckCardView.Id);
         }
+
+        public void DoubleClick(IViewInteractable deckCardView) =>
+            deckCardView.InteractableEffects.DoubleClickEffect();
+
+        public void HoverOn(IViewInteractable deckCardView) =>
+            deckCardView.InteractableEffects.HoverOnEffect();
+
+        public void HoverOff(IViewInteractable deckCardView) =>
+            deckCardView.InteractableEffects.HoverOffEffect();
     }
 }

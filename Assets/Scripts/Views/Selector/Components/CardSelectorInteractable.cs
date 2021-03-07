@@ -1,14 +1,12 @@
-﻿using Arkham.Controllers;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Arkham.Views
 {
-    public class CardSelectorInteractable : InteractableComponent
+    public class CardSelectorInteractable : MonoBehaviour, IInteractableEffects
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
@@ -19,17 +17,17 @@ namespace Arkham.Views
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
 
         /*******************************************************************/
-        public override void ClickEffect() => interactableAudio.ClickSound();
+        public void ClickEffect() => interactableAudio.ClickSound();
 
-        public override void DoubleClickEffect() => ClickEffect();
+        public void DoubleClickEffect() => ClickEffect();
 
-        public override void HoverOnEffect()
+        public void HoverOnEffect()
         {
             interactableAudio.HoverOnSound();
             HoverActivate();
         }
 
-        public override void HoverOffEffect()
+        public void HoverOffEffect()
         {
             interactableAudio.HoverOffSound();
             HoverDesactivate();

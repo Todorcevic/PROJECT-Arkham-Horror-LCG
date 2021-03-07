@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 69.17, y: 0}
   m_SizeDelta: {x: 0, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &266830916585237919
@@ -174,7 +174,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 69.17, y: 0}
   m_SizeDelta: {x: 0, y: 49.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7604832507051445950
@@ -299,7 +299,6 @@ GameObject:
   - component: {fileID: 4716696262168546615}
   - component: {fileID: 6373958950554177775}
   - component: {fileID: 7313824911628664628}
-  - component: {fileID: -1410313417515954157}
   - component: {fileID: 6038229258631111471}
   - component: {fileID: 2901600964660766015}
   m_Layer: 5
@@ -342,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ca1576a9fb6e646a9b783d81445c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactable: {fileID: 7313824911628664628}
+  buttonInteractable: {fileID: 7313824911628664628}
 --- !u!114 &7313824911628664628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b9bafdc0df6304d82d16cc02c99104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   interactableAudio: {fileID: 6282047614073122101}
   background: {fileID: 5700855835450385730}
   text: {fileID: 5844591669556902260}
@@ -363,24 +363,6 @@ MonoBehaviour:
   clickAction:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &-1410313417515954157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8656333651208386103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 6373958950554177775}
-  _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 1
 --- !u!114 &6038229258631111471
 MonoBehaviour:
   m_ObjectHideFlags: 0

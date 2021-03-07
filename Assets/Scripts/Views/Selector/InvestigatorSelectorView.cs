@@ -9,7 +9,10 @@ namespace Arkham.Views
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private LeadActivator leadActivator;
         [SerializeField, Required, ChildGameObjectsOnly] private SelectorMovement selectorMovement;
+        [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorSelectorInteractable investigatorSelectorInteractable;
+
         public bool IsLeader => leadActivator.IsLeader;
+        public override IInteractableEffects InteractableEffects => investigatorSelectorInteractable;
 
         /*******************************************************************/
         public void MoveTo(Transform transform) => selectorMovement.MoveTo(transform);

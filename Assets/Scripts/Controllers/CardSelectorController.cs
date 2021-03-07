@@ -1,39 +1,26 @@
 ﻿using Arkham.Interactors;
-using Arkham.Managers;
 using Arkham.EventData;
 using Zenject;
-using UnityEngine;
-using System.Diagnostics;
 
 namespace Arkham.Controllers
 {
-    public class CardSelectorController : IInitializable
+    public class CardSelectorController : IController
     {
         [Inject] private readonly IRemoveCard removeCard;
-        [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
         [Inject] private readonly IClickableCards clickableCards;
-
         /*******************************************************************/
-        void IInitializable.Initialize()
-        {
-            foreach (IViewInteractable interactableView in cardSelectorsManager.Selectors)
-                Suscribe(interactableView);
-        }
 
-        /*******************************************************************/
-        private void Suscribe(IViewInteractable selectorView)
-        {
-            selectorView.Interactable.Clicked += () => Click(selectorView);
-            selectorView.Interactable.DoubleClicked += () => Click(selectorView);
-            selectorView.Interactable.HoverOn += selectorView.Interactable.HoverOnEffect;
-            selectorView.Interactable.HoverOff += selectorView.Interactable.HoverOffEffect;
-        }
-
-        private void Click(IViewInteractable selectorView)
+        public void Click(IViewInteractable selectorView)
         {
             if (!clickableCards.IsClickable(selectorView.Id)) return;
-            selectorView.Interactable.ClickEffect();
+            selectorView.InteractableEffects.ClickEffect();
             removeCard.RemoveDeckCard(selectorView.Id);
         }
+
+        public void DoubleClick(IViewInteractable selectorView) => selectorView.InteractableEffects.DoubleClickEffect();
+
+        public void HoverOn(IViewInteractable selectorView) => selectorView.InteractableEffects.HoverOnEffect();
+
+        public void HoverOff(IViewInteractable selectorView) => selectorView.InteractableEffects.HoverOffEffect();
     }
 }

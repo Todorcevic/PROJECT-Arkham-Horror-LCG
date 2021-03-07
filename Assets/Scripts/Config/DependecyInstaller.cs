@@ -6,7 +6,6 @@ using Arkham.Factories;
 using Arkham.Controllers;
 using Arkham.Presenters;
 using Arkham.Interactors;
-using Arkham.Managers;
 using Arkham.Views;
 using Arkham.EventData;
 
@@ -30,11 +29,17 @@ namespace Arkham.Config
             Container.Bind<IScenarioLoader>().To<ScenarioLoader>().AsSingle();
 
             /*** Controllers ***/
-            Container.BindInterfacesTo<CampaignController>().AsSingle();
-            Container.BindInterfacesTo<InvestigatorSelectorController>().AsSingle();
-            Container.BindInterfacesTo<CardSelectorController>().AsSingle();
-            Container.BindInterfacesTo<InvestigatorCardController>().AsSingle();
-            Container.BindInterfacesTo<DeckCardController>().AsSingle();
+            Container.Bind<IController>().To<CampaignController>().AsSingle().WhenInjectedInto<CampaignView>();
+            Container.Bind<IController>().To<CardSelectorController>().AsSingle().WhenInjectedInto<CardSelectorView>();
+            Container.Bind<IController>().To<InvestigatorSelectorController>().AsSingle().WhenInjectedInto<InvestigatorSelectorView>();
+            Container.Bind<IController>().To<DeckCardController>().AsSingle().WhenInjectedInto<DeckCardView>();
+            Container.Bind<IController>().To<InvestigatorCardController>().AsSingle().WhenInjectedInto<InvestigatorCardView>();
+
+
+            //Container.BindInterfacesTo<InvestigatorSelectorController>().AsSingle();
+            //Container.BindInterfacesTo<CardSelectorController>().AsSingle();
+            //Container.BindInterfacesTo<InvestigatorCardController>().AsSingle();
+            //Container.BindInterfacesTo<DeckCardController>().AsSingle();
 
             /*** Presenters ***/
             Container.BindInterfacesTo<CampaignPresenter>().AsSingle();
@@ -78,11 +83,6 @@ namespace Arkham.Config
             Container.BindExecutionOrder<DeckCardPresenter>(-80);
             Container.BindExecutionOrder<InvestigatorAvatarPresenter>(-80);
             Container.BindExecutionOrder<CardsQuantityPresenter>(-80);
-            Container.BindExecutionOrder<ButtonView>(0);
-            Container.BindExecutionOrder<ButtonsManager>(70);
-            Container.BindExecutionOrder<CampaignController>(70);
-            Container.BindExecutionOrder<InvestigatorSelectorController>(70);
-            Container.BindExecutionOrder<CardSelectorController>(70);
         }
     }
 }

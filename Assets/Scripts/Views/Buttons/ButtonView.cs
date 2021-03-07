@@ -1,20 +1,27 @@
-﻿using Arkham.Controllers;
+﻿using Arkham.Services;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Arkham.Views
 {
-    public class ButtonView : MonoBehaviour, IInitializable
+    public class ButtonView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        [Inject] private readonly IDoubleClickDetector clickDetector;
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
+        [SerializeField, Required, ChildGameObjectsOnly] private ButtonInteractable buttonInteractable;
 
-        public void Initialize()
+
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            interactable.Clicked += interactable.ClickEffect;
-            interactable.HoverOn += interactable.HoverOnEffect;
-            interactable.HoverOff += interactable.HoverOffEffect;
+            if (clickDetector.CheckDoubleClick(eventData.clickTime, eventData.pointerPress))
+                buttonInteractable.DoubleClickEffect();
+            else buttonInteractable.ClickEffect();
         }
+
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => buttonInteractable.HoverOnEffect();
+
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => buttonInteractable.HoverOffEffect();
     }
 }

@@ -1,21 +1,21 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using Arkham.Controllers;
 using Arkham.SettingObjects;
+using Arkham.Controllers;
 
 namespace Arkham.Views
 {
-    public class CampaignView : MonoBehaviour, ICampaignConfigurable, IViewInteractable
+    public class CampaignView : ViewInteractable, ICampaignConfigurable
     {
         [Title("ID")]
         [SerializeField, Required, HideInPrefabAssets] private string id;
 
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
+        [SerializeField, Required, ChildGameObjectsOnly] private CampaignInteractable campaignInteractable;
         [SerializeField, Required, ChildGameObjectsOnly] private ImageConfigurator imageConfigurator;
 
-        public string Id => id;
-        public InteractableComponent Interactable => interactable;
+        public override string Id => id;
+        public override IInteractableEffects InteractableEffects => campaignInteractable;
 
         /*******************************************************************/
         public void ChangeIconState(Sprite icon) => imageConfigurator.ChangeImage(icon);

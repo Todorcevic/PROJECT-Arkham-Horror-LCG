@@ -4,21 +4,20 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public class SelectorView : MonoBehaviour, IViewInteractable
+    public abstract class SelectorView : ViewInteractable
     {
+        private string id;
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private InteractableComponent interactable;
         [SerializeField, Required, ChildGameObjectsOnly] private ImageConfigurator imageConfigurator;
         [SerializeField, Required, ChildGameObjectsOnly] private GlowActivator glowActivator;
-        public string Id { get; private set; }
-        public bool IsEmpty => Id == null;
-        public virtual InteractableComponent Interactable => interactable;
-        public Transform Transform => transform;
 
+        public bool IsEmpty => Id == null;
+        public Transform Transform => transform;
+        public override string Id => id;
         /*******************************************************************/
         public void SetSelector(string cardId, Sprite cardImage = null)
         {
-            Id = cardId;
+            id = cardId;
             imageConfigurator.Activate(cardId != null);
             imageConfigurator.ChangeImage(cardImage);
         }

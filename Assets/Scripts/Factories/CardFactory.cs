@@ -1,7 +1,5 @@
 ﻿using Arkham.Components;
-using Arkham.Controllers;
 using Arkham.Managers;
-using Arkham.Presenters;
 using Arkham.Repositories;
 using Arkham.Services;
 using Arkham.Views;
@@ -16,8 +14,8 @@ namespace Arkham.Factories
         [Inject] protected readonly IImageCardsManager imageCards;
         [Inject] protected readonly IInstantiatorAdapter instantiator;
         [Inject] protected readonly ICardInfoRepository infoRepository;
+
         protected abstract ICardsManager CardsManager { get; }
-        protected abstract ICardController CardController { get; }
         protected abstract IEnumerable<string> Cards { get; }
 
         /*******************************************************************/
@@ -25,17 +23,16 @@ namespace Arkham.Factories
         {
             foreach (string cardId in Cards)
             {
-                Create(cardId, CardsManager, CardController);
+                Create(cardId, CardsManager);
                 ExtraSettings(cardId);
             }
         }
 
-        private void Create(string cardId, ICardsManager manager, ICardController controller)
+        private void Create(string cardId, ICardsManager manager)
         {
             var args = new object[] { cardId, imageCards.GetSprite(cardId) };
             CardView cardView = diContainer.InstantiatePrefabForComponent<CardView>(manager.CardPrefab, manager.Zone, args);
             manager.AllCards.Add(cardId, cardView);
-            controller.Init(cardView);
         }
 
         protected abstract void ExtraSettings(string cardId);

@@ -1,14 +1,12 @@
-﻿using Arkham.Controllers;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Arkham.Views
 {
-    public class CampaignInteractable : InteractableComponent
+    public class CampaignInteractable : MonoBehaviour, IInteractableEffects
     {
         [Title("RESOURCES")]
         [SerializeField, Required] private InteractableAudio InteractableAudio;
@@ -23,15 +21,15 @@ namespace Arkham.Views
         [SerializeField] private UnityEvent clickAction;
 
         /*******************************************************************/
-        public override void ClickEffect()
+        public void ClickEffect()
         {
             InteractableAudio.ClickSound();
             clickAction?.Invoke();
         }
 
-        public override void DoubleClickEffect() { }
+        public void DoubleClickEffect() { }
 
-        public override void HoverOnEffect()
+        public void HoverOnEffect()
         {
             InteractableAudio.HoverOnSound();
             chapterImage.transform.DOScale(zoomParallaxHoverEffect, timeHoverAnimation);
@@ -39,7 +37,7 @@ namespace Arkham.Views
             highlightedTextBox.transform.DOLocalMoveY(yoffsetHoverHighlighted, timeHoverAnimation);
         }
 
-        public override void HoverOffEffect()
+        public void HoverOffEffect()
         {
             InteractableAudio.HoverOffSound();
             chapterImage.transform.DOScale(1f, timeHoverAnimation);

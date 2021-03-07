@@ -1,5 +1,4 @@
-﻿using Arkham.Controllers;
-using Arkham.Managers;
+﻿using Arkham.Managers;
 using System.Collections.Generic;
 using System.Linq;
 using Zenject;
@@ -8,10 +7,8 @@ namespace Arkham.Factories
 {
     public class DeckCardFactory : CardFactory
     {
-        [Inject] private readonly IDeckCardController deckCardController;
         [Inject] private readonly IDeckCardsManager deckCardsManager;
         protected override ICardsManager CardsManager => deckCardsManager;
-        protected override ICardController CardController => deckCardController;
         protected override IEnumerable<string> Cards => infoRepository.CardInfoList
                 .FindAll(c => (c.Type_code == "asset"
                 || c.Type_code == "event"

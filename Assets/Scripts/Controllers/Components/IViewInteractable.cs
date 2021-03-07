@@ -1,10 +1,10 @@
-﻿using Zenject;
+﻿using Arkham.Views;
 
 namespace Arkham.Controllers
 {
     public interface IViewInteractable
     {
         string Id { get; }
-        InteractableComponent Interactable { get; }
+        IInteractableEffects InteractableEffects { get; }
     }
 }
