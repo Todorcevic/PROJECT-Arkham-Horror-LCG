@@ -44,10 +44,10 @@ ademas se debe aplicar el pricipio Open/Close en todo lo posible ya que las regl
 
 * Un Manager contiene una colección de abstracciones de las Views para poder suministrárselos a quien lo necesite, en su mayor parte a los Presenters.
 
-* Cuando el usuario interactua con una View, esta lanza un evento al que está suscrito el Controller destinado a esa View, el requisito para estas Views
-es que implimenten IViewInteractable, que es la interface que utiliza el Controller para suscribirse y manejar la parte visual.
+* Cuando el usuario interactua con una View, se llama al Controller destinado a esa View, el requisito para estas Views
+es que implimenten IViewInteractable, que es la interface que utiliza el Controller para manejar la parte visual ademas del identificador de la View.
 
-* El Controller cuando reciba una notificación actuará llamando a EventData para modificar alguna Entity, o ejecutando directamente un metodo de algún Presenter.
+* El Controller actuará llamando a EventData para modificar alguna Entity, o ejecutando directamente un metodo de algún Presenter.
 
 * Un EventData modifica alguna Entity y lanza una notificación que será recibida por los Presenters que estén suscrito (puede ser 1 o varios presenters).
 
