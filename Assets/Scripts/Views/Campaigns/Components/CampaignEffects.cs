@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Arkham.Views
 {
-    public class CampaignInteractable : MonoBehaviour, IInteractableEffects
+    public class CampaignEffects : MonoBehaviour, IInteractableEffects
     {
         [Title("RESOURCES")]
         [SerializeField, Required] private InteractableAudio InteractableAudio;

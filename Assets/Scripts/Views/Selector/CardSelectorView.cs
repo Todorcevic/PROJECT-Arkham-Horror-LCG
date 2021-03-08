@@ -11,9 +11,9 @@ namespace Arkham.Views
         [SerializeField, Required, ChildGameObjectsOnly] private Image background;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI cardName;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI quantity;
-        [SerializeField, Required, ChildGameObjectsOnly] private CardSelectorInteractable cardSelectorInteractable;
+        [SerializeField, Required, ChildGameObjectsOnly] private CardSelectorEffects cardSelectorEffects;
 
-        public override IInteractableEffects InteractableEffects => cardSelectorInteractable;
+        public override IInteractableEffects InteractableEffects => cardSelectorEffects;
 
         /*******************************************************************/
         public void SetName(string cardName) => this.cardName.text = cardName;

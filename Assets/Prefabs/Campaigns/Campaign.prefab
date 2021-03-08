@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 6799962634472469167}
   - component: {fileID: 5919814810207110816}
   - component: {fileID: 2422650025459318338}
+  - component: {fileID: 6235080407246302284}
   - component: {fileID: 3868054859199124096}
   - component: {fileID: 4555354956186786125}
   - component: {fileID: 8088090979582546804}
@@ -430,8 +431,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: x
-  campaignInteractable: {fileID: 2422650025459318338}
+  campaignEffects: {fileID: 2422650025459318338}
   imageConfigurator: {fileID: 3868054859199124096}
+  interactableComponent: {fileID: 6235080407246302284}
 --- !u!114 &2422650025459318338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,6 +456,18 @@ MonoBehaviour:
   clickAction:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6235080407246302284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6720720525385905213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8f13c723efe2d468247b3ff7c3c64b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3868054859199124096
 MonoBehaviour:
   m_ObjectHideFlags: 0

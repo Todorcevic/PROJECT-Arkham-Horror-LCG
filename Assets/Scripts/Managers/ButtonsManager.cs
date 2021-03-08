@@ -7,9 +7,9 @@ namespace Arkham.Managers
     public class ButtonsManager : MonoBehaviour
     {
         [Title("RESOURCES")]
-        [SerializeField, SceneObjectsOnly] private ButtonInteractable currentButton;
+        [SerializeField, SceneObjectsOnly] private ButtonEffects currentButton;
 
-        public ButtonInteractable CurrentButton => currentButton;
+        public ButtonEffects CurrentButton => currentButton;
 
         /*******************************************************************/
         private void Start()
@@ -18,7 +18,7 @@ namespace Arkham.Managers
         }
 
         /*******************************************************************/
-        public void SelectTab(ButtonInteractable button)
+        public void SelectTab(ButtonEffects button)
         {
             currentButton?.HoverDesactivate();
             button?.HoverActivate();

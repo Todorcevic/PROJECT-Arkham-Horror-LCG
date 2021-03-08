@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6920108898983775684}
   - component: {fileID: 6856283878978541192}
+  - component: {fileID: 6758695691846733632}
   - component: {fileID: 8246988587003093940}
   - component: {fileID: 5250951900939113371}
-  - component: {fileID: -5149845009183273786}
   - component: {fileID: 6396499959933405539}
   m_Layer: 5
   m_Name: CardSelector
@@ -60,10 +60,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageConfigurator: {fileID: 5250951900939113371}
   glowActivator: {fileID: 5330237612808224715}
+  interactableComponent: {fileID: 8246988587003093940}
   background: {fileID: 4850368526312077242}
   cardName: {fileID: 4121154858783106769}
   quantity: {fileID: 223955344760844326}
-  cardSelectorInteractable: {fileID: 8246988587003093940}
+  cardSelectorEffects: {fileID: 6758695691846733632}
+--- !u!114 &6758695691846733632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167292358315829728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b05fc11253128e4db1747879672a18b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableAudio: {fileID: 3161861043085989557}
+  background: {fileID: 4850368526312077242}
+  cardName: {fileID: 4121154858783106769}
+  quantity: {fileID: 223955344760844326}
+  timeHoverAnimation: 0.25
 --- !u!114 &8246988587003093940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,14 +91,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1167292358315829728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5e4e9a2525d67b41bd3b88e25c5e03e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b8f13c723efe2d468247b3ff7c3c64b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableAudio: {fileID: 3161861043085989557}
-  background: {fileID: 4850368526312077242}
-  cardName: {fileID: 4121154858783106769}
-  quantity: {fileID: 223955344760844326}
-  timeHoverAnimation: 0.25
 --- !u!114 &5250951900939113371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,24 +109,6 @@ MonoBehaviour:
   canvas: {fileID: 6396499959933405539}
   image: {fileID: 904807066180061608}
   disableColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
---- !u!114 &-5149845009183273786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1167292358315829728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 6856283878978541192}
-  _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 1
 --- !u!225 &6396499959933405539
 CanvasGroup:
   m_ObjectHideFlags: 0

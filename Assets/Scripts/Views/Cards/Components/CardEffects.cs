@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public class InvestigatorSelectorInteractable : MonoBehaviour, IInteractableEffects
+    public class CardEffects : MonoBehaviour, IInteractableEffects
     {
+        private const float ORIGINAL_SCALE = 1.0f;
         [Title("RESOURCES")]
         [SerializeField, Required] private Transform objectToTransform;
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
@@ -16,7 +17,7 @@ namespace Arkham.Views
         /*******************************************************************/
         public void ClickEffect() => audioInteractable.ClickSound();
 
-        public void DoubleClickEffect() => ClickEffect();
+        public void DoubleClickEffect() { }
 
         public void HoverOnEffect()
         {
@@ -24,10 +25,6 @@ namespace Arkham.Views
             objectToTransform.DOScale(scaleHoverEffect, timeHoverAnimation);
         }
 
-        public void HoverOffEffect()
-        {
-            audioInteractable.HoverOffSound();
-            objectToTransform.DOScale(1f, timeHoverAnimation);
-        }
+        public void HoverOffEffect() => objectToTransform.DOScale(ORIGINAL_SCALE, timeHoverAnimation);
     }
 }
