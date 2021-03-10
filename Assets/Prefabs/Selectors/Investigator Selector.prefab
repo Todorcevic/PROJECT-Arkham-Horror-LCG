@@ -380,6 +380,7 @@ GameObject:
   - component: {fileID: 1708805155399710711}
   - component: {fileID: 7561200676907797182}
   - component: {fileID: 2436444971608776358}
+  - component: {fileID: 1257268811680312118}
   m_Layer: 5
   m_Name: PlaceHolder
   m_TagString: Untagged
@@ -471,6 +472,7 @@ MonoBehaviour:
   imageConfigurator: {fileID: 7561200676907797182}
   glowActivator: {fileID: 4178966816585282234}
   selectorMovement: {fileID: 2436444971608776358}
+  leadActivator: {fileID: 1257268811680312118}
   effects: {fileID: 1708805155399710711}
 --- !u!114 &1708805155399710711
 MonoBehaviour:
@@ -518,6 +520,19 @@ MonoBehaviour:
   selector: {fileID: 8950362181989810048}
   placeHolder: {fileID: 4822173926775762534}
   timeMoveAnimation: 0.25
+--- !u!114 &1257268811680312118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8866863660725742159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a38582105bc6a6478d44bfcabe0b962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leaderIcon: {fileID: 4720073451212197437}
 --- !u!1001 &8610192574271832416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -575,11 +590,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
---- !u!4 &8018144536311021652 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1746173441245118772, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
-  m_PrefabInstance: {fileID: 8610192574271832416}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1385225813015163964 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7225114169980597596, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
@@ -591,3 +601,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038d7dc22c3565849878ed7593cc2df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &8018144536311021652 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1746173441245118772, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
+  m_PrefabInstance: {fileID: 8610192574271832416}
+  m_PrefabAsset: {fileID: 0}

@@ -16,9 +16,11 @@ namespace Arkham.Views
         [Inject] private readonly IDoubleClickDetector clickDetector;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private SelectorMovement selectorMovement;
+        [SerializeField, Required, ChildGameObjectsOnly] private LeadActivator leadActivator;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorSelectorEffects effects;
 
         public SelectorMovement SelectorMovement => selectorMovement;
+        public LeadActivator LeadActivator => leadActivator;
 
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)

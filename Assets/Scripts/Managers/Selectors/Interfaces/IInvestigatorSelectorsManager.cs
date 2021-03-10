@@ -6,7 +6,6 @@ namespace Arkham.Managers
 {
     public interface IInvestigatorSelectorsManager
     {
-        Transform SelectorZone { get; }
         List<IInvestigatorSelector> Selectors { get; }
         IInvestigatorSelector GetEmptySelector();
         IInvestigatorSelector GetSelectorById(string cardId);
