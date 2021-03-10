@@ -44,7 +44,7 @@ namespace Arkham.Presenters
         {
             selector.SetSelector(cardId, imageCards.GetSprite(cardId));
             selector.SetName(cardInfoInteractor.GetRealName(cardId));
-            selector.Transform.SetParent(cardSelectorsManager.Zone);
+            //selector.Transform.SetParent(cardSelectorsManager.Zone);
         }
 
         private int SetQuantityAndGetIt(ICardSelector selector, string cardId)

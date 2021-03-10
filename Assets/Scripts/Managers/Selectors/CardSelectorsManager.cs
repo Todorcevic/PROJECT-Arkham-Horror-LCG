@@ -35,7 +35,7 @@ namespace Arkham.Managers
         public void DesactivateSelector(ICardSelector selector)
         {
             selector.SetSelector(null);
-            selector.Transform.SetParent(placeHolder);
+            //selector.Transform.SetParent(placeHolder);
         }
     }
 }

@@ -11,7 +11,8 @@ namespace Arkham.Interactors
         [Inject] private readonly ICardInfoInteractor cardInfoInteractor;
 
         public string LeadInvestigator => investigatorSelectorRepository.InvestigatorsSelectedList.FirstOrDefault();
-        public bool SelectionIsFull => investigatorSelectorRepository.InvestigatorsSelectedList.Count >= GameData.MAX_INVESTIGATORS;
+        public int AmontInvestigatorsSelected => investigatorSelectorRepository.InvestigatorsSelectedList.Count;
+        public bool SelectionIsFull => AmontInvestigatorsSelected >= GameData.MAX_INVESTIGATORS;
 
         /*******************************************************************/
         public bool CanThisCardBeSelected(string cardId)

@@ -35,6 +35,7 @@ namespace Arkham.Presenters
                 IInvestigatorSelector selector = investigatorSelectorsManager.GetEmptySelector();
                 SetInvestigatorInSelector(investigatorId, selector);
             }
+            investigatorSelectorsManager.ArrangeSelectors();
         }
 
         private void SelectInvestigator(string activeInvestigatorId)
@@ -48,14 +49,14 @@ namespace Arkham.Presenters
         {
             IInvestigatorSelector selector = investigatorSelectorsManager.GetEmptySelector();
             SetInvestigatorInSelector(investigatorId, selector);
-            selector.MoveTo(investigatorCardsManager.AllCards[investigatorId].Transform);
-            investigatorSelectorsManager.SetLeadAndArrangeSelectors(investigatorSelectorInteractor.LeadInvestigator);
+            selector.SelectorMovement.MoveImageTo(investigatorCardsManager.AllCards[investigatorId].Transform);
+            investigatorSelectorsManager.ArrangeSelectors();
         }
 
         private void RemoveInvestigator(string investigatorId)
         {
             investigatorSelectorsManager.GetSelectorById(investigatorId).SetSelector(null);
-            investigatorSelectorsManager.SetLeadAndArrangeSelectors(investigatorSelectorInteractor.LeadInvestigator);
+            investigatorSelectorsManager.ArrangeSelectors();
         }
 
         private void SetInvestigatorInSelector(string investigatorId, IInvestigatorSelector selector)

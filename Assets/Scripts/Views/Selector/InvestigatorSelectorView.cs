@@ -4,6 +4,7 @@ using Arkham.Services;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Arkham.Views
@@ -14,11 +15,10 @@ namespace Arkham.Views
         [Inject] private readonly IRemoveInvestigator removeInvestigator;
         [Inject] private readonly IDoubleClickDetector clickDetector;
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private LeadActivator leadActivator;
         [SerializeField, Required, ChildGameObjectsOnly] private SelectorMovement selectorMovement;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorSelectorEffects effects;
 
-        public bool IsLeader => leadActivator.IsLeader;
+        public SelectorMovement SelectorMovement => selectorMovement;
 
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
@@ -38,9 +38,5 @@ namespace Arkham.Views
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => effects.HoverOnEffect();
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => effects.HoverOffEffect();
-
-        public void MoveTo(Transform transform) => selectorMovement.MoveTo(transform);
-        public void Arrange(Transform transform) => selectorMovement.Arrange(transform);
-        public void ActivateLeaderIcon(bool activate) => leadActivator.ActivateLeaderIcon(activate);
     }
 }

@@ -6,7 +6,6 @@ namespace Arkham.Presenters
     {
         string Id { get; }
         bool IsEmpty { get; }
-        Transform Transform { get; }
         void SetSelector(string cardId, Sprite cardImage = null);
         void ActivateGlow(bool activate);
     }

@@ -8,7 +8,7 @@ namespace Arkham.Views
     {
         [Title("RESOURCES")]
         [SerializeField, Required] private Transform objectToTransform;
-        [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
+        [SerializeField, Required] private InteractableAudio audioInteractable;
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
         [SerializeField, Range(1f, 2f)] private float scaleHoverEffect;

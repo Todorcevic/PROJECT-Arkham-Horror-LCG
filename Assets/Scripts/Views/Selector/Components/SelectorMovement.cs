@@ -12,13 +12,11 @@ namespace Arkham.Views
         [SerializeField, Range(0f, 1f)] private float timeMoveAnimation;
 
         /*******************************************************************/
-        public void MoveTo(Transform transform) => selector.position = transform.position;
+        public void MoveImageTo(Transform transform) => selector.position = transform.position;
 
-        public void Arrange(Transform transform)
-        {
-            placeHolder.SetParent(transform);
-            StartCoroutine(Reorder());
-        }
+        public void SetParent(Transform transform) => placeHolder.SetParent(transform);
+
+        public void Arrange() => StartCoroutine(Reorder());
 
         private IEnumerator Reorder()
         {
