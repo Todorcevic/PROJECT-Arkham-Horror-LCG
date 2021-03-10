@@ -8,7 +8,7 @@ using Zenject;
 
 namespace Arkham.Factories
 {
-    public abstract class CardFactory : IInitializable
+    public abstract class CardFactory
     {
         [Inject] private readonly DiContainer diContainer;
         [Inject] protected readonly IImageCardsManager imageCards;
@@ -19,7 +19,7 @@ namespace Arkham.Factories
         protected abstract IEnumerable<string> Cards { get; }
 
         /*******************************************************************/
-        void IInitializable.Initialize()
+        public void BuildCards()
         {
             foreach (string cardId in Cards)
             {

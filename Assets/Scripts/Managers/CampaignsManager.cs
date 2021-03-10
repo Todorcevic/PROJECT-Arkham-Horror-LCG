@@ -15,7 +15,7 @@ namespace Arkham.Managers
         public List<ICampaignConfigurable> Campaigns => campaigns.OfType<ICampaignConfigurable>().ToList();
 
         /*******************************************************************/
-        public ICampaignState GetState(string campaignState) => states.Find(s => s.Id == campaignState);
+        public CampaignState GetState(string campaignState) => states.Find(s => s.Id == campaignState);
         public ICampaignConfigurable GetCampaign(string campaignId) => campaigns.Find(c => c.Id == campaignId);
     }
 }

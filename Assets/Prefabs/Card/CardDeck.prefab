@@ -221,7 +221,6 @@ GameObject:
   - component: {fileID: 7131878188277760170}
   - component: {fileID: 2951232632282224403}
   - component: {fileID: 6256245110943196981}
-  - component: {fileID: 6454661821234380597}
   - component: {fileID: 5771078568742617593}
   - component: {fileID: 7192597132227724208}
   - component: {fileID: 7918799787899769508}
@@ -265,9 +264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24dc0fce97ca8140bdddc17440607a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardEffects: {fileID: 6256245110943196981}
+  effects: {fileID: 6256245110943196981}
   imageConfigurator: {fileID: 5771078568742617593}
-  interactableComponent: {fileID: 6454661821234380597}
 --- !u!114 &6256245110943196981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,18 +282,6 @@ MonoBehaviour:
   audioInteractable: {fileID: 910552761267311518}
   timeHoverAnimation: 0.25
   scaleHoverEffect: 1.1
---- !u!114 &6454661821234380597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120494878094766683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b8f13c723efe2d468247b3ff7c3c64b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5771078568742617593
 MonoBehaviour:
   m_ObjectHideFlags: 0

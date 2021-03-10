@@ -1,12 +1,11 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Arkham.Views
 {
-    public class CampaignEffects : MonoBehaviour, IInteractableEffects
+    public class CampaignEffects : MonoBehaviour
     {
         [Title("RESOURCES")]
         [SerializeField, Required] private InteractableAudio InteractableAudio;
@@ -17,17 +16,9 @@ namespace Arkham.Views
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
         [SerializeField, Range(0f, 100f)] private float yoffsetHoverHighlighted;
         [SerializeField, Range(1f, 2f)] private float zoomParallaxHoverEffect;
-        [Title("CLICK EVENT")]
-        [SerializeField] private UnityEvent clickAction;
 
         /*******************************************************************/
-        public void ClickEffect()
-        {
-            InteractableAudio.ClickSound();
-            clickAction?.Invoke();
-        }
-
-        public void DoubleClickEffect() { }
+        public void ClickEffect() => InteractableAudio.ClickSound();
 
         public void HoverOnEffect()
         {

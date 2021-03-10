@@ -7,6 +7,6 @@ namespace Arkham.Managers
     {
         List<ICampaignConfigurable> Campaigns { get; }
         ICampaignConfigurable GetCampaign(string campaignId);
-        ICampaignState GetState(string campaignState);
+        CampaignState GetState(string campaignState);
     }
 }

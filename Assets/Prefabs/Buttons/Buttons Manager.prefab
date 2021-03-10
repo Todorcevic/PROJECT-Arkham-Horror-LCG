@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7450945702122334378}
   - component: {fileID: 7450945702122334379}
   - component: {fileID: 1858149329644766282}
-  - component: {fileID: 7853243437564333243}
   m_Layer: 5
   m_Name: Buttons Manager
   m_TagString: Untagged
@@ -53,7 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentButton: {fileID: 0}
-  buttons: []
 --- !u!222 &7450945702122334378
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -102,21 +100,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 0
---- !u!114 &7853243437564333243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7450945702122334382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 5180960593408351286}
-  _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 1

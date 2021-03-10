@@ -7,19 +7,12 @@ using System.Linq;
 
 namespace Arkham.Services
 {
-    public class DataPersistence : IDataPersistence, IInitializable
+    public class DataPersistence : IDataPersistence
     {
         [Inject] private readonly GameFiles gameFiles;
         [Inject] private readonly IRepository repository;
         [Inject] private readonly ISerializer serializer;
         [Inject] private readonly IFileAdapter fileAdapter;
-
-        /*******************************************************************/
-        void IInitializable.Initialize()
-        {
-            LoadDataCards();
-            LoadProgress();
-        }
 
         /*******************************************************************/
         public void LoadDataCards()

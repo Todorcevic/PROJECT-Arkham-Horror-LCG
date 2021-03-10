@@ -4,12 +4,9 @@ using Zenject;
 
 namespace Arkham.Services
 {
-    public class ScreenResolutionAutoDetect : IResolutionSet, IInitializable
+    public class ScreenResolutionAutoDetect : IResolutionSet
     {
         [Inject] private readonly IScreenResolutionAdapter screenAdapter;
-
-        /*******************************************************************/
-        void IInitializable.Initialize() => SettingResolution();
 
         /*******************************************************************/
         public void SettingResolution()

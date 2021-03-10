@@ -9,7 +9,10 @@ namespace Arkham.SettingObjects
         [SerializeField] private Sprite icon;
 
         /*******************************************************************/
-        public override void ExecuteState(ICampaignConfigurable campaignView) =>
+        public override void ExecuteState(ICampaignConfigurable campaignView)
+        {
+            campaignView.IsOpen = isOpen;
             campaignView.ChangeIconState(icon);
+        }
     }
 }

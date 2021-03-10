@@ -211,11 +211,9 @@ GameObject:
   - component: {fileID: 640894624587334985}
   - component: {fileID: 8288249651464930690}
   - component: {fileID: 3561010909705348683}
-  - component: {fileID: 7970832748505163419}
   - component: {fileID: 3668679410626289193}
   - component: {fileID: 3905956588092644237}
   - component: {fileID: 5553332038502686038}
-  - component: {fileID: -8942497819829396363}
   m_Layer: 5
   m_Name: Investigator Selector
   m_TagString: Untagged
@@ -261,10 +259,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageConfigurator: {fileID: 3668679410626289193}
   glowActivator: {fileID: 4178966816585282234}
-  interactableComponent: {fileID: 7970832748505163419}
   leadActivator: {fileID: 3270828025641024244}
   selectorMovement: {fileID: 3905956588092644237}
-  investigatorSelectorEffects: {fileID: 3561010909705348683}
+  effects: {fileID: 3561010909705348683}
 --- !u!114 &3561010909705348683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,18 +278,6 @@ MonoBehaviour:
   audioInteractable: {fileID: 1385225813015163964}
   timeHoverAnimation: 0.25
   scaleHoverEffect: 1.1
---- !u!114 &7970832748505163419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4040927172998764470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b8f13c723efe2d468247b3ff7c3c64b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3668679410626289193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,18 +320,6 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &-8942497819829396363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4040927172998764470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc53220fd39587a498dd25f99a55643b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4716931724812838525
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,6 +329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4657216712409307515}
+  - component: {fileID: 8603365674181226123}
   m_Layer: 5
   m_Name: PlaceHolder
   m_TagString: Untagged
@@ -382,6 +356,14 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8603365674181226123
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4716931724812838525}
+  m_CullTransparentMesh: 0
 --- !u!1 &8628197188317402312
 GameObject:
   m_ObjectHideFlags: 0

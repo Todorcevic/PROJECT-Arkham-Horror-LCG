@@ -3,10 +3,8 @@ using Arkham.Repositories;
 using Arkham.Services;
 using Arkham.Scenarios;
 using Arkham.Factories;
-using Arkham.Controllers;
 using Arkham.Presenters;
 using Arkham.Interactors;
-using Arkham.Views;
 using Arkham.EventData;
 
 namespace Arkham.Config
@@ -27,19 +25,6 @@ namespace Arkham.Config
             Container.Bind<ISerializer>().To<JsonNewtonsoftAdapter>().AsSingle();
             Container.Bind<IDoubleClickDetector>().To<DoubleClickDetector>().AsSingle();
             Container.Bind<IScenarioLoader>().To<ScenarioLoader>().AsSingle();
-
-            /*** Controllers ***/
-            Container.Bind<IController>().To<CampaignController>().AsSingle().WhenInjectedInto<CampaignView>();
-            Container.Bind<IController>().To<CardSelectorController>().AsSingle().WhenInjectedInto<CardSelectorView>();
-            Container.Bind<IController>().To<InvestigatorSelectorController>().AsSingle().WhenInjectedInto<InvestigatorSelectorView>();
-            Container.Bind<IController>().To<DeckCardController>().AsSingle().WhenInjectedInto<DeckCardView>();
-            Container.Bind<IController>().To<InvestigatorCardController>().AsSingle().WhenInjectedInto<InvestigatorCardView>();
-
-
-            //Container.BindInterfacesTo<InvestigatorSelectorController>().AsSingle();
-            //Container.BindInterfacesTo<CardSelectorController>().AsSingle();
-            //Container.BindInterfacesTo<InvestigatorCardController>().AsSingle();
-            //Container.BindInterfacesTo<DeckCardController>().AsSingle();
 
             /*** Presenters ***/
             Container.BindInterfacesTo<CampaignPresenter>().AsSingle();
@@ -71,18 +56,6 @@ namespace Arkham.Config
             Container.BindInterfacesTo<CampaignEventData>().AsSingle();
             Container.BindInterfacesTo<AddCardEventData>().AsSingle();
             Container.BindInterfacesTo<RemoveCardEventData>().AsSingle();
-
-            /*** Execution Order ***/
-            Container.BindExecutionOrder<ScreenResolutionAutoDetect>(-100);
-            Container.BindExecutionOrder<DataPersistence>(-100);
-            Container.BindExecutionOrder<CardFactory>(-90);
-            Container.BindExecutionOrder<CampaignPresenter>(-80);
-            Container.BindExecutionOrder<InvestigatorSelectorPresenter>(-80);
-            Container.BindExecutionOrder<CardSelectorPresenter>(-80);
-            Container.BindExecutionOrder<InvestigatorCardPresenter>(-80);
-            Container.BindExecutionOrder<DeckCardPresenter>(-80);
-            Container.BindExecutionOrder<InvestigatorAvatarPresenter>(-80);
-            Container.BindExecutionOrder<CardsQuantityPresenter>(-80);
         }
     }
 }

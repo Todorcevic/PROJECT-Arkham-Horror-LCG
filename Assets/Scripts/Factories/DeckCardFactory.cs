@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Arkham.Factories
 {
-    public class DeckCardFactory : CardFactory
+    public class DeckCardFactory : CardFactory, IDeckCardFactory
     {
         [Inject] private readonly IDeckCardsManager deckCardsManager;
         protected override ICardsManager CardsManager => deckCardsManager;

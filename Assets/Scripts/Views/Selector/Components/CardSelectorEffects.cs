@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Arkham.Views
 {
-    public class CardSelectorEffects : MonoBehaviour, IInteractableEffects
+    public class CardSelectorEffects : MonoBehaviour
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
@@ -18,8 +18,6 @@ namespace Arkham.Views
 
         /*******************************************************************/
         public void ClickEffect() => interactableAudio.ClickSound();
-
-        public void DoubleClickEffect() { }
 
         public void HoverOnEffect()
         {

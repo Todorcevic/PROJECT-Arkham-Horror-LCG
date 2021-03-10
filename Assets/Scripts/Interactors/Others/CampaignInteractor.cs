@@ -14,7 +14,5 @@ namespace Arkham.Interactors
 
         /*******************************************************************/
         public string GetState(string campaignId) => campaignRepository.GetCampaign(campaignId).State;
-
-        public string GetScenario(string campaignId) => campaignRepository.GetCampaign(campaignId).FirstScenarioId;
     }
 }

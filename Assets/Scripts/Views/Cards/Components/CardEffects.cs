@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public class CardEffects : MonoBehaviour, IInteractableEffects
+    public class CardEffects : MonoBehaviour
     {
         private const float ORIGINAL_SCALE = 1.0f;
         [Title("RESOURCES")]
@@ -16,8 +16,6 @@ namespace Arkham.Views
 
         /*******************************************************************/
         public void ClickEffect() => audioInteractable.ClickSound();
-
-        public void DoubleClickEffect() { }
 
         public void HoverOnEffect()
         {

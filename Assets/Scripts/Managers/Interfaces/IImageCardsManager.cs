@@ -1,7 +1,4 @@
-﻿using Arkham.Controllers;
-using Arkham.Views;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Arkham.Components
 {

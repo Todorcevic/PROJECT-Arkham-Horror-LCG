@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public class InvestigatorSelectorEffects : MonoBehaviour, IInteractableEffects
+    public class InvestigatorSelectorEffects : MonoBehaviour
     {
         [Title("RESOURCES")]
         [SerializeField, Required] private Transform objectToTransform;

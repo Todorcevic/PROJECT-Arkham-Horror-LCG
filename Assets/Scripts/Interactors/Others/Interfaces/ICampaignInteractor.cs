@@ -7,6 +7,5 @@ namespace Arkham.Interactors
     {
         IEnumerable<string> CampaignsList { get; }
         string GetState(string campaignId);
-        string GetScenario(string campaignId);
     }
 }

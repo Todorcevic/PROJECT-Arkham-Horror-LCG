@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using Arkham.Controllers;
-using Arkham.Views;
 
 namespace Arkham.SettingObjects
 {
-    public abstract class CampaignState : ScriptableObject, ICampaignState
+    public abstract class CampaignState : ScriptableObject
     {
         [SerializeField, Required] protected bool isOpen;
         public string Id => name;

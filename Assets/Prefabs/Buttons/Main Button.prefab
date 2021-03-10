@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 69.17, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &266830916585237919
@@ -172,9 +172,9 @@ RectTransform:
   m_Father: {fileID: 7756205494182457572}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 69.17, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 25, y: -30}
   m_SizeDelta: {x: 0, y: 49.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7604832507051445950
@@ -298,9 +298,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4716696262168546615}
   - component: {fileID: 6373958950554177775}
-  - component: {fileID: 7313824911628664628}
+  - component: {fileID: 6230712807843425529}
   - component: {fileID: 6038229258631111471}
   - component: {fileID: 2901600964660766015}
+  - component: {fileID: 7484273481519661322}
   m_Layer: 5
   m_Name: Main Button
   m_TagString: Untagged
@@ -341,8 +342,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ca1576a9fb6e646a9b783d81445c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonEffects: {fileID: 7313824911628664628}
---- !u!114 &7313824911628664628
+  effects: {fileID: 6230712807843425529}
+  clickAction:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6230712807843425529
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -354,15 +358,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ab9f111bd255045b27513bcd1cf3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
   interactableAudio: {fileID: 6282047614073122101}
   background: {fileID: 5700855835450385730}
   text: {fileID: 5844591669556902260}
   secundaryText: {fileID: 0}
   timeHoverAnimation: 0.25
-  clickAction:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &6038229258631111471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,6 +403,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!225 &7484273481519661322
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8656333651208386103}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &3704934223061096553
 PrefabInstance:
   m_ObjectHideFlags: 0

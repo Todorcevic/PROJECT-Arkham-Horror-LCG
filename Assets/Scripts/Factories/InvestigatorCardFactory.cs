@@ -8,7 +8,7 @@ using Arkham.Repositories;
 
 namespace Arkham.Factories
 {
-    public class InvestigatorCardFactory : CardFactory
+    public class InvestigatorCardFactory : CardFactory, IInvestigatorCardFactory
     {
         [Inject] private readonly IInvestigatorRepository investigatorRepository;
         [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
