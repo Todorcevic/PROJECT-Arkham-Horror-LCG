@@ -1,44 +1,23 @@
-﻿using Arkham.EventData;
-using Arkham.Presenters;
-using Arkham.Services;
+﻿using Arkham.Presenters;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using Zenject;
 
 namespace Arkham.Views
 {
-    public class InvestigatorSelectorView : SelectorView, IInvestigatorSelector, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class InvestigatorSelectorView : SelectorView, IInvestigatorSelector
     {
-        [Inject] private readonly ISelectInvestigator selectInvestigator;
-        [Inject] private readonly IRemoveInvestigator removeInvestigator;
-        [Inject] private readonly IDoubleClickDetector clickDetector;
-        [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private SelectorMovement selectorMovement;
-        [SerializeField, Required, ChildGameObjectsOnly] private LeadActivator leadActivator;
-        [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorSelectorEffects effects;
+        [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")]
+        private SelectorMovement selectorMovement;
+        [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")]
+        private LeadActivator leadActivator;
 
-        public SelectorMovement SelectorMovement => selectorMovement;
-        public LeadActivator LeadActivator => leadActivator;
+        public bool IsLeader => leadActivator.IsLeader;
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
-        {
-            if (clickDetector.CheckDoubleClick(eventData.clickTime, eventData.pointerPress))
-            {
-                effects.DoubleClickEffect();
-                removeInvestigator.RemoveInvestigator(Id);
-            }
-            else
-            {
-                effects.ClickEffect();
-                selectInvestigator.SelectInvestigator(Id);
-            }
-        }
+        public void MoveImageTo(Transform transform) => selectorMovement.MoveImageTo(transform);
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => effects.HoverOnEffect();
+        public void ArrangeTo(Transform transform) => selectorMovement.ArrangeTo(transform);
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => effects.HoverOffEffect();
+        public void ActivateLeaderIcon(bool activate) => leadActivator.ActivateLeaderIcon(activate);
     }
 }

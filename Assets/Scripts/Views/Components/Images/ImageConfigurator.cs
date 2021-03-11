@@ -1,13 +1,16 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Arkham.Views
 {
     public class ImageConfigurator : MonoBehaviour
     {
-        [SerializeField] private CanvasGroup canvas;
-        [SerializeField] private Image image;
-        [SerializeField] private Color disableColor;
+        [Title("RESOURCES")]
+        [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvas;
+        [SerializeField, Required, ChildGameObjectsOnly] private Image image;
+        [SerializeField, Required] private Color disableColor;
+
         public Sprite GetSprite => image.sprite;
 
         /*******************************************************************/

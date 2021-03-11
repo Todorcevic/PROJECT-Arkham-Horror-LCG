@@ -1,21 +1,20 @@
-﻿using Arkham.Interactors;
-using Arkham.Presenters;
+﻿using Arkham.Presenters;
 using Arkham.Views;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Zenject;
 
 namespace Arkham.Managers
 {
     public class InvestigatorSelectorsManager : MonoBehaviour, IInvestigatorSelectorsManager
     {
-        [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
+        [Title("RESOURCES")]
         [SerializeField, Required, SceneObjectsOnly] private Transform selectorZone;
         [SerializeField, Required, SceneObjectsOnly] private List<InvestigatorSelectorView> selectors;
+
         public List<IInvestigatorSelector> Selectors => selectors.OfType<IInvestigatorSelector>().ToList();
-        public IInvestigatorSelector GetLeadSelector => selectors.Find(i => i.LeadActivator.IsLeader);
+        public IInvestigatorSelector GetLeadSelector => selectors.Find(i => i.IsLeader);
 
         /*******************************************************************/
         public IInvestigatorSelector GetEmptySelector() => Selectors.Find(selector => selector.Id == null);
@@ -23,21 +22,17 @@ namespace Arkham.Managers
         public IInvestigatorSelector GetSelectorById(string cardId) =>
             Selectors.Find(selector => selector.Id == cardId);
 
-        public void ArrangeSelectors()
+        public void ArrangeSelectorsAndSetThisLead(string leadInvestigatorId)
         {
-            foreach (InvestigatorSelectorView selector in selectors)
-            {
-                selector.SelectorMovement.SetPlaceHolderParentTo(selector.IsEmpty ? transform : selectorZone);
-                selector.SelectorMovement.Arrange();
-            }
-            SetLeadSelector();
+            Selectors.ForEach(selector => selector.ArrangeTo(selector.IsEmpty ? transform : selectorZone));
+            SetLeadSelector(leadInvestigatorId);
         }
 
-        private void SetLeadSelector()
+        private void SetLeadSelector(string leadInvestigatorId)
         {
-            if (investigatorSelectorInteractor.LeadInvestigator == GetLeadSelector.Id || investigatorSelectorInteractor.LeadInvestigator == null) return;
-            GetLeadSelector.LeadActivator.ActivateLeaderIcon(false);
-            GetSelectorById(investigatorSelectorInteractor.LeadInvestigator).LeadActivator.ActivateLeaderIcon(true);
+            if (leadInvestigatorId == GetLeadSelector.Id || leadInvestigatorId == null) return;
+            GetLeadSelector.ActivateLeaderIcon(false);
+            GetSelectorById(leadInvestigatorId).ActivateLeaderIcon(true);
         }
     }
 }

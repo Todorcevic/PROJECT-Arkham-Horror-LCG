@@ -4,6 +4,6 @@ namespace Arkham.Services
 {
     public interface IDoubleClickDetector
     {
-        bool CheckDoubleClick(float time, GameObject objectClicked);
+        bool IsDoubleClick(float time, GameObject objectClicked);
     }
 }

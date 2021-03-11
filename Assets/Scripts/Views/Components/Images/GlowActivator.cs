@@ -6,6 +6,7 @@ namespace Arkham.Views
 {
     public class GlowActivator : MonoBehaviour
     {
+        [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image glow;
 
         /*******************************************************************/

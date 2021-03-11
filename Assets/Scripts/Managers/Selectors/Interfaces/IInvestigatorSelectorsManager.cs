@@ -7,8 +7,9 @@ namespace Arkham.Managers
     public interface IInvestigatorSelectorsManager
     {
         List<IInvestigatorSelector> Selectors { get; }
+        IInvestigatorSelector GetLeadSelector { get; }
         IInvestigatorSelector GetEmptySelector();
         IInvestigatorSelector GetSelectorById(string cardId);
-        void ArrangeSelectors();
+        void ArrangeSelectorsAndSetThisLead(string leadInvestigatorId);
     }
 }

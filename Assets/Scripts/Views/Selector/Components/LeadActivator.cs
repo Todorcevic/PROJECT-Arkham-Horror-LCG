@@ -6,7 +6,8 @@ namespace Arkham.Views
 {
     public class LeadActivator : MonoBehaviour
     {
-        [SerializeField, Required] private Image leaderIcon;
+        [Title("RESOURCES")]
+        [SerializeField, ChildGameObjectsOnly, Required] private Image leaderIcon;
 
         /*******************************************************************/
         public bool IsLeader => leaderIcon.enabled;

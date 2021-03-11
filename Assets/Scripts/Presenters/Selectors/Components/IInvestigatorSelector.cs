@@ -5,7 +5,9 @@ namespace Arkham.Presenters
 {
     public interface IInvestigatorSelector : ISelector
     {
-        SelectorMovement SelectorMovement { get; }
-        LeadActivator LeadActivator { get; }
+        bool IsLeader { get; }
+        void MoveImageTo(Transform transform);
+        void ArrangeTo(Transform transform);
+        void ActivateLeaderIcon(bool activate);
     }
 }

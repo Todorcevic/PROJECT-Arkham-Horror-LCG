@@ -5,9 +5,10 @@ namespace Arkham.Views
 {
     public class SelectorView : MonoBehaviour
     {
-        [Title("RESOURCES")]
-        [SerializeField, Required] private ImageConfigurator imageConfigurator;
-        [SerializeField, Required] private GlowActivator glowActivator;
+        [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")]
+        private ImageConfigurator imageConfigurator;
+        [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")]
+        private GlowActivator glowActivator;
 
         public string Id { get; private set; }
         public bool IsEmpty => Id == null;
