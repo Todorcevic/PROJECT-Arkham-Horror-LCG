@@ -14,7 +14,7 @@ namespace Arkham.Views
         /*******************************************************************/
         public void MoveImageTo(Transform transform) => selector.position = transform.position;
 
-        public void SetParent(Transform transform) => placeHolder.SetParent(transform);
+        public void SetPlaceHolderParentTo(Transform transform) => placeHolder.SetParent(transform);
 
         public void Arrange() => StartCoroutine(Reorder());
 

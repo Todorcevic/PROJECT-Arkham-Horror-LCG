@@ -27,7 +27,7 @@ namespace Arkham.Managers
         {
             foreach (InvestigatorSelectorView selector in selectors)
             {
-                selector.SelectorMovement.SetParent(selector.IsEmpty ? transform : selectorZone);
+                selector.SelectorMovement.SetPlaceHolderParentTo(selector.IsEmpty ? transform : selectorZone);
                 selector.SelectorMovement.Arrange();
             }
             SetLeadSelector();
