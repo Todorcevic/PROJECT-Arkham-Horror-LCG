@@ -16,7 +16,7 @@ namespace Arkham.Views
         /*******************************************************************/
         public void MoveImageTo(Transform transform) => selectorMovement.MoveImageTo(transform);
 
-        public void ArrangeTo(Transform transform) => selectorMovement.ArrangeTo(transform);
+        public void ArrangeTo(Transform transform = null) => selectorMovement.ArrangeTo(transform);
 
         public void ActivateLeaderIcon(bool activate) => leadActivator.ActivateLeaderIcon(activate);
     }

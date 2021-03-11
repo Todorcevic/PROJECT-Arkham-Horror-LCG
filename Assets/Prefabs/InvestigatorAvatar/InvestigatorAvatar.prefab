@@ -66,7 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e9f82dc6491194680f4786d78bb5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 4167499009643336929}
+  canvas: {fileID: 0}
+  canvasGroup: {fileID: 4167499009643336929}
   image: {fileID: 2813498599222703814}
   disableColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &4167499009643336958

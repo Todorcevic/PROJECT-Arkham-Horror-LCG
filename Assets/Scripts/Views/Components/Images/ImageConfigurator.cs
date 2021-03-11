@@ -7,7 +7,7 @@ namespace Arkham.Views
     public class ImageConfigurator : MonoBehaviour
     {
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvas;
+        [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
         [SerializeField, Required] private Color disableColor;
 
@@ -17,15 +17,15 @@ namespace Arkham.Views
         public void Activate(bool isEnable)
         {
             image.color = isEnable ? Color.white : disableColor;
-            canvas.interactable = canvas.blocksRaycasts = isEnable;
+            canvasGroup.interactable = canvasGroup.blocksRaycasts = isEnable;
         }
 
         public void ChangeImage(Sprite sprite)
         {
-            canvas.alpha = sprite == null ? 0 : 1;
+            canvasGroup.alpha = sprite == null ? 0 : 1;
             image.sprite = sprite;
         }
 
-        public void Show(bool isShow) => canvas.gameObject.SetActive(isShow);
+        public void Show(bool isShow) => canvasGroup.gameObject.SetActive(isShow);
     }
 }

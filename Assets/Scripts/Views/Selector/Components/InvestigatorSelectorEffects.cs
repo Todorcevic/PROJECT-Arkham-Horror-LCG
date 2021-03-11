@@ -1,12 +1,14 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Arkham.Views
 {
     public class InvestigatorSelectorEffects : MonoBehaviour
     {
         [Title("RESOURCES")]
+        [SerializeField, Required] private Canvas canvas;
         [SerializeField, Required] private Transform objectToTransform;
         [SerializeField, Required] private InteractableAudio audioInteractable;
         [Title("SETTINGS")]
@@ -28,6 +30,17 @@ namespace Arkham.Views
         {
             audioInteractable.HoverOffSound();
             objectToTransform.DOScale(1f, timeHoverAnimation);
+        }
+
+        public void ImageUp() => canvas.sortingOrder = 2;
+        public void ImageDown() => canvas.sortingOrder = 1;
+
+        public void SwapPlaceHolder(Transform selectorDragging, Transform selector)
+        {
+            audioInteractable.HoverOnSound();
+            int indexToSwap = selectorDragging.GetSiblingIndex();
+            selectorDragging.SetSiblingIndex(selector.GetSiblingIndex());
+            selector.SetSiblingIndex(indexToSwap);
         }
     }
 }

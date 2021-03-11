@@ -33,7 +33,6 @@ namespace Arkham.Presenters
             foreach (string investigatorId in investigatorSelectorRepository.InvestigatorsSelectedList)
             {
                 IInvestigatorSelector selector = investigatorSelectorsManager.GetEmptySelector();
-                Debug.Log(selector.Id);
                 SetInvestigatorInSelector(investigatorId, selector);
             }
             investigatorSelectorsManager.ArrangeSelectorsAndSetThisLead(investigatorSelectorInteractor.LeadInvestigator);

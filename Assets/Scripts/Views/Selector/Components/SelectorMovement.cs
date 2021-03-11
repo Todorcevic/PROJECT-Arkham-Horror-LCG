@@ -8,17 +8,17 @@ namespace Arkham.Views
     public class SelectorMovement : MonoBehaviour
     {
         [Title("RESOURCES")]
-        [SerializeField, ChildGameObjectsOnly, Required] private Transform selector;
-        [SerializeField, ChildGameObjectsOnly, Required] private Transform placeHolder;
+        [SerializeField, Required] private Transform selector;
+        [SerializeField, Required] private Transform placeHolder;
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeMoveAnimation;
 
         /*******************************************************************/
         public void MoveImageTo(Transform transform) => selector.position = transform.position;
 
-        public void ArrangeTo(Transform transform)
+        public void ArrangeTo(Transform transform = null)
         {
-            placeHolder.SetParent(transform);
+            if (transform != null) placeHolder.SetParent(transform);
             StartCoroutine(Reorder());
         }
 

@@ -10,7 +10,7 @@ namespace Arkham.Managers
     public class InvestigatorSelectorsManager : MonoBehaviour, IInvestigatorSelectorsManager
     {
         [Title("RESOURCES")]
-        [SerializeField, Required, SceneObjectsOnly] private Transform selectorZone;
+        [SerializeField, Required, SceneObjectsOnly] private Transform placeHoldersZone;
         [SerializeField, Required, SceneObjectsOnly] private List<InvestigatorSelectorView> selectors;
 
         public List<IInvestigatorSelector> Selectors => selectors.OfType<IInvestigatorSelector>().ToList();
@@ -24,7 +24,7 @@ namespace Arkham.Managers
 
         public void ArrangeSelectorsAndSetThisLead(string leadInvestigatorId)
         {
-            Selectors.ForEach(selector => selector.ArrangeTo(selector.IsEmpty ? transform : selectorZone));
+            Selectors.ForEach(selector => selector.ArrangeTo(selector.IsEmpty ? transform : placeHoldersZone));
             SetLeadSelector(leadInvestigatorId);
         }
 

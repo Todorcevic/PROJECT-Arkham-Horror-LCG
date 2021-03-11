@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 5579331317714830482}
   - component: {fileID: 205126067982190759}
   - component: {fileID: 2260248826508076982}
+  - component: {fileID: 7140359230233156653}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -324,6 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d6c925a92e3934babb0963835c556d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 7140359230233156653}
   objectToTransform: {fileID: 8950362181989810048}
   audioInteractable: {fileID: 1385225813015163964}
   timeHoverAnimation: 0.25
@@ -340,7 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e9f82dc6491194680f4786d78bb5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 2260248826508076982}
+  canvasGroup: {fileID: 2260248826508076982}
   image: {fileID: 2502264937126802845}
   disableColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
 --- !u!225 &2260248826508076982
@@ -355,6 +357,27 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!223 &7140359230233156653
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8590450183605477844}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 1
+  m_TargetDisplay: 0
 --- !u!1 &8628197188317402312
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,6 +520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectorView: {fileID: 4811412860381521357}
   effects: {fileID: 5579331317714830482}
+  objectToDrag: {fileID: 8950362181989810048}
 --- !u!222 &34041437426948442
 CanvasRenderer:
   m_ObjectHideFlags: 0
