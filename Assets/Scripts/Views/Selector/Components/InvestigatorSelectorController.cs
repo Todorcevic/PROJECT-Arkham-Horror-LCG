@@ -1,5 +1,4 @@
 ﻿using Arkham.EventData;
-using Arkham.Managers;
 using Arkham.Services;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -13,11 +12,11 @@ namespace Arkham.Views
         private static bool isDragging;
         [Inject] private readonly ISelectInvestigator selectInvestigator;
         [Inject] private readonly IRemoveInvestigator removeInvestigator;
+        [Inject] private readonly IChangeInvestigator changeInvestigator;
         [Inject] private readonly IDoubleClickDetector clickDetector;
         [Title("RESOURCES")]
         [SerializeField, Required] private InvestigatorSelectorView selectorView;
         [SerializeField, Required] private InvestigatorSelectorEffects effects;
-        [SerializeField, Required] private Transform objectToDrag;
 
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
@@ -39,8 +38,9 @@ namespace Arkham.Views
             if (eventData.pointerDrag == gameObject) return;
             if (isDragging)
             {
-                effects.SwapPlaceHolder(eventData.pointerDrag.transform, transform);
-                selectorView.ArrangeTo();
+                effects.HoverOnAudio();
+                int positionToSwap = eventData.pointerDrag.transform.GetSiblingIndex();
+                changeInvestigator.Swap(positionToSwap, selectorView.Id);
             }
             else effects.HoverOnEffect();
         }
@@ -52,23 +52,20 @@ namespace Arkham.Views
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
         {
-            effects.ImageUp();
             isDragging = true;
+            effects.ImageUp();
         }
 
-        void IDragHandler.OnDrag(PointerEventData eventData) => objectToDrag.position = eventData.position;
+        void IDragHandler.OnDrag(PointerEventData eventData) => effects.Dragging(eventData.position);
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
             isDragging = false;
             effects.ImageDown();
             effects.HoverOffEffect();
-            if (!eventData.hovered.Contains(transform.parent.gameObject))
-            {
+            if (effects.CanRemove(eventData))
                 removeInvestigator.RemoveInvestigator(selectorView.Id);
-                return;
-            }
-            selectorView.ArrangeTo();
+            else selectorView.ArrangeTo();
         }
     }
 }

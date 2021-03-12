@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,24 +9,29 @@ namespace Arkham.Views
     public class SelectorMovement : MonoBehaviour
     {
         [Title("RESOURCES")]
-        [SerializeField, Required] private Transform selector;
+        [SerializeField, Required] private Transform cardImage;
         [SerializeField, Required] private Transform placeHolder;
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeMoveAnimation;
 
+        public Transform PlaceHolder => placeHolder;
+
         /*******************************************************************/
-        public void MoveImageTo(Transform transform) => selector.position = transform.position;
+        public void MoveImageTo(Transform transform) => cardImage.position = transform.position;
 
-        public void ArrangeTo(Transform transform = null)
-        {
-            if (transform != null) placeHolder.SetParent(transform);
-            StartCoroutine(Reorder());
-        }
+        public void SetTransform(Transform transform) => placeHolder.SetParent(transform, worldPositionStays: false);
 
-        private IEnumerator Reorder()
+        public IEnumerator ArrangeTo()
         {
             yield return null;
-            selector.DOMove(placeHolder.position, timeMoveAnimation);
+            cardImage.DOMove(placeHolder.position, timeMoveAnimation);
+        }
+
+        public void SwapPlaceHolder(Transform selectorDragging)
+        {
+            int indexToSwap = selectorDragging.GetSiblingIndex();
+            selectorDragging.SetSiblingIndex(placeHolder.GetSiblingIndex());
+            placeHolder.SetSiblingIndex(indexToSwap);
         }
     }
 }

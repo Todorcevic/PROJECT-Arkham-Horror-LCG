@@ -52,6 +52,7 @@ namespace Arkham.Config
             /*** Event Data ***/
             Container.BindInterfacesTo<AddInvestigatorEventData>().AsSingle();
             Container.BindInterfacesTo<RemoveInvestigatorEventData>().AsSingle();
+            Container.BindInterfacesTo<ChangeInvestigatorEventData>().AsSingle();
             Container.BindInterfacesTo<SelectInvestigatorEventData>().AsSingle();
             Container.BindInterfacesTo<CampaignEventData>().AsSingle();
             Container.BindInterfacesTo<AddCardEventData>().AsSingle();

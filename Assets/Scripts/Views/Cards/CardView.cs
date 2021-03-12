@@ -25,9 +25,16 @@ namespace Arkham.Views
         }
 
         /*******************************************************************/
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => effects.HoverOnEffect();
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        {
+            if (eventData.dragging) return;
+            effects.HoverOnEffect();
+        }
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => effects.HoverOffEffect();
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        {
+            effects.HoverOffEffect();
+        }
 
         public void Activate(bool isEnable) => imageConfigurator.Activate(isEnable);
 

@@ -12,6 +12,7 @@ namespace Arkham.Views
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
+            if (eventData.dragging) return;
             effects.ClickEffect();
             addCard.AddDeckCard(Id);
         }

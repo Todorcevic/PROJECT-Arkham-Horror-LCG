@@ -18,19 +18,21 @@ namespace Arkham.Views
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            if (!IsActive) return;
+            if (!IsActive || eventData.dragging) return;
             effects.ClickEffect();
             clickAction?.Invoke();
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            if (IsActive) effects.HoverOnEffect();
+            if (!IsActive || eventData.dragging) return;
+            effects.HoverOnEffect();
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            if (IsActive) effects.HoverOffEffect();
+            if (!IsActive || eventData.dragging) return;
+            effects.HoverOffEffect();
         }
     }
 }

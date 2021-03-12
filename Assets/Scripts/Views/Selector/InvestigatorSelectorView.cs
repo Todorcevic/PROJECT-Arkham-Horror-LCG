@@ -1,5 +1,6 @@
 ﻿using Arkham.Presenters;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 namespace Arkham.Views
@@ -12,12 +13,17 @@ namespace Arkham.Views
         private LeadActivator leadActivator;
 
         public bool IsLeader => leadActivator.IsLeader;
+        public Transform PlaceHolder => selectorMovement.PlaceHolder;
 
         /*******************************************************************/
         public void MoveImageTo(Transform transform) => selectorMovement.MoveImageTo(transform);
 
-        public void ArrangeTo(Transform transform = null) => selectorMovement.ArrangeTo(transform);
+        public void SetTransform(Transform transform) => selectorMovement.SetTransform(transform);
+
+        public void ArrangeTo() => StartCoroutine(selectorMovement.ArrangeTo());
 
         public void ActivateLeaderIcon(bool activate) => leadActivator.ActivateLeaderIcon(activate);
+
+        public void SwapPlaceHolder(Transform selectorDragging) => selectorMovement.SwapPlaceHolder(selectorDragging);
     }
 }

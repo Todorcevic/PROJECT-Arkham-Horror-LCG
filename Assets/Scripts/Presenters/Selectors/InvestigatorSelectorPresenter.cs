@@ -17,6 +17,7 @@ namespace Arkham.Presenters
         [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
         [Inject] private readonly IAddInvestigatorEvent addInvestigatorEventData;
         [Inject] private readonly IRemoveInvestigatorEvent removeInvestigatorEvent;
+        [Inject] private readonly IChangeInvestigatorEvent changeInvestigatorEvent;
 
         /*******************************************************************/
         void IInitializable.Initialize()
@@ -24,19 +25,14 @@ namespace Arkham.Presenters
             selectInvestigatorEvent.InvestigatorSelectedChanged += SelectInvestigator;
             addInvestigatorEventData.InvestigatorAdded += AddInvestigator;
             removeInvestigatorEvent.InvestigatorRemoved += RemoveInvestigator;
+            changeInvestigatorEvent.InvestigatorChanged += ChangeInvestigator;
             InitializeSelectors();
         }
 
         /*******************************************************************/
-        private void InitializeSelectors()
-        {
-            foreach (string investigatorId in investigatorSelectorRepository.InvestigatorsSelectedList)
-            {
-                IInvestigatorSelector selector = investigatorSelectorsManager.GetEmptySelector();
-                SetInvestigatorInSelector(investigatorId, selector);
-            }
-            investigatorSelectorsManager.ArrangeSelectorsAndSetThisLead(investigatorSelectorInteractor.LeadInvestigator);
-        }
+        private void InitializeSelectors() =>
+            investigatorSelectorRepository.InvestigatorsSelectedList.ForEach(i => AddInvestigator(i));
+
 
         private void SelectInvestigator(string activeInvestigatorId)
         {
@@ -48,21 +44,28 @@ namespace Arkham.Presenters
         private void AddInvestigator(string investigatorId)
         {
             IInvestigatorSelector selector = investigatorSelectorsManager.GetEmptySelector();
-            SetInvestigatorInSelector(investigatorId, selector);
+            Sprite spriteCard = investigatorCardsManager.GetSpriteCard(investigatorId);
+            selector.SetSelector(investigatorId, spriteCard);
             selector.MoveImageTo(investigatorCardsManager.AllCards[investigatorId].Transform);
-            investigatorSelectorsManager.ArrangeSelectorsAndSetThisLead(investigatorSelectorInteractor.LeadInvestigator);
+            selector.SetTransform(investigatorSelectorsManager.PlaceHolderZone);
+            selector.ArrangeTo();
+            investigatorSelectorsManager.SetLeadSelector(investigatorSelectorInteractor.LeadInvestigator);
         }
 
         private void RemoveInvestigator(string investigatorId)
         {
-            investigatorSelectorsManager.GetSelectorById(investigatorId).SetSelector(null);
+            IInvestigatorSelector selector = investigatorSelectorsManager.GetSelectorById(investigatorId);
+            selector.SetSelector(null);
             investigatorSelectorsManager.ArrangeSelectorsAndSetThisLead(investigatorSelectorInteractor.LeadInvestigator);
         }
 
-        private void SetInvestigatorInSelector(string investigatorId, IInvestigatorSelector selector)
+        private void ChangeInvestigator(string inv1, string inv2)
         {
-            Sprite spriteCard = investigatorCardsManager.GetSpriteCard(investigatorId);
-            selector.SetSelector(investigatorId, spriteCard);
+            IInvestigatorSelector selector1 = investigatorSelectorsManager.GetSelectorById(inv1);
+            IInvestigatorSelector selector2 = investigatorSelectorsManager.GetSelectorById(inv2);
+            selector1.SwapPlaceHolder(selector2.PlaceHolder);
+            selector1.ArrangeTo();
+            investigatorSelectorsManager.SetLeadSelector(investigatorSelectorInteractor.LeadInvestigator);
         }
     }
 }
