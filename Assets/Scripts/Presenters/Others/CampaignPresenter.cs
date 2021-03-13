@@ -1,8 +1,8 @@
 ﻿using Arkham.Managers;
 using Arkham.Interactors;
 using Arkham.EventData;
-using Arkham.SettingObjects;
 using Zenject;
+using Arkham.Views;
 
 namespace Arkham.Presenters
 {
@@ -22,7 +22,7 @@ namespace Arkham.Presenters
         /*******************************************************************/
         private void ExecuteStateWithCampaign(string campaignId, string state)
         {
-            ICampaignConfigurable campaignView = campaignsManager.GetCampaign(campaignId);
+            CampaignView campaignView = campaignsManager.GetCampaign(campaignId);
             campaignsManager.GetState(state).ExecuteState(campaignView);
         }
 

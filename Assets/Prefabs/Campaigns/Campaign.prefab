@@ -446,6 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: x
   firstScenario: x
+  effects: {fileID: 2422650025459318338}
   imageConfigurator: {fileID: 749265671048677320}
 --- !u!114 &1548243087228422766
 MonoBehaviour:
@@ -460,7 +461,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   campaignView: {fileID: 5919814810207110816}
-  effects: {fileID: 2422650025459318338}
   clickAction:
     m_PersistentCalls:
       m_Calls: []

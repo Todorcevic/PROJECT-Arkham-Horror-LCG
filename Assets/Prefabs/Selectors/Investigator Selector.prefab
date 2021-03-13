@@ -254,6 +254,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageConfigurator: {fileID: 205126067982190759}
   glowActivator: {fileID: 4178966816585282234}
+  effects: {fileID: 5579331317714830482}
+  dragEffects: {fileID: 3011696457822602216}
   selectorMovement: {fileID: 7377333972140860705}
   leadActivator: {fileID: 3664458873342121480}
 --- !u!114 &7377333972140860705
@@ -284,6 +286,7 @@ GameObject:
   - component: {fileID: 205126067982190759}
   - component: {fileID: 2260248826508076982}
   - component: {fileID: 7140359230233156653}
+  - component: {fileID: 3011696457822602216}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -308,10 +311,10 @@ RectTransform:
   m_Father: {fileID: 640894624587334985}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 160, y: 109.99573}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5579331317714830482
 MonoBehaviour:
@@ -379,6 +382,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!114 &3011696457822602216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8590450183605477844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abcd9aa3387e10c41bf521b5925fba8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 7140359230233156653}
+  view: {fileID: 8950362181989810048}
+  audioInteractable: {fileID: 1385225813015163964}
+  timeHoverAnimation: 0.25
 --- !u!1 &8628197188317402312
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,6 +497,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4822173926775762534}
   - component: {fileID: 3120307966216879096}
+  - component: {fileID: 4465910107572208893}
   - component: {fileID: 34041437426948442}
   - component: {fileID: 4453454765105130133}
   - component: {fileID: 6378843800810972078}
@@ -505,7 +525,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 110}
+  m_SizeDelta: {x: 160, y: 109.99573}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3120307966216879096
 MonoBehaviour:
@@ -520,7 +540,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectorView: {fileID: 4811412860381521357}
-  effects: {fileID: 5579331317714830482}
+--- !u!114 &4465910107572208893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8866863660725742159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a446b5f41185e4ca67655207dcfcf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectorView: {fileID: 4811412860381521357}
+  removeZone: {fileID: 0}
 --- !u!222 &34041437426948442
 CanvasRenderer:
   m_ObjectHideFlags: 0

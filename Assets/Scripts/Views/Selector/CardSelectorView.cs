@@ -14,7 +14,6 @@ namespace Arkham.Views
     {
         [Inject] private readonly IRemoveCard removeCard;
         [Inject] private readonly IClickableCards clickableCards;
-        [SerializeField, Required, ChildGameObjectsOnly] private Image background;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI cardName;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI quantity;
         [SerializeField, Required, ChildGameObjectsOnly] private CardSelectorEffects effects;

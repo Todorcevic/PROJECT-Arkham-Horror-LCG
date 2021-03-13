@@ -2,7 +2,6 @@
 using Arkham.Views;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Arkham.Managers
@@ -12,10 +11,10 @@ namespace Arkham.Managers
         [Title("RESOURCES")]
         [SerializeField, SceneObjectsOnly] private List<CampaignView> campaigns;
         [SerializeField, AssetsOnly] private List<CampaignState> states;
-        public List<ICampaignConfigurable> Campaigns => campaigns.OfType<ICampaignConfigurable>().ToList();
+        public List<CampaignView> Campaigns => campaigns;
 
         /*******************************************************************/
         public CampaignState GetState(string campaignState) => states.Find(s => s.Id == campaignState);
-        public ICampaignConfigurable GetCampaign(string campaignId) => campaigns.Find(c => c.Id == campaignId);
+        public CampaignView GetCampaign(string campaignId) => campaigns.Find(c => c.Id == campaignId);
     }
 }

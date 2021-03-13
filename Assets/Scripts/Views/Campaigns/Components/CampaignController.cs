@@ -12,7 +12,6 @@ namespace Arkham.Views
         [Inject] private readonly IChangeCampaign changeCampaign;
         [Title("RESOURCES")]
         [SerializeField, Required] private CampaignView campaignView;
-        [SerializeField, Required] private CampaignEffects effects;
         [Title("CLICK EVENT")]
         [SerializeField] private UnityEvent clickAction;
 
@@ -20,13 +19,13 @@ namespace Arkham.Views
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             if (!campaignView.IsOpen) return;
-            effects.ClickEffect();
+            campaignView.Effects.ClickEffect();
             clickAction?.Invoke();
             changeCampaign.SelectScenario(campaignView.FirstScenario);
         }
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => effects.HoverOnEffect();
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => campaignView.Effects.HoverOnEffect();
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => effects.HoverOffEffect();
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => campaignView.Effects.HoverOffEffect();
     }
 }

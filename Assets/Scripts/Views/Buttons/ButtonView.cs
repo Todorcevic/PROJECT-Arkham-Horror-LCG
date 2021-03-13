@@ -18,7 +18,7 @@ namespace Arkham.Views
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            if (!IsActive || eventData.dragging) return;
+            if (!IsActive) return;
             effects.ClickEffect();
             clickAction?.Invoke();
         }

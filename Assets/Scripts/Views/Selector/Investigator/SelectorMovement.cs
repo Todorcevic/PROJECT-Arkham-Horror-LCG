@@ -19,12 +19,18 @@ namespace Arkham.Views
         /*******************************************************************/
         public void MoveImageTo(Transform transform) => cardImage.position = transform.position;
 
-        public void SetTransform(Transform transform) => placeHolder.SetParent(transform, worldPositionStays: false);
+        public void SetTransform(Transform transform = null)
+        {
+            placeHolder.SetParent(transform ? transform : this.transform, worldPositionStays: false);
+            placeHolder.localPosition = Vector3.zero;
+        }
 
-        public IEnumerator ArrangeTo()
+        public void Arrange() => StartCoroutine(ArrangeTo());
+
+        private IEnumerator ArrangeTo()
         {
             yield return null;
-            cardImage.DOMove(placeHolder.position, timeMoveAnimation);
+            yield return cardImage.DOMove(placeHolder.position, timeMoveAnimation).WaitForCompletion();
         }
 
         public void SwapPlaceHolder(Transform selectorDragging)

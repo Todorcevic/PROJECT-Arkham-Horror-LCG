@@ -4,6 +4,7 @@ using Arkham.EventData;
 using Arkham.Repositories;
 using UnityEngine;
 using Zenject;
+using Arkham.Views;
 
 namespace Arkham.Presenters
 {
@@ -43,28 +44,29 @@ namespace Arkham.Presenters
 
         private void AddInvestigator(string investigatorId)
         {
-            IInvestigatorSelector selector = investigatorSelectorsManager.GetEmptySelector();
+            InvestigatorSelectorView selector = investigatorSelectorsManager.GetEmptySelector();
             Sprite spriteCard = investigatorCardsManager.GetSpriteCard(investigatorId);
             selector.SetSelector(investigatorId, spriteCard);
-            selector.MoveImageTo(investigatorCardsManager.AllCards[investigatorId].Transform);
-            selector.SetTransform(investigatorSelectorsManager.PlaceHolderZone);
-            selector.ArrangeTo();
+            selector.SelectorMovement.MoveImageTo(investigatorCardsManager.AllCards[investigatorId].Transform);
+            selector.SelectorMovement.SetTransform(investigatorSelectorsManager.PlaceHoldersZone);
+            selector.SelectorMovement.Arrange();
             investigatorSelectorsManager.SetLeadSelector(investigatorSelectorInteractor.LeadInvestigator);
         }
 
         private void RemoveInvestigator(string investigatorId)
         {
-            IInvestigatorSelector selector = investigatorSelectorsManager.GetSelectorById(investigatorId);
+            InvestigatorSelectorView selector = investigatorSelectorsManager.GetSelectorById(investigatorId);
+            selector.SelectorMovement.SetTransform();
             selector.SetSelector(null);
             investigatorSelectorsManager.ArrangeSelectorsAndSetThisLead(investigatorSelectorInteractor.LeadInvestigator);
         }
 
         private void ChangeInvestigator(string inv1, string inv2)
         {
-            IInvestigatorSelector selector1 = investigatorSelectorsManager.GetSelectorById(inv1);
-            IInvestigatorSelector selector2 = investigatorSelectorsManager.GetSelectorById(inv2);
-            selector1.SwapPlaceHolder(selector2.PlaceHolder);
-            selector1.ArrangeTo();
+            InvestigatorSelectorView selector1 = investigatorSelectorsManager.GetSelectorById(inv1);
+            InvestigatorSelectorView selector2 = investigatorSelectorsManager.GetSelectorById(inv2);
+            selector1.SelectorMovement.SwapPlaceHolder(selector2.SelectorMovement.PlaceHolder);
+            selector1.SelectorMovement.Arrange();
             investigatorSelectorsManager.SetLeadSelector(investigatorSelectorInteractor.LeadInvestigator);
         }
     }

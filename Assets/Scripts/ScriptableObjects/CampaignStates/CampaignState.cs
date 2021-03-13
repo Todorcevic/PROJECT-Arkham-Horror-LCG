@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using Arkham.Views;
 
 namespace Arkham.SettingObjects
 {
@@ -10,6 +11,6 @@ namespace Arkham.SettingObjects
         public bool IsOpen => isOpen;
 
         /*******************************************************************/
-        public abstract void ExecuteState(ICampaignConfigurable campaignView);
+        public abstract void ExecuteState(CampaignView campaignView);
     }
 }
