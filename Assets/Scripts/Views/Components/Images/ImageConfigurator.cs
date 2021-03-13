@@ -7,8 +7,8 @@ namespace Arkham.Views
     public class ImageConfigurator : MonoBehaviour
     {
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
-        [SerializeField, Required, ChildGameObjectsOnly] private Image image;
+        [SerializeField, Required] private CanvasGroup canvasGroup;
+        [SerializeField, Required] private Image image;
         [SerializeField, Required] private Color disableColor;
 
         public Sprite GetSprite => image.sprite;

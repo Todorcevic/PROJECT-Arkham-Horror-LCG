@@ -253,10 +253,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageConfigurator: {fileID: 205126067982190759}
+  selectorMovement: {fileID: 7377333972140860705}
   glowActivator: {fileID: 4178966816585282234}
   effects: {fileID: 5579331317714830482}
   dragEffects: {fileID: 3011696457822602216}
-  selectorMovement: {fileID: 7377333972140860705}
   leadActivator: {fileID: 3664458873342121480}
 --- !u!114 &7377333972140860705
 MonoBehaviour:
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b2fb9248b5b504ea25fc820635b33b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardImage: {fileID: 8950362181989810048}
+  objectToMove: {fileID: 8950362181989810048}
   placeHolder: {fileID: 4822173926775762534}
   timeMoveAnimation: 0.25
 --- !u!1 &8590450183605477844
@@ -328,9 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d6c925a92e3934babb0963835c556d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 7140359230233156653}
   objectToTransform: {fileID: 8950362181989810048}
-  removeZone: {fileID: 0}
   audioInteractable: {fileID: 1385225813015163964}
   timeHoverAnimation: 0.25
   scaleHoverEffect: 1.1

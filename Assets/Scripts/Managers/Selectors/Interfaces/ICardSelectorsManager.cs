@@ -1,4 +1,4 @@
-﻿using Arkham.Presenters;
+﻿using Arkham.Views;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,11 +6,12 @@ namespace Arkham.Managers
 {
     public interface ICardSelectorsManager
     {
-        Transform Zone { get; }
-        List<ICardSelector> Selectors { get; }
-        List<ICardSelector> GetAllFilledSelectors();
-        ICardSelector GetSelectorByCardIdOrEmpty(string cardId);
+        Transform PlaceHolderZone { get; }
+        Transform SelectorsZone { get; }
+        List<CardSelectorView> Selectors { get; }
+        List<CardSelectorView> GetAllFilledSelectors();
+        CardSelectorView GetSelectorByCardIdOrEmpty(string cardId);
         void CleanAllSelectors();
-        void DesactivateSelector(ICardSelector selector);
+        void DesactivateSelector(CardSelectorView selector);
     }
 }

@@ -9,7 +9,7 @@ namespace Arkham.Views
     public class CardSelectorEffects : MonoBehaviour
     {
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
+        [SerializeField, Required] private InteractableAudio interactableAudio;
         [SerializeField, Required, ChildGameObjectsOnly] private Image background;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI cardName;
         [SerializeField, ChildGameObjectsOnly] private TextMeshProUGUI quantity;

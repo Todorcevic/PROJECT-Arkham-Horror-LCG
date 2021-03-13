@@ -9,7 +9,7 @@ namespace Arkham.Views
     public class SelectorMovement : MonoBehaviour
     {
         [Title("RESOURCES")]
-        [SerializeField, Required] private Transform cardImage;
+        [SerializeField, Required] private Transform objectToMove;
         [SerializeField, Required] private Transform placeHolder;
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeMoveAnimation;
@@ -17,7 +17,7 @@ namespace Arkham.Views
         public Transform PlaceHolder => placeHolder;
 
         /*******************************************************************/
-        public void MoveImageTo(Transform transform) => cardImage.position = transform.position;
+        public void MoveImageTo(Transform transform) => objectToMove.position = transform.position;
 
         public void SetTransform(Transform transform = null)
         {
@@ -30,7 +30,7 @@ namespace Arkham.Views
         private IEnumerator ArrangeTo()
         {
             yield return null;
-            yield return cardImage.DOMove(placeHolder.position, timeMoveAnimation).WaitForCompletion();
+            yield return objectToMove.DOMove(placeHolder.position, timeMoveAnimation).WaitForCompletion();
         }
 
         public void SwapPlaceHolder(Transform selectorDragging)

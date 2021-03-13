@@ -37,8 +37,8 @@ namespace Arkham.Presenters
 
         private void SelectInvestigator(string activeInvestigatorId)
         {
-            investigatorSelectorsManager.GetSelectorById(investigatorSelected)?.ActivateGlow(false);
-            investigatorSelectorsManager.GetSelectorById(activeInvestigatorId)?.ActivateGlow(true);
+            investigatorSelectorsManager.GetSelectorById(investigatorSelected)?.GlowActivator.ActivateGlow(false);
+            investigatorSelectorsManager.GetSelectorById(activeInvestigatorId)?.GlowActivator.ActivateGlow(true);
             investigatorSelected = activeInvestigatorId;
         }
 

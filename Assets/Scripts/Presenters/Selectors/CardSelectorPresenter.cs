@@ -3,6 +3,7 @@ using Arkham.Interactors;
 using Arkham.Managers;
 using Arkham.EventData;
 using Zenject;
+using Arkham.Views;
 
 namespace Arkham.Presenters
 {
@@ -10,6 +11,7 @@ namespace Arkham.Presenters
     {
         [Inject] private readonly IRemoveCardEvent removeCardEvent;
         [Inject] private readonly IAddCardEvent addCardEvent;
+        [Inject] private readonly IDeckCardsManager deckCardsManager;
         [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
         [Inject] private readonly IInvestigatorInfoInteractor investigatorInfoInteractor;
         [Inject] private readonly ICardInfoInteractor cardInfoInteractor;
@@ -28,29 +30,32 @@ namespace Arkham.Presenters
         /*******************************************************************/
         private void SetCardInSelector(string cardId)
         {
-            ICardSelector selector = cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardId);
+            CardSelectorView selector = cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardId);
             if (selector.IsEmpty) ActivateSelector(selector, cardId);
             _ = SetQuantityAndGetIt(selector, cardId);
         }
 
         private void RemoveCardInSelector(string cardId)
         {
-            ICardSelector selector = cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardId);
+            CardSelectorView selector = cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardId);
             if (SetQuantityAndGetIt(selector, cardId) <= 0)
                 cardSelectorsManager.DesactivateSelector(selector);
         }
 
-        private void ActivateSelector(ICardSelector selector, string cardId)
+        private void ActivateSelector(CardSelectorView selector, string cardId)
         {
             selector.SetSelector(cardId, imageCards.GetSprite(cardId));
-            selector.SetName(cardInfoInteractor.GetRealName(cardId));
-            //selector.Transform.SetParent(cardSelectorsManager.Zone);
+            selector.TextRefresher.SetName(cardInfoInteractor.GetRealName(cardId));
+            selector.SelectorMovement.SetTransform(cardSelectorsManager.PlaceHolderZone);
+            selector.SelectorMovement.MoveImageTo(cardSelectorsManager.PlaceHolderZone);
+            selector.SelectorMovement.Arrange();
+
         }
 
-        private int SetQuantityAndGetIt(ICardSelector selector, string cardId)
+        private int SetQuantityAndGetIt(CardSelectorView selector, string cardId)
         {
             int quantity = currentInvestigator.GetAmountOfThisCardInDeck(cardId);
-            selector.SetQuantity(quantity);
+            selector.TextRefresher.SetQuantity(quantity);
             return quantity;
         }
 
