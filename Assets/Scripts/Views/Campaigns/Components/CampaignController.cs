@@ -9,7 +9,7 @@ namespace Arkham.Views
 {
     public class CampaignController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [Inject] private readonly IChangeCampaign changeCampaign;
+        [Inject] private readonly IChangeScenario changeScenario;
         [Title("RESOURCES")]
         [SerializeField, Required] private CampaignView campaignView;
         [Title("CLICK EVENT")]
@@ -21,7 +21,7 @@ namespace Arkham.Views
             if (!campaignView.IsOpen) return;
             campaignView.Effects.ClickEffect();
             clickAction?.Invoke();
-            changeCampaign.SelectScenario(campaignView.FirstScenario);
+            changeScenario.SelectScenario(campaignView.FirstScenario);
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => campaignView.Effects.HoverOnEffect();

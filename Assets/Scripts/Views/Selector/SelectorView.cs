@@ -3,9 +3,10 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public abstract class SelectorView : MonoBehaviour
+    public class SelectorView : MonoBehaviour
     {
-        [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")] protected ImageConfigurator imageConfigurator;
+        [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")] private Activator activator;
+        [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")] private ImageConfigurator imageConfigurator;
         [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")] private SelectorMovement selectorMovement;
         [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")] private GlowActivator glowActivator;
 
@@ -15,6 +16,11 @@ namespace Arkham.Views
         public GlowActivator GlowActivator => glowActivator;
 
         /*******************************************************************/
-        public abstract void SetSelector(string cardId, Sprite cardImage = null);
+        public void SetSelector(string cardId, Sprite cardImage = null)
+        {
+            Id = cardId;
+            imageConfigurator.ChangeImage(cardImage);
+            activator.Activate(cardImage != null);
+        }
     }
 }

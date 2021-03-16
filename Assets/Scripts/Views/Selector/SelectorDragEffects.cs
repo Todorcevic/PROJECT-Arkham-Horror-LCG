@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public class InvestigatorSelectorDragEffects : MonoBehaviour
+    public class SelectorDragEffects : MonoBehaviour
     {
         [Title("RESOURCES")]
         [SerializeField, Required] private Canvas canvas;

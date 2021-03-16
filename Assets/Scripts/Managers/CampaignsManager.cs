@@ -1,8 +1,10 @@
-﻿using Arkham.SettingObjects;
+﻿using Arkham.Interactors;
+using Arkham.SettingObjects;
 using Arkham.Views;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Arkham.Managers
 {

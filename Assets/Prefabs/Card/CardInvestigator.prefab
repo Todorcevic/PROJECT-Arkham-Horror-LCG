@@ -683,6 +683,7 @@ GameObject:
   - component: {fileID: 6950638181576210403}
   - component: {fileID: 2433772825681969578}
   - component: {fileID: 7902555606089898850}
+  - component: {fileID: 8336178524971090763}
   - component: {fileID: 7192597132227724208}
   - component: {fileID: 7918799787899769508}
   m_Layer: 5
@@ -727,6 +728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects: {fileID: 2433772825681969578}
   imageConfigurator: {fileID: 7902555606089898850}
+  activator: {fileID: 8336178524971090763}
 --- !u!114 &2433772825681969578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,9 +757,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e9f82dc6491194680f4786d78bb5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
   canvasGroup: {fileID: 7192597132227724208}
   image: {fileID: 6939591346607468995}
+--- !u!114 &8336178524971090763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120494878094766683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6a28799e70be7439ca8762a058d96a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 7192597132227724208}
+  image: {fileID: 6939591346607468995}
+  text: {fileID: 0}
+  activeColor: {r: 1, g: 1, b: 1, a: 1}
   disableColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
 --- !u!225 &7192597132227724208
 CanvasGroup:

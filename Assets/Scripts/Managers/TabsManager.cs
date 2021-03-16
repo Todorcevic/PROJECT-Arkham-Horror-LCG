@@ -4,21 +4,21 @@ using Arkham.Views;
 
 namespace Arkham.Managers
 {
-    public class ButtonsManager : MonoBehaviour
+    public class TabsManager : MonoBehaviour
     {
         [Title("RESOURCES")]
-        [SerializeField, Required, SceneObjectsOnly] private ButtonView currentButton;
+        [SerializeField, Required, SceneObjectsOnly] private TabButtonView currentButton;
 
         /*******************************************************************/
         private void Start() => SelectTab(currentButton);
 
         /*******************************************************************/
-        public void SelectTab(ButtonView button)
+        public void SelectTab(TabButtonView button)
         {
-            currentButton.IsActive = true;
-            currentButton.ButtonEffects.HoverDesactivate();
-            button.IsActive = false;
-            button.ButtonEffects.HoverActivate();
+            currentButton.IsInactive = false;
+            currentButton.HoverDesactive();
+            button.IsInactive = true;
+            button.HoverActive();
             currentButton = button;
         }
     }

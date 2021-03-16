@@ -11,7 +11,5 @@ namespace Arkham.Managers
         List<CardSelectorView> Selectors { get; }
         List<CardSelectorView> GetAllFilledSelectors();
         CardSelectorView GetSelectorByCardIdOrEmpty(string cardId);
-        void CleanAllSelectors();
-        void DesactivateSelector(CardSelectorView selector);
     }
 }

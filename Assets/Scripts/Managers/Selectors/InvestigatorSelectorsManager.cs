@@ -1,12 +1,15 @@
-﻿using Arkham.Views;
+﻿using Arkham.Repositories;
+using Arkham.Views;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Arkham.Managers
 {
     public class InvestigatorSelectorsManager : MonoBehaviour, IInvestigatorSelectorsManager
     {
+        [Inject] private readonly IInvestigatorSelectorRepository investigatorSelectorRepository;
         [Title("RESOURCES")]
         [SerializeField, Required, SceneObjectsOnly] private Transform placeHoldersZone;
         [SerializeField, Required, SceneObjectsOnly] private List<InvestigatorSelectorView> selectors;
@@ -20,19 +23,5 @@ namespace Arkham.Managers
 
         public InvestigatorSelectorView GetSelectorById(string cardId) =>
             Selectors.Find(selector => selector.Id == cardId);
-
-        public void ArrangeSelectorsAndSetThisLead(string leadInvestigatorId)
-        {
-            foreach (var selector in selectors)
-                selector.SelectorMovement.Arrange();
-            SetLeadSelector(leadInvestigatorId);
-        }
-
-        public void SetLeadSelector(string leadInvestigatorId)
-        {
-            if (leadInvestigatorId == GetLeadSelector.Id || leadInvestigatorId == null) return;
-            GetLeadSelector.LeadActivator.ActivateLeaderIcon(false);
-            GetSelectorById(leadInvestigatorId).LeadActivator.ActivateLeaderIcon(true);
-        }
     }
 }

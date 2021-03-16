@@ -1,11 +1,12 @@
 ﻿using Arkham.Entities;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Zenject;
 
 namespace Arkham.Repositories
 {
     [DataContract]
-    public class Repository : IRepository, ICampaignRepository, IInvestigatorRepository, IInvestigatorSelectorRepository, ICardInfoRepository
+    public class Repository : ICampaignRepository, IInvestigatorRepository, IInvestigatorSelectorRepository, ICardInfoRepository
     {
         /**** Campaigns ****/
         [DataMember] public string CurrentScenario { get; set; }

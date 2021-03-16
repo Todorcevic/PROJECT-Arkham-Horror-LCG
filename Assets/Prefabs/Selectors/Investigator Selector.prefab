@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 640894624587334985}
   - component: {fileID: 4811412860381521357}
   - component: {fileID: 7377333972140860705}
+  - component: {fileID: 4581722988236795539}
   m_Layer: 5
   m_Name: Investigator Selector
   m_TagString: Untagged
@@ -252,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5607064fade8c614e8ceaf0fcbce0b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activator: {fileID: 4581722988236795539}
   imageConfigurator: {fileID: 205126067982190759}
   selectorMovement: {fileID: 7377333972140860705}
   glowActivator: {fileID: 4178966816585282234}
@@ -273,6 +275,19 @@ MonoBehaviour:
   objectToMove: {fileID: 8950362181989810048}
   placeHolder: {fileID: 4822173926775762534}
   timeMoveAnimation: 0.25
+--- !u!114 &4581722988236795539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4040927172998764470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6a28799e70be7439ca8762a058d96a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 4453454765105130133}
 --- !u!1 &8590450183605477844
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +361,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 2260248826508076982}
   image: {fileID: 2502264937126802845}
-  disableColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
 --- !u!225 &2260248826508076982
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -389,7 +403,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8590450183605477844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abcd9aa3387e10c41bf521b5925fba8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 537c995b85ca763458ab1829c3fd7f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 7140359230233156653}
@@ -569,8 +583,8 @@ CanvasGroup:
   m_GameObject: {fileID: 8866863660725742159}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &6378843800810972078
 MonoBehaviour:

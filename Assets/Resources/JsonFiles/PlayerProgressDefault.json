@@ -1,40 +1,33 @@
 {
-    "CurrentScenario": "CORE1",
+    "CurrentScenario": null,
     "CampaignsList": [
         {
             "Id": "CORE",
-            "State": "Open",
-            "FirstScenarioId": "CORE1"
+            "State": "Open"
         },
         {
             "Id": "TDL",
-            "State": "Lock",
-            "FirstScenarioId": "TDL1"
+            "State": "Lock"
         },
         {
             "Id": "TPC",
-            "State": "Lock",
-            "FirstScenarioId": "TPC1"
+            "State": "Lock"
         },
         {
             "Id": "TFA",
-            "State": "Lock",
-            "FirstScenarioId": "TFA1"
+            "State": "Lock"
         },
         {
             "Id": "TCU",
-            "State": "Lock",
-            "FirstScenarioId": "TCU1"
+            "State": "Lock"
         },
         {
             "Id": "TDE",
-            "State": "Lock",
-            "FirstScenarioId": "TDE1"
+            "State": "Lock"
         },
         {
             "Id": "OS",
-            "State": "Lock",
-            "FirstScenarioId": "RCORE"
+            "State": "Lock"
         }
     ],
     "InvestigatorsList": [
@@ -51,11 +44,12 @@
             "PhysicTrauma": 0,
             "MentalTrauma": 0,
             "Xp": 0,
-            "Deck": [
-                "01009",
-                "01010"
-            ],
-            "MandatoryCards": []
+            "Deck": [],
+            "MandatoryCards": [
+                "01006",
+                "01007",
+                "01000"
+            ]
         },
         {
             "Id": "02001",
@@ -103,7 +97,11 @@
             "MentalTrauma": 0,
             "Xp": 0,
             "Deck": [],
-            "MandatoryCards": []
+            "MandatoryCards": [
+                "01012",
+                "01013",
+                "01000"
+            ]
         },
         {
             "Id": "02004",
@@ -215,7 +213,11 @@
             "MentalTrauma": 0,
             "Xp": 0,
             "Deck": [],
-            "MandatoryCards": []
+            "MandatoryCards": [
+                "01010",
+                "01011",
+                "01000"
+            ]
         },
         {
             "Id": "02003",
@@ -271,7 +273,11 @@
             "MentalTrauma": 0,
             "Xp": 0,
             "Deck": [],
-            "MandatoryCards": []
+            "MandatoryCards": [
+                "01008",
+                "01009",
+                "01000"
+            ]
         },
         {
             "Id": "02002",
@@ -327,7 +333,11 @@
             "MentalTrauma": 0,
             "Xp": 0,
             "Deck": [],
-            "MandatoryCards": []
+            "MandatoryCards": [
+                "01014",
+                "01015",
+                "01000"
+            ]
         },
         {
             "Id": "02005",
@@ -370,9 +380,5 @@
             "MandatoryCards": []
         }
     ],
-    "InvestigatorsSelectedList": [
-        "01005",
-        "01001",
-        "01002"
-    ]
+    "InvestigatorsSelectedList": []
 }

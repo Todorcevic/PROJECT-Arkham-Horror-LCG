@@ -17,9 +17,5 @@ namespace Arkham.Factories
                 && c.Subtype_code != "weakness")
                 && imageCards.ExistThisSprite(c.Code)).OrderBy(c => c.Faction_code).ThenBy(c => c.Code).Select(c => c.Code);
 
-        /*******************************************************************/
-        protected override void ExtraSettings(string cardId)
-        {
-        }
     }
 }

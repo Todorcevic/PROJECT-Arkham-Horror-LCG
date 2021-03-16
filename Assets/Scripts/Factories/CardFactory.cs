@@ -22,10 +22,7 @@ namespace Arkham.Factories
         public void BuildCards()
         {
             foreach (string cardId in Cards)
-            {
                 Create(cardId, CardsManager);
-                ExtraSettings(cardId);
-            }
         }
 
         private void Create(string cardId, ICardsManager manager)
@@ -34,7 +31,5 @@ namespace Arkham.Factories
             CardView cardView = diContainer.InstantiatePrefabForComponent<CardView>(manager.CardPrefab, manager.Zone, args);
             manager.AllCards.Add(cardId, cardView);
         }
-
-        protected abstract void ExtraSettings(string cardId);
     }
 }

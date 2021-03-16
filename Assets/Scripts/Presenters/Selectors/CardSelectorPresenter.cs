@@ -11,7 +11,6 @@ namespace Arkham.Presenters
     {
         [Inject] private readonly IRemoveCardEvent removeCardEvent;
         [Inject] private readonly IAddCardEvent addCardEvent;
-        [Inject] private readonly IDeckCardsManager deckCardsManager;
         [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
         [Inject] private readonly IInvestigatorInfoInteractor investigatorInfoInteractor;
         [Inject] private readonly ICardInfoInteractor cardInfoInteractor;
@@ -39,7 +38,7 @@ namespace Arkham.Presenters
         {
             CardSelectorView selector = cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardId);
             if (SetQuantityAndGetIt(selector, cardId) <= 0)
-                cardSelectorsManager.DesactivateSelector(selector);
+                DesactivateSelector(selector);
         }
 
         private void ActivateSelector(CardSelectorView selector, string cardId)
@@ -47,9 +46,8 @@ namespace Arkham.Presenters
             selector.SetSelector(cardId, imageCards.GetSprite(cardId));
             selector.TextRefresher.SetName(cardInfoInteractor.GetRealName(cardId));
             selector.SelectorMovement.SetTransform(cardSelectorsManager.PlaceHolderZone);
-            selector.SelectorMovement.MoveImageTo(cardSelectorsManager.PlaceHolderZone);
-            selector.SelectorMovement.Arrange();
-
+            //selector.SelectorMovement.MoveImageTo(cardSelectorsManager.PlaceHolderZone);
+            //selector.SelectorMovement.Arrange();
         }
 
         private int SetQuantityAndGetIt(CardSelectorView selector, string cardId)
@@ -61,10 +59,22 @@ namespace Arkham.Presenters
 
         private void ShowAllCards(string investigatorId)
         {
-            cardSelectorsManager.CleanAllSelectors();
+            CleanAllSelectors();
             if (investigatorId == null) return;
             foreach (string cardId in investigatorInfoInteractor.GetFullDeck(investigatorId))
                 SetCardInSelector(cardId);
+        }
+
+        private void CleanAllSelectors()
+        {
+            foreach (CardSelectorView selector in cardSelectorsManager.GetAllFilledSelectors())
+                DesactivateSelector(selector);
+        }
+
+        private void DesactivateSelector(CardSelectorView selector)
+        {
+            selector.SetSelector(null);
+            selector.SelectorMovement.SetTransform(cardSelectorsManager.SelectorsZone);
         }
     }
 }

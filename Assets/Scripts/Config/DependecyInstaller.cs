@@ -6,6 +6,7 @@ using Arkham.Factories;
 using Arkham.Presenters;
 using Arkham.Interactors;
 using Arkham.EventData;
+using Arkham.Entities;
 
 namespace Arkham.Config
 {
@@ -34,6 +35,7 @@ namespace Arkham.Config
             Container.BindInterfacesTo<DeckCardPresenter>().AsSingle();
             Container.BindInterfacesTo<InvestigatorAvatarPresenter>().AsSingle();
             Container.BindInterfacesTo<CardsQuantityPresenter>().AsSingle();
+            Container.BindInterfacesTo<ContinueButtonPresenter>().AsSingle();
 
             /*** Interactors ***/
             Container.BindInterfacesTo<CampaignInteractor>().AsSingle();
@@ -57,6 +59,7 @@ namespace Arkham.Config
             Container.BindInterfacesTo<CampaignEventData>().AsSingle();
             Container.BindInterfacesTo<AddCardEventData>().AsSingle();
             Container.BindInterfacesTo<RemoveCardEventData>().AsSingle();
+            Container.BindInterfacesTo<StartGameEventData>().AsSingle();
         }
     }
 }

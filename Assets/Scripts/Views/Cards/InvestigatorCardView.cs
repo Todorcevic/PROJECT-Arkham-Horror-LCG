@@ -14,7 +14,7 @@ namespace Arkham.Views
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            if (eventData.dragging) return;
+            if (eventData.dragging || IsInactive) return;
             effects.ClickEffect();
             addInvestigator.AddInvestigator(Id);
             selectInvestigator.SelectInvestigator(Id);

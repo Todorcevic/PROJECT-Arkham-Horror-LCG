@@ -22,9 +22,7 @@ namespace Arkham.Presenters
         }
 
         /*******************************************************************/
-        private void RefreshAllCardsVisibility(string _) => RefreshAllCardsVisibility();
-
-        private void RefreshAllCardsVisibility()
+        private void RefreshAllCardsVisibility(string _)
         {
             foreach (ICardVisualizable cardView in deckCardsManager.CardsList)
             {

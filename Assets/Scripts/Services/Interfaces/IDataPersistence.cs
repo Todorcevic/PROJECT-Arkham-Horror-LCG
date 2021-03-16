@@ -9,5 +9,7 @@ namespace Arkham.Services
         void LoadDataCards();
         void SaveProgress();
         void LoadProgress();
+        void NewGame();
+        bool CanContineGame();
     }
 }

@@ -6,6 +6,12 @@ namespace Arkham.Services
 {
     public class JsonNewtonsoftAdapter : ISerializer
     {
+        private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
+        {
+            ObjectCreationHandling = ObjectCreationHandling.Replace
+        };
+
+        /*******************************************************************/
         public T CreateDataFromResources<T>(string pathAndNameJsonFile)
         {
             TextAsset jsonData = Resources.Load<TextAsset>(pathAndNameJsonFile);
@@ -27,13 +33,13 @@ namespace Arkham.Services
         public void UpdateDataFromResources(string pathAndNameJsonFile, object objectToUpdate)
         {
             TextAsset jsonData = Resources.Load<TextAsset>(pathAndNameJsonFile);
-            JsonConvert.PopulateObject(jsonData.text, objectToUpdate);
+            JsonConvert.PopulateObject(jsonData.text, objectToUpdate, serializerSettings);
         }
 
         public void UpdateDataFromFile(string pathAndNameJsonFile, object objectToUpdate)
         {
             string jsonData = File.ReadAllText(pathAndNameJsonFile);
-            JsonConvert.PopulateObject(jsonData, objectToUpdate);
+            JsonConvert.PopulateObject(jsonData, objectToUpdate, serializerSettings);
         }
     }
 }

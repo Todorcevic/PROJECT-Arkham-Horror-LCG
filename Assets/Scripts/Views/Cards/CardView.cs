@@ -14,7 +14,8 @@ namespace Arkham.Views
 
         public string Id { get; private set; }
         public Sprite GetCardImage => imageConfigurator.GetSprite;
-        public Transform Transform => transform;
+        public Vector3 Position => transform.position;
+        public bool IsInactive { get; set; }
 
         /*******************************************************************/
         [Inject]
@@ -36,8 +37,10 @@ namespace Arkham.Views
             effects.HoverOffEffect();
         }
 
-        public void Activate(bool isEnable) => imageConfigurator.Activate(isEnable);
-
-        public void Show(bool isShow) => imageConfigurator.Show(isShow);
+        public void Activate(bool isEnable)
+        {
+            IsInactive = !isEnable;
+            imageConfigurator.ChangeColor(isEnable ? Color.white : Color.gray);
+        }
     }
 }

@@ -12,7 +12,5 @@ namespace Arkham.Managers
         InvestigatorSelectorView GetLeadSelector { get; }
         InvestigatorSelectorView GetEmptySelector();
         InvestigatorSelectorView GetSelectorById(string cardId);
-        void ArrangeSelectorsAndSetThisLead(string leadInvestigatorId);
-        void SetLeadSelector(string leadInvestigatorId);
     }
 }

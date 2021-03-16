@@ -17,7 +17,7 @@ namespace Arkham.Views
         public Transform PlaceHolder => placeHolder;
 
         /*******************************************************************/
-        public void MoveImageTo(Transform transform) => objectToMove.position = transform.position;
+        public void MoveImageTo(Vector3 position) => objectToMove.position = position;
 
         public void SetTransform(Transform transform = null)
         {
@@ -25,9 +25,9 @@ namespace Arkham.Views
             placeHolder.localPosition = Vector3.zero;
         }
 
-        public void Arrange() => StartCoroutine(ArrangeTo());
+        public void Arrange() => StartCoroutine(Arranging());
 
-        private IEnumerator ArrangeTo()
+        private IEnumerator Arranging()
         {
             yield return null;
             yield return objectToMove.DOMove(placeHolder.position, timeMoveAnimation).WaitForCompletion();

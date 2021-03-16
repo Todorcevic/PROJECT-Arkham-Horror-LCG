@@ -4,15 +4,17 @@ using Arkham.Config;
 using Arkham.Repositories;
 using Zenject;
 using System.Linq;
+using Arkham.Investigators;
 
 namespace Arkham.Services
 {
     public class DataPersistence : IDataPersistence
     {
         [Inject] private readonly GameFiles gameFiles;
-        [Inject] private readonly IRepository repository;
+        [Inject] private readonly Repository repository;
         [Inject] private readonly ISerializer serializer;
         [Inject] private readonly IFileAdapter fileAdapter;
+        [Inject] protected readonly IInstantiatorAdapter instantiator;
 
         /*******************************************************************/
         public void LoadDataCards()
@@ -25,10 +27,22 @@ namespace Arkham.Services
 
         public void LoadProgress()
         {
-            if (fileAdapter.FileExist(gameFiles.PlayerProgressFilePath))
-                serializer.UpdateDataFromFile(gameFiles.PlayerProgressFilePath, repository);
-            else
-                serializer.UpdateDataFromResources(gameFiles.PlayerProgressDefaultFilePath, repository);
+            serializer.UpdateDataFromFile(gameFiles.PlayerProgressFilePath, repository);
+            LoadDeckBuildingRules();
+        }
+
+        public void NewGame()
+        {
+            serializer.UpdateDataFromResources(gameFiles.PlayerProgressDefaultFilePath, repository);
+            LoadDeckBuildingRules();
+        }
+
+        public bool CanContineGame() => fileAdapter.FileExist(gameFiles.PlayerProgressFilePath);
+
+        private void LoadDeckBuildingRules()
+        {
+            foreach (InvestigatorInfo investigator in repository.InvestigatorsList)
+                investigator.DeckBuilding = instantiator.CreateInstance<DeckBuildingRules>(investigator.Id);
         }
     }
 }

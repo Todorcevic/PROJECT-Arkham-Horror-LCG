@@ -24,17 +24,5 @@ namespace Arkham.Managers
 
         private CardSelectorView GetEmptySelector() =>
             Selectors.Find(selector => selector.Id == null);
-
-        public void CleanAllSelectors()
-        {
-            foreach (CardSelectorView selector in GetAllFilledSelectors())
-                DesactivateSelector(selector);
-        }
-
-        public void DesactivateSelector(CardSelectorView selector)
-        {
-            selector.SetSelector(null);
-            selector.SelectorMovement.SetTransform(selectorsZone);
-        }
     }
 }

@@ -6,18 +6,11 @@ namespace Arkham.Views
     public class InvestigatorSelectorView : SelectorView
     {
         [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")] private InvestigatorSelectorEffects effects;
-        [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")] private InvestigatorSelectorDragEffects dragEffects;
+        [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")] private SelectorDragEffects dragEffects;
         [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")] private LeadActivator leadActivator;
 
         public InvestigatorSelectorEffects Effects => effects;
-        public InvestigatorSelectorDragEffects DragEffects => dragEffects;
+        public SelectorDragEffects DragEffects => dragEffects;
         public LeadActivator LeadActivator => leadActivator;
-
-        /*******************************************************************/
-        public override void SetSelector(string cardId, Sprite cardImage = null)
-        {
-            Id = cardId;
-            imageConfigurator.ChangeImage(cardImage);
-        }
     }
 }

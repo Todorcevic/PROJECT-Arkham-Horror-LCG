@@ -1,5 +1,4 @@
 ﻿using Arkham.Config;
-using System.Diagnostics;
 using Zenject;
 
 namespace Arkham.Interactors
@@ -27,6 +26,6 @@ namespace Arkham.Interactors
             cardInfoInteractor.GetQuantity(cardId) - investigatorInfoInteractor.AmountSelectedOfThisCard(cardId) <= 0;
 
         private bool IsThisCardInMax(string cardId) =>
-            currentInvestigator.GetAmountOfThisCardInDeck(cardId) >= GameData.MAX_SIMILARS_CARDS_IN_DECK;
+            currentInvestigator.GetAmountOfThisCardInDeck(cardId) >= GameConfig.MAX_SIMILARS_CARDS_IN_DECK;
     }
 }

@@ -1,17 +1,16 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using Arkham.Views;
-using Zenject;
 
 namespace Arkham.Managers
 {
-    public class PanelsManager : MonoBehaviour, IInitializable
+    public class PanelsManager : MonoBehaviour
     {
         [Title("RESOURCES")]
         [SerializeField, SceneObjectsOnly] private PanelComponent currentPanel;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => SelectPanel(currentPanel);
+        private void Start() => SelectPanel(currentPanel);
 
         /*******************************************************************/
         public void SelectPanel(PanelComponent panel)

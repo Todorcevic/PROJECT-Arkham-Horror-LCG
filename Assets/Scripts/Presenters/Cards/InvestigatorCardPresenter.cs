@@ -12,17 +12,20 @@ namespace Arkham.Presenters
         [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
         [Inject] private readonly IAddInvestigatorEvent addInvestigatorEventData;
         [Inject] private readonly IRemoveInvestigatorEvent removeInvestigatorEvent;
+        [Inject] private readonly IStartGameEvent startGameEvent;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
             addInvestigatorEventData.InvestigatorAdded += RefreshAllCardsVisibility;
             removeInvestigatorEvent.InvestigatorRemoved += RefreshAllCardsVisibility;
-            RefreshAllCardsVisibility(null);
+            startGameEvent.GameStarted += RefreshAllCardsVisibility;
         }
 
         /*******************************************************************/
-        private void RefreshAllCardsVisibility(string _)
+        private void RefreshAllCardsVisibility(string _) => RefreshAllCardsVisibility();
+
+        private void RefreshAllCardsVisibility()
         {
             foreach (ICardVisualizable cardView in investigatorCardsManager.CardsList)
             {

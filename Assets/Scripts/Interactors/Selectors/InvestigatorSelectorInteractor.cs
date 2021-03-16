@@ -12,7 +12,7 @@ namespace Arkham.Interactors
 
         public string LeadInvestigator => investigatorSelectorRepository.InvestigatorsSelectedList.FirstOrDefault();
         public int AmontInvestigatorsSelected => investigatorSelectorRepository.InvestigatorsSelectedList.Count;
-        public bool SelectionIsFull => AmontInvestigatorsSelected >= GameData.MAX_INVESTIGATORS;
+        public bool SelectionIsFull => AmontInvestigatorsSelected >= GameConfig.MAX_INVESTIGATORS;
 
         /*******************************************************************/
         public bool CanThisCardBeSelected(string cardId)

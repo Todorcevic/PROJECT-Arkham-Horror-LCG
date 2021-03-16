@@ -1,4 +1,5 @@
-﻿using Arkham.Factories;
+﻿using Arkham.Entities;
+using Arkham.Factories;
 using Arkham.Services;
 using UnityEngine;
 using Zenject;
@@ -16,9 +17,10 @@ namespace Arkham.Config
         {
             resolutionSetter.SettingResolution();
             repositoriesIO.LoadDataCards();
-            repositoriesIO.LoadProgress();
+            //repositoriesIO.LoadProgress();
             deckCardFactory.BuildCards();
             investigatorCardFactory.BuildCards();
+            //repositoriesIO.SaveProgress();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Arkham.Managers
         [SerializeField, Required, AssetsOnly] private CardView cardPrefab;
         [SerializeField, Required, SceneObjectsOnly] private Transform zone;
         [Title("CARDS"), ShowInInspector] public List<ICardVisualizable> CardsList => AllCards.Values.ToList();
+
         public Dictionary<string, ICardVisualizable> AllCards { get; } =
             new Dictionary<string, ICardVisualizable>();
         public Transform Zone => zone;

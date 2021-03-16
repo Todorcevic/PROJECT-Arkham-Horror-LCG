@@ -18,11 +18,5 @@ namespace Arkham.Factories
                 .FindAll(c => c.Type_code == "investigator" && imageCards.ExistThisSprite(c.Code))
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Code).Select(c => c.Code);
 
-        /*******************************************************************/
-        protected override void ExtraSettings(string investigatorId)
-        {
-            InvestigatorInfo investigatorInfo = investigatorRepository.GetInvestigatorInfo(investigatorId);
-            investigatorInfo.DeckBuilding = instantiator.CreateInstance<DeckBuildingRules>(investigatorId);
-        }
     }
 }

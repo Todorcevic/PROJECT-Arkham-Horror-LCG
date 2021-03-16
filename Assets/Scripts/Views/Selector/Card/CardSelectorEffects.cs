@@ -19,6 +19,8 @@ namespace Arkham.Views
         /*******************************************************************/
         public void ClickEffect() => interactableAudio.ClickSound();
 
+        public void HoverOnAudio() => interactableAudio.HoverOnSound();
+
         public void HoverOnEffect()
         {
             interactableAudio.HoverOnSound();
