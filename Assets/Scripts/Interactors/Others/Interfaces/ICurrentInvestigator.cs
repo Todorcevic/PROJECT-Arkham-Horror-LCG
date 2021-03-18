@@ -6,6 +6,7 @@ namespace Arkham.Interactors
     public interface ICurrentInvestigator
     {
         string Id { get; }
+        int Xp { get; }
         int DeckSize { get; }
         int AmountCardsSelected { get; }
         List<string> AllowedCards { get; }

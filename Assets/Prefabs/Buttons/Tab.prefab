@@ -346,7 +346,7 @@ MonoBehaviour:
   clickAction:
     m_PersistentCalls:
       m_Calls: []
-  desactiveColor: {r: 0, g: 0, b: 0, a: 0}
+  desactiveColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
 --- !u!114 &3128367346518108937
 MonoBehaviour:
   m_ObjectHideFlags: 0

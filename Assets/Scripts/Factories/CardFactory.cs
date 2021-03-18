@@ -4,6 +4,7 @@ using Arkham.Repositories;
 using Arkham.Services;
 using Arkham.Views;
 using System.Collections.Generic;
+using System.Linq;
 using Zenject;
 
 namespace Arkham.Factories
@@ -17,7 +18,6 @@ namespace Arkham.Factories
 
         protected abstract ICardsManager CardsManager { get; }
         protected abstract IEnumerable<string> Cards { get; }
-
         /*******************************************************************/
         public void BuildCards()
         {

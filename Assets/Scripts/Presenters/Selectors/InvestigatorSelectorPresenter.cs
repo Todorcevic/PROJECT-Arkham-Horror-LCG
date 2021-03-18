@@ -20,6 +20,7 @@ namespace Arkham.Presenters
         [Inject] private readonly IRemoveInvestigatorEvent removeInvestigatorEvent;
         [Inject] private readonly IChangeInvestigatorEvent changeInvestigatorEvent;
         [Inject] private readonly IStartGameEvent startGameEvent;
+        [Inject] private readonly ISelectInvestigator selectInvestigator;
 
         private string LeadInvestigator => investigatorSelectorInteractor.LeadInvestigator;
 
@@ -37,38 +38,55 @@ namespace Arkham.Presenters
         private void InitializeSelectors()
         {
             CleanAllSelectors();
-            investigatorSelectorRepository.InvestigatorsSelectedList.ForEach(i => AddInvestigator(i));
+            AddAllInvestigators();
+            SelectLeadInvestigator();
         }
 
         private void CleanAllSelectors() => investigatorSelectorsManager.Selectors.ForEach(s => s.SetSelector(null));
+        private void AddAllInvestigators() =>
+            investigatorSelectorRepository.InvestigatorsSelectedList.ForEach(i => AddInvestigator(i));
+        private void SelectLeadInvestigator() =>
+            selectInvestigator.SelectInvestigator(investigatorSelectorInteractor.LeadInvestigator);
 
+        /*******************************************************************/
         private void SelectInvestigator(string activeInvestigatorId)
         {
-            investigatorSelectorsManager.GetSelectorById(investigatorSelected)?.GlowActivator.ActivateGlow(false);
-            investigatorSelectorsManager.GetSelectorById(activeInvestigatorId)?.GlowActivator.ActivateGlow(true);
+            RemoveGlowInOldInvestigator();
+            ActiveGlowInNewInvestigator(activeInvestigatorId);
             investigatorSelected = activeInvestigatorId;
         }
 
+        private void RemoveGlowInOldInvestigator() =>
+            investigatorSelectorsManager.GetSelectorById(investigatorSelected)?.GlowActivator.ActivateGlow(false);
+        private void ActiveGlowInNewInvestigator(string activeInvestigatorId) =>
+            investigatorSelectorsManager.GetSelectorById(activeInvestigatorId)?.GlowActivator.ActivateGlow(true);
+
+        /*******************************************************************/
         private void AddInvestigator(string investigatorId)
         {
             InvestigatorSelectorView selector = investigatorSelectorsManager.GetEmptySelector();
             Sprite spriteCard = investigatorCardsManager.GetSpriteCard(investigatorId);
             selector.SetSelector(investigatorId, spriteCard);
-            selector.SelectorMovement.MoveImageTo(investigatorCardsManager.AllCards[investigatorId].Position);
+            selector.SelectorMovement.MoveImageTo(investigatorCardsManager.AllCards[investigatorId].Transform.position);
             selector.SelectorMovement.SetTransform(investigatorSelectorsManager.PlaceHoldersZone);
             selector.SelectorMovement.Arrange();
             SetLeadSelector();
         }
 
+        /*******************************************************************/
         private void RemoveInvestigator(string investigatorId)
         {
             InvestigatorSelectorView selector = investigatorSelectorsManager.GetSelectorById(investigatorId);
             selector.SelectorMovement.SetTransform();
             selector.SetSelector(null);
-            ArrangeSelectors();
+            ArrangeAllSelectors();
             SetLeadSelector();
         }
 
+        private void ArrangeAllSelectors() =>
+            investigatorSelectorsManager.Selectors.ForEach(s => s.SelectorMovement.Arrange());
+
+        /*******************************************************************/
         private void ChangeInvestigator(string inv1, string inv2)
         {
             InvestigatorSelectorView selector1 = investigatorSelectorsManager.GetSelectorById(inv1);
@@ -78,12 +96,7 @@ namespace Arkham.Presenters
             SetLeadSelector();
         }
 
-        private void ArrangeSelectors()
-        {
-            foreach (var selector in investigatorSelectorsManager.Selectors)
-                selector.SelectorMovement.Arrange();
-        }
-
+        /*******************************************************************/
         private void SetLeadSelector()
         {
             if (LeadInvestigator == investigatorSelectorsManager.GetLeadSelector.Id || LeadInvestigator == null) return;

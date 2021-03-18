@@ -7,8 +7,12 @@ namespace Arkham.Views
     public class InitializeGame : MonoBehaviour
     {
         [Inject] private readonly IStartGame startGame;
-
+        [Inject] private readonly IChangeScenario changeScenario;
         /*******************************************************************/
-        public void NewGame() => startGame.NewGame();
+        public void NewGame()
+        {
+            startGame.NewGame();
+            changeScenario.SelectScenario(null);
+        }
     }
 }

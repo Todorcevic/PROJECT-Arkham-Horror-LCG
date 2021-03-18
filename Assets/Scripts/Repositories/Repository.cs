@@ -6,8 +6,11 @@ using Zenject;
 namespace Arkham.Repositories
 {
     [DataContract]
-    public class Repository : ICampaignRepository, IInvestigatorRepository, IInvestigatorSelectorRepository, ICardInfoRepository
+    public class Repository : ISettings, ICampaignRepository, IInvestigatorRepository, IInvestigatorSelectorRepository, ICardInfoRepository, IUnlockCards
     {
+        /**** Settings ****/
+        public bool AreCardsVisible { get; set; }
+
         /**** Campaigns ****/
         [DataMember] public string CurrentScenario { get; set; }
         [DataMember] public List<CampaignInfo> CampaignsList { get; set; }
@@ -25,5 +28,9 @@ namespace Arkham.Repositories
         /**** Investigators Selector ****/
         public string CurrentInvestigatorSelected { get; set; }
         [DataMember] public List<string> InvestigatorsSelectedList { get; set; }
+
+        /**** Unlock Cards ****/
+        [DataMember] public List<string> UnlockCards { get; set; } = new List<string>();
+        public bool IsThisCardUnlocked(string cardId) => UnlockCards.Contains(cardId);
     }
 }

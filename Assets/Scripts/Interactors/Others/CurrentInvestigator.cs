@@ -19,6 +19,7 @@ namespace Arkham.Interactors
         public List<string> Deck => Info.Deck;
         public bool SelectionIsFull => AmountCardsSelected >= DeckSize;
         public bool SelectionIsNotFull => AmountCardsSelected == DeckSize - 1;
+        public int Xp => Info.Xp;
 
         /*******************************************************************/
         public int GetAmountOfThisCardInDeck(string cardId) =>

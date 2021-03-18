@@ -9,6 +9,8 @@ namespace Arkham.Interactors
     {
         [Inject] private readonly IInvestigatorSelectorRepository investigatorSelectorRepository;
         [Inject] private readonly ICardInfoInteractor cardInfoInteractor;
+        [Inject] private readonly ISettings settings;
+        [Inject] private readonly IUnlockCards unlockCards;
 
         public string LeadInvestigator => investigatorSelectorRepository.InvestigatorsSelectedList.FirstOrDefault();
         public int AmontInvestigatorsSelected => investigatorSelectorRepository.InvestigatorsSelectedList.Count;
@@ -18,8 +20,16 @@ namespace Arkham.Interactors
         public bool CanThisCardBeSelected(string cardId)
         {
             if (SelectionIsFull) return false;
+            if (!unlockCards.IsThisCardUnlocked(cardId)) return false;
             if (IsThisInvestigatorWasted(cardId)) return false;
             return true;
+        }
+
+        public bool CanThisCardBeShowed(string cardId)
+        {
+            if (settings.AreCardsVisible) return true;
+            if (unlockCards.IsThisCardUnlocked(cardId)) return true;
+            return false;
         }
 
         private int AmountSelectedOfThisInvestigator(string investigatorId) =>

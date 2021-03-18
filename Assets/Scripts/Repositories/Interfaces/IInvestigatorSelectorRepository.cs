@@ -5,7 +5,7 @@ namespace Arkham.Repositories
 {
     public interface IInvestigatorSelectorRepository
     {
-        string CurrentInvestigatorSelected { get; set; }
+        string CurrentInvestigatorSelected { get; }
         List<string> InvestigatorsSelectedList { get; set; }
     }
 }

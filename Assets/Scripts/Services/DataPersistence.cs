@@ -37,8 +37,6 @@ namespace Arkham.Services
             LoadDeckBuildingRules();
         }
 
-        public bool CanContineGame() => fileAdapter.FileExist(gameFiles.PlayerProgressFilePath);
-
         private void LoadDeckBuildingRules()
         {
             foreach (InvestigatorInfo investigator in repository.InvestigatorsList)

@@ -43,6 +43,7 @@ namespace Arkham.Config
             Container.BindInterfacesTo<CardSelectorInteractors>().AsSingle();
             Container.BindInterfacesTo<CardInfoInteractor>().AsSingle();
             Container.BindInterfacesTo<InvestigatorInfoInteractor>().AsSingle();
+            Container.BindInterfacesTo<ContinueGame>().AsSingle();
 
             Container.BindInterfacesTo<ClickableCards>().AsSingle();
             Container.BindInterfacesTo<CurrentInvestigator>().AsSingle();
@@ -60,6 +61,8 @@ namespace Arkham.Config
             Container.BindInterfacesTo<AddCardEventData>().AsSingle();
             Container.BindInterfacesTo<RemoveCardEventData>().AsSingle();
             Container.BindInterfacesTo<StartGameEventData>().AsSingle();
+            Container.BindInterfacesTo<VisibilityEventData>().AsSingle();
+            Container.BindInterfacesTo<UnlockCardEventData>().AsSingle();
         }
     }
 }

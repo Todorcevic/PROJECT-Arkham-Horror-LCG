@@ -1,4 +1,6 @@
-﻿using Arkham.Presenters;
+﻿using Arkham.Managers;
+using Arkham.Presenters;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,7 +16,7 @@ namespace Arkham.Views
 
         public string Id { get; private set; }
         public Sprite GetCardImage => imageConfigurator.GetSprite;
-        public Vector3 Position => transform.position;
+        public Transform Transform => transform;
         public bool IsInactive { get; set; }
 
         /*******************************************************************/
@@ -42,5 +44,7 @@ namespace Arkham.Views
             IsInactive = !isEnable;
             imageConfigurator.ChangeColor(isEnable ? Color.white : Color.gray);
         }
+
+        public void Show(bool isEnable) => gameObject.SetActive(isEnable);
     }
 }

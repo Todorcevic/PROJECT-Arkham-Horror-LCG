@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arkham.Interactors
+namespace Arkham.EventData
 {
-    public class NewGame
+    public interface IUnlockCardEvent
     {
-
+        event Action<string> CardUnlocked;
     }
 }

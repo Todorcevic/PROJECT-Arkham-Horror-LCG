@@ -42,5 +42,7 @@ namespace Arkham.Views
             effects.ChangeTextColor(desactive ? desactiveColor : Color.white);
             IsInactive = desactive;
         }
+
+        public void AddClickAction(UnityAction action) => clickAction.AddListener(action);
     }
 }

@@ -6,5 +6,6 @@
         bool SelectionIsFull { get; }
         int AmontInvestigatorsSelected { get; }
         bool CanThisCardBeSelected(string cardId);
+        bool CanThisCardBeShowed(string cardId);
     }
 }
