@@ -267,7 +267,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effects: {fileID: 6256245110943196981}
   imageConfigurator: {fileID: 5771078568742617593}
-  activator: {fileID: 1482679649463931921}
 --- !u!114 &6256245110943196981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,10 +310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 7192597132227724208}
-  image: {fileID: 6939591346607468995}
-  text: {fileID: 0}
-  activeColor: {r: 1, g: 1, b: 1, a: 1}
-  disableColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
 --- !u!225 &7192597132227724208
 CanvasGroup:
   m_ObjectHideFlags: 0

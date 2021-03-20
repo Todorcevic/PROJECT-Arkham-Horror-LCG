@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Arkham.Interactors
 {
-    public class ContinueGame : IContinueGame
+    public class ContinueGameInteractor : IContinueGame
     {
         [Inject] private readonly GameFiles gameFiles;
         [Inject] private readonly IFileAdapter fileAdapter;

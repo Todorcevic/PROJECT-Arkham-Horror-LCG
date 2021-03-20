@@ -25,6 +25,7 @@ namespace Arkham.Presenters
         }
 
         /*******************************************************************/
+        private void RefreshAllCardsVisibility(bool _) => RefreshAllCardsVisibility();
         private void RefreshAllCardsVisibility(string _) => RefreshAllCardsVisibility();
 
         private void RefreshAllCardsVisibility()

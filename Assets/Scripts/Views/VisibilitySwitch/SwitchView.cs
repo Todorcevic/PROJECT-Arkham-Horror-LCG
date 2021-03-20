@@ -1,16 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
-using Arkham.Views;
 using DG.Tweening;
+using System;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
-    public class SwitchView : MonoBehaviour, IPointerClickHandler
+    public enum Switch
     {
-        private bool isOn;
+        Visibility
+    }
+
+
+    public class SwitchView : MonoBehaviour, IPointerClickHandler, ISwitch
+    {
+        private event Action<PointerEventData> Clicked;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
         [SerializeField, Required] private Transform positionOn;
@@ -19,39 +24,26 @@ namespace Arkham.View
         [SerializeField, Required] private Image background;
         [SerializeField, Required] private Image border;
         [Title("SETTINGS")]
-        [SerializeField, Required, PropertyTooltip("TAG is required to save")] private string switchTag;
         [SerializeField] private bool saveValue;
         [SerializeField, Range(0f, 1f)] private float timeMoveAnimation;
         [SerializeField] private Color colorOn;
         [SerializeField] private Color colorOff;
-        [Title("SWITCH EVENTS")]
-        [SerializeField] private UnityEvent OnEvents;
-        [SerializeField] private UnityEvent OffEvents;
+
+        bool ISwitch.SaveValue => saveValue;
 
         /*******************************************************************/
-        private void Start()
-        {
-            if (PlayerPrefs.GetString(switchTag)?.Length == 0 || !saveValue) return;
-            isOn = bool.Parse(PlayerPrefs.GetString(switchTag));
-            AnimateSwitch();
-        }
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => Clicked?.Invoke(eventData);
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            isOn = !isOn;
-            if (isOn) OnEvents?.Invoke();
-            else OffEvents?.Invoke();
-            AnimateSwitch();
-            if (saveValue) PlayerPrefs.SetString(switchTag, isOn.ToString());
-        }
+        void ISwitch.ClickSound() => interactableAudio.ClickSound();
 
-        public void AnimateSwitch()
+        void ISwitch.AnimateSwitch(bool isOn)
         {
-            interactableAudio.ClickSound();
             button.transform.DOMove(isOn ? positionOn.position : positionOff.position, timeMoveAnimation);
             button.DOColor(isOn ? colorOff : colorOn, timeMoveAnimation);
             border.DOColor(isOn ? colorOff : colorOn, timeMoveAnimation);
             background.DOColor(isOn ? colorOn : colorOff, timeMoveAnimation);
         }
+
+        void ISwitch.AddEvent(Action<PointerEventData> action) => Clicked += action;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Arkham.Repositories;
+using Arkham.Services;
 using System;
 using Zenject;
 
@@ -6,15 +7,16 @@ namespace Arkham.EventData
 {
     public class VisibilityEventData : IVisibility, IVisibilityEvent
     {
-
         [Inject] private readonly Repository repository;
-        public event Action VisibilityChanged;
+        public event Action<bool> VisibilityChanged;
 
         /*******************************************************************/
-        public void ChangeVisibility(bool isVisible)
+        public void Init(bool isOn) => repository.AreCardsVisible = isOn;
+
+        public void ChangeVisibility()
         {
-            repository.AreCardsVisible = isVisible;
-            VisibilityChanged?.Invoke();
+            repository.AreCardsVisible = !repository.AreCardsVisible;
+            VisibilityChanged?.Invoke(repository.AreCardsVisible);
         }
     }
 }

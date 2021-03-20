@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Arkham.Interactors
 {
-    public class CardSelectorInteractors : ICardSelectorInteractors
+    public class CardSelectorInteractor : ICardSelectorInteractors
     {
         [Inject] private readonly IInvestigatorInfoInteractor investigatorInfoInteractor;
         [Inject] private readonly ICardInfoInteractor cardInfoInteractor;

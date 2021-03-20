@@ -2,6 +2,7 @@
 {
     public interface IVisibility
     {
-        void ChangeVisibility(bool isVisible);
+        void Init(bool isOn);
+        void ChangeVisibility();
     }
 }

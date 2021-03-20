@@ -10,7 +10,6 @@ namespace Arkham.Views
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
-
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeFadeAnimation;
 

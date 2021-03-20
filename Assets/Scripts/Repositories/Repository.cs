@@ -8,7 +8,6 @@ namespace Arkham.Repositories
     [DataContract]
     public class Repository : ISettings, ICampaignRepository, IInvestigatorRepository, IInvestigatorSelectorRepository, ICardInfoRepository, IUnlockCards
     {
-        /**** Settings ****/
         public bool AreCardsVisible { get; set; }
 
         /**** Campaigns ****/
@@ -31,6 +30,7 @@ namespace Arkham.Repositories
 
         /**** Unlock Cards ****/
         [DataMember] public List<string> UnlockCards { get; set; } = new List<string>();
+
         public bool IsThisCardUnlocked(string cardId) => UnlockCards.Contains(cardId);
     }
 }

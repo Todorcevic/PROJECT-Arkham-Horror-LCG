@@ -13,7 +13,6 @@ namespace Arkham.Services
         [Inject] private readonly GameFiles gameFiles;
         [Inject] private readonly Repository repository;
         [Inject] private readonly ISerializer serializer;
-        [Inject] private readonly IFileAdapter fileAdapter;
         [Inject] protected readonly IInstantiatorAdapter instantiator;
 
         /*******************************************************************/
