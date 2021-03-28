@@ -7,13 +7,15 @@ namespace Arkham.EventData
     public class AddInvestigatorEventData : IAddInvestigator, IAddInvestigatorEvent
     {
         [Inject] private readonly IInvestigatorSelectorRepository investigatorSelectorRepository;
-        public event Action<string> InvestigatorAdded;
+        private event Action<string> InvestigatorAdded;
 
         /*******************************************************************/
-        public void AddInvestigator(string investigatorId)
+        void IAddInvestigator.AddInvestigator(string investigatorId)
         {
             investigatorSelectorRepository.InvestigatorsSelectedList.Add(investigatorId);
             InvestigatorAdded?.Invoke(investigatorId);
         }
+
+        void IAddInvestigatorEvent.AddAction(Action<string> action) => InvestigatorAdded += action;
     }
 }

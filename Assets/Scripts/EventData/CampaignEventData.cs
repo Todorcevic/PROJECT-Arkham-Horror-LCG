@@ -8,20 +8,24 @@ namespace Arkham.EventData
     public class CampaignEventData : IChangeCampaign, ICampaignEvent, IChangeScenario, IScenarioEvent
     {
         [Inject] private readonly ICampaignRepository campaignRepository;
-        public event Action<string, string> CampaignStateChanged;
-        public event Action<string> CurrentScenarioChanged;
+        private event Action<string, string> CampaignStateChanged;
+        private event Action<string> CurrentScenarioChanged;
 
         /*******************************************************************/
-        public void ChangeCampaignState(string campaignId, string state)
+        void IChangeCampaign.ChangeCampaignState(string campaignId, string state)
         {
             campaignRepository.GetCampaign(campaignId).State = state;
             CampaignStateChanged?.Invoke(campaignId, state);
         }
 
-        public void SelectScenario(string scenarioId)
+        void IChangeScenario.SelectingScenario(string scenarioId)
         {
             campaignRepository.CurrentScenario = scenarioId;
             CurrentScenarioChanged?.Invoke(scenarioId);
         }
+
+        void ICampaignEvent.AddAction(Action<string, string> action) => CampaignStateChanged += action;
+
+        void IScenarioEvent.AddAction(Action<string> action) => CurrentScenarioChanged += action;
     }
 }

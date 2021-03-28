@@ -7,15 +7,17 @@ namespace Arkham.EventData
     public class ChangeInvestigatorEventData : IChangeInvestigator, IChangeInvestigatorEvent
     {
         [Inject] private readonly IInvestigatorSelectorRepository investigatorSelectorRepository;
-        public event Action<string, string> InvestigatorChanged;
+        private event Action<string, string> InvestigatorChanged;
 
         /*******************************************************************/
-        public void Swap(int positionToSwap, string investigatorId)
+        void IChangeInvestigator.Swap(int positionToSwap, string investigatorId)
         {
             int realPosition = investigatorSelectorRepository.InvestigatorsSelectedList.IndexOf(investigatorId);
             investigatorSelectorRepository.InvestigatorsSelectedList[realPosition] = investigatorSelectorRepository.InvestigatorsSelectedList[positionToSwap];
             investigatorSelectorRepository.InvestigatorsSelectedList[positionToSwap] = investigatorId;
             InvestigatorChanged?.Invoke(investigatorId, investigatorSelectorRepository.InvestigatorsSelectedList[realPosition]);
         }
+
+        void IChangeInvestigatorEvent.AddAction(Action<string, string> action) => InvestigatorChanged += action;
     }
 }

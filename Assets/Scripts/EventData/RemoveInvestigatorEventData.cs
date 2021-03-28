@@ -7,13 +7,15 @@ namespace Arkham.EventData
     public class RemoveInvestigatorEventData : IRemoveInvestigator, IRemoveInvestigatorEvent
     {
         [Inject] private readonly IInvestigatorSelectorRepository investigatorSelectorRepository;
-        public event Action<string> InvestigatorRemoved;
+        private event Action<string> InvestigatorRemoved;
 
         /*******************************************************************/
-        public void RemoveInvestigator(string investigatorId)
+        void IRemoveInvestigator.Removing(string investigatorId)
         {
             investigatorSelectorRepository.InvestigatorsSelectedList.Remove(investigatorId);
             InvestigatorRemoved?.Invoke(investigatorId);
         }
+
+        void IRemoveInvestigatorEvent.AddAction(Action<string> action) => InvestigatorRemoved += action;
     }
 }

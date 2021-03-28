@@ -4,6 +4,6 @@ namespace Arkham.EventData
 {
     public interface IScenarioEvent
     {
-        event Action<string> CurrentScenarioChanged;
+        void AddAction(Action<string> action);
     }
 }

@@ -9,21 +9,21 @@ namespace Arkham.Presenters
 {
     public class CardSelectorPresenter : IInitializable
     {
+        [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
+        [Inject] private readonly IImageCardsManager imageCards;
         [Inject] private readonly IRemoveCardEvent removeCardEvent;
         [Inject] private readonly IAddCardEvent addCardEvent;
-        [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
+        [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
         [Inject] private readonly IInvestigatorInfoInteractor investigatorInfoInteractor;
         [Inject] private readonly ICardInfoInteractor cardInfoInteractor;
-        [Inject] private readonly IImageCardsManager imageCards;
-        [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
-        [Inject] private readonly ICurrentInvestigator currentInvestigator;
+        [Inject] private readonly ICurrentInvestigatorInteractor currentInvestigator;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            addCardEvent.DeckCardAdded += SetCardInSelector;
-            removeCardEvent.DeckCardRemoved += RemoveCardInSelector;
-            selectInvestigatorEvent.InvestigatorSelectedChanged += ShowAllCards;
+            addCardEvent.AddAction(SetCardInSelector);
+            removeCardEvent.AddAction(RemoveCardInSelector);
+            selectInvestigatorEvent.AddAction(ShowAllCards);
         }
 
         /*******************************************************************/
@@ -44,8 +44,8 @@ namespace Arkham.Presenters
         private void ActivateSelector(CardSelectorView selector, string cardId)
         {
             selector.SetSelector(cardId, imageCards.GetSprite(cardId));
-            selector.TextRefresher.SetName(cardInfoInteractor.GetRealName(cardId));
-            selector.SelectorMovement.SetTransform(cardSelectorsManager.PlaceHolderZone);
+            selector.SetName(cardInfoInteractor.GetRealName(cardId));
+            selector.SetTransform(cardSelectorsManager.PlaceHolderZone);
             //selector.SelectorMovement.MoveImageTo(cardSelectorsManager.PlaceHolderZone);
             //selector.SelectorMovement.Arrange();
         }
@@ -53,7 +53,7 @@ namespace Arkham.Presenters
         private int SetQuantityAndGetIt(CardSelectorView selector, string cardId)
         {
             int quantity = currentInvestigator.GetAmountOfThisCardInDeck(cardId);
-            selector.TextRefresher.SetQuantity(quantity);
+            selector.SetQuantity(quantity);
             return quantity;
         }
 
@@ -74,7 +74,7 @@ namespace Arkham.Presenters
         private void DesactivateSelector(CardSelectorView selector)
         {
             selector.SetSelector(null);
-            selector.SelectorMovement.SetTransform(cardSelectorsManager.SelectorsZone);
+            selector.SetTransform(cardSelectorsManager.SelectorsZone);
         }
     }
 }

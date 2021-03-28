@@ -1,5 +1,8 @@
 ﻿using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 namespace Arkham.Views
 {
@@ -12,8 +15,7 @@ namespace Arkham.Views
 
         public string Id { get; protected set; }
         public bool IsEmpty => Id == null;
-        public SelectorMovement SelectorMovement => selectorMovement;
-        public GlowActivator GlowActivator => glowActivator;
+        public Transform PlaceHolder => selectorMovement.PlaceHolder;
 
         /*******************************************************************/
         public void SetSelector(string cardId, Sprite cardImage = null)
@@ -22,5 +24,15 @@ namespace Arkham.Views
             imageConfigurator.ChangeImage(cardImage);
             activator.Activate(cardImage != null);
         }
+
+        public void Glow(bool isOn) => glowActivator.ActivateGlow(isOn);
+
+        public void Arrange() => selectorMovement.Arrange();
+
+        public void SetTransform(Transform transform = null) => selectorMovement.SetTransform(transform);
+
+        public void MoveImageTo(Vector3 position) => selectorMovement.MoveImageTo(position);
+
+        public void SwapPlaceHolder(Transform selectorDragging) => selectorMovement.SwapPlaceHolder(selectorDragging);
     }
 }

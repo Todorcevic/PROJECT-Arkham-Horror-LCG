@@ -1,5 +1,4 @@
-﻿using Arkham.Entities;
-using Arkham.Services;
+﻿using Arkham.Services;
 using System;
 using Zenject;
 
@@ -11,16 +10,18 @@ namespace Arkham.EventData
         public event Action GameStarted;
 
         /*******************************************************************/
-        public void NewGame()
+        void IStartGame.NewGame()
         {
             dataPersistence.NewGame();
             GameStarted?.Invoke();
         }
 
-        public void ContinueGame()
+        void IStartGame.ContinueGame()
         {
             dataPersistence.LoadProgress();
             GameStarted?.Invoke();
         }
+
+        void IStartGameEvent.AddAction(Action action) => GameStarted += action;
     }
 }

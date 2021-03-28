@@ -17,16 +17,13 @@ namespace Arkham.Presenters
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            selectInvestigatorEvent.InvestigatorSelectedChanged += RefreshAllCardsVisibility;
-            addCardEvent.DeckCardAdded += RefreshAllCardsVisibility;
-            removeCardEvent.DeckCardRemoved += RefreshAllCardsVisibility;
-            visibilityEvent.VisibilityChanged += RefreshAllCardsVisibility;
+            selectInvestigatorEvent.AddAction((_) => RefreshAllCardsVisibility());
+            addCardEvent.AddAction((_) => RefreshAllCardsVisibility());
+            removeCardEvent.AddAction((_) => RefreshAllCardsVisibility());
+            visibilityEvent.AddAction((_) => RefreshAllCardsVisibility());
         }
 
         /*******************************************************************/
-        private void RefreshAllCardsVisibility(bool _) => RefreshAllCardsVisibility();
-        private void RefreshAllCardsVisibility(string _) => RefreshAllCardsVisibility();
-
         private void RefreshAllCardsVisibility()
         {
             foreach (ICardVisualizable cardView in deckCardsManager.CardsList)

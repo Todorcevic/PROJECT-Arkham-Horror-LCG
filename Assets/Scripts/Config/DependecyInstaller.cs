@@ -2,7 +2,9 @@
 using Arkham.Repositories;
 using Arkham.Services;
 using Arkham.Scenarios;
-using Arkham.Views;
+using UnityEngine;
+using Arkham.Managers;
+using Arkham.Controllers;
 
 namespace Arkham.Config
 {
@@ -27,9 +29,13 @@ namespace Arkham.Config
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
             .InNamespace("Arkham.Factories").WithSuffix("Factory")).AsSingle();
 
-            /*** Controller ***/
-            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham.Controllers").WithSuffix("Controller")).AsSingle();
+            /*** Managers ***/
+            //Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
+            //.InNamespace("Arkham.Managers").WithSuffix("Manager")).AsSingle();
+
+            /*** Controllers ***/
+            //Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
+            //.InNamespace("Arkham.Controllerss").WithSuffix("Controller")).AsSingle();
 
             /*** Presenters ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()

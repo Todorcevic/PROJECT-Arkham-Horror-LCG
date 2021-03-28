@@ -147,7 +147,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 1143711315986413296}
   image: {fileID: 2636244524589476625}
-  disableColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!225 &1143711315986413296
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -401,8 +400,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6799962634472469167}
   - component: {fileID: 5919814810207110816}
-  - component: {fileID: 1548243087228422766}
-  - component: {fileID: 2422650025459318338}
+  - component: {fileID: 509505167249770005}
+  - component: {fileID: 2827260056155826863}
   - component: {fileID: 8088090979582546804}
   m_Layer: 5
   m_Name: Campaign
@@ -441,14 +440,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6720720525385905213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca8b8064a52b5d542bc4ffcafadfe940, type: 3}
+  m_Script: {fileID: 11500000, guid: 24d089206c542684e922dcafcd8c6827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: x
-  firstScenario: x
-  effects: {fileID: 2422650025459318338}
   imageConfigurator: {fileID: 749265671048677320}
---- !u!114 &1548243087228422766
+--- !u!114 &509505167249770005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -457,23 +454,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6720720525385905213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebc78f5d79744ac4490ad20749d93a46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  campaignView: {fileID: 5919814810207110816}
-  clickAction:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &2422650025459318338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6720720525385905213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f19f06299ccc7a4bae2de67adbfbe9c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9eee470fb14838b4a9b1c971fa317acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   InteractableAudio: {fileID: 2496415024736871201}
@@ -481,8 +462,25 @@ MonoBehaviour:
   highlighted: {fileID: 6801058822832394089}
   highlightedTextBox: {fileID: 8914362415478176639}
   timeHoverAnimation: 0.25
-  yoffsetHoverHighlighted: 10
-  zoomParallaxHoverEffect: 1.25
+  yoffsetHoverHighlighted: 25
+  zoomParallaxHoverEffect: 1.4
+--- !u!114 &2827260056155826863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6720720525385905213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67bcdc39ac7a9a4a88eff7417f26069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  campaignView: {fileID: 5919814810207110816}
+  campaignEffects: {fileID: 509505167249770005}
+  clickAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8088090979582546804
 MonoBehaviour:
   m_ObjectHideFlags: 0

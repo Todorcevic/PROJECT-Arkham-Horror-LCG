@@ -7,6 +7,6 @@ namespace Arkham.Entities
     {
         [DataMember] public string Id { get; set; }
         [DataMember] public string State { get; set; }
-        public string FirstScenarioId { get; set; }
+        public string FirstScenario { get; set; }
     }
 }

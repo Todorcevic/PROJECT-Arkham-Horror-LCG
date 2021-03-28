@@ -8,7 +8,7 @@ namespace Arkham.Interactors
     {
         [Inject] private readonly IInvestigatorInfoInteractor investigatorInfoInteractor;
         [Inject] private readonly ICardInfoInteractor cardInfoInteractor;
-        [Inject] private readonly ICurrentInvestigator currentInvestigator;
+        [Inject] private readonly ICurrentInvestigatorInteractor currentInvestigator;
         [Inject] private readonly ISettings settings;
         [Inject] private readonly IUnlockCards unlockCards;
 
@@ -33,6 +33,7 @@ namespace Arkham.Interactors
 
         private bool IsThisCardAllowed(string cardId)
         {
+            if (currentInvestigator.Id == null) return false;
             if (!currentInvestigator.AllowedCards.Contains(cardId)) return false;
             if (currentInvestigator.Xp < cardInfoInteractor.GetXp(cardId)) return false;
             return true;

@@ -4,7 +4,6 @@ using Arkham.Repositories;
 using Arkham.Services;
 using Arkham.Views;
 using System.Collections.Generic;
-using System.Linq;
 using Zenject;
 
 namespace Arkham.Factories

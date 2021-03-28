@@ -298,7 +298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4716696262168546615}
   - component: {fileID: 6373958950554177775}
-  - component: {fileID: 3128367346518108937}
+  - component: {fileID: 8619291348812580191}
   - component: {fileID: 6038229258631111471}
   - component: {fileID: 2901600964660766015}
   - component: {fileID: 7484273481519661322}
@@ -342,12 +342,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ca1576a9fb6e646a9b783d81445c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effects: {fileID: 3128367346518108937}
-  clickAction:
-    m_PersistentCalls:
-      m_Calls: []
+  interactableAudio: {fileID: 6282047614073122101}
+  background: {fileID: 5700855835450385730}
+  text: {fileID: 5844591669556902260}
+  timeHoverAnimation: 0.25
   desactiveColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
---- !u!114 &3128367346518108937
+--- !u!114 &8619291348812580191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -356,13 +356,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8656333651208386103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5ab9f111bd255045b27513bcd1cf3a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3aaec4b956374b34394438338d9093d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableAudio: {fileID: 6282047614073122101}
-  background: {fileID: 5700855835450385730}
-  text: {fileID: 5844591669556902260}
-  timeHoverAnimation: 0.25
+  buttonView: {fileID: 6373958950554177775}
+  clickAction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6038229258631111471
 MonoBehaviour:
   m_ObjectHideFlags: 0

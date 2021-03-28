@@ -2,6 +2,6 @@
 {
     public interface IChangeScenario
     {
-        void SelectScenario(string scenarioId);
+        void SelectingScenario(string scenarioId);
     }
 }

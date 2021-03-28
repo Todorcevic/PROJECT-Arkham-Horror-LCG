@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Arkham.Interactors
 {
-    public class CurrentInvestigatorInteractor : ICurrentInvestigator
+    public class CurrentInvestigatorInteractor : ICurrentInvestigatorInteractor
     {
         [Inject] private readonly IInvestigatorSelectorRepository investigatorSelectorRepository;
         [Inject] private readonly IInvestigatorRepository investigatorRepository;

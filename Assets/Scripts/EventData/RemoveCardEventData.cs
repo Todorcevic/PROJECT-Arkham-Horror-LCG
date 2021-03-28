@@ -6,14 +6,16 @@ namespace Arkham.EventData
 {
     public class RemoveCardEventData : IRemoveCard, IRemoveCardEvent
     {
-        [Inject] private readonly ICurrentInvestigator currentInvestigator;
-        public event Action<string> DeckCardRemoved;
+        [Inject] private readonly ICurrentInvestigatorInteractor currentInvestigator;
+        private event Action<string> DeckCardRemoved;
 
         /*******************************************************************/
-        public void RemoveDeckCard(string deckCardId)
+        void IRemoveCard.RemoveDeckCard(string deckCardId)
         {
             currentInvestigator.Deck.Remove(deckCardId);
             DeckCardRemoved?.Invoke(deckCardId);
         }
+
+        void IRemoveCardEvent.AddAction(Action<string> action) => DeckCardRemoved += action;
     }
 }

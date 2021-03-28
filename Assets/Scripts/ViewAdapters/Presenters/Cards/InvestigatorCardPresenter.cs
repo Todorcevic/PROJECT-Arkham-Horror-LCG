@@ -2,7 +2,6 @@
 using Arkham.Managers;
 using Arkham.EventData;
 using Zenject;
-using Arkham.Repositories;
 
 namespace Arkham.Presenters
 {
@@ -18,16 +17,13 @@ namespace Arkham.Presenters
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            addInvestigatorEventData.InvestigatorAdded += RefreshAllCardsVisibility;
-            removeInvestigatorEvent.InvestigatorRemoved += RefreshAllCardsVisibility;
-            startGameEvent.GameStarted += RefreshAllCardsVisibility;
-            visibilityEvent.VisibilityChanged += RefreshAllCardsVisibility;
+            addInvestigatorEventData.AddAction((_) => RefreshAllCardsVisibility());
+            removeInvestigatorEvent.AddAction((_) => RefreshAllCardsVisibility());
+            startGameEvent.AddAction(RefreshAllCardsVisibility);
+            visibilityEvent.AddAction((_) => RefreshAllCardsVisibility());
         }
 
         /*******************************************************************/
-        private void RefreshAllCardsVisibility(bool _) => RefreshAllCardsVisibility();
-        private void RefreshAllCardsVisibility(string _) => RefreshAllCardsVisibility();
-
         private void RefreshAllCardsVisibility()
         {
             foreach (ICardVisualizable cardView in investigatorCardsManager.CardsList)

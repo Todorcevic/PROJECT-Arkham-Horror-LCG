@@ -4,6 +4,6 @@ namespace Arkham.EventData
 {
     public interface IChangeInvestigatorEvent
     {
-        event Action<string, string> InvestigatorChanged;
+        void AddAction(Action<string, string> action);
     }
 }

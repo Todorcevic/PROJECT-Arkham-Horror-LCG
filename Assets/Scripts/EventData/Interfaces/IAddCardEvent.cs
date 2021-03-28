@@ -4,6 +4,6 @@ namespace Arkham.EventData
 {
     public interface IAddCardEvent
     {
-        event Action<string> DeckCardAdded;
+        void AddAction(Action<string> action);
     }
 }

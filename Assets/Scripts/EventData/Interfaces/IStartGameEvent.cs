@@ -4,6 +4,6 @@ namespace Arkham.EventData
 {
     public interface IStartGameEvent
     {
-        event Action GameStarted;
+        void AddAction(Action action);
     }
 }

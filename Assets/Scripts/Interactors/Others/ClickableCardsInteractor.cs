@@ -4,7 +4,7 @@ namespace Arkham.Interactors
 {
     public class ClickableCardsInteractor : IClickableCards
     {
-        [Inject] private readonly ICurrentInvestigator currentInvestigator;
+        [Inject] private readonly ICurrentInvestigatorInteractor currentInvestigator;
 
         /*******************************************************************/
         public bool IsClickable(string cardId)

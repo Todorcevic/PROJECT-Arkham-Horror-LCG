@@ -7,13 +7,15 @@ namespace Arkham.EventData
     public class UnlockCardEventData : IUnlockCard, IUnlockCardEvent
     {
         [Inject] private readonly Repository repository;
-        public event Action<string> CardUnlocked;
+        public event Action CardUnlocked;
 
         /*******************************************************************/
-        public void UnlockCard(string cardId)
+        void IUnlockCard.UnlockCard(string cardId)
         {
             repository.UnlockCards.Add(cardId);
-            CardUnlocked?.Invoke(cardId);
+            CardUnlocked?.Invoke();
         }
+
+        void IUnlockCardEvent.AddAction(Action action) => CardUnlocked += action;
     }
 }

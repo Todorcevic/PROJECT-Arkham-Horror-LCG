@@ -4,6 +4,6 @@ namespace Arkham.EventData
 {
     public interface ICampaignEvent
     {
-        event Action<string, string> CampaignStateChanged;
+        void AddAction(Action<string, string> action);
     }
 }

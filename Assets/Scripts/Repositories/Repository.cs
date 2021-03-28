@@ -1,7 +1,6 @@
 ﻿using Arkham.Entities;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using Zenject;
 
 namespace Arkham.Repositories
 {

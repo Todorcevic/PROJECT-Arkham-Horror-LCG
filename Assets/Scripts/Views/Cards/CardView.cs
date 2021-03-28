@@ -1,14 +1,11 @@
-﻿using Arkham.Managers;
-using Arkham.Presenters;
-using DG.Tweening;
+﻿using Arkham.Presenters;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Arkham.Views
 {
-    public class CardView : MonoBehaviour, ICardVisualizable, IPointerEnterHandler, IPointerExitHandler
+    public class CardView : MonoBehaviour, ICardVisualizable
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] protected CardEffects effects;
@@ -28,21 +25,21 @@ namespace Arkham.Views
         }
 
         /*******************************************************************/
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        public void ClickEffect()
         {
-            if (eventData.dragging) return;
-            effects.HoverOnEffect();
+            if (IsInactive) return;
+            effects.ClickEffect();
         }
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
-        {
-            effects.HoverOffEffect();
-        }
+        public void HoverOnEffect() => effects.HoverOnEffect();
+
+        public void HoverOffEffect() => effects.HoverOffEffect();
 
         public void Activate(bool isEnable)
         {
             IsInactive = !isEnable;
             imageConfigurator.ChangeColor(isEnable ? Color.white : Color.gray);
+            effects.SetEnableColor(IsInactive);
         }
 
         public void Show(bool isEnable) => gameObject.SetActive(isEnable);

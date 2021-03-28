@@ -1,24 +1,20 @@
 ﻿using Arkham.EventData;
 using Arkham.Services;
-using Arkham.Views;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Arkham.Controllers
 {
-    public class VisibilitySwitchController : IInitializable
+    public class VisibilitySwitchController : MonoBehaviour, IPointerClickHandler
     {
         [Inject] private readonly IPlayerPrefsAdapter playerPrefs;
         [Inject] private readonly IVisibility visibility;
-        [Inject(Id = "VisivilitySwitch")] private readonly ISwitch switchView;
 
         /*******************************************************************/
-        void IInitializable.Initialize()
-        {
-            switchView.AddEvent(Click);
-            visibility.Init(playerPrefs.LoadCardsVisibility());
-        }
+        private void Start() => visibility.Init(playerPrefs.LoadCardsVisibility());
 
-        private void Click(PointerEventData eventData) => visibility.ChangeVisibility();
+        /*******************************************************************/
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => visibility.ChangeVisibility();
     }
 }

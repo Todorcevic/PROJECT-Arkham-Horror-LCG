@@ -2,6 +2,6 @@
 {
     public interface IRemoveInvestigator
     {
-        void RemoveInvestigator(string investigatorId);
+        void Removing(string investigatorId);
     }
 }

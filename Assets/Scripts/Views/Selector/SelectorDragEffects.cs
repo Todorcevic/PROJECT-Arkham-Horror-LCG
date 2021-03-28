@@ -14,11 +14,11 @@ namespace Arkham.Views
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
 
         /*******************************************************************/
-        public void BeginningDrag() => canvas.sortingOrder = 2;
+        public void BeginningDragEffect() => canvas.sortingOrder = 2;
 
-        public void Dragging(Vector2 movePosition) => view.position = movePosition;
+        public void DraggingEffect(Vector2 movePosition) => view.position = movePosition;
 
-        public void EndingDrag()
+        public void EndingDragEffect()
         {
             canvas.sortingOrder = 1;
             audioInteractable.HoverOffSound();

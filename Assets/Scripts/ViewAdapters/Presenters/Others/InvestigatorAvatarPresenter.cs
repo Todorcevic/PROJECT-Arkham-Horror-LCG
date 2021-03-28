@@ -1,6 +1,7 @@
 ﻿using Arkham.Managers;
 using Arkham.EventData;
 using Zenject;
+using Arkham.Interactors;
 
 namespace Arkham.Presenters
 {
@@ -8,12 +9,13 @@ namespace Arkham.Presenters
     {
         [Inject] private readonly IInvestigatorAvatarVisualizable investigatorAvatar;
         [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
+        [Inject] private readonly ICurrentInvestigatorInteractor currentInvestigator;
         [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            selectInvestigatorEvent.InvestigatorSelectedChanged += ShowInvetigator;
+            selectInvestigatorEvent.AddAction(ShowInvetigator);
         }
 
         /*******************************************************************/

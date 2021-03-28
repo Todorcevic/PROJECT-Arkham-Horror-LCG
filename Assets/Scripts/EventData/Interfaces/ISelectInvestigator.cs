@@ -2,6 +2,6 @@
 {
     public interface ISelectInvestigator
     {
-        void SelectInvestigator(string investigatorId);
+        void Selecting(string investigatorId);
     }
 }
