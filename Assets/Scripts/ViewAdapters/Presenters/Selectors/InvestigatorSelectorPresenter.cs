@@ -17,11 +17,10 @@ namespace Arkham.Presenters
         [Inject] private readonly IInvestigatorSelectorRepository investigatorSelectorRepository;
         [Inject] private readonly ISelectInvestigator selectInvestigator;
         [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
-        [Inject] private readonly IAddInvestigatorEvent addInvestigatorEventData;
+        [Inject] private readonly IAddInvestigatorEvent addInvestigatorEvent;
         [Inject] private readonly IRemoveInvestigatorEvent removeInvestigatorEvent;
         [Inject] private readonly IChangeInvestigatorEvent changeInvestigatorEvent;
         [Inject] private readonly IStartGameEvent startGameEvent;
-
         [Inject] private readonly IShowCard showCard;
 
         private string LeadInvestigator => investigatorSelectorInteractor.LeadInvestigator;
@@ -30,7 +29,7 @@ namespace Arkham.Presenters
         void IInitializable.Initialize()
         {
             selectInvestigatorEvent.AddAction(SelectInvestigator);
-            addInvestigatorEventData.AddAction(AddInvestigator);
+            addInvestigatorEvent.AddAction(AddInvestigator);
             removeInvestigatorEvent.AddAction(RemoveInvestigator);
             changeInvestigatorEvent.AddAction(ChangeInvestigator);
             startGameEvent.AddAction(InitializeSelectors);
@@ -69,7 +68,7 @@ namespace Arkham.Presenters
             IInvestigatorSelectorView selector = investigatorSelectorsManager.GetEmptySelector();
             Sprite spriteCard = investigatorCardsManager.GetSpriteCard(investigatorId);
             selector.SetSelector(investigatorId, spriteCard);
-            selector.MoveImageTo(investigatorCardsManager.AllCards[investigatorId].Transform.position);
+            selector.MoveImageTo(showCard.Transform);
             selector.SetTransform(investigatorSelectorsManager.PlaceHoldersZone);
             selector.Arrange();
             SetLeadSelector();

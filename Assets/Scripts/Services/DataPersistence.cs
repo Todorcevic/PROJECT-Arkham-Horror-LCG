@@ -13,7 +13,8 @@ namespace Arkham.Services
         [Inject] private readonly GameFiles gameFiles;
         [Inject] private readonly Repository repository;
         [Inject] private readonly ISerializer serializer;
-        [Inject] protected readonly IInstantiatorAdapter instantiator;
+        [Inject] private readonly IInstantiatorAdapter instantiator;
+        [Inject] private readonly IPlayerPrefsAdapter playerPrefs;
 
         /*******************************************************************/
         public void LoadDataCards()
@@ -28,6 +29,11 @@ namespace Arkham.Services
         {
             serializer.UpdateDataFromFile(gameFiles.PlayerProgressFilePath, repository);
             LoadDeckBuildingRules();
+        }
+
+        public void LoadSettings()
+        {
+            repository.AreCardsVisible = playerPrefs.LoadCardsVisibility();
         }
 
         public void NewGame()

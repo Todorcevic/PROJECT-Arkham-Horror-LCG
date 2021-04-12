@@ -15,9 +15,8 @@ namespace Arkham.Config
         private void Awake()
         {
             resolutionSetter.SettingResolution();
+            repositoriesIO.LoadSettings();
             repositoriesIO.LoadDataCards();
-            //repositoriesIO.NewGame();
-            //repositoriesIO.LoadProgress();
             deckCardFactory.BuildCards();
             investigatorCardFactory.BuildCards();
             //repositoriesIO.SaveProgress();

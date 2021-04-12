@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class CardView : MonoBehaviour, ICardVisualizable
+    public class CardView : MonoBehaviour, ICardVisualizable, IShowable
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] protected CardEffects effects;
@@ -15,6 +15,10 @@ namespace Arkham.Views
         public Sprite GetCardImage => imageConfigurator.GetSprite;
         public Transform Transform => transform;
         public bool IsInactive { get; set; }
+
+        string IShowable.CardId => Id;
+        Color IShowable.ImageColor => IsInactive ? Color.gray : Color.white;
+        Vector2 IShowable.Position => Transform.position;
 
         /*******************************************************************/
         [Inject]

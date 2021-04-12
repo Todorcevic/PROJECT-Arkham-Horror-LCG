@@ -16,6 +16,7 @@ namespace Arkham.Views
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
         [SerializeField] private Color desactiveColor;
 
+        public string Id { get; set; }
         public bool IsInactive { get; set; }
 
         /*******************************************************************/

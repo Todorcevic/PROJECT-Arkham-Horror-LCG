@@ -5,8 +5,11 @@ namespace Arkham.Views
 {
     public interface IShowCard
     {
-        void ShowingPreviewCard(ICardVisualizable cardView);
+        Transform Transform { get; }
+        void ShowInLeftSide(IShowable showableCard);
+        void ShowInRightSide(IShowable showableCard);
         void HidePreviewCard();
-        void MoveAnimation();
+        void AddMoveAnimation();
+        void RemoveMoveAnimation(bool withReshow);
     }
 }

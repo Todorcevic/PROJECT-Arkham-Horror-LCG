@@ -416,7 +416,7 @@ MonoBehaviour:
   audioInteractable: {fileID: 910552761267311518}
   glow: {fileID: 1562410001402135089}
   canvasGlow: {fileID: 8267710214329079339}
-  timeHoverAnimation: 0.25
+  timeHoverAnimation: 0.1
   enableColor: {r: 0.03858135, g: 0.15686275, b: 0.03858135, a: 1}
   disableColor: {r: 0.15686275, g: 0.039215688, b: 0.039215688, a: 1}
 --- !u!114 &5771078568742617593

@@ -1,29 +1,27 @@
 ﻿using Arkham.EventData;
 using Arkham.Services;
-using Arkham.Views;
-using UnityEngine;
 using Zenject;
 
-namespace Arkham.ViewAdapters
+namespace Arkham.Presenters
 {
-    public class VisibilitySwitchPresenter : MonoBehaviour
+    public class VisibilitySwitchPresenter : IInitializable
     {
         [Inject] private readonly IVisibilityEvent visibilityEvent;
         [Inject] private readonly IPlayerPrefsAdapter playerPrefs;
-        [SerializeField] private SwitchView switchView;
+        [Inject] private readonly ISwitchView switchView;
 
         /*******************************************************************/
-        private void Start()
+        void IInitializable.Initialize()
         {
             visibilityEvent.AddAction(Effect);
-            switchView.AnimateSwitch(playerPrefs.LoadCardsVisibility());
+            switchView.SwitchAnimation(playerPrefs.LoadCardsVisibility());
         }
 
         /*******************************************************************/
         private void Effect(bool isOn)
         {
             switchView.ClickSound();
-            switchView.AnimateSwitch(isOn);
+            switchView.SwitchAnimation(isOn);
             if (switchView.SaveValue) playerPrefs.SaveCardsVisibility(isOn);
         }
     }

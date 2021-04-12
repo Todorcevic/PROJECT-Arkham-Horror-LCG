@@ -12,6 +12,7 @@ namespace Arkham.Controllers
     {
         [Inject] private readonly IRemoveCard removeCard;
         [Inject] private readonly IClickableCards clickableCards;
+        [Inject] private readonly IShowCard showCard;
 
         [Title("RESOURCES")]
         [SerializeField, Required] private CardSelectorView selectorView;
@@ -24,8 +25,16 @@ namespace Arkham.Controllers
             removeCard.RemoveDeckCard(selectorView.Id);
         }
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => selectorView.HoverOnEffect();
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        {
+            selectorView.HoverOnEffect();
+            showCard.ShowInRightSide(selectorView);
+        }
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => selectorView.HoverOffEffect();
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        {
+            selectorView.HoverOffEffect();
+            showCard.HidePreviewCard();
+        }
     }
 }

@@ -1,5 +1,8 @@
-﻿using Arkham.Views;
+﻿using Arkham.EventData;
+using Arkham.Presenters;
+using Arkham.Views;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
@@ -16,7 +19,7 @@ namespace Arkham.Controllers
         {
             if (eventData.dragging) return;
             cardView.HoverOnEffect();
-            showCard.ShowingPreviewCard(cardView);
+            showCard.ShowInLeftSide(cardView);
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)

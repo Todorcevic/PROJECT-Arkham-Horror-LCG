@@ -17,7 +17,7 @@ namespace Arkham.Views
         public Transform PlaceHolder => placeHolder;
 
         /*******************************************************************/
-        public void MoveImageTo(Vector3 position) => objectToMove.position = position;
+        public void MoveImageTo(Transform transform) => objectToMove.position = transform.position;
 
         public void SetTransform(Transform transform = null)
         {

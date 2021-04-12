@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 3032191948345935880}
   - component: {fileID: 2924932035807111340}
   - component: {fileID: 3032535824621658588}
+  - component: {fileID: 7575163990074930281}
   m_Layer: 5
   m_Name: Switch
   m_TagString: Untagged
@@ -211,18 +212,10 @@ MonoBehaviour:
   button: {fileID: 2976730997661172547}
   background: {fileID: 3032328422896472614}
   border: {fileID: 3033934612055678762}
-  switchTag: Quick Swap
   saveValue: 1
   timeMoveAnimation: 0.25
   colorOn: {r: 1, g: 1, b: 1, a: 1}
   colorOff: {r: 0, g: 0, b: 0, a: 1}
-  invokeAtStart: 1
-  OnEvents:
-    m_PersistentCalls:
-      m_Calls: []
-  OffEvents:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!222 &2924932035807111340
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -261,6 +254,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7575163990074930281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3134975941348239948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 3032191948345935880}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 1
 --- !u!1 &3136202387567892450
 GameObject:
   m_ObjectHideFlags: 0

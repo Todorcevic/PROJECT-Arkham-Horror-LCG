@@ -2,10 +2,11 @@
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using DG.Tweening;
+using Arkham.Presenters;
 
 namespace Arkham.Views
 {
-    public class SwitchView : MonoBehaviour
+    public class SwitchView : MonoBehaviour, ISwitchView
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
@@ -25,7 +26,7 @@ namespace Arkham.Views
         /*******************************************************************/
         public void ClickSound() => interactableAudio.ClickSound();
 
-        public void AnimateSwitch(bool isOn)
+        public void SwitchAnimation(bool isOn)
         {
             button.transform.DOMove(isOn ? positionOn.position : positionOff.position, timeMoveAnimation);
             button.DOColor(isOn ? colorOff : colorOn, timeMoveAnimation);

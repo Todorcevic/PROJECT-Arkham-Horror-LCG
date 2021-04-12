@@ -11,7 +11,7 @@ namespace Arkham.Views
         void Glow(bool isOn);
         void Arrange();
         void SetTransform(Transform transform = null);
-        void MoveImageTo(Vector3 position);
+        void MoveImageTo(Transform transform);
         void SwapPlaceHolder(Transform selectorDragging);
     }
 }
