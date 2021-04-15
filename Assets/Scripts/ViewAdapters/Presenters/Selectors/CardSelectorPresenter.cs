@@ -1,5 +1,4 @@
-﻿using Arkham.Components;
-using Arkham.Interactors;
+﻿using Arkham.Interactors;
 using Arkham.Managers;
 using Arkham.EventData;
 using Zenject;

@@ -160,10 +160,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2925609289913365034}
-  - component: {fileID: 3032191948345935880}
+  - component: {fileID: 2320447808462410590}
   - component: {fileID: 2924932035807111340}
   - component: {fileID: 3032535824621658588}
-  - component: {fileID: 7575163990074930281}
+  - component: {fileID: 6158392838173230855}
   m_Layer: 5
   m_Name: Switch
   m_TagString: Untagged
@@ -194,7 +194,7 @@ RectTransform:
   m_AnchoredPosition: {x: 480.9, y: 355.14}
   m_SizeDelta: {x: 70, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3032191948345935880
+--- !u!114 &2320447808462410590
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3134975941348239948}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e99587e19dc6e7642babe460b67c85cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 64b2e77fc3c1d0d47bf0f6a637168acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactableAudio: {fileID: 2250651008988377551}
@@ -212,7 +212,6 @@ MonoBehaviour:
   button: {fileID: 2976730997661172547}
   background: {fileID: 3032328422896472614}
   border: {fileID: 3033934612055678762}
-  saveValue: 1
   timeMoveAnimation: 0.25
   colorOn: {r: 1, g: 1, b: 1, a: 1}
   colorOff: {r: 0, g: 0, b: 0, a: 1}
@@ -254,7 +253,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7575163990074930281
+--- !u!114 &6158392838173230855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,11 +266,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _components:
-  - {fileID: 3032191948345935880}
+  - {fileID: 2320447808462410590}
   _identifier: 
   _useSceneContext: 0
   _context: {fileID: 0}
-  _bindType: 1
+  _bindType: 0
 --- !u!1 &3136202387567892450
 GameObject:
   m_ObjectHideFlags: 0

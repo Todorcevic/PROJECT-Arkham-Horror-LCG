@@ -1,5 +1,4 @@
-﻿using Arkham.Components;
-using Arkham.Managers;
+﻿using Arkham.Managers;
 using Arkham.Repositories;
 using Arkham.Services;
 using Arkham.Views;
@@ -17,6 +16,7 @@ namespace Arkham.Factories
 
         protected abstract ICardsManager CardsManager { get; }
         protected abstract IEnumerable<string> Cards { get; }
+
         /*******************************************************************/
         public void BuildCards()
         {

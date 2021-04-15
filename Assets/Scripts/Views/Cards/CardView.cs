@@ -9,7 +9,7 @@ namespace Arkham.Views
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] protected CardEffects effects;
-        [SerializeField, Required, ChildGameObjectsOnly] private ImageConfigurator imageConfigurator;
+        [SerializeField, Required, ChildGameObjectsOnly] private ImageController imageConfigurator;
 
         public string Id { get; private set; }
         public Sprite GetCardImage => imageConfigurator.GetSprite;

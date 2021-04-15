@@ -35,11 +35,11 @@ namespace Arkham.Config
 
             /*** Controllers ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham.Controllers").WithSuffix("Controller")).AsSingle();
+            .InNamespace("Arkham").WithSuffix("Controller")).AsSingle();
 
             /*** Presenters ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham.Presenters").WithSuffix("Presenter")).AsSingle();
+            .InNamespace("Arkham").WithSuffix("Presenter")).AsSingle();
 
             /*** Interactors ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()

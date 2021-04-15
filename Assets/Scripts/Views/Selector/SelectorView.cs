@@ -9,7 +9,7 @@ namespace Arkham.Views
     public class SelectorView : MonoBehaviour, IShowable
     {
         [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")] private Activator activator;
-        [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")] private ImageConfigurator imageConfigurator;
+        [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")] private ImageController imageConfigurator;
         [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")] private SelectorMovement selectorMovement;
         [SerializeField, Required, ChildGameObjectsOnly, TitleGroup("RESOURCES")] private GlowActivator glowActivator;
 
