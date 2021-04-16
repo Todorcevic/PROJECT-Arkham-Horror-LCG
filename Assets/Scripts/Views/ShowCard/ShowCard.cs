@@ -9,7 +9,7 @@ namespace Arkham.Views
 {
     public class ShowCard : MonoBehaviour, IShowCard
     {
-        private IShowable currentShowableCard;
+        private ShowCardDTO currentShowableCard;
         private Vector2 finalPosition;
         const string SHOWCARD_ANIMATION = "ShowCardAnimation";
         const string MOVE_ANIMATION = "MoveAnimation";
@@ -32,19 +32,19 @@ namespace Arkham.Views
 
         /*******************************************************************/
 
-        public void ShowInRightSide(IShowable showableCard)
+        public void ShowInRightSide(ShowCardDTO showableCard)
         {
             finalPosition = new Vector2(showableCard.Position.x + rightOffSet, AxisYMiddleScreen);
             StartCoroutine(Show(showableCard, finalPosition));
         }
 
-        public void ShowInLeftSide(IShowable showableCard)
+        public void ShowInLeftSide(ShowCardDTO showableCard)
         {
             finalPosition = new Vector2(showableCard.Position.x + leftOffSet, AxisYMiddleScreen);
             StartCoroutine(Show(showableCard, finalPosition));
         }
 
-        private IEnumerator Show(IShowable showableCard, Vector2 finalPosition)
+        private IEnumerator Show(ShowCardDTO showableCard, Vector2 finalPosition)
         {
 
             currentShowableCard = showableCard;
@@ -73,14 +73,14 @@ namespace Arkham.Views
 
         private void MoveShowCard(Vector2 position) => showCard.position = position;
 
-        private void ActiveFrontImage(IShowable showableCard)
+        private void ActiveFrontImage(ShowCardDTO showableCard)
         {
             frontImage.gameObject.SetActive(true);
             frontImage.color = showableCard.ImageColor;
             frontImage.sprite = imageCards.GetSprite(showableCard.CardId);
         }
 
-        private void ActiveBackImage(IShowable showableCard)
+        private void ActiveBackImage(ShowCardDTO showableCard)
         {
             if (!imageCards.ExistThisSprite(showableCard.CardId)) return;
             backImage.gameObject.SetActive(true);

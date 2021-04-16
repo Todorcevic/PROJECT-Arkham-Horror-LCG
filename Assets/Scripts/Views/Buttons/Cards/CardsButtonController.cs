@@ -8,9 +8,9 @@ namespace Arkham.Views
     {
         [Inject(Id = "CardsButton")] private readonly IClickable investigatorsButton;
         [Inject(Id = "MidPanelsManager")] private readonly IPanelsManager panelsManager;
-        [Inject(Id = "CardsPanel")] private readonly IPanelView cardsPanel;
+        [Inject(Id = "CardsPanel")] private readonly PanelView cardsPanel;
         [Inject(Id = "CardsPanel")] private readonly RectTransform panelToScroll;
-        [Inject] private readonly ScrollRect scroll;
+        [Inject(Id = "MidZone")] private readonly ScrollRect scroll;
 
         /*******************************************************************/
         void IInitializable.Initialize() => investigatorsButton.AddAction(Clicked);

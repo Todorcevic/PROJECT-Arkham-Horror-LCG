@@ -10,13 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6920108898983775684}
   - component: {fileID: 6856283878978541192}
-  - component: {fileID: 4849943684128353853}
-  - component: {fileID: 1423898098214504282}
-  - component: {fileID: 1347047366177070392}
   - component: {fileID: 8964837675823102800}
-  - component: {fileID: 5808197557035986605}
   - component: {fileID: 6396499959933405539}
-  - component: {fileID: 23938792926752367}
   m_Layer: 5
   m_Name: CardSelector
   m_TagString: Untagged
@@ -58,58 +53,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab6e96f211313c49936da3da12a0a22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activator: {fileID: 5808197557035986605}
   imageConfigurator: {fileID: 8964837675823102800}
-  selectorMovement: {fileID: 4849943684128353853}
-  glowActivator: {fileID: 5330237612808224715}
-  effects: {fileID: 1423898098214504282}
-  textRefresher: {fileID: 1347047366177070392}
---- !u!114 &4849943684128353853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1167292358315829728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6b2fb9248b5b504ea25fc820635b33b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToMove: {fileID: 830607639089351350}
-  placeHolder: {fileID: 6920108898983775684}
-  timeMoveAnimation: 0.25
---- !u!114 &1423898098214504282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1167292358315829728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b05fc11253128e4db1747879672a18b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactableAudio: {fileID: 3161861043085989557}
-  background: {fileID: 4850368526312077242}
+  sensor: {fileID: 2292736795119808387}
   cardName: {fileID: 4121154858783106769}
   quantity: {fileID: 223955344760844326}
-  timeHoverAnimation: 0.25
---- !u!114 &1347047366177070392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1167292358315829728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 439a7637c8920c24cbcac93163605922, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardName: {fileID: 4121154858783106769}
-  quantity: {fileID: 223955344760844326}
+  timeAnimation: 0.25
 --- !u!114 &8964837675823102800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,19 +72,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 6396499959933405539}
   image: {fileID: 904807066180061608}
---- !u!114 &5808197557035986605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1167292358315829728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c6a28799e70be7439ca8762a058d96a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 6396499959933405539}
 --- !u!225 &6396499959933405539
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -149,24 +84,6 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &23938792926752367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1167292358315829728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 6856283878978541192}
-  _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 1
 --- !u!1 &1348962347046350789
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +448,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56248809f79e482439196a88c05f5be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectorView: {fileID: 6856283878978541192}
+  canvas: {fileID: 6396499959933405539}
+  interactableAudio: {fileID: 3161861043085989557}
+  background: {fileID: 4850368526312077242}
+  cardName: {fileID: 4121154858783106769}
+  quantity: {fileID: 223955344760844326}
+  timeHoverAnimation: 0.25
 --- !u!222 &8745428860228659470
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -829,7 +751,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7588765500988663254}
   - component: {fileID: 4032824870846164497}
-  - component: {fileID: 5330237612808224715}
   - component: {fileID: 47592392950777169}
   m_Layer: 5
   m_Name: Glow
@@ -865,19 +786,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8002712753976703404}
   m_CullTransparentMesh: 0
---- !u!114 &5330237612808224715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8002712753976703404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b9a985dff4b203419651980f82da9c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glow: {fileID: 47592392950777169}
 --- !u!114 &47592392950777169
 MonoBehaviour:
   m_ObjectHideFlags: 0

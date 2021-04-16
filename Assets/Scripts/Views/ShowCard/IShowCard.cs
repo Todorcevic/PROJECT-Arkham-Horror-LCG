@@ -6,8 +6,8 @@ namespace Arkham.Views
     public interface IShowCard
     {
         Transform Transform { get; }
-        void ShowInLeftSide(IShowable showableCard);
-        void ShowInRightSide(IShowable showableCard);
+        void ShowInLeftSide(ShowCardDTO showableCard);
+        void ShowInRightSide(ShowCardDTO showableCard);
         void HidePreviewCard();
         void AddMoveAnimation();
         void RemoveMoveAnimation(bool withReshow);

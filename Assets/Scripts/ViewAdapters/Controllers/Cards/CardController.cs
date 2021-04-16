@@ -19,7 +19,7 @@ namespace Arkham.Controllers
         {
             if (eventData.dragging) return;
             cardView.HoverOnEffect();
-            showCard.ShowInLeftSide(cardView);
+            showCard.ShowInLeftSide(new ShowCardDTO(cardView.Id, cardView.IsInactive ? Color.gray : Color.white, cardView.Transform.position));
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)

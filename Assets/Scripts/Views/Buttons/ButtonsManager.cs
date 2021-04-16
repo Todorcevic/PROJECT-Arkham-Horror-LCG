@@ -16,7 +16,7 @@ namespace Arkham.Views
         private void Awake()
         {
             foreach (ButtonView button in buttons)
-                button.AddAction(() => SelectButton(button));
+                ((IClickable)button).AddAction(() => SelectButton(button));
         }
 
         private void Start() => SelectButton(FirstButton);

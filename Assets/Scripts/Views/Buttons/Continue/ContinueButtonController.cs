@@ -8,7 +8,7 @@ namespace Arkham.Views
         [Inject] private readonly IStartGame startGame;
         [Inject(Id = "ContinueButton")] private readonly IClickable continueButton;
         [Inject(Id = "MainPanelsManager")] private readonly IPanelsManager panelsManager;
-        [Inject(Id = "ChooseCardPanel")] private readonly IPanelView chooseCardPanel;
+        [Inject(Id = "ChooseCardPanel")] private readonly PanelView chooseCardPanel;
 
         /*******************************************************************/
         void IInitializable.Initialize() => continueButton.AddAction(Clicked);

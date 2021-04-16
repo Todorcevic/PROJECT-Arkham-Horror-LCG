@@ -7,7 +7,7 @@ namespace Arkham.Views
     public class CampaignController : ICampaignController
     {
         [Inject(Id = "MainPanelsManager")] private readonly IPanelsManager panelsManager;
-        [Inject(Id = "ChooseCardPanel")] private readonly IPanelView panelToShow;
+        [Inject(Id = "ChooseCardPanel")] private readonly PanelView panelToShow;
         [Inject] private readonly ICampaignRepository campaignRepository;
         [Inject] private readonly IChangeScenario changeScenario;
 

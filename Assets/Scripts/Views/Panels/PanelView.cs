@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 namespace Arkham.Views
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class PanelView : MonoBehaviour, IPanelView
+    public class PanelView : MonoBehaviour
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;

@@ -159,7 +159,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3394847833145682607}
-  - component: {fileID: 3664458873342121480}
   m_Layer: 5
   m_Name: Icons
   m_TagString: Untagged
@@ -187,19 +186,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3664458873342121480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3780868227115382619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a38582105bc6a6478d44bfcabe0b962, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leaderIcon: {fileID: 4720073451212197437}
 --- !u!1 &4040927172998764470
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,9 +196,6 @@ GameObject:
   m_Component:
   - component: {fileID: 640894624587334985}
   - component: {fileID: 6506103354257736602}
-  - component: {fileID: 7377333972140860705}
-  - component: {fileID: 4581722988236795539}
-  - component: {fileID: 7216076524719990544}
   m_Layer: 5
   m_Name: Investigator Selector
   m_TagString: Untagged
@@ -231,8 +214,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4822173926775762534}
   - {fileID: 8018144536311021652}
+  - {fileID: 4822173926775762534}
   - {fileID: 8950362181989810048}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -254,59 +237,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5607064fade8c614e8ceaf0fcbce0b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activator: {fileID: 4581722988236795539}
-  imageConfigurator: {fileID: 205126067982190759}
-  selectorMovement: {fileID: 7377333972140860705}
+  imageController: {fileID: 205126067982190759}
   glowActivator: {fileID: 4178966816585282234}
-  effects: {fileID: 5579331317714830482}
-  dragEffects: {fileID: 3011696457822602216}
-  leadActivator: {fileID: 3664458873342121480}
---- !u!114 &7377333972140860705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4040927172998764470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6b2fb9248b5b504ea25fc820635b33b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToMove: {fileID: 8950362181989810048}
+  card: {fileID: 8950362181989810048}
   placeHolder: {fileID: 4822173926775762534}
-  timeMoveAnimation: 0.25
---- !u!114 &4581722988236795539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4040927172998764470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c6a28799e70be7439ca8762a058d96a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 4453454765105130133}
---- !u!114 &7216076524719990544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4040927172998764470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 6506103354257736602}
-  _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 1
+  sensor: {fileID: 3772148681532851492}
+  dragSensor: {fileID: 3183701225739591869}
+  leaderIcon: {fileID: 4720073451212197437}
+  timeAnimation: 0.25
 --- !u!1 &8590450183605477844
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,11 +254,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8950362181989810048}
-  - component: {fileID: 5579331317714830482}
   - component: {fileID: 205126067982190759}
   - component: {fileID: 2260248826508076982}
   - component: {fileID: 7140359230233156653}
-  - component: {fileID: 3011696457822602216}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -350,22 +286,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 109.99573}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5579331317714830482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8590450183605477844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1d6c925a92e3934babb0963835c556d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToTransform: {fileID: 8950362181989810048}
-  audioInteractable: {fileID: 1385225813015163964}
-  timeHoverAnimation: 0.25
-  scaleHoverEffect: 1.1
 --- !u!114 &205126067982190759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,22 +333,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
---- !u!114 &3011696457822602216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8590450183605477844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 537c995b85ca763458ab1829c3fd7f0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 7140359230233156653}
-  view: {fileID: 8950362181989810048}
-  audioInteractable: {fileID: 1385225813015163964}
-  timeHoverAnimation: 0.25
 --- !u!1 &8628197188317402312
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,7 +470,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 640894624587334985}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -585,7 +489,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 434cc36646b87fc4e9208f62120b5da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  investigatorSelectorView: {fileID: 6506103354257736602}
+  card: {fileID: 8950362181989810048}
+  audioInteractable: {fileID: 1385225813015163964}
+  canvas: {fileID: 4453454765105130133}
+  timeHoverAnimation: 0.25
+  scaleHoverEffect: 1.1
 --- !u!114 &3183701225739591869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,8 +506,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd2481389269c648a74f59f367c8db5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  removeZone: {fileID: 0}
-  investigatorSelectorView: {fileID: 6506103354257736602}
+  canvas: {fileID: 7140359230233156653}
+  card: {fileID: 8950362181989810048}
+  audioInteractable: {fileID: 1385225813015163964}
+  timeHoverAnimation: 0.25
 --- !u!222 &34041437426948442
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -659,7 +569,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1746173441245118772, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1746173441245118772, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
       propertyPath: m_LocalPosition.x

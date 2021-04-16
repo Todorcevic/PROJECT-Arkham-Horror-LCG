@@ -10,7 +10,7 @@ namespace Arkham.Views
         [Inject] private readonly IRemoveCardEvent removeCardEvent;
         [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
         [Inject] private readonly ICurrentInvestigatorInteractor currentInvestigator;
-        [Inject] private readonly ICardsQuantityVisualizable cardsQuantityView;
+        [Inject] private readonly CardsQuantityView cardsQuantityView;
 
         private string AmountCards => currentInvestigator.AmountCardsSelected.ToString();
         private string DeckSize => currentInvestigator.DeckSize.ToString();

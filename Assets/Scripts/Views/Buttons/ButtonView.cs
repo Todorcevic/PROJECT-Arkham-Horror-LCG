@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Arkham.Views
 {
-    public class ButtonView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IButtonView, IClickable
+    public class ButtonView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IClickable
     {
         private event Action Clicked;
         [Title("RESOURCES")]
@@ -22,6 +22,20 @@ namespace Arkham.Views
         public bool IsInactive { get; set; }
 
         /*******************************************************************/
+        public void Desactive(bool isOn)
+        {
+            Desactivate(isOn);
+            IsInactive = isOn;
+        }
+
+        public void Lock(bool isOn)
+        {
+            HoverActivate(isOn);
+            IsInactive = isOn;
+        }
+
+        void IClickable.AddAction(Action action) => Clicked += action;
+
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             if (eventData.dragging || IsInactive) return;
@@ -40,20 +54,6 @@ namespace Arkham.Views
             if (eventData.dragging || IsInactive) return;
             HoverOffEffect();
         }
-
-        public void Desactive(bool isOn)
-        {
-            Desactivate(isOn);
-            IsInactive = isOn;
-        }
-
-        public void Lock(bool isOn)
-        {
-            HoverActivate(isOn);
-            IsInactive = isOn;
-        }
-
-        public void AddAction(Action action) => Clicked += action;
 
         private void ClickEffect() => interactableAudio.ClickSound();
 

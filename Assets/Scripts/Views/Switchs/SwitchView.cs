@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Arkham.Views
 {
-    public class SwitchView : MonoBehaviour, IPointerClickHandler, ISwitchView, IClickable
+    public class SwitchView : MonoBehaviour, IPointerClickHandler, IClickable
     {
         private event Action Clicked;
         [Title("RESOURCES")]
@@ -23,17 +23,16 @@ namespace Arkham.Views
         [SerializeField] private Color colorOff;
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => Clicked?.Invoke();
+        public void ClickSound() => interactableAudio.ClickSound();
 
-        void ISwitchView.ClickSound() => interactableAudio.ClickSound();
-
-        void ISwitchView.SwitchAnimation(bool isOn)
+        public void SwitchAnimation(bool isOn)
         {
             button.transform.DOMove(isOn ? positionOn.position : positionOff.position, timeMoveAnimation);
             button.DOColor(isOn ? colorOff : colorOn, timeMoveAnimation);
             border.DOColor(isOn ? colorOff : colorOn, timeMoveAnimation);
             background.DOColor(isOn ? colorOn : colorOff, timeMoveAnimation);
         }
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => Clicked?.Invoke();
 
         void IClickable.AddAction(Action action) => Clicked += action;
     }

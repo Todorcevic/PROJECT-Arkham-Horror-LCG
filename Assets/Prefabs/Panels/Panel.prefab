@@ -79,7 +79,6 @@ MonoBehaviour:
   _components:
   - {fileID: 6575411944432041585}
   _identifier: 
-  _viewIdentifier: 0
   _useSceneContext: 0
   _context: {fileID: 0}
-  _bindType: 1
+  _bindType: 0

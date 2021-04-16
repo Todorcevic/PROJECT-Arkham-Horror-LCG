@@ -6,7 +6,7 @@ namespace Arkham.Views
 {
     public class VisibilitySwitchPresenter : IInitializable
     {
-        [Inject(Id = "VisibilitySwitch")] private readonly ISwitchView visibilitySwitch;
+        [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitch;
         [Inject] private readonly IVisibilityEvent visibilityEvent;
         [Inject] private readonly IPlayerPrefsAdapter playerPrefs;
 

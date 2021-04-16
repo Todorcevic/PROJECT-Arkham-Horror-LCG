@@ -9,7 +9,7 @@ namespace Arkham.Views
     {
         [Inject] private readonly IScenarioEvent changeCampaignEventData;
         [Inject] private readonly IContinueGame continueGame;
-        [Inject(Id = "ContinueButton")] private readonly IButtonView continueButton;
+        [Inject(Id = "ContinueButton")] private readonly ButtonView continueButton;
 
         /*******************************************************************/
         void IInitializable.Initialize()

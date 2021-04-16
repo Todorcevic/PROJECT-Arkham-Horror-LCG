@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public class InvestigatorAvatarView : MonoBehaviour, IInvestigatorAvatarVisualizable
+    public class InvestigatorAvatarView : MonoBehaviour
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private ImageController imageConfigurator;

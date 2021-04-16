@@ -7,7 +7,7 @@ namespace Arkham.Views
     {
         [Inject(Id = "BackButton")] private readonly List<IClickable> backButtons;
         [Inject(Id = "MainPanelsManager")] private readonly IPanelsManager panelsManager;
-        [Inject(Id = "HomePanel")] private readonly IPanelView homePanel;
+        [Inject(Id = "HomePanel")] private readonly PanelView homePanel;
 
         /*******************************************************************/
         void IInitializable.Initialize()

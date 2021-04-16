@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public class CardsQuantityView : MonoBehaviour, ICardsQuantityVisualizable
+    public class CardsQuantityView : MonoBehaviour
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI cardsAmountText;

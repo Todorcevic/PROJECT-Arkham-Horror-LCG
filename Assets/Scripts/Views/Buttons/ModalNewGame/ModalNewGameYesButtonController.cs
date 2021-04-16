@@ -9,7 +9,7 @@ namespace Arkham.Views
         [Inject] private readonly IChangeScenario changeScenario;
         [Inject(Id = "ModalNewGameYesButton")] private readonly IClickable yesButton;
         [Inject(Id = "MainPanelsManager")] private readonly IPanelsManager panelsManager;
-        [Inject(Id = "ChooseCampaignPanel")] private readonly IPanelView chooseCardPanel;
+        [Inject(Id = "ChooseCampaignPanel")] private readonly PanelView chooseCardPanel;
 
         /*******************************************************************/
         void IInitializable.Initialize() => yesButton.AddAction(Clicked);

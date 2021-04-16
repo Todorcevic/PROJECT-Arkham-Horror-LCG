@@ -2,6 +2,6 @@
 {
     public interface IPanelsManager
     {
-        void SelectPanel(IPanelView panel);
+        void SelectPanel(PanelView panel);
     }
 }

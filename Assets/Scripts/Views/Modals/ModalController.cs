@@ -13,7 +13,7 @@ namespace Arkham.Views
         /*******************************************************************/
         private void Awake()
         {
-            foreach (ButtonView button in buttons)
+            foreach (IClickable button in buttons)
                 button.AddAction(CloseThisModal);
         }
 

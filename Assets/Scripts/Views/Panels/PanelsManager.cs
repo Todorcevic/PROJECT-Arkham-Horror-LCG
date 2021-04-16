@@ -5,7 +5,7 @@ namespace Arkham.Views
 {
     public class PanelsManager : MonoBehaviour, IPanelsManager
     {
-        private IPanelView selectedPanel;
+        private PanelView selectedPanel;
         [Title("RESOURCES")]
         [SerializeField, SceneObjectsOnly] private PanelView deafultPanel;
 
@@ -13,7 +13,7 @@ namespace Arkham.Views
         private void Start() => SelectPanel(deafultPanel);
 
         /*******************************************************************/
-        public void SelectPanel(IPanelView panel)
+        public void SelectPanel(PanelView panel)
         {
             selectedPanel?.Activate(false);
             panel.Activate(true);
