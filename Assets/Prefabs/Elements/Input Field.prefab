@@ -61,6 +61,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6595575011324295586}
   - component: {fileID: 6593460269907642082}
+  - component: {fileID: 1063564503332554169}
   - component: {fileID: 6413489290477726112}
   m_Layer: 5
   m_Name: Input Field
@@ -98,6 +99,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6381683694520450568}
   m_CullTransparentMesh: 0
+--- !u!114 &1063564503332554169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6381683694520450568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c443ac13f59446742ae2960e311cf05c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  search: {fileID: 6413489290477726112}
+  placeHolderCanvas: {fileID: 6608833021825329118}
 --- !u!114 &6413489290477726112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 0
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -185,7 +201,7 @@ MonoBehaviour:
   m_SelectionColor: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_Text: 
   m_CaretBlinkRate: 0.85
-  m_CaretWidth: 1
+  m_CaretWidth: 4
   m_ReadOnly: 0
   m_RichText: 1
   m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

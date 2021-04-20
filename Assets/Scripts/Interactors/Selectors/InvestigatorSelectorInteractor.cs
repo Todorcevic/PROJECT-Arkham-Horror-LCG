@@ -27,6 +27,7 @@ namespace Arkham.Interactors
 
         public bool CanThisCardBeShowed(string cardId)
         {
+            if (!cardInfoInteractor.ThisCardContainThisText(cardId, settings.TextToSearch)) return false;
             if (settings.AreCardsVisible) return true;
             if (unlockCards.IsThisCardUnlocked(cardId)) return true;
             return false;

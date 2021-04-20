@@ -8,7 +8,7 @@ namespace Arkham.Views
     {
         [Inject] private readonly IRemoveCard removeCard;
         [Inject] private readonly IClickableCards clickableCards;
-        [Inject] private readonly IShowCard showCard;
+        [Inject] private readonly ICardShowerPresenter showCardPresenter;
         [Inject] private readonly ICardSelectorsManager manager;
 
         /*******************************************************************/
@@ -19,8 +19,8 @@ namespace Arkham.Views
             else manager.GetSelectorByCardIdOrEmpty(cardId).CantRemoveAnimation();
         }
 
-        public void HoveredOn(ShowCardDTO showCardDTO) => showCard.ShowInRightSide(showCardDTO);
+        public void HoveredOn(CardShowerDTO showCardDTO) => showCardPresenter.Show(showCardDTO);
 
-        public void HoveredOff() => showCard.HidePreviewCard();
+        public void HoveredOff() => showCardPresenter.Hide();
     }
 }

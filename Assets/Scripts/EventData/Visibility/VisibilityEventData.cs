@@ -1,5 +1,6 @@
 ﻿using Arkham.Repositories;
 using System;
+using UnityEngine;
 using Zenject;
 
 namespace Arkham.EventData
@@ -8,6 +9,7 @@ namespace Arkham.EventData
     {
         [Inject] private readonly Repository repository;
         private event Action<bool> VisibilityChanged;
+        private event Action<string> TextToSearchChanged;
 
         /*******************************************************************/
         void IVisibility.ChangeVisibility()
@@ -16,6 +18,14 @@ namespace Arkham.EventData
             VisibilityChanged?.Invoke(repository.AreCardsVisible);
         }
 
-        void IVisibilityEvent.AddAction(Action<bool> action) => VisibilityChanged += action;
+        void IVisibility.ChangeText(string textToSearch)
+        {
+            repository.TextToSearch = textToSearch;
+            TextToSearchChanged?.Invoke(textToSearch);
+        }
+
+        void IVisibilityEvent.AddVisibilityAction(Action<bool> action) => VisibilityChanged += action;
+
+        void IVisibilityEvent.AddTextChangeAction(Action<string> action) => TextToSearchChanged += action;
     }
 }

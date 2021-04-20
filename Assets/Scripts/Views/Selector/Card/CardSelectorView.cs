@@ -1,14 +1,18 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Arkham.Views
 {
     public class CardSelectorView : MonoBehaviour
     {
+        private Tween cantComplete;
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private ImageController imageConfigurator;
+        [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvas;
+        [SerializeField, Required, ChildGameObjectsOnly] private Image image;
         [SerializeField, Required, ChildGameObjectsOnly] private CardSelectorSensor sensor;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI cardName;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI quantity;
@@ -19,11 +23,17 @@ namespace Arkham.Views
         public bool IsEmpty => Id == null;
 
         /*******************************************************************/
-        public void SetSelector(string cardId, Sprite cardImage = null)
+        public void SetSelector(string cardId, Sprite cardSprite = null)
         {
             Id = sensor.Id = cardId;
             sensor.Activate(!IsEmpty);
-            imageConfigurator.ChangeImage(cardImage);
+            ChangeImage(cardSprite);
+        }
+
+        private void ChangeImage(Sprite cardSprite)
+        {
+            canvas.alpha = cardSprite == null ? 0 : 1;
+            image.sprite = cardSprite;
         }
 
         public void SetName(string cardName) => this.cardName.text = cardName;
@@ -36,6 +46,10 @@ namespace Arkham.Views
             transform.localPosition = Vector3.zero;
         }
 
-        public void CantRemoveAnimation() => transform.DOPunchPosition(Vector3.right * 10, timeAnimation, 20, 5);
+        public void CantRemoveAnimation()
+        {
+            cantComplete.Complete();
+            cantComplete = transform.DOPunchPosition(Vector3.right * 10, timeAnimation, 20, 5);
+        }
     }
 }

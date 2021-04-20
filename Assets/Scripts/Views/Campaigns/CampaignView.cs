@@ -12,7 +12,8 @@ namespace Arkham.Views
         [Inject] private readonly ICampaignController campaignController;
         [Title("RESOURCES")]
         [SerializeField, Required] private InteractableAudio InteractableAudio;
-        [SerializeField, Required] private ImageController imageConfigurator;
+        [SerializeField, Required] private CanvasGroup canvasIcon;
+        [SerializeField, Required] private Image icon;
         [SerializeField, Required] private Image chapterImage;
         [SerializeField, Required] private CanvasGroup highlighted;
         [SerializeField, Required] private Transform highlightedTextBox;
@@ -40,7 +41,11 @@ namespace Arkham.Views
 
         private void ClickEffect() => InteractableAudio.ClickSound();
 
-        public void ChangeIconState(Sprite icon) => imageConfigurator.ChangeImage(icon);
+        public void ChangeIconState(Sprite iconSprite)
+        {
+            canvasIcon.alpha = iconSprite == null ? 0 : 1;
+            icon.sprite = iconSprite;
+        }
 
         private void HoverOnEffect()
         {

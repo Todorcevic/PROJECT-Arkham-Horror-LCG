@@ -4,6 +4,7 @@ namespace Arkham.EventData
 {
     public interface IVisibilityEvent
     {
-        void AddAction(Action<bool> action);
+        void AddVisibilityAction(Action<bool> action);
+        void AddTextChangeAction(Action<string> action);
     }
 }

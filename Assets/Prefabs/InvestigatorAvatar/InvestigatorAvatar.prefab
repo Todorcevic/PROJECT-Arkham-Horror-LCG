@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4167499009643336928}
   - component: {fileID: 6303013556528072547}
-  - component: {fileID: 4167499009643336959}
   - component: {fileID: 4167499009643336958}
   - component: {fileID: 4167499009643336929}
   - component: {fileID: 2813498599222703814}
@@ -51,19 +50,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4ca9fc18ce4274428b67b13f7ebec2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imageConfigurator: {fileID: 4167499009643336959}
---- !u!114 &4167499009643336959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4167499009643336931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9e9f82dc6491194680f4786d78bb5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 4167499009643336929}

@@ -7,7 +7,9 @@ namespace Arkham.Repositories
     [DataContract]
     public class Repository : ISettings, ICampaignRepository, IInvestigatorRepository, IInvestigatorSelectorRepository, ICardInfoRepository, IUnlockCards
     {
+        /**** Settings ****/
         public bool AreCardsVisible { get; set; }
+        public string TextToSearch { get; set; }
 
         /**** Campaigns ****/
         [DataMember] public string CurrentScenario { get; set; }

@@ -3,7 +3,7 @@
     public interface ICardSelectorController
     {
         void Clicked(string cardId);
-        void HoveredOn(ShowCardDTO showCardDTO);
+        void HoveredOn(CardShowerDTO showCardDTO);
         void HoveredOff();
     }
 }

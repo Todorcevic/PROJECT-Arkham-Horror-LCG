@@ -9,16 +9,15 @@ namespace Arkham.Config
     {
         [Inject] private readonly IResolutionSet resolutionSetter;
         [Inject] private readonly IDataPersistence repositoriesIO;
-        [Inject] private readonly IDeckCardFactory deckCardFactory;
-        [Inject] private readonly IInvestigatorCardFactory investigatorCardFactory;
+        [Inject] private readonly ICardFactory cardFactory;
 
         private void Awake()
         {
             resolutionSetter.SettingResolution();
             repositoriesIO.LoadSettings();
             repositoriesIO.LoadDataCards();
-            deckCardFactory.BuildCards();
-            investigatorCardFactory.BuildCards();
+            cardFactory.BuildDeckCards();
+            cardFactory.BuildInvestigatorCards();
             //repositoriesIO.SaveProgress();
         }
     }

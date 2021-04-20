@@ -32,7 +32,7 @@ namespace Arkham.Views
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             HoverOnEffect();
-            controller.HoveredOn(new ShowCardDTO(Id, Color.white, transform.position));
+            controller.HoveredOn(new CardShowerDTO(Id, Color.white, transform.position, isInLeftSide: false));
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)

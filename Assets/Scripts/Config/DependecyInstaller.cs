@@ -2,9 +2,7 @@
 using Arkham.Repositories;
 using Arkham.Services;
 using Arkham.Scenarios;
-using UnityEngine;
-using Arkham.Managers;
-using Arkham.Controllers;
+using Arkham.Views;
 
 namespace Arkham.Config
 {
@@ -15,6 +13,9 @@ namespace Arkham.Config
             Container.Bind<GameFiles>().AsSingle();
             Container.BindInterfacesAndSelfTo<Repository>().AsSingle();
 
+            /*** Managers ***/
+            Container.BindInterfacesTo<CardsManager>().AsSingle();
+
             /*** Services ***/
             Container.BindInterfacesTo<ScreenResolutionAutoDetect>().AsSingle();
             Container.BindInterfacesTo<DataPersistence>().AsSingle();
@@ -22,20 +23,13 @@ namespace Arkham.Config
             Container.BindInterfacesTo<DoubleClickDetector>().AsSingle();
             Container.BindInterfacesTo<ScenarioLoader>().AsSingle();
 
+            /*** Adapters ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham.Services").WithSuffix("Adapter")).AsSingle();
-
-            /*** Factories ***/
-            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham.Factories").WithSuffix("Factory")).AsSingle();
-
-            /*** Managers ***/
-            //Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-            //.InNamespace("Arkham.Managers").WithSuffix("Manager")).AsSingle();
+          .InNamespace("Arkham.Services").WithSuffix("Adapter")).AsSingle();
 
             /*** Controllers ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham").WithSuffix("Controller")).AsSingle();
+           .InNamespace("Arkham").WithSuffix("Controller")).AsSingle();
 
             /*** Presenters ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()

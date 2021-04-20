@@ -354,9 +354,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7131878188277760170}
   - component: {fileID: 748502393720868132}
-  - component: {fileID: 6256245110943196981}
-  - component: {fileID: 5771078568742617593}
-  - component: {fileID: 3987006750177897546}
   - component: {fileID: 7192597132227724208}
   - component: {fileID: 7918799787899769508}
   m_Layer: 5
@@ -399,53 +396,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4caa4ccbf8bdbc843aeaf63cba91b978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effects: {fileID: 6256245110943196981}
-  imageConfigurator: {fileID: 5771078568742617593}
---- !u!114 &6256245110943196981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120494878094766683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09f2fed0a1fd2014399b54d82c64a49b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   audioInteractable: {fileID: 910552761267311518}
-  glow: {fileID: 1562410001402135089}
-  canvasGlow: {fileID: 8267710214329079339}
-  timeHoverAnimation: 0.1
-  enableColor: {r: 0.03858135, g: 0.15686275, b: 0.03858135, a: 1}
-  disableColor: {r: 0.15686275, g: 0.039215688, b: 0.039215688, a: 1}
---- !u!114 &5771078568742617593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120494878094766683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9e9f82dc6491194680f4786d78bb5b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   canvasGroup: {fileID: 7192597132227724208}
+  canvasGlow: {fileID: 8267710214329079339}
   image: {fileID: 4100283504713718926}
---- !u!114 &3987006750177897546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120494878094766683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63763ca80809885459feb9ce048bf786, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardView: {fileID: 748502393720868132}
+  glow: {fileID: 1562410001402135089}
+  timeHoverAnimation: 0.1
+  enableColor: {r: 0.05882353, g: 0.23529412, b: 0.05882353, a: 1}
+  disableColor: {r: 0.23529412, g: 0.05882353, b: 0.05882353, a: 1}
 --- !u!225 &7192597132227724208
 CanvasGroup:
   m_ObjectHideFlags: 0

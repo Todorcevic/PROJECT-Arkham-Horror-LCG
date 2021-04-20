@@ -1,5 +1,4 @@
 ﻿using Arkham.Interactors;
-using Arkham.Managers;
 using Arkham.EventData;
 using Arkham.Repositories;
 using UnityEngine;
@@ -11,7 +10,7 @@ namespace Arkham.Views
     {
         private string investigatorSelected;
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
-        [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
+        [Inject] private readonly ICardsManager investigatorCardsManager;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
         [Inject] private readonly IInvestigatorSelectorRepository investigatorSelectorRepository;
         [Inject] private readonly ISelectInvestigator selectInvestigator;
@@ -93,17 +92,24 @@ namespace Arkham.Views
         {
             InvestigatorSelectorView selector1 = investigatorSelectorsManager.GetSelectorById(investigatorId1);
             InvestigatorSelectorView selector2 = investigatorSelectorsManager.GetSelectorById(investigatorId2);
-            selector1.SwapPlaceHolderWith(selector2);
+            SwapPlaceHolders(selector1, selector2);
             investigatorSelectorsManager.RebuildPlaceHolders();
             selector1.ArrangeAnimation();
             SetLeadSelector();
         }
 
+        private void SwapPlaceHolders(InvestigatorSelectorView selector1, InvestigatorSelectorView selector2)
+        {
+            int selector1Index = selector1.GetPlaceHolderIndex();
+            selector1.SwapPlaceHolder(selector2.GetPlaceHolderIndex());
+            selector2.SwapPlaceHolder(selector1Index);
+        }
+
         /*******************************************************************/
         private void SetLeadSelector()
         {
-            if (LeadInvestigator == investigatorSelectorsManager.GetLeadSelector.Id || LeadInvestigator == null) return;
-            investigatorSelectorsManager.GetLeadSelector.LeadIcon(false);
+            if (LeadInvestigator == investigatorSelectorsManager.GetLeadSelector?.Id || LeadInvestigator == null) return;
+            investigatorSelectorsManager.GetLeadSelector?.LeadIcon(false);
             investigatorSelectorsManager.GetSelectorById(LeadInvestigator).LeadIcon(true);
         }
     }

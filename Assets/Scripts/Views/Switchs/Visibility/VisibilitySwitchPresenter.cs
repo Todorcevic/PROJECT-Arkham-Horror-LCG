@@ -15,7 +15,7 @@ namespace Arkham.Views
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            visibilityEvent.AddAction(Effect);
+            visibilityEvent.AddVisibilityAction(Effect);
             visibilitySwitch.SwitchAnimation(IsOnVisibility);
         }
 

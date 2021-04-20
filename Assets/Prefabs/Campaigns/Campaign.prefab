@@ -385,7 +385,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6799962634472469167}
   - component: {fileID: 509505167249770005}
-  - component: {fileID: 1852633353276870473}
   - component: {fileID: 8088090979582546804}
   m_Layer: 5
   m_Name: Campaign
@@ -428,28 +427,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractableAudio: {fileID: 2496415024736871201}
-  imageConfigurator: {fileID: 1852633353276870473}
+  canvasIcon: {fileID: 1143711315986413296}
+  icon: {fileID: 2636244524589476625}
   chapterImage: {fileID: 6690869596982815881}
   highlighted: {fileID: 6801058822832394089}
   highlightedTextBox: {fileID: 8914362415478176639}
-  id: 
+  id: x
   timeHoverAnimation: 0.25
   yoffsetHoverHighlighted: 25
   zoomParallaxHoverEffect: 1.4
---- !u!114 &1852633353276870473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6720720525385905213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9e9f82dc6491194680f4786d78bb5b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 1143711315986413296}
-  image: {fileID: 2636244524589476625}
 --- !u!114 &8088090979582546804
 MonoBehaviour:
   m_ObjectHideFlags: 0

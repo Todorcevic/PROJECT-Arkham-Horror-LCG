@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 12, y: 0}
-  m_SizeDelta: {x: 24, y: 24}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4956624871112968992
 CanvasRenderer:
@@ -212,7 +212,10 @@ MonoBehaviour:
   button: {fileID: 2976730997661172547}
   background: {fileID: 3032328422896472614}
   border: {fileID: 3033934612055678762}
-  timeMoveAnimation: 0.25
+  title: {fileID: 4901141807485635196}
+  timeMoveAnimation: 0.5
+  timeHoverAnimation: 0.25
+  hoverScale: 1.25
   colorOn: {r: 1, g: 1, b: 1, a: 1}
   colorOff: {r: 0, g: 0, b: 0, a: 1}
 --- !u!222 &2924932035807111340

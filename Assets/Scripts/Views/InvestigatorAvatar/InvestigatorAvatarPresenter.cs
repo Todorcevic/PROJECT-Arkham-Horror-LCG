@@ -1,5 +1,4 @@
-﻿using Arkham.Managers;
-using Arkham.EventData;
+﻿using Arkham.EventData;
 using Zenject;
 
 namespace Arkham.Views
@@ -7,7 +6,7 @@ namespace Arkham.Views
     public class InvestigatorAvatarPresenter : IInitializable
     {
         [Inject] private readonly InvestigatorAvatarView investigatorAvatar;
-        [Inject] private readonly IInvestigatorCardsManager investigatorCardsManager;
+        [Inject] private readonly ICardsManager investigatorCardsManager;
         [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
 
         /*******************************************************************/
