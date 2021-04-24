@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
     public class CardsQuantityView : MonoBehaviour
     {

@@ -196,6 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 640894624587334985}
   - component: {fileID: 6506103354257736602}
+  - component: {fileID: 8081987424911631509}
   m_Layer: 5
   m_Name: Investigator Selector
   m_TagString: Untagged
@@ -238,12 +239,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGlow: {fileID: 7307837665907907417}
-  canvasImage: {fileID: 2260248826508076982}
+  canvasImage: {fileID: 2373911684840172437}
   image: {fileID: 2502264937126802845}
   sensor: {fileID: 3772148681532851492}
   dragSensor: {fileID: 3183701225739591869}
   leaderIcon: {fileID: 4720073451212197437}
   timeAnimation: 0.25
+--- !u!114 &8081987424911631509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4040927172998764470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 6506103354257736602}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 2
 --- !u!1 &8590450183605477844
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8950362181989810048}
-  - component: {fileID: 2260248826508076982}
+  - component: {fileID: 2373911684840172437}
   - component: {fileID: 7140359230233156653}
   m_Layer: 5
   m_Name: Card
@@ -271,7 +290,7 @@ RectTransform:
   m_GameObject: {fileID: 8590450183605477844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 5748743940797143815}
   - {fileID: 3896154658098547371}
@@ -284,7 +303,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 109.99573}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!225 &2260248826508076982
+--- !u!225 &2373911684840172437
 CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -585,11 +604,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
---- !u!4 &8018144536311021652 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1746173441245118772, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
-  m_PrefabInstance: {fileID: 8610192574271832416}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1385225813015163964 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7225114169980597596, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
@@ -601,3 +615,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038d7dc22c3565849878ed7593cc2df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &8018144536311021652 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1746173441245118772, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
+  m_PrefabInstance: {fileID: 8610192574271832416}
+  m_PrefabAsset: {fileID: 0}

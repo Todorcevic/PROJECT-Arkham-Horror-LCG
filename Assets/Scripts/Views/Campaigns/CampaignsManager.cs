@@ -1,14 +1,12 @@
-﻿using Sirenix.OdinInspector;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using Zenject;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
-    public class CampaignsManager : MonoBehaviour, ICampaignsManager
+    public class CampaignsManager : ICampaignsManager
     {
-        [Title("RESOURCES")]
-        [SerializeField, SceneObjectsOnly] private List<CampaignView> campaigns;
-        [SerializeField, AssetsOnly] private List<CampaignState> states;
+        [Inject] private readonly List<CampaignView> campaigns;
+        [Inject] private readonly List<CampaignState> states;
 
         /*******************************************************************/
         public CampaignView GetCampaign(string campaignId) => campaigns.Find(c => c.Id == campaignId);

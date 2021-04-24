@@ -1,19 +1,16 @@
 ﻿using Arkham.EventData;
 using Zenject;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
-    public class SearchController : ISearchController
+    public class SearchController : IInitializable
     {
-        private string currentText;
+        [Inject(Id = "InputSearch")] private readonly InputFieldView inputFieldView;
         [Inject] private readonly IVisibility visibility;
 
         /*******************************************************************/
-        public void UpdateText(string textToSearch)
-        {
-            if (textToSearch == currentText) return;
-            currentText = textToSearch;
-            visibility.ChangeText(textToSearch);
-        }
+        void IInitializable.Initialize() => inputFieldView.AddUpdateAction(Updated);
+
+        public void Updated(string textToSearch) => visibility.ChangeText(textToSearch);
     }
 }

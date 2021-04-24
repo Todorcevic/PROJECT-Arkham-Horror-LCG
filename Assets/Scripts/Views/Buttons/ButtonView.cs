@@ -6,11 +6,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
-    public class ButtonView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IClickable
+    public class ButtonView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        private event Action Clicked;
+        private bool isInactive;
+        private event Action ClickAction;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
         [SerializeField, Required, ChildGameObjectsOnly] private Image background;
@@ -19,51 +20,50 @@ namespace Arkham.Views
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
         [SerializeField] private Color desactiveColor;
 
-        public bool IsInactive { get; set; }
 
         /*******************************************************************/
         public void Desactive(bool isOn)
         {
             Desactivate(isOn);
-            IsInactive = isOn;
+            isInactive = isOn;
         }
 
         public void Lock(bool isOn)
         {
             HoverActivate(isOn);
-            IsInactive = isOn;
+            isInactive = isOn;
         }
-
-        void IClickable.AddAction(Action action) => Clicked += action;
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            if (eventData.dragging || IsInactive) return;
+            if (eventData.dragging || isInactive) return;
             ClickEffect();
-            Clicked?.Invoke();
+            ClickAction?.Invoke();
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            if (eventData.dragging || IsInactive) return;
+            if (eventData.dragging || isInactive) return;
             HoverOnEffect();
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            if (eventData.dragging || IsInactive) return;
+            if (eventData.dragging || isInactive) return;
             HoverOffEffect();
         }
 
-        private void ClickEffect() => interactableAudio.ClickSound();
+        public void AddClickAction(Action action) => ClickAction += action;
 
-        private void HoverOnEffect()
+        public void ClickEffect() => interactableAudio.ClickSound();
+
+        public void HoverOnEffect()
         {
             interactableAudio.HoverOnSound();
             HoverActivate(true);
         }
 
-        private void HoverOffEffect()
+        public void HoverOffEffect()
         {
             interactableAudio.HoverOffSound();
             HoverActivate(false);

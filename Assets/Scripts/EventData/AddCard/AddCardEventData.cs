@@ -1,5 +1,6 @@
 ﻿using Arkham.Interactors;
 using System;
+using System.ComponentModel;
 using Zenject;
 
 namespace Arkham.EventData

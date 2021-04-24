@@ -1,20 +1,21 @@
 ﻿using Zenject;
-using Arkham.Repositories;
 using Arkham.Services;
 using Arkham.Scenarios;
 using Arkham.Views;
+using Arkham.Repositories;
 
 namespace Arkham.Config
 {
     public class DependecyInstaller : Installer<DependecyInstaller>
     {
+        [Inject] private readonly GameFiles gamefiles;
+
         public override void InstallBindings()
         {
-            Container.Bind<GameFiles>().AsSingle();
             Container.BindInterfacesAndSelfTo<Repository>().AsSingle();
 
-            /*** Managers ***/
-            Container.BindInterfacesTo<CardsManager>().AsSingle();
+            /*** Resources ***/
+            Container.Bind<CampaignState>().FromScriptableObjectResource(gamefiles.CAMPAIGNS_STATES).AsSingle();
 
             /*** Services ***/
             Container.BindInterfacesTo<ScreenResolutionAutoDetect>().AsSingle();
@@ -31,6 +32,10 @@ namespace Arkham.Config
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
            .InNamespace("Arkham").WithSuffix("Controller")).AsSingle();
 
+            /*** Managers ***/
+            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
+           .InNamespace("Arkham").WithSuffix("Manager")).AsSingle();
+
             /*** Presenters ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
             .InNamespace("Arkham").WithSuffix("Presenter")).AsSingle();
@@ -42,6 +47,10 @@ namespace Arkham.Config
             /*** Event Data ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
             .InNamespace("Arkham.EventData").WithSuffix("EventData")).AsSingle();
+
+            /*** Use Cases ***/
+            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
+            .InNamespace("Arkham").WithSuffix("UseCase")).AsSingle();
         }
     }
 }

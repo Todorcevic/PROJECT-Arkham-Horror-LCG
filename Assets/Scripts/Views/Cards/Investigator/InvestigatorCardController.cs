@@ -1,11 +1,10 @@
 ﻿using Arkham.EventData;
 using Zenject;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
     public class InvestigatorCardController : IInvestigatorCardController
     {
-        [Inject] private readonly ICardShowerPresenter showCardPresenter;
         [Inject] private readonly IAddInvestigator addInvestigator;
         [Inject] private readonly ISelectInvestigator selectInvestigator;
 
@@ -15,9 +14,5 @@ namespace Arkham.Views
             addInvestigator.AddInvestigator(cardId);
             selectInvestigator.Selecting(cardId);
         }
-
-        public void HoveredOn(CardShowerDTO showCardDTO) => showCardPresenter.Show(showCardDTO);
-
-        public void HoveredOff() => showCardPresenter.Hide();
     }
 }

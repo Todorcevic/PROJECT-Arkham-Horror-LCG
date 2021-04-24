@@ -4,10 +4,10 @@ namespace Arkham.Views
 {
     public class NewGameButtonController : IInitializable
     {
-        [Inject(Id = "NewGameButton")] private readonly IClickable newGameButton;
+        [Inject(Id = "NewGameButton")] private readonly ButtonView newGameButton;
         [Inject(Id = "NewGameModal")] private readonly PanelView newGameModal;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => newGameButton.AddAction(() => newGameModal.Activate(true));
+        void IInitializable.Initialize() => newGameButton.AddClickAction(() => newGameModal.Activate(true));
     }
 }

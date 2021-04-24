@@ -5,12 +5,14 @@ using UnityEngine.EventSystems;
 using Zenject;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
     public class InputFieldView : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerExitHandler, IUpdateSelectedHandler
     {
-        [Inject] private readonly ISearchController controller;
+        private string currentText;
+        private event Action<string> UpdateAction;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private TMP_InputField field;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI searchText;
@@ -23,11 +25,18 @@ namespace Arkham.Views
         [SerializeField] private Color selectColor;
 
         /*******************************************************************/
-        public void OnSelect(BaseEventData eventData) => background.color = selectColor;
+        public void AddUpdateAction(Action<string> action) => UpdateAction += action;
 
-        public void OnDeselect(BaseEventData eventData) => background.color = deselectColor;
+        void ISelectHandler.OnSelect(BaseEventData eventData) => background.color = selectColor;
 
-        public void OnUpdateSelected(BaseEventData eventData) => controller.UpdateText(field.text);
+        void IDeselectHandler.OnDeselect(BaseEventData eventData) => background.color = deselectColor;
+
+        void IUpdateSelectedHandler.OnUpdateSelected(BaseEventData eventData)
+        {
+            if (field.text == currentText) return;
+            currentText = field.text;
+            UpdateAction.Invoke(field.text);
+        }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {

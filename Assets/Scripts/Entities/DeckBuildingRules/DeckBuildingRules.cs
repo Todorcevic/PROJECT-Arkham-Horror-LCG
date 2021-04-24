@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using Arkham.Repositories;
 using Zenject;
-using Arkham.Entities;
 
-namespace Arkham.Investigators
+namespace Arkham.Entities
 {
     public class DeckBuildingRules
     {
         private List<string> allowedCards;
         [Inject] private readonly ICardInfoRepository infoRepository;
+
         public virtual int DeckSize => 30;
         protected virtual List<string> DeckBuildingFactionConditions => new List<string>();
         protected virtual List<int> DeckBuildingXpConditions => new List<int>();

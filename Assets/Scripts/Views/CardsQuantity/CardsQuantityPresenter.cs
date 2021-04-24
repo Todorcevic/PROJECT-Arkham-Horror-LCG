@@ -2,7 +2,7 @@
 using Arkham.Interactors;
 using Arkham.EventData;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
     public class CardsQuantityPresenter : IInitializable
     {

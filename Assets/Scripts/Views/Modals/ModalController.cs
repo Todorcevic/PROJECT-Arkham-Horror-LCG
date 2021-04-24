@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
     public class ModalController : MonoBehaviour
     {
@@ -13,8 +13,8 @@ namespace Arkham.Views
         /*******************************************************************/
         private void Awake()
         {
-            foreach (IClickable button in buttons)
-                button.AddAction(CloseThisModal);
+            foreach (ButtonView button in buttons)
+                button.AddClickAction(CloseThisModal);
         }
 
         private void CloseThisModal() => modal.Activate(false);

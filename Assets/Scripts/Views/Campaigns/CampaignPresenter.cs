@@ -2,7 +2,7 @@
 using Arkham.Interactors;
 using Zenject;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
     public class CampaignPresenter : IInitializable
     {

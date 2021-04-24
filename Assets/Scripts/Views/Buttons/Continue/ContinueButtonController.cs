@@ -1,17 +1,17 @@
 ﻿using Arkham.EventData;
 using Zenject;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
     public class ContinueButtonController : IInitializable
     {
         [Inject] private readonly IStartGame startGame;
-        [Inject(Id = "ContinueButton")] private readonly IClickable continueButton;
+        [Inject(Id = "ContinueButton")] private readonly ButtonView continueButton;
         [Inject(Id = "MainPanelsManager")] private readonly IPanelsManager panelsManager;
         [Inject(Id = "ChooseCardPanel")] private readonly PanelView chooseCardPanel;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => continueButton.AddAction(Clicked);
+        void IInitializable.Initialize() => continueButton.AddClickAction(Clicked);
 
         /*******************************************************************/
 

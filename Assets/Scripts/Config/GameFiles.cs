@@ -8,12 +8,14 @@ namespace Arkham.Config
         public string JSON_ROOT_DIRECTORY => "JsonFiles/";
         //const string HISTORIES_PATH = "Histories/";
         public string CAMPAIGNS_DIRECTORY => "Campaigns/";
+        public string CAMPAIGNS_STATES => "CampaignStates/";
         //const string CHAOS_BAG_PATH = "ChaosBag/";
 
         //public const string INVESTIGATOR_BACK_IMAGE = "InvestigatorBack";
         //public const string ENCOUNTER_BACK_IMAGE = "EncounterBack";
 
         public string ALL_CARDS_DATA_FILE => "AllCardsData";
+        public string ALL_CARDS_IMAGE_EN => "Cards/AllCardsEN/";
         public string SCENARIO_DATA_FILE => "ScenarioInfo";
         //public const string NEW_INVESTIGATORS_FILE = "InvestigatorsDataDefault";
         //public const string CURRENT_INVESTIGATORS_FILE = "InvestigatorsDataSave";

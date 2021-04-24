@@ -1,7 +1,7 @@
 ﻿using Arkham.EventData;
 using Zenject;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
     public class InvestigatorAvatarPresenter : IInitializable
     {

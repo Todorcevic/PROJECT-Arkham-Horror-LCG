@@ -111,8 +111,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c443ac13f59446742ae2960e311cf05c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  search: {fileID: 6413489290477726112}
-  placeHolderCanvas: {fileID: 6608833021825329118}
+  field: {fileID: 0}
+  searchText: {fileID: 0}
+  background: {fileID: 0}
+  icon: {fileID: 0}
+  timeHoverAnimation: 0
+  hoverScale: 1
+  deselectColor: {r: 0, g: 0, b: 0, a: 0}
+  selectColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &6413489290477726112
 MonoBehaviour:
   m_ObjectHideFlags: 0

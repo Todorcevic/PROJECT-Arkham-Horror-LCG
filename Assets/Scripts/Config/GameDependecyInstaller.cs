@@ -6,6 +6,8 @@ namespace Arkham.Config
     {
         public override void InstallBindings()
         {
+            Container.Bind<GameFiles>().AsSingle();
+
             DependecyInstaller.Install(Container);
         }
     }

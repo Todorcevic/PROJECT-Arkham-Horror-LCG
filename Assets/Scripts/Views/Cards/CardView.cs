@@ -5,11 +5,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
     public class CardView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private ICardController controller;
+        [Inject] private readonly ICardShowerController showerController;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
@@ -46,13 +47,13 @@ namespace Arkham.Views
         {
             if (eventData.dragging) return;
             HoverOnEffect();
-            controller.HoveredOn(new CardShowerDTO(Id, IsInactive ? Color.gray : Color.white, transform.position, isInLeftSide: true));
+            showerController.HoveredOn(new CardShowerDTO(Id, IsInactive ? Color.gray : Color.white, transform.position, isInLeftSide: true));
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             HoverOffEffect();
-            controller.HoveredOff();
+            showerController.HoveredOff();
         }
 
         private void ClickEffect() => audioInteractable.ClickSound();
@@ -79,5 +80,7 @@ namespace Arkham.Views
             canvasGroup.alpha = sprite == null ? 0 : 1;
             image.sprite = sprite;
         }
+
+
     }
 }

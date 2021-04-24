@@ -1,4 +1,4 @@
-﻿namespace Arkham.Views
+﻿namespace Arkham.View
 {
     public interface ISearchController
     {

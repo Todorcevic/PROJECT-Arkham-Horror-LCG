@@ -1,4 +1,6 @@
-﻿namespace Arkham.Views
+﻿using System.Collections.Generic;
+
+namespace Arkham.View
 {
     public interface ICampaignsManager
     {

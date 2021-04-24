@@ -1,5 +1,6 @@
 ﻿using Arkham.Config;
 using Arkham.Repositories;
+using UnityEngine;
 using Zenject;
 
 namespace Arkham.Interactors

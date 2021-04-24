@@ -1,16 +1,17 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
-    public class SwitchView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IClickable
+    public class SwitchView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        private event Action Clicked;
+        private bool isOn;
+        private event Action ClickAction;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
         [SerializeField, Required] private Transform positionOn;
@@ -27,7 +28,7 @@ namespace Arkham.Views
         [SerializeField] private Color colorOff;
 
         /*******************************************************************/
-        public void ClickSound() => interactableAudio.ClickSound();
+        public void AddClickAction(Action action) => ClickAction += action;
 
         public void SwitchAnimation(bool isOn)
         {
@@ -35,7 +36,10 @@ namespace Arkham.Views
             button.DOColor(isOn ? colorOff : colorOn, timeMoveAnimation);
             border.DOColor(isOn ? colorOff : colorOn, timeMoveAnimation);
             background.DOColor(isOn ? colorOn : colorOff, timeMoveAnimation);
+            this.isOn = isOn;
         }
+
+        private void ClickSound() => interactableAudio.ClickSound();
 
         private void SwitchHoverOn()
         {
@@ -51,9 +55,12 @@ namespace Arkham.Views
             button.transform.DOScale(1f, timeHoverAnimation);
         }
 
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => Clicked?.Invoke();
-
-        void IClickable.AddAction(Action action) => Clicked += action;
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        {
+            ClickSound();
+            SwitchAnimation(!isOn);
+            ClickAction?.Invoke();
+        }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => SwitchHoverOn();
 

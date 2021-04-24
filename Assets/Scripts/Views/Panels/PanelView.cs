@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class PanelView : MonoBehaviour

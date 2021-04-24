@@ -1009,7 +1009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843826107656425437, guid: 4e7674a006a0e404ea1441beee0d1095, type: 3}
       propertyPath: _bindType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6843826107656425437, guid: 4e7674a006a0e404ea1441beee0d1095, type: 3}
       propertyPath: _identifier

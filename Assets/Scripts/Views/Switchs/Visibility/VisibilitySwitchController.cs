@@ -1,14 +1,17 @@
 ﻿using Arkham.EventData;
 using Zenject;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
     public class VisibilitySwitchController : IInitializable
     {
-        [Inject(Id = "VisibilitySwitch")] private readonly IClickable visibilitySwitch;
+        [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitchView;
         [Inject] private readonly IVisibility visibility;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => visibilitySwitch.AddAction(visibility.ChangeVisibility);
+        void IInitializable.Initialize() => visibilitySwitchView.AddClickAction(Clicked);
+
+        /*******************************************************************/
+        public void Clicked() => visibility.ChangeVisibility();
     }
 }

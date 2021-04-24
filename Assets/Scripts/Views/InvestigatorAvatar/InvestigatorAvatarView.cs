@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
     public class InvestigatorAvatarView : MonoBehaviour
     {

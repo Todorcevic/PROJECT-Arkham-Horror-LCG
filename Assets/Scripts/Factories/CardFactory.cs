@@ -1,4 +1,5 @@
 ﻿using Arkham.Repositories;
+using Arkham.Services;
 using Arkham.Views;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Arkham.Factories
         [Inject] private readonly ICardsManager cardsManager;
 
         [SerializeField, Required, AssetsOnly] private CardView cardPrefab;
-        [SerializeField, Required, AssetsOnly] private CardView investigatorPrefab;
+        [SerializeField, Required, AssetsOnly] private CardInvestigatorView investigatorPrefab;
         [SerializeField, Required, SceneObjectsOnly] private Transform cardZone;
         [SerializeField, Required, SceneObjectsOnly] private Transform investigatorZone;
 
@@ -50,7 +51,7 @@ namespace Arkham.Factories
             foreach (string investigatorId in InvestigatorCards)
             {
                 object[] args = new object[] { investigatorId, imageCards.GetSprite(investigatorId), investigatorController };
-                CardView cardView = diContainer.InstantiatePrefabForComponent<CardView>(investigatorPrefab, investigatorZone, args);
+                CardInvestigatorView cardView = diContainer.InstantiatePrefabForComponent<CardInvestigatorView>(investigatorPrefab, investigatorZone, args);
                 cardsManager.AddInvestigatorCard(investigatorId, cardView);
             }
         }

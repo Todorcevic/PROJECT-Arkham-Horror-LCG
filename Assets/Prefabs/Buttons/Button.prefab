@@ -343,6 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableAudio: {fileID: 6282047614073122101}
+  canvas: {fileID: 7484273481519661322}
   background: {fileID: 5700855835450385730}
   text: {fileID: 5844591669556902260}
   timeHoverAnimation: 0.25

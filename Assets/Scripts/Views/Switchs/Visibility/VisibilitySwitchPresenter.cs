@@ -2,7 +2,7 @@
 using Arkham.Services;
 using Zenject;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
     public class VisibilitySwitchPresenter : IInitializable
     {
@@ -15,16 +15,11 @@ namespace Arkham.Views
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            visibilityEvent.AddVisibilityAction(Effect);
+            visibilityEvent.AddVisibilityAction(SaveState);
             visibilitySwitch.SwitchAnimation(IsOnVisibility);
         }
 
         /*******************************************************************/
-        private void Effect(bool isOn)
-        {
-            visibilitySwitch.ClickSound();
-            visibilitySwitch.SwitchAnimation(isOn);
-            playerPrefs.SaveCardsVisibility(isOn);
-        }
+        private void SaveState(bool isOn) => playerPrefs.SaveCardsVisibility(isOn);
     }
 }

@@ -4,7 +4,6 @@ using Arkham.Config;
 using Arkham.Repositories;
 using Zenject;
 using System.Linq;
-using Arkham.Investigators;
 
 namespace Arkham.Services
 {
@@ -31,10 +30,7 @@ namespace Arkham.Services
             LoadDeckBuildingRules();
         }
 
-        public void LoadSettings()
-        {
-            repository.AreCardsVisible = playerPrefs.LoadCardsVisibility();
-        }
+        public void LoadSettings() => repository.AreCardsVisible = playerPrefs.LoadCardsVisibility();
 
         public void NewGame()
         {

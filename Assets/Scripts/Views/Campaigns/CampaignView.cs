@@ -5,11 +5,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Arkham.Views
+namespace Arkham.View
 {
     public class CampaignView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [Inject] private readonly ICampaignController campaignController;
+        [Inject] private readonly ICampaignController controller;
         [Title("RESOURCES")]
         [SerializeField, Required] private InteractableAudio InteractableAudio;
         [SerializeField, Required] private CanvasGroup canvasIcon;
@@ -25,27 +25,27 @@ namespace Arkham.Views
         [SerializeField, Range(1f, 2f)] private float zoomParallaxHoverEffect;
 
         public string Id => id;
-        public bool IsOpen { get; set; }
+        public bool IsOpen { private get; set; }
 
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             if (!IsOpen) return;
             ClickEffect();
-            campaignController.Clicked(Id);
+            controller.Clicked(Id);
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => HoverOnEffect();
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => HoverOffEffect();
 
-        private void ClickEffect() => InteractableAudio.ClickSound();
-
         public void ChangeIconState(Sprite iconSprite)
         {
             canvasIcon.alpha = iconSprite == null ? 0 : 1;
             icon.sprite = iconSprite;
         }
+
+        private void ClickEffect() => InteractableAudio.ClickSound();
 
         private void HoverOnEffect()
         {
