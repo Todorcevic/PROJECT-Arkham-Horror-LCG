@@ -2,7 +2,7 @@
 using Arkham.Services;
 using Zenject;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class VisibilitySwitchPresenter : IInitializable
     {

@@ -1,7 +1,7 @@
 ﻿using Arkham.EventData;
 using Zenject;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class ContinueButtonController : IInitializable
     {
@@ -14,7 +14,6 @@ namespace Arkham.View
         void IInitializable.Initialize() => continueButton.AddClickAction(Clicked);
 
         /*******************************************************************/
-
         private void Clicked()
         {
             startGame.ContinueGame();

@@ -3,7 +3,7 @@ using Arkham.Interactors;
 using UnityEngine;
 using Zenject;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class ContinueButtonPresenter : IInitializable
     {

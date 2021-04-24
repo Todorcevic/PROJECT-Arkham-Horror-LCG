@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class InvestigatorSelectorsManager : IInvestigatorSelectorsManager
     {
@@ -18,7 +18,12 @@ namespace Arkham.View
         public InvestigatorSelectorView GetSelectorById(string cardId) =>
             selectors.Find(selector => selector.Id == cardId);
 
-        public void EmptyAllSelectors() => selectors.ForEach(s => s.EmptySelector());
+        public void ResetSelectors()
+        {
+            selectors.ForEach(selector => selector.ResetSelector());
+            RebuildPlaceHolders();
+            selectors.ForEach(selector => selector.PosicionateCardOff());
+        }
 
         public void ArrangeAllSelectors() => selectors.ForEach(s => s.ArrangeAnimation());
 

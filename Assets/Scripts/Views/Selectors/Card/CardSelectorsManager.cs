@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Zenject;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class CardSelectorsManager : ICardSelectorsManager
     {

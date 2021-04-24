@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class InvestigatorSelectorView : MonoBehaviour
     {
@@ -31,6 +31,7 @@ namespace Arkham.View
         {
             Id = sensor.Id = dragSensor.Id = cardId;
             sensor.Activate(true);
+            canvasImage.alpha = 1;
             image.sprite = cardSprite;
         }
 
@@ -38,6 +39,15 @@ namespace Arkham.View
         {
             Id = null;
             sensor.Activate(false);
+            canvasImage.alpha = 0;
+            image.sprite = null;
+        }
+
+        public void ResetSelector()
+        {
+            EmptySelector();
+            Glow(false);
+            SetTransform();
         }
 
         public void LeadIcon(bool isOn) => leaderIcon.enabled = isOn;
@@ -50,6 +60,18 @@ namespace Arkham.View
             PlaceHolder.localPosition = Vector3.zero;
         }
 
+        public void PosicionateCardOn()
+        {
+            CardVisual.localScale = Vector3.one;
+            CardVisual.position = PlaceHolder.position;
+        }
+
+        public void PosicionateCardOff()
+        {
+            CardVisual.localScale = Vector3.zero;
+            CardVisual.position = PlaceHolder.position;
+        }
+
         public void SwapPlaceHoldersWith(InvestigatorSelectorView otherSelector)
         {
             int selector1Index = PlaceHolder.GetSiblingIndex();
@@ -57,28 +79,15 @@ namespace Arkham.View
             otherSelector.PlaceHolder.SetSiblingIndex(selector1Index);
         }
 
-        public void SetImageAnimation()
-        {
-            DOTween.Sequence().PrependCallback(PreConfig)
+        public void SetImageAnimation() => DOTween.Sequence().PrependCallback(PosicionateCardOff)
                 .Append(CardVisual.DOScale(1, timeAnimation));
-
-            void PreConfig()
-            {
-                CardVisual.localScale = Vector3.zero;
-                CardVisual.position = PlaceHolder.position;
-                canvasImage.alpha = 1;
-            }
-        }
 
         public Task RemoveAnimation()
         {
             return DOTween.Sequence()
                 .Join(CardVisual.DOMove(PlaceHolder.position, timeAnimation).SetSpeedBased())
-                .Join(CardVisual.DOScale(0, timeAnimation))
-                .AppendCallback(PostConfig).SetId(REMOVE_ANIMATION)
+                .Join(CardVisual.DOScale(0, timeAnimation)).SetId(REMOVE_ANIMATION)
                 .AsyncWaitForCompletion();
-
-            void PostConfig() => canvasImage.alpha = 0;
         }
 
         public void ArrangeAnimation() => CardVisual.DOMove(PlaceHolder.position, timeAnimation);

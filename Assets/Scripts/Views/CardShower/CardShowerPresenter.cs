@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class CardShowerPresenter : IInitializable, ICardShowerPresenter
     {

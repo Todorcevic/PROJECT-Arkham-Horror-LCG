@@ -2,9 +2,9 @@
 using UnityEngine;
 using TMPro;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
-    public class CardInvestigatorView : CardView
+    public class InvestigatorCardView : CardView
     {
         private GameObject currentState;
         [Title("INVESTIGATOR RESOURCES")]

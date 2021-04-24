@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Arkham.Services;
+using System.Collections.Generic;
 using Zenject;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class BackButtonController : IInitializable
     {
         [Inject(Id = "BackButton")] private readonly List<ButtonView> backButtons;
         [Inject(Id = "MainPanelsManager")] private readonly IPanelsManager panelsManager;
         [Inject(Id = "HomePanel")] private readonly PanelView homePanel;
+        [Inject] private readonly IDataPersistence dataPersistence;
 
         /*******************************************************************/
         void IInitializable.Initialize()
@@ -17,6 +19,10 @@ namespace Arkham.View
         }
 
         /*******************************************************************/
-        private void Clicked() => panelsManager.SelectPanel(homePanel);
+        private void Clicked()
+        {
+            dataPersistence.SaveProgress();
+            panelsManager.SelectPanel(homePanel);
+        }
     }
 }

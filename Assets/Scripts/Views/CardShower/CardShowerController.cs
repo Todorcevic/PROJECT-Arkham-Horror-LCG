@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class CardShowerController : ICardShowerController
     {

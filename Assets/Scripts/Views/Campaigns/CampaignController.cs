@@ -2,7 +2,7 @@
 using Arkham.Repositories;
 using Zenject;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class CampaignController : ICampaignController
     {

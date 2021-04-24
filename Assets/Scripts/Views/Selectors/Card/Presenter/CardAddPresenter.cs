@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class AddCardUseCase : IInitializable, IAddCardUseCase
+    public class CardAddPresenter : IInitializable, ICardAddPresenter
     {
         [Inject(Id = "CardPlaceHolderZone")] public RectTransform placeHolderZone;
         [Inject] private readonly IAddCardEvent addCardEvent;

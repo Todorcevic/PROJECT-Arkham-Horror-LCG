@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public interface ICardShower
     {

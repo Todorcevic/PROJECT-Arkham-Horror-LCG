@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class InvestigatorSelectorController : IInvestigatorSelectorController
     {

@@ -1,4 +1,4 @@
-﻿namespace Arkham.View
+﻿namespace Arkham.Views
 {
     public interface IPanelsManager
     {

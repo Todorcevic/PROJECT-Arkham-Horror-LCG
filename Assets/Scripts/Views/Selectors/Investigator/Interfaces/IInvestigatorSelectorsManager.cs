@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public interface IInvestigatorSelectorsManager
     {
         InvestigatorSelectorView GetLeadSelector { get; }
         InvestigatorSelectorView GetEmptySelector();
         InvestigatorSelectorView GetSelectorById(string cardId);
-        void EmptyAllSelectors();
+        void ResetSelectors();
         void ArrangeAllSelectors();
         void RebuildPlaceHolders();
     }

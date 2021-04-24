@@ -19,7 +19,7 @@ namespace Arkham.Factories
         [Inject] private readonly ICardsManager cardsManager;
 
         [SerializeField, Required, AssetsOnly] private CardView cardPrefab;
-        [SerializeField, Required, AssetsOnly] private CardInvestigatorView investigatorPrefab;
+        [SerializeField, Required, AssetsOnly] private InvestigatorCardView investigatorPrefab;
         [SerializeField, Required, SceneObjectsOnly] private Transform cardZone;
         [SerializeField, Required, SceneObjectsOnly] private Transform investigatorZone;
 
@@ -51,7 +51,7 @@ namespace Arkham.Factories
             foreach (string investigatorId in InvestigatorCards)
             {
                 object[] args = new object[] { investigatorId, imageCards.GetSprite(investigatorId), investigatorController };
-                CardInvestigatorView cardView = diContainer.InstantiatePrefabForComponent<CardInvestigatorView>(investigatorPrefab, investigatorZone, args);
+                InvestigatorCardView cardView = diContainer.InstantiatePrefabForComponent<InvestigatorCardView>(investigatorPrefab, investigatorZone, args);
                 cardsManager.AddInvestigatorCard(investigatorId, cardView);
             }
         }

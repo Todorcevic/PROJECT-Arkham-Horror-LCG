@@ -5,16 +5,16 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class CardsSelectedUseCase : IInitializable
+    public class CardsSelectedPresenter : IInitializable
     {
         [Inject(Id = "CardSelectorZone")] public RectTransform selectorsZone;
         [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
         [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
         [Inject] private readonly IInvestigatorInfoInteractor investigatorInfoInteractor;
-        [Inject] private readonly IAddCardUseCase addCard;
+        [Inject] private readonly ICardAddPresenter addCard;
 
         /*******************************************************************/
-        public void Initialize() => selectInvestigatorEvent.AddAction(ShowAllCards);
+        public void Initialize() => selectInvestigatorEvent.AddSelectedAction(ShowAllCards);
 
         /*******************************************************************/
         private void ShowAllCards(string investigatorId)

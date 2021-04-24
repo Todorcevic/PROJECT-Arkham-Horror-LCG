@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class VisibilityInvestigatorUseCase : IInitializable
+    public class InvestigatorCardVisibilityPresenter : IInitializable
     {
         [Inject] private readonly IStartGameEvent startGameEvent;
         [Inject] private readonly IAddInvestigatorEvent addInvestigatorEvent;
@@ -16,15 +16,15 @@ namespace Arkham.Views
         /*******************************************************************/
         public void Initialize()
         {
-            startGameEvent.AddAction(RefreshAllCardsVisibility);
-            addInvestigatorEvent.AddAction((_) => RefreshAllCardsVisibility());
-            removeInvestigatorEvent.AddAction((_) => RefreshAllCardsVisibility());
-            visibilityEvent.AddVisibilityAction((_) => RefreshAllCardsVisibility());
-            visibilityEvent.AddTextChangeAction(RefreshAllCardsVisibility);
+            startGameEvent.AddAction(RefreshAllInvestigatorsVisibility);
+            addInvestigatorEvent.AddAction((_) => RefreshAllInvestigatorsVisibility());
+            removeInvestigatorEvent.AddAction((_) => RefreshAllInvestigatorsVisibility());
+            visibilityEvent.AddVisibilityAction((_) => RefreshAllInvestigatorsVisibility());
+            visibilityEvent.AddTextChangeAction(RefreshAllInvestigatorsVisibility);
         }
 
         /*******************************************************************/
-        private void RefreshAllCardsVisibility()
+        private void RefreshAllInvestigatorsVisibility()
         {
             foreach (CardView cardView in cardsManager.InvestigatorList)
             {

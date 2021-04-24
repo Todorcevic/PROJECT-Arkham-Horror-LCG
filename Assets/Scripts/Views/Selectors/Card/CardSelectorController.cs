@@ -2,7 +2,7 @@
 using Arkham.Interactors;
 using Zenject;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class CardSelectorController : ICardSelectorController
     {

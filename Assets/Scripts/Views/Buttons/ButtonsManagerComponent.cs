@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Arkham.View.Manager
+namespace Arkham.Views.Manager
 {
     public class ButtonsManagerComponent : MonoBehaviour
     {

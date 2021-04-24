@@ -1,7 +1,7 @@
 ﻿using Arkham.EventData;
 using Zenject;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class ModalNewGameYesButtonController : IInitializable
     {

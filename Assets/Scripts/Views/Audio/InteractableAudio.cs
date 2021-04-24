@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class InteractableAudio : MonoBehaviour
     {

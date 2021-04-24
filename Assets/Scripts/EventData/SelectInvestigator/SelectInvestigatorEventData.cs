@@ -7,8 +7,7 @@ namespace Arkham.EventData
     public class SelectInvestigatorEventData : ISelectInvestigator, ISelectInvestigatorEvent
     {
         [Inject] private readonly Repository repository;
-
-        public event Action<string> InvestigatorSelected;
+        private event Action<string> InvestigatorSelected;
 
         /*******************************************************************/
         void ISelectInvestigator.Selecting(string investigatorId)
@@ -17,6 +16,6 @@ namespace Arkham.EventData
             InvestigatorSelected?.Invoke(investigatorId);
         }
 
-        void ISelectInvestigatorEvent.AddAction(Action<string> action) => InvestigatorSelected += action;
+        void ISelectInvestigatorEvent.AddSelectedAction(Action<string> action) => InvestigatorSelected += action;
     }
 }

@@ -2,7 +2,7 @@
 using Arkham.Interactors;
 using Arkham.EventData;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class CardsQuantityPresenter : IInitializable
     {
@@ -20,7 +20,7 @@ namespace Arkham.View
         {
             addCardEvent.AddAction((_) => UpdateData());
             removeCardEvent.AddAction((_) => UpdateData());
-            selectInvestigatorEvent.AddAction((_) => UpdateData());
+            selectInvestigatorEvent.AddSelectedAction((_) => UpdateData());
         }
 
         /*******************************************************************/

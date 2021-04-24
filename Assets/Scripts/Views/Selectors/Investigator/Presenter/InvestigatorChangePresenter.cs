@@ -3,11 +3,11 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class ChangeInvestigatorUseCase : IInitializable
+    public class InvestigatorChangePresenter : IInitializable
     {
         [Inject] private readonly IChangeInvestigatorEvent changeInvestigatorEvent;
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
-        [Inject] private readonly ILeadInvestigatorUseCase selectorLead;
+        [Inject] private readonly IInvestigatorLeadPresenter selectorLead;
 
         /*******************************************************************/
         public void Initialize() => changeInvestigatorEvent.AddAction(ChangeInvestigator);

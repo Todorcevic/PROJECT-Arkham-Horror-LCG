@@ -1,7 +1,7 @@
 ﻿using Arkham.EventData;
 using Zenject;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class InvestigatorAvatarPresenter : IInitializable
     {
@@ -10,7 +10,7 @@ namespace Arkham.View
         [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => selectInvestigatorEvent.AddAction(ShowInvetigator);
+        void IInitializable.Initialize() => selectInvestigatorEvent.AddSelectedAction(ShowInvetigator);
 
         /*******************************************************************/
         private void ShowInvetigator(string investigatorId)

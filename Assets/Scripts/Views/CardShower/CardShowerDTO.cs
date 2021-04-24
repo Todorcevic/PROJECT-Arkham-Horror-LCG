@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class CardShowerDTO
     {

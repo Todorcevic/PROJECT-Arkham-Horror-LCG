@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class InputFieldView : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerExitHandler, IUpdateSelectedHandler
     {

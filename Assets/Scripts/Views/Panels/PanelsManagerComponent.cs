@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace Arkham.View.Manager
+namespace Arkham.Views.Manager
 {
     public class PanelsManagerComponent : MonoBehaviour, IPanelsManager
     {

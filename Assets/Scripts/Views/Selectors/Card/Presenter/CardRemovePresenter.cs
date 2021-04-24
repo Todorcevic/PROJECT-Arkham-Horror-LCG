@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class RemoveCardUseCase : IInitializable
+    public class CardRemovePresenter : IInitializable
     {
         [Inject(Id = "CardSelectorZone")] public RectTransform selectorsZone;
         [Inject] private readonly IRemoveCardEvent removeCardEvent;

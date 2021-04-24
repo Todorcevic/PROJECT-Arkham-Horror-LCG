@@ -1,6 +1,6 @@
 ﻿namespace Arkham.Views
 {
-    public interface ILeadInvestigatorUseCase
+    public interface IInvestigatorLeadPresenter
     {
         void SetLeadSelector();
     }

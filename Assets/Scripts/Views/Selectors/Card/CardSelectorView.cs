@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class CardSelectorView : MonoBehaviour
     {

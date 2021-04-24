@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Arkham.View
+namespace Arkham.Views
 {
     public class CardSelectorSensor : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {

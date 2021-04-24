@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class StateInvestigatorUseCase : IInitializable
+    public class InvestigatorCardStatePresenter : IInitializable
     {
         [Inject] private readonly IStartGameEvent startGameEvent;
         [Inject] private readonly ICardsManager cardsManager;
@@ -16,7 +16,7 @@ namespace Arkham.Views
         /*******************************************************************/
         private void InvestigatorStateResolve()
         {
-            foreach (CardInvestigatorView cardInvestigator in cardsManager.InvestigatorList)
+            foreach (InvestigatorCardView cardInvestigator in cardsManager.InvestigatorList)
             {
                 if (investigatorInteractor.ISKilled(cardInvestigator.Id)) cardInvestigator.ChangeToKilledState();
                 else if (investigatorInteractor.ISInsane(cardInvestigator.Id)) cardInvestigator.ChangeToInsaneState();

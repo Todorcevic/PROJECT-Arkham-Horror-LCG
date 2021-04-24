@@ -1,6 +1,6 @@
 ﻿namespace Arkham.Views
 {
-    public interface IAddCardUseCase
+    public interface ICardAddPresenter
     {
         void SetCardInSelector(string cardId);
     }
