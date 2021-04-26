@@ -1,4 +1,4 @@
-﻿using Arkham.EventData;
+﻿using Arkham.Repositories;
 using System.Threading.Tasks;
 using Zenject;
 
@@ -6,12 +6,12 @@ namespace Arkham.Views
 {
     public class InvestigatorRemovePresenter : IInitializable
     {
-        [Inject] private readonly IRemoveInvestigatorEvent removeInvestigatorEvent;
+        [Inject] private readonly IInvestigatorRemovedEvent investigatorRemovedEvent;
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly IInvestigatorLeadPresenter selectorLead;
 
         /*******************************************************************/
-        public void Initialize() => removeInvestigatorEvent.AddAction(RemoveInvestigator);
+        public void Initialize() => investigatorRemovedEvent.Subscribe(RemoveInvestigator);
 
         /*******************************************************************/
         private async void RemoveInvestigator(string investigatorId)

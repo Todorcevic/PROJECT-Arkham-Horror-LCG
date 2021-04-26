@@ -1,6 +1,7 @@
 ﻿using Zenject;
 using Arkham.Interactors;
 using Arkham.EventData;
+using Arkham.Repositories;
 
 namespace Arkham.Views
 {
@@ -8,7 +9,7 @@ namespace Arkham.Views
     {
         [Inject] private readonly IAddCardEvent addCardEvent;
         [Inject] private readonly IRemoveCardEvent removeCardEvent;
-        [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
+        [Inject] private readonly IInvestigatorSelectedEvent selectInvestigatorEvent;
         [Inject] private readonly ICurrentInvestigatorInteractor currentInvestigator;
         [Inject] private readonly CardsQuantityView cardsQuantityView;
 
@@ -20,7 +21,7 @@ namespace Arkham.Views
         {
             addCardEvent.AddAction((_) => UpdateData());
             removeCardEvent.AddAction((_) => UpdateData());
-            selectInvestigatorEvent.AddSelectedAction((_) => UpdateData());
+            selectInvestigatorEvent.Subscribe((_) => UpdateData());
         }
 
         /*******************************************************************/

@@ -7,7 +7,7 @@ namespace Arkham.Entities
     public class DeckBuildingRules
     {
         private List<string> allowedCards;
-        [Inject] private readonly ICardInfoRepository infoRepository;
+        [Inject] private readonly ICardInfo infoRepository;
 
         public virtual int DeckSize => 30;
         protected virtual List<string> DeckBuildingFactionConditions => new List<string>();
@@ -22,8 +22,7 @@ namespace Arkham.Entities
             int i = 0;
             foreach (string faction in DeckBuildingFactionConditions)
             {
-                deckBuildingResult.AddRange(infoRepository.CardInfoList
-                    .FindAll(c => c.Faction_code == faction && c.Xp <= DeckBuildingXpConditions[i])
+                deckBuildingResult.AddRange(infoRepository.FindAll(c => c.Faction_code == faction && c.Xp <= DeckBuildingXpConditions[i])
                     .ConvertAll(c => c.Code));
                 i++;
             }

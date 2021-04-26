@@ -1,4 +1,5 @@
 ﻿using Arkham.EventData;
+using Arkham.Repositories;
 using UnityEngine;
 using Zenject;
 
@@ -6,7 +7,7 @@ namespace Arkham.Views
 {
     public class AddInvestigatorPresenter : IInitializable, IAddInvestigatorPresenter
     {
-        [Inject] private readonly IAddInvestigatorEvent addInvestigatorEvent;
+        [Inject] private readonly IInvestigatorAddedEvent investigatorAddedEvent;
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly ICardsManager investigatorCardsManager;
         [Inject] private readonly IInvestigatorLeadPresenter selectorLead;
@@ -14,7 +15,7 @@ namespace Arkham.Views
         [Inject(Id = "InvestigatorPlaceHolderZone")] private readonly RectTransform placeHoldersZone;
 
         /*******************************************************************/
-        public void Initialize() => addInvestigatorEvent.AddAction(AddInvestigator);
+        public void Initialize() => investigatorAddedEvent.Subscribe(AddInvestigator);
 
         /*******************************************************************/
         public void InitInvestigator(string investigatorId)

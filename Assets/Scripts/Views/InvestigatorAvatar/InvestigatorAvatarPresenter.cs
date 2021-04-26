@@ -1,4 +1,4 @@
-﻿using Arkham.EventData;
+﻿using Arkham.Repositories;
 using Zenject;
 
 namespace Arkham.Views
@@ -7,10 +7,10 @@ namespace Arkham.Views
     {
         [Inject] private readonly InvestigatorAvatarView investigatorAvatar;
         [Inject] private readonly ICardsManager investigatorCardsManager;
-        [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
+        [Inject] private readonly IInvestigatorSelectedEvent selectInvestigatorEvent;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => selectInvestigatorEvent.AddSelectedAction(ShowInvetigator);
+        void IInitializable.Initialize() => selectInvestigatorEvent.Subscribe(ShowInvetigator);
 
         /*******************************************************************/
         private void ShowInvetigator(string investigatorId)

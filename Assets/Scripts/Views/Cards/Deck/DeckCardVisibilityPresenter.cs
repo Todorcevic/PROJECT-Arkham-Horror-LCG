@@ -1,6 +1,7 @@
 ﻿using Arkham.Interactors;
 using Arkham.EventData;
 using Zenject;
+using Arkham.Repositories;
 
 namespace Arkham.Views
 {
@@ -10,13 +11,13 @@ namespace Arkham.Views
         [Inject] private readonly IAddCardEvent addCardEvent;
         [Inject] private readonly ICardSelectorInteractors cardSelectorInteractor;
         [Inject] private readonly ICardsManager cardsManager;
-        [Inject] private readonly ISelectInvestigatorEvent selectInvestigatorEvent;
+        [Inject] private readonly IInvestigatorSelectedEvent selectInvestigatorEvent;
         [Inject] private readonly IVisibilityEvent visibilityEvent;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            selectInvestigatorEvent.AddSelectedAction((_) => RefreshAllCardsVisibility());
+            selectInvestigatorEvent.Subscribe((_) => RefreshAllCardsVisibility());
             addCardEvent.AddAction((_) => RefreshAllCardsVisibility());
             removeCardEvent.AddAction((_) => RefreshAllCardsVisibility());
             visibilityEvent.AddVisibilityAction((_) => RefreshAllCardsVisibility());

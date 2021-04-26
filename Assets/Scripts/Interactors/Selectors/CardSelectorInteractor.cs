@@ -1,17 +1,16 @@
 ﻿using Arkham.Config;
 using Arkham.Repositories;
-using UnityEngine;
 using Zenject;
 
 namespace Arkham.Interactors
 {
     public class CardSelectorInteractor : ICardSelectorInteractors
     {
-        [Inject] private readonly IInvestigatorInfoInteractor investigatorInfoInteractor;
-        [Inject] private readonly ICardInfoInteractor cardInfoInteractor;
+        [Inject] private readonly IInvestigatorInfo investigatorRepository;
+        [Inject] private readonly ICardInfo cardInfo;
         [Inject] private readonly ICurrentInvestigatorInteractor currentInvestigator;
-        [Inject] private readonly ISettings settings;
-        [Inject] private readonly IUnlockCards unlockCards;
+        [Inject] private readonly Settings settings;
+        [Inject] private readonly IUnlockCardsInfo unlockCards;
 
         /*******************************************************************/
         public bool CanThisCardBeSelected(string cardId)
@@ -27,7 +26,7 @@ namespace Arkham.Interactors
 
         public bool CanThisCardBeShowed(string cardId)
         {
-            if (!cardInfoInteractor.ThisCardContainThisText(cardId, settings.TextToSearch)) return false;
+            if (!cardInfo.ThisCardContainThisText(cardId, settings.TextToSearch)) return false;
             if (settings.AreCardsVisible) return true;
             if (IsThisCardAllowed(cardId) && unlockCards.IsThisCardUnlocked(cardId)) return true;
             return false;
@@ -37,12 +36,12 @@ namespace Arkham.Interactors
         {
             if (currentInvestigator.Id == null) return false;
             if (!currentInvestigator.AllowedCards.Contains(cardId)) return false;
-            if (currentInvestigator.Xp < cardInfoInteractor.GetXp(cardId)) return false;
+            if (currentInvestigator.Xp < cardInfo.Get(cardId).Xp) return false;
             return true;
         }
 
         private bool IsThisCardWasted(string cardId) =>
-            cardInfoInteractor.GetQuantity(cardId) - investigatorInfoInteractor.AmountSelectedOfThisCard(cardId) <= 0;
+            cardInfo.Get(cardId).Quantity - investigatorRepository.AmountSelectedOfThisCard(cardId) <= 0;
 
         private bool IsThisCardInMax(string cardId) =>
             currentInvestigator.GetAmountOfThisCardInDeck(cardId) >= GameConfig.MAX_SIMILARS_CARDS_IN_DECK;

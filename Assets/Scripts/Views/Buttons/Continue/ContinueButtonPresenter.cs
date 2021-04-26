@@ -1,20 +1,19 @@
-﻿using Arkham.EventData;
-using Arkham.Interactors;
-using UnityEngine;
+﻿using Arkham.Interactors;
+using Arkham.Repositories;
 using Zenject;
 
 namespace Arkham.Views
 {
     public class ContinueButtonPresenter : IInitializable
     {
-        [Inject] private readonly IScenarioEvent changeCampaignEventData;
+        [Inject] private readonly IScenarioChangedEvent changeCampaignEventData;
         [Inject] private readonly IContinueGame continueGame;
         [Inject(Id = "ContinueButton")] private readonly ButtonView continueButton;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            changeCampaignEventData.AddAction(DesactiveButton);
+            changeCampaignEventData.Subscribe(DesactiveButton);
             continueButton.Desactive(!continueGame.CanContinue());
         }
 

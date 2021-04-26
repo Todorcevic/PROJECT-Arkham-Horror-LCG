@@ -1,5 +1,6 @@
 ﻿using Arkham.EventData;
 using Arkham.Interactors;
+using Arkham.Repositories;
 using Zenject;
 
 namespace Arkham.Views
@@ -7,8 +8,8 @@ namespace Arkham.Views
     public class InvestigatorCardVisibilityPresenter : IInitializable
     {
         [Inject] private readonly IStartGameEvent startGameEvent;
-        [Inject] private readonly IAddInvestigatorEvent addInvestigatorEvent;
-        [Inject] private readonly IRemoveInvestigatorEvent removeInvestigatorEvent;
+        [Inject] private readonly IInvestigatorAddedEvent InvestigatorAddedEvent;
+        [Inject] private readonly IInvestigatorRemovedEvent removeInvestigatorEvent;
         [Inject] private readonly IVisibilityEvent visibilityEvent;
         [Inject] private readonly ICardsManager cardsManager;
         [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
@@ -17,8 +18,8 @@ namespace Arkham.Views
         public void Initialize()
         {
             startGameEvent.AddAction(RefreshAllInvestigatorsVisibility);
-            addInvestigatorEvent.AddAction((_) => RefreshAllInvestigatorsVisibility());
-            removeInvestigatorEvent.AddAction((_) => RefreshAllInvestigatorsVisibility());
+            InvestigatorAddedEvent.Subscribe((_) => RefreshAllInvestigatorsVisibility());
+            removeInvestigatorEvent.Subscribe((_) => RefreshAllInvestigatorsVisibility());
             visibilityEvent.AddVisibilityAction((_) => RefreshAllInvestigatorsVisibility());
             visibilityEvent.AddTextChangeAction(RefreshAllInvestigatorsVisibility);
         }

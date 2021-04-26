@@ -12,7 +12,17 @@ namespace Arkham.Config
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<Repository>().AsSingle();
+            Container.Bind<Settings>().AsSingle();
+
+            /*** Reositories ***/
+            //  Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
+            //.InNamespace("Arkham.Repositories").WithSuffix("Repository")).AsSingle();
+
+            Container.BindInterfacesTo<CardInfoRepository>().AsSingle();
+            Container.BindInterfacesTo<CampaignRepository>().AsSingle();
+            Container.BindInterfacesTo<InvestigatorInfoRepository>().AsSingle();
+            Container.BindInterfacesTo<UnlockCardsRepository>().AsSingle();
+            Container.BindInterfacesTo<InvestigatorSelectorRepository>().AsSingle();
 
             /*** Resources ***/
             Container.Bind<CampaignState>().FromScriptableObjectResource(gamefiles.CAMPAIGNS_STATES).AsSingle();

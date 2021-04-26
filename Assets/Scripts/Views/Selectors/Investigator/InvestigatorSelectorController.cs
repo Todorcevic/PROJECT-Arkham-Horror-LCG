@@ -1,5 +1,5 @@
-﻿using Arkham.EventData;
-using Arkham.Interactors;
+﻿using Arkham.Interactors;
+using Arkham.Repositories;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
@@ -8,23 +8,20 @@ namespace Arkham.Views
 {
     public class InvestigatorSelectorController : IInvestigatorSelectorController
     {
-        [Inject] private readonly IRemoveInvestigator removeInvestigator;
-        [Inject] private readonly ISelectInvestigator selectInvestigator;
-        [Inject] private readonly IChangeInvestigator changeInvestigator;
-        [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
+        [Inject] private readonly IInvestigatorSelectorRepository investigatorSelectorRepository;
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorManager;
         [Inject(Id = "MidZone")] private readonly RectTransform removeZone;
 
         /*******************************************************************/
         public void DoubleClicked(string investigatorId)
         {
-            removeInvestigator.Removing(investigatorId);
-            selectInvestigator.Selecting(investigatorSelectorInteractor.LeadInvestigator);
+            investigatorSelectorRepository.Remove(investigatorId);
+            investigatorSelectorRepository.SelectLead();
         }
 
-        public void Clicked(string investigatorId) => selectInvestigator.Selecting(investigatorId);
+        public void Clicked(string investigatorId) => investigatorSelectorRepository.SelectCurrent(investigatorId);
 
-        public void Swaping(string investigatorId, int positionToSwap) => changeInvestigator.Swap(positionToSwap, investigatorId);
+        public void Swaping(string investigatorId, int positionToSwap) => investigatorSelectorRepository.Swap(positionToSwap, investigatorId);
 
         public void EndingDrag(string investigatorId, PointerEventData eventData)
         {

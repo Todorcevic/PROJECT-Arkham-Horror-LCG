@@ -12,13 +12,13 @@ namespace Arkham.EventData
         /*******************************************************************/
         void IStartGame.NewGame()
         {
-            dataPersistence.NewGame();
+            dataPersistence.LoadProgress(isNewGame: true);
             GameStarted?.Invoke();
         }
 
         void IStartGame.ContinueGame()
         {
-            dataPersistence.LoadProgress();
+            dataPersistence.LoadProgress(isNewGame: false);
             GameStarted?.Invoke();
         }
 

@@ -6,20 +6,20 @@ namespace Arkham.EventData
 {
     public class VisibilityEventData : IVisibility, IVisibilityEvent
     {
-        [Inject] private readonly Repository repository;
+        [Inject] private readonly Settings settings;
         private event Action<bool> VisibilityChanged;
         private event Action TextToSearchChanged;
 
         /*******************************************************************/
         void IVisibility.ChangeVisibility()
         {
-            repository.AreCardsVisible = !repository.AreCardsVisible;
-            VisibilityChanged?.Invoke(repository.AreCardsVisible);
+            settings.AreCardsVisible = !settings.AreCardsVisible;
+            VisibilityChanged?.Invoke(settings.AreCardsVisible);
         }
 
         void IVisibility.ChangeText(string textToSearch)
         {
-            repository.TextToSearch = textToSearch;
+            settings.TextToSearch = textToSearch;
             TextToSearchChanged?.Invoke();
         }
 

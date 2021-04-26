@@ -13,7 +13,7 @@ namespace Tests
         public override void InstallBindings()
         {
             Container.Bind<GameFiles>().AsSingle();
-            Container.BindInterfacesTo<CardInfoInteractor>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CardInfoRepository>().AsSingle();
 
             Container.Bind<IDoubleClickDetector>().To<DoubleClickDetector>().AsSingle();
             Container.Bind<IResolutionSet>().To<ScreenResolutionAutoDetect>().AsSingle();

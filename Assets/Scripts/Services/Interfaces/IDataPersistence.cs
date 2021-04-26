@@ -8,8 +8,7 @@ namespace Arkham.Services
     {
         void LoadDataCards();
         void SaveProgress();
-        void LoadProgress();
+        void LoadProgress(bool isNewGame);
         void LoadSettings();
-        void NewGame();
     }
 }

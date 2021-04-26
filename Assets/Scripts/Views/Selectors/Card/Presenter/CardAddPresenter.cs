@@ -1,5 +1,6 @@
 ﻿using Arkham.EventData;
 using Arkham.Interactors;
+using Arkham.Repositories;
 using Arkham.Services;
 using UnityEngine;
 using Zenject;
@@ -12,7 +13,7 @@ namespace Arkham.Views
         [Inject] private readonly IAddCardEvent addCardEvent;
         [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
         [Inject] private readonly IImageCardsManager imageCards;
-        [Inject] private readonly ICardInfoInteractor cardInfoInteractor;
+        [Inject] private readonly ICardInfo cardInfo;
         [Inject] private readonly ICurrentInvestigatorInteractor currentInvestigator;
 
         /*******************************************************************/
@@ -29,7 +30,7 @@ namespace Arkham.Views
         private void ActivateSelector(CardSelectorView selector, string cardId)
         {
             selector.SetSelector(cardId, imageCards.GetSprite(cardId));
-            selector.SetName(cardInfoInteractor.GetRealName(cardId));
+            selector.SetName(cardInfo.Get(cardId).Real_name);
             selector.SetTransform(placeHolderZone);
         }
 
