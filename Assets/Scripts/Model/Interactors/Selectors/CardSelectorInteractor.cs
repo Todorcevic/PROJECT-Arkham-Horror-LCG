@@ -8,15 +8,15 @@ namespace Arkham.Interactors
     {
         [Inject] private readonly IInvestigatorInfo investigatorRepository;
         [Inject] private readonly ICardInfo cardInfo;
-        [Inject] private readonly ICurrentInvestigatorInteractor currentInvestigator;
+        [Inject] private readonly IInvestigatorSelectedInfo currentInvestigator;
         [Inject] private readonly Settings settings;
         [Inject] private readonly IUnlockCardsInfo unlockCards;
 
         /*******************************************************************/
         public bool CanThisCardBeSelected(string cardId)
         {
-            if (currentInvestigator.Id == null) return false;
-            if (currentInvestigator.SelectionIsFull) return false;
+            if (currentInvestigator.Info.Id == null) return false;
+            if (currentInvestigator.Info.SelectionIsFull) return false;
             if (!unlockCards.IsThisCardUnlocked(cardId)) return false;
             if (!IsThisCardAllowed(cardId)) return false;
             if (IsThisCardWasted(cardId)) return false;
@@ -34,9 +34,9 @@ namespace Arkham.Interactors
 
         private bool IsThisCardAllowed(string cardId)
         {
-            if (currentInvestigator.Id == null) return false;
-            if (!currentInvestigator.AllowedCards.Contains(cardId)) return false;
-            if (currentInvestigator.Xp < cardInfo.Get(cardId).Xp) return false;
+            if (currentInvestigator.Info.Id == null) return false;
+            if (!currentInvestigator.Info.DeckBuilding.AllowedCards().Contains(cardId)) return false;
+            if (currentInvestigator.Info.Xp < cardInfo.Get(cardId).Xp) return false;
             return true;
         }
 
@@ -44,6 +44,6 @@ namespace Arkham.Interactors
             cardInfo.Get(cardId).Quantity - investigatorRepository.AmountSelectedOfThisCard(cardId) <= 0;
 
         private bool IsThisCardInMax(string cardId) =>
-            currentInvestigator.GetAmountOfThisCardInDeck(cardId) >= GameConfig.MAX_SIMILARS_CARDS_IN_DECK;
+            currentInvestigator.Info.GetAmountOfThisCardInDeck(cardId) >= GameConfig.MAX_SIMILARS_CARDS_IN_DECK;
     }
 }

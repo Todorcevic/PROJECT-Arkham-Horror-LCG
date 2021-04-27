@@ -1,5 +1,4 @@
-﻿using Arkham.EventData;
-using Arkham.Repositories;
+﻿using Arkham.Repositories;
 using Zenject;
 
 namespace Arkham.Views

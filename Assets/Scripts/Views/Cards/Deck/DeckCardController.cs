@@ -1,13 +1,14 @@
 ﻿using Arkham.EventData;
+using Arkham.Interactors;
 using Zenject;
 
 namespace Arkham.Views
 {
     public class DeckCardController : IDeckCardController
     {
-        [Inject] private readonly IAddCard addCard;
+        [Inject] private readonly IInvestigatorSelected investigatorSelected;
 
         /*******************************************************************/
-        public void Clicked(string cardId) => addCard.AddDeckCard(cardId);
+        public void Clicked(string cardId) => investigatorSelected.AddCard(cardId);
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Arkham.EventData
+namespace Arkham.Interactors
 {
-    public interface IRemoveCardEvent
+    public interface ICardAddedEvent
     {
         void AddAction(Action<string> action);
     }

@@ -10,11 +10,11 @@ namespace Arkham.Views
     public class CardAddPresenter : IInitializable, ICardAddPresenter
     {
         [Inject(Id = "CardPlaceHolderZone")] public RectTransform placeHolderZone;
-        [Inject] private readonly IAddCardEvent addCardEvent;
+        [Inject] private readonly ICardAddedEvent addCardEvent;
         [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
         [Inject] private readonly IImageCardsManager imageCards;
         [Inject] private readonly ICardInfo cardInfo;
-        [Inject] private readonly ICurrentInvestigatorInteractor currentInvestigator;
+        [Inject] private readonly IInvestigatorSelectedInfo currentInvestigator;
 
         /*******************************************************************/
         public void Initialize() => addCardEvent.AddAction(SetCardInSelector);
@@ -36,7 +36,7 @@ namespace Arkham.Views
 
         private void SetQuantity(CardSelectorView selector)
         {
-            int quantity = currentInvestigator.GetAmountOfThisCardInDeck(selector.Id);
+            int quantity = currentInvestigator.Info.GetAmountOfThisCardInDeck(selector.Id);
             selector.SetQuantity(quantity);
         }
     }

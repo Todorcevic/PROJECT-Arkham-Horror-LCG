@@ -7,8 +7,8 @@ namespace Arkham.Views
 {
     public class ReadyButtonPresenter : IInitializable
     {
-        [Inject] private readonly IRemoveCardEvent removeCardEvent;
-        [Inject] private readonly IAddCardEvent addCardEvent;
+        [Inject] private readonly ICardRemovedEvent removeCardEvent;
+        [Inject] private readonly ICardAddedEvent addCardEvent;
         [Inject] private readonly IStartGameEvent startGameEvent;
         [Inject] private readonly IPlayGameInteractor playGameInteractor;
         [Inject(Id = "ReadyButton")] private readonly ButtonView readyButton;

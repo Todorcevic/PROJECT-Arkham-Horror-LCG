@@ -8,9 +8,9 @@ namespace Arkham.Views
     public class CardRemovePresenter : IInitializable
     {
         [Inject(Id = "CardSelectorZone")] public RectTransform selectorsZone;
-        [Inject] private readonly IRemoveCardEvent removeCardEvent;
+        [Inject] private readonly ICardRemovedEvent removeCardEvent;
         [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
-        [Inject] private readonly ICurrentInvestigatorInteractor currentInvestigator;
+        [Inject] private readonly IInvestigatorSelectedInfo currentInvestigator;
 
         /*******************************************************************/
         public void Initialize() => removeCardEvent.AddAction(RemoveCardInSelector);
@@ -25,7 +25,7 @@ namespace Arkham.Views
 
         private int SetQuantityAndGetIt(CardSelectorView selector, string cardId)
         {
-            int quantity = currentInvestigator.GetAmountOfThisCardInDeck(cardId);
+            int quantity = currentInvestigator.Info.GetAmountOfThisCardInDeck(cardId);
             selector.SetQuantity(quantity);
             return quantity;
         }

@@ -7,14 +7,14 @@ namespace Arkham.Views
 {
     public class CardsQuantityPresenter : IInitializable
     {
-        [Inject] private readonly IAddCardEvent addCardEvent;
-        [Inject] private readonly IRemoveCardEvent removeCardEvent;
+        [Inject] private readonly ICardAddedEvent addCardEvent;
+        [Inject] private readonly ICardRemovedEvent removeCardEvent;
         [Inject] private readonly IInvestigatorSelectedEvent selectInvestigatorEvent;
-        [Inject] private readonly ICurrentInvestigatorInteractor currentInvestigator;
+        [Inject] private readonly IInvestigatorSelectedInfo currentInvestigator;
         [Inject] private readonly CardsQuantityView cardsQuantityView;
 
-        private string AmountCards => currentInvestigator.AmountCardsSelected.ToString();
-        private string DeckSize => currentInvestigator.DeckSize.ToString();
+        private string AmountCards => currentInvestigator.Info.AmountCardsSelected.ToString();
+        private string DeckSize => currentInvestigator.Info.DeckSize.ToString();
 
         /*******************************************************************/
         void IInitializable.Initialize()
