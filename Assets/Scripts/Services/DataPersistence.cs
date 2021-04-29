@@ -1,56 +1,68 @@
-﻿using Arkham.Entities;
-using Arkham.Config;
-using Arkham.Repositories;
-using Zenject;
+﻿using Arkham.Config;
+using Arkham.Model;
 using System.Collections.Generic;
+using Zenject;
 
 namespace Arkham.Services
 {
-    public class DataPersistence : IDataPersistence
+    public class DataPersistence : IInitializable, IDataContext
     {
         [Inject] private readonly GameFiles gameFiles;
         [Inject] private readonly Settings settings;
         [Inject] private readonly ISerializer serializer;
         [Inject] private readonly IPlayerPrefsAdapter playerPrefs;
-        [Inject] private readonly ICardInfoLoader cardInfo;
-        [Inject] private readonly ICampaignLoader campaignRepository;
-        [Inject] private readonly IInvestigatorInfoLoader investigatorRepository;
-        [Inject] private readonly IUnlockCardsLoader unlockCardsRepository;
-        [Inject] private readonly IInvestigatorSelectorLoader investigatorSelectorRepository;
-        [Inject] private readonly ICardInfo cardInfoRepository;
         [Inject] private readonly IInstantiatorAdapter instantiator;
+        [Inject] private readonly StartGameEventDomain gameStartedEvent;
+        [Inject] private readonly CardInfoRepository cardInfo;
+        [Inject] private readonly CampaignRepository campaignData;
+        [Inject] private readonly InvestigatorInfoRepository investigatorData;
+        [Inject] private readonly InvestigatorSelectorRepository selectorData;
+        [Inject] private readonly UnlockCardRepository unlockCardData;
 
         /*******************************************************************/
+        void IInitializable.Initialize() => gameStartedEvent.GameStarted += LoadProgress;
+
         public void LoadDataCards() =>
             cardInfo.CardInfoList = serializer.CreateDataFromResources<List<CardInfo>>(gameFiles.CardsDataFilePath);
 
         public void LoadSettings() => settings.AreCardsVisible = playerPrefs.LoadCardsVisibility();
 
-        public void SaveProgress()
+        public void SaveProgress() => serializer.SaveFileFromData(CreateDTO(), gameFiles.PlayerProgressFilePath);
+
+        private Repository CreateDTO() => new Repository()
         {
-            serializer.SaveFileFromData(campaignRepository, gameFiles.PlayerProgressFilePath);
-            serializer.SaveFileFromData(investigatorRepository, gameFiles.PlayerProgressFilePath);
-            serializer.SaveFileFromData(unlockCardsRepository, gameFiles.PlayerProgressFilePath);
-            serializer.SaveFileFromData(investigatorSelectorRepository, gameFiles.PlayerProgressFilePath);
+            CurrentScenario = campaignData.CurrentScenario,
+            CampaignsList = campaignData.CampaignsList,
+            InvestigatorsList = investigatorData.InvestigatorsList,
+            InvestigatorsSelectedList = selectorData.InvestigatorsSelectedList,
+            UnlockCards = unlockCardData.UnlockCards
+        };
+
+        private void LoadProgress(StartGame gameType)
+        {
+            Repository repositoryDTO = gameType == StartGame.New ? LoadNewGame() : LoadContinue();
+            CreateRepositories(repositoryDTO);
+            LoadDependency();
         }
 
-        public void LoadProgress(bool isNewGame) =>
-            Load(isNewGame ? gameFiles.PlayerProgressDefaultFilePath : gameFiles.PlayerProgressFilePath);
+        private Repository LoadNewGame() => serializer.CreateDataFromResources<Repository>(gameFiles.PlayerProgressDefaultFilePath);
 
-        private void Load(string filePath)
+        private Repository LoadContinue() => serializer.CreateDataFromFile<Repository>(gameFiles.PlayerProgressFilePath);
+
+        private void CreateRepositories(Repository repositoryDTO)
         {
-            serializer.UpdateDataFromFile(filePath, campaignRepository);
-            serializer.UpdateDataFromFile(filePath, investigatorRepository);
-            serializer.UpdateDataFromFile(filePath, unlockCardsRepository);
-            serializer.UpdateDataFromFile(filePath, investigatorSelectorRepository);
-            LoadDependency();
+            campaignData.CurrentScenario = repositoryDTO.CurrentScenario;
+            campaignData.CampaignsList = repositoryDTO.CampaignsList;
+            investigatorData.InvestigatorsList = repositoryDTO.InvestigatorsList;
+            selectorData.InvestigatorsSelectedList = repositoryDTO.InvestigatorsSelectedList;
+            unlockCardData.UnlockCards = repositoryDTO.UnlockCards;
         }
 
         private void LoadDependency()
         {
-            foreach (InvestigatorInfo investigator in investigatorRepository.InvestigatorsList)
+            foreach (InvestigatorInfo investigator in investigatorData.InvestigatorsList)
             {
-                investigator.Info = cardInfoRepository.Get(investigator.Id);
+                investigator.Info = cardInfo.Get(investigator.Id);
                 investigator.DeckBuilding = instantiator.CreateInstance<DeckBuildingRules>(investigator.Id);
             }
         }

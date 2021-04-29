@@ -1,15 +1,16 @@
-﻿using Arkham.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Zenject;
 
-namespace Arkham.Repositories
+namespace Arkham.Model
 {
-    public class CardInfoRepository : ICardInfoLoader, ICardInfo
+    public class CardInfoRepository
     {
         private List<CardInfo> cardInfoList;
         private Dictionary<string, CardInfo> cardInfoDict;
 
+        [Inject]
         public List<CardInfo> CardInfoList
         {
             set

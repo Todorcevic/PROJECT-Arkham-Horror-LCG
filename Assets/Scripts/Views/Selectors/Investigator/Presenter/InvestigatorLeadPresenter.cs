@@ -1,4 +1,4 @@
-﻿using Arkham.Repositories;
+﻿using Arkham.Model;
 using Zenject;
 
 namespace Arkham.Views
@@ -6,7 +6,7 @@ namespace Arkham.Views
     public class InvestigatorLeadPresenter : IInvestigatorLeadPresenter
     {
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
-        [Inject] private readonly IInvestigatorSelectorInfo investigatorSelectorInfo;
+        [Inject] private readonly InvestigatorSelectorRepository investigatorSelectorInfo;
 
         private InvestigatorSelectorView LeadSelector => investigatorSelectorsManager.GetLeadSelector;
 

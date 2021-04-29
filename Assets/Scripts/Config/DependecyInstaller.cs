@@ -1,8 +1,8 @@
-﻿using Zenject;
-using Arkham.Services;
+﻿using Arkham.Model;
 using Arkham.Scenarios;
+using Arkham.Services;
 using Arkham.Views;
-using Arkham.Repositories;
+using Zenject;
 
 namespace Arkham.Config
 {
@@ -12,17 +12,29 @@ namespace Arkham.Config
 
         public override void InstallBindings()
         {
-            Container.Bind<Settings>().AsSingle();
-
             /*** Reositories ***/
-            //  Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-            //.InNamespace("Arkham.Repositories").WithSuffix("Repository")).AsSingle();
+            Container.Bind<Settings>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CardInfoRepository>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CampaignRepository>().AsSingle();
+            Container.BindInterfacesAndSelfTo<InvestigatorInfoRepository>().AsSingle();
+            Container.BindInterfacesAndSelfTo<UnlockCardRepository>().AsSingle();
+            Container.BindInterfacesAndSelfTo<InvestigatorSelectorRepository>().AsSingle();
 
-            Container.BindInterfacesTo<CardInfoRepository>().AsSingle();
-            Container.BindInterfacesTo<CampaignRepository>().AsSingle();
-            Container.BindInterfacesTo<InvestigatorInfoRepository>().AsSingle();
-            Container.BindInterfacesTo<UnlockCardsRepository>().AsSingle();
-            Container.BindInterfacesTo<InvestigatorSelectorRepository>().AsSingle();
+            /*** Event Data ***/
+            Container.Bind<CampaignChangeEventDomain>().AsSingle();
+            Container.Bind<AddCardEventDomain>().AsSingle();
+            Container.Bind<RemoveCardEventDomain>().AsSingle();
+            Container.Bind<InvestigatorSelectorEventDomain>().AsSingle();
+            Container.Bind<StartGameEventDomain>().AsSingle();
+            Container.Bind<UnlockCardEventDomain>().AsSingle();
+            Container.Bind<VisibilityChangeEventDomain>().AsSingle();
+
+            /*** Interactors ***/
+            Container.Bind<CurrentInvestigatorInteractor>().AsSingle();
+            Container.Bind<PlayGameInteractor>().AsSingle();
+            Container.Bind<ContinueGameInteractor>().AsSingle();
+            Container.Bind<CardSelectorInteractor>().AsSingle();
+            Container.Bind<InvestigatorSelectorInteractor>().AsSingle();
 
             /*** Resources ***/
             Container.Bind<CampaignState>().FromScriptableObjectResource(gamefiles.CAMPAIGNS_STATES).AsSingle();
@@ -36,7 +48,7 @@ namespace Arkham.Config
 
             /*** Adapters ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-          .InNamespace("Arkham.Services").WithSuffix("Adapter")).AsSingle();
+          .InNamespace("Arkham").WithSuffix("Adapter")).AsSingle();
 
             /*** Controllers ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
@@ -49,14 +61,6 @@ namespace Arkham.Config
             /*** Presenters ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
             .InNamespace("Arkham").WithSuffix("Presenter")).AsSingle();
-
-            /*** Interactors ***/
-            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham.Interactors").WithSuffix("Interactor")).AsSingle();
-
-            /*** Event Data ***/
-            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham.EventData").WithSuffix("EventData")).AsSingle();
 
             /*** Use Cases ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()

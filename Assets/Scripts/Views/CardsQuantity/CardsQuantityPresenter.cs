@@ -1,27 +1,25 @@
-﻿using Zenject;
-using Arkham.Interactors;
-using Arkham.EventData;
-using Arkham.Repositories;
+﻿using Arkham.Model;
+using Zenject;
 
 namespace Arkham.Views
 {
     public class CardsQuantityPresenter : IInitializable
     {
-        [Inject] private readonly ICardAddedEvent addCardEvent;
-        [Inject] private readonly ICardRemovedEvent removeCardEvent;
-        [Inject] private readonly IInvestigatorSelectedEvent selectInvestigatorEvent;
-        [Inject] private readonly IInvestigatorSelectedInfo currentInvestigator;
+        [Inject] private readonly AddCardEventDomain addCardEvent;
+        [Inject] private readonly RemoveCardEventDomain removeCardEvent;
+        [Inject] private readonly InvestigatorSelectorEventDomain selectInvestigatorEvent;
+        [Inject] private readonly CurrentInvestigatorInteractor currentInvestigator;
         [Inject] private readonly CardsQuantityView cardsQuantityView;
 
-        private string AmountCards => currentInvestigator.Info.AmountCardsSelected.ToString();
-        private string DeckSize => currentInvestigator.Info.DeckSize.ToString();
+        private string AmountCards => currentInvestigator.Info?.AmountCardsSelected.ToString();
+        private string DeckSize => currentInvestigator.Info?.DeckSize.ToString();
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            addCardEvent.AddAction((_) => UpdateData());
-            removeCardEvent.AddAction((_) => UpdateData());
-            selectInvestigatorEvent.Subscribe((_) => UpdateData());
+            addCardEvent.DeckCardAdded += (_) => UpdateData();
+            removeCardEvent.DeckCardRemoved += (_) => UpdateData();
+            selectInvestigatorEvent.Select((_) => UpdateData());
         }
 
         /*******************************************************************/

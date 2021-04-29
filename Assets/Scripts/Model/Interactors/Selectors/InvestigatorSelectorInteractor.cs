@@ -1,22 +1,21 @@
-﻿using Arkham.Repositories;
-using Zenject;
+﻿using Zenject;
 
-namespace Arkham.Interactors
+namespace Arkham.Model
 {
-    public class InvestigatorSelectorInteractor : IInvestigatorSelectorInteractor
+    public class InvestigatorSelectorInteractor
     {
-        [Inject] private readonly IInvestigatorSelectorInfo investigatorSelectorInfo;
-        [Inject] private readonly ICardInfo cardInfo;
-        [Inject] private readonly IInvestigatorInfo investigatorRepository;
         [Inject] private readonly Settings settings;
-        [Inject] private readonly IUnlockCardsInfo unlockCards;
+        [Inject] private readonly InvestigatorSelectorRepository investigatorSelectorInfo;
+        [Inject] private readonly CardInfoRepository cardInfo;
+        [Inject] private readonly InvestigatorInfoRepository investigatorInfo;
+        [Inject] private readonly UnlockCardRepository unlockCardInfo;
 
         /*******************************************************************/
         public bool CanThisCardBeSelected(string investigatorId)
         {
             if (investigatorSelectorInfo.IsSelectionFull) return false;
-            if (investigatorRepository.Get(investigatorId).IsEliminated) return false;
-            if (!unlockCards.IsThisCardUnlocked(investigatorId)) return false;
+            if (investigatorInfo.Get(investigatorId).IsEliminated) return false;
+            if (!unlockCardInfo.IsThisCardUnlocked(investigatorId)) return false;
             if (IsThisInvestigatorWasted(investigatorId)) return false;
             return true;
         }
@@ -25,7 +24,7 @@ namespace Arkham.Interactors
         {
             if (!cardInfo.ThisCardContainThisText(investigatorId, settings.TextToSearch)) return false;
             if (settings.AreCardsVisible) return true;
-            if (unlockCards.IsThisCardUnlocked(investigatorId)) return true;
+            if (unlockCardInfo.IsThisCardUnlocked(investigatorId)) return true;
             return false;
         }
 

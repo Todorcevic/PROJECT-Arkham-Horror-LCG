@@ -1,6 +1,4 @@
-﻿using System.Runtime.Remoting;
-
-namespace Arkham.Services
+﻿namespace Arkham.Services
 {
     public interface IInstantiatorAdapter
     {

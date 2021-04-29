@@ -1,27 +1,24 @@
-﻿using Arkham.EventData;
-using Arkham.Interactors;
-using Arkham.Repositories;
+﻿using Arkham.Model;
 using Zenject;
 
 namespace Arkham.Views
 {
     public class InvestigatorCardVisibilityPresenter : IInitializable
     {
-        [Inject] private readonly IStartGameEvent startGameEvent;
-        [Inject] private readonly IInvestigatorAddedEvent InvestigatorAddedEvent;
-        [Inject] private readonly IInvestigatorRemovedEvent removeInvestigatorEvent;
-        [Inject] private readonly IVisibilityEvent visibilityEvent;
+        [Inject] private readonly StartGameEventDomain gameStartedEvent;
+        [Inject] private readonly InvestigatorSelectorEventDomain InvestigatorSelectorEvent;
+        [Inject] private readonly VisibilityChangeEventDomain visibilityChangedEvent;
         [Inject] private readonly ICardsManager cardsManager;
-        [Inject] private readonly IInvestigatorSelectorInteractor investigatorSelectorInteractor;
+        [Inject] private readonly InvestigatorSelectorInteractor investigatorSelectorInteractor;
 
         /*******************************************************************/
         public void Initialize()
         {
-            startGameEvent.AddAction(RefreshAllInvestigatorsVisibility);
-            InvestigatorAddedEvent.Subscribe((_) => RefreshAllInvestigatorsVisibility());
-            removeInvestigatorEvent.Subscribe((_) => RefreshAllInvestigatorsVisibility());
-            visibilityEvent.AddVisibilityAction((_) => RefreshAllInvestigatorsVisibility());
-            visibilityEvent.AddTextChangeAction(RefreshAllInvestigatorsVisibility);
+            gameStartedEvent.GameStarted += (_) => RefreshAllInvestigatorsVisibility();
+            InvestigatorSelectorEvent.Add((_) => RefreshAllInvestigatorsVisibility());
+            InvestigatorSelectorEvent.Remove((_) => RefreshAllInvestigatorsVisibility());
+            visibilityChangedEvent.VisibilityChanged += (_) => RefreshAllInvestigatorsVisibility();
+            visibilityChangedEvent.TextToSearchChanged += RefreshAllInvestigatorsVisibility;
         }
 
         /*******************************************************************/

@@ -1,13 +1,12 @@
-﻿using Arkham.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace Arkham.Repositories
+namespace Arkham.Model
 {
     [DataContract]
-    public class InvestigatorInfoRepository : IInvestigatorInfoLoader, IInvestigatorInfo
+    public class InvestigatorInfoRepository
     {
         [DataMember] public List<InvestigatorInfo> InvestigatorsList { get; set; }
 

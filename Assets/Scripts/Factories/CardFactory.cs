@@ -1,4 +1,4 @@
-﻿using Arkham.Repositories;
+﻿using Arkham.Model;
 using Arkham.Services;
 using Arkham.Views;
 using Sirenix.OdinInspector;
@@ -13,7 +13,7 @@ namespace Arkham.Factories
     {
         [Inject] private readonly DiContainer diContainer;
         [Inject] private readonly IImageCardsManager imageCards;
-        [Inject] private readonly ICardInfo infoRepository;
+        [Inject] private readonly CardInfoRepository cardInfo;
         [Inject] private readonly IDeckCardController cardController;
         [Inject] private readonly IInvestigatorCardController investigatorController;
         [Inject] private readonly ICardsManager cardsManager;
@@ -23,14 +23,14 @@ namespace Arkham.Factories
         [SerializeField, Required, SceneObjectsOnly] private Transform cardZone;
         [SerializeField, Required, SceneObjectsOnly] private Transform investigatorZone;
 
-        private IEnumerable<string> DeckCards => infoRepository.FindAll(c => (c.Type_code == "asset"
+        private IEnumerable<string> DeckCards => cardInfo.FindAll(c => (c.Type_code == "asset"
                || c.Type_code == "event"
                || c.Type_code == "skill")
                && (c.Subtype_code != "basicweakness"
                && c.Subtype_code != "weakness")
                && imageCards.ExistThisSprite(c.Code)).OrderBy(c => c.Faction_code).ThenBy(c => c.Code).Select(c => c.Code);
 
-        private IEnumerable<string> InvestigatorCards => infoRepository
+        private IEnumerable<string> InvestigatorCards => cardInfo
                 .FindAll(c => c.Type_code == "investigator" && imageCards.ExistThisSprite(c.Code))
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Code).Select(c => c.Code);
 

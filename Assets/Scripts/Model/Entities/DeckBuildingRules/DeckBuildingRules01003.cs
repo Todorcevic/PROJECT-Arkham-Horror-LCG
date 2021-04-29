@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Arkham.Entities
+namespace Arkham.Model
 {
     public class DeckBuildingRules01003 : DeckBuildingRules
     {

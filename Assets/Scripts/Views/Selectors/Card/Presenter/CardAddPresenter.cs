@@ -1,6 +1,4 @@
-﻿using Arkham.EventData;
-using Arkham.Interactors;
-using Arkham.Repositories;
+﻿using Arkham.Model;
 using Arkham.Services;
 using UnityEngine;
 using Zenject;
@@ -10,14 +8,14 @@ namespace Arkham.Views
     public class CardAddPresenter : IInitializable, ICardAddPresenter
     {
         [Inject(Id = "CardPlaceHolderZone")] public RectTransform placeHolderZone;
-        [Inject] private readonly ICardAddedEvent addCardEvent;
+        [Inject] private readonly AddCardEventDomain addCardEvent;
         [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
         [Inject] private readonly IImageCardsManager imageCards;
-        [Inject] private readonly ICardInfo cardInfo;
-        [Inject] private readonly IInvestigatorSelectedInfo currentInvestigator;
+        [Inject] private readonly CardInfoRepository cardInfo;
+        [Inject] private readonly CurrentInvestigatorInteractor currentInvestigator;
 
         /*******************************************************************/
-        public void Initialize() => addCardEvent.AddAction(SetCardInSelector);
+        public void Initialize() => addCardEvent.DeckCardAdded += SetCardInSelector;
 
         /*******************************************************************/
         public void SetCardInSelector(string cardId)

@@ -1,5 +1,4 @@
-﻿using Arkham.EventData;
-using Arkham.Interactors;
+﻿using Arkham.Model;
 using Arkham.Services;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -11,8 +10,8 @@ namespace Arkham.Views
     {
         private Task moveAnimation;
         private CardShowerDTO currentShowableCard;
-        [Inject] private readonly ICardAddedEvent addCardEvent;
-        [Inject] private readonly ICardRemovedEvent cardRemovedEvent;
+        [Inject] private readonly AddCardEventDomain addCardEvent;
+        [Inject] private readonly RemoveCardEventDomain cardRemovedEvent;
         [Inject] private readonly IImageCardsManager imageCards;
         [Inject] private readonly ICardShower cardShower;
         [Inject(Id = "CardSelectorZone")] private readonly RectTransform cardSelectorZone;
@@ -21,8 +20,8 @@ namespace Arkham.Views
         /*******************************************************************/
         public void Initialize()
         {
-            addCardEvent.AddAction(AddCardAnimation);
-            cardRemovedEvent.AddAction(RemoveCardAnimation);
+            addCardEvent.DeckCardAdded += AddCardAnimation;
+            cardRemovedEvent.DeckCardRemoved += RemoveCardAnimation;
         }
 
         public void Hide()

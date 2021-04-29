@@ -1,4 +1,4 @@
-﻿using Arkham.Repositories;
+﻿using Arkham.Model;
 using Zenject;
 
 namespace Arkham.Views
@@ -7,12 +7,13 @@ namespace Arkham.Views
     {
         [Inject(Id = "MainPanelsManager")] private readonly IPanelsManager panelsManager;
         [Inject(Id = "ChooseCardPanel")] private readonly PanelView panelToShow;
-        [Inject] private readonly ICampaignRepository campaignRepository;
-
+        [Inject] private readonly CampaignRepository campaignRepository;
+        [Inject] private readonly CampaignChangeEventDomain currentScenario;
         /*******************************************************************/
         public void Clicked(string campaignId)
         {
-            campaignRepository.SelectFirstScenarioOf(campaignId);
+            string scenario = campaignRepository.Get(campaignId).FirstScenario;
+            currentScenario.Select(scenario);
             panelsManager.SelectPanel(panelToShow);
         }
     }

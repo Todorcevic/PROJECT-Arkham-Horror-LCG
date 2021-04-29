@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace Arkham.Entities
+namespace Arkham.Model
 {
     [DataContract]
     public class InvestigatorInfo

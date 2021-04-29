@@ -1,21 +1,19 @@
-﻿using Arkham.EventData;
-using Arkham.Interactors;
-using Arkham.Repositories;
+﻿using Arkham.Model;
 using Zenject;
 
 namespace Arkham.Views
 {
     public class InvestigatorInitPresenter : IInitializable
     {
-        [Inject] private readonly IStartGameEvent startGameEvent;
+        [Inject] private readonly StartGameEventDomain startGameEvent;
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
-        [Inject] private readonly IInvestigatorSelectorInfo investigatorSelectorInfo;
-        [Inject] private readonly IInvestigatorSelectorRepository investigatorSelectorRepository;
+        [Inject] private readonly InvestigatorSelectorEventDomain investigatorSelector;
+        [Inject] private readonly InvestigatorSelectorRepository investigatorSelectorInfo;
         [Inject] private readonly IAddInvestigatorPresenter selectorAdd;
         [Inject] private readonly IInvestigatorLeadPresenter selectorLead;
 
         /*******************************************************************/
-        public void Initialize() => startGameEvent.AddAction(InitializeSelectors);
+        public void Initialize() => startGameEvent.GameStarted += (_) => InitializeSelectors();
 
         /*******************************************************************/
         private void InitializeSelectors()
@@ -34,7 +32,7 @@ namespace Arkham.Views
         private void SelectLeadInvestigator()
         {
             selectorLead.SetLeadSelector();
-            investigatorSelectorRepository.SelectCurrentOrLead();
+            investigatorSelector.SelectCurrentOrLead();
         }
     }
 }

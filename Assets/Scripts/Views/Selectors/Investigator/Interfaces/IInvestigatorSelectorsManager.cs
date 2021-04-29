@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-namespace Arkham.Views
+﻿namespace Arkham.Views
 {
     public interface IInvestigatorSelectorsManager
     {

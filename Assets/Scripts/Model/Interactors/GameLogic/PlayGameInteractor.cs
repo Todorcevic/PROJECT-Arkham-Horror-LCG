@@ -1,20 +1,18 @@
-﻿using Arkham.Entities;
-using Arkham.Repositories;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Zenject;
 
-namespace Arkham.Interactors
+namespace Arkham.Model
 {
-    public class PlayGameInteractor : IPlayGameInteractor
+    public class PlayGameInteractor
     {
-        [Inject] private readonly IInvestigatorInfo investigatorRepository;
-        [Inject] private readonly IInvestigatorSelectorInfo investigatorSelectorRepository;
+        [Inject] private readonly InvestigatorInfoRepository investigatorInfo;
+        [Inject] private readonly InvestigatorSelectorRepository investigatorSelectorInfo;
         //[Inject] private readonly ICampaignRepository campaignRepository;
 
         private List<InvestigatorInfo> InvestigatorsWithCards =>
-                investigatorRepository.FindAll(investigator => investigator.Deck.Count > 0 && !investigator.IsPlaying);
-        public bool GameIsReadyToPlay => investigatorRepository.Exists(investigator => investigator.SelectionIsFull
-                && investigatorSelectorRepository.Contains(investigator.Id));
+                investigatorInfo.FindAll(investigator => investigator.Deck.Count > 0 && !investigator.IsPlaying);
+        public bool GameIsReadyToPlay => investigatorInfo.Exists(investigator => investigator.SelectionIsFull
+                && investigatorSelectorInfo.Contains(investigator.Id));
 
         /*******************************************************************/
         public void Ready()

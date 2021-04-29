@@ -1,11 +1,10 @@
-using UnityEngine;
-using TMPro;
-using Sirenix.OdinInspector;
-using UnityEngine.EventSystems;
-using Zenject;
-using UnityEngine.UI;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Arkham.Views
 {

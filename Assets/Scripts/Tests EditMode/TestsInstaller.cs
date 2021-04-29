@@ -1,7 +1,5 @@
 ﻿using Arkham.Config;
-using Arkham.Factories;
-using Arkham.Interactors;
-using Arkham.Repositories;
+using Arkham.Model;
 using Arkham.Scenarios;
 using Arkham.Services;
 using Zenject;
@@ -22,7 +20,7 @@ namespace Tests
             Container.Bind<IFileAdapter>().To<FileAdapter>().AsSingle();
             Container.Bind<IInstantiatorAdapter>().To<NameConventionInstantiator>().AsSingle();
             Container.Bind<IScenarioLoader>().To<ScenarioLoader>().AsSingle();
-            Container.Bind<IDataPersistence>().To<DataPersistence>().AsSingle();
+            Container.Bind<IDataContext>().To<DataPersistence>().AsSingle();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Arkham.EventData;
+﻿using Arkham.Model;
 using Arkham.Services;
 using Zenject;
 
@@ -7,7 +7,7 @@ namespace Arkham.Views
     public class VisibilitySwitchPresenter : IInitializable
     {
         [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitch;
-        [Inject] private readonly IVisibilityEvent visibilityEvent;
+        [Inject] private readonly VisibilityChangeEventDomain visibilityEvent;
         [Inject] private readonly IPlayerPrefsAdapter playerPrefs;
 
         private bool IsOnVisibility => playerPrefs.LoadCardsVisibility();
@@ -15,7 +15,7 @@ namespace Arkham.Views
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            visibilityEvent.AddVisibilityAction(SaveState);
+            visibilityEvent.VisibilityChanged += SaveState;
             visibilitySwitch.SwitchAnimation(IsOnVisibility);
         }
 

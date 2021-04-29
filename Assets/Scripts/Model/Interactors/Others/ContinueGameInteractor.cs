@@ -2,9 +2,9 @@
 using Arkham.Services;
 using Zenject;
 
-namespace Arkham.Interactors
+namespace Arkham.Model
 {
-    public class ContinueGameInteractor : IContinueGame
+    public class ContinueGameInteractor
     {
         [Inject] private readonly GameFiles gameFiles;
         [Inject] private readonly IFileAdapter fileAdapter;

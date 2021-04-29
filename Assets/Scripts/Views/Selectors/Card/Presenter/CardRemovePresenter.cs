@@ -1,5 +1,4 @@
-﻿using Arkham.EventData;
-using Arkham.Interactors;
+﻿using Arkham.Model;
 using UnityEngine;
 using Zenject;
 
@@ -8,12 +7,12 @@ namespace Arkham.Views
     public class CardRemovePresenter : IInitializable
     {
         [Inject(Id = "CardSelectorZone")] public RectTransform selectorsZone;
-        [Inject] private readonly ICardRemovedEvent removeCardEvent;
+        [Inject] private readonly RemoveCardEventDomain removeCardEvent;
         [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
-        [Inject] private readonly IInvestigatorSelectedInfo currentInvestigator;
+        [Inject] private readonly CurrentInvestigatorInteractor currentInvestigator;
 
         /*******************************************************************/
-        public void Initialize() => removeCardEvent.AddAction(RemoveCardInSelector);
+        public void Initialize() => removeCardEvent.DeckCardRemoved += RemoveCardInSelector;
 
         /*******************************************************************/
         private void RemoveCardInSelector(string cardId)

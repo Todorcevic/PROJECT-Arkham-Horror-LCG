@@ -1,29 +1,27 @@
-﻿using Arkham.EventData;
-using Arkham.Interactors;
-using Arkham.Repositories;
+﻿using Arkham.Model;
 using Zenject;
 
 namespace Arkham.Views
 {
     public class InvestigatorCardStatePresenter : IInitializable
     {
-        [Inject] private readonly IStartGameEvent startGameEvent;
+        [Inject] private readonly StartGameEventDomain startGameEvent;
         [Inject] private readonly ICardsManager cardsManager;
-        [Inject] private readonly IInvestigatorInfo investigatorRepository;
+        [Inject] private readonly InvestigatorInfoRepository investigatorInfo;
 
         /*******************************************************************/
-        public void Initialize() => startGameEvent.AddAction(InvestigatorStateResolve);
+        public void Initialize() => startGameEvent.GameStarted += (_) => InvestigatorStateResolve();
 
         /*******************************************************************/
         private void InvestigatorStateResolve()
         {
             foreach (InvestigatorCardView cardInvestigator in cardsManager.InvestigatorList)
             {
-                if (investigatorRepository.Get(cardInvestigator.Id).ISKilled)
+                if (investigatorInfo.Get(cardInvestigator.Id).ISKilled)
                     cardInvestigator.ChangeToKilledState();
-                else if (investigatorRepository.Get(cardInvestigator.Id).ISInsane)
+                else if (investigatorInfo.Get(cardInvestigator.Id).ISInsane)
                     cardInvestigator.ChangeToInsaneState();
-                else if (investigatorRepository.Get(cardInvestigator.Id).IsRetired)
+                else if (investigatorInfo.Get(cardInvestigator.Id).IsRetired)
                     cardInvestigator.ChangeToRetiredState();
             }
         }

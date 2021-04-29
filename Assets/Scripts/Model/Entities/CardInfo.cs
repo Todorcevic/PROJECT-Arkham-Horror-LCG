@@ -1,4 +1,4 @@
-﻿namespace Arkham.Entities
+﻿namespace Arkham.Model
 {
     public class CardInfo
     {

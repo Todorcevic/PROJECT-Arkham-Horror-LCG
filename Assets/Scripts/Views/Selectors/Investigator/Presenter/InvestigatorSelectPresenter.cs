@@ -1,4 +1,4 @@
-﻿using Arkham.Repositories;
+﻿using Arkham.Model;
 using Zenject;
 
 namespace Arkham.Views
@@ -6,11 +6,11 @@ namespace Arkham.Views
     public class InvestigatorSelectPresenter : IInitializable
     {
         private string investigatorSelected;
-        [Inject] private readonly IInvestigatorSelectedEvent selectInvestigatorEvent;
+        [Inject] private readonly InvestigatorSelectorEventDomain selectInvestigatorEvent;
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
 
         /*******************************************************************/
-        public void Initialize() => selectInvestigatorEvent.Subscribe(SelectInvestigator);
+        public void Initialize() => selectInvestigatorEvent.Select(SelectInvestigator);
 
         /*******************************************************************/
         private void SelectInvestigator(string activeInvestigatorId)

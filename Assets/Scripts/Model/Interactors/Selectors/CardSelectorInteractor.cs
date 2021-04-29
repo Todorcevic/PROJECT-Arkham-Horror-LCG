@@ -1,23 +1,22 @@
 ﻿using Arkham.Config;
-using Arkham.Repositories;
 using Zenject;
 
-namespace Arkham.Interactors
+namespace Arkham.Model
 {
-    public class CardSelectorInteractor : ICardSelectorInteractors
+    public class CardSelectorInteractor
     {
-        [Inject] private readonly IInvestigatorInfo investigatorRepository;
-        [Inject] private readonly ICardInfo cardInfo;
-        [Inject] private readonly IInvestigatorSelectedInfo currentInvestigator;
+        [Inject] private readonly InvestigatorInfoRepository investigatorInfo;
+        [Inject] private readonly CardInfoRepository cardInfo;
+        [Inject] private readonly CurrentInvestigatorInteractor currentInvestigator;
         [Inject] private readonly Settings settings;
-        [Inject] private readonly IUnlockCardsInfo unlockCards;
+        [Inject] private readonly UnlockCardRepository unlockCardInfo;
 
         /*******************************************************************/
         public bool CanThisCardBeSelected(string cardId)
         {
-            if (currentInvestigator.Info.Id == null) return false;
+            if (currentInvestigator?.Info?.Id == null) return false;
             if (currentInvestigator.Info.SelectionIsFull) return false;
-            if (!unlockCards.IsThisCardUnlocked(cardId)) return false;
+            if (!unlockCardInfo.IsThisCardUnlocked(cardId)) return false;
             if (!IsThisCardAllowed(cardId)) return false;
             if (IsThisCardWasted(cardId)) return false;
             if (IsThisCardInMax(cardId)) return false;
@@ -28,20 +27,20 @@ namespace Arkham.Interactors
         {
             if (!cardInfo.ThisCardContainThisText(cardId, settings.TextToSearch)) return false;
             if (settings.AreCardsVisible) return true;
-            if (IsThisCardAllowed(cardId) && unlockCards.IsThisCardUnlocked(cardId)) return true;
+            if (IsThisCardAllowed(cardId) && unlockCardInfo.IsThisCardUnlocked(cardId)) return true;
             return false;
         }
 
         private bool IsThisCardAllowed(string cardId)
         {
-            if (currentInvestigator.Info.Id == null) return false;
+            if (currentInvestigator.Info?.Id == null) return false;
             if (!currentInvestigator.Info.DeckBuilding.AllowedCards().Contains(cardId)) return false;
-            if (currentInvestigator.Info.Xp < cardInfo.Get(cardId).Xp) return false;
+            if (currentInvestigator.Info?.Xp < cardInfo.Get(cardId).Xp) return false;
             return true;
         }
 
         private bool IsThisCardWasted(string cardId) =>
-            cardInfo.Get(cardId).Quantity - investigatorRepository.AmountSelectedOfThisCard(cardId) <= 0;
+            cardInfo.Get(cardId).Quantity - investigatorInfo.AmountSelectedOfThisCard(cardId) <= 0;
 
         private bool IsThisCardInMax(string cardId) =>
             currentInvestigator.Info.GetAmountOfThisCardInDeck(cardId) >= GameConfig.MAX_SIMILARS_CARDS_IN_DECK;

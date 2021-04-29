@@ -1,11 +1,11 @@
-﻿using Arkham.Interactors;
+﻿using Arkham.Model;
 using Zenject;
 
 namespace Arkham.Views
 {
     public class CardSelectorController : ICardSelectorController
     {
-        [Inject] private readonly IInvestigatorSelected investigatorSelected;
+        [Inject] private readonly RemoveCardEventDomain investigatorSelected;
         [Inject] private readonly ICardSelectorsManager manager;
 
         /*******************************************************************/

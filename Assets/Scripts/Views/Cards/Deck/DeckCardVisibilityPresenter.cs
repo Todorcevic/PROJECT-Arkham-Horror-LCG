@@ -1,27 +1,25 @@
-﻿using Arkham.Interactors;
-using Arkham.EventData;
+﻿using Arkham.Model;
 using Zenject;
-using Arkham.Repositories;
 
 namespace Arkham.Views
 {
     public class DeckCardVisibilityPresenter : IInitializable
     {
-        [Inject] private readonly ICardRemovedEvent removeCardEvent;
-        [Inject] private readonly ICardAddedEvent addCardEvent;
-        [Inject] private readonly ICardSelectorInteractors cardSelectorInteractor;
+        [Inject] private readonly CardSelectorInteractor cardSelectorInteractor;
         [Inject] private readonly ICardsManager cardsManager;
-        [Inject] private readonly IInvestigatorSelectedEvent selectInvestigatorEvent;
-        [Inject] private readonly IVisibilityEvent visibilityEvent;
+        [Inject] private readonly RemoveCardEventDomain cardRemovedEvent;
+        [Inject] private readonly AddCardEventDomain addCardEvent;
+        [Inject] private readonly InvestigatorSelectorEventDomain selectInvestigatorEvent;
+        [Inject] private readonly VisibilityChangeEventDomain visibilityEvent;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            selectInvestigatorEvent.Subscribe((_) => RefreshAllCardsVisibility());
-            addCardEvent.AddAction((_) => RefreshAllCardsVisibility());
-            removeCardEvent.AddAction((_) => RefreshAllCardsVisibility());
-            visibilityEvent.AddVisibilityAction((_) => RefreshAllCardsVisibility());
-            visibilityEvent.AddTextChangeAction(RefreshAllCardsVisibility);
+            selectInvestigatorEvent.Select((_) => RefreshAllCardsVisibility());
+            addCardEvent.DeckCardAdded += (_) => RefreshAllCardsVisibility();
+            cardRemovedEvent.DeckCardRemoved += (_) => RefreshAllCardsVisibility();
+            visibilityEvent.VisibilityChanged += (_) => RefreshAllCardsVisibility();
+            visibilityEvent.TextToSearchChanged += RefreshAllCardsVisibility;
         }
 
         /*******************************************************************/

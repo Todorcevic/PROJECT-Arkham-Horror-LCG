@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using Arkham.Repositories;
 using Zenject;
 
-namespace Arkham.Entities
+namespace Arkham.Model
 {
     public class DeckBuildingRules
     {
         private List<string> allowedCards;
-        [Inject] private readonly ICardInfo infoRepository;
+        [Inject] private readonly CardInfoRepository cardInfoRepository;
 
         public virtual int DeckSize => 30;
         protected virtual List<string> DeckBuildingFactionConditions => new List<string>();
@@ -22,7 +21,7 @@ namespace Arkham.Entities
             int i = 0;
             foreach (string faction in DeckBuildingFactionConditions)
             {
-                deckBuildingResult.AddRange(infoRepository.FindAll(c => c.Faction_code == faction && c.Xp <= DeckBuildingXpConditions[i])
+                deckBuildingResult.AddRange(cardInfoRepository.FindAll(c => c.Faction_code == faction && c.Xp <= DeckBuildingXpConditions[i])
                     .ConvertAll(c => c.Code));
                 i++;
             }
