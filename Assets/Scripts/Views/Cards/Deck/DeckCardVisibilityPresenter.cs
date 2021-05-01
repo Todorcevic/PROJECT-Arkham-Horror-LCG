@@ -5,21 +5,22 @@ namespace Arkham.Views
 {
     public class DeckCardVisibilityPresenter : IInitializable
     {
-        [Inject] private readonly CardSelectorInteractor cardSelectorInteractor;
+        [Inject] private readonly CardState cardSelectorInteractor;
         [Inject] private readonly ICardsManager cardsManager;
         [Inject] private readonly RemoveCardEventDomain cardRemovedEvent;
         [Inject] private readonly AddCardEventDomain addCardEvent;
-        [Inject] private readonly InvestigatorSelectorEventDomain selectInvestigatorEvent;
-        [Inject] private readonly VisibilityChangeEventDomain visibilityEvent;
+        [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
+        [Inject] private readonly VisibilityEventDomain visibilityEvent;
+        [Inject] private readonly SearchTextEventDomain searchTextEvent;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            selectInvestigatorEvent.Select((_) => RefreshAllCardsVisibility());
-            addCardEvent.DeckCardAdded += (_) => RefreshAllCardsVisibility();
-            cardRemovedEvent.DeckCardRemoved += (_) => RefreshAllCardsVisibility();
-            visibilityEvent.VisibilityChanged += (_) => RefreshAllCardsVisibility();
-            visibilityEvent.TextToSearchChanged += RefreshAllCardsVisibility;
+            investigatorSelectEvent.Subscribe((_) => RefreshAllCardsVisibility());
+            addCardEvent.Subscribe((_) => RefreshAllCardsVisibility());
+            cardRemovedEvent.Subscribe((_) => RefreshAllCardsVisibility());
+            visibilityEvent.Subscribe((_) => RefreshAllCardsVisibility());
+            searchTextEvent.Subscribe(RefreshAllCardsVisibility);
         }
 
         /*******************************************************************/

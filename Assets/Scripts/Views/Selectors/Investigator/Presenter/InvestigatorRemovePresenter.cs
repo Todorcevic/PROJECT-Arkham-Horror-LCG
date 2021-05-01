@@ -6,12 +6,12 @@ namespace Arkham.Views
 {
     public class InvestigatorRemovePresenter : IInitializable
     {
-        [Inject] private readonly InvestigatorSelectorEventDomain investigatorRemovedEvent;
+        [Inject] private readonly RemoveInvestigatorEventDomain investigatorRemovedEvent;
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly IInvestigatorLeadPresenter selectorLead;
 
         /*******************************************************************/
-        public void Initialize() => investigatorRemovedEvent.Remove(RemoveInvestigator);
+        public void Initialize() => investigatorRemovedEvent.Subscribe(RemoveInvestigator);
 
         /*******************************************************************/
         private async void RemoveInvestigator(string investigatorId)

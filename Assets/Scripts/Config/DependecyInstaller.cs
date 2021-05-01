@@ -1,5 +1,4 @@
 ﻿using Arkham.Model;
-using Arkham.Scenarios;
 using Arkham.Services;
 using Arkham.Views;
 using Zenject;
@@ -12,39 +11,41 @@ namespace Arkham.Config
 
         public override void InstallBindings()
         {
-            /*** Reositories ***/
+            /*** Repositories***/
+            Container.Bind<CardRepository>().AsSingle();
             Container.Bind<Settings>().AsSingle();
-            Container.BindInterfacesAndSelfTo<CardInfoRepository>().AsSingle();
-            Container.BindInterfacesAndSelfTo<CampaignRepository>().AsSingle();
-            Container.BindInterfacesAndSelfTo<InvestigatorInfoRepository>().AsSingle();
-            Container.BindInterfacesAndSelfTo<UnlockCardRepository>().AsSingle();
-            Container.BindInterfacesAndSelfTo<InvestigatorSelectorRepository>().AsSingle();
+            Container.Bind<CampaignRepository>().AsSingle();
+            Container.Bind<InvestigatorRepository>().AsSingle();
+            Container.Bind<Selector>().AsSingle();
+            Container.Bind<UnlockCardsRepository>().AsSingle();
 
             /*** Event Data ***/
-            Container.Bind<CampaignChangeEventDomain>().AsSingle();
+            Container.Bind<CampaignEventDomain>().AsSingle();
+            Container.Bind<ScenarioEventDomain>().AsSingle();
             Container.Bind<AddCardEventDomain>().AsSingle();
             Container.Bind<RemoveCardEventDomain>().AsSingle();
-            Container.Bind<InvestigatorSelectorEventDomain>().AsSingle();
+            Container.Bind<SelectInvestigatorEventDomain>().AsSingle();
+            Container.Bind<ChangeInvestigatorEventDomain>().AsSingle();
+            Container.Bind<AddInvestigatorEventDomain>().AsSingle();
+            Container.Bind<RemoveInvestigatorEventDomain>().AsSingle();
             Container.Bind<StartGameEventDomain>().AsSingle();
             Container.Bind<UnlockCardEventDomain>().AsSingle();
-            Container.Bind<VisibilityChangeEventDomain>().AsSingle();
+            Container.Bind<VisibilityEventDomain>().AsSingle();
+            Container.Bind<SearchTextEventDomain>().AsSingle();
 
             /*** Interactors ***/
-            Container.Bind<CurrentInvestigatorInteractor>().AsSingle();
-            Container.Bind<PlayGameInteractor>().AsSingle();
-            Container.Bind<ContinueGameInteractor>().AsSingle();
-            Container.Bind<CardSelectorInteractor>().AsSingle();
-            Container.Bind<InvestigatorSelectorInteractor>().AsSingle();
+            Container.Bind<CardState>().AsSingle();
+            Container.Bind<InvestigatorState>().AsSingle();
 
             /*** Resources ***/
-            Container.Bind<CampaignState>().FromScriptableObjectResource(gamefiles.CAMPAIGNS_STATES).AsSingle();
+            Container.Bind<CampaignStateSO>().FromScriptableObjectResource(gamefiles.CAMPAIGNS_STATES).AsSingle();
 
             /*** Services ***/
             Container.BindInterfacesTo<ScreenResolutionAutoDetect>().AsSingle();
-            Container.BindInterfacesTo<DataPersistence>().AsSingle();
-            Container.BindInterfacesTo<NameConventionInstantiator>().AsSingle();
+
             Container.BindInterfacesTo<DoubleClickDetector>().AsSingle();
-            Container.BindInterfacesTo<ScenarioLoader>().AsSingle();
+            Container.BindInterfacesTo<DataContext>().AsSingle();
+            Container.BindInterfacesTo<DataMapper>().AsSingle();
 
             /*** Adapters ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
@@ -62,9 +63,9 @@ namespace Arkham.Config
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
             .InNamespace("Arkham").WithSuffix("Presenter")).AsSingle();
 
-            /*** Use Cases ***/
-            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham").WithSuffix("UseCase")).AsSingle();
+            /*** Factories ***/
+            Container.BindInterfacesTo<CampaignStateFactory>().AsSingle();
+            Container.BindInterfacesTo<NameConventionFactory>().AsSingle();
         }
     }
 }

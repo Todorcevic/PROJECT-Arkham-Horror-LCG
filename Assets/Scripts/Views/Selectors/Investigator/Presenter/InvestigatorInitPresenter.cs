@@ -7,13 +7,13 @@ namespace Arkham.Views
     {
         [Inject] private readonly StartGameEventDomain startGameEvent;
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
-        [Inject] private readonly InvestigatorSelectorEventDomain investigatorSelector;
-        [Inject] private readonly InvestigatorSelectorRepository investigatorSelectorInfo;
+        [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
+        [Inject] private readonly Selector selectorRepository;
         [Inject] private readonly IAddInvestigatorPresenter selectorAdd;
         [Inject] private readonly IInvestigatorLeadPresenter selectorLead;
 
         /*******************************************************************/
-        public void Initialize() => startGameEvent.GameStarted += (_) => InitializeSelectors();
+        public void Initialize() => startGameEvent.Subscribe((_) => InitializeSelectors());
 
         /*******************************************************************/
         private void InitializeSelectors()
@@ -25,14 +25,14 @@ namespace Arkham.Views
 
         private void AddAllInvestigators()
         {
-            foreach (string investigatorId in investigatorSelectorInfo.AllInvestigatorsSelected)
+            foreach (string investigatorId in selectorRepository.Ids)
                 selectorAdd.InitInvestigator(investigatorId);
         }
 
         private void SelectLeadInvestigator()
         {
             selectorLead.SetLeadSelector();
-            investigatorSelector.SelectCurrentOrLead();
+            investigatorSelectEvent.SelectCurrentOrLead();
         }
     }
 }

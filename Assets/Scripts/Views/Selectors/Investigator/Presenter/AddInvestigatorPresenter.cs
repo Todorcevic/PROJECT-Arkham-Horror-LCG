@@ -6,7 +6,7 @@ namespace Arkham.Views
 {
     public class AddInvestigatorPresenter : IInitializable, IAddInvestigatorPresenter
     {
-        [Inject] private readonly InvestigatorSelectorEventDomain investigatorAddedEvent;
+        [Inject] private readonly AddInvestigatorEventDomain investigatorAddEvent;
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly ICardsManager investigatorCardsManager;
         [Inject] private readonly IInvestigatorLeadPresenter selectorLead;
@@ -14,7 +14,7 @@ namespace Arkham.Views
         [Inject(Id = "InvestigatorPlaceHolderZone")] private readonly RectTransform placeHoldersZone;
 
         /*******************************************************************/
-        public void Initialize() => investigatorAddedEvent.Add(AddInvestigator);
+        public void Initialize() => investigatorAddEvent.Subscribe(AddInvestigator);
 
         /*******************************************************************/
         public void InitInvestigator(string investigatorId)

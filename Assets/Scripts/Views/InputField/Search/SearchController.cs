@@ -6,11 +6,11 @@ namespace Arkham.Views
     public class SearchController : IInitializable
     {
         [Inject(Id = "InputSearch")] private readonly InputFieldView inputFieldView;
-        [Inject] private readonly VisibilityChangeEventDomain textSearch;
+        [Inject] private readonly SearchTextEventDomain searchTextEvent;
 
         /*******************************************************************/
         void IInitializable.Initialize() => inputFieldView.AddUpdateAction(Updated);
 
-        public void Updated(string textToSearch) => textSearch.Change(textToSearch);
+        public void Updated(string textToSearch) => searchTextEvent.Change(textToSearch);
     }
 }

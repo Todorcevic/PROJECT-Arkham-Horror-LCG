@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Arkham.Config;
+using System;
 
 namespace Arkham.Model
 {
-    public enum StartGame { New, Continue }
-
     public class StartGameEventDomain
     {
-        public event Action<StartGame> GameStarted;
+        private event Action<StartGame> GameStarted;
 
         /*******************************************************************/
         public void Init(StartGame gameType) => GameStarted?.Invoke(gameType);
+
+        public void Subscribe(Action<StartGame> action) => GameStarted += action;
     }
 }

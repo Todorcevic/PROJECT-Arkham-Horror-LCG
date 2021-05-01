@@ -7,7 +7,9 @@ namespace Arkham.Views
 {
     public class InvestigatorSelectorController : IInvestigatorSelectorController
     {
-        [Inject] private readonly InvestigatorSelectorEventDomain investigatorSelector;
+        [Inject] private readonly RemoveInvestigatorEventDomain investigatorSelector;
+        [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
+        [Inject] private readonly ChangeInvestigatorEventDomain investigatorChangeEvent;
         [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorManager;
         [Inject(Id = "MidZone")] private readonly RectTransform removeZone;
 
@@ -15,12 +17,12 @@ namespace Arkham.Views
         public void DoubleClicked(string investigatorId)
         {
             investigatorSelector.Remove(investigatorId);
-            investigatorSelector.SelectLead();
+            investigatorSelectEvent.SelectLead();
         }
 
-        public void Clicked(string investigatorId) => investigatorSelector.SelectCurrentOrLead();
+        public void Clicked(string investigatorId) => investigatorSelectEvent.Select(investigatorId);
 
-        public void Swaping(string investigatorId, int positionToSwap) => investigatorSelector.Swap(positionToSwap, investigatorId);
+        public void Swaping(string investigatorId, int positionToSwap) => investigatorChangeEvent.Swap(positionToSwap, investigatorId);
 
         public void EndingDrag(string investigatorId, PointerEventData eventData)
         {

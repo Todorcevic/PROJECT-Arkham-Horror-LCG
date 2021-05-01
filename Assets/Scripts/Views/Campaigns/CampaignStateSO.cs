@@ -1,0 +1,22 @@
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
+
+namespace Arkham.Views
+{
+    [CreateAssetMenu(fileName = "BasicCampaignState", menuName = "BasicCampaignState", order = 1)]
+    public class CampaignStateSO : ScriptableObject
+    {
+        [SerializeField] private Sprite icon;
+        [SerializeField, Required] private bool isOpen;
+
+        public string Id => name;
+        public bool IsOpen => isOpen;
+
+        /*******************************************************************/
+        public void ExecuteState(CampaignView campaignView)
+        {
+            campaignView.ChangeIconState(icon);
+            campaignView.IsOpen = isOpen;
+        }
+    }
+}

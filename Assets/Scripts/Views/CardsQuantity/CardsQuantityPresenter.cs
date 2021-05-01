@@ -7,19 +7,19 @@ namespace Arkham.Views
     {
         [Inject] private readonly AddCardEventDomain addCardEvent;
         [Inject] private readonly RemoveCardEventDomain removeCardEvent;
-        [Inject] private readonly InvestigatorSelectorEventDomain selectInvestigatorEvent;
-        [Inject] private readonly CurrentInvestigatorInteractor currentInvestigator;
+        [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
+        [Inject] private readonly Selector selector;
         [Inject] private readonly CardsQuantityView cardsQuantityView;
 
-        private string AmountCards => currentInvestigator.Info?.AmountCardsSelected.ToString();
-        private string DeckSize => currentInvestigator.Info?.DeckSize.ToString();
+        private string AmountCards => selector.InvestigatorSelected?.AmountCardsSelected.ToString();
+        private string DeckSize => selector.InvestigatorSelected?.DeckBuilder.DeckSize.ToString();
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            addCardEvent.DeckCardAdded += (_) => UpdateData();
-            removeCardEvent.DeckCardRemoved += (_) => UpdateData();
-            selectInvestigatorEvent.Select((_) => UpdateData());
+            addCardEvent.Subscribe((_) => UpdateData());
+            removeCardEvent.Subscribe((_) => UpdateData());
+            investigatorSelectEvent.Subscribe((_) => UpdateData());
         }
 
         /*******************************************************************/

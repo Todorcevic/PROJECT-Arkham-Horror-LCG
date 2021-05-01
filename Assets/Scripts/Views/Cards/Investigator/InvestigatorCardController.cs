@@ -5,13 +5,14 @@ namespace Arkham.Views
 {
     public class InvestigatorCardController : IInvestigatorCardController
     {
-        [Inject] private readonly InvestigatorSelectorEventDomain investigatorSelector;
+        [Inject] private readonly AddInvestigatorEventDomain investigatorAddEvent;
+        [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
 
         /*******************************************************************/
         public void Clicked(string investigatorId)
         {
-            investigatorSelector.Add(investigatorId);
-            investigatorSelector.Select(investigatorId);
+            investigatorAddEvent.Add(investigatorId);
+            investigatorSelectEvent.Select(investigatorId);
         }
     }
 }

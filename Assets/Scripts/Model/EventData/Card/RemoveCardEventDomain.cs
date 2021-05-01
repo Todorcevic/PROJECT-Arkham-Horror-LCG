@@ -5,20 +5,20 @@ namespace Arkham.Model
 {
     public class RemoveCardEventDomain
     {
-        public event Action<string> DeckCardRemoved;
-        [Inject] private readonly CurrentInvestigatorInteractor investigatorSelectedInfo;
-        [Inject] private readonly InvestigatorSelectorRepository investigatorSelectorInfo;
-        [Inject] private readonly InvestigatorInfoRepository investigatorInfo;
+        private event Action<string> CardRemoved;
+        [Inject] private readonly Selector selector;
+        [Inject] private readonly CardRepository cardCollection;
 
-        private InvestigatorInfo Info =>
-            investigatorInfo.Get(investigatorSelectorInfo.CurrentInvestigatorSelected);
-
+        /*******************************************************************/
         public bool RemoveCard(string cardId)
         {
-            if (investigatorSelectedInfo.IsMandatoryCard(cardId)) return false;
-            Info.Deck.Remove(cardId);
-            DeckCardRemoved?.Invoke(cardId);
+            Card card = cardCollection.Get(cardId);
+            if (selector.InvestigatorSelected.IsMandatoryCard(card)) return false;
+            selector.InvestigatorSelected.RemoveToDeck(card);
+            CardRemoved?.Invoke(cardId);
             return true;
         }
+
+        public void Subscribe(Action<string> action) => CardRemoved += action;
     }
 }

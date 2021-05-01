@@ -1,4 +1,5 @@
 ﻿using Arkham.Model;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -7,20 +8,20 @@ namespace Arkham.Views
     public class CardsSelectedPresenter : IInitializable
     {
         [Inject(Id = "CardSelectorZone")] public RectTransform selectorsZone;
-        [Inject] private readonly InvestigatorSelectorEventDomain selectInvestigatorEvent;
+        [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
         [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
         [Inject] private readonly ICardAddPresenter addCard;
-        [Inject] private readonly InvestigatorInfoRepository investigaotInfo;
+        [Inject] private readonly InvestigatorRepository investigatorManager;
 
         /*******************************************************************/
-        public void Initialize() => selectInvestigatorEvent.Select(ShowAllCards);
+        public void Initialize() => investigatorSelectEvent.Subscribe(ShowAllCards);
 
         /*******************************************************************/
         private void ShowAllCards(string investigatorId)
         {
             CleanAllSelectors();
             if (investigatorId == null) return;
-            foreach (string cardId in investigaotInfo.Get(investigatorId).FullDeck)
+            foreach (string cardId in investigatorManager.Get(investigatorId).FullDeck.Select(c => c.Code))
                 addCard.SetCardInSelector(cardId);
         }
 

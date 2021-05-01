@@ -6,19 +6,21 @@ namespace Arkham.Views
     public class InvestigatorCardVisibilityPresenter : IInitializable
     {
         [Inject] private readonly StartGameEventDomain gameStartedEvent;
-        [Inject] private readonly InvestigatorSelectorEventDomain InvestigatorSelectorEvent;
-        [Inject] private readonly VisibilityChangeEventDomain visibilityChangedEvent;
+        [Inject] private readonly RemoveInvestigatorEventDomain InvestigatorSelectorEvent;
+        [Inject] private readonly AddInvestigatorEventDomain investigatorAddEvent;
+        [Inject] private readonly VisibilityEventDomain visibilityChangedEvent;
         [Inject] private readonly ICardsManager cardsManager;
-        [Inject] private readonly InvestigatorSelectorInteractor investigatorSelectorInteractor;
+        [Inject] private readonly InvestigatorState investigatorSelectorInteractor;
+        [Inject] private readonly SearchTextEventDomain searchTextEvent;
 
         /*******************************************************************/
         public void Initialize()
         {
-            gameStartedEvent.GameStarted += (_) => RefreshAllInvestigatorsVisibility();
-            InvestigatorSelectorEvent.Add((_) => RefreshAllInvestigatorsVisibility());
-            InvestigatorSelectorEvent.Remove((_) => RefreshAllInvestigatorsVisibility());
-            visibilityChangedEvent.VisibilityChanged += (_) => RefreshAllInvestigatorsVisibility();
-            visibilityChangedEvent.TextToSearchChanged += RefreshAllInvestigatorsVisibility;
+            gameStartedEvent.Subscribe((_) => RefreshAllInvestigatorsVisibility());
+            investigatorAddEvent.Subscribe((_) => RefreshAllInvestigatorsVisibility());
+            InvestigatorSelectorEvent.Subscribe((_) => RefreshAllInvestigatorsVisibility());
+            visibilityChangedEvent.Subscribe((_) => RefreshAllInvestigatorsVisibility());
+            searchTextEvent.Subscribe(RefreshAllInvestigatorsVisibility);
         }
 
         /*******************************************************************/

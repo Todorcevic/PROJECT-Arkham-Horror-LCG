@@ -7,10 +7,10 @@ namespace Arkham.Views
     {
         [Inject] private readonly InvestigatorAvatarView investigatorAvatar;
         [Inject] private readonly ICardsManager investigatorCardsManager;
-        [Inject] private readonly InvestigatorSelectorEventDomain selectInvestigatorEvent;
+        [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => selectInvestigatorEvent.Select(ShowInvetigator);
+        void IInitializable.Initialize() => investigatorSelectEvent.Subscribe(ShowInvetigator);
 
         /*******************************************************************/
         private void ShowInvetigator(string investigatorId)

@@ -7,13 +7,11 @@ namespace Arkham.Views
     {
         [Inject(Id = "MainPanelsManager")] private readonly IPanelsManager panelsManager;
         [Inject(Id = "ChooseCardPanel")] private readonly PanelView panelToShow;
-        [Inject] private readonly CampaignRepository campaignRepository;
-        [Inject] private readonly CampaignChangeEventDomain currentScenario;
+        [Inject] private readonly ScenarioEventDomain scenarioEvent;
         /*******************************************************************/
         public void Clicked(string campaignId)
         {
-            string scenario = campaignRepository.Get(campaignId).FirstScenario;
-            currentScenario.Select(scenario);
+            scenarioEvent.SelectCampaign(campaignId);
             panelsManager.SelectPanel(panelToShow);
         }
     }

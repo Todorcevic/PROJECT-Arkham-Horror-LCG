@@ -7,7 +7,7 @@ namespace Arkham.Views
     public class VisibilitySwitchPresenter : IInitializable
     {
         [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitch;
-        [Inject] private readonly VisibilityChangeEventDomain visibilityEvent;
+        [Inject] private readonly VisibilityEventDomain visibilityEvent;
         [Inject] private readonly IPlayerPrefsAdapter playerPrefs;
 
         private bool IsOnVisibility => playerPrefs.LoadCardsVisibility();
@@ -15,7 +15,7 @@ namespace Arkham.Views
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            visibilityEvent.VisibilityChanged += SaveState;
+            visibilityEvent.Subscribe(SaveState);
             visibilitySwitch.SwitchAnimation(IsOnVisibility);
         }
 

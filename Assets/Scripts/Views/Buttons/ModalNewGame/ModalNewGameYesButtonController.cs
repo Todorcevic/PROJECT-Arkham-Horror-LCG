@@ -1,4 +1,5 @@
-﻿using Arkham.Model;
+﻿using Arkham.Config;
+using Arkham.Model;
 using Zenject;
 
 namespace Arkham.Views
@@ -6,7 +7,7 @@ namespace Arkham.Views
     public class ModalNewGameYesButtonController : IInitializable
     {
         [Inject] private readonly StartGameEventDomain startGame;
-        [Inject] private readonly CampaignChangeEventDomain currentScenario;
+        [Inject] private readonly ScenarioEventDomain scenarioEvent;
         [Inject(Id = "ModalNewGameYesButton")] private readonly ButtonView yesButton;
         [Inject(Id = "MainPanelsManager")] private readonly IPanelsManager panelsManager;
         [Inject(Id = "ChooseCampaignPanel")] private readonly PanelView chooseCardPanel;
@@ -17,7 +18,7 @@ namespace Arkham.Views
         private void Clicked()
         {
             startGame.Init(StartGame.New);
-            currentScenario.Select(null);
+            scenarioEvent.Reset();
             panelsManager.SelectPanel(chooseCardPanel);
         }
     }

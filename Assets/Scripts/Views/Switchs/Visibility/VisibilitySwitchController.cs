@@ -6,7 +6,7 @@ namespace Arkham.Views
     public class VisibilitySwitchController : IInitializable
     {
         [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitchView;
-        [Inject] private readonly VisibilityChangeEventDomain visibility;
+        [Inject] private readonly VisibilityEventDomain visibility;
 
         /*******************************************************************/
         void IInitializable.Initialize() => visibilitySwitchView.AddClickAction(Clicked);

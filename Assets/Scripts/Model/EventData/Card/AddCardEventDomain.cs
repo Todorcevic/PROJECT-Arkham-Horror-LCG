@@ -5,18 +5,18 @@ namespace Arkham.Model
 {
     public class AddCardEventDomain
     {
-        public event Action<string> DeckCardAdded;
-        [Inject] private readonly InvestigatorSelectorRepository investigatorSelectorInfo;
-        [Inject] private readonly InvestigatorInfoRepository investigatorInfo;
-
-        private InvestigatorInfo Info =>
-            investigatorInfo.Get(investigatorSelectorInfo.CurrentInvestigatorSelected);
+        private event Action<string> CardAdded;
+        [Inject] private readonly Selector selectorRepository;
+        [Inject] private readonly CardRepository cardRepository;
 
         /*******************************************************************/
-        public void AddCard(string deckCardId)
+        public void AddCard(string cardId)
         {
-            Info.Deck.Add(deckCardId);
-            DeckCardAdded?.Invoke(deckCardId);
+            Card card = cardRepository.Get(cardId);
+            selectorRepository.InvestigatorSelected.AddToDeck(card);
+            CardAdded?.Invoke(cardId);
         }
+
+        public void Subscribe(Action<string> action) => CardAdded += action;
     }
 }

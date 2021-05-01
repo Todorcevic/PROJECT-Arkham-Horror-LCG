@@ -11,11 +11,11 @@ namespace Arkham.Views
         [Inject] private readonly AddCardEventDomain addCardEvent;
         [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
         [Inject] private readonly IImageCardsManager imageCards;
-        [Inject] private readonly CardInfoRepository cardInfo;
-        [Inject] private readonly CurrentInvestigatorInteractor currentInvestigator;
+        [Inject] private readonly CardRepository cardCollection;
+        [Inject] private readonly Selector selector;
 
         /*******************************************************************/
-        public void Initialize() => addCardEvent.DeckCardAdded += SetCardInSelector;
+        public void Initialize() => addCardEvent.Subscribe(SetCardInSelector);
 
         /*******************************************************************/
         public void SetCardInSelector(string cardId)
@@ -28,13 +28,13 @@ namespace Arkham.Views
         private void ActivateSelector(CardSelectorView selector, string cardId)
         {
             selector.SetSelector(cardId, imageCards.GetSprite(cardId));
-            selector.SetName(cardInfo.Get(cardId).Real_name);
+            selector.SetName(cardCollection.Get(cardId).Real_name);
             selector.SetTransform(placeHolderZone);
         }
 
         private void SetQuantity(CardSelectorView selector)
         {
-            int quantity = currentInvestigator.Info.GetAmountOfThisCardInDeck(selector.Id);
+            int quantity = this.selector.InvestigatorSelected.GetAmountOfThisCardInDeck(selector.Id);
             selector.SetQuantity(quantity);
         }
     }

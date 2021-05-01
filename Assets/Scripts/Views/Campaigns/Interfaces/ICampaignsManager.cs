@@ -2,7 +2,7 @@
 {
     public interface ICampaignsManager
     {
-        CampaignState GetState(string campaignState);
+        CampaignStateSO GetState(string campaignState);
         CampaignView GetCampaign(string campaignId);
     }
 }
