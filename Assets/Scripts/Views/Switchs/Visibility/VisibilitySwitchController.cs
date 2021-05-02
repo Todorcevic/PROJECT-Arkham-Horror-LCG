@@ -1,17 +1,32 @@
-﻿using Arkham.Model;
-using Zenject;
+﻿using Zenject;
+using Arkham.Services;
+using Arkham.Model;
 
 namespace Arkham.Views
 {
-    public class VisibilitySwitchController : IInitializable
+    public class VisibilitySwitchController : IInitializable, IVisibility
     {
         [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitchView;
-        [Inject] private readonly VisibilityEventDomain visibility;
+        [Inject] private readonly InvestigatorCardVisibilityPresenter investigatorVisibility;
+        [Inject] private readonly DeckCardVisibilityPresenter cardVisibility;
+        [Inject] private readonly IPlayerPrefsAdapter playerPrefs;
+
+        public bool IsOn => visibilitySwitchView.IsOn;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => visibilitySwitchView.AddClickAction(Clicked);
+        void IInitializable.Initialize()
+        {
+            bool IsOnVisibility = playerPrefs.LoadCardsVisibility();
+            visibilitySwitchView.SwitchAnimation(IsOnVisibility);
+            visibilitySwitchView.AddClickAction(Clicked);
+        }
 
         /*******************************************************************/
-        public void Clicked() => visibility.Change();
+        public void Clicked()
+        {
+            playerPrefs.SaveCardsVisibility(IsOn);
+            investigatorVisibility.RefreshInvestigatorsVisibility();
+            cardVisibility.RefreshCardsVisibility();
+        }
     }
 }

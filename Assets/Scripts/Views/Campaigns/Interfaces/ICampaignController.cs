@@ -2,6 +2,6 @@
 {
     public interface ICampaignController
     {
-        void Clicked(string campaignId);
+        void Clicked(CampaignView campaignId);
     }
 }

@@ -14,8 +14,7 @@ namespace Tests
             Container.Bind<IResolutionSet>().To<ScreenResolutionAutoDetect>().AsSingle();
             Container.Bind<ISerializer>().To<JsonNewtonsoftAdapter>().AsSingle();
             Container.Bind<IScreenResolutionAdapter>().To<ScreenResolutionAdapter>().AsSingle();
-            Container.Bind<IFileAdapter>().To<FileAdapter>().AsSingle();
-            Container.Bind<IInstantiatorAdapter>().To<NameConventionFactory>().AsSingle();
+            Container.Bind<IConventionFactory>().To<NameConventionFactory>().AsSingle();
         }
     }
 }

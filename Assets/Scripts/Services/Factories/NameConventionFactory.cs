@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using UnityEngine;
 using Zenject;
 
 namespace Arkham.Services
 {
-    public class NameConventionFactory : IInstantiatorAdapter
+    public class NameConventionFactory : IConventionFactory
     {
         [Inject] private readonly DiContainer diContainer;
 
@@ -22,8 +23,8 @@ namespace Arkham.Services
         private string ResolvingTypeName<T>(string typeNameSufix)
         {
             List<string> typesNameInNamespace = Assembly.GetExecutingAssembly().GetTypes()
-                      .Where(t => t.Namespace == typeof(T).Namespace).Select(t => t.Name)
-                      .ToList();
+                      .Where(t => t.Namespace == typeof(T).Namespace).Select(t => t.Name).ToList();
+
             return typesNameInNamespace.Contains(typeof(T).Name + typeNameSufix)
                 ? typeof(T).Name + typeNameSufix
                 : typeof(T).Name;

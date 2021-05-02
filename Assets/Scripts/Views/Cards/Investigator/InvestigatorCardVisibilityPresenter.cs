@@ -1,5 +1,7 @@
 ﻿using Arkham.Model;
 using Zenject;
+using Arkham.Adapter;
+using Arkham.Services;
 
 namespace Arkham.Views
 {
@@ -8,28 +10,25 @@ namespace Arkham.Views
         [Inject] private readonly StartGameEventDomain gameStartedEvent;
         [Inject] private readonly RemoveInvestigatorEventDomain InvestigatorSelectorEvent;
         [Inject] private readonly AddInvestigatorEventDomain investigatorAddEvent;
-        [Inject] private readonly VisibilityEventDomain visibilityChangedEvent;
         [Inject] private readonly ICardsManager cardsManager;
-        [Inject] private readonly InvestigatorState investigatorSelectorInteractor;
-        [Inject] private readonly SearchTextEventDomain searchTextEvent;
+        [Inject] private readonly InvestigatorSelectionFilter investigatorSelectionFilter;
+        [Inject] private readonly CardVisibilityService visibilityService;
 
         /*******************************************************************/
         public void Initialize()
         {
-            gameStartedEvent.Subscribe((_) => RefreshAllInvestigatorsVisibility());
-            investigatorAddEvent.Subscribe((_) => RefreshAllInvestigatorsVisibility());
-            InvestigatorSelectorEvent.Subscribe((_) => RefreshAllInvestigatorsVisibility());
-            visibilityChangedEvent.Subscribe((_) => RefreshAllInvestigatorsVisibility());
-            searchTextEvent.Subscribe(RefreshAllInvestigatorsVisibility);
+            gameStartedEvent.Subscribe((_) => RefreshInvestigatorsVisibility());
+            investigatorAddEvent.Subscribe((_) => RefreshInvestigatorsVisibility());
+            InvestigatorSelectorEvent.Subscribe((_) => RefreshInvestigatorsVisibility());
         }
 
         /*******************************************************************/
-        private void RefreshAllInvestigatorsVisibility()
+        public void RefreshInvestigatorsVisibility()
         {
             foreach (CardView cardView in cardsManager.InvestigatorList)
             {
-                bool canBeSelected = investigatorSelectorInteractor.CanThisCardBeSelected(cardView.Id);
-                bool canBeShowed = investigatorSelectorInteractor.CanThisCardBeShowed(cardView.Id);
+                bool canBeSelected = investigatorSelectionFilter.CanThisCardBeSelected(cardView.Id);
+                bool canBeShowed = visibilityService.CanThisCardBeShowed(cardView.Id);
                 cardView.Activate(canBeSelected);
                 cardView.Show(canBeShowed);
             }

@@ -1,5 +1,6 @@
 ﻿using Arkham.Model;
 using Zenject;
+using Arkham.Adapter;
 
 namespace Arkham.Views
 {
@@ -27,6 +28,7 @@ namespace Arkham.Views
         {
             CampaignView campaign = campaignManager.GetCampaign(campaignId);
             campaignManager.GetState(state).ExecuteState(campaign);
+            //campaign.IsOpen = campaignRepository.Get(campaignId).State.IsOpen;
         }
     }
 }

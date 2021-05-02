@@ -28,12 +28,7 @@ namespace Arkham.Views
         public bool IsOpen { private get; set; }
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
-        {
-            if (!IsOpen) return;
-            ClickEffect();
-            controller.Clicked(Id);
-        }
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => controller.Clicked(this);
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => HoverOnEffect();
 
@@ -45,7 +40,7 @@ namespace Arkham.Views
             icon.sprite = iconSprite;
         }
 
-        private void ClickEffect() => InteractableAudio.ClickSound();
+        public void ClickEffect() => InteractableAudio.ClickSound();
 
         private void HoverOnEffect()
         {

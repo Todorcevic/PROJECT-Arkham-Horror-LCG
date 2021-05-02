@@ -1,5 +1,6 @@
 ﻿using Arkham.Config;
 using Arkham.Model;
+using Arkham.Adapter;
 using System.Collections.Generic;
 using Zenject;
 
@@ -8,18 +9,14 @@ namespace Arkham.Services
     public class DataContext : IInitializable, IDataPersistence
     {
         [Inject] private readonly ISerializer serializer;
-        [Inject] private readonly IPlayerPrefsAdapter playerPrefs;
         [Inject] private readonly IMapper mapper;
         [Inject] private readonly GameFiles gameFiles;
-        [Inject] private readonly Settings settings;
         [Inject] private readonly CardRepository cardRepository;
         [Inject] private readonly StartGameEventDomain gameStartedEvent;
 
 
         /*******************************************************************/
         void IInitializable.Initialize() => gameStartedEvent.Subscribe(LoadProgress);
-
-        public void LoadSettings() => settings.AreCardsVisible = playerPrefs.LoadCardsVisibility();
 
         public void LoadDataCards()
         {

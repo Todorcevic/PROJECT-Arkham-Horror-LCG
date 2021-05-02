@@ -1,5 +1,4 @@
 ﻿using Arkham.Model;
-using System.Collections.Generic;
 using Zenject;
 
 namespace Arkham.Services
@@ -11,8 +10,7 @@ namespace Arkham.Services
         [Inject] private readonly InvestigatorRepository investigatorRepository;
         [Inject] private readonly Selector selectorRepository;
         [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
-        [Inject] private readonly IInstantiatorAdapter instantiator;
-        [Inject] private readonly ICampaignStateFactory campaignStateFactory;
+        [Inject] private readonly IConventionFactory factory;
 
         /*******************************************************************/
         public FullDTO CreateDTO()
@@ -80,7 +78,7 @@ namespace Arkham.Services
                 };
 
                 newInvestigator.Info = cardRepository.Get(investigator.Id);
-                newInvestigator.DeckBuilder = instantiator.CreateInstance<DeckBuildingRules>(investigator.Id);
+                newInvestigator.DeckBuilder = factory.CreateInstance<DeckBuildingRules>(investigator.Id);
                 foreach (string card in investigator.MandatoryCards)
                     newInvestigator.AddToMandatory(cardRepository.Get(card));
                 foreach (string card in investigator.Deck)
@@ -93,18 +91,17 @@ namespace Arkham.Services
         public void MapCampaigns(FullDTO repositoryDTO)
         {
             campaignRepository.Reset();
-            campaignRepository.CreateStatesWith(campaignStateFactory.Create());
 
             foreach (CampaignDTO campaign in repositoryDTO.CampaignsList)
             {
                 Campaign newCampaing = new Campaign()
                 {
                     Id = campaign.Id,
-                    State = campaignRepository.GetState(campaign.State),
-                    FirstScenario = instantiator.CreateInstance<Scenario>(campaign.Firstscenario)
+                    State = factory.CreateInstance<CampaignState>(campaign.State),
+                    FirstScenario = factory.CreateInstance<Scenario>(campaign.Firstscenario)
                 };
                 campaignRepository.Add(newCampaing);
-                campaignRepository.CurrentScenario = instantiator.CreateInstance<Scenario>(repositoryDTO.CurrentScenario);
+                campaignRepository.CurrentScenario = factory.CreateInstance<Scenario>(repositoryDTO.CurrentScenario);
             }
         }
     }

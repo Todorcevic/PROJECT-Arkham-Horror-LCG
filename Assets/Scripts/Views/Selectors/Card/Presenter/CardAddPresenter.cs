@@ -2,6 +2,7 @@
 using Arkham.Services;
 using UnityEngine;
 using Zenject;
+using Arkham.Adapter;
 
 namespace Arkham.Views
 {

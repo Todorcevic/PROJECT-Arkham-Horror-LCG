@@ -1,5 +1,6 @@
-﻿using Sirenix.OdinInspector;
+﻿using Arkham.Model;
 using UnityEngine;
+using Zenject;
 
 namespace Arkham.Views
 {
@@ -7,16 +8,10 @@ namespace Arkham.Views
     public class CampaignStateSO : ScriptableObject
     {
         [SerializeField] private Sprite icon;
-        [SerializeField, Required] private bool isOpen;
 
         public string Id => name;
-        public bool IsOpen => isOpen;
 
         /*******************************************************************/
-        public void ExecuteState(CampaignView campaignView)
-        {
-            campaignView.ChangeIconState(icon);
-            campaignView.IsOpen = isOpen;
-        }
+        public void ExecuteState(CampaignView campaignView) => campaignView.ChangeIconState(icon);
     }
 }

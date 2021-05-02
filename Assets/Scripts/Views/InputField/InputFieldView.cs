@@ -8,13 +8,13 @@ using UnityEngine.UI;
 
 namespace Arkham.Views
 {
-    public class InputFieldView : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerExitHandler, IUpdateSelectedHandler
+    public class InputFieldView : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler,
+        IPointerExitHandler, IUpdateSelectedHandler
     {
-        private string currentText;
-        private event Action<string> UpdateAction;
+        private event Action UpdateAction;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private TMP_InputField field;
-        [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI searchText;
+        [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI textField;
         [SerializeField, Required, ChildGameObjectsOnly] private Image background;
         [SerializeField, Required, ChildGameObjectsOnly] private Image icon;
         [Title("SETTINGS")]
@@ -23,8 +23,10 @@ namespace Arkham.Views
         [SerializeField] private Color deselectColor;
         [SerializeField] private Color selectColor;
 
+        public string CurrentText { get; private set; }
+
         /*******************************************************************/
-        public void AddUpdateAction(Action<string> action) => UpdateAction += action;
+        public void AddUpdateAction(Action action) => UpdateAction += action;
 
         void ISelectHandler.OnSelect(BaseEventData eventData) => background.color = selectColor;
 
@@ -32,20 +34,20 @@ namespace Arkham.Views
 
         void IUpdateSelectedHandler.OnUpdateSelected(BaseEventData eventData)
         {
-            if (field.text == currentText) return;
-            currentText = field.text;
-            UpdateAction.Invoke(field.text);
+            if (field.text == CurrentText) return;
+            CurrentText = field.text;
+            UpdateAction.Invoke();
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            searchText.fontStyle = FontStyles.Bold;
+            textField.fontStyle = FontStyles.Bold;
             icon.transform.DOScale(hoverScale, timeHoverAnimation);
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            searchText.fontStyle = FontStyles.Normal;
+            textField.fontStyle = FontStyles.Normal;
             icon.transform.DOScale(1f, timeHoverAnimation);
         }
     }

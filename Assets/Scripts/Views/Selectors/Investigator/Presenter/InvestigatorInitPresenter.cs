@@ -1,5 +1,6 @@
 ﻿using Arkham.Model;
 using Zenject;
+using Arkham.Adapter;
 
 namespace Arkham.Views
 {

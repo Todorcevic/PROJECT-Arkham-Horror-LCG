@@ -1,7 +1,7 @@
-﻿using Arkham.Model;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
+using Arkham.Adapter;
 
 namespace Arkham.Views
 {

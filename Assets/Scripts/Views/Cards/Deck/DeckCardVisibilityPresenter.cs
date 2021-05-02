@@ -1,35 +1,34 @@
 ﻿using Arkham.Model;
 using Zenject;
+using Arkham.Adapter;
+using Arkham.Services;
 
 namespace Arkham.Views
 {
     public class DeckCardVisibilityPresenter : IInitializable
     {
-        [Inject] private readonly CardState cardSelectorInteractor;
+        [Inject] private readonly CardSelectionFiler cardSelectionFilter;
         [Inject] private readonly ICardsManager cardsManager;
         [Inject] private readonly RemoveCardEventDomain cardRemovedEvent;
         [Inject] private readonly AddCardEventDomain addCardEvent;
         [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
-        [Inject] private readonly VisibilityEventDomain visibilityEvent;
-        [Inject] private readonly SearchTextEventDomain searchTextEvent;
+        [Inject] private readonly CardVisibilityService visibilityService;
 
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            investigatorSelectEvent.Subscribe((_) => RefreshAllCardsVisibility());
-            addCardEvent.Subscribe((_) => RefreshAllCardsVisibility());
-            cardRemovedEvent.Subscribe((_) => RefreshAllCardsVisibility());
-            visibilityEvent.Subscribe((_) => RefreshAllCardsVisibility());
-            searchTextEvent.Subscribe(RefreshAllCardsVisibility);
+            investigatorSelectEvent.Subscribe((_) => RefreshCardsVisibility());
+            addCardEvent.Subscribe((_) => RefreshCardsVisibility());
+            cardRemovedEvent.Subscribe((_) => RefreshCardsVisibility());
         }
 
         /*******************************************************************/
-        private void RefreshAllCardsVisibility()
+        public void RefreshCardsVisibility()
         {
             foreach (CardView cardView in cardsManager.DeckList)
             {
-                bool canBeSelected = cardSelectorInteractor.CanThisCardBeSelected(cardView.Id);
-                bool canBeShowed = cardSelectorInteractor.CanThisCardBeShowed(cardView.Id);
+                bool canBeSelected = cardSelectionFilter.CanThisCardBeSelected(cardView.Id);
+                bool canBeShowed = visibilityService.CanThisCardBeShowed(cardView.Id);
                 cardView.Activate(canBeSelected);
                 cardView.Show(canBeShowed);
             }

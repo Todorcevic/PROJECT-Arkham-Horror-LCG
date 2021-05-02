@@ -1,6 +1,6 @@
-﻿using Arkham.Model;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Zenject;
+using Arkham.Adapter;
 
 namespace Arkham.Views
 {

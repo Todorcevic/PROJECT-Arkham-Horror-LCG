@@ -10,7 +10,6 @@ namespace Arkham.Views
 {
     public class SwitchView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        private bool isOn;
         private event Action ClickAction;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
@@ -27,8 +26,16 @@ namespace Arkham.Views
         [SerializeField] private Color colorOn;
         [SerializeField] private Color colorOff;
 
+        public bool IsOn { get; private set; }
+
         /*******************************************************************/
         public void AddClickAction(Action action) => ClickAction += action;
+
+        public void SwitchAnimation()
+        {
+            interactableAudio.ClickSound();
+            SwitchAnimation(!IsOn);
+        }
 
         public void SwitchAnimation(bool isOn)
         {
@@ -36,10 +43,8 @@ namespace Arkham.Views
             button.DOColor(isOn ? colorOff : colorOn, timeMoveAnimation);
             border.DOColor(isOn ? colorOff : colorOn, timeMoveAnimation);
             background.DOColor(isOn ? colorOn : colorOff, timeMoveAnimation);
-            this.isOn = isOn;
+            IsOn = isOn;
         }
-
-        private void ClickSound() => interactableAudio.ClickSound();
 
         private void SwitchHoverOn()
         {
@@ -57,8 +62,7 @@ namespace Arkham.Views
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            ClickSound();
-            SwitchAnimation(!isOn);
+            SwitchAnimation();
             ClickAction?.Invoke();
         }
 

@@ -1,6 +1,6 @@
 ﻿using Arkham.Config;
-using Arkham.Model;
-using Arkham.Services;
+using Arkham.Adapter;
+using System.IO;
 using Zenject;
 
 namespace Arkham.Views
@@ -9,7 +9,6 @@ namespace Arkham.Views
     {
         [Inject] private readonly ScenarioEventDomain scenarioEvent;
         [Inject] private readonly GameFiles gameFiles;
-        [Inject] private readonly IFileAdapter fileAdapter;
         [Inject(Id = "ContinueButton")] private readonly ButtonView continueButton;
 
         /*******************************************************************/
@@ -22,6 +21,6 @@ namespace Arkham.Views
         /*******************************************************************/
         private void DesactiveButton(string scenario) => continueButton.Desactive(scenario == null);
 
-        private bool CanContinue() => fileAdapter.FileExist(gameFiles.PlayerProgressFilePath);
+        private bool CanContinue() => File.Exists(gameFiles.PlayerProgressFilePath);
     }
 }

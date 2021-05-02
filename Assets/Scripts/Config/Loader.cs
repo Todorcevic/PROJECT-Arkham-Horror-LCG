@@ -13,7 +13,6 @@ namespace Arkham.Config
         private void Awake()
         {
             resolutionSetter.SettingResolution();
-            mapper.LoadSettings();
             mapper.LoadDataCards();
             cardFactory.BuildDeckCards();
             cardFactory.BuildInvestigatorCards();
