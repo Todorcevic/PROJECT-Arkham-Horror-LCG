@@ -10,7 +10,7 @@ namespace Arkham.Views
     public class CardView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private ICardController controller;
-        [Inject] private readonly ICardShowerController showerController;
+        [Inject] private readonly CardShowerController showerController;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
@@ -80,7 +80,5 @@ namespace Arkham.Views
             canvasGroup.alpha = sprite == null ? 0 : 1;
             image.sprite = sprite;
         }
-
-
     }
 }

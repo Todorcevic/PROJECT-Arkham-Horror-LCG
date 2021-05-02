@@ -4,20 +4,16 @@ using Arkham.Adapter;
 
 namespace Arkham.Views
 {
-    public class InvestigatorInitPresenter : IInitializable
+    public class SelectorInitPresenter
     {
-        [Inject] private readonly StartGameEventDomain startGameEvent;
-        [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
+        [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
         [Inject] private readonly Selector selectorRepository;
-        [Inject] private readonly IAddInvestigatorPresenter selectorAdd;
-        [Inject] private readonly IInvestigatorLeadPresenter selectorLead;
+        [Inject] private readonly AddInvestigatorPresenter selectorAdd;
+        [Inject] private readonly InvestigatorLeadPresenter selectorLead;
 
         /*******************************************************************/
-        public void Initialize() => startGameEvent.Subscribe((_) => InitializeSelectors());
-
-        /*******************************************************************/
-        private void InitializeSelectors()
+        public void InitializeSelectors()
         {
             investigatorSelectorsManager.ResetSelectors();
             AddAllInvestigators();

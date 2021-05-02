@@ -6,9 +6,9 @@ namespace Arkham.Views
 {
     public class ContinueButtonController : IInitializable
     {
-        [Inject] private readonly StartGameEventDomain startGame;
+        [Inject] private readonly StartGameUseCase startGame;
         [Inject(Id = "ContinueButton")] private readonly ButtonView continueButton;
-        [Inject(Id = "MainPanelsManager")] private readonly IPanelsManager panelsManager;
+        [Inject(Id = "MainPanelsManager")] private readonly PanelsManagerComponent panelsManager;
         [Inject(Id = "ChooseCardPanel")] private readonly PanelView chooseCardPanel;
 
         /*******************************************************************/

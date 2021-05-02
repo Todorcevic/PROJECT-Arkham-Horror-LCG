@@ -7,7 +7,7 @@ namespace Arkham.Views
     {
         private string investigatorSelected;
         [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
-        [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
+        [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
 
         /*******************************************************************/
         public void Initialize() => investigatorSelectEvent.Subscribe(SelectInvestigator);

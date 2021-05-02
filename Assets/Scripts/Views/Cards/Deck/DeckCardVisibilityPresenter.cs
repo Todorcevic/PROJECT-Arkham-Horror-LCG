@@ -8,7 +8,7 @@ namespace Arkham.Views
     public class DeckCardVisibilityPresenter : IInitializable
     {
         [Inject] private readonly CardSelectionFiler cardSelectionFilter;
-        [Inject] private readonly ICardsManager cardsManager;
+        [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly RemoveCardEventDomain cardRemovedEvent;
         [Inject] private readonly AddCardEventDomain addCardEvent;
         [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;

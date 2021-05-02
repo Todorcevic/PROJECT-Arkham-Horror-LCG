@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class InvestigatorSelectorsManager : IInvestigatorSelectorsManager
+    public class InvestigatorSelectorsManager
     {
         [Inject(Id = "InvestigatorPlaceHolderZone")] private readonly RectTransform placeHoldersZone;
         [Inject] private readonly List<InvestigatorSelectorView> selectors;

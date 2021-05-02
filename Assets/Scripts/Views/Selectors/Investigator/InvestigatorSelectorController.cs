@@ -5,12 +5,12 @@ using Arkham.Adapter;
 
 namespace Arkham.Views
 {
-    public class InvestigatorSelectorController : IInvestigatorSelectorController
+    public class InvestigatorSelectorController
     {
         [Inject] private readonly RemoveInvestigatorEventDomain investigatorSelector;
         [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
         [Inject] private readonly ChangeInvestigatorEventDomain investigatorChangeEvent;
-        [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorManager;
+        [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
         [Inject(Id = "MidZone")] private readonly RectTransform removeZone;
 
         /*******************************************************************/

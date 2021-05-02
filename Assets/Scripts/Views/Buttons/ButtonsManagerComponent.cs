@@ -22,7 +22,7 @@ namespace Arkham.Views
         private void Start() => SelectButton(FirstButton);
 
         /*******************************************************************/
-        public void SelectButton(ButtonView button)
+        private void SelectButton(ButtonView button)
         {
             currentButton?.Lock(false);
             button.Lock(true);

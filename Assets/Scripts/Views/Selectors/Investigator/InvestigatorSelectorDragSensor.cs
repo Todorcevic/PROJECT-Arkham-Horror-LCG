@@ -9,7 +9,7 @@ namespace Arkham.Views
     public class InvestigatorSelectorDragSensor : MonoBehaviour, IPointerEnterHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         private static bool isDragging;
-        [Inject] private readonly IInvestigatorSelectorController controller;
+        [Inject] private readonly InvestigatorSelectorController controller;
         [Title("RESOURCES")]
         [SerializeField, Required] private Canvas canvas;
         [SerializeField, Required] private Transform card;

@@ -7,7 +7,7 @@ namespace Arkham.Services
     {
         [Inject] private readonly CardRepository cardRepository;
         [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
-        [Inject] private readonly ICardSearch cardSearch;
+        [Inject] private readonly ICardSearchable cardSearch;
         [Inject] private readonly IVisibility visibility;
         [Inject] private readonly CardSelectionFiler cardSelectionFilter;
 

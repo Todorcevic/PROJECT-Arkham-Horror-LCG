@@ -3,7 +3,7 @@ using Arkham.Adapter;
 
 namespace Arkham.Views
 {
-    public class InvestigatorCardController : IInvestigatorCardController
+    public class InvestigatorCardController : ICardController
     {
         [Inject] private readonly AddInvestigatorEventDomain investigatorAddEvent;
         [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;

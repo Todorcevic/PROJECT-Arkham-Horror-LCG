@@ -3,9 +3,9 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class InvestigatorLeadPresenter : IInvestigatorLeadPresenter
+    public class InvestigatorLeadPresenter
     {
-        [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
+        [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly Selector selector;
 
         private InvestigatorSelectorView LeadSelector => investigatorSelectorsManager.GetLeadSelector;

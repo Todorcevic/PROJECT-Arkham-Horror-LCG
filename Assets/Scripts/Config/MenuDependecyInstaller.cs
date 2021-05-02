@@ -12,6 +12,35 @@ namespace Arkham.Config
 
         public override void InstallBindings()
         {
+            /*** Services ***/
+            Container.BindInterfacesTo<ScreenResolutionAutoDetect>().AsSingle();
+            Container.Bind<CardVisibilityService>().AsSingle();
+            Container.BindInterfacesTo<DoubleClickDetector>().AsSingle();
+            Container.BindInterfacesTo<DataContext>().AsSingle();
+            Container.BindInterfacesTo<DataMapper>().AsSingle();
+
+            /*** Controllers ***/
+            Container.Bind(x => x.AllNonAbstractClasses()
+           .InNamespace("Arkham").WithSuffix("Controller")).AsCached();
+
+            Container.Bind(x => x.AllInterfaces()).To(x => x.AllInterfaces()
+           .InNamespace("Arkham").WithSuffix("Controller")).AsCached();
+
+            /*** Managers ***/
+            Container.Bind(x => x.AllNonAbstractClasses()
+           .InNamespace("Arkham").WithSuffix("Manager")).AsSingle();
+
+            /*** Presenters ***/
+            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
+            .InNamespace("Arkham").WithSuffix("Presenter")).AsCached();
+
+            Container.Bind(x => x.AllNonAbstractClasses()
+            .InNamespace("Arkham").WithSuffix("Presenter")).AsCached();
+
+            /*** Adapters ***/
+            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
+            .InNamespace("Arkham").WithSuffix("Adapter")).AsSingle();
+
             /*** Repositories***/
             Container.Bind<CardRepository>().AsSingle();
             Container.Bind<CampaignRepository>().AsSingle();
@@ -28,7 +57,7 @@ namespace Arkham.Config
             Container.Bind<ChangeInvestigatorEventDomain>().AsSingle();
             Container.Bind<AddInvestigatorEventDomain>().AsSingle();
             Container.Bind<RemoveInvestigatorEventDomain>().AsSingle();
-            Container.Bind<StartGameEventDomain>().AsSingle();
+            Container.Bind<StartGameUseCase>().AsSingle();
             Container.Bind<UnlockCardEventDomain>().AsSingle();
 
             /*** Interactors ***/
@@ -38,31 +67,7 @@ namespace Arkham.Config
             /*** Resources ***/
             Container.Bind<CampaignStateSO>().FromScriptableObjectResource(gamefiles.CAMPAIGNS_STATES).AsSingle();
 
-            /*** Services ***/
-            Container.BindInterfacesTo<ScreenResolutionAutoDetect>().AsSingle();
-            Container.BindInterfacesTo<CardVisibilityService>().AsSingle();
-            Container.BindInterfacesTo<DoubleClickDetector>().AsSingle();
-            Container.BindInterfacesTo<DataContext>().AsSingle();
-            Container.BindInterfacesTo<DataMapper>().AsSingle();
 
-            /*** Adapters ***/
-            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-          .InNamespace("Arkham").WithSuffix("Adapter")).AsSingle();
-
-            /*** Controllers ***/
-            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-           .InNamespace("Arkham").WithSuffix("Controller")).AsSingle();
-
-            /*** Managers ***/
-            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-           .InNamespace("Arkham").WithSuffix("Manager")).AsSingle();
-
-            /*** Presenters ***/
-            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham").WithSuffix("Presenter")).AsSingle();
-
-            Container.BindInterfacesAndSelfTo<InvestigatorCardVisibilityPresenter>().AsSingle();
-            Container.BindInterfacesAndSelfTo<DeckCardVisibilityPresenter>().AsSingle();
 
             /*** Factories ***/
             Container.BindInterfacesTo<NameConventionFactory>().AsSingle();

@@ -10,8 +10,8 @@ namespace Arkham.Views
 {
     public class CardSelectorSensor : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [Inject] private readonly ICardSelectorController controller;
-        [Inject] private readonly ICardShowerController showerController;
+        [Inject] private readonly CardSelectorController controller;
+        [Inject] private readonly CardShowerController showerController;
         [Title("RESOURCES")]
         [SerializeField, Required] private CanvasGroup canvas;
         [SerializeField, Required] private InteractableAudio interactableAudio;

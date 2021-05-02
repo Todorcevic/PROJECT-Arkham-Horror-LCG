@@ -7,7 +7,7 @@ namespace Arkham.Views
     public class BackButtonController : IInitializable
     {
         [Inject(Id = "BackButton")] private readonly List<ButtonView> backButtons;
-        [Inject(Id = "MainPanelsManager")] private readonly IPanelsManager panelsManager;
+        [Inject(Id = "MainPanelsManager")] private readonly PanelsManagerComponent panelsManager;
         [Inject(Id = "HomePanel")] private readonly PanelView homePanel;
         [Inject] private readonly IDataPersistence dataPersistence;
 

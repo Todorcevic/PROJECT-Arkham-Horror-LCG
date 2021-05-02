@@ -6,18 +6,16 @@ using Zenject;
 
 namespace Arkham.Services
 {
-    public class DataContext : IInitializable, IDataPersistence
+    public class DataContext : IDataPersistence
     {
         [Inject] private readonly ISerializer serializer;
         [Inject] private readonly IMapper mapper;
         [Inject] private readonly GameFiles gameFiles;
         [Inject] private readonly CardRepository cardRepository;
-        [Inject] private readonly StartGameEventDomain gameStartedEvent;
+        [Inject] private readonly StartGameUseCase gameStartedEvent;
 
 
         /*******************************************************************/
-        void IInitializable.Initialize() => gameStartedEvent.Subscribe(LoadProgress);
-
         public void LoadDataCards()
         {
             List<Card> cards = serializer.CreateDataFromResources<List<Card>>(gameFiles.CardsDataFilePath);

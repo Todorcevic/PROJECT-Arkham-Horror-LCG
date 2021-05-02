@@ -2,9 +2,9 @@
 
 namespace Arkham.Views
 {
-    public class CardShowerController : ICardShowerController
+    public class CardShowerController
     {
-        [Inject] private readonly ICardShowerPresenter showCardPresenter;
+        [Inject] private readonly CardShowerPresenter showCardPresenter;
 
         /*******************************************************************/
         public void HoveredOn(CardShowerDTO showCardDTO) => showCardPresenter.Show(showCardDTO);

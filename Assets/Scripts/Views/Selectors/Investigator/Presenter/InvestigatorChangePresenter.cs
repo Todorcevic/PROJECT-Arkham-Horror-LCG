@@ -6,8 +6,8 @@ namespace Arkham.Views
     public class InvestigatorChangePresenter : IInitializable
     {
         [Inject] private readonly ChangeInvestigatorEventDomain investigatorChangeEvent;
-        [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
-        [Inject] private readonly IInvestigatorLeadPresenter selectorLead;
+        [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
+        [Inject] private readonly InvestigatorLeadPresenter selectorLead;
 
         /*******************************************************************/
         public void Initialize() => investigatorChangeEvent.Subscribe(ChangeInvestigator);

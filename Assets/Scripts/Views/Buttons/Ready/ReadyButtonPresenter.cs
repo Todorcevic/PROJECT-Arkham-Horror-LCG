@@ -6,24 +6,22 @@ namespace Arkham.Views
 {
     public class ReadyButtonPresenter : IInitializable
     {
-        [Inject] private readonly AddInvestigatorEventDomain addInvestigatorEvent;
-        [Inject] private readonly RemoveInvestigatorEventDomain removeInvestigatorEvent;
-        [Inject] private readonly RemoveCardEventDomain removeCardEvent;
-        [Inject] private readonly AddCardEventDomain addCardEvent;
-        [Inject] private readonly StartGameEventDomain startGameEvent;
+        [Inject] private readonly AddInvestigatorEventDomain investigatorAddedEvent;
+        [Inject] private readonly RemoveInvestigatorEventDomain investigatorRemovedEvent;
+        [Inject] private readonly RemoveCardEventDomain cardRemovedEvent;
+        [Inject] private readonly AddCardEventDomain cardAddedEvent;
         [Inject] private readonly Selector selectorRepository;
         [Inject(Id = "ReadyButton")] private readonly ButtonView readyButton;
 
         /*******************************************************************/
         public void Initialize()
         {
-            addInvestigatorEvent.Subscribe((_) => UpdateButton());
-            removeInvestigatorEvent.Subscribe((_) => UpdateButton());
-            startGameEvent.Subscribe((_) => UpdateButton());
-            addCardEvent.Subscribe((_) => UpdateButton());
-            removeCardEvent.Subscribe((_) => UpdateButton());
+            investigatorAddedEvent.Subscribe((_) => UpdateButton());
+            investigatorRemovedEvent.Subscribe((_) => UpdateButton());
+            cardAddedEvent.Subscribe((_) => UpdateButton());
+            cardRemovedEvent.Subscribe((_) => UpdateButton());
         }
 
-        private void UpdateButton() => readyButton.Desactive(!selectorRepository.IsReady);
+        public void UpdateButton() => readyButton.Desactive(!selectorRepository.IsReady);
     }
 }

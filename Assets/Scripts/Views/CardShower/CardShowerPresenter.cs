@@ -6,14 +6,14 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class CardShowerPresenter : IInitializable, ICardShowerPresenter
+    public class CardShowerPresenter : IInitializable
     {
         private Task moveAnimation;
         private CardShowerDTO currentShowableCard;
         [Inject] private readonly AddCardEventDomain cardAdded;
         [Inject] private readonly RemoveCardEventDomain cardRemoved;
-        [Inject] private readonly IImageCardsManager imageCards;
-        [Inject] private readonly ICardShower cardShower;
+        [Inject] private readonly ImageCardsManagerComponent imageCards;
+        [Inject] private readonly CardShower cardShower;
         [Inject(Id = "CardSelectorZone")] private readonly RectTransform cardSelectorZone;
         [Inject(Id = "MidZone")] private readonly RectTransform cardZone;
 

@@ -1,22 +1,18 @@
 ﻿using Zenject;
 using Arkham.Adapter;
-using Arkham.Model;
 
 namespace Arkham.Views
 {
-    public class CampaignController : ICampaignController
+    public class CampaignController
     {
-        [Inject(Id = "MainPanelsManager")] private readonly IPanelsManager panelsManager;
+        [Inject(Id = "MainPanelsManager")] private readonly PanelsManagerComponent panelsManager;
         [Inject(Id = "ChooseCardPanel")] private readonly PanelView panelToShow;
         [Inject] private readonly ScenarioEventDomain scenarioEvent;
-        [Inject] private readonly CampaignRepository campaignRepository;
 
         /*******************************************************************/
-        public void Clicked(CampaignView campaign)
+        public void Clicked(string campaignId)
         {
-            if (!campaignRepository.Get(campaign.Id).State.IsOpen) return;
-            campaign.ClickEffect();
-            scenarioEvent.SelectCampaign(campaign.Id);
+            scenarioEvent.SelectCampaign(campaignId);
             panelsManager.SelectPanel(panelToShow);
         }
     }

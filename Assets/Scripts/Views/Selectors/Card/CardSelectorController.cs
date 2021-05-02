@@ -3,10 +3,10 @@ using Arkham.Adapter;
 
 namespace Arkham.Views
 {
-    public class CardSelectorController : ICardSelectorController
+    public class CardSelectorController
     {
         [Inject] private readonly RemoveCardEventDomain investigatorSelected;
-        [Inject] private readonly ICardSelectorsManager manager;
+        [Inject] private readonly CardSelectorsManager manager;
 
         /*******************************************************************/
         public void Clicked(string cardId)

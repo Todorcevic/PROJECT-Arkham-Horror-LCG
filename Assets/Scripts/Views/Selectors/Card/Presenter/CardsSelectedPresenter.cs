@@ -10,8 +10,8 @@ namespace Arkham.Views
     {
         [Inject(Id = "CardSelectorZone")] public RectTransform selectorsZone;
         [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
-        [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
-        [Inject] private readonly ICardAddPresenter addCard;
+        [Inject] private readonly CardSelectorsManager cardSelectorsManager;
+        [Inject] private readonly CardAddPresenter addCard;
         [Inject] private readonly InvestigatorRepository investigatorManager;
 
         /*******************************************************************/

@@ -7,7 +7,7 @@ namespace Arkham.Views
     public class InvestigatorsButtonController : IInitializable
     {
         [Inject(Id = "InvestigatorsButton")] private readonly ButtonView investigatorsButton;
-        [Inject(Id = "MidPanelsManager")] private readonly IPanelsManager panelsManager;
+        [Inject(Id = "MidPanelsManager")] private readonly PanelsManagerComponent panelsManager;
         [Inject(Id = "InvestigatorsPanel")] private readonly PanelView investigatorsPanel;
         [Inject(Id = "InvestigatorsPanel")] private readonly RectTransform panelToScroll;
         [Inject(Id = "MidZone")] private readonly ScrollRect scroll;

@@ -11,11 +11,11 @@ namespace Arkham.Services
     public class CardFactory : MonoBehaviour, ICardFactory
     {
         [Inject] private readonly DiContainer diContainer;
-        [Inject] private readonly IImageCardsManager imageCards;
+        [Inject] private readonly ImageCardsManagerComponent imageCards;
         [Inject] private readonly CardRepository cardCollection;
-        [Inject] private readonly IDeckCardController cardController;
-        [Inject] private readonly IInvestigatorCardController investigatorController;
-        [Inject] private readonly ICardsManager cardsManager;
+        [Inject] private readonly DeckCardController cardController;
+        [Inject] private readonly InvestigatorCardController investigatorController;
+        [Inject] private readonly CardsManager cardsManager;
 
         [SerializeField, Required, AssetsOnly] private CardView cardPrefab;
         [SerializeField, Required, AssetsOnly] private InvestigatorCardView investigatorPrefab;

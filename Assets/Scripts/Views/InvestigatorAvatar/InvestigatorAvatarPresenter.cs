@@ -6,7 +6,7 @@ namespace Arkham.Views
     public class InvestigatorAvatarPresenter : IInitializable
     {
         [Inject] private readonly InvestigatorAvatarView investigatorAvatar;
-        [Inject] private readonly ICardsManager investigatorCardsManager;
+        [Inject] private readonly CardsManager investigatorCardsManager;
         [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
 
         /*******************************************************************/

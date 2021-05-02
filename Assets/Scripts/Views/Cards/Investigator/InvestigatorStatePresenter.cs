@@ -1,20 +1,15 @@
 ﻿using Arkham.Model;
 using Zenject;
-using Arkham.Adapter;
 
 namespace Arkham.Views
 {
-    public class InvestigatorStatePresenter : IInitializable
+    public class InvestigatorStatePresenter
     {
-        [Inject] private readonly StartGameEventDomain startGameEvent;
-        [Inject] private readonly ICardsManager cardsManager;
+        [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorRepository investigatorManager;
 
         /*******************************************************************/
-        public void Initialize() => startGameEvent.Subscribe((_) => InvestigatorStateResolve());
-
-        /*******************************************************************/
-        private void InvestigatorStateResolve()
+        public void InvestigatorStateResolve()
         {
             foreach (InvestigatorCardView cardInvestigator in cardsManager.InvestigatorList)
             {

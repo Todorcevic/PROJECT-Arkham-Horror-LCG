@@ -7,17 +7,15 @@ namespace Arkham.Views
 {
     public class InvestigatorCardVisibilityPresenter : IInitializable
     {
-        [Inject] private readonly StartGameEventDomain gameStartedEvent;
         [Inject] private readonly RemoveInvestigatorEventDomain InvestigatorSelectorEvent;
         [Inject] private readonly AddInvestigatorEventDomain investigatorAddEvent;
-        [Inject] private readonly ICardsManager cardsManager;
+        [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorSelectionFilter investigatorSelectionFilter;
         [Inject] private readonly CardVisibilityService visibilityService;
 
         /*******************************************************************/
         public void Initialize()
         {
-            gameStartedEvent.Subscribe((_) => RefreshInvestigatorsVisibility());
             investigatorAddEvent.Subscribe((_) => RefreshInvestigatorsVisibility());
             InvestigatorSelectorEvent.Subscribe((_) => RefreshInvestigatorsVisibility());
         }

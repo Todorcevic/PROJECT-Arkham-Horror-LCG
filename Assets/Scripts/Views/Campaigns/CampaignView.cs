@@ -9,7 +9,7 @@ namespace Arkham.Views
 {
     public class CampaignView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [Inject] private readonly ICampaignController controller;
+        [Inject] private readonly CampaignController controller;
         [Title("RESOURCES")]
         [SerializeField, Required] private InteractableAudio InteractableAudio;
         [SerializeField, Required] private CanvasGroup canvasIcon;
@@ -28,7 +28,12 @@ namespace Arkham.Views
         public bool IsOpen { private get; set; }
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => controller.Clicked(this);
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        {
+            if (!IsOpen) return;
+            ClickEffect();
+            controller.Clicked(Id);
+        }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => HoverOnEffect();
 

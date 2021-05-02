@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Arkham.Views
 {
-    public class CardSelectorsManager : ICardSelectorsManager
+    public class CardSelectorsManager
     {
         [Inject] private readonly List<CardSelectorView> selectors;
 

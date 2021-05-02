@@ -1,9 +1,9 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Arkham.Views.Manager
+namespace Arkham.Views
 {
-    public class PanelsManagerComponent : MonoBehaviour, IPanelsManager
+    public class PanelsManagerComponent : MonoBehaviour
     {
         private PanelView selectedPanel;
         [Title("RESOURCES")]

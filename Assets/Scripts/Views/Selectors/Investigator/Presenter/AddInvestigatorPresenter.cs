@@ -4,13 +4,13 @@ using Arkham.Adapter;
 
 namespace Arkham.Views
 {
-    public class AddInvestigatorPresenter : IInitializable, IAddInvestigatorPresenter
+    public class AddInvestigatorPresenter : IInitializable
     {
         [Inject] private readonly AddInvestigatorEventDomain investigatorAddEvent;
-        [Inject] private readonly IInvestigatorSelectorsManager investigatorSelectorsManager;
-        [Inject] private readonly ICardsManager investigatorCardsManager;
-        [Inject] private readonly IInvestigatorLeadPresenter selectorLead;
-        [Inject] private readonly ICardShowerPresenter cardShowerPresenter;
+        [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
+        [Inject] private readonly CardsManager cardsManager;
+        [Inject] private readonly InvestigatorLeadPresenter selectorLead;
+        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Inject(Id = "InvestigatorPlaceHolderZone")] private readonly RectTransform placeHoldersZone;
 
         /*******************************************************************/
@@ -34,7 +34,7 @@ namespace Arkham.Views
 
         private void SetThisSelectorWithThisInvestigator(InvestigatorSelectorView selector, string investigatorId)
         {
-            Sprite spriteCard = investigatorCardsManager.GetSpriteCard(investigatorId);
+            Sprite spriteCard = cardsManager.GetSpriteCard(investigatorId);
             selector.SetTransform(placeHoldersZone);
             selector.SetSelector(investigatorId, spriteCard);
             investigatorSelectorsManager.RebuildPlaceHolders();

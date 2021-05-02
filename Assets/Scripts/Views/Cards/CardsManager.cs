@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Arkham.Views
 {
-    public class CardsManager : ICardsManager
+    public class CardsManager
     {
         private readonly Dictionary<string, CardView> deckCards = new Dictionary<string, CardView>();
         private readonly Dictionary<string, InvestigatorCardView> investigatorCards = new Dictionary<string, InvestigatorCardView>();

@@ -1,6 +1,6 @@
 ﻿namespace Arkham.Model
 {
-    public interface ICardSearch
+    public interface ICardSearchable
     {
         string TextToSearch { get; }
     }

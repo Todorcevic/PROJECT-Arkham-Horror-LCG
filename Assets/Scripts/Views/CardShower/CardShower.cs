@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Arkham.Views
 {
-    public class CardShower : MonoBehaviour, ICardShower
+    public class CardShower : MonoBehaviour
     {
         private const string SHOW_ANIMATION = "ShowAnimation";
         private const string MOVE_ANIMATION = "MoveAnimation";

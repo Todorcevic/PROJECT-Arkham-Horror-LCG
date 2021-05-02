@@ -11,7 +11,7 @@ namespace Arkham.Views
     {
         public const string HOVEROFF = "HoverOff";
         [Inject] private readonly IDoubleClickDetector clickDetector;
-        [Inject] private readonly IInvestigatorSelectorController controller;
+        [Inject] private readonly InvestigatorSelectorController controller;
         [Title("RESOURCES")]
         [SerializeField, Required] private Transform card;
         [SerializeField, Required] private InteractableAudio audioInteractable;

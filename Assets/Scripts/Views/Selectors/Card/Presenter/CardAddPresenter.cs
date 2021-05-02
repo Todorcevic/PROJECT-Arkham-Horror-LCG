@@ -6,12 +6,12 @@ using Arkham.Adapter;
 
 namespace Arkham.Views
 {
-    public class CardAddPresenter : IInitializable, ICardAddPresenter
+    public class CardAddPresenter : IInitializable
     {
         [Inject(Id = "CardPlaceHolderZone")] public RectTransform placeHolderZone;
         [Inject] private readonly AddCardEventDomain addCardEvent;
-        [Inject] private readonly ICardSelectorsManager cardSelectorsManager;
-        [Inject] private readonly IImageCardsManager imageCards;
+        [Inject] private readonly CardSelectorsManager cardSelectorsManager;
+        [Inject] private readonly ImageCardsManagerComponent imageCards;
         [Inject] private readonly CardRepository cardCollection;
         [Inject] private readonly Selector selector;
 

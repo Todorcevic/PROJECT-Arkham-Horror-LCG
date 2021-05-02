@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Arkham.Services
 {
-    public class ImageCardsManagerComponent : MonoBehaviour, IImageCardsManager
+    public class ImageCardsManagerComponent : MonoBehaviour
     {
         [SerializeField] private List<Sprite> cardImagesEN;
 
