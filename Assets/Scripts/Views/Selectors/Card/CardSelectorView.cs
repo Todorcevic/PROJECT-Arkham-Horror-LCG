@@ -12,7 +12,7 @@ namespace Arkham.Views
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvas;
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
-        [SerializeField, Required, ChildGameObjectsOnly] private CardSelectorSensor sensor;
+        [SerializeField, Required, ChildGameObjectsOnly] private CardSelectorController sensor;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI cardName;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI quantity;
         [Title("SETTINGS")]
@@ -25,7 +25,7 @@ namespace Arkham.Views
         public void SetSelector(string cardId, Sprite cardSprite = null)
         {
             Id = sensor.Id = cardId;
-            sensor.Activate(!IsEmpty);
+            Activate(!IsEmpty);
             ChangeImage(cardSprite);
         }
 
@@ -50,5 +50,7 @@ namespace Arkham.Views
             cantComplete.Complete();
             cantComplete = transform.DOPunchPosition(Vector3.right * 10, timeAnimation, 20, 5);
         }
+
+        private void Activate(bool isOn) => canvas.blocksRaycasts = canvas.interactable = isOn;
     }
 }

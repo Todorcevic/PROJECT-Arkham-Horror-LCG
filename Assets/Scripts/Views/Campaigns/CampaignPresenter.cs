@@ -4,15 +4,12 @@ using Arkham.Adapter;
 
 namespace Arkham.Views
 {
-    public class CampaignPresenter : IInitializable
+    public class CampaignPresenter
     {
         [Inject] private readonly CampaignsManager campaignManager;
         [Inject] private readonly CampaignRepository campaignRepository;
-        [Inject] private readonly CampaignEventDomain campaignChangedEvent;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => campaignChangedEvent.Subscribe(ExecuteStateWithCampaign);
-
         public void InitializeCampaigns()
         {
             foreach (Campaign campaign in campaignRepository.Campaigns)

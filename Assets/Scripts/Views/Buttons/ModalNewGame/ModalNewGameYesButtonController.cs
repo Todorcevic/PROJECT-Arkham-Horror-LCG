@@ -7,7 +7,7 @@ namespace Arkham.Views
     public class ModalNewGameYesButtonController : IInitializable
     {
         [Inject] private readonly StartGameUseCase startGame;
-        [Inject] private readonly ScenarioEventDomain scenarioEvent;
+        [Inject] private readonly SelectScenarioUseCase scenarioEvent;
         [Inject(Id = "ModalNewGameYesButton")] private readonly ButtonView yesButton;
         [Inject(Id = "MainPanelsManager")] private readonly PanelsManagerComponent panelsManager;
         [Inject(Id = "ChooseCampaignPanel")] private readonly PanelView chooseCardPanel;

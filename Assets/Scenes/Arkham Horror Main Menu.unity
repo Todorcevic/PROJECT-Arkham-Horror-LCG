@@ -44301,7 +44301,7 @@ MonoBehaviour:
   _identifier: 
   _useSceneContext: 0
   _context: {fileID: 0}
-  _bindType: 0
+  _bindType: 1
 --- !u!114 &1628229757
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ namespace Arkham.Views
     public class CardView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private ICardController controller;
-        [Inject] private readonly CardShowerController showerController;
+        [Inject] private readonly CardShowerPresenter showerController;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
@@ -47,7 +47,7 @@ namespace Arkham.Views
         {
             if (eventData.dragging) return;
             HoverOnEffect();
-            showerController.HoveredOn(new CardShowerDTO(Id, IsInactive ? Color.gray : Color.white, transform.position, isInLeftSide: true));
+            showerController.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: true));
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)

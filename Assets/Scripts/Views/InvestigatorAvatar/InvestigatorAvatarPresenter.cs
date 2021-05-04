@@ -1,19 +1,14 @@
 ﻿using Zenject;
-using Arkham.Adapter;
 
 namespace Arkham.Views
 {
-    public class InvestigatorAvatarPresenter : IInitializable
+    public class InvestigatorAvatarPresenter
     {
         [Inject] private readonly InvestigatorAvatarView investigatorAvatar;
         [Inject] private readonly CardsManager investigatorCardsManager;
-        [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => investigatorSelectEvent.Subscribe(ShowInvetigator);
-
-        /*******************************************************************/
-        private void ShowInvetigator(string investigatorId)
+        public void ShowInvetigator(string investigatorId)
         {
             UnityEngine.Sprite imageCard = investigatorCardsManager.GetSpriteCard(investigatorId);
             investigatorAvatar.ChangeImage(imageCard);

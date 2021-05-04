@@ -11,7 +11,7 @@ namespace Arkham.Services
     public class CardFactory : MonoBehaviour, ICardFactory
     {
         [Inject] private readonly DiContainer diContainer;
-        [Inject] private readonly ImageCardsManagerComponent imageCards;
+        [Inject] private readonly ICardImage imageCards;
         [Inject] private readonly CardRepository cardCollection;
         [Inject] private readonly DeckCardController cardController;
         [Inject] private readonly InvestigatorCardController investigatorController;

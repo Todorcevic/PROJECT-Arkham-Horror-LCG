@@ -14,7 +14,7 @@ namespace Arkham.Config
         {
             /*** Services ***/
             Container.BindInterfacesTo<ScreenResolutionAutoDetect>().AsSingle();
-            Container.Bind<CardVisibilityService>().AsSingle();
+            Container.Bind<CardVisibilityInteractor>().AsSingle();
             Container.BindInterfacesTo<DoubleClickDetector>().AsSingle();
             Container.BindInterfacesTo<DataContext>().AsSingle();
             Container.BindInterfacesTo<DataMapper>().AsSingle();
@@ -23,7 +23,7 @@ namespace Arkham.Config
             Container.Bind(x => x.AllNonAbstractClasses()
            .InNamespace("Arkham").WithSuffix("Controller")).AsCached();
 
-            Container.Bind(x => x.AllInterfaces()).To(x => x.AllInterfaces()
+            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
            .InNamespace("Arkham").WithSuffix("Controller")).AsCached();
 
             /*** Managers ***/
@@ -49,25 +49,21 @@ namespace Arkham.Config
             Container.Bind<UnlockCardsRepository>().AsSingle();
 
             /*** Event Data ***/
-            Container.Bind<CampaignEventDomain>().AsSingle();
-            Container.Bind<ScenarioEventDomain>().AsSingle();
-            Container.Bind<AddCardEventDomain>().AsSingle();
-            Container.Bind<RemoveCardEventDomain>().AsSingle();
-            Container.Bind<SelectInvestigatorEventDomain>().AsSingle();
-            Container.Bind<ChangeInvestigatorEventDomain>().AsSingle();
-            Container.Bind<AddInvestigatorEventDomain>().AsSingle();
-            Container.Bind<RemoveInvestigatorEventDomain>().AsSingle();
+            Container.Bind<SelectScenarioUseCase>().AsSingle();
+            Container.Bind<AddCardUseCase>().AsSingle();
+            Container.Bind<RemoveCardUseCase>().AsSingle();
+            Container.Bind<SelectInvestigatorUseCase>().AsSingle();
+            Container.Bind<ChangeInvestigatorUseCase>().AsSingle();
+            Container.Bind<AddInvestigatorUseCase>().AsSingle();
+            Container.Bind<RemoveInvestigatorUseCase>().AsSingle();
             Container.Bind<StartGameUseCase>().AsSingle();
-            Container.Bind<UnlockCardEventDomain>().AsSingle();
 
             /*** Interactors ***/
-            Container.Bind<CardSelectionFiler>().AsSingle();
-            Container.Bind<InvestigatorSelectionFilter>().AsSingle();
+            Container.Bind<CardSelectionInteractor>().AsSingle();
+            Container.Bind<InvestigatorSelectionInteractor>().AsSingle();
 
             /*** Resources ***/
             Container.Bind<CampaignStateSO>().FromScriptableObjectResource(gamefiles.CAMPAIGNS_STATES).AsSingle();
-
-
 
             /*** Factories ***/
             Container.BindInterfacesTo<NameConventionFactory>().AsSingle();

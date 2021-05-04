@@ -1,6 +1,5 @@
 ﻿using Arkham.Config;
 using Arkham.Model;
-using Arkham.Adapter;
 using System.Collections.Generic;
 using Zenject;
 
@@ -12,8 +11,6 @@ namespace Arkham.Services
         [Inject] private readonly IMapper mapper;
         [Inject] private readonly GameFiles gameFiles;
         [Inject] private readonly CardRepository cardRepository;
-        [Inject] private readonly StartGameUseCase gameStartedEvent;
-
 
         /*******************************************************************/
         public void LoadDataCards()

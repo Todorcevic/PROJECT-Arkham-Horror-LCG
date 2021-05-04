@@ -7,7 +7,7 @@ namespace Arkham.Views
     {
         [Inject(Id = "MainPanelsManager")] private readonly PanelsManagerComponent panelsManager;
         [Inject(Id = "ChooseCardPanel")] private readonly PanelView panelToShow;
-        [Inject] private readonly ScenarioEventDomain scenarioEvent;
+        [Inject] private readonly SelectScenarioUseCase scenarioEvent;
 
         /*******************************************************************/
         public void Clicked(string campaignId)

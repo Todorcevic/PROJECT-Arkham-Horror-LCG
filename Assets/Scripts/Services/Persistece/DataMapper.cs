@@ -37,7 +37,7 @@ namespace Arkham.Services
                     MentalTrauma = investigator.MentalTrauma,
                     Xp = investigator.Xp,
                     IsPlaying = investigator.IsPlaying,
-                    IsRetired = investigator.IsRetired
+                    IsRetired = investigator.State == InvestigatorState.Retired
                 };
 
                 investigatorDTO.Deck = investigator.CardsInDeckIds;
@@ -69,22 +69,20 @@ namespace Arkham.Services
             investigatorRepository.Reset();
             foreach (InvestigatorDTO investigator in repositoryDTO.InvestigatorsList)
             {
-                Investigator newInvestigator = new Investigator()
-                {
-                    PhysicTrauma = investigator.PhysicTrauma,
-                    MentalTrauma = investigator.MentalTrauma,
-                    Xp = investigator.Xp,
-                    IsPlaying = investigator.IsPlaying,
-                    IsRetired = investigator.IsRetired
-                };
+                Investigator newInvestigator = new Investigator(
+                    investigator.PhysicTrauma,
+                    investigator.MentalTrauma,
+                    investigator.Xp,
+                    investigator.IsPlaying,
+                    investigator.IsRetired,
+                    cardRepository.Get(investigator.Id),
+                    factory.CreateInstance<DeckBuildingRules>(investigator.Id)
+                    );
 
-                newInvestigator.Info = cardRepository.Get(investigator.Id);
-                newInvestigator.DeckBuilder = factory.CreateInstance<DeckBuildingRules>(investigator.Id);
                 foreach (string card in investigator.MandatoryCards)
                     newInvestigator.AddToMandatory(cardRepository.Get(card));
                 foreach (string card in investigator.Deck)
                     newInvestigator.AddToDeck(cardRepository.Get(card));
-
                 investigatorRepository.Add(newInvestigator);
             }
         }

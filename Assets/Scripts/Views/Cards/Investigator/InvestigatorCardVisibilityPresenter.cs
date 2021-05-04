@@ -1,24 +1,13 @@
 ﻿using Arkham.Model;
 using Zenject;
-using Arkham.Adapter;
-using Arkham.Services;
 
 namespace Arkham.Views
 {
-    public class InvestigatorCardVisibilityPresenter : IInitializable
+    public class InvestigatorCardVisibilityPresenter
     {
-        [Inject] private readonly RemoveInvestigatorEventDomain InvestigatorSelectorEvent;
-        [Inject] private readonly AddInvestigatorEventDomain investigatorAddEvent;
         [Inject] private readonly CardsManager cardsManager;
-        [Inject] private readonly InvestigatorSelectionFilter investigatorSelectionFilter;
-        [Inject] private readonly CardVisibilityService visibilityService;
-
-        /*******************************************************************/
-        public void Initialize()
-        {
-            investigatorAddEvent.Subscribe((_) => RefreshInvestigatorsVisibility());
-            InvestigatorSelectorEvent.Subscribe((_) => RefreshInvestigatorsVisibility());
-        }
+        [Inject] private readonly InvestigatorSelectionInteractor investigatorSelectionFilter;
+        [Inject] private readonly CardVisibilityInteractor visibilityService;
 
         /*******************************************************************/
         public void RefreshInvestigatorsVisibility()

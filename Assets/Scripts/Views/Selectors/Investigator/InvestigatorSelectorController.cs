@@ -1,35 +1,70 @@
-﻿using UnityEngine;
+﻿using Arkham.Adapter;
+using Arkham.Services;
+using DG.Tweening;
+using Sirenix.OdinInspector;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
-using Arkham.Adapter;
 
 namespace Arkham.Views
 {
-    public class InvestigatorSelectorController
+    public class InvestigatorSelectorController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [Inject] private readonly RemoveInvestigatorEventDomain investigatorSelector;
-        [Inject] private readonly SelectInvestigatorEventDomain investigatorSelectEvent;
-        [Inject] private readonly ChangeInvestigatorEventDomain investigatorChangeEvent;
-        [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
-        [Inject(Id = "MidZone")] private readonly RectTransform removeZone;
+        public const string HOVEROFF = "HoverOff";
+        [Inject] private readonly IDoubleClickDetector clickDetector;
+        [Inject] private readonly RemoveInvestigatorUseCase investigatorSelector;
+        [Inject] private readonly SelectInvestigatorUseCase investigatorSelectEvent;
+        [Title("RESOURCES")]
+        [SerializeField, Required] private Transform card;
+        [SerializeField, Required] private InteractableAudio audioInteractable;
+        [Title("SETTINGS")]
+        [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
+        [SerializeField, Range(1f, 2f)] private float scaleHoverEffect;
+
+        public string Id { private get; set; }
 
         /*******************************************************************/
-        public void DoubleClicked(string investigatorId)
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            investigatorSelector.Remove(investigatorId);
-            investigatorSelectEvent.SelectLead();
+            if (clickDetector.IsDoubleClick(eventData.clickTime, eventData.pointerPress))
+            {
+                DoubleClickEffect();
+                investigatorSelector.Remove(Id);
+                investigatorSelectEvent.SelectLead();
+            }
+            else
+            {
+                ClickEffect();
+                investigatorSelectEvent.Select(Id);
+            }
         }
 
-        public void Clicked(string investigatorId) => investigatorSelectEvent.Select(investigatorId);
-
-        public void Swaping(string investigatorId, int positionToSwap) => investigatorChangeEvent.Swap(positionToSwap, investigatorId);
-
-        public void EndingDrag(string investigatorId, PointerEventData eventData)
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            if (IsInRemoveZone(eventData)) DoubleClicked(investigatorId);
-            else investigatorSelectorManager.GetSelectorById(investigatorId).ArrangeAnimation();
+            if (eventData.dragging || DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION)) return;
+            HoverOnEffect();
         }
 
-        private bool IsInRemoveZone(PointerEventData eventData) => eventData.hovered.Contains(removeZone.gameObject);
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        {
+            if (eventData.dragging || DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION)) return;
+            HoverOffEffect();
+        }
+
+        private void ClickEffect() => audioInteractable.ClickSound();
+
+        private void DoubleClickEffect() => audioInteractable.ClickSound();
+
+        private void HoverOnEffect()
+        {
+            audioInteractable.HoverOnSound();
+            card.DOScale(scaleHoverEffect, timeHoverAnimation);
+        }
+
+        private void HoverOffEffect()
+        {
+            audioInteractable.HoverOffSound();
+            card.DOScale(1f, timeHoverAnimation).SetId(HOVEROFF);
+        }
     }
 }

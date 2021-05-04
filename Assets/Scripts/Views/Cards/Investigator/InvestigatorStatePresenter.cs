@@ -6,18 +6,18 @@ namespace Arkham.Views
     public class InvestigatorStatePresenter
     {
         [Inject] private readonly CardsManager cardsManager;
-        [Inject] private readonly InvestigatorRepository investigatorManager;
+        [Inject] private readonly InvestigatorRepository investigatorRepository;
 
         /*******************************************************************/
         public void InvestigatorStateResolve()
         {
             foreach (InvestigatorCardView cardInvestigator in cardsManager.InvestigatorList)
             {
-                if (investigatorManager.Get(cardInvestigator.Id).ISKilled)
+                if (investigatorRepository.Get(cardInvestigator.Id).State == InvestigatorState.Killed)
                     cardInvestigator.ChangeToKilledState();
-                else if (investigatorManager.Get(cardInvestigator.Id).ISInsane)
+                else if (investigatorRepository.Get(cardInvestigator.Id).State == InvestigatorState.Insane)
                     cardInvestigator.ChangeToInsaneState();
-                else if (investigatorManager.Get(cardInvestigator.Id).IsRetired)
+                else if (investigatorRepository.Get(cardInvestigator.Id).State == InvestigatorState.Retired)
                     cardInvestigator.ChangeToRetiredState();
             }
         }

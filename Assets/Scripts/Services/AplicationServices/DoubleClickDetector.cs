@@ -8,6 +8,7 @@ namespace Arkham.Services
         private float lastClickTime;
         private GameObject lastObjectClicked;
 
+        /*******************************************************************/
         public bool IsDoubleClick(float clickTime, GameObject objectClicked)
         {
             if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_LIMIT && objectClicked == lastObjectClicked)

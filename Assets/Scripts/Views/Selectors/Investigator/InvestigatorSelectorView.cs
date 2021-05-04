@@ -14,8 +14,9 @@ namespace Arkham.Views
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGlow;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasImage;
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
-        [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorSelectorSensor sensor;
-        [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorSelectorDragSensor dragSensor;
+        [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorSelectorController sensor;
+        [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorSelectorDragController dragSensor;
+        [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasSensor;
         [SerializeField, Required, ChildGameObjectsOnly] private Image leaderIcon;
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeAnimation;
@@ -27,10 +28,12 @@ namespace Arkham.Views
         public bool IsLeader => leaderIcon.enabled;
 
         /*******************************************************************/
+        public void Activate(bool isOn) => canvasSensor.blocksRaycasts = canvasSensor.interactable = isOn;
+
         public void SetSelector(string cardId, Sprite cardSprite)
         {
             Id = sensor.Id = dragSensor.Id = cardId;
-            sensor.Activate(true);
+            Activate(true);
             canvasImage.alpha = 1;
             image.sprite = cardSprite;
         }
@@ -38,7 +41,7 @@ namespace Arkham.Views
         public void EmptySelector()
         {
             Id = null;
-            sensor.Activate(false);
+            Activate(false);
             canvasImage.alpha = 0;
             image.sprite = null;
         }

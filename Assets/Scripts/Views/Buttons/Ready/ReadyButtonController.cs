@@ -5,11 +5,11 @@ namespace Arkham.Views
 {
     public class ReadyButtonController : IInitializable
     {
-        [Inject(Id = "ReadyButton")] private readonly ButtonView readyButtons;
+        [Inject(Id = "ReadyButton")] private readonly ButtonView readyButton;
         [Inject] private readonly Selector selectorRepository;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => readyButtons.AddClickAction(Clicked);
+        void IInitializable.Initialize() => readyButton.AddClickAction(Clicked);
 
         /*******************************************************************/
 
@@ -18,5 +18,7 @@ namespace Arkham.Views
             selectorRepository.ReadyAllInvestigators();
             //TODO :StartGame
         }
+
+        public void Desactive(bool desactivate) => readyButton.Desactive(desactivate);
     }
 }

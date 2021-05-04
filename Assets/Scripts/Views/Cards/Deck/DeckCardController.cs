@@ -5,7 +5,7 @@ namespace Arkham.Views
 {
     public class DeckCardController : ICardController
     {
-        [Inject] private readonly AddCardEventDomain addCardEvent;
+        [Inject] private readonly AddCardUseCase addCardEvent;
 
         /*******************************************************************/
         public void Clicked(string cardId) => addCardEvent.AddCard(cardId);
