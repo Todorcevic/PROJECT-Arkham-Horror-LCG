@@ -5,6 +5,7 @@ namespace Arkham.Views
 {
     public class SearchController : IInitializable, ICardSearchable
     {
+        [Inject] private readonly InvestigatorSelectionInteractor investigatorSelectionFilter;
         [Inject(Id = "InputSearch")] private readonly InputFieldView inputFieldView;
         [Inject] private readonly InvestigatorCardVisibilityPresenter investigatorVisibility;
         [Inject] private readonly DeckCardVisibilityPresenter cardVisibility;

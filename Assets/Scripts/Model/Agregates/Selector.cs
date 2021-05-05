@@ -8,7 +8,7 @@ namespace Arkham.Model
     {
         private List<Investigator> investigators;
 
-        public Investigator InvestigatorSelected { get; set; }
+        public Investigator InvestigatorSelected { get; private set; }
         public Investigator Lead => investigators.FirstOrDefault();
         public int AmontInvestigatorsSelected => investigators.Count;
         public bool IsSelectionFull => AmontInvestigatorsSelected >= GameConfig.MAX_INVESTIGATORS;
@@ -22,7 +22,11 @@ namespace Arkham.Model
         public int AmountSelectedOfThisInvestigator(Investigator investigator) =>
             investigators.Count(inv => inv == investigator);
 
-        public void Reset() => investigators = new List<Investigator>();
+        public void Reset()
+        {
+            InvestigatorSelected = null;
+            investigators = new List<Investigator>();
+        }
 
         public void Add(Investigator investigator) => investigators.Add(investigator);
 
@@ -37,5 +41,7 @@ namespace Arkham.Model
         }
 
         public void ReadyAllInvestigators() => investigators.ForEach(investigator => investigator.IsPlaying = true);
+
+        public void SetCurrentInvestigator(Investigator investigator) => InvestigatorSelected = investigator;
     }
 }

@@ -27,11 +27,11 @@ namespace Arkham.Services
                || c.Type_code == "skill")
                && (c.Subtype_code != "basicweakness"
                && c.Subtype_code != "weakness")
-               && imageCards.ExistThisSprite(c.Code)).OrderBy(c => c.Faction_code).ThenBy(c => c.Code).Select(c => c.Code);
+               && imageCards.ExistThisSprite(c.Id)).OrderBy(c => c.Faction_code).ThenBy(c => c.Id).Select(c => c.Id);
 
         private IEnumerable<string> InvestigatorCards => cardCollection
-                .FindAll(c => c.Type_code == "investigator" && imageCards.ExistThisSprite(c.Code))
-                .OrderBy(c => c.Faction_code).ThenBy(c => c.Code).Select(c => c.Code);
+                .FindAll(c => c.Type_code == "investigator" && imageCards.ExistThisSprite(c.Id))
+                .OrderBy(c => c.Faction_code).ThenBy(c => c.Id).Select(c => c.Id);
 
         /*******************************************************************/
         public void BuildDeckCards()

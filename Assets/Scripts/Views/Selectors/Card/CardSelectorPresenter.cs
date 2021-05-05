@@ -1,4 +1,4 @@
-﻿using Arkham.Adapter;
+﻿using Arkham.UseCases;
 using Arkham.Services;
 using System.Collections.Generic;
 using UnityEngine;

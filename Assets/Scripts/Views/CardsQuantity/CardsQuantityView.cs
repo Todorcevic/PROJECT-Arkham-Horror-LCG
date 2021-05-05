@@ -11,8 +11,10 @@ namespace Arkham.Views
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI deckSizeText;
 
         /*******************************************************************/
-        public string SetCardsAmount(string amount) => cardsAmountText.text = amount;
-
-        public string SetDeckSize(string amount) => deckSizeText.text = amount;
+        public void Refresh(string amountCard, string deckSize)
+        {
+            cardsAmountText.text = amountCard;
+            deckSizeText.text = deckSize;
+        }
     }
 }

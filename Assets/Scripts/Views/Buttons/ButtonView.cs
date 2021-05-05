@@ -10,6 +10,7 @@ namespace Arkham.Views
 {
     public class ButtonView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        private bool isLock;
         private bool isInactive;
         private event Action ClickAction;
         [Title("RESOURCES")]
@@ -31,7 +32,10 @@ namespace Arkham.Views
         {
             HoverActivate(isOn);
             isInactive = isOn;
+            isLock = isOn;
         }
+
+        public void Execute() => ClickAction?.Invoke();
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
@@ -74,7 +78,7 @@ namespace Arkham.Views
             FillBackground(isOn);
         }
 
-        private void Desactivate(bool isOn) => ChangeTextColor(isOn ? desactiveColor : Color.white);
+        private void Desactivate(bool isOn) => ChangeTextColor(isOn ? desactiveColor : isLock ? Color.black : Color.white);
 
         private void ChangeTextColor(Color color) => text.DOColor(color, timeHoverAnimation);
 

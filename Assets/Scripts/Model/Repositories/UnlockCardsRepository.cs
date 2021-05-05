@@ -13,6 +13,6 @@ namespace Arkham.Model
 
         public void Add(Card card) => cards.Add(card);
 
-        public List<string> Serialize() => cards.ConvertAll(card => card.Code);
+        public List<string> Serialize() => cards.ConvertAll(card => card.Id);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Arkham.Adapter;
+﻿using Arkham.UseCases;
 using Arkham.Model;
 using Arkham.Services;
 using Arkham.Views;
@@ -41,22 +41,16 @@ namespace Arkham.Config
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
             .InNamespace("Arkham").WithSuffix("Adapter")).AsSingle();
 
+            /*** Event Data ***/
+            Container.Bind(x => x.AllNonAbstractClasses()
+            .InNamespace("Arkham").WithSuffix("UseCase")).AsSingle();
+
             /*** Repositories***/
             Container.Bind<CardRepository>().AsSingle();
             Container.Bind<CampaignRepository>().AsSingle();
             Container.Bind<InvestigatorRepository>().AsSingle();
             Container.Bind<Selector>().AsSingle();
             Container.Bind<UnlockCardsRepository>().AsSingle();
-
-            /*** Event Data ***/
-            Container.Bind<SelectScenarioUseCase>().AsSingle();
-            Container.Bind<AddCardUseCase>().AsSingle();
-            Container.Bind<RemoveCardUseCase>().AsSingle();
-            Container.Bind<SelectInvestigatorUseCase>().AsSingle();
-            Container.Bind<ChangeInvestigatorUseCase>().AsSingle();
-            Container.Bind<AddInvestigatorUseCase>().AsSingle();
-            Container.Bind<RemoveInvestigatorUseCase>().AsSingle();
-            Container.Bind<StartGameUseCase>().AsSingle();
 
             /*** Interactors ***/
             Container.Bind<CardSelectionInteractor>().AsSingle();

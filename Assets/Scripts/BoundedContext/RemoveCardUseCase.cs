@@ -2,24 +2,27 @@
 using Arkham.Views;
 using Zenject;
 
-namespace Arkham.Adapter
+namespace Arkham.UseCases
 {
     public class RemoveCardUseCase
     {
-        [Inject] private readonly ReadyButtonController readyButton;
-        [Inject] private readonly DeckCardVisibilityPresenter cardVisibility;
-        [Inject] private readonly CardShowerPresenter cardShower;
-        [Inject] private readonly CardsQuantityPresenter cardQuantity;
-        [Inject] private readonly CardSelectorPresenter cardselector;
         [Inject] private readonly Selector selector;
         [Inject] private readonly CardRepository cardRepository;
+        [Inject(Id = "ReadyButton")] private readonly ButtonView readyButton;
+        [Inject] private readonly DeckCardVisibilityPresenter cardVisibility;
+        [Inject] private readonly CardsQuantityView cardQuantity;
+        [Inject] private readonly CardSelectorPresenter cardSelector;
+
+        private string AmountCards => selector.InvestigatorSelected?.AmountCardsSelected.ToString();
+        private string DeckSize => selector.InvestigatorSelected?.DeckBuilding.DeckSize.ToString();
 
         /*******************************************************************/
-        public void ExecuteWith(string cardId)
+        public bool ExecuteWith(string cardId)
         {
             Card card = cardRepository.Get(cardId);
-            if (UpdateModel(card)) UpdateView(card);
-            else CantRemoveAnimation(card.Code);
+            bool isRemoved = UpdateModel(card);
+            if (isRemoved) UpdateView(card);
+            return isRemoved;
         }
 
         private bool UpdateModel(Card card)
@@ -32,13 +35,10 @@ namespace Arkham.Adapter
         private void UpdateView(Card card)
         {
             int currentQuantity = selector.InvestigatorSelected.GetAmountOfThisCardInDeck(card);
-            cardselector.SetCardInSelector(new CardRowDTO(card.Code, card.Real_name, currentQuantity));
-            cardShower.RemoveCardAnimation();
-            cardVisibility.RefreshCardsVisibility();
-            cardQuantity.Refresh();
+            cardSelector.SetCardInSelector(new CardRowDTO(card.Id, card.Real_name, currentQuantity));
+            cardVisibility.RefreshCardsSelectability();
+            cardQuantity.Refresh(AmountCards, DeckSize);
             readyButton.Desactive(!selector.IsReady);
         }
-
-        private void CantRemoveAnimation(string cardId) => cardselector.CantRemove(cardId);
     }
 }

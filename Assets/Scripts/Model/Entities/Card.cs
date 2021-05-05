@@ -1,7 +1,10 @@
-﻿namespace Arkham.Model
+﻿using Newtonsoft.Json;
+
+namespace Arkham.Model
 {
     public class Card
     {
+        [JsonProperty("Code")] public string Id { get; set; }
         public string Pack_code { get; set; }
         public string Pack_name { get; set; }
         public string Type_code { get; set; }
@@ -12,7 +15,6 @@
         public string Faction_name { get; set; }
         public int? Position { get; set; }
         public bool? Exceptional { get; set; }
-        public string Code { get; set; }
         public string Name { get; set; }
         public string Real_name { get; set; }
         public string Text { get; set; }

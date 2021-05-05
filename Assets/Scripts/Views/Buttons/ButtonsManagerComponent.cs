@@ -25,6 +25,8 @@ namespace Arkham.Views
         private void SelectButton(ButtonView button)
         {
             currentButton?.Lock(false);
+            //currentButton?.SetState(ButtonState.Activate);
+            //button.SetState(ButtonState.Lock);
             button.Lock(true);
             currentButton = button;
         }

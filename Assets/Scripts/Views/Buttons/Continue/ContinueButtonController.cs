@@ -1,4 +1,5 @@
 ﻿using Arkham.Config;
+using Arkham.UseCases;
 using System.IO;
 using Zenject;
 
@@ -9,7 +10,7 @@ namespace Arkham.Views
         [Inject] private readonly GameFiles gameFiles;
         [Inject] private readonly StartGameUseCase startGame;
         [Inject(Id = "ContinueButton")] private readonly ButtonView continueButton;
-        [Inject(Id = "MainPanelsManager")] private readonly PanelsManagerComponent panelsManager;
+        [Inject(Id = "MainPanelsManager")] private readonly PanelsManagerComponent mainPanelsManager;
         [Inject(Id = "ChooseCardPanel")] private readonly PanelView chooseCardPanel;
 
         /*******************************************************************/
@@ -25,7 +26,7 @@ namespace Arkham.Views
         private void Clicked()
         {
             startGame.Init(StartGame.Continue);
-            panelsManager.SelectPanel(chooseCardPanel);
+            mainPanelsManager.SelectPanel(chooseCardPanel);
         }
 
         private bool CanContinue() => File.Exists(gameFiles.PlayerProgressFilePath);

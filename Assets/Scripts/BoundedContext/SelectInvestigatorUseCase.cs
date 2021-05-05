@@ -3,17 +3,20 @@ using Arkham.Views;
 using System.Collections.Generic;
 using Zenject;
 
-namespace Arkham.Adapter
+namespace Arkham.UseCases
 {
     public class SelectInvestigatorUseCase
     {
-        [Inject] private readonly Selector selectorRepository;
+        [Inject] private readonly Selector selector;
         [Inject] private readonly InvestigatorRepository investigatorRepository;
         [Inject] private readonly DeckCardVisibilityPresenter cardVisibility;
-        [Inject] private readonly CardsQuantityPresenter cardsQuantity;
-        [Inject] private readonly InvestigatorAvatarPresenter investigatorAvatar;
+        [Inject] private readonly CardsQuantityView cardQuantity;
+        [Inject] private readonly InvestigatorAvatarView investigatorAvatar;
         [Inject] private readonly CardSelectorPresenter cardSelector;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
+
+        private string AmountCards => selector.InvestigatorSelected?.AmountCardsSelected.ToString();
+        private string DeckSize => selector.InvestigatorSelected?.DeckBuilding.DeckSize.ToString();
 
         /*******************************************************************/
         public void Select(string investigatorId)
@@ -22,9 +25,7 @@ namespace Arkham.Adapter
             Select(investigator);
         }
 
-        public void SelectLead() => Select(selectorRepository.Lead);
-
-        public void SelectCurrentOrLead() => Select(selectorRepository.InvestigatorSelected ?? selectorRepository.Lead);
+        public void SelectLead() => Select(selector.Lead);
 
         private void Select(Investigator investigator)
         {
@@ -32,13 +33,14 @@ namespace Arkham.Adapter
             UpdateView(investigator);
         }
 
-        private void UpdateModel(Investigator investigator) => selectorRepository.InvestigatorSelected = investigator;
+        private void UpdateModel(Investigator investigator) => selector.SetCurrentInvestigator(investigator);
 
         private void UpdateView(Investigator investigator)
         {
             investigatorSelector.SelectInvestigator(investigator?.Id);
             investigatorAvatar.ShowInvetigator(investigator?.Id);
-            cardsQuantity.Refresh();
+            cardQuantity.Refresh(AmountCards, DeckSize);
+            cardVisibility.RefreshCardsSelectability();
             cardVisibility.RefreshCardsVisibility();
             cardSelector.ShowAllCards(CreateDTOList(investigator));
         }
@@ -48,7 +50,7 @@ namespace Arkham.Adapter
             List<CardRowDTO> allCardRow = new List<CardRowDTO>();
             if (investigator == null) return allCardRow;
             foreach (Card card in investigator?.FullDeck)
-                allCardRow.Add(new CardRowDTO(card.Code, card.Real_name, investigator.GetAmountOfThisCardInDeck(card)));
+                allCardRow.Add(new CardRowDTO(card.Id, card.Real_name, investigator.GetAmountOfThisCardInDeck(card)));
             return allCardRow;
         }
     }

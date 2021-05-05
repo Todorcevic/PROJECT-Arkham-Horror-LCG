@@ -2,7 +2,7 @@
 using Arkham.Views;
 using Zenject;
 
-namespace Arkham.Adapter
+namespace Arkham.UseCases
 {
     public class SelectScenarioUseCase
     {

@@ -14,10 +14,17 @@ namespace Arkham.Views
         {
             foreach (CardView cardView in cardsManager.InvestigatorList)
             {
-                bool canBeSelected = investigatorSelectionFilter.CanThisCardBeSelected(cardView.Id);
                 bool canBeShowed = visibilityService.CanThisCardBeShowed(cardView.Id);
-                cardView.Activate(canBeSelected);
                 cardView.Show(canBeShowed);
+            }
+        }
+
+        public void RefreshInvestigatorsSelectability()
+        {
+            foreach (CardView cardView in cardsManager.InvestigatorList)
+            {
+                bool canBeSelected = investigatorSelectionFilter.CanThisCardBeSelected(cardView.Id);
+                cardView.Activate(canBeSelected);
             }
         }
     }

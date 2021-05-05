@@ -1,6 +1,6 @@
 ﻿using Arkham.Config;
 using Zenject;
-using Arkham.Adapter;
+using Arkham.UseCases;
 
 namespace Arkham.Views
 {
@@ -9,8 +9,8 @@ namespace Arkham.Views
         [Inject] private readonly StartGameUseCase startGame;
         [Inject] private readonly SelectScenarioUseCase scenarioEvent;
         [Inject(Id = "ModalNewGameYesButton")] private readonly ButtonView yesButton;
-        [Inject(Id = "MainPanelsManager")] private readonly PanelsManagerComponent panelsManager;
-        [Inject(Id = "ChooseCampaignPanel")] private readonly PanelView chooseCardPanel;
+        [Inject(Id = "MainPanelsManager")] private readonly PanelsManagerComponent mainPanelsManager;
+        [Inject(Id = "ChooseCampaignPanel")] private readonly PanelView chooseCampaignPanel;
 
         /*******************************************************************/
         void IInitializable.Initialize() => yesButton.AddClickAction(Clicked);
@@ -19,7 +19,7 @@ namespace Arkham.Views
         {
             startGame.Init(StartGame.New);
             scenarioEvent.Reset();
-            panelsManager.SelectPanel(chooseCardPanel);
+            mainPanelsManager.SelectPanel(chooseCampaignPanel);
         }
     }
 }

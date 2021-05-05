@@ -13,7 +13,7 @@ namespace Arkham.Model
         public void CreateWith(List<Card> cards)
         {
             cardList = cards;
-            cardDict = cards.ToDictionary(c => c.Code);
+            cardDict = cards.ToDictionary(c => c.Id);
         }
 
         public Card Get(string cardId) => cardDict[cardId];

@@ -1,26 +1,22 @@
-﻿using Arkham.Model;
-using Zenject;
-using Arkham.Adapter;
+﻿using Zenject;
+using Arkham.UseCases;
+using System.Collections.Generic;
 
 namespace Arkham.Views
 {
     public class CampaignPresenter
     {
         [Inject] private readonly CampaignsManager campaignManager;
-        [Inject] private readonly CampaignRepository campaignRepository;
 
         /*******************************************************************/
-        public void InitializeCampaigns()
+        public void InitializeCampaigns(List<CampaignDTO> campaigns)
         {
-            foreach (Campaign campaign in campaignRepository.Campaigns)
-                ExecuteStateWithCampaign(campaign.Id, campaign.State.Id);
-        }
-
-        private void ExecuteStateWithCampaign(string campaignId, string state)
-        {
-            CampaignView campaign = campaignManager.GetCampaign(campaignId);
-            campaignManager.GetState(state).ExecuteState(campaign);
-            campaign.IsOpen = campaignRepository.Get(campaignId).State.IsOpen;
+            foreach (CampaignDTO campaign in campaigns)
+            {
+                CampaignView campaignView = campaignManager.GetCampaign(campaign.Id);
+                campaignManager.GetState(campaign.State).ExecuteState(campaignView);
+                campaignView.IsOpen = campaign.IsOpen;
+            }
         }
     }
 }

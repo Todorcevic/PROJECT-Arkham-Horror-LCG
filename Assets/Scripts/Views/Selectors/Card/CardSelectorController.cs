@@ -1,4 +1,4 @@
-﻿using Arkham.Adapter;
+﻿using Arkham.UseCases;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -11,9 +11,11 @@ namespace Arkham.Views
 {
     public class CardSelectorController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        private Tween cantComplete;
         [Inject] private readonly CardShowerPresenter cardShower;
         [Inject] private readonly RemoveCardUseCase removeCard;
         [Title("RESOURCES")]
+        [SerializeField, Required] private Transform card;
         [SerializeField, Required] private InteractableAudio interactableAudio;
         [SerializeField, Required] private Image background;
         [SerializeField, Required] private TextMeshProUGUI cardName;
@@ -27,7 +29,8 @@ namespace Arkham.Views
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             ClickEffect();
-            removeCard.ExecuteWith(Id);
+            if (removeCard.ExecuteWith(Id)) cardShower.RemoveCardAnimation();
+            else CantRemoveAnimation();
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
@@ -76,5 +79,10 @@ namespace Arkham.Views
 
         private void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, timeAnimation);
 
+        public void CantRemoveAnimation()
+        {
+            cantComplete.Complete();
+            cantComplete = card.DOPunchPosition(Vector3.right * 10, timeAnimation, 20, 5);
+        }
     }
 }

@@ -33,7 +33,6 @@ namespace Arkham.Views
             {
                 frontImage.gameObject.SetActive(true);
                 frontImage.sprite = frontCardSprite;
-                //frontImage.color = imageColor;
             }
 
             void ActiveBackImage()
@@ -41,7 +40,6 @@ namespace Arkham.Views
                 if (backCardSprite == null) return;
                 backImage.gameObject.SetActive(true);
                 backImage.sprite = backCardSprite;
-                //backImage.color = imageColor;
             }
         }
 

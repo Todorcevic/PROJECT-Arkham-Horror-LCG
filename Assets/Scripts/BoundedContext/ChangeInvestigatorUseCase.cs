@@ -2,13 +2,13 @@
 using Arkham.Views;
 using Zenject;
 
-namespace Arkham.Adapter
+namespace Arkham.UseCases
 {
     public class ChangeInvestigatorUseCase
     {
         [Inject] private readonly InvestigatorRepository investigatorRepository;
-        [Inject] private readonly Selector selectorRepository;
-        [Inject] private readonly InvestigatorSelectorPresenter selectorInvestigator;
+        [Inject] private readonly Selector selector;
+        [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
 
         /*******************************************************************/
         public void Swap(int positionToSwap, string investigatorId)
@@ -20,11 +20,14 @@ namespace Arkham.Adapter
         private string UpdateModel(int positionToSwap, string investigatorId)
         {
             Investigator investigatorToSwap = investigatorRepository.Get(investigatorId);
-            Investigator investigatorFromSwap = selectorRepository.Swap(positionToSwap, investigatorToSwap);
+            Investigator investigatorFromSwap = selector.Swap(positionToSwap, investigatorToSwap);
             return investigatorFromSwap.Id;
         }
 
-        private void UpdateView(string investigatorId1, string investigatorId2) =>
-            selectorInvestigator.ChangeInvestigator(investigatorId1, investigatorId2);
+        private void UpdateView(string investigatorId1, string investigatorId2)
+        {
+            investigatorSelector.ChangeInvestigator(investigatorId1, investigatorId2);
+            investigatorSelector.SetLeadSelector(selector.Lead?.Id);
+        }
     }
 }

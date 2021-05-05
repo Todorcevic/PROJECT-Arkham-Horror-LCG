@@ -1,4 +1,4 @@
-﻿using Arkham.Model;
+﻿using Arkham.UseCases;
 using Zenject;
 
 namespace Arkham.Views
@@ -6,19 +6,13 @@ namespace Arkham.Views
     public class ReadyButtonController : IInitializable
     {
         [Inject(Id = "ReadyButton")] private readonly ButtonView readyButton;
-        [Inject] private readonly Selector selectorRepository;
+        [Inject] private readonly StartPlayUseCase startPlay;
 
         /*******************************************************************/
         void IInitializable.Initialize() => readyButton.AddClickAction(Clicked);
 
         /*******************************************************************/
 
-        private void Clicked()
-        {
-            selectorRepository.ReadyAllInvestigators();
-            //TODO :StartGame
-        }
-
-        public void Desactive(bool desactivate) => readyButton.Desactive(desactivate);
+        private void Clicked() => startPlay.Start();
     }
 }

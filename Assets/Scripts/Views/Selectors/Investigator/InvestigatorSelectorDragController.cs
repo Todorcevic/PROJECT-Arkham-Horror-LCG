@@ -1,4 +1,4 @@
-﻿using Arkham.Adapter;
+﻿using Arkham.UseCases;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;

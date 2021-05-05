@@ -5,8 +5,8 @@ namespace Arkham.Views
 {
     public class DeckCardVisibilityPresenter
     {
-        [Inject] private readonly CardSelectionInteractor cardSelectionFilter;
         [Inject] private readonly CardsManager cardsManager;
+        [Inject] private readonly CardSelectionInteractor cardSelectionFilter;
         [Inject] private readonly CardVisibilityInteractor visibilityService;
 
         /*******************************************************************/
@@ -14,10 +14,17 @@ namespace Arkham.Views
         {
             foreach (CardView cardView in cardsManager.DeckList)
             {
-                bool canBeSelected = cardSelectionFilter.CanThisCardBeSelected(cardView.Id);
                 bool canBeShowed = visibilityService.CanThisCardBeShowed(cardView.Id);
-                cardView.Activate(canBeSelected);
                 cardView.Show(canBeShowed);
+            }
+        }
+
+        public void RefreshCardsSelectability()
+        {
+            foreach (CardView cardView in cardsManager.DeckList)
+            {
+                bool canBeSelected = cardSelectionFilter.CanThisCardBeSelected(cardView.Id);
+                cardView.Activate(canBeSelected);
             }
         }
     }

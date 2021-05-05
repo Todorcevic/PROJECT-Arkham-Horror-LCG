@@ -1,5 +1,5 @@
 ﻿using Zenject;
-using Arkham.Adapter;
+using Arkham.UseCases;
 
 namespace Arkham.Views
 {

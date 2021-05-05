@@ -1,6 +1,5 @@
-﻿using Arkham.Model;
-using Zenject;
-using Arkham.Adapter;
+﻿using Zenject;
+using Arkham.UseCases;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
@@ -13,7 +12,6 @@ namespace Arkham.Views
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly SelectInvestigatorUseCase investigatorSelectEvent;
-        [Inject] private readonly Selector selector;
         [Inject] private readonly CardShowerPresenter cardShowerController;
         [Inject(Id = "InvestigatorPlaceHolderZone")] private readonly RectTransform placeHoldersZone;
 
@@ -24,8 +22,7 @@ namespace Arkham.Views
         {
             investigatorSelectorsManager.ResetSelectors();
             AddAllInvestigators();
-            SetLeadSelector();
-            investigatorSelectEvent.SelectCurrentOrLead();
+            investigatorSelectEvent.SelectLead();
 
             void AddAllInvestigators()
             {
@@ -45,7 +42,6 @@ namespace Arkham.Views
         {
             InvestigatorSelectorView selector = investigatorSelectorsManager.GetEmptySelector();
             SetThisSelectorWithThisInvestigator(selector, investigatorId);
-            SetLeadSelector();
             Animation();
 
             async void Animation()
@@ -59,7 +55,6 @@ namespace Arkham.Views
         {
             InvestigatorSelectorView selector = investigatorSelectorsManager.GetSelectorById(investigatorId);
             selector.SetTransform();
-            SetLeadSelector();
             await Animation();
             selector.EmptySelector();
 
@@ -76,7 +71,6 @@ namespace Arkham.Views
             InvestigatorSelectorView selector1 = investigatorSelectorsManager.GetSelectorById(investigatorId1);
             InvestigatorSelectorView selector2 = investigatorSelectorsManager.GetSelectorById(investigatorId2);
             selector1.SwapPlaceHoldersWith(selector2);
-            SetLeadSelector();
             Animation();
 
             void Animation()
@@ -99,19 +93,19 @@ namespace Arkham.Views
               investigatorSelectorsManager.GetSelectorById(activeInvestigatorId)?.Glow(true);
         }
 
+        public void SetLeadSelector(string realLeadInvestigator)
+        {
+            if (realLeadInvestigator == null || realLeadInvestigator == LeadSelector?.Id) return;
+            LeadSelector?.LeadIcon(false);
+            investigatorSelectorsManager.GetSelectorById(realLeadInvestigator).LeadIcon(true);
+        }
+
         private void SetThisSelectorWithThisInvestigator(InvestigatorSelectorView selector, string investigatorId)
         {
             Sprite spriteCard = cardsManager.GetSpriteCard(investigatorId);
             selector.SetTransform(placeHoldersZone);
             selector.SetSelector(investigatorId, spriteCard);
             investigatorSelectorsManager.RebuildPlaceHolders();
-        }
-
-        private void SetLeadSelector()
-        {
-            if (selector.Lead == null || selector.Lead.Id == LeadSelector?.Id) return;
-            LeadSelector?.LeadIcon(false);
-            investigatorSelectorsManager.GetSelectorById(selector.Lead.Id).LeadIcon(true);
         }
     }
 }

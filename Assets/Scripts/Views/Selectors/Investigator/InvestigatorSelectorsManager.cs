@@ -11,6 +11,7 @@ namespace Arkham.Views
         [Inject] private readonly List<InvestigatorSelectorView> selectors;
 
         public InvestigatorSelectorView GetLeadSelector => selectors.Find(i => i.IsLeader);
+        public InvestigatorSelectorView GetRealLeadSelector => selectors[0];
 
         /*******************************************************************/
         public InvestigatorSelectorView GetEmptySelector() => selectors.Find(selector => selector.Id == null);
