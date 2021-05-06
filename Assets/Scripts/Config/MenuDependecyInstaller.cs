@@ -1,7 +1,6 @@
-﻿using Arkham.UseCases;
+﻿using Arkham.Application;
 using Arkham.Model;
 using Arkham.Services;
-using Arkham.Views;
 using Zenject;
 
 namespace Arkham.Config

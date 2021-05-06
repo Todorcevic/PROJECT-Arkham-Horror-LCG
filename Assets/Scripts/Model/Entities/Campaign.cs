@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Arkham.Model
+﻿namespace Arkham.Model
 {
     public class Campaign
     {
