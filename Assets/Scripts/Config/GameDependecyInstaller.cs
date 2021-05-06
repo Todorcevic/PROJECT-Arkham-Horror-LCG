@@ -8,7 +8,7 @@ namespace Arkham.Config
         {
             Container.Bind<GameFiles>().AsSingle();
 
-            DependecyInstaller.Install(Container);
+            MenuDependecyInstaller.Install(Container);
         }
     }
 }

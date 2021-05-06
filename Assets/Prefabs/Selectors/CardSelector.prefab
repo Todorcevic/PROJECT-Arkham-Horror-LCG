@@ -453,12 +453,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56248809f79e482439196a88c05f5be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 6396499959933405539}
+  card: {fileID: 830607639089351350}
   interactableAudio: {fileID: 3161861043085989557}
   background: {fileID: 4850368526312077242}
   cardName: {fileID: 4121154858783106769}
   quantity: {fileID: 223955344760844326}
-  timeHoverAnimation: 0.25
+  timeAnimation: 0.25
 --- !u!222 &8745428860228659470
 CanvasRenderer:
   m_ObjectHideFlags: 0

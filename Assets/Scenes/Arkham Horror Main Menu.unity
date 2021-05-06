@@ -43125,6 +43125,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Ready
       objectReference: {fileID: 0}
+    - target: {fileID: 6843826107656425437, guid: 4e7674a006a0e404ea1441beee0d1095, type: 3}
+      propertyPath: _identifier
+      value: ReadyButton
+      objectReference: {fileID: 0}
     - target: {fileID: 7756205494182457572, guid: 4e7674a006a0e404ea1441beee0d1095, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -44307,7 +44311,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1628229754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 947eaaa5974dbb54aa4333662437b431, type: 3}
+  m_Script: {fileID: 11500000, guid: accd749bd95506143bb07944439d5b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardImagesEN:
@@ -58264,8 +58268,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1938258359}
-  - component: {fileID: 1938258358}
   - component: {fileID: 1938258357}
+  - component: {fileID: 1938258358}
   - component: {fileID: 1938258360}
   - component: {fileID: 1938258361}
   m_Layer: 0

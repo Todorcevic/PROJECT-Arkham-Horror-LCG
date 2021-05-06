@@ -243,6 +243,7 @@ MonoBehaviour:
   image: {fileID: 2502264937126802845}
   sensor: {fileID: 3772148681532851492}
   dragSensor: {fileID: 3183701225739591869}
+  canvasSensor: {fileID: 4453454765105130133}
   leaderIcon: {fileID: 4720073451212197437}
   timeAnimation: 0.25
 --- !u!114 &8081987424911631509
@@ -478,7 +479,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card: {fileID: 8950362181989810048}
   audioInteractable: {fileID: 1385225813015163964}
-  canvas: {fileID: 4453454765105130133}
   timeHoverAnimation: 0.25
   scaleHoverEffect: 1.1
 --- !u!114 &3183701225739591869
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd2481389269c648a74f59f367c8db5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 7140359230233156653}
+  canvasCard: {fileID: 7140359230233156653}
   card: {fileID: 8950362181989810048}
   audioInteractable: {fileID: 1385225813015163964}
   timeHoverAnimation: 0.25

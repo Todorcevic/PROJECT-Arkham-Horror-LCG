@@ -1,0 +1,22 @@
+﻿using Zenject;
+<<<<<<< HEAD:Assets/Scripts/Applicaction/Views/Campaigns/CampaignController.cs
+=======
+using Arkham.Adapter;
+>>>>>>> parent of 72498c4 (Use Cases Finish):Assets/Scripts/Views/Campaigns/CampaignController.cs
+
+namespace Arkham.Application
+{
+    public class CampaignController
+    {
+        [Inject(Id = "MainPanelsManager")] private readonly PanelsMediator panelsManager;
+        [Inject(Id = "ChooseCardPanel")] private readonly PanelView panelToShow;
+        [Inject] private readonly SelectScenarioUseCase scenarioEvent;
+
+        /*******************************************************************/
+        public void Clicked(string campaignId)
+        {
+            scenarioEvent.SelectCampaign(campaignId);
+            panelsManager.SelectPanel(panelToShow);
+        }
+    }
+}
