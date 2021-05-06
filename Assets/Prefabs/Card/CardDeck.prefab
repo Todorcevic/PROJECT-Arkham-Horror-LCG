@@ -354,6 +354,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7131878188277760170}
   - component: {fileID: 748502393720868132}
+  - component: {fileID: 7998605898064692693}
   - component: {fileID: 7192597132227724208}
   - component: {fileID: 7918799787899769508}
   m_Layer: 5
@@ -404,6 +405,19 @@ MonoBehaviour:
   timeHoverAnimation: 0.1
   enableColor: {r: 0.05882353, g: 0.23529412, b: 0.05882353, a: 1}
   disableColor: {r: 0.23529412, g: 0.05882353, b: 0.05882353, a: 1}
+--- !u!114 &7998605898064692693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120494878094766683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63763ca80809885459feb9ce048bf786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardView: {fileID: 748502393720868132}
 --- !u!225 &7192597132227724208
 CanvasGroup:
   m_ObjectHideFlags: 0

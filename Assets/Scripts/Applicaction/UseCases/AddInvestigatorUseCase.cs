@@ -6,7 +6,6 @@ namespace Arkham.Application
     public class AddInvestigatorUseCase
     {
         [Inject] private readonly InvestigatorRepository investigatorRepository;
-        [Inject] private readonly InvestigatorSelectionInteractor investigatorSelectionFilter;
         [Inject] private readonly Selector selector;
         [Inject(Id = "ReadyButton")] private readonly ButtonView readyButton;
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;

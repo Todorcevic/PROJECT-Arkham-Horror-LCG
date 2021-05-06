@@ -1,5 +1,4 @@
-﻿using Arkham.Application;
-using Arkham.Services;
+﻿using Arkham.Services;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -12,8 +11,8 @@ namespace Arkham.Application
     {
         public const string HOVEROFF = "HoverOff";
         [Inject] private readonly IDoubleClickDetector clickDetector;
-        [Inject] private readonly RemoveInvestigatorUseCase investigatorSelector;
-        [Inject] private readonly SelectInvestigatorUseCase investigatorSelectEvent;
+        [Inject] private readonly RemoveInvestigatorUseCase removeInvestigator;
+        [Inject] private readonly SelectInvestigatorUseCase selectInvestigator;
         [Title("RESOURCES")]
         [SerializeField, Required] private Transform card;
         [SerializeField, Required] private InteractableAudio audioInteractable;
@@ -29,13 +28,13 @@ namespace Arkham.Application
             if (clickDetector.IsDoubleClick(eventData.clickTime, eventData.pointerPress))
             {
                 DoubleClickEffect();
-                investigatorSelector.Remove(Id);
-                investigatorSelectEvent.SelectLead();
+                removeInvestigator.Remove(Id);
+                selectInvestigator.SelectLead();
             }
             else
             {
                 ClickEffect();
-                investigatorSelectEvent.Select(Id);
+                selectInvestigator.Select(Id);
             }
         }
 

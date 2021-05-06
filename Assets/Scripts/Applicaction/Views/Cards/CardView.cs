@@ -1,16 +1,13 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Arkham.Application
 {
-    public class CardView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class CardView : MonoBehaviour
     {
-        private ICardController controller;
-        [Inject] private readonly CardShowerPresenter showerController;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
@@ -28,43 +25,22 @@ namespace Arkham.Application
 
         /*******************************************************************/
         [Inject]
-        private void Init(string id, Sprite sprite, ICardController controller)
+        private void Init(string id, Sprite sprite)
         {
             name = Id = id;
             ChangeImage(sprite);
-            this.controller = controller;
         }
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
-        {
-            if (eventData.dragging || IsInactive) return;
-            ClickEffect();
-            controller.Clicked(Id);
-        }
+        public void ClickEffect() => audioInteractable.ClickSound();
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
-        {
-            if (eventData.dragging) return;
-            HoverOnEffect();
-            showerController.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: true));
-        }
-
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
-        {
-            HoverOffEffect();
-            showerController.HoveredOff();
-        }
-
-        private void ClickEffect() => audioInteractable.ClickSound();
-
-        private void HoverOnEffect()
+        public void HoverOnEffect()
         {
             canvasGlow.DOFade(1, timeHoverAnimation);
             audioInteractable.HoverOnSound();
         }
 
-        private void HoverOffEffect() => canvasGlow.DOFade(0, timeHoverAnimation);
+        public void HoverOffEffect() => canvasGlow.DOFade(0, timeHoverAnimation);
 
         public void Activate(bool isEnable)
         {
