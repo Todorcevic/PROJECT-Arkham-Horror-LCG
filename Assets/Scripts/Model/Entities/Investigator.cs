@@ -61,8 +61,6 @@ namespace Arkham.Model
 
         public List<Card> FindInDeck(Predicate<Card> filter) => deck.FindAll(filter);
 
-        public int AmountInDeck(Card card) => deck.FindAll(c => c == card).Count;
-
         public void Retire() => isRetired = true;
     }
 }

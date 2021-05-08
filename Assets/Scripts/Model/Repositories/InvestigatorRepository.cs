@@ -20,7 +20,7 @@ namespace Arkham.Model
         public bool Exists(Predicate<Investigator> filter) => investigators.Exists(filter);
 
         public int AmountSelectedOfThisCard(Card card) =>
-            investigators.Select(investigator => investigator.AmountInDeck(card)).Sum();
+            investigators.Select(investigator => investigator.GetAmountOfThisCardInDeck(card)).Sum();
 
         public int AmountLeftOfThisCard(Card card) => (card.Quantity ?? 0) - AmountSelectedOfThisCard(card);
 
