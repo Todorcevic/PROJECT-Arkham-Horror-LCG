@@ -124,4 +124,4 @@ El objetivo es conseguir una version profesional del juego aplicando una arquite
 
 * [NSubstitute](https://nsubstitute.github.io/) para la creación de Mocks en los tests.
 
-![Menu](https://www.rosalesnavas.com/images/Arkham Menu.jpg)
+![Menu](https://www.rosalesnavas.com/images/Arkham_Menu.jpg)
