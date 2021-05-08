@@ -3,7 +3,7 @@
 ![Project ARKHAM HORROR](https://www.rosalesnavas.com/images/logo_with_text_black.png)
 ---
 Este proyecto está basado en el juego de cartas LCG Arkham Horror de Fantasy Flight Games.
-El objetivo es conseguir una version profesional del juego aplicando una arquitectura limpia y principios SOLID.
+El objetivo es conseguir una version profesional del juego aplicando una arquitectura por capas y principios SOLID.
 
 * [La versión jugable del prototipo](https://github.com/Todorcevic/Project-ARKHAM-HORROR)
  
@@ -20,15 +20,11 @@ El objetivo es conseguir una version profesional del juego aplicando una arquite
 
 ### Objetivos:
 
-* Facilitar la testabilidad y escalabilidad aplicando una aruitectura limpia con buenas practicas y patrones de diseño.
+* Facilitar la testabilidad y escalabilidad aplicando una arquitectura limpia con buenas practicas y patrones de diseño.
 
 ### Claves:
 
-* Inversión de dependencias.
-
 * Inyección de dependencias.
-
-* Segregación de Interfaces.
 
 * Separacíon de la lógica con la vista.
 
@@ -40,31 +36,41 @@ ademas se debe aplicar el pricipio Open/Close en todo lo posible ya que las regl
 
 * Evitar la herencia de MonoBehaviour para poder facilitar los test unitarios.
 
-* Una View es un GameObject en la escena que contiene los componentes: ButtonView, CardViewc.
+Application Layer
 
-[Contribution guidelines for this project](Assets/Scripts/Applicaction/Views/Cards/CardView.cs)
+* Una View es un GameObject en la escena que contiene los componentes que reflejarán cambios:
+[CardView](Assets/Scripts/Applicaction/Views/Cards/CardView.cs)
+[ButtonView](Assets/Scripts/Applicaction/Views/Buttons/ButtonView.cs)
+
+* Un Controller recibe la entrada del usuario y actuará llamando a un UseCase o a un Presenter
+
+* Un Presenter se encarga de controlar las Views segun los argumentos que haya recibido, normalmente por activación de un UseCase.
 
 * Un Manager contiene una colección de las Views para poder suministrárselos a quien lo necesite, en su mayor parte a los Presenters.
 
-* Cuando el usuario interactua con una View, se llama al Controller destinado a esa View, el requisito para estas Views
-es que implimenten IViewInteractable, que es la interface que utiliza el Controller para manejar la parte visual ademas del identificador de la View.
+* Un UseCase es un Mediator que conecta la capa de dominio con la capa de presentación y suministra a los Presenters los datos necesarios.
 
-* El Controller actuará llamando a EventData para modificar alguna Entity, o ejecutando directamente un metodo de algún Presenter.
+* Un DTO es una estructura de datos utilizado para el envio de información.
 
-* Un EventData modifica alguna Entity y lanza una notificación que será recibida por los Presenters que estén suscrito (puede ser 1 o varios presenters).
+Domain Layer
 
-* Una Entity representa el estado y las características de algo en el juego mediante valores primitivos y serializables.
+* Las Entity, Agregates y ValueObjects representan el estado y las características de algo en el juego mediante valores primitivos.
 
-* Cuando un Presenter recibe una notificación de EventData o una llamada de Controller, consulta con los Interactors para obtener los datos necesarios y 
-actua en concecuencia con una Interface que es implementada por la View correspondiente. 
+* Un Repository es una coleccion de Entities con los metodos para acceder facilmente a la información. (Se utilizará tambien para persistir los datos).
 
-* Los Interactors contienen la lógica del juego, obtieniendo los datos de las Entities y suminitrando información al Presenter según este último la pida. La comunicación Presenter - Interactor tiene las dependencias invertidas para que la lógica no se vea afectada si algún componente visual cambia o se agregan nuevos.
+* Un Interactor contiene lógica que implica a varias entidades distintas.
 
-* Los Managers suministran al Presenter una o varias instancias de las Interfaces que implementa la View.
+Service Layer
 
-* La View contiene los componentes visuales cuyos métodos serán implementados en interfaces para invertir la dependencia que existe entre Presenter-View.
+* IDataPersistence es la abstraccion necesaria para almacenar y cargar lo datos. (Actualmente se hace en archivos JSON)
 
-* Los Services proporcionan ayuda o efectua una tarea específica, por ejemplo: CardFactory, DoubleClickDetector, etc. Suele ser inyectado al módulo que lo necesite.
+* Un Factory se encarga de instanciar objetos.
+
+* Un Adapter es la abstraccion de algun servicio para evitar su acoplamiento.
+
+
+Notas:
+* En una arquitectura limpia los UseCase suelen estar en la capa de dominio, pero debido a que existen un gran numero de elementos visuales que son afectados cuando hay un cambio en alguna Entity me ha parecido que no bastaria solo con invertir la dependencia ya que serían muchas las interfaces que dependerían el modelo que este seguiria quedando acoplado. Otra posibilidad sería que los Presenters se suscribieran a eventos de dominio, pero tendrían que conocer directamente al modelo para obtener la información que necesitan haciendo que estas clases sean mas confusas, ademas de que no controlariamos el orden de ejecucion. La opción de usar el patron Mediator como UseCase em ha parecido lo mas correcto.
 
 ---
 ## Herramientas:
@@ -72,7 +78,7 @@ actua en concecuencia con una Interface que es implementada por la View correspo
 
 * [DOTween](http://dotween.demigiant.com/index.php) para implementar animaciones y contenido visual.
 
-* [JsonDotNet](https://www.newtonsoft.com/json) para la persistencia de datos. Se implementa con un Adapter por si fuera necesario cambiarlo a otro sistema de almacenamiento como una base de datos.
+* [JsonDotNet](https://www.newtonsoft.com/json) para la persistencia de datos.
 
 * [Odin Inspector](https://odininspector.com/) para crear herramientas que ayuden al diseño visual.
 
