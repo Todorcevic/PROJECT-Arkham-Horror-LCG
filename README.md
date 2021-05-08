@@ -29,14 +29,7 @@ El objetivo es conseguir una version profesional del juego aplicando una arquite
 * Separacíon de la lógica con la vista.
 
 ---
-## Detalles:
 
-* Debido a que es un juego con reglas complejas es necesario diseñarlo para que cualquier modificación tenga el mínimo impacto con el resto de módulos,
-ademas se debe aplicar el pricipio Open/Close en todo lo posible ya que las reglas se agregan y modifican constantemente.
-
-* Evitar la herencia de MonoBehaviour para poder facilitar los test unitarios.
-
---
 ### Application Layer
 
 * Una View es un GameObject en la escena que contiene los componentes que reflejarán cambios, ej:
