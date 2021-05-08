@@ -30,7 +30,7 @@ namespace Arkham.Application
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             ClickEffect();
-            if (removeCard.ExecuteWith(Id, investigatorSelectorManager.CurrentInvestigatorId))
+            if (removeCard.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId))
                 cardShower.RemoveCardAnimation();
             else CantRemoveAnimation();
         }

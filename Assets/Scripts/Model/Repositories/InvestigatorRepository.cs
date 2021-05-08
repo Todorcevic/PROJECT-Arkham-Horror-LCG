@@ -22,6 +22,8 @@ namespace Arkham.Model
         public int AmountSelectedOfThisCard(Card card) =>
             investigators.Select(investigator => investigator.AmountInDeck(card)).Sum();
 
+        public int AmountLeftOfThisCard(Card card) => (card.Quantity ?? 0) - AmountSelectedOfThisCard(card);
+
         public void Reset() => investigators = new List<Investigator>();
 
         public void Add(Investigator investigator) => investigators.Add(investigator);

@@ -9,7 +9,7 @@ namespace Arkham.Application
         [Inject] private readonly InvestigatorRepository investigatorRepository;
         [Inject] private readonly Selector selector;
         [Inject] private readonly CardSelectorPresenter cardSelector;
-        [Inject] private readonly DeckCardVisibilityPresenter cardVisibility;
+        [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject(Id = "ReadyButton")] private readonly ButtonView readyButton;
 
@@ -28,7 +28,8 @@ namespace Arkham.Application
         {
             int quantity = investigator.GetAmountOfThisCardInDeck(card);
             cardSelector.SetCardInSelector(new CardRowDTO(card.Id, card.Real_name, quantity));
-            cardVisibility.RefreshCardsSelectability();
+            deckCardPresenter.RefreshCardsSelectability();
+            deckCardPresenter.SetQuantity(new CardQuantityDTO(card.Id, investigatorRepository.AmountLeftOfThisCard(card)));
             string amountCards = investigator?.AmountCardsSelected.ToString();
             string deckSize = investigator?.DeckBuilding.DeckSize.ToString();
             cardQuantity.Refresh(amountCards, deckSize);

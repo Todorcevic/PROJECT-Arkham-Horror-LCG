@@ -14,7 +14,7 @@ namespace Arkham.Services
         [Inject] private readonly ICardImage imageCards;
         [Inject] private readonly CardRepository cardCollection;
         [Inject] private readonly CardsManager cardsManager;
-        [SerializeField, Required, AssetsOnly] private CardView cardPrefab;
+        [SerializeField, Required, AssetsOnly] private DeckCardView cardPrefab;
         [SerializeField, Required, AssetsOnly] private InvestigatorCardView investigatorPrefab;
         [SerializeField, Required, SceneObjectsOnly] private Transform cardZone;
         [SerializeField, Required, SceneObjectsOnly] private Transform investigatorZone;
@@ -36,8 +36,8 @@ namespace Arkham.Services
             foreach (string cardId in DeckCards)
             {
                 object[] args = new object[] { cardId, imageCards.GetSprite(cardId) };
-                CardView cardView = diContainer.InstantiatePrefabForComponent<CardView>(cardPrefab, cardZone, args);
-                cardsManager.AddDeckCard(cardId, cardView);
+                DeckCardView cardView = diContainer.InstantiatePrefabForComponent<DeckCardView>(cardPrefab, cardZone, args);
+                cardsManager.AddCard(cardId, cardView);
             }
         }
 
@@ -47,7 +47,7 @@ namespace Arkham.Services
             {
                 object[] args = new object[] { investigatorId, imageCards.GetSprite(investigatorId) };
                 InvestigatorCardView cardView = diContainer.InstantiatePrefabForComponent<InvestigatorCardView>(investigatorPrefab, investigatorZone, args);
-                cardsManager.AddInvestigatorCard(investigatorId, cardView);
+                cardsManager.AddCard(investigatorId, cardView);
             }
         }
     }

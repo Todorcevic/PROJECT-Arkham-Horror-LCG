@@ -7186,7 +7186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4fdb58040112f47866fab64350bf3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 748502393720868132, guid: b5f97452dc8e2c543aa6835ff8c1ae58, type: 3}
+  cardPrefab: {fileID: 3206177030987578973, guid: b5f97452dc8e2c543aa6835ff8c1ae58, type: 3}
   investigatorPrefab: {fileID: 3428538249790762421, guid: 4727e361d0b8a48458da3e9ac6788432, type: 3}
   cardZone: {fileID: 1780279752}
   investigatorZone: {fileID: 1994157215}

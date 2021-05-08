@@ -1,4 +1,5 @@
-﻿using Arkham.Services;
+﻿using Arkham.Model;
+using Arkham.Services;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;

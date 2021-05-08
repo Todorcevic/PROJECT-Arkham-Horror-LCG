@@ -1,5 +1,4 @@
 ﻿using Arkham.Model;
-using Arkham.Application;
 using System.Collections.Generic;
 using Zenject;
 
@@ -9,7 +8,7 @@ namespace Arkham.Application
     {
         [Inject] private readonly Selector selector;
         [Inject] private readonly InvestigatorRepository investigatorRepository;
-        [Inject] private readonly DeckCardVisibilityPresenter cardVisibility;
+        [Inject] private readonly DeckCardPresenter cardVisibility;
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject] private readonly InvestigatorAvatarView investigatorAvatar;
         [Inject] private readonly CardSelectorPresenter cardSelector;
@@ -23,9 +22,7 @@ namespace Arkham.Application
             Investigator investigator = investigatorRepository.Get(investigatorId);
             investigatorSelector.SelectInvestigator(investigatorId);
             investigatorAvatar.ShowInvetigator(investigatorId);
-            string amountCards = investigator?.AmountCardsSelected.ToString();
-            string deckSize = investigator?.DeckBuilding.DeckSize.ToString();
-            cardQuantity.Refresh(amountCards, deckSize);
+            cardQuantity.Refresh(investigator?.AmountCardsSelected.ToString(), investigator?.DeckBuilding.DeckSize.ToString());
             cardVisibility.RefreshCardsSelectability();
             cardVisibility.RefreshCardsVisibility();
             cardSelector.ShowAllCards(CreateDTOList(investigatorId));

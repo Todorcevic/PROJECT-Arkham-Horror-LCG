@@ -9,12 +9,12 @@ namespace Arkham.Application
         [Inject] private readonly CardRepository cardRepository;
         [Inject] private readonly InvestigatorRepository investigatorRepository;
         [Inject(Id = "ReadyButton")] private readonly ButtonView readyButton;
-        [Inject] private readonly DeckCardVisibilityPresenter cardVisibility;
+        [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject] private readonly CardSelectorPresenter cardSelector;
 
         /*******************************************************************/
-        public bool ExecuteWith(string cardId, string investigatorId)
+        public bool Remove(string cardId, string investigatorId)
         {
             Card card = cardRepository.Get(cardId);
             Investigator investigator = investigatorRepository.Get(investigatorId);
@@ -32,13 +32,14 @@ namespace Arkham.Application
 
         private void UpdateView(Card card, Investigator investigator)
         {
-            int currentQuantity = investigator.GetAmountOfThisCardInDeck(card);
-            cardSelector.SetCardInSelector(new CardRowDTO(card.Id, card.Real_name, currentQuantity));
-            cardVisibility.RefreshCardsSelectability();
-            string amountCards = investigator?.AmountCardsSelected.ToString();
-            string deckSize = investigator?.DeckBuilding.DeckSize.ToString();
-            cardQuantity.Refresh(amountCards, deckSize);
+            cardSelector.SetCardInSelector(CreateCardRowDTO(card, investigator));
+            deckCardPresenter.RefreshCardsSelectability();
+            deckCardPresenter.SetQuantity(new CardQuantityDTO(card.Id, investigatorRepository.AmountLeftOfThisCard(card)));
+            cardQuantity.Refresh(investigator?.AmountCardsSelected.ToString(), investigator?.DeckBuilding.DeckSize.ToString());
             readyButton.Desactive(!selector.IsReady);
         }
+
+        private CardRowDTO CreateCardRowDTO(Card card, Investigator investigator) =>
+            new CardRowDTO(card.Id, card.Real_name, investigator.GetAmountOfThisCardInDeck(card));
     }
 }

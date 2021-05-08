@@ -6,21 +6,18 @@ namespace Arkham.Application
 {
     public class CardsManager
     {
-        private readonly Dictionary<string, CardView> deckCards = new Dictionary<string, CardView>();
-        private readonly Dictionary<string, InvestigatorCardView> investigatorCards = new Dictionary<string, InvestigatorCardView>();
+        private readonly Dictionary<string, CardView> cards = new Dictionary<string, CardView>();
 
-        public List<CardView> AllCards => DeckList.Concat(InvestigatorList).ToList();
-        public List<CardView> DeckList => deckCards.Values.ToList();
-        public List<InvestigatorCardView> InvestigatorList => investigatorCards.Values.ToList();
+        public List<CardView> AllCards => cards.Values.ToList();
+        public List<DeckCardView> DeckList => cards.Values.OfType<DeckCardView>().ToList();
+        public List<InvestigatorCardView> InvestigatorList => cards.Values.OfType<InvestigatorCardView>().ToList();
 
         /*******************************************************************/
-        public CardView GetDeckCard(string cardId) => deckCards[cardId];
+        public InvestigatorCardView GetInvestigatorCard(string cardId) => (InvestigatorCardView)cards[cardId];
 
-        public InvestigatorCardView GetInvestigatorCard(string cardId) => investigatorCards[cardId];
+        public DeckCardView GetDeckCard(string cardId) => (DeckCardView)cards[cardId];
 
-        public void AddDeckCard(string cardId, CardView cardView) => deckCards.Add(cardId, cardView);
-
-        public void AddInvestigatorCard(string cardId, InvestigatorCardView cardView) => investigatorCards.Add(cardId, cardView);
+        public void AddCard(string cardId, CardView cardView) => cards.Add(cardId, cardView);
 
         public Sprite GetSpriteCard(string id) => id != null ? AllCards.Find(c => c.Id == id).GetCardImage : null;
     }
