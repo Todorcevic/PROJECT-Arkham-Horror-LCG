@@ -36,6 +36,7 @@ ademas se debe aplicar el pricipio Open/Close en todo lo posible ya que las regl
 
 * Evitar la herencia de MonoBehaviour para poder facilitar los test unitarios.
 
+--
 ### Application Layer
 
 * Una View es un GameObject en la escena que contiene los componentes que reflejarán cambios, ej:
@@ -74,7 +75,7 @@ ademas se debe aplicar el pricipio Open/Close en todo lo posible ya que las regl
 
 [CampaignDTO](Assets/Scripts/Applicaction/UseCases/DTO/CampaignDTO.cs)
 
-
+--
 ### Domain Layer
 
 * Las Entity, Agregates y ValueObjects representan el estado y las características de algo en el juego mediante valores primitivos, ej:
@@ -95,7 +96,7 @@ ademas se debe aplicar el pricipio Open/Close en todo lo posible ya que las regl
 
 [InvestigatorSelectionInteractor](Assets/Scripts/Model/Interactors/InvestigatorSelectionInteractor.cs)
 
-
+--
 ### Service Layer
 
 * IDataPersistence es la abstraccion necesaria para almacenar y cargar lo datos. (Actualmente se hace en archivos JSON)
@@ -115,7 +116,7 @@ ademas se debe aplicar el pricipio Open/Close en todo lo posible ya que las regl
 [PlayerPrefAdapter](Assets/Scripts/Services/Adapters/PlayerPrefsAdapter.cs)
 
 
-Notas:
+#### Notas:
 * En una arquitectura limpia los UseCase suelen estar en la capa de dominio, pero debido a que existen un gran numero de elementos visuales que son afectados cuando hay un cambio en alguna Entity me ha parecido que no bastaria solo con invertir la dependencia ya que serían muchas las interfaces que tendria que consumir el modelo y seguiria quedando acoplado. Otra posibilidad sería que los Presenters se suscribieran a eventos de dominio, pero tendrían que conocer directamente al modelo para obtener la información que necesitan haciendo que estas clases sean mas confusas, ademas de que no controlariamos el orden de ejecucion. La opción de usar el patron Mediator y sacar los UseCase a la capa de aplicación me ha parecido lo mas correcto.
 
 ---
