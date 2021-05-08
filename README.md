@@ -20,7 +20,7 @@ El objetivo es conseguir una version profesional del juego aplicando una arquite
 
 ### Objetivos:
 
-* Facilitar la testabilidad y escalabilidad aplicando una arquitectura limpia con buenas practicas y patrones de diseño.
+* Facilitar la testabilidad y escalabilidad aplicando una arquitectura con buenas practicas y patrones de diseño.
 
 ### Claves:
 
