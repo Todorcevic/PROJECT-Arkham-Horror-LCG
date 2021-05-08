@@ -20,7 +20,7 @@ El objetivo es conseguir una version profesional del juego aplicando una arquite
 
 ### Objetivos:
 
-* Buscar la máxima testabilidad y escalabilidad.
+* Facilitar la testabilidad y escalabilidad aplicando una aruitectura limpia con buenas practicas y patrones de diseño.
 
 ### Claves:
 
@@ -30,7 +30,7 @@ El objetivo es conseguir una version profesional del juego aplicando una arquite
 
 * Segregación de Interfaces.
 
-* Eventos de dominio.
+* Separacíon de la lógica con la vista.
 
 ---
 ## Detalles:
@@ -38,11 +38,13 @@ El objetivo es conseguir una version profesional del juego aplicando una arquite
 * Debido a que es un juego con reglas complejas es necesario diseñarlo para que cualquier modificación tenga el mínimo impacto con el resto de módulos,
 ademas se debe aplicar el pricipio Open/Close en todo lo posible ya que las reglas se agregan y modifican constantemente.
 
-* Solo las Views y los Managers heredarán de MonoBehaviour para así poder facilitar los test unitarios.
+* Evitar la herencia de MonoBehaviour para poder facilitar los test unitarios.
 
-* Una View es un único elemento visual: un boton, una carta, etc.
+* Una View es un GameObject en la escena que contiene los componentes: ButtonView, CardViewc.
 
-* Un Manager contiene una colección de abstracciones de las Views para poder suministrárselos a quien lo necesite, en su mayor parte a los Presenters.
+[Contribution guidelines for this project](Assets/Scripts/Applicaction/Views/Cards/CardView.cs)
+
+* Un Manager contiene una colección de las Views para poder suministrárselos a quien lo necesite, en su mayor parte a los Presenters.
 
 * Cuando el usuario interactua con una View, se llama al Controller destinado a esa View, el requisito para estas Views
 es que implimenten IViewInteractable, que es la interface que utiliza el Controller para manejar la parte visual ademas del identificador de la View.
