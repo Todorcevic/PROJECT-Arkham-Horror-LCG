@@ -4,7 +4,7 @@ namespace Arkham.Model
 {
     public class UnlockCardsRepository
     {
-        private List<Card> cards;
+        private List<Card> cards = new List<Card>();
 
         /*******************************************************************/
         public bool IsThisCardUnlocked(Card card) => cards.Contains(card);

@@ -6,7 +6,7 @@ namespace Arkham.Model
 {
     public class Selector
     {
-        private List<Investigator> investigators;
+        private List<Investigator> investigators = new List<Investigator>();
         public Investigator Lead => investigators.FirstOrDefault();
         public int AmontInvestigatorsSelected => investigators.Count;
         public bool IsSelectionFull => AmontInvestigatorsSelected >= GameConfig.MAX_INVESTIGATORS;
