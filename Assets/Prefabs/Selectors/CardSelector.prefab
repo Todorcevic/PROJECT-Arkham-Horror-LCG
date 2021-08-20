@@ -55,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 6396499959933405539}
   image: {fileID: 904807066180061608}
+  background: {fileID: 4850368526312077242}
   sensor: {fileID: 2292736795119808387}
   cardName: {fileID: 4121154858783106769}
   quantity: {fileID: 223955344760844326}
@@ -67,7 +68,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167292358315829728}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0

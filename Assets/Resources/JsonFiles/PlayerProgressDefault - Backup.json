@@ -48,16 +48,15 @@
         },
         {
             "Id": "01001",
-            "PhysicTrauma": 3,
-            "MentalTrauma": 3,
-            "Xp": 3,
+            "PhysicTrauma": 0,
+            "MentalTrauma": 0,
+            "Xp": 0,
             "Deck": [],
             "MandatoryCards": [
                 "01006",
                 "01007",
                 "01000"
-            ],
-            "IsPlaying": true
+            ]
         },
         {
             "Id": "02001",

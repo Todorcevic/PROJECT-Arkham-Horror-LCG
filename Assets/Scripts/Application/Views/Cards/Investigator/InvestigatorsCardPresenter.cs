@@ -34,13 +34,17 @@ namespace Arkham.Application
         {
             foreach (InvestigatorStateDTO investigator in investigators)
             {
-                if (investigator.State == InvestigatorState.Killed)
-                    cardsManager.GetInvestigatorCard(investigator.Id).ChangeToKilledState();
-                else if (investigator.State == InvestigatorState.Insane)
-                    cardsManager.GetInvestigatorCard(investigator.Id).ChangeToInsaneState();
-                else if (investigator.State == InvestigatorState.Retired)
-                    cardsManager.GetInvestigatorCard(investigator.Id).ChangeToRetiredState();
+                InvestigatorCardView investigatorView = cardsManager.GetInvestigatorCard(investigator.Id);
+                investigatorView.ChangeState(investigator.State);
+                investigatorView.UpdatePhysicTrauma(investigator.PhysicTrauma);
+                investigatorView.UpdateMentalTrauma(investigator.MentalTrauma);
+                investigatorView.UpdateXp(investigator.Xp);
             }
+        }
+
+        public void InvestigaotrTokensResolve()
+        {
+
         }
     }
 }
