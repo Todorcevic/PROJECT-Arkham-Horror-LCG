@@ -21,18 +21,20 @@ namespace Arkham.Application
 
         public void ShowAllCards(Investigator investigator)
         {
+
             if (investigator == null) return;
             CleanAllSelectors();
             foreach (Card card in investigator?.FullDeck)
-                SetCardInSelector(card);
+                SetCardInSelector(card, investigator);
         }
 
-        public void SetCardInSelector(Card cardRow)
+        public void SetCardInSelector(Card cardRow, Investigator investigator)
         {
             CardSelectorView selector = cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardRow.Id);
-            selector.SetQuantity(cardRow.Quantity ?? 0);
+            int quantity = investigator.GetAmountOfThisCardInDeck(cardRow);
+            selector.SetQuantity(quantity);
             SetSelector(selector, cardRow);
-            if (cardRow.Quantity <= 0) DesactivateSelector(selector);
+            if (quantity <= 0) DesactivateSelector(selector);
         }
 
         public void ChangeBackgroundColor(string investigatorId)
