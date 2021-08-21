@@ -1,6 +1,7 @@
 ﻿using Arkham.Config;
 using Zenject;
 using Arkham.Application;
+using Arkham.Model;
 
 namespace Arkham.Application
 {
@@ -18,7 +19,7 @@ namespace Arkham.Application
         private void Clicked()
         {
             startGame.Init(StartGame.New);
-            scenarioEvent.Reset();
+            scenarioEvent.ResetInit();
             mainPanelsManager.SelectPanel(chooseCampaignPanel);
         }
     }

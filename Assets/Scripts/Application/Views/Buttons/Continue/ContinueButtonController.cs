@@ -21,8 +21,6 @@ namespace Arkham.Application
         }
 
         /*******************************************************************/
-        public void Desactive(bool desactivate) => continueButton.Desactive(desactivate);
-
         private void Clicked()
         {
             startGame.Init(StartGame.Continue);
