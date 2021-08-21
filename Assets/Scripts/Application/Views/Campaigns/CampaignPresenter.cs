@@ -6,16 +6,17 @@ namespace Arkham.Application
 {
     public class CampaignPresenter
     {
+        [Inject] private readonly CampaignRepository campaignRepository;
         [Inject] private readonly CampaignsManager campaignManager;
 
         /*******************************************************************/
-        public void InitializeCampaigns(List<CampaignDTO> campaigns)
+        public void InitializeCampaigns()
         {
-            foreach (CampaignDTO campaign in campaigns)
+            foreach (Campaign campaign in campaignRepository.Campaigns)
             {
                 CampaignView campaignView = campaignManager.GetCampaign(campaign.Id);
-                campaignManager.GetState(campaign.State).ExecuteState(campaignView);
-                campaignView.IsOpen = campaign.IsOpen;
+                campaignManager.GetState(campaign.State.Id).ExecuteState(campaignView);
+                campaignView.IsOpen = campaign.State.IsOpen;
             }
         }
     }

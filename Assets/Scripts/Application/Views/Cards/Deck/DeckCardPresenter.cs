@@ -10,6 +10,8 @@ namespace Arkham.Application
         [Inject] private readonly CardSelectionInteractor cardSelectionFilter;
         [Inject] private readonly CardVisibilityInteractor visibilityService;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
+        [Inject] private readonly CardRepository cardRepository;
+        [Inject] private readonly InvestigatorRepository investigatorRepository;
 
         /*******************************************************************/
         public void RefreshCardsVisibility()
@@ -30,11 +32,12 @@ namespace Arkham.Application
             }
         }
 
-        public void RefresQuantity(List<CardQuantityDTO> cardQuantities)
+        public void RefresQuantity()
         {
             foreach (DeckCardView cardView in cardsManager.DeckList)
             {
-                int quantity = cardQuantities.Find(c => c.CardId == cardView.Id).Quantity;
+                Card card = cardRepository.Get(cardView.Id);
+                int quantity = investigatorRepository.AmountLeftOfThisCard(card);
                 cardView.SetQuantity(FormatQuantity(quantity));
             }
         }

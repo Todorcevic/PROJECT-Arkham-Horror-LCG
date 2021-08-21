@@ -30,7 +30,7 @@ namespace Arkham.Application
         {
             investigatorVisibility.RefreshInvestigatorsSelectability();
             investigatorSelector.RemoveInvestigator(investigatorId);
-            investigatorSelector.SetLeadSelector(selector.Lead?.Id);
+            investigatorSelector.SetLeadSelector();
             readyButton.Desactive(!selector.IsReady);
         }
     }

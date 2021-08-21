@@ -7,11 +7,12 @@ namespace Arkham.Model
     public class Selector
     {
         private List<Investigator> investigators = new List<Investigator>();
+
         public Investigator Lead => investigators.FirstOrDefault();
         public int AmontInvestigatorsSelected => investigators.Count;
         public bool IsSelectionFull => AmontInvestigatorsSelected >= GameValues.MAX_INVESTIGATORS;
         public bool IsReady => investigators.Count > 0 && investigators.All(invesigator => invesigator.SelectionIsFull);
-        public List<string> Ids => investigators.ConvertAll(investigator => investigator.Id);
+        public List<string> InvestigatorsIdInSelector => investigators.ConvertAll(investigator => investigator.Id);
         public IEnumerable<Investigator> InvestigatorsInSelector => investigators;
 
         /*******************************************************************/

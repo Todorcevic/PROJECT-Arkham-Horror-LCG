@@ -10,6 +10,7 @@ namespace Arkham.Application
         [Inject] private readonly InvestigatorSelectionInteractor investigatorSelectionFilter;
         [Inject] private readonly CardVisibilityInteractor visibilityService;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
+        [Inject] private readonly InvestigatorRepository investigatorRepository;
 
         /*******************************************************************/
         public void RefreshInvestigatorsVisibility()
@@ -30,9 +31,9 @@ namespace Arkham.Application
             }
         }
 
-        public void InvestigatorStateResolve(List<InvestigatorStateDTO> investigators)
+        public void InvestigatorStateResolve()
         {
-            foreach (InvestigatorStateDTO investigator in investigators)
+            foreach (Investigator investigator in investigatorRepository.Investigators)
             {
                 InvestigatorCardView investigatorView = cardsManager.GetInvestigatorCard(investigator.Id);
                 investigatorView.ChangeState(investigator.State);

@@ -44,7 +44,7 @@ namespace Arkham.Services
                 fullDTO.InvestigatorsList.Add(investigatorDTO);
             }
 
-            fullDTO.InvestigatorsSelectedList = selectorRepository.Ids;
+            fullDTO.InvestigatorsSelectedList = selectorRepository.InvestigatorsIdInSelector;
             fullDTO.UnlockCards = unlockCardsRepository.Serialize();
             return fullDTO;
         }

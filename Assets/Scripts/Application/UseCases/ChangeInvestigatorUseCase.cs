@@ -23,7 +23,7 @@ namespace Arkham.Application
         private void UpdateView(string investigatorToSwapId, string investigatorFromSwapId)
         {
             investigatorSelector.ChangeInvestigator(investigatorToSwapId, investigatorFromSwapId);
-            investigatorSelector.SetLeadSelector(selector.Lead?.Id);
+            investigatorSelector.SetLeadSelector();
         }
     }
 }
