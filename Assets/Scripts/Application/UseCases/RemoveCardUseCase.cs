@@ -12,27 +12,31 @@ namespace Arkham.Application
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject] private readonly CardSelectorPresenter cardSelector;
+        [Inject] private readonly SelectorSelectionInteractor selectorSelectionInteractor;
 
         /*******************************************************************/
-        public bool Remove(string cardId, string investigatorId)
+        public void Remove(string cardId, string investigatorId)
         {
             Card card = cardRepository.Get(cardId);
             Investigator investigator = investigatorRepository.Get(investigatorId);
-            bool isRemoved = UpdateModel(card, investigator);
-            if (isRemoved) UpdateView(card, investigator);
-            return isRemoved;
+            UpdateModel(card, investigator);
+            UpdateView(card, investigator);
         }
 
-        private bool UpdateModel(Card card, Investigator investigator)
-        {
-            if (investigator.IsMandatoryCard(card)) return false;
-            investigator.RemoveToDeck(card);
-            return true;
-        }
+        //private bool CanRemoveCard(Card card, Investigator investigator)
+        //{
+        //    if (investigator.IsMandatoryCard(card)) return false;
+        //    if (investigator.IsPlaying && investigator.Xp <= 0) return false;
+        //    if (investigator.IsPlaying && !investigator.SelectionIsFull) return false;
+        //    return true;
+        //}
+
+        private void UpdateModel(Card card, Investigator investigator) => investigator.RemoveToDeck(card);
 
         private void UpdateView(Card card, Investigator investigator)
         {
             cardSelector.SetCardInSelector(CreateCardRowDTO(card, investigator));
+            cardSelector.RefreshBackgroundColor(investigator.Id);
             deckCardPresenter.RefreshCardsSelectability();
             deckCardPresenter.SetQuantity(new CardQuantityDTO(card.Id, investigatorRepository.AmountLeftOfThisCard(card)));
             cardQuantity.Refresh(investigator?.AmountCardsSelected.ToString(), investigator?.DeckBuilding.DeckSize.ToString());

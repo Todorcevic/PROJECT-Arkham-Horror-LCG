@@ -11,6 +11,7 @@ namespace Arkham.Application
         [Inject(Id = "CardSelectorZone")] public RectTransform selectorsZone;
         [Inject(Id = "CardPlaceHolderZone")] public RectTransform placeHolderZone;
         [Inject] private readonly CardSelectorsManager cardSelectorsManager;
+        [Inject] private readonly SelectorSelectionInteractor selectorSelectionInteractor;
         [Inject] private readonly ICardImage imageCards;
 
         /*******************************************************************/
@@ -29,6 +30,14 @@ namespace Arkham.Application
             selector.SetQuantity(cardRow.Quantity);
             SetSelector(selector, cardRow);
             if (cardRow.Quantity <= 0) DesactivateSelector(selector);
+        }
+
+        public void RefreshBackgroundColor(string investigatorId)
+        {
+            foreach (CardSelectorView selector in cardSelectorsManager.GetAllFilledSelectors())
+            {
+                selector.SetColorBackground(selectorSelectionInteractor.CanThisSelectorBeRemoved(selector.Id, investigatorId));
+            }
         }
 
         private void SetSelector(CardSelectorView selector, CardRowDTO cardRow)

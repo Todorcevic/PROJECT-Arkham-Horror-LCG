@@ -13,7 +13,6 @@ namespace Arkham.Config
         {
             /*** Services ***/
             Container.BindInterfacesTo<ScreenResolutionAutoDetect>().AsSingle();
-            Container.Bind<CardVisibilityInteractor>().AsSingle();
             Container.BindInterfacesTo<DoubleClickDetector>().AsSingle();
             Container.BindInterfacesTo<DataContext>().AsSingle();
             Container.BindInterfacesTo<DataMapper>().AsSingle();
@@ -54,6 +53,8 @@ namespace Arkham.Config
             /*** Interactors ***/
             Container.Bind<CardSelectionInteractor>().AsSingle();
             Container.Bind<InvestigatorSelectionInteractor>().AsSingle();
+            Container.Bind<CardVisibilityInteractor>().AsSingle();
+            Container.Bind<SelectorSelectionInteractor>().AsSingle();
 
             /*** Resources ***/
             Container.Bind<CampaignStateSO>().FromScriptableObjectResource(gamefiles.CAMPAIGNS_STATES).AsSingle();

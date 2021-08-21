@@ -12,6 +12,7 @@ namespace Arkham.Application
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvas;
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
+        [SerializeField, Required, ChildGameObjectsOnly] private Image background;
         [SerializeField, Required, ChildGameObjectsOnly] private CardSelectorController sensor;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI cardName;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI quantity;
@@ -50,6 +51,8 @@ namespace Arkham.Application
             cantComplete.Complete();
             cantComplete = transform.DOPunchPosition(Vector3.right * 10, timeAnimation, 20, 5);
         }
+
+        public void SetColorBackground(bool canBeRemoved) => background.color = canBeRemoved ? Color.green : Color.red;
 
         private void Activate(bool isOn) => canvas.blocksRaycasts = canvas.interactable = isOn;
     }

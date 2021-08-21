@@ -25,13 +25,17 @@ namespace Arkham.Application
         [SerializeField, Range(0f, 1f)] private float timeAnimation;
 
         public string Id { private get; set; }
+        public bool CanBeRemoved => background.color == Color.green;
 
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             ClickEffect();
-            if (removeCard.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId))
+            if (CanBeRemoved)
+            {
+                removeCard.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId);
                 cardShower.RemoveCardAnimation();
+            }
             else CantRemoveAnimation();
         }
 

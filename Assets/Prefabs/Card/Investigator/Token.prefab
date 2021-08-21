@@ -92,12 +92,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 79.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 96
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -144,6 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7739451522199555394}
   - component: {fileID: 3414620456253124661}
+  - component: {fileID: 5134687782990867174}
   - component: {fileID: 184025345159406237}
   m_Layer: 5
   m_Name: Token
@@ -180,6 +181,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8729351357657111659}
   m_CullTransparentMesh: 0
+--- !u!114 &5134687782990867174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8729351357657111659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa97ed19f7a52848a4d435e4d18ff0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: {fileID: 3506458213031733785}
 --- !u!114 &184025345159406237
 MonoBehaviour:
   m_ObjectHideFlags: 0

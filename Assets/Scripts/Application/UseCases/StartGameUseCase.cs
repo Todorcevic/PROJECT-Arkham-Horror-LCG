@@ -54,7 +54,7 @@ namespace Arkham.Application
         {
             List<InvestigatorStateDTO> allinvestigators = new List<InvestigatorStateDTO>();
             foreach (Investigator investigator in investigatorRepository.Investigators)
-                allinvestigators.Add(new InvestigatorStateDTO(investigator.Id, investigator.State));
+                allinvestigators.Add(new InvestigatorStateDTO(investigator.Id, investigator.PhysicTrauma, investigator.MentalTrauma, investigator.Xp, investigator.State));
             return allinvestigators;
         }
 

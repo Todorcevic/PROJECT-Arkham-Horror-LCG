@@ -16,7 +16,7 @@ namespace Arkham.Config
             mapper.LoadDataCards();
             cardFactory.BuildDeckCards();
             cardFactory.BuildInvestigatorCards();
-            //repositoriesIO.SaveProgress();
+            //mapper.SaveProgress();
         }
     }
 }
