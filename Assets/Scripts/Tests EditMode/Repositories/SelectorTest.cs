@@ -9,13 +9,13 @@ namespace Tests
     public class SelectorTest
     {
         private Fakes fakes;
-        private Selector selector;
+        private SelectorRepository selector;
 
         [SetUp]
         public void Start()
         {
             fakes = new Fakes();
-            selector = new Selector();
+            selector = new SelectorRepository();
         }
 
 

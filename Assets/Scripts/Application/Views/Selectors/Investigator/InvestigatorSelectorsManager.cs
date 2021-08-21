@@ -12,7 +12,7 @@ namespace Arkham.Application
         [Inject] private readonly List<InvestigatorSelectorView> selectors;
 
         public string CurrentInvestigatorId => currentInvestigator;
-        public InvestigatorSelectorView GetCurrentLeadSelector => selectors.Find(i => i.IsLeader);
+        public InvestigatorSelectorView GetCurrentLeadSelector => selectors.Find(invSelectorView => invSelectorView.IsLeader);
         public InvestigatorSelectorView GetRealLeadSelector => selectors[0];
 
         /*******************************************************************/

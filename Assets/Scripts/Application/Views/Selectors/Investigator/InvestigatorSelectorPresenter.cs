@@ -1,17 +1,13 @@
 ﻿using Zenject;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
-using Arkham.Config;
 using Arkham.Model;
 
 namespace Arkham.Application
 {
     public class InvestigatorSelectorPresenter
     {
-        [Inject] private readonly Selector selector;
-        [Inject] private readonly InvestigatorRepository investigatorRepository;
-
+        [Inject] private readonly SelectorRepository selector;
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly SelectInvestigatorUseCase investigatorSelectUseCase;
@@ -91,10 +87,7 @@ namespace Arkham.Application
             }
         }
 
-        public void SelectInvestigator(string activeInvestigatorId)
-        {
-            investigatorSelectorsManager.SelectInvestigator(activeInvestigatorId);
-        }
+        public void SelectInvestigator(string activeInvestigatorId) => investigatorSelectorsManager.SelectInvestigator(activeInvestigatorId);
 
         private void SetThisSelectorWithThisInvestigator(InvestigatorSelectorView selector, string investigatorId)
         {

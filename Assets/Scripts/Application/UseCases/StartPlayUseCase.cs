@@ -5,7 +5,7 @@ namespace Arkham.Application
 {
     public class StartPlayUseCase
     {
-        [Inject] private readonly Selector selector;
+        [Inject] private readonly SelectorRepository selector;
 
         /*******************************************************************/
         public void Start()

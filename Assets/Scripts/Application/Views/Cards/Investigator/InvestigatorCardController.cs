@@ -9,16 +9,16 @@ namespace Arkham.Application
     {
         [SerializeField, Required] private CardView cardView;
         [Inject] private readonly CardShowerPresenter cardShowerPresenter;
-        [Inject] private readonly AddInvestigatorUseCase investigatorAddEvent;
-        [Inject] private readonly SelectInvestigatorUseCase investigatorSelectEvent;
+        [Inject] private readonly AddInvestigatorUseCase addInvestigatorUseCase;
+        [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
 
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             if (eventData.dragging || cardView.IsInactive) return;
             cardView.ClickEffect();
-            investigatorAddEvent.Add(cardView.Id);
-            investigatorSelectEvent.Select(cardView.Id);
+            addInvestigatorUseCase.Add(cardView.Id);
+            selectInvestigatorUseCase.Select(cardView.Id);
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)

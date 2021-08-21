@@ -1,5 +1,4 @@
 ﻿using Arkham.Config;
-using Arkham.Application;
 using System.IO;
 using Zenject;
 
@@ -13,11 +12,13 @@ namespace Arkham.Application
         [Inject(Id = "MainPanelsManager")] private readonly PanelsMediator mainPanelsManager;
         [Inject(Id = "ChooseCardPanel")] private readonly PanelView chooseCardPanel;
 
+        private bool CanContinue => File.Exists(gameFiles.PlayerProgressFilePath);
+
         /*******************************************************************/
         void IInitializable.Initialize()
         {
             continueButton.AddClickAction(Clicked);
-            continueButton.Desactive(!CanContinue());
+            continueButton.Desactive(!CanContinue);
         }
 
         /*******************************************************************/
@@ -26,7 +27,5 @@ namespace Arkham.Application
             startGame.Init(StartGame.Continue);
             mainPanelsManager.SelectPanel(chooseCardPanel);
         }
-
-        private bool CanContinue() => File.Exists(gameFiles.PlayerProgressFilePath);
     }
 }

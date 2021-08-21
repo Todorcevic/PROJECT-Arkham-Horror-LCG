@@ -1,5 +1,4 @@
 ﻿using Arkham.Application;
-using Arkham.Model;
 using Arkham.Services;
 using Zenject;
 
@@ -44,17 +43,12 @@ namespace Arkham.Config
             .InNamespace("Arkham").WithSuffix("UseCase")).AsSingle();
 
             /*** Repositories***/
-            Container.Bind<CardRepository>().AsSingle();
-            Container.Bind<CampaignRepository>().AsSingle();
-            Container.Bind<InvestigatorRepository>().AsSingle();
-            Container.Bind<Selector>().AsSingle();
-            Container.Bind<UnlockCardsRepository>().AsSingle();
+            Container.Bind(x => x.AllNonAbstractClasses()
+            .InNamespace("Arkham").WithSuffix("Repository")).AsSingle();
 
             /*** Interactors ***/
-            Container.Bind<CardSelectionInteractor>().AsSingle();
-            Container.Bind<InvestigatorSelectionInteractor>().AsSingle();
-            Container.Bind<CardVisibilityInteractor>().AsSingle();
-            Container.Bind<SelectorSelectionInteractor>().AsSingle();
+            Container.Bind(x => x.AllNonAbstractClasses()
+            .InNamespace("Arkham").WithSuffix("Interactor")).AsSingle();
 
             /*** Resources ***/
             Container.Bind<CampaignStateSO>().FromScriptableObjectResource(gamefiles.CAMPAIGNS_STATES).AsSingle();

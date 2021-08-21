@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Arkham.Config
+﻿namespace Arkham.Config
 {
     public class GameFiles
     {

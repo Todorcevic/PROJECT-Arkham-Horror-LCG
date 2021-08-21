@@ -1,6 +1,5 @@
 ﻿using Arkham.Model;
 using Arkham.Services;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -14,17 +13,14 @@ namespace Arkham.Application
         [Inject] private readonly SelectorSelectionInteractor selectorSelectionInteractor;
         [Inject] private readonly ICardImage imageCards;
 
-        [Inject] private readonly InvestigatorRepository investigatorRepository;
-
         /*******************************************************************/
         public void CantRemove(string cardId) => cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardId).CantRemoveAnimation();
 
         public void ShowAllCards(Investigator investigator)
         {
-
-            if (investigator == null) return;
             CleanAllSelectors();
-            foreach (Card card in investigator?.FullDeck)
+            if (investigator == null) return;
+            foreach (Card card in investigator.FullDeck)
                 SetCardInSelector(card, investigator);
         }
 

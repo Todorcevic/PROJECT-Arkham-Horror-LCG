@@ -8,7 +8,7 @@ namespace Arkham.Services
         [Inject] private readonly CardRepository cardRepository;
         [Inject] private readonly CampaignRepository campaignRepository;
         [Inject] private readonly InvestigatorRepository investigatorRepository;
-        [Inject] private readonly Selector selectorRepository;
+        [Inject] private readonly SelectorRepository selectorRepository;
         [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
         [Inject] private readonly IConventionFactory factory;
 
@@ -89,7 +89,6 @@ namespace Arkham.Services
         public void MapCampaigns(FullDTO repositoryDTO)
         {
             campaignRepository.Reset();
-
             foreach (CampaignDTO campaign in repositoryDTO.CampaignsList)
             {
                 Campaign newCampaing = new Campaign()

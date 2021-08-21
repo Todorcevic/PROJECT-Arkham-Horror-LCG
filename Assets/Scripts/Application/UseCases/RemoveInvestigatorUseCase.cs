@@ -7,7 +7,7 @@ namespace Arkham.Application
     public class RemoveInvestigatorUseCase
     {
         [Inject] private readonly InvestigatorRepository investigatorRepository;
-        [Inject] private readonly Selector selector;
+        [Inject] private readonly SelectorRepository selector;
         [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;

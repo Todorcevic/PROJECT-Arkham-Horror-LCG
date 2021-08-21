@@ -1,5 +1,4 @@
 ﻿using Arkham.Model;
-using System.Collections.Generic;
 using Zenject;
 
 namespace Arkham.Application

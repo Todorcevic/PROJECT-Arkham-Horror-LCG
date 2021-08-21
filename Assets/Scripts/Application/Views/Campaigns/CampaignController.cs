@@ -28,7 +28,7 @@ namespace Arkham.Application
         {
             if (!campaignView.IsOpen) return;
             ClickEffect();
-            scenarioEvent.SelectCampaignInit(campaignView.Id);
+            scenarioEvent.SelectFirstScenarioOf(campaignView.Id);
             panelsManager.SelectPanel(panelToShow);
         }
 
@@ -38,7 +38,7 @@ namespace Arkham.Application
 
         public void Clicked(string campaignId)
         {
-            scenarioEvent.SelectCampaignInit(campaignId);
+            scenarioEvent.SelectFirstScenarioOf(campaignId);
             panelsManager.SelectPanel(panelToShow);
         }
 

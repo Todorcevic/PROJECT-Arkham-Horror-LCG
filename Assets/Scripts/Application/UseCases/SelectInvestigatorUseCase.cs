@@ -6,7 +6,7 @@ namespace Arkham.Application
 {
     public class SelectInvestigatorUseCase
     {
-        [Inject] private readonly Selector selector;
+        [Inject] private readonly SelectorRepository selector;
         [Inject] private readonly InvestigatorRepository investigatorRepository;
         [Inject] private readonly DeckCardPresenter cardVisibility;
         [Inject] private readonly CardsQuantityView cardQuantity;

@@ -6,7 +6,7 @@ namespace Arkham.Application
     public class AddInvestigatorUseCase
     {
         [Inject] private readonly InvestigatorRepository investigatorRepository;
-        [Inject] private readonly Selector selector;
+        [Inject] private readonly SelectorRepository selectorRepository;
         [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
@@ -19,7 +19,7 @@ namespace Arkham.Application
             UpdateView(investigatorId);
         }
 
-        private void UpdateModel(Investigator investigator) => selector.Add(investigator);
+        private void UpdateModel(Investigator investigator) => selectorRepository.Add(investigator);
 
         private void UpdateView(string investigatorId)
         {

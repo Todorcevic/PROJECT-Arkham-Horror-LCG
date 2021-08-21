@@ -8,12 +8,12 @@ namespace Arkham.Config
     {
         [Inject] private readonly IResolutionSet resolutionSetter;
         [Inject] private readonly ICardFactory cardFactory;
-        [Inject] private readonly IDataPersistence mapper;
+        [Inject] private readonly IDataPersistence dataContext;
 
         private void Awake()
         {
             resolutionSetter.SettingResolution();
-            mapper.LoadDataCards();
+            dataContext.LoadDataCards();
             cardFactory.BuildDeckCards();
             cardFactory.BuildInvestigatorCards();
             //mapper.SaveProgress();

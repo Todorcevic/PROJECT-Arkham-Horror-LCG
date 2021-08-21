@@ -1,5 +1,4 @@
 ﻿using Arkham.Model;
-using Arkham.Application;
 using Zenject;
 
 namespace Arkham.Application
@@ -10,26 +9,16 @@ namespace Arkham.Application
         [Inject] private readonly ContinueButtonPresenter continueButton;
 
         /*******************************************************************/
+        public void Reset() => SelectFirstScenarioOf(null);
 
-        public void ResetInit()
-        {
-            ResetUpdateModel();
-            ResetUpdateView();
-        }
-
-        void ResetUpdateModel() => campaignRepository.CurrentScenario = null;
-
-        void ResetUpdateView() => continueButton.Desactive(true);
-
-
-        public void SelectCampaignInit(string campaignId)
+        public void SelectFirstScenarioOf(string campaignId)
         {
             SelectCampaignUpdateModel(campaignId);
             SelectCampaignUpdateView();
         }
 
-        void SelectCampaignUpdateModel(string campaignId) => campaignRepository.CurrentScenario = campaignRepository.Get(campaignId).FirstScenario;
+        void SelectCampaignUpdateModel(string campaignId) => campaignRepository.SelectFirstScenarioOf(campaignId);
 
-        void SelectCampaignUpdateView() => continueButton.Desactive(false);
+        void SelectCampaignUpdateView() => continueButton.CheckEnable();
     }
 }

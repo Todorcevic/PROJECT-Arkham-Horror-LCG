@@ -5,7 +5,7 @@ namespace Arkham.Application
 {
     public class ReadyButtonPresenter
     {
-        [Inject] private readonly Selector selector;
+        [Inject] private readonly SelectorRepository selector;
         [Inject(Id = "ReadyButton")] private readonly ButtonView readyButton;
 
         /*******************************************************************/

@@ -19,5 +19,7 @@ namespace Arkham.Model
         }
 
         public void Add(Campaign campaign) => campaigns.Add(campaign);
+
+        public void SelectFirstScenarioOf(string campaignId) => CurrentScenario = Get(campaignId)?.FirstScenario;
     }
 }
