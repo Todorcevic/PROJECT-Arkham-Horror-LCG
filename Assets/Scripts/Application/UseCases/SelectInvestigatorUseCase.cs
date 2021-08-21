@@ -13,7 +13,6 @@ namespace Arkham.Application
         [Inject] private readonly InvestigatorAvatarView investigatorAvatar;
         [Inject] private readonly CardSelectorPresenter cardSelector;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
-        [Inject] private readonly SelectorSelectionInteractor selectorSelectionInteractor;
 
         /*******************************************************************/
         public void SelectLead() => Select(selector.Lead?.Id);
@@ -23,21 +22,11 @@ namespace Arkham.Application
             Investigator investigator = investigatorRepository.Get(investigatorId);
             investigatorSelector.SelectInvestigator(investigatorId);
             investigatorAvatar.ShowInvetigator(investigatorId);
-            cardQuantity.Refresh(investigator?.AmountCardsSelected.ToString(), investigator?.DeckBuilding.DeckSize.ToString());
+            cardQuantity.Refresh(investigator);
             cardVisibility.RefreshCardsSelectability();
             cardVisibility.RefreshCardsVisibility();
-            cardSelector.ShowAllCards(CreateDTOList(investigatorId));
-            cardSelector.RefreshBackgroundColor(investigatorId);
-        }
-
-        private List<CardRowDTO> CreateDTOList(string investigatorId)
-        {
-            Investigator investigator = investigatorRepository.Get(investigatorId);
-            List<CardRowDTO> allCardRow = new List<CardRowDTO>();
-            if (investigator == null) return allCardRow;
-            foreach (Card card in investigator?.FullDeck)
-                allCardRow.Add(new CardRowDTO(card.Id, card.Real_name, investigator.GetAmountOfThisCardInDeck(card)));
-            return allCardRow;
+            cardSelector.ShowAllCards(investigator);
+            cardSelector.ChangeBackgroundColor(investigatorId);
         }
     }
 }

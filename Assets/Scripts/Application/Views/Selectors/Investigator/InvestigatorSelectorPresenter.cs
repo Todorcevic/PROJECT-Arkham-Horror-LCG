@@ -9,9 +9,8 @@ namespace Arkham.Application
 {
     public class InvestigatorSelectorPresenter
     {
-        [Inject] private readonly StartGameUseCase startGameUseCase;
         [Inject] private readonly Selector selector;
-
+        [Inject] private readonly InvestigatorRepository investigatorRepository;
 
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
@@ -92,10 +91,10 @@ namespace Arkham.Application
             }
         }
 
-        public void SelectInvestigator(string activeInvestigatorId) =>
+        public void SelectInvestigator(string activeInvestigatorId)
+        {
             investigatorSelectorsManager.SelectInvestigator(activeInvestigatorId);
-
-
+        }
 
         private void SetThisSelectorWithThisInvestigator(InvestigatorSelectorView selector, string investigatorId)
         {

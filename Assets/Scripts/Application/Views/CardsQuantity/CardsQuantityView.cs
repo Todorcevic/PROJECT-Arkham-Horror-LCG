@@ -1,6 +1,8 @@
-﻿using Sirenix.OdinInspector;
+﻿using Arkham.Model;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace Arkham.Application
 {
@@ -11,10 +13,10 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI deckSizeText;
 
         /*******************************************************************/
-        public void Refresh(string amountCard, string deckSize)
+        public void Refresh(Investigator investigator)
         {
-            cardsAmountText.text = amountCard;
-            deckSizeText.text = deckSize;
+            cardsAmountText.text = investigator?.AmountCardsSelected.ToString();
+            deckSizeText.text = investigator?.DeckBuilding.DeckSize.ToString();
         }
     }
 }

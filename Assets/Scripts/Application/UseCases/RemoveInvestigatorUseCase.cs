@@ -7,9 +7,8 @@ namespace Arkham.Application
     public class RemoveInvestigatorUseCase
     {
         [Inject] private readonly InvestigatorRepository investigatorRepository;
-        [Inject] private readonly InvestigatorSelectionInteractor investigatorSelectionFilter;
         [Inject] private readonly Selector selector;
-        [Inject(Id = "ReadyButton")] private readonly ButtonView readyButton;
+        [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
 
@@ -31,7 +30,7 @@ namespace Arkham.Application
             investigatorVisibility.RefreshInvestigatorsSelectability();
             investigatorSelector.RemoveInvestigator(investigatorId);
             investigatorSelector.SetLeadSelector();
-            readyButton.Desactive(!selector.IsReady);
+            readyButton.AutoActivate();
         }
     }
 }

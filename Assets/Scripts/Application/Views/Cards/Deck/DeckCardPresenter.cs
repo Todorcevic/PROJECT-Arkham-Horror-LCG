@@ -42,8 +42,11 @@ namespace Arkham.Application
             }
         }
 
-        public void SetQuantity(CardQuantityDTO cardQuantity) =>
-            cardsManager.GetDeckCard(cardQuantity.CardId).SetQuantity(FormatQuantity(cardQuantity.Quantity));
+        public void SetQuantity(Card card)
+        {
+            int quantity = investigatorRepository.AmountLeftOfThisCard(card);
+            cardsManager.GetDeckCard(card.Id).SetQuantity(FormatQuantity(quantity));
+        }
 
         private string FormatQuantity(int quantity) => quantity > 1 ? "x" + quantity : string.Empty;
     }
