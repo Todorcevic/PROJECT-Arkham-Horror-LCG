@@ -11,8 +11,8 @@ namespace Arkham.Application
     {
         public const string HOVEROFF = "HoverOff";
         [Inject] private readonly IDoubleClickDetector clickDetector;
-        [Inject] private readonly RemoveInvestigatorUseCase removeInvestigator;
-        [Inject] private readonly SelectInvestigatorUseCase selectInvestigator;
+        [Inject] private readonly RemoveInvestigatorUseCase removeInvestigatorUseCase;
+        [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
         [Title("RESOURCES")]
         [SerializeField, Required] private Transform card;
         [SerializeField, Required] private InteractableAudio audioInteractable;
@@ -28,13 +28,13 @@ namespace Arkham.Application
             if (clickDetector.IsDoubleClick(eventData.clickTime, eventData.pointerPress))
             {
                 DoubleClickEffect();
-                removeInvestigator.Remove(Id);
-                selectInvestigator.SelectLead();
+                removeInvestigatorUseCase.Remove(Id);
+                selectInvestigatorUseCase.SelectLead();
             }
             else
             {
                 ClickEffect();
-                selectInvestigator.Select(Id);
+                selectInvestigatorUseCase.Select(Id);
             }
         }
 

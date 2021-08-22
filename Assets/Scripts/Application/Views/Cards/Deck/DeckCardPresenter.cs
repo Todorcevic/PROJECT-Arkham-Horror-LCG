@@ -1,4 +1,5 @@
 ﻿using Arkham.Model;
+using Arkham.Services;
 using Zenject;
 
 namespace Arkham.Application
@@ -11,6 +12,7 @@ namespace Arkham.Application
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
         [Inject] private readonly CardRepository cardRepository;
         [Inject] private readonly InvestigatorRepository investigatorRepository;
+        [Inject] private readonly CardShowerPresenter cardShower;
 
         /*******************************************************************/
         public void RefreshCardsVisibility()
@@ -18,6 +20,7 @@ namespace Arkham.Application
             foreach (DeckCardView cardView in cardsManager.DeckList)
             {
                 bool canBeShowed = visibilityService.CanThisCardBeShowed(cardView.Id, investigatorSelectorManager.CurrentInvestigatorId);
+                if (!canBeShowed) cardShower.HoveredOff(cardView.Id);
                 cardView.Show(canBeShowed);
             }
         }

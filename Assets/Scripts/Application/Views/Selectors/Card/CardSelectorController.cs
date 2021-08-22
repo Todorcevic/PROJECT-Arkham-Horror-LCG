@@ -1,5 +1,4 @@
-﻿using Arkham.Application;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -13,7 +12,7 @@ namespace Arkham.Application
     {
         private Tween cantComplete;
         [Inject] private readonly CardShowerPresenter cardShower;
-        [Inject] private readonly RemoveCardUseCase removeCard;
+        [Inject] private readonly RemoveCardUseCase removeCardUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
         [Title("RESOURCES")]
         [SerializeField, Required] private Transform card;
@@ -23,19 +22,16 @@ namespace Arkham.Application
         [SerializeField, Required] private TextMeshProUGUI quantity;
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeAnimation;
+        [SerializeField] private Color enableColor;
 
         public string Id { private get; set; }
-        public bool CanBeRemoved => background.color == Color.green;
+        public bool CanBeRemoved => background.color == enableColor;
 
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             ClickEffect();
-            if (CanBeRemoved)
-            {
-                removeCard.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId);
-                cardShower.RemoveCardAnimation();
-            }
+            if (CanBeRemoved) removeCardUseCase.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId);
             else CantRemoveAnimation();
         }
 
@@ -48,7 +44,7 @@ namespace Arkham.Application
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             HoverOffEffect();
-            cardShower.HoveredOff();
+            cardShower.HoveredOff(Id);
         }
 
         private void ClickEffect() => interactableAudio.ClickSound();

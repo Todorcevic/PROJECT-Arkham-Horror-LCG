@@ -10,20 +10,19 @@ namespace Arkham.Application
         [SerializeField, Required] private CardView cardView;
         [Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
-        [Inject] private readonly AddCardUseCase addCardEvent;
+        [Inject] private readonly AddCardUseCase addCardUseCase;
 
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             if (eventData.dragging || cardView.IsInactive) return;
             cardView.ClickEffect();
-            addCardEvent.AddCard(cardView.Id, investigatorSelectorManager.CurrentInvestigatorId);
-            cardShowerPresenter.AddCardAnimation();
+            addCardUseCase.AddCard(cardView.Id, investigatorSelectorManager.CurrentInvestigatorId);
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            if (eventData.dragging) return;
+            //if (eventData.dragging) return;
             cardView.HoverOnEffect();
             cardShowerPresenter.HoveredOn(new CardShowerDTO(cardView.Id, transform.position, isInLeftSide: true));
         }
@@ -31,7 +30,7 @@ namespace Arkham.Application
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             cardView.HoverOffEffect();
-            cardShowerPresenter.HoveredOff();
+            cardShowerPresenter.HoveredOff(cardView.Id);
         }
     }
 }

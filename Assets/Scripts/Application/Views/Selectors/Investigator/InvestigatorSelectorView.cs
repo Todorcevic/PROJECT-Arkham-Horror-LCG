@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,7 +58,7 @@ namespace Arkham.Application
 
         public void SetTransform(Transform toTransform = null)
         {
-            PlaceHolder.SetParent(toTransform ? toTransform : this.transform, worldPositionStays: false);
+            PlaceHolder.SetParent(toTransform ? toTransform : transform, worldPositionStays: false);
             PlaceHolder.localPosition = Vector3.zero;
         }
 
@@ -82,16 +81,14 @@ namespace Arkham.Application
             otherSelector.PlaceHolder.SetSiblingIndex(selector1Index);
         }
 
-        public void SetImageAnimation() => DOTween.Sequence().PrependCallback(PosicionateCardOff)
-                .Append(CardVisual.DOScale(1, timeAnimation));
+        public Tween SetImageAnimation() => DOTween.Sequence()
+            .PrependCallback(PosicionateCardOff)
+            .Append(CardVisual.DOScale(1, timeAnimation));
 
-        public Task RemoveAnimation()
-        {
-            return DOTween.Sequence()
-                .Join(CardVisual.DOMove(PlaceHolder.position, timeAnimation).SetSpeedBased())
-                .Join(CardVisual.DOScale(0, timeAnimation)).SetId(REMOVE_ANIMATION)
-                .AsyncWaitForCompletion();
-        }
+
+        public Tween RemoveAnimation() => DOTween.Sequence()
+            .Join(CardVisual.DOMove(PlaceHolder.position, timeAnimation).SetSpeedBased())
+            .Join(CardVisual.DOScale(0, timeAnimation)).SetId(REMOVE_ANIMATION);
 
         public void ArrangeAnimation() => CardVisual.DOMove(PlaceHolder.position, timeAnimation);
     }
