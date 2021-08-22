@@ -18,6 +18,8 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI quantity;
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeAnimation;
+        [SerializeField] private Color enableColor;
+        [SerializeField] private Color disableColor;
 
         public string Id { get; protected set; }
         public bool IsEmpty => Id == null;
@@ -52,7 +54,7 @@ namespace Arkham.Application
             cantComplete = transform.DOPunchPosition(Vector3.right * 10, timeAnimation, 20, 5);
         }
 
-        public void SetColorBackground(bool canBeRemoved) => background.color = canBeRemoved ? Color.green : Color.red;
+        public void SetColorBackground(bool canBeRemoved) => background.color = canBeRemoved ? enableColor : disableColor;
 
         private void Activate(bool isOn) => canvas.blocksRaycasts = canvas.interactable = isOn;
     }

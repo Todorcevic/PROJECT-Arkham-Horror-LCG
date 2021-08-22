@@ -51,7 +51,7 @@ namespace Arkham.Model
         /*******************************************************************/
         public bool IsMandatoryCard(Card card) => mandatoryCards.Contains(card);
 
-        public int GetAmountOfThisCardInDeck(Card card) => FullDeck.Count(c => c == card);
+        public int GetAmountOfThisCardInDeck(Card card) => FullDeck.Count(cardInDeck => cardInDeck == card);
 
         public void AddToDeck(Card card) => deck.Add(card);
 
