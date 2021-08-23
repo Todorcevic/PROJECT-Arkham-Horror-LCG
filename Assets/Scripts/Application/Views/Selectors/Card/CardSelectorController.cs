@@ -44,7 +44,7 @@ namespace Arkham.Application
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             HoverOffEffect();
-            cardShower.HoveredOff(Id);
+            cardShower.HoveredOff();
         }
 
         private void ClickEffect() => interactableAudio.ClickSound();

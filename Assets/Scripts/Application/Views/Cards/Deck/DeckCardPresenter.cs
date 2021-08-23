@@ -20,7 +20,7 @@ namespace Arkham.Application
             foreach (DeckCardView cardView in cardsManager.DeckList)
             {
                 bool canBeShowed = visibilityService.CanThisCardBeShowed(cardView.Id, investigatorSelectorManager.CurrentInvestigatorId);
-                if (!canBeShowed) cardShower.HoveredOff(cardView.Id);
+                if (!canBeShowed) cardShower.HoveredOff();
                 cardView.Show(canBeShowed);
             }
         }

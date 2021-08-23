@@ -26,7 +26,7 @@ namespace Arkham.Application
 
         private void UpdateView(Card card, Investigator investigator)
         {
-            cardShowerPresenter.MoveCard(card.Id);
+            cardShowerPresenter.MoveCard();
             cardSelector.SetCardInSelector(card, investigator);
             cardSelector.ChangeBackgroundColor(investigator.Id);
             deckCardPresenter.RefreshCardsSelectability();

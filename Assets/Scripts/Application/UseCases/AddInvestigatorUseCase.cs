@@ -26,7 +26,7 @@ namespace Arkham.Application
         private void UpdateView(string investigatorId)
         {
             InvestigatorSelectorView selector = investigatorSelector.AddInvestigatorToSelector(investigatorId);
-            cardShowerPresenter.MoveInvestigator(investigatorId, selector.PlaceHolderPosition)
+            cardShowerPresenter.MoveInvestigator(selector.PlaceHolderPosition)
                 .OnComplete(() => selector.SetImageAnimation());
             investigatorSelector.SetLeadSelector();
             investigatorVisibility.RefreshInvestigatorsSelectability();

@@ -30,7 +30,7 @@ namespace Arkham.Application
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             cardView.HoverOffEffect();
-            cardShowerPresenter.HoveredOff(cardView.Id);
+            cardShowerPresenter.HoveredOff();
         }
     }
 }

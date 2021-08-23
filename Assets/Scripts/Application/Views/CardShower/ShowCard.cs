@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,8 +17,7 @@ public class ShowCard : MonoBehaviour
     [SerializeField, Range(1f, 2f)] private float scale;
 
     public string Id => id;
-    private string SHOW_ANIMATION => "ShowAnimation" + id;
-    private string MOVE_ANIMATION => "MoveAnimation" + id;
+
 
     /*******************************************************************/
     public void Active(string cardId, Sprite frontCardSprite, Sprite backCardSprite)
@@ -42,8 +42,7 @@ public class ShowCard : MonoBehaviour
 
     public void Hide()
     {
-        if (DOTween.IsTweening(MOVE_ANIMATION)) return;
-        DOTween.Kill(SHOW_ANIMATION);
+        DOTween.Kill(name);
         frontImage.gameObject.SetActive(false);
         backImage.gameObject.SetActive(false);
         gameObject.SetActive(false);
@@ -54,12 +53,11 @@ public class ShowCard : MonoBehaviour
     public void ShowAnimation(Vector2 positionToMove) => DOTween.Sequence()
         .Append(transform.DOMove(positionToMove, timeAnimation).SetDelay(delay))
         .Join(transform.DOScale(scale, timeAnimation)
-        .SetDelay(delay)).SetId(SHOW_ANIMATION);
+        .SetDelay(delay)).SetId(name);
 
 
     public Tween MoveAnimation(Vector2 positionToMove) => DOTween.Sequence()
         .Append(transform.DOMove(positionToMove, timeAnimation))
         .Join(transform.DOScale(0, timeAnimation))
-        .AppendCallback(Hide)
-        .SetId(MOVE_ANIMATION);
+        .AppendCallback(Hide);
 }
