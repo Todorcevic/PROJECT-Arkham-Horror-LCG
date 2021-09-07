@@ -11,6 +11,7 @@ namespace Arkham.Application
         [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
+        [Inject(Id = "InvestigatorsButton")] private readonly ButtonView investigatorsButton;
 
         /*******************************************************************/
         public void Remove(string investigatorId)
@@ -31,6 +32,7 @@ namespace Arkham.Application
             investigatorSelector.RemoveInvestigator(investigatorId);
             investigatorSelector.SetLeadSelector();
             readyButton.AutoActivate();
+            investigatorsButton.ExecuteClick();
         }
     }
 }

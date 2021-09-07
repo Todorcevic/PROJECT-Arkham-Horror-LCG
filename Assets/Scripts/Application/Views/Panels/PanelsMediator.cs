@@ -15,6 +15,7 @@ namespace Arkham.Application
         /*******************************************************************/
         public void SelectPanel(PanelView panel)
         {
+            if (panel == selectedPanel) return;
             selectedPanel?.Activate(false);
             panel.Activate(true);
             selectedPanel = panel;

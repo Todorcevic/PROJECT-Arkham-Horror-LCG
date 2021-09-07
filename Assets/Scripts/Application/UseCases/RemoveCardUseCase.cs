@@ -12,7 +12,7 @@ namespace Arkham.Application
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject] private readonly CardSelectorPresenter cardSelector;
         [Inject] private readonly CardShowerPresenter cardShowerPresenter;
-
+        [Inject(Id = "CardsButton")] private readonly ButtonView cardsButton;
         /*******************************************************************/
         public void Remove(string cardId, string investigatorId)
         {
@@ -33,6 +33,7 @@ namespace Arkham.Application
             deckCardPresenter.SetQuantity(card);
             cardQuantity.Refresh(investigator);
             readyButton.AutoActivate();
+            cardsButton.ExecuteClick();
         }
     }
 }
