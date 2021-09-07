@@ -87,7 +87,7 @@ namespace Arkham.Application
 
 
         public Tween RemoveAnimation() => DOTween.Sequence()
-            .Join(CardVisual.DOMove(PlaceHolder.position, timeAnimation).SetSpeedBased())
+            .Join(CardVisual.DOMove(PlaceHolder.position, timeAnimation * 4).SetSpeedBased())
             .Join(CardVisual.DOScale(0, timeAnimation)).SetId(REMOVE_ANIMATION);
 
         public void ArrangeAnimation() => CardVisual.DOMove(PlaceHolder.position, timeAnimation);
