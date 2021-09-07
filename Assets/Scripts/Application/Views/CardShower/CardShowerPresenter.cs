@@ -1,5 +1,6 @@
 ﻿using Arkham.Services;
-using System.Threading.Tasks;
+using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -7,53 +8,61 @@ namespace Arkham.Application
 {
     public class CardShowerPresenter
     {
-        private Task moveAnimation;
-        private CardShowerDTO currentShowableCard;
+        CardShowerDTO current;
         [Inject] private readonly ICardImage imageCards;
-        [Inject] private readonly CardShowerView cardShower;
+        [Inject] private readonly List<ShowCard> showCards;
         [Inject(Id = "CardSelectorZone")] private readonly RectTransform cardSelectorZone;
         [Inject(Id = "MidZone")] private readonly RectTransform cardZone;
 
         /*******************************************************************/
-        public async void HoveredOn(CardShowerDTO showableCard)
+        private ShowCard GetNewShowCard()
         {
-            currentShowableCard = showableCard;
-            if (moveAnimation != null) await moveAnimation;
-            if (currentShowableCard == null) return;
-            Sprite frontImage = imageCards.GetSprite(showableCard.CardId);
-            Sprite backImage = imageCards.GetBackSprite(showableCard.CardId);
-            cardShower.SetShowCard(showableCard.Position, frontImage, backImage);
-            cardShower.ShowAnimation(showableCard.FinalPosition);
+            ShowCard showCard = showCards.Find(s => !s.isActiveAndEnabled);
+            showCard.gameObject.SetActive(true);
+            return showCard;
         }
 
-        public void HoveredOff()
+        private ShowCard GetShowedShowCard() => showCards.Find(showCard => showCard.isActiveAndEnabled && !DOTween.IsTweening(showCard));
+
+        public void HoveredOn(CardShowerDTO showableCard)
         {
-            currentShowableCard = null;
-            cardShower.Hide();
+            current = showableCard;
+            ShowCard showCard = GetNewShowCard();
+            MoveShowCard();
+            SetShowCard();
+            showCard.ShowAnimation(showableCard.FinalPosition);
+
+            void MoveShowCard() => showCard.transform.position = showableCard.Position;
+
+            void SetShowCard()
+            {
+                Sprite frontImage = imageCards.GetSprite(showableCard.CardId);
+                Sprite backImage = imageCards.GetBackSprite(showableCard.CardId);
+                showCard.Active(showableCard.CardId, frontImage, backImage);
+            }
         }
 
-        public Task AddInvestigatorAnimation(Vector2 placeHolderPosition) =>
-            moveAnimation = cardShower.MoveAnimation(placeHolderPosition);
+        public void HoveredOff() => GetShowedShowCard()?.Hide();
 
-        public async void AddCardAnimation()
+        public void MoveCard()
         {
-            moveAnimation = cardShower.MoveAnimation(cardSelectorZone.position);
-            await moveAnimation;
-            Reshow();
+            ShowCard showCard = GetShowedShowCard();
+            showCard.MoveAnimation(cardSelectorZone.position).SetId(showCard);
+            HoveredOn(current);
         }
 
-        public async void RemoveCardAnimation()
+        public void RemoveCard()
         {
-            moveAnimation = cardShower.MoveAnimation(cardZone.position);
-            await moveAnimation;
-            Reshow();
+            ShowCard showCard = GetShowedShowCard();
+            showCard.MoveAnimation(cardZone.position).SetId(showCard);
+            HoveredOn(current);
         }
 
-        private void Reshow()
+        public Tween MoveInvestigator(Vector2 positionToMove)
         {
-            cardShower.Hide();
-            if (currentShowableCard != null)
-                HoveredOn(currentShowableCard);
+            ShowCard showCard = GetShowedShowCard();
+            HoveredOn(current);
+            return showCard.MoveAnimation(positionToMove).SetId(showCard);
         }
     }
 }

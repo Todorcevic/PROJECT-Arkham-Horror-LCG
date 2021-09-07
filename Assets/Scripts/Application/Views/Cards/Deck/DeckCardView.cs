@@ -8,8 +8,13 @@ namespace Arkham.Application
     {
         [Title("DECKCARD RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI textQuantity;
+        [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken xpCost;
 
         /*******************************************************************/
-        public void SetQuantity(string quantity) => textQuantity.text = quantity;
+        public void SetQuantity(int quantity) => textQuantity.text = FormatQuantity(quantity);
+
+        public void SetXpCost(int quantity) => xpCost.UpdateAmount(quantity);
+
+        private string FormatQuantity(int quantity) => quantity > 1 ? "x" + quantity : string.Empty;
     }
 }

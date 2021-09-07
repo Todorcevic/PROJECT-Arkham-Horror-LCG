@@ -11,12 +11,15 @@ namespace Arkham.Application
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject] private readonly ReadyButtonPresenter readyButton;
+        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
+        [Inject] private readonly UpdateXpUseCase updateXpUseCase;
 
         /*******************************************************************/
         public void AddCard(string cardId, string investigatorId)
         {
             Card card = cardRepository.Get(cardId);
             Investigator investigator = investigatorRepository.Get(investigatorId);
+            updateXpUseCase.PayCardXp(investigator, card);
             UpdateModel(card, investigator);
             UpdateView(card, investigator);
         }
@@ -25,6 +28,7 @@ namespace Arkham.Application
 
         private void UpdateView(Card card, Investigator investigator)
         {
+            cardShowerPresenter.MoveCard();
             cardSelector.SetCardInSelector(card, investigator);
             cardSelector.ChangeBackgroundColor(investigator.Id);
             deckCardPresenter.RefreshCardsSelectability();

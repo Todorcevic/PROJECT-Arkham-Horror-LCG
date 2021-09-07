@@ -1,5 +1,5 @@
 ﻿using Arkham.Model;
-using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 namespace Arkham.Application
@@ -13,6 +13,7 @@ namespace Arkham.Application
         [Inject] private readonly InvestigatorAvatarView investigatorAvatar;
         [Inject] private readonly CardSelectorPresenter cardSelector;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
+        [Inject] private readonly CardsManager investigatorCardsManager;
 
         /*******************************************************************/
         public void SelectLead() => Select(selector.Lead?.Id);
@@ -20,8 +21,12 @@ namespace Arkham.Application
         public void Select(string investigatorId)
         {
             Investigator investigator = investigatorRepository.Get(investigatorId);
+            if (investigator != null)
+            {
+                Sprite imageCard = investigatorCardsManager.GetSpriteCard(investigator?.Id);
+                investigatorAvatar.SetAvatar(imageCard, investigator.PhysicTrauma, investigator.MentalTrauma, investigator.Xp);
+            }
             investigatorSelector.SelectInvestigator(investigatorId);
-            investigatorAvatar.ShowInvetigator(investigatorId);
             cardQuantity.Refresh(investigator);
             cardVisibility.RefreshCardsSelectability();
             cardVisibility.RefreshCardsVisibility();

@@ -1,4 +1,5 @@
 ﻿using Arkham.Model;
+using DG.Tweening;
 using Zenject;
 
 namespace Arkham.Application
@@ -10,6 +11,7 @@ namespace Arkham.Application
         [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
+        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
 
         /*******************************************************************/
         public void Add(string investigatorId)
@@ -23,7 +25,9 @@ namespace Arkham.Application
 
         private void UpdateView(string investigatorId)
         {
-            investigatorSelector.AddInvestigator(investigatorId);
+            InvestigatorSelectorView selector = investigatorSelector.AddInvestigatorToSelector(investigatorId);
+            cardShowerPresenter.MoveInvestigator(selector.PlaceHolderPosition)
+                .OnComplete(() => selector.SetImageAnimation());
             investigatorSelector.SetLeadSelector();
             investigatorVisibility.RefreshInvestigatorsSelectability();
             readyButton.AutoActivate();

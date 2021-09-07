@@ -1,7 +1,7 @@
 ﻿using Zenject;
 using UnityEngine;
-using System.Threading.Tasks;
 using Arkham.Model;
+using DG.Tweening;
 
 namespace Arkham.Application
 {
@@ -11,7 +11,6 @@ namespace Arkham.Application
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly SelectInvestigatorUseCase investigatorSelectUseCase;
-        [Inject] private readonly CardShowerPresenter cardShowerController;
         [Inject(Id = "InvestigatorPlaceHolderZone")] private readonly RectTransform placeHoldersZone;
 
         private InvestigatorSelectorView LeadSelector => investigatorSelectorsManager.GetCurrentLeadSelector;
@@ -45,31 +44,24 @@ namespace Arkham.Application
             investigatorSelectorsManager.GetSelectorById(realLeadInvestigator).LeadIcon(true);
         }
 
-        public void AddInvestigator(string investigatorId)
+        public InvestigatorSelectorView AddInvestigatorToSelector(string investigatorId)
         {
             InvestigatorSelectorView selector = investigatorSelectorsManager.GetEmptySelector();
             SetThisSelectorWithThisInvestigator(selector, investigatorId);
-            Animation();
-
-            async void Animation()
-            {
-                await cardShowerController.AddInvestigatorAnimation(selector.PlaceHolderPosition);
-                selector.SetImageAnimation();
-            }
+            return selector;
         }
 
-        public async void RemoveInvestigator(string investigatorId)
+        public void RemoveInvestigator(string investigatorId)
         {
             InvestigatorSelectorView selector = investigatorSelectorsManager.GetSelectorById(investigatorId);
             selector.SetTransform();
-            await Animation();
-            selector.EmptySelector();
+            Animation();
 
-            async Task Animation()
+            void Animation()
             {
                 investigatorSelectorsManager.RebuildPlaceHolders();
                 investigatorSelectorsManager.ArrangeAllSelectors();
-                await selector.RemoveAnimation();
+                selector.RemoveAnimation().OnComplete(selector.EmptySelector);
             }
         }
 

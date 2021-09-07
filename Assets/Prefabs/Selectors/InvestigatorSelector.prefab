@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 6506103354257736602}
   - component: {fileID: 8081987424911631509}
   m_Layer: 5
-  m_Name: Investigator Selector
+  m_Name: InvestigatorSelector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -70,7 +70,6 @@ namespace Arkham.Model
 
         public bool IsInvestigator => Type_code == "investigator";
         public bool ContainThisText(string textToSearch) => Real_name.ToLower().Contains(textToSearch?.ToLower() ?? "");
-
     }
 }
 
