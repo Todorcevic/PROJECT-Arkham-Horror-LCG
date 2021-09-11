@@ -385,7 +385,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6799962634472469167}
   - component: {fileID: 509505167249770005}
-  - component: {fileID: 4257975125720030568}
   - component: {fileID: 8088090979582546804}
   - component: {fileID: 863886768200286005}
   m_Layer: 5
@@ -430,24 +429,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasIcon: {fileID: 1143711315986413296}
   icon: {fileID: 2636244524589476625}
-  id: x
---- !u!114 &4257975125720030568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6720720525385905213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a67bcdc39ac7a9a4a88eff7417f26069, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   InteractableAudio: {fileID: 2496415024736871201}
   chapterImage: {fileID: 6690869596982815881}
   highlighted: {fileID: 6801058822832394089}
   highlightedTextBox: {fileID: 8914362415478176639}
-  campaignView: {fileID: 509505167249770005}
+  id: x
   timeHoverAnimation: 0.25
   yoffsetHoverHighlighted: 15
   zoomParallaxHoverEffect: 1.25

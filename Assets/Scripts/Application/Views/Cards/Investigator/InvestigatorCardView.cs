@@ -2,13 +2,18 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.EventSystems;
+using Zenject;
 
 namespace Arkham.Application
 {
-    public class InvestigatorCardView : CardView
+    public class InvestigatorCardView : CardView, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private InvestigatorStateView currentState;
+        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
+        [Inject] private readonly AddInvestigatorUseCase addInvestigatorUseCase;
+        [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
+
         [Title("INVESTIGATOR RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private List<InvestigatorStateView> states;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken physicTrauma;
@@ -16,6 +21,27 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken xp;
 
         /*******************************************************************/
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.dragging || IsInactive) return;
+            ClickEffect();
+            addInvestigatorUseCase.Add(Id);
+            selectInvestigatorUseCase.Select(Id);
+        }
+
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        {
+            if (eventData.dragging) return;
+            HoverOnEffect();
+            cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: true));
+        }
+
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        {
+            HoverOffEffect();
+            cardShowerPresenter.HoveredOff();
+        }
+
         public void ChangeState(InvestigatorState state)
         {
             if (state != InvestigatorState.None) HideTokens();

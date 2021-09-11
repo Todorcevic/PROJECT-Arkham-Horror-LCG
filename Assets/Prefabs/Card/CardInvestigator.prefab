@@ -440,7 +440,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7131878188277760170}
   - component: {fileID: 3428538249790762421}
-  - component: {fileID: 5622529335119516345}
   - component: {fileID: 7192597132227724208}
   - component: {fileID: 7918799787899769508}
   m_Layer: 5
@@ -498,19 +497,6 @@ MonoBehaviour:
   physicTrauma: {fileID: 2243245496653488814}
   mentalTrauma: {fileID: 2136586034364361448}
   xp: {fileID: 446024562793134213}
---- !u!114 &5622529335119516345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120494878094766683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 604c9ecdeaa7b644386412ef9bc4969a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardView: {fileID: 3428538249790762421}
 --- !u!225 &7192597132227724208
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1124,11 +1110,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
---- !u!4 &5949791847475927809 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1746173441245118772, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
-  m_PrefabInstance: {fileID: 5380199940833303093}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3381794686743605097 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7225114169980597596, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
@@ -1140,6 +1121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038d7dc22c3565849878ed7593cc2df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &5949791847475927809 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1746173441245118772, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
+  m_PrefabInstance: {fileID: 5380199940833303093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6369084594602625096
 PrefabInstance:
   m_ObjectHideFlags: 0

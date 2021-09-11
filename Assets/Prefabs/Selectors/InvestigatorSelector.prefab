@@ -494,7 +494,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasCard: {fileID: 7140359230233156653}
-  card: {fileID: 8950362181989810048}
   audioInteractable: {fileID: 1385225813015163964}
   timeHoverAnimation: 0.25
 --- !u!222 &34041437426948442

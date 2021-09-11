@@ -2,32 +2,89 @@
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Arkham.Application
 {
-    public class CardSelectorView : MonoBehaviour
+    public class CardSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private Tween cantComplete;
+        [Inject] private readonly CardShowerPresenter cardShower;
+        [Inject] private readonly RemoveCardUseCase removeCardUseCase;
+        [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
+
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvas;
-        [SerializeField, Required, ChildGameObjectsOnly] private Image image;
-        [SerializeField, Required, ChildGameObjectsOnly] private Image background;
-        [SerializeField, Required, ChildGameObjectsOnly] private CardSelectorController sensor;
-        [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI cardName;
-        [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI quantity;
+        [SerializeField, Required] private Transform card;
+        [SerializeField, Required] private InteractableAudio interactableAudio;
+        [SerializeField, Required] private CanvasGroup canvas;
+        [SerializeField, Required] private Image image;
+        [SerializeField, Required] private Image background;
+        [SerializeField, Required] private TextMeshProUGUI cardName;
+        [SerializeField, Required] private TextMeshProUGUI quantity;
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeAnimation;
         [SerializeField] private Color enableColor;
         [SerializeField] private Color disableColor;
 
-        public string Id { get; protected set; }
-        public bool IsEmpty => Id == null;
+        public string Id { get; private set; } = null;
+        public bool IsEmpty => string.IsNullOrEmpty(Id);
+        public bool CanBeRemoved { get; private set; }
 
         /*******************************************************************/
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        {
+            ClickEffect();
+            if (CanBeRemoved) removeCardUseCase.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId);
+            else CantRemoveAnimation();
+        }
+
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        {
+            HoverOnEffect();
+            cardShower.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: false));
+        }
+
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        {
+            HoverOffEffect();
+            cardShower.HoveredOff();
+        }
+
+        private void ClickEffect() => interactableAudio.ClickSound();
+
+        private void HoverOnEffect()
+        {
+            interactableAudio.HoverOnSound();
+            ChangeTextColor(Color.black);
+            FillBackground(true);
+        }
+
+        private void HoverOffEffect()
+        {
+            interactableAudio.HoverOffSound();
+            ChangeTextColor(Color.white);
+            FillBackground(false);
+        }
+
+        private void ChangeTextColor(Color color)
+        {
+            cardName.DOColor(color, timeAnimation);
+            quantity?.DOColor(color, timeAnimation);
+        }
+
+        private void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, timeAnimation);
+
+        private void CantRemoveAnimation()
+        {
+            cantComplete.Complete();
+            cantComplete = card.DOPunchPosition(Vector3.right * 10, timeAnimation, 20, 5);
+        }
+
         public void SetSelector(string cardId, Sprite cardSprite = null)
         {
-            Id = sensor.Id = cardId;
+            Id = cardId;
             Activate(!IsEmpty);
             ChangeImage(cardSprite);
         }
@@ -44,17 +101,15 @@ namespace Arkham.Application
 
         public void SetTransform(Transform toTransform)
         {
-            transform.SetParent(toTransform, worldPositionStays: false);
-            transform.localPosition = Vector3.zero;
+            card.SetParent(toTransform, worldPositionStays: false);
+            card.localPosition = Vector3.zero;
         }
 
-        public void CantRemoveAnimation()
+        public void SetColorBackground(bool canBeRemoved)
         {
-            cantComplete.Complete();
-            cantComplete = transform.DOPunchPosition(Vector3.right * 10, timeAnimation, 20, 5);
+            background.color = canBeRemoved ? enableColor : disableColor;
+            CanBeRemoved = canBeRemoved;
         }
-
-        public void SetColorBackground(bool canBeRemoved) => background.color = canBeRemoved ? enableColor : disableColor;
 
         private void Activate(bool isOn) => canvas.blocksRaycasts = canvas.interactable = isOn;
     }

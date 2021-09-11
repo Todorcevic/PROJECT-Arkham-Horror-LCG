@@ -10,7 +10,7 @@ namespace Arkham.Application
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
         [Inject] private readonly InvestigatorsCardPresenter investigatorsCard;
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
-        [Inject] private readonly CampaignPresenter campaignPresenter;
+        [Inject] private readonly CampaignsManager campaignsManager;
         [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly InvestigatorButtonPresenter investigatorsButton;
 
@@ -28,7 +28,7 @@ namespace Arkham.Application
             investigatorsButton.ExecuteClick();
             investigatorSelector.InitializeSelectors();
             investigatorSelector.SetLeadSelector();
-            if (gameType == StartGame.New) campaignPresenter.InitializeCampaigns();
+            campaignsManager.InitializeCampaigns(gameType);
             investigatorsCard.InvestigatorStateResolve();
             investigatorsCard.RefreshInvestigatorsSelectability();
             investigatorsCard.RefreshInvestigatorsVisibility();
