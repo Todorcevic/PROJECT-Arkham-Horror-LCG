@@ -8,6 +8,7 @@ namespace Arkham.Application
 {
     public class CardView : MonoBehaviour
     {
+        private Tween cantAdd;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
@@ -16,12 +17,13 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private Image glow;
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
+        [SerializeField, Range(0f, 1f)] private float timeShakeAnimation;
         [SerializeField] private Color enableColor;
         [SerializeField] private Color disableColor;
 
+        protected bool IsInactive { get; set; }
         public string Id { get; private set; }
         public Sprite GetCardImage => image.sprite;
-        public bool IsInactive { get; set; }
 
         /*******************************************************************/
         [Inject]
@@ -56,5 +58,12 @@ namespace Arkham.Application
             canvasGroup.alpha = sprite == null ? 0 : 1;
             image.sprite = sprite;
         }
+
+        protected void CantAddAnimation()
+        {
+            cantAdd.Complete();
+            cantAdd = transform.DOPunchPosition(Vector3.right * 10, timeShakeAnimation, 20, 5);
+        }
     }
 }
+

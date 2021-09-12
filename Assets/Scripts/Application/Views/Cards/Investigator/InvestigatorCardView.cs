@@ -22,10 +22,14 @@ namespace Arkham.Application
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            if (eventData.dragging || IsInactive) return;
+            if (eventData.dragging) return;
             ClickEffect();
-            addInvestigatorUseCase.Add(Id);
-            selectInvestigatorUseCase.Select(Id);
+            if (IsInactive) CantAddAnimation();
+            else
+            {
+                addInvestigatorUseCase.Add(Id);
+                selectInvestigatorUseCase.Select(Id);
+            }
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)

@@ -403,6 +403,7 @@ MonoBehaviour:
   image: {fileID: 4100283504713718926}
   glow: {fileID: 1562410001402135089}
   timeHoverAnimation: 0.1
+  timeShakeAnimation: 0.25
   enableColor: {r: 0.05882353, g: 0.23529412, b: 0.05882353, a: 1}
   disableColor: {r: 0.23529412, g: 0.05882353, b: 0.05882353, a: 1}
   textQuantity: {fileID: 3509090138855255280}

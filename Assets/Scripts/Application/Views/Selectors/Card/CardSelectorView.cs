@@ -29,7 +29,7 @@ namespace Arkham.Application
 
         public string Id { get; private set; } = null;
         public bool IsEmpty => string.IsNullOrEmpty(Id);
-        public bool CanBeRemoved { get; private set; }
+        private bool CanBeRemoved { get; set; }
 
         /*******************************************************************/
         public void SetSelector(string cardId, Sprite cardSprite = null)
