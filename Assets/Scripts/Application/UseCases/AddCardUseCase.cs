@@ -30,7 +30,7 @@ namespace Arkham.Application
         {
             cardShowerPresenter.MoveCard();
             cardSelector.SetCardInSelector(card, investigator);
-            cardSelector.ChangeBackgroundColor(investigator.Id);
+            cardSelector.SetCanBeRemovedInSelectors(investigator.Id);
             deckCardPresenter.RefreshCardsSelectability();
             deckCardPresenter.SetQuantity(card);
             cardQuantity.Refresh(investigator);

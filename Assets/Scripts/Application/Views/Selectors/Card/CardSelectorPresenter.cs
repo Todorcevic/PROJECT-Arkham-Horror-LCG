@@ -45,10 +45,10 @@ namespace Arkham.Application
             }
         }
 
-        public void ChangeBackgroundColor(string investigatorId)
+        public void SetCanBeRemovedInSelectors(string investigatorId)
         {
             foreach (CardSelectorView selector in cardSelectorsManager.GetAllFilledSelectors())
-                selector.SetColorBackground(selectorSelectionInteractor.CanThisSelectorBeRemoved(selector.Id, investigatorId));
+                selector.SetCanBeRemoved(selectorSelectionInteractor.CanThisSelectorBeRemoved(selector.Id, investigatorId));
         }
 
         private void DesactivateSelector(CardSelectorView selector)

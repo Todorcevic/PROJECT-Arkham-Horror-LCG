@@ -13,7 +13,6 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGlow;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasImage;
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
-        [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorSelectorController sensor;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorSelectorDragController dragSensor;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasSensor;
         [SerializeField, Required, ChildGameObjectsOnly] private Image leaderIcon;
@@ -21,17 +20,15 @@ namespace Arkham.Application
         [SerializeField, Range(0f, 1f)] private float timeAnimation;
 
         private Transform CardVisual => canvasImage.transform;
-        private Transform PlaceHolder => sensor.transform;
+        private Transform PlaceHolder => dragSensor.transform;
         public Vector2 PlaceHolderPosition => PlaceHolder.position;
         public string Id { get; protected set; }
         public bool IsLeader => leaderIcon.enabled;
 
         /*******************************************************************/
-        public void Activate(bool isOn) => canvasSensor.blocksRaycasts = canvasSensor.interactable = isOn;
-
         public void SetSelector(string cardId, Sprite cardSprite)
         {
-            Id = sensor.Id = dragSensor.Id = cardId;
+            Id = dragSensor.Id = cardId;
             Activate(true);
             canvasImage.alpha = 1;
             image.sprite = cardSprite;
@@ -91,5 +88,7 @@ namespace Arkham.Application
             .Join(CardVisual.DOScale(0, timeAnimation)).SetId(REMOVE_ANIMATION);
 
         public void ArrangeAnimation() => CardVisual.DOMove(PlaceHolder.position, timeAnimation);
+
+        private void Activate(bool isOn) => canvasSensor.blocksRaycasts = canvasSensor.interactable = isOn;
     }
 }

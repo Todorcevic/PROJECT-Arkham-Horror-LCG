@@ -13,7 +13,6 @@ namespace Arkham.Application
         [Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Inject] private readonly AddInvestigatorUseCase addInvestigatorUseCase;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
-
         [Title("INVESTIGATOR RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private List<InvestigatorStateView> states;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken physicTrauma;

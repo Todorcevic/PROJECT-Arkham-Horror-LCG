@@ -31,7 +31,7 @@ namespace Arkham.Application
             cardVisibility.RefreshCardsSelectability();
             cardVisibility.RefreshCardsVisibility();
             cardSelector.ShowAllCards(investigator);
-            cardSelector.ChangeBackgroundColor(investigatorId);
+            cardSelector.SetCanBeRemovedInSelectors(investigatorId);
         }
     }
 }

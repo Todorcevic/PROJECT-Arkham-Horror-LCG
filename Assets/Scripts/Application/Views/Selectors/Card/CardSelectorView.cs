@@ -14,7 +14,6 @@ namespace Arkham.Application
         [Inject] private readonly CardShowerPresenter cardShower;
         [Inject] private readonly RemoveCardUseCase removeCardUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
-
         [Title("RESOURCES")]
         [SerializeField, Required] private Transform card;
         [SerializeField, Required] private InteractableAudio interactableAudio;
@@ -33,66 +32,19 @@ namespace Arkham.Application
         public bool CanBeRemoved { get; private set; }
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
-        {
-            ClickEffect();
-            if (CanBeRemoved) removeCardUseCase.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId);
-            else CantRemoveAnimation();
-        }
-
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
-        {
-            HoverOnEffect();
-            cardShower.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: false));
-        }
-
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
-        {
-            HoverOffEffect();
-            cardShower.HoveredOff();
-        }
-
-        private void ClickEffect() => interactableAudio.ClickSound();
-
-        private void HoverOnEffect()
-        {
-            interactableAudio.HoverOnSound();
-            ChangeTextColor(Color.black);
-            FillBackground(true);
-        }
-
-        private void HoverOffEffect()
-        {
-            interactableAudio.HoverOffSound();
-            ChangeTextColor(Color.white);
-            FillBackground(false);
-        }
-
-        private void ChangeTextColor(Color color)
-        {
-            cardName.DOColor(color, timeAnimation);
-            quantity?.DOColor(color, timeAnimation);
-        }
-
-        private void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, timeAnimation);
-
-        private void CantRemoveAnimation()
-        {
-            cantComplete.Complete();
-            cantComplete = card.DOPunchPosition(Vector3.right * 10, timeAnimation, 20, 5);
-        }
-
         public void SetSelector(string cardId, Sprite cardSprite = null)
         {
             Id = cardId;
             Activate(!IsEmpty);
             ChangeImage(cardSprite);
-        }
 
-        private void ChangeImage(Sprite cardSprite)
-        {
-            canvas.alpha = cardSprite == null ? 0 : 1;
-            image.sprite = cardSprite;
+            void Activate(bool isOn) => canvas.blocksRaycasts = canvas.interactable = isOn;
+
+            void ChangeImage(Sprite cardSprite)
+            {
+                canvas.alpha = cardSprite == null ? 0 : 1;
+                image.sprite = cardSprite;
+            }
         }
 
         public void SetName(string cardName) => this.cardName.text = cardName;
@@ -105,12 +57,59 @@ namespace Arkham.Application
             card.localPosition = Vector3.zero;
         }
 
-        public void SetColorBackground(bool canBeRemoved)
+        public void SetCanBeRemoved(bool canBeRemoved)
         {
             background.color = canBeRemoved ? enableColor : disableColor;
             CanBeRemoved = canBeRemoved;
         }
 
-        private void Activate(bool isOn) => canvas.blocksRaycasts = canvas.interactable = isOn;
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        {
+            ClickEffect();
+            if (CanBeRemoved) removeCardUseCase.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId);
+            else CantRemoveAnimation();
+
+            void ClickEffect() => interactableAudio.ClickSound();
+
+            void CantRemoveAnimation()
+            {
+                cantComplete.Complete();
+                cantComplete = card.DOPunchPosition(Vector3.right * 10, timeAnimation, 20, 5);
+            }
+        }
+
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        {
+            HoverOnEffect();
+            cardShower.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: false));
+
+            void HoverOnEffect()
+            {
+                interactableAudio.HoverOnSound();
+                ChangeTextColor(Color.black);
+                FillBackground(true);
+            }
+        }
+
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        {
+            HoverOffEffect();
+            cardShower.HoveredOff();
+
+            void HoverOffEffect()
+            {
+                interactableAudio.HoverOffSound();
+                ChangeTextColor(Color.white);
+                FillBackground(false);
+            }
+        }
+
+        private void ChangeTextColor(Color color)
+        {
+            cardName.DOColor(color, timeAnimation);
+            quantity?.DOColor(color, timeAnimation);
+        }
+
+        private void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, timeAnimation);
     }
 }
