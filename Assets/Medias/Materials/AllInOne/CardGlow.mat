@@ -76,7 +76,7 @@ Material:
     - _AlphaOutlinePower: 3.02
     - _AlphaRoundThreshold: 0.5
     - _BlurHD: 0
-    - _BlurIntensity: 30
+    - _BlurIntensity: 50
     - _Brightness: 0
     - _ChromAberrAlpha: 0.4
     - _ChromAberrAmount: 1
@@ -97,7 +97,7 @@ Material:
     - _ColorSwapGreenLuminosity: 0.5
     - _ColorSwapRedLuminosity: 0.5
     - _Contrast: 1
-    - _DistortAmount: 1
+    - _DistortAmount: 0.1
     - _DistortTexXSpeed: 1
     - _DistortTexYSpeed: 1
     - _FadeAmount: -0.1
@@ -113,7 +113,7 @@ Material:
     - _GhostTransparency: 0
     - _GlitchAmount: 3
     - _GlitchSize: 1
-    - _Glow: 15
+    - _Glow: 8
     - _GlowTexUsed: 0
     - _GradBlend: 1
     - _GradBoostX: 1.2
@@ -137,9 +137,9 @@ Material:
     - _HologramStripesAmount: 0.2
     - _HologramStripesSpeed: 5
     - _HologramUnmodAmount: 0.4
-    - _HsvBright: 1
+    - _HsvBright: 1.2
     - _HsvSaturation: 1
-    - _HsvShift: 180
+    - _HsvShift: 0
     - _InnerOutlineAlpha: 1
     - _InnerOutlineGlow: 4
     - _InnerOutlineThickness: 1
@@ -157,25 +157,25 @@ Material:
     - _OnlyInnerOutline: 0
     - _OnlyOutline: 0
     - _Outline8Directions: 0
-    - _OutlineAlpha: 0.734
+    - _OutlineAlpha: 1
     - _OutlineDistortAmount: 0.5
     - _OutlineDistortTexXSpeed: 5
     - _OutlineDistortTexYSpeed: 5
     - _OutlineDistortToggle: 0
-    - _OutlineGlow: 3
+    - _OutlineGlow: 1.5
     - _OutlineIsPixel: 0
     - _OutlinePixelWidth: 1
     - _OutlineTexGrey: 0
     - _OutlineTexToggle: 0
     - _OutlineTexXSpeed: 10
     - _OutlineTexYSpeed: 0
-    - _OutlineWidth: 0.025
+    - _OutlineWidth: 0.028
     - _OverlayBlend: 1
     - _OverlayGlow: 1
     - _PinchUvAmount: 0.35
     - _PixelateSize: 32
-    - _PosterizeGamma: 0.75
-    - _PosterizeNumColors: 8
+    - _PosterizeGamma: 4.39
+    - _PosterizeNumColors: 20
     - _PosterizeOutline: 1
     - _RandomSeed: 0
     - _RectSize: 1
