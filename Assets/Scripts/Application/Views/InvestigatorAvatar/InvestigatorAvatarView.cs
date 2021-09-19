@@ -23,7 +23,7 @@ namespace Arkham.Application
             SetXp(xpAmount);
         }
 
-        public void ChangeImage(Sprite sprite)
+        private void ChangeImage(Sprite sprite)
         {
             canvasGroup.alpha = sprite == null ? 0 : 1;
             image.sprite = sprite;

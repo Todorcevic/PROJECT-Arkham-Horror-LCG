@@ -18,6 +18,7 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken physicTrauma;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken mentalTrauma;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken xp;
+        [SerializeField, Required, ChildGameObjectsOnly] private ButtonIcon retireButton;
 
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
@@ -47,7 +48,6 @@ namespace Arkham.Application
 
         public void ChangeState(InvestigatorState state)
         {
-            if (state != InvestigatorState.None) HideTokens();
             currentState?.Activate(false);
             currentState = states.Find(invState => invState.State == state);
             currentState?.Activate(true);
@@ -59,11 +59,6 @@ namespace Arkham.Application
 
         public void UpdateXp(int amount) => xp.UpdateAmount(amount);
 
-        private void HideTokens()
-        {
-            physicTrauma.gameObject.SetActive(false);
-            mentalTrauma.gameObject.SetActive(false);
-            xp.gameObject.SetActive(false);
-        }
+        public void ShowRetireButton(bool isActive) => retireButton.Activate(isActive);
     }
 }

@@ -30,18 +30,9 @@ namespace Arkham.Application
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             if (clickDetector.IsDoubleClick(eventData.clickTime, eventData.pointerPress))
-            {
-                ClickEffect();
                 removeInvestigatorUseCase.Remove(Id);
-                selectInvestigatorUseCase.SelectLead();
-            }
-            else
-            {
-                ClickEffect();
-                selectInvestigatorUseCase.Select(Id);
-            }
-
-            void ClickEffect() => audioInteractable.ClickSound();
+            else selectInvestigatorUseCase.Select(Id);
+            audioInteractable.ClickSound();
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
@@ -98,7 +89,7 @@ namespace Arkham.Application
         {
             isDragging = false;
             EndDragEffect();
-            if (IsInRemoveZone()) EndingDrag();
+            if (IsInRemoveZone()) removeInvestigatorUseCase.Remove(Id);
             else ArrangeAnimation();
 
             void EndDragEffect()
@@ -108,12 +99,6 @@ namespace Arkham.Application
             }
 
             bool IsInRemoveZone() => eventData.hovered.Contains(removeZone.gameObject);
-
-            void EndingDrag()
-            {
-                removeInvestigatorUseCase.Remove(Id);
-                selectInvestigatorUseCase.SelectLead();
-            }
 
             void ArrangeAnimation() => Card.DOMove(transform.position, timeHoverAnimation);
         }

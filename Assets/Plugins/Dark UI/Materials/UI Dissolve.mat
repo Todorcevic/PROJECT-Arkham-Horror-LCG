@@ -4,9 +4,8 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_Name: UI Dissolve
   m_Shader: {fileID: 4800000, guid: 38c8011ffe4ca46888aba954dfe16391, type: 3}
   m_ShaderKeywords: _EMISSION
@@ -37,14 +36,12 @@ Material:
     - _UseUIAlphaClip: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-  m_BuildTextureStacks: []
 --- !u!21 &21068288719974348
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 9
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_Name: UI-Effect-Dissolve-Add
   m_Shader: {fileID: 4800000, guid: 38c8011ffe4ca46888aba954dfe16391, type: 3}
   m_ShaderKeywords: UI_COLOR_ADD
@@ -75,14 +72,12 @@ Material:
     - _UseUIAlphaClip: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-  m_BuildTextureStacks: []
 --- !u!21 &21237785833609848
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 9
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_Name: UI-Effect-Dissolve-Set
   m_Shader: {fileID: 4800000, guid: 38c8011ffe4ca46888aba954dfe16391, type: 3}
   m_ShaderKeywords: UI_COLOR_SET
@@ -113,14 +108,12 @@ Material:
     - _UseUIAlphaClip: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-  m_BuildTextureStacks: []
 --- !u!21 &21721019877632072
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 9
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_Name: UI-Effect-Dissolve-Sub
   m_Shader: {fileID: 4800000, guid: 38c8011ffe4ca46888aba954dfe16391, type: 3}
   m_ShaderKeywords: UI_COLOR_SUB
@@ -151,4 +144,3 @@ Material:
     - _UseUIAlphaClip: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-  m_BuildTextureStacks: []

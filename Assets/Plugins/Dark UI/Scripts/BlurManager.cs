@@ -1,38 +1,84 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 namespace Michsky.UI.Dark
 {
     public class BlurManager : MonoBehaviour
     {
-        private readonly string customProperty = "_Size";
-
         [Header("RESOURCES")]
-        [SerializeField] private Material blurMaterial;
+        public Material blurMaterial;
 
         [Header("SETTINGS")]
-        [SerializeField] [Range(0f, 30f)] private float minBlurValue;
-        [SerializeField] [Range(0f, 30f)] private float maxBlurValue;
-        [SerializeField] [Range(0f, 1f)] private float timeAnimation;
+        [Range(0.0f, 10)] public float blurValue = 5.0f;
+        [Range(0.1f, 50)] public float animationSpeed = 25;
+        public string customProperty = "_Size";
 
-        private Tween BlurIn => blurMaterial.DOFloat(maxBlurValue, customProperty, timeAnimation);
+        float currentBlurValue;
 
-        private Tween BlurOut => blurMaterial.DOFloat(minBlurValue, customProperty, timeAnimation);
+        void Start()
+        {
+            if(customProperty == null)
+            {
+                customProperty = "_Size";
+            }
 
-        private void Start() => blurMaterial.SetFloat(customProperty, minBlurValue);
+            blurMaterial.SetFloat(customProperty, 0);
+        }
+
+        IEnumerator BlurIn()
+        {
+            currentBlurValue = blurMaterial.GetFloat(customProperty);
+
+            while (currentBlurValue <= blurValue)
+            {
+                currentBlurValue += Time.deltaTime * animationSpeed;
+
+                if (currentBlurValue >= blurValue)
+                {
+                    currentBlurValue = blurValue;
+                }
+
+                blurMaterial.SetFloat(customProperty, currentBlurValue);
+                yield return null;
+            }
+            StopCoroutine("BlurIn");
+        }
+
+        IEnumerator BlurOut()
+        {
+            currentBlurValue = blurMaterial.GetFloat(customProperty);
+
+            while (currentBlurValue >= 0)
+            {
+                currentBlurValue -= Time.deltaTime * animationSpeed;
+
+                if (currentBlurValue <= 0)
+                {
+                    currentBlurValue = 0;
+                }
+
+                blurMaterial.SetFloat(customProperty, currentBlurValue);
+                yield return null;
+            }
+            StopCoroutine("BlurOut");
+        }
 
         public void BlurInAnim()
         {
-            BlurOut.Kill();
-            BlurIn.Play();
+            StopCoroutine("BlurOut");
+            StartCoroutine("BlurIn");
         }
 
         public void BlurOutAnim()
         {
-            BlurIn.Kill();
-            BlurOut.Play();
+            StopCoroutine("BlurIn");
+            StartCoroutine("BlurOut");
+        }
+
+        public void SetBlurValue(float cbv)
+        {
+            blurValue = cbv;
         }
     }
 }
