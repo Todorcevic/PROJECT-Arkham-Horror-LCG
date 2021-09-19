@@ -21,11 +21,8 @@ namespace Arkham.Application
         public void Select(string investigatorId)
         {
             Investigator investigator = investigatorRepository.Get(investigatorId);
-            if (investigator != null)
-            {
-                Sprite imageCard = investigatorCardsManager.GetSpriteCard(investigator?.Id);
-                investigatorAvatar.SetAvatar(imageCard, investigator.PhysicTrauma, investigator.MentalTrauma, investigator.Xp);
-            }
+            Sprite imageCard = investigatorCardsManager.GetSpriteCard(investigator?.Id);
+            investigatorAvatar.SetAvatar(imageCard, investigator?.PhysicTrauma ?? 0, investigator?.MentalTrauma ?? 0, investigator?.Xp ?? 0);
             investigatorSelector.SelectInvestigator(investigatorId);
             cardQuantity.Refresh(investigator);
             cardVisibility.RefreshCardsSelectability();

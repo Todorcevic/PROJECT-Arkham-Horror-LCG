@@ -21,7 +21,7 @@ namespace Arkham.Model
         public int AmountSelectedOfThisInvestigator(Investigator investigator) =>
             investigators.Count(inv => inv == investigator);
 
-        public void Reset() => investigators = new List<Investigator>();
+        public void Reset() => investigators.Clear();
 
         public void Add(Investigator investigator) => investigators.Add(investigator);
 

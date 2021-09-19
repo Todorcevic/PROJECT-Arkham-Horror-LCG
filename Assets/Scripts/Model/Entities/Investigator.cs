@@ -35,7 +35,7 @@ namespace Arkham.Model
         public bool IsEliminated => State != InvestigatorState.None;
         public List<string> CardsInDeckIds => deck.ConvertAll(card => card.Id);
         public List<string> MandatoryCardsIds => mandatoryCards.ConvertAll(card => card.Id);
-        public Card LastCardRemoved { get; set; }
+        public Card LastCardRemoved { get; private set; }
 
         /*******************************************************************/
         public Investigator(int physicTrauma, int mentalTrauma, int xp, bool isPlaying, bool isRetired, Card info, DeckBuildingRules deckBuilding)
@@ -66,6 +66,12 @@ namespace Arkham.Model
 
         public List<Card> FindInDeck(Predicate<Card> filter) => deck.FindAll(filter);
 
-        public void Retire() => isRetired = true;
+        public void Retire()
+        {
+            isRetired = true;
+            RemoveAllCards();
+        }
+
+        private void RemoveAllCards() => deck.Clear();
     }
 }

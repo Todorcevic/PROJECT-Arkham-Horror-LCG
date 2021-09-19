@@ -7,24 +7,24 @@ namespace Arkham.Application
     public class RemoveInvestigatorUseCase
     {
         [Inject] private readonly InvestigatorRepository investigatorRepository;
-        [Inject] private readonly SelectorRepository selector;
+        [Inject] private readonly SelectorRepository selectorRepository;
         [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
+        [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
         [Inject(Id = "InvestigatorsButton")] private readonly ButtonView investigatorsButton;
 
         /*******************************************************************/
         public void Remove(string investigatorId)
         {
-            UpdateModel(investigatorId);
+            Investigator investigator = investigatorRepository.Get(investigatorId);
+            if (!selectorRepository.Contains(investigator)) return;
+            UpdateModel(investigator);
             UpdateView(investigatorId);
+            selectInvestigatorUseCase.SelectLead();
         }
 
-        private void UpdateModel(string investigatorId)
-        {
-            Investigator investigator = investigatorRepository.Get(investigatorId);
-            selector.Remove(investigator);
-        }
+        private void UpdateModel(Investigator investigator) => selectorRepository.Remove(investigator);
 
         private void UpdateView(string investigatorId)
         {
