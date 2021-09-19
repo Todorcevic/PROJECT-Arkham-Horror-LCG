@@ -7,21 +7,33 @@ namespace Arkham.Application
     {
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly CardSelectionInteractor cardSelectionFilter;
-        [Inject] private readonly CardVisibilityInteractor visibilityService;
+        [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
         [Inject] private readonly CardRepository cardRepository;
         [Inject] private readonly InvestigatorRepository investigatorRepository;
         [Inject] private readonly CardShowerPresenter cardShower;
         [Inject] private readonly CardXpCostInteractor xpInteractor;
+        [Inject(Id = "InputSearch")] private readonly InputFieldView inputSearch;
+        [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitchView;
 
         /*******************************************************************/
         public void RefreshCardsVisibility()
         {
+            cardShower.HoveredOff();
+            Investigator investigator = investigatorRepository.Get(investigatorSelectorManager.CurrentInvestigatorId);
             foreach (DeckCardView cardView in cardsManager.DeckList)
             {
-                bool canBeShowed = visibilityService.CanThisCardBeShowed(cardView.Id, investigatorSelectorManager.CurrentInvestigatorId);
-                if (!canBeShowed) cardShower.HoveredOff();
-                cardView.Show(canBeShowed);
+                Card card = cardRepository.Get(cardView.Id);
+                cardView.Show(CanbeShowed());
+
+                bool CanbeShowed()
+                {
+                    if (!card.ContainThisText(inputSearch.CurrentText)) return false;
+                    if (visibilitySwitchView.IsOn) return true;
+                    if (!unlockCardsRepository.IsThisCardUnlocked(card)) return false;
+                    if (!cardSelectionFilter.IsThisCardAllowed(card, investigator)) return false;
+                    return true;
+                }
             }
         }
 

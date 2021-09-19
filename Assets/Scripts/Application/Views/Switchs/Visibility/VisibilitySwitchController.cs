@@ -4,14 +4,12 @@ using Arkham.Model;
 
 namespace Arkham.Application
 {
-    public class VisibilitySwitchController : IInitializable, IVisibility
+    public class VisibilitySwitchController : IInitializable
     {
         [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitchView;
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
         [Inject] private readonly DeckCardPresenter cardVisibility;
         [Inject] private readonly IPlayerPrefsAdapter playerPrefs;
-
-        public bool IsOn => visibilitySwitchView.IsOn;
 
         /*******************************************************************/
         void IInitializable.Initialize()
@@ -24,7 +22,7 @@ namespace Arkham.Application
         /*******************************************************************/
         public void Clicked()
         {
-            playerPrefs.SaveCardsVisibility(IsOn);
+            playerPrefs.SaveCardsVisibility(visibilitySwitchView.IsOn);
             investigatorVisibility.RefreshInvestigatorsVisibility();
             cardVisibility.RefreshCardsVisibility();
         }

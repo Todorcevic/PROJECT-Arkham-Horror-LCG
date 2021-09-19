@@ -8,17 +8,26 @@ namespace Arkham.Application
     {
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorSelectionInteractor investigatorSelectionFilter;
-        [Inject] private readonly CardVisibilityInteractor visibilityService;
-        [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
         [Inject] private readonly InvestigatorRepository investigatorRepository;
+        [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
+        [Inject(Id = "InputSearch")] private readonly InputFieldView inputSearch;
+        [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitchView;
 
         /*******************************************************************/
         public void RefreshInvestigatorsVisibility()
         {
             foreach (CardView cardView in cardsManager.InvestigatorList)
             {
-                bool canBeShowed = visibilityService.CanThisCardBeShowed(cardView.Id, investigatorSelectorManager.CurrentInvestigatorId);
-                cardView.Show(canBeShowed);
+                Card card = investigatorRepository.Get(cardView.Id).Info;
+                cardView.Show(CanbeShowed());
+
+                bool CanbeShowed()
+                {
+                    if (!card.ContainThisText(inputSearch.CurrentText)) return false;
+                    if (visibilitySwitchView.IsOn) return true;
+                    if (!unlockCardsRepository.IsThisCardUnlocked(card)) return false;
+                    return true;
+                }
             }
         }
 

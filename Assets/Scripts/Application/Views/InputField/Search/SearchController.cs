@@ -3,19 +3,17 @@ using Zenject;
 
 namespace Arkham.Application
 {
-    public class SearchController : IInitializable, ICardSearchable
+    public class SearchController : IInitializable
     {
         [Inject(Id = "InputSearch")] private readonly InputFieldView inputFieldView;
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
         [Inject] private readonly DeckCardPresenter cardVisibility;
 
-        public string TextToSearch => inputFieldView.CurrentText;
-
         /*******************************************************************/
         void IInitializable.Initialize() => inputFieldView.AddUpdateAction(Updated);
 
         /*******************************************************************/
-        public void Updated()
+        private void Updated()
         {
             investigatorVisibility.RefreshInvestigatorsVisibility();
             cardVisibility.RefreshCardsVisibility();
