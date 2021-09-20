@@ -6,7 +6,7 @@ namespace Arkham.Application
     public class SelectScenarioUseCase
     {
         [Inject] private readonly CampaignRepository campaignRepository;
-        [Inject] private readonly ContinueButtonPresenter continueButton;
+        [Inject(Id = "ContinueButton")] private readonly ButtonView continueButton;
 
         /*******************************************************************/
         public void Reset() => SelectFirstScenarioOf(null);
@@ -19,6 +19,6 @@ namespace Arkham.Application
 
         void SelectCampaignUpdateModel(string campaignId) => campaignRepository.SelectFirstScenarioOf(campaignId);
 
-        void SelectCampaignUpdateView() => continueButton.CheckEnable();
+        void SelectCampaignUpdateView() => continueButton.Desactive(campaignRepository.CurrentScenario == null);
     }
 }

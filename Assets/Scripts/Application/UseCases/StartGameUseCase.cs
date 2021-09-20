@@ -12,7 +12,7 @@ namespace Arkham.Application
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CampaignsManager campaignsManager;
         [Inject] private readonly ReadyButtonPresenter readyButton;
-        [Inject] private readonly InvestigatorButtonPresenter investigatorsButton;
+        [Inject(Id = "InvestigatorsButton")] private readonly ButtonView investigatorsButton;
 
         /*******************************************************************/
         public void Init(StartGame gameType)

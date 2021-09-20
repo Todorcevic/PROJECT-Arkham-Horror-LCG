@@ -5,10 +5,10 @@ namespace Arkham.Application
 {
     public class ReadyButtonPresenter
     {
-        [Inject] private readonly SelectorRepository selector;
+        [Inject] private readonly SelectorRepository selectorRepository;
         [Inject(Id = "ReadyButton")] private readonly ButtonView readyButton;
 
         /*******************************************************************/
-        public void AutoActivate() => readyButton.Desactive(!selector.IsReady);
+        public void AutoActivate() => readyButton.Desactive(!selectorRepository.IsReady);
     }
 }
