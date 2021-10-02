@@ -2,15 +2,16 @@ using Zenject;
 
 namespace Arkham.Application
 {
-    public class RetireController : ButtonIcon
+    public class RetireController : IInitializable
     {
         [Inject] private readonly RetireInvestigatorUseCase retireInvestigatorUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
+        [Inject(Id = "Retire Button")] private readonly ButtonIcon retireButton;
 
         /*******************************************************************/
-        private void Start()
+        public void Initialize()
         {
-            ClickAction += () => retireInvestigatorUseCase.Retire(investigatorSelectorManager.CurrentInvestigatorId);
+            retireButton.ClickAction += () => retireInvestigatorUseCase.Retire(investigatorSelectorManager.CurrentInvestigatorId);
         }
     }
 }

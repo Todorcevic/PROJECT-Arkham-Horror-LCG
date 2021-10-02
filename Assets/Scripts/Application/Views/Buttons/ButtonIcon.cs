@@ -10,7 +10,7 @@ namespace Arkham.Application
 {
     public class ButtonIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        protected event Action ClickAction;
+        public event Action ClickAction;
         [Title("RESOURCES")]
         [SerializeField, Required] private InteractableAudio interactableAudio;
         [SerializeField, Required] private Image glow;
@@ -30,6 +30,7 @@ namespace Arkham.Application
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
+            Debug.Log("Enter");
             if (eventData.dragging) return;
             HoverOnEffect();
         }
