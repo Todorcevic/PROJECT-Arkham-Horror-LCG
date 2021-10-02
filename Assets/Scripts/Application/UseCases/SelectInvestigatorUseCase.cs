@@ -23,6 +23,7 @@ namespace Arkham.Application
             Investigator investigator = investigatorRepository.Get(investigatorId);
             Sprite imageCard = investigatorCardsManager.GetSpriteCard(investigator?.Id);
             investigatorAvatar.SetAvatar(imageCard, investigator?.PhysicTrauma ?? 0, investigator?.MentalTrauma ?? 0, investigator?.Xp ?? 0);
+            investigatorAvatar.ActivateRetireButton(investigator?.State == InvestigatorState.None && investigator!.IsPlaying);
             investigatorSelector.SelectInvestigator(investigatorId);
             cardQuantity.Refresh(investigator);
             cardVisibility.RefreshCardsSelectability();

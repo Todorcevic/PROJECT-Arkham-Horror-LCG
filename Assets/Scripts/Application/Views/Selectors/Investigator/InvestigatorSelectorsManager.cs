@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using DG.Tweening;
 
 namespace Arkham.Application
 {
@@ -16,7 +17,11 @@ namespace Arkham.Application
         public InvestigatorSelectorView GetRealLeadSelector => selectors[0];
 
         /*******************************************************************/
-        public InvestigatorSelectorView GetEmptySelector() => selectors.Find(selector => selector.Id == null);
+        public InvestigatorSelectorView GetEmptySelector()
+        {
+            DOTween.Complete(InvestigatorSelectorView.REMOVE_ANIMATION);
+            return selectors.Find(selector => selector.Id == null);
+        }
 
         public InvestigatorSelectorView GetSelectorById(string cardId) =>
             selectors.Find(selector => selector.Id == cardId);
@@ -40,7 +45,7 @@ namespace Arkham.Application
 
             void RemoveGlowInOldInvestigator() => GetSelectorById(currentInvestigator)?.Glow(false);
 
-            void ActiveGlowInNewInvestigator() => GetSelectorById(currentInvestigator).Glow(true);
+            void ActiveGlowInNewInvestigator() => GetSelectorById(currentInvestigator)?.Glow(true);
         }
     }
 }

@@ -22,7 +22,8 @@ namespace Arkham.Application
             return showCard;
         }
 
-        private ShowCard GetShowedShowCard() => showCards.Find(showCard => showCard.isActiveAndEnabled && !DOTween.IsTweening(showCard));
+        private ShowCard GetShowedShowCard() =>
+            showCards.FindLast(showCard => showCard.isActiveAndEnabled && !DOTween.IsTweening(showCard)) ?? GetNewShowCard();
 
         public void HoveredOn(CardShowerDTO showableCard)
         {

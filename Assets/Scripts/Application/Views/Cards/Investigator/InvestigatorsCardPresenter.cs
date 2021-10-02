@@ -49,7 +49,6 @@ namespace Arkham.Application
                 investigatorView.UpdatePhysicTrauma(hasNoState ? investigator.PhysicTrauma : 0);
                 investigatorView.UpdateMentalTrauma(hasNoState ? investigator.MentalTrauma : 0);
                 investigatorView.UpdateXp(hasNoState ? investigator.Xp : 0);
-                investigatorView.ShowRetireButton(hasNoState && investigator.IsPlaying);
                 investigatorView.ChangeState(investigator.State);
             }
         }

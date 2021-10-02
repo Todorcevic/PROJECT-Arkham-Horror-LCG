@@ -10,9 +10,8 @@ namespace Arkham.Application
 {
     public class ButtonIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        protected event Action<string> ClickAction;
+        protected event Action ClickAction;
         [Title("RESOURCES")]
-        [SerializeField, Required] private CardView cardView;
         [SerializeField, Required] private InteractableAudio interactableAudio;
         [SerializeField, Required] private Image glow;
         [SerializeField, Required] private TextMeshProUGUI text;
@@ -26,7 +25,7 @@ namespace Arkham.Application
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             interactableAudio.ClickSound();
-            ClickAction?.Invoke(cardView.Id);
+            ClickAction?.Invoke();
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)

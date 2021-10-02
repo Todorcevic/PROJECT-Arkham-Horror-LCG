@@ -14,6 +14,7 @@ namespace Arkham.Application
         [Inject] private readonly InvestigatorsCardPresenter investigatorCardsPresenter;
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly RemoveInvestigatorUseCase removeInvestigatorUseCase;
+        [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
 
         /*******************************************************************/
         public void Retire(string investigatorId)
@@ -36,6 +37,7 @@ namespace Arkham.Application
             investigatorCardsPresenter.RefreshInvestigatorsSelectability();
             deckCardPresenter.RefreshCardsSelectability();
             deckCardPresenter.RefresQuantity();
+            selectInvestigatorUseCase.SelectLead();
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Arkham.Model
             Investigator investigator = investigatorRepository.Get(investigatorId);
 
             if (investigator == null) return false;
+            if (investigator.IsEliminated) return false;
             if (investigator.SelectionIsFull) return false;
             if (!unlockCardsRepository.IsThisCardUnlocked(card)) return false;
             if (!IsThisCardAllowed(card, investigator)) return false;
