@@ -30,7 +30,6 @@ namespace Arkham.Application
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("Enter");
             if (eventData.dragging) return;
             HoverOnEffect();
         }
