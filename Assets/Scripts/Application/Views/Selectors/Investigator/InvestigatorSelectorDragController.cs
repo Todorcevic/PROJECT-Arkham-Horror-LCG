@@ -35,18 +35,6 @@ namespace Arkham.Application
             audioInteractable.ClickSound();
         }
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
-        {
-            if (eventData.dragging || DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION)) return;
-            HoverOffEffect();
-
-            void HoverOffEffect()
-            {
-                audioInteractable.HoverOffSound();
-                Card.DOScale(1f, timeHoverAnimation).SetId(HOVEROFF);
-            }
-        }
-
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             HoverEnter();
@@ -72,6 +60,19 @@ namespace Arkham.Application
                 investigatorChange.Swap(eventData.pointerDrag.transform.GetSiblingIndex(), Id);
 
                 bool IsDragging(PointerEventData eventData) => eventData.pointerDrag == gameObject;
+            }
+        }
+
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        {
+
+            if (eventData.dragging || DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION)) return;
+            HoverOffEffect();
+
+            void HoverOffEffect()
+            {
+                audioInteractable.HoverOffSound();
+                Card.DOScale(1f, timeHoverAnimation).SetId(HOVEROFF);
             }
         }
 
