@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _components:
   - {fileID: 7232189419699815923}
-  _identifier: Retire Button
+  _identifier: RetireButton
   _useSceneContext: 0
   _context: {fileID: 0}
   _bindType: 0
@@ -502,6 +502,10 @@ PrefabInstance:
     - target: {fileID: 728046689199323153, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: textToShow
       value: Retire
+      objectReference: {fileID: 0}
+    - target: {fileID: 728046689199323153, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
+      propertyPath: isClickable
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2992879549137472935, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: m_Pivot.x

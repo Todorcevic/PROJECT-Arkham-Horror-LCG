@@ -22,12 +22,14 @@ namespace Arkham.Application
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
         [SerializeField, Range(1f, 2f)] private float scaleHoverEffect;
+        [SerializeField] private ButtonIcon leaderIcon;
 
         public string Id { private get; set; }
+        public static bool IsDragging => isDragging;
         private Transform Card => canvasCard.transform;
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        public void OnPointerClick(PointerEventData eventData)
         {
             if (clickDetector.IsDoubleClick(eventData.clickTime, eventData.pointerPress))
                 removeInvestigatorUseCase.Remove(Id);
@@ -35,7 +37,7 @@ namespace Arkham.Application
             audioInteractable.ClickSound();
         }
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        public void OnPointerEnter(PointerEventData eventData)
         {
             HoverEnter();
             DragEnter();
@@ -63,10 +65,10 @@ namespace Arkham.Application
             }
         }
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        public void OnPointerExit(PointerEventData eventData)
         {
-
-            if (eventData.dragging || DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION)) return;
+            if (eventData.dragging) return;
+            if (DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION)) return;
             HoverOffEffect();
 
             void HoverOffEffect()

@@ -5,12 +5,16 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Collections.Generic;
 
 namespace Arkham.Application
 {
     public class ButtonIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         public event Action ClickAction;
+        public event Action<PointerEventData> ClickEventAction;
+        public event Action<PointerEventData> EnterAction;
+        public event Action<PointerEventData> ExitAction;
         [Title("RESOURCES")]
         [SerializeField, Required] private InteractableAudio interactableAudio;
         [SerializeField, Required] private Image glow;
@@ -20,18 +24,21 @@ namespace Arkham.Application
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
         [SerializeField, Range(1f, 2f)] private float scaleAnimation;
         [SerializeField] private string textToShow;
+        [SerializeField] private bool isClickable;
 
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            interactableAudio.ClickSound();
+            if (isClickable) interactableAudio.ClickSound();
             ClickAction?.Invoke();
+            ClickEventAction?.Invoke(eventData);
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             if (eventData.dragging) return;
             HoverOnEffect();
+            EnterAction?.Invoke(eventData);
         }
 
 
@@ -39,6 +46,7 @@ namespace Arkham.Application
         {
             if (eventData.dragging) return;
             HoverOffEffect();
+            ExitAction?.Invoke(eventData);
         }
 
         public void Activate(bool isActive)

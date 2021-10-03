@@ -6,7 +6,7 @@ namespace Arkham.Application
     {
         [Inject] private readonly RetireInvestigatorUseCase retireInvestigatorUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
-        [Inject(Id = "Retire Button")] private readonly ButtonIcon retireButton;
+        [Inject(Id = "RetireButton")] private readonly ButtonIcon retireButton;
 
         /*******************************************************************/
         public void Initialize()

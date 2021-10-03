@@ -21,6 +21,7 @@ namespace Arkham.Application
 
         private Transform CardVisual => canvasImage.transform;
         private Transform PlaceHolder => dragSensor.transform;
+        public InvestigatorSelectorDragController DragSensor => dragSensor;
         public Vector2 PlaceHolderPosition => PlaceHolder.position;
         public string Id { get; protected set; }
         public bool IsLeader => leaderIcon.enabled;
