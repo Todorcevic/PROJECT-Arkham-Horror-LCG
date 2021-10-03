@@ -280,6 +280,7 @@ MonoBehaviour:
   timeHoverAnimation: 0.1
   scaleAnimation: 1.1
   textToShow: 
+  isClickable: 0
 --- !u!1 &8867609605388215213
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +318,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -45}
+  m_AnchoredPosition: {x: 0, y: 45}
   m_SizeDelta: {x: 150, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3919345989444966472

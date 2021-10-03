@@ -98,7 +98,9 @@ namespace Arkham.Application
             void EndDragEffect()
             {
                 canvasCard.sortingOrder = 1;
-                Card.DOScale(1f, timeHoverAnimation);
+                if (eventData.pointerEnter != gameObject)
+                    Card.DOScale(1f, timeHoverAnimation);
+                //audioInteractable.ClickSound();
             }
 
             bool IsInRemoveZone() => eventData.hovered.Contains(removeZone.gameObject);
