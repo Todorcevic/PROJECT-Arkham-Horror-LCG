@@ -11,6 +11,7 @@ namespace Arkham.Application
         [Inject] private readonly DeckCardPresenter cardVisibility;
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject] private readonly InvestigatorAvatarView investigatorAvatar;
+        [Inject(Id = "RetireButton")] private readonly ButtonIcon retireButton;
         [Inject] private readonly CardSelectorPresenter cardSelector;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
         [Inject] private readonly CardsManager investigatorCardsManager;
@@ -23,7 +24,7 @@ namespace Arkham.Application
             Investigator investigator = investigatorRepository.Get(investigatorId);
             Sprite imageCard = investigatorCardsManager.GetSpriteCard(investigator?.Id);
             investigatorAvatar.SetAvatar(imageCard, investigator?.PhysicTrauma ?? 0, investigator?.MentalTrauma ?? 0, investigator?.Xp ?? 0);
-            investigatorAvatar.ActivateRetireButton(investigator?.State == InvestigatorState.None && investigator!.IsPlaying);
+            retireButton.Activate(investigator?.State == InvestigatorState.None && investigator!.IsPlaying);
             investigatorSelector.SelectInvestigator(investigatorId);
             cardQuantity.Refresh(investigator);
             cardVisibility.RefreshCardsSelectability();

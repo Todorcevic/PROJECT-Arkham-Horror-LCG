@@ -41,7 +41,6 @@ namespace Arkham.Application
             EnterAction?.Invoke(eventData);
         }
 
-
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             if (eventData.dragging) return;

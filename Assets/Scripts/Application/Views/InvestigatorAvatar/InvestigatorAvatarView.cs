@@ -13,7 +13,6 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken physicTrauma;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken mentalTrauma;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken xp;
-        [SerializeField, Required, ChildGameObjectsOnly] private ButtonIcon retireButton;
 
         /*******************************************************************/
         public void SetAvatar(Sprite sprite, int physicAmount, int mentalAmount, int xpAmount)
@@ -23,8 +22,6 @@ namespace Arkham.Application
             SetMentalTrauma(mentalAmount);
             SetXp(xpAmount);
         }
-
-        public void ActivateRetireButton(bool isActive) => retireButton.Activate(isActive);
 
         private void ChangeImage(Sprite sprite)
         {
