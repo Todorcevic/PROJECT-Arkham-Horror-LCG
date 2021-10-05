@@ -11,7 +11,6 @@ namespace Arkham.Application
 {
     public class ButtonIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        public event Action ClickAction;
         public event Action<PointerEventData> ClickEventAction;
         public event Action<PointerEventData> EnterAction;
         public event Action<PointerEventData> ExitAction;
@@ -24,13 +23,12 @@ namespace Arkham.Application
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
         [SerializeField, Range(1f, 2f)] private float scaleAnimation;
         [SerializeField] private string textToShow;
-        [SerializeField] private bool isClickable;
+        [SerializeField] private bool clickSound;
 
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            if (isClickable) interactableAudio.ClickSound();
-            ClickAction?.Invoke();
+            if (clickSound) interactableAudio.ClickSound();
             ClickEventAction?.Invoke(eventData);
         }
 

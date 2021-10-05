@@ -1,7 +1,5 @@
 ﻿using Arkham.Config;
 using Zenject;
-using Arkham.Application;
-using Arkham.Model;
 
 namespace Arkham.Application
 {

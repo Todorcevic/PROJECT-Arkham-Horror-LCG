@@ -4,14 +4,10 @@ namespace Arkham.Application
 {
     public class RetireController : IInitializable
     {
-        [Inject] private readonly RetireInvestigatorUseCase retireInvestigatorUseCase;
-        [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
         [Inject(Id = "RetireButton")] private readonly ButtonIcon retireButton;
+        [Inject(Id = "RetireInvestigatorModal")] private readonly PanelView retireInvestigatorModal;
 
         /*******************************************************************/
-        public void Initialize()
-        {
-            retireButton.ClickAction += () => retireInvestigatorUseCase.Retire(investigatorSelectorManager.CurrentInvestigatorId);
-        }
+        public void Initialize() => retireButton.ClickEventAction += (_) => retireInvestigatorModal.Activate(true);
     }
 }
