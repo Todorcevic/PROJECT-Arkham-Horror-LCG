@@ -52,5 +52,13 @@ namespace Arkham.Application
                 investigatorView.ChangeState(investigator.State);
             }
         }
+
+        public void RefreshTokens(Investigator investigator)
+        {
+            InvestigatorCardView investigatorView = cardsManager.GetInvestigatorCard(investigator.Id);
+            investigatorView.UpdatePhysicTrauma(investigator.PhysicTrauma);
+            investigatorView.UpdateMentalTrauma(investigator.MentalTrauma);
+            investigatorView.UpdateXp(investigator.Xp);
+        }
     }
 }

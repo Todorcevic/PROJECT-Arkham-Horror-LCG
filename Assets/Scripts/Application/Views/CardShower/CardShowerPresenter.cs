@@ -8,7 +8,7 @@ namespace Arkham.Application
 {
     public class CardShowerPresenter
     {
-        CardShowerDTO current;
+        private CardShowerDTO current;
         [Inject] private readonly ICardImage imageCards;
         [Inject] private readonly List<ShowCard> showCards;
         [Inject(Id = "CardSelectorZone")] private readonly RectTransform cardSelectorZone;

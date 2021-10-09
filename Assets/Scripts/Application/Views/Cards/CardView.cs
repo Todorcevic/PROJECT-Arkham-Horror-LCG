@@ -21,7 +21,7 @@ namespace Arkham.Application
         [SerializeField] private Color enableColor;
         [SerializeField] private Color disableColor;
 
-        protected bool IsInactive { get; set; }
+        protected bool IsInactive { get; private set; }
         public string Id { get; private set; }
         public Sprite GetCardImage => image.sprite;
 

@@ -100,7 +100,7 @@ namespace Arkham.Application
                 canvasCard.sortingOrder = 1;
                 if (eventData.pointerEnter != gameObject)
                     Card.DOScale(1f, timeHoverAnimation);
-                //audioInteractable.ClickSound();
+                //audioInteractable.ClickSound();             
             }
 
             bool IsInRemoveZone() => eventData.hovered.Contains(removeZone.gameObject);

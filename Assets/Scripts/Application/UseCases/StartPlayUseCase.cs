@@ -1,4 +1,8 @@
 ﻿using Arkham.Model;
+using DG.Tweening;
+using System.Collections;
+using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Arkham.Application
@@ -6,6 +10,7 @@ namespace Arkham.Application
     public class StartPlayUseCase
     {
         [Inject] private readonly SelectorRepository selector;
+        [Inject] private readonly CampaignRepository campaignRepository;
 
         /*******************************************************************/
         public void Start()
@@ -18,7 +23,8 @@ namespace Arkham.Application
 
         private void UpdateView()
         {
-            //TODO :StartGame, LoadScene}
+            DOTween.CompleteAll();
+            SceneManager.LoadScene(campaignRepository.CurrentScenario.Id);
         }
     }
 }

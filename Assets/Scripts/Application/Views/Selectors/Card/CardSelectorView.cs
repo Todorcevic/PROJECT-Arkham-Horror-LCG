@@ -80,6 +80,7 @@ namespace Arkham.Application
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
+            if (eventData.dragging) return;
             HoverOnEffect();
             cardShower.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: false));
 
@@ -93,6 +94,7 @@ namespace Arkham.Application
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
+            if (eventData.dragging) return;
             HoverOffEffect();
             cardShower.HoveredOff();
 

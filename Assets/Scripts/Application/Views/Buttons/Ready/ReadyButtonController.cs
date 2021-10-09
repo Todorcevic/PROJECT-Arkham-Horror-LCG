@@ -11,7 +11,6 @@ namespace Arkham.Application
         void IInitializable.Initialize() => readyButton.AddClickAction(Clicked);
 
         /*******************************************************************/
-
         private void Clicked() => startPlay.Start();
     }
 }

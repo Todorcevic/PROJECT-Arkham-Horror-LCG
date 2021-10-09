@@ -8,6 +8,6 @@ namespace Arkham.Application
         [Inject(Id = "RetireInvestigatorModal")] private readonly PanelView retireInvestigatorModal;
 
         /*******************************************************************/
-        public void Initialize() => retireButton.ClickEventAction += (_) => retireInvestigatorModal.Activate(true);
+        public void Initialize() => retireButton.ClickAction += (_) => retireInvestigatorModal.Activate(true);
     }
 }

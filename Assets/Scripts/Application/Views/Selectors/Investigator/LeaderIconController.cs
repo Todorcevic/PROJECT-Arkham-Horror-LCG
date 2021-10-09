@@ -9,7 +9,7 @@ namespace Arkham.Application
 
         private void Start()
         {
-            leader.ClickEventAction += dragController.OnPointerClick;
+            leader.ClickAction += dragController.OnPointerClick;
             leader.EnterAction += dragController.OnPointerEnter;
             leader.ExitAction += dragController.OnPointerExit;
         }

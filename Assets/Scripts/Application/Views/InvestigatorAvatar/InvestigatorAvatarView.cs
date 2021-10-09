@@ -1,7 +1,7 @@
-﻿using Sirenix.OdinInspector;
+﻿using Arkham.Config;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Arkham.Application
 {
@@ -13,6 +13,8 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken physicTrauma;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken mentalTrauma;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken xp;
+        [SerializeField] private ButtonIcon physicTraumaButton;
+        [SerializeField] private ButtonIcon mentalTraumaButton;
 
         /*******************************************************************/
         public void SetAvatar(Sprite sprite, int physicAmount, int mentalAmount, int xpAmount)
@@ -32,7 +34,20 @@ namespace Arkham.Application
         }
 
         public void SetPhysicTrauma(int amount) => physicTrauma.UpdateAmount(amount);
+
         public void SetMentalTrauma(int amount) => mentalTrauma.UpdateAmount(amount);
-        public void SetXp(int amount) => xp.UpdateAmount(amount);
+
+        public void SetXp(int amount)
+        {
+            xp.UpdateAmount(amount);
+            CheckActiveTraumas(amount);
+        }
+
+        private void CheckActiveTraumas(int xpAmount)
+        {
+            bool isInactive = xpAmount < GameValues.TRAUMA_COST;
+            physicTraumaButton.IsInactive(isInactive);
+            mentalTraumaButton.IsInactive(isInactive);
+        }
     }
 }
