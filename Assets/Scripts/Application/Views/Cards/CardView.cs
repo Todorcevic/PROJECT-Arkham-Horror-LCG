@@ -12,7 +12,7 @@ namespace Arkham.Application
     public class CardView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
         protected Action Clicked;
-        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
+        [Inject] protected readonly CardShowerPresenter cardShowerPresenter;
         private Tween cantAdd;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
@@ -44,8 +44,7 @@ namespace Arkham.Application
         {
             if (eventData.dragging) return;
             ClickEffect();
-            if (IsInactive) CantAddAnimation();
-            else Clicked?.Invoke();
+            Clicked?.Invoke();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -65,7 +64,9 @@ namespace Arkham.Application
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
         {
             if (cardShowerPresenter.LastShowCard.IsMoving) return;
-            cardShowerPresenter.LastShowCard?.Dragging(eventData.position);
+            if (!cardShowerPresenter.LastShowCard.IsActive) cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, eventData.position));
+            cardShowerPresenter.LastShowCard.Dragging();
+            HoverOffEffect();
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData)
@@ -75,7 +76,6 @@ namespace Arkham.Application
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
-            HoverOffEffect();
             CardView cardView = eventData.hovered.Find(gameObject => gameObject.GetComponent<CardView>())?.GetComponent<CardView>();
             if (cardView == null) cardShowerPresenter.LastShowCard.MoveAnimation(transform.position);
         }

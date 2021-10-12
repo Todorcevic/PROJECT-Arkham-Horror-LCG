@@ -1,7 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Arkham.Application
@@ -20,8 +19,12 @@ namespace Arkham.Application
         {
             Clicked += () =>
             {
-                addCardUseCase.AddCard(Id, investigatorSelectorManager.CurrentInvestigatorId);
-                OnPointerEnter(null);
+                if (IsInactive) CantAddAnimation();
+                else
+                {
+                    addCardUseCase.AddCard(Id, investigatorSelectorManager.CurrentInvestigatorId);
+                    OnPointerEnter(null);
+                }
             };
         }
 

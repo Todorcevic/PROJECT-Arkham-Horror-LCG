@@ -12,6 +12,13 @@ namespace Arkham.Application
         private float AxisXRightOffset => Screen.width * 0.25f;
 
         /*******************************************************************/
+        public CardShowerDTO(string id, Vector2 position)
+        {
+            CardId = id;
+            Position = position;
+            FinalPosition = position;
+        }
+
         public CardShowerDTO(string id, Vector2 position, bool isInLeftSide)
         {
             CardId = id;

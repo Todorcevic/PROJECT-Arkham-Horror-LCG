@@ -24,8 +24,10 @@ namespace Arkham.Application
         {
             Clicked += () =>
              {
-                 addInvestigatorUseCase.Add(Id);
+                 if (IsInactive) CantAddAnimation();
+                 else addInvestigatorUseCase.Add(Id);
                  selectInvestigatorUseCase.Select(Id);
+                 cardShowerPresenter.HoveredOff();
              };
         }
 

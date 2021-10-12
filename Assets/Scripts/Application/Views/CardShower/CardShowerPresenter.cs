@@ -24,13 +24,12 @@ namespace Arkham.Application
             return showCard;
         }
 
-        public ShowCard HoveredOn(CardShowerDTO showableCard)
+        public void HoveredOn(CardShowerDTO showableCard)
         {
             ShowCard showCard = GetNewShowCard();
             MoveShowCard();
             SetShowCard();
             showCard.ShowAnimation(showableCard.FinalPosition);
-            return showCard;
 
             void MoveShowCard() => showCard.transform.position = showableCard.Position;
 

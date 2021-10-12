@@ -63,22 +63,16 @@ public class ShowCard : MonoBehaviour
         .Join(transform.DOScale(0, timeAnimation))
         .AppendCallback(Hide).SetId(MoveTweenId);
 
-    public void Dragging(Vector2 startPosition)
+    public void Dragging()
     {
-        DOTween.Kill(name);
+        DOTween.Kill(ShowTweenId);
         DesactiveBackImage();
-        TransformShowCard();
+        transform.DOScale(dragScale, timeAnimation);
 
         void DesactiveBackImage()
         {
             backImage.gameObject.SetActive(false);
             backImage.sprite = null;
-        }
-
-        void TransformShowCard()
-        {
-            transform.DOScale(dragScale, timeAnimation);
-            transform.position = startPosition;
         }
     }
 }
