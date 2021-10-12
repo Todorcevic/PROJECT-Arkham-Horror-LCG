@@ -44,16 +44,17 @@ namespace Arkham.Application
 
         public void HoveredOff()
         {
-            if (!DOTween.IsTweening(LastShowCard))
+            if (!LastShowCard.IsMoving)
             {
                 LastShowCard?.Hide();
+                showCards.FindAll(showCard => !showCard.IsMoving && showCard.IsActive).ForEach(s => s.Hide());
             }
         }
 
-        public void MoveCard() => LastShowCard?.MoveAnimation(cardSelectorZone.position).SetId(LastShowCard);
+        public void MoveCard() => LastShowCard?.MoveAnimation(cardSelectorZone.position);
 
-        public void RemoveCard() => LastShowCard?.MoveAnimation(cardZone.position).SetId(LastShowCard);
+        public void RemoveCard() => LastShowCard?.MoveAnimation(cardZone.position);
 
-        public Tween MoveInvestigator(Vector2 positionToMove) => LastShowCard.MoveAnimation(positionToMove).SetId(LastShowCard);
+        public Tween MoveInvestigator(Vector2 positionToMove) => LastShowCard.MoveAnimation(positionToMove);
     }
 }

@@ -55,16 +55,16 @@ namespace Arkham.Application
             cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: true));
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            if (eventData?.dragging ?? false) return;
+            if (eventData.dragging) return;
             HoverOffEffect();
             cardShowerPresenter.HoveredOff();
         }
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
         {
-            if (DOTween.IsTweening(cardShowerPresenter.LastShowCard)) return;
+            if (cardShowerPresenter.LastShowCard.IsMoving) return;
             cardShowerPresenter.LastShowCard?.Dragging(eventData.position);
         }
 
@@ -83,7 +83,7 @@ namespace Arkham.Application
         void IDropHandler.OnDrop(PointerEventData eventData)
         {
             if (cardShowerPresenter.LastShowCard.Id != string.Empty)
-                cardShowerPresenter.LastShowCard.MoveAnimation(transform.position);
+                cardShowerPresenter.LastShowCard.MoveAnimation(eventData.pointerDrag.transform.position);
             OnPointerEnter(null);
         }
 

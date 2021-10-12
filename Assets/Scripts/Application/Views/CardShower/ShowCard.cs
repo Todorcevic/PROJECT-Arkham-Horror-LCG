@@ -15,6 +15,11 @@ public class ShowCard : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float dragScale;
 
     public string Id { get; private set; }
+    public bool IsActive => Id != string.Empty;
+    public bool IsMoving => DOTween.IsTweening(MoveTweenId);
+
+    private string ShowTweenId => "Show" + transform.name;
+    private string MoveTweenId => "Move" + transform.name;
 
     /*******************************************************************/
     public void Active(string cardId, Sprite frontCardSprite, Sprite backCardSprite)
@@ -39,24 +44,24 @@ public class ShowCard : MonoBehaviour
 
     public void Hide()
     {
-        DOTween.Kill(name);
+        Id = string.Empty;
+        DOTween.Kill(ShowTweenId);
         frontImage.gameObject.SetActive(false);
         backImage.gameObject.SetActive(false);
         gameObject.SetActive(false);
-        Id = string.Empty;
         transform.localScale = Vector2.zero;
     }
 
     public void ShowAnimation(Vector2 positionToMove) => DOTween.Sequence()
         .Append(transform.DOMove(positionToMove, timeAnimation).SetDelay(delay))
         .Join(transform.DOScale(scale, timeAnimation)
-        .SetDelay(delay)).SetId(name);
+        .SetDelay(delay)).SetId(ShowTweenId);
 
 
     public Tween MoveAnimation(Vector2 positionToMove) => DOTween.Sequence()
         .Append(transform.DOMove(positionToMove, timeAnimation))
         .Join(transform.DOScale(0, timeAnimation))
-        .AppendCallback(Hide);
+        .AppendCallback(Hide).SetId(MoveTweenId);
 
     public void Dragging(Vector2 startPosition)
     {
