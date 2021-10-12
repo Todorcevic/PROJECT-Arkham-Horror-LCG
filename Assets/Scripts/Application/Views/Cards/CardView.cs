@@ -31,8 +31,6 @@ namespace Arkham.Application
         public string Id { get; private set; }
         public Sprite GetCardImage => image.sprite;
 
-        private ShowCard showCard;
-
         /*******************************************************************/
         [Inject]
         private void Init(string id, Sprite sprite)
@@ -54,7 +52,7 @@ namespace Arkham.Application
         {
             if (eventData?.dragging ?? false) return;
             HoverOnEffect();
-            showCard = cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: true));
+            cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: true));
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -62,32 +60,31 @@ namespace Arkham.Application
             if (eventData?.dragging ?? false) return;
             HoverOffEffect();
             cardShowerPresenter.HoveredOff();
-            showCard = null;
         }
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
         {
             if (DOTween.IsTweening(cardShowerPresenter.LastShowCard)) return;
-            showCard?.Dragging(eventData.position);
+            cardShowerPresenter.LastShowCard?.Dragging(eventData.position);
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData)
         {
-            if (showCard != null) showCard.transform.position = eventData.position;
+            cardShowerPresenter.LastShowCard.transform.position = eventData.position;
         }
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
             HoverOffEffect();
-            showCard?.MoveAnimation(transform.position);
             CardView cardView = eventData.hovered.Find(gameObject => gameObject.GetComponent<CardView>())?.GetComponent<CardView>();
-            if (cardView != null) cardView.OnPointerEnter(null);
+            if (cardView == null) cardShowerPresenter.LastShowCard.MoveAnimation(transform.position);
         }
 
         void IDropHandler.OnDrop(PointerEventData eventData)
         {
-            //showCard.MoveAnimation(transform.position);
-            //OnPointerEnter(null);
+            if (cardShowerPresenter.LastShowCard.Id != string.Empty)
+                cardShowerPresenter.LastShowCard.MoveAnimation(transform.position);
+            OnPointerEnter(null);
         }
 
         public void ClickEffect() => audioInteractable.ClickSound();
