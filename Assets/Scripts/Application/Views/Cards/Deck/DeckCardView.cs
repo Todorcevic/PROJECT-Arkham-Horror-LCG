@@ -6,9 +6,8 @@ using Zenject;
 
 namespace Arkham.Application
 {
-    public class DeckCardView : CardView, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class DeckCardView : CardView
     {
-        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
         [Inject] private readonly AddCardUseCase addCardUseCase;
 
@@ -17,26 +16,13 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken xpCost;
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        private void Start()
         {
-            if (eventData.dragging) return;
-            ClickEffect();
-            if (IsInactive) CantAddAnimation();
-            else addCardUseCase.AddCard(Id, investigatorSelectorManager.CurrentInvestigatorId);
-
-        }
-
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
-        {
-            if (eventData.dragging) return;
-            HoverOnEffect();
-            cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: true));
-        }
-
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
-        {
-            HoverOffEffect();
-            cardShowerPresenter.HoveredOff();
+            Clicked += () =>
+            {
+                addCardUseCase.AddCard(Id, investigatorSelectorManager.CurrentInvestigatorId);
+                OnPointerEnter(null);
+            };
         }
 
         public void SetQuantity(int quantity) => textQuantity.text = FormatQuantity(quantity);

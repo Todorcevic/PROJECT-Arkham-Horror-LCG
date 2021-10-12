@@ -66,7 +66,11 @@ namespace Arkham.Application
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             ClickEffect();
-            if (CanBeRemoved) removeCardUseCase.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId);
+            if (CanBeRemoved)
+            {
+                removeCardUseCase.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId);
+                cardShower.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: false));
+            }
             else CantRemoveAnimation();
 
             void ClickEffect() => interactableAudio.ClickSound();
@@ -94,7 +98,6 @@ namespace Arkham.Application
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            if (eventData.dragging) return;
             HoverOffEffect();
             cardShower.HoveredOff();
 

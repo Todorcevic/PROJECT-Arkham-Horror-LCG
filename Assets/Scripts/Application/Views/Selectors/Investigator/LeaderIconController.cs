@@ -13,5 +13,7 @@ namespace Arkham.Application
             leader.EnterAction += dragController.OnPointerEnter;
             leader.ExitAction += dragController.OnPointerExit;
         }
+
+        public void Activate(bool isActive) => leader.Activate(isActive);
     }
 }

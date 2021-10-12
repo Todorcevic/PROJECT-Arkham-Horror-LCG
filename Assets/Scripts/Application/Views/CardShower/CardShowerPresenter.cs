@@ -8,30 +8,29 @@ namespace Arkham.Application
 {
     public class CardShowerPresenter
     {
-        private CardShowerDTO current;
         [Inject] private readonly ICardImage imageCards;
         [Inject] private readonly List<ShowCard> showCards;
         [Inject(Id = "CardSelectorZone")] private readonly RectTransform cardSelectorZone;
         [Inject(Id = "MidZone")] private readonly RectTransform cardZone;
+
+        public ShowCard LastShowCard { get; private set; }
 
         /*******************************************************************/
         private ShowCard GetNewShowCard()
         {
             ShowCard showCard = showCards.Find(s => !s.isActiveAndEnabled);
             showCard.gameObject.SetActive(true);
+            LastShowCard = showCard;
             return showCard;
         }
 
-        private ShowCard GetShowedShowCard() =>
-            showCards.FindLast(showCard => showCard.isActiveAndEnabled && !DOTween.IsTweening(showCard)) ?? GetNewShowCard();
-
-        public void HoveredOn(CardShowerDTO showableCard)
+        public ShowCard HoveredOn(CardShowerDTO showableCard)
         {
-            current = showableCard;
             ShowCard showCard = GetNewShowCard();
             MoveShowCard();
             SetShowCard();
             showCard.ShowAnimation(showableCard.FinalPosition);
+            return showCard;
 
             void MoveShowCard() => showCard.transform.position = showableCard.Position;
 
@@ -43,27 +42,18 @@ namespace Arkham.Application
             }
         }
 
-        public void HoveredOff() => GetShowedShowCard()?.Hide();
-
-        public void MoveCard()
+        public void HoveredOff()
         {
-            ShowCard showCard = GetShowedShowCard();
-            showCard.MoveAnimation(cardSelectorZone.position).SetId(showCard);
-            HoveredOn(current);
+            if (!DOTween.IsTweening(LastShowCard))
+            {
+                LastShowCard?.Hide();
+            }
         }
 
-        public void RemoveCard()
-        {
-            ShowCard showCard = GetShowedShowCard();
-            showCard.MoveAnimation(cardZone.position).SetId(showCard);
-            HoveredOn(current);
-        }
+        public void MoveCard() => LastShowCard?.MoveAnimation(cardSelectorZone.position).SetId(LastShowCard);
 
-        public Tween MoveInvestigator(Vector2 positionToMove)
-        {
-            ShowCard showCard = GetShowedShowCard();
-            HoveredOn(current);
-            return showCard.MoveAnimation(positionToMove).SetId(showCard);
-        }
+        public void RemoveCard() => LastShowCard?.MoveAnimation(cardZone.position).SetId(LastShowCard);
+
+        public Tween MoveInvestigator(Vector2 positionToMove) => LastShowCard.MoveAnimation(positionToMove).SetId(LastShowCard);
     }
 }

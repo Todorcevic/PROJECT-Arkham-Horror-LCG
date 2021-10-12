@@ -11,7 +11,6 @@ namespace Arkham.Application
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
         [Inject] private readonly CardRepository cardRepository;
         [Inject] private readonly InvestigatorRepository investigatorRepository;
-        [Inject] private readonly CardShowerPresenter cardShower;
         [Inject] private readonly CardXpCostInteractor xpInteractor;
         [Inject(Id = "InputSearch")] private readonly InputFieldView inputSearch;
         [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitchView;
@@ -19,7 +18,6 @@ namespace Arkham.Application
         /*******************************************************************/
         public void RefreshCardsVisibility()
         {
-            cardShower.HoveredOff();
             Investigator investigator = investigatorRepository.Get(investigatorSelectorManager.CurrentInvestigatorId);
             foreach (DeckCardView cardView in cardsManager.DeckList)
             {

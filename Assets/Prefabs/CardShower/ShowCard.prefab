@@ -67,6 +67,7 @@ MonoBehaviour:
   timeAnimation: 0.25
   delay: 0
   scale: 1.6
+  dragScale: 0.6
 --- !u!114 &6242000737049106308
 MonoBehaviour:
   m_ObjectHideFlags: 0

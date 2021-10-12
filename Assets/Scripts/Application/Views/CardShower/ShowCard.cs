@@ -1,13 +1,10 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShowCard : MonoBehaviour
 {
-    private string id;
-
     [Title("RESOURCES")]
     [SerializeField, Required, ChildGameObjectsOnly] private Image frontImage;
     [SerializeField, Required, ChildGameObjectsOnly] private Image backImage;
@@ -15,14 +12,14 @@ public class ShowCard : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float timeAnimation;
     [SerializeField, Range(0f, 1f)] private float delay;
     [SerializeField, Range(1f, 2f)] private float scale;
+    [SerializeField, Range(0f, 1f)] private float dragScale;
 
-    public string Id => id;
-
+    public string Id { get; private set; }
 
     /*******************************************************************/
     public void Active(string cardId, Sprite frontCardSprite, Sprite backCardSprite)
     {
-        id = cardId;
+        Id = cardId;
         ActiveFrontImage();
         ActiveBackImage();
 
@@ -46,7 +43,7 @@ public class ShowCard : MonoBehaviour
         frontImage.gameObject.SetActive(false);
         backImage.gameObject.SetActive(false);
         gameObject.SetActive(false);
-        id = string.Empty;
+        Id = string.Empty;
         transform.localScale = Vector2.zero;
     }
 
@@ -60,4 +57,23 @@ public class ShowCard : MonoBehaviour
         .Append(transform.DOMove(positionToMove, timeAnimation))
         .Join(transform.DOScale(0, timeAnimation))
         .AppendCallback(Hide);
+
+    public void Dragging(Vector2 startPosition)
+    {
+        DOTween.Kill(name);
+        DesactiveBackImage();
+        TransformShowCard();
+
+        void DesactiveBackImage()
+        {
+            backImage.gameObject.SetActive(false);
+            backImage.sprite = null;
+        }
+
+        void TransformShowCard()
+        {
+            transform.DOScale(dragScale, timeAnimation);
+            transform.position = startPosition;
+        }
+    }
 }

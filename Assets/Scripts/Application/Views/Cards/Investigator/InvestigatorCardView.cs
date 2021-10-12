@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
+using DG.Tweening;
 
 namespace Arkham.Application
 {
-    public class InvestigatorCardView : CardView, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class InvestigatorCardView : CardView, IPointerClickHandler
     {
         private InvestigatorStateView currentState;
-        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Inject] private readonly AddInvestigatorUseCase addInvestigatorUseCase;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
         [Title("INVESTIGATOR RESOURCES")]
@@ -20,27 +20,13 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken xp;
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        private void Start()
         {
-            if (eventData.dragging) return;
-            ClickEffect();
-            if (IsInactive) CantAddAnimation();
-            else addInvestigatorUseCase.Add(Id);
-
-            selectInvestigatorUseCase.Select(Id);
-        }
-
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
-        {
-            if (eventData.dragging) return;
-            HoverOnEffect();
-            cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: true));
-        }
-
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
-        {
-            HoverOffEffect();
-            cardShowerPresenter.HoveredOff();
+            Clicked += () =>
+             {
+                 addInvestigatorUseCase.Add(Id);
+                 selectInvestigatorUseCase.Select(Id);
+             };
         }
 
         public void ChangeState(InvestigatorState state)

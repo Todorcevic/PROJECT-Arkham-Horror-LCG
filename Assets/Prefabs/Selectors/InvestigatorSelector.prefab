@@ -216,8 +216,8 @@ CanvasGroup:
   m_GameObject: {fileID: 8590450183605477844}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!223 &6507702765034026266
 Canvas:
@@ -592,7 +592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4329434936648613502, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: m_IgnoreParentGroups
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6383684541787554902, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: m_AnchorMax.x
