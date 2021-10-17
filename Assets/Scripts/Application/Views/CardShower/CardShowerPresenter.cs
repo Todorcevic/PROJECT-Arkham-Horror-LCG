@@ -16,33 +16,19 @@ namespace Arkham.Application
         public ShowCard LastShowCard { get; private set; }
 
         /*******************************************************************/
-        private ShowCard GetNewShowCard()
+
+        public ShowCard SetAndShow(CardShowerDTO showableCard)
         {
+            Sprite frontImage = imageCards.GetSprite(showableCard.CardId);
+            Sprite backImage = imageCards.GetBackSprite(showableCard.CardId);
             ShowCard showCard = showCards.Find(s => !s.isActiveAndEnabled);
-            showCard.gameObject.SetActive(true);
+            showCard.Active(showableCard, frontImage, backImage);
+            showCard.ShowAnimation(showableCard.FinalPosition);
             LastShowCard = showCard;
             return showCard;
         }
 
-        public ShowCard HoveredOn(CardShowerDTO showableCard)
-        {
-            ShowCard showCard = GetNewShowCard();
-            MoveShowCard();
-            SetShowCard();
-            showCard.ShowAnimation(showableCard.FinalPosition);
-            return showCard;
-
-            void MoveShowCard() => showCard.transform.position = showableCard.Position;
-
-            void SetShowCard()
-            {
-                Sprite frontImage = imageCards.GetSprite(showableCard.CardId);
-                Sprite backImage = imageCards.GetBackSprite(showableCard.CardId);
-                showCard.Active(showableCard.CardId, frontImage, backImage);
-            }
-        }
-
-        public void HoveredOff(ShowCard showCard) => showCards.FindAll(showCard => showCard.IsActive && !showCard.IsMoving).ForEach(showCard => showCard.Hide());
+        public void HideAllShowCards(ShowCard showCard) => showCards.FindAll(showCard => showCard.IsActive && !showCard.IsMoving).ForEach(showCard => showCard.Hide());
 
         public void MoveCard() => LastShowCard?.MoveAnimation(cardSelectorZone.position);
 

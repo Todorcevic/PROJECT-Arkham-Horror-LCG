@@ -13,6 +13,7 @@ namespace Arkham.Application
         private InvestigatorStateView currentState;
         [Inject] private readonly AddInvestigatorUseCase addInvestigatorUseCase;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
+        [Inject] private readonly PlaceHoldersZone placeHoldersZone;
         [Title("INVESTIGATOR RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private List<InvestigatorStateView> states;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken physicTrauma;
@@ -27,11 +28,15 @@ namespace Arkham.Application
                  if (IsInactive)
                  {
                      CantAddAnimation();
-                     cardShowerPresenter.HoveredOff(showCard);
+                     cardShowerPresenter.HideAllShowCards(showCard);
                  }
                  else addInvestigatorUseCase.Add(Id);
                  selectInvestigatorUseCase.Select(Id);
              };
+
+            BeginDragged += () => placeHoldersZone.Activate(true);
+
+            EndDragged += () => placeHoldersZone.Activate(false);
         }
 
         public void ChangeState(InvestigatorState state)

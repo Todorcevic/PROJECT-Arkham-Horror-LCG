@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 using DG.Tweening;
@@ -9,7 +8,7 @@ namespace Arkham.Application
     public class InvestigatorSelectorsManager
     {
         private string currentInvestigator;
-        [Inject(Id = "InvestigatorPlaceHolderZone")] private readonly RectTransform placeHoldersZone;
+        [Inject] private readonly PlaceHoldersZone placeHoldersZone;
         [Inject] private readonly List<InvestigatorSelectorView> selectors;
 
         public string CurrentInvestigatorId => currentInvestigator;
@@ -35,7 +34,7 @@ namespace Arkham.Application
 
         public void ArrangeAllSelectors() => selectors.ForEach(s => s.ArrangeAnimation());
 
-        public void RebuildPlaceHolders() => LayoutRebuilder.ForceRebuildLayoutImmediate(placeHoldersZone);
+        public void RebuildPlaceHolders() => LayoutRebuilder.ForceRebuildLayoutImmediate(placeHoldersZone.RectTransform);
 
         public void SelectInvestigator(string activeInvestigatorId)
         {

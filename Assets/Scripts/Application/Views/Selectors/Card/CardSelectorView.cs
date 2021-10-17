@@ -87,7 +87,7 @@ namespace Arkham.Application
         {
             if (eventData?.dragging ?? false) return;
             HoverOnEffect();
-            showCard = cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: false));
+            showCard = cardShowerPresenter.SetAndShow(new CardShowerDTO(Id, transform.position, isInLeftSide: false));
 
             void HoverOnEffect()
             {
@@ -100,7 +100,7 @@ namespace Arkham.Application
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             HoverOffEffect();
-            cardShowerPresenter.HoveredOff(showCard);
+            cardShowerPresenter.HideAllShowCards(showCard);
 
             void HoverOffEffect()
             {

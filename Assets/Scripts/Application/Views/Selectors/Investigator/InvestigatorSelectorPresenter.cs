@@ -11,7 +11,7 @@ namespace Arkham.Application
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly SelectInvestigatorUseCase investigatorSelectUseCase;
-        [Inject(Id = "InvestigatorPlaceHolderZone")] private readonly RectTransform placeHoldersZone;
+        [Inject] private readonly PlaceHoldersZone placeHoldersZone;
 
         private InvestigatorSelectorView LeadSelector => investigatorSelectorsManager.GetCurrentLeadSelector;
 
@@ -84,7 +84,7 @@ namespace Arkham.Application
         private void SetThisSelectorWithThisInvestigator(InvestigatorSelectorView selector, string investigatorId)
         {
             Sprite spriteCard = cardsManager.GetSpriteCard(investigatorId);
-            selector.SetTransform(placeHoldersZone);
+            selector.SetTransform(placeHoldersZone.RectTransform);
             selector.SetSelector(investigatorId, spriteCard);
             investigatorSelectorsManager.RebuildPlaceHolders();
         }

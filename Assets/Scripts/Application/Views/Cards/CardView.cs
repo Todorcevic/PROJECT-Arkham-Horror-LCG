@@ -12,6 +12,8 @@ namespace Arkham.Application
     public class CardView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
         protected Action Clicked;
+        protected Action BeginDragged;
+        protected Action EndDragged;
         protected ShowCard showCard;
         [Inject] protected readonly CardShowerPresenter cardShowerPresenter;
         private Tween cantAdd;
@@ -52,22 +54,23 @@ namespace Arkham.Application
         {
             if (eventData?.dragging ?? false) return;
             HoverOnEffect();
-            showCard = cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: true));
+            showCard = cardShowerPresenter.SetAndShow(new CardShowerDTO(Id, transform.position, isInLeftSide: true));
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             if (eventData.dragging) return;
             HoverOffEffect();
-            cardShowerPresenter.HoveredOff(showCard);
+            cardShowerPresenter.HideAllShowCards(showCard);
         }
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
         {
             if (showCard?.IsMoving ?? true) return;
-            if (!showCard.IsActive) showCard = cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, eventData.position));
+            if (!showCard.IsActive) showCard = cardShowerPresenter.SetAndShow(new CardShowerDTO(Id, eventData.position));
             showCard.Dragging();
             HoverOffEffect();
+            BeginDragged?.Invoke();
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData)
@@ -78,6 +81,7 @@ namespace Arkham.Application
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
             if (!showCard.IsShowing) showCard.MoveAnimation(transform.position);
+            EndDragged?.Invoke();
         }
 
         void IDropHandler.OnDrop(PointerEventData eventData)
