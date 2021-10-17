@@ -12,6 +12,7 @@ namespace Arkham.Application
     public class CardView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
         protected Action Clicked;
+        protected ShowCard showCard;
         [Inject] protected readonly CardShowerPresenter cardShowerPresenter;
         private Tween cantAdd;
         [Title("RESOURCES")]
@@ -51,39 +52,37 @@ namespace Arkham.Application
         {
             if (eventData?.dragging ?? false) return;
             HoverOnEffect();
-            cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: true));
+            showCard = cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: true));
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             if (eventData.dragging) return;
             HoverOffEffect();
-            cardShowerPresenter.HoveredOff();
+            cardShowerPresenter.HoveredOff(showCard);
         }
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
         {
-            if (cardShowerPresenter.LastShowCard.IsMoving) return;
-            if (!cardShowerPresenter.LastShowCard.IsActive) cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, eventData.position));
-            cardShowerPresenter.LastShowCard.Dragging();
+            if (showCard?.IsMoving ?? true) return;
+            if (!showCard.IsActive) showCard = cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, eventData.position));
+            showCard.Dragging();
             HoverOffEffect();
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData)
         {
-            cardShowerPresenter.LastShowCard.transform.position = eventData.position;
+            showCard.transform.position = eventData.position;
         }
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
-            CardView cardView = eventData.hovered.Find(gameObject => gameObject.GetComponent<CardView>())?.GetComponent<CardView>();
-            if (cardView == null) cardShowerPresenter.LastShowCard.MoveAnimation(transform.position);
+            if (!showCard.IsShowing) showCard.MoveAnimation(transform.position);
         }
 
         void IDropHandler.OnDrop(PointerEventData eventData)
         {
-            if (cardShowerPresenter.LastShowCard.Id != string.Empty)
-                cardShowerPresenter.LastShowCard.MoveAnimation(eventData.pointerDrag.transform.position);
+            showCard?.MoveAnimation(transform.position);
             OnPointerEnter(null);
         }
 
@@ -108,7 +107,7 @@ namespace Arkham.Application
         {
             if (IsSeleted())
             {
-                cardShowerPresenter.LastShowCard?.Hide();
+                showCard?.Hide();
                 HoverOffEffect();
             }
             gameObject.SetActive(isEnable);

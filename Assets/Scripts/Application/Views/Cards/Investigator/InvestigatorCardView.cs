@@ -24,10 +24,13 @@ namespace Arkham.Application
         {
             Clicked += () =>
              {
-                 if (IsInactive) CantAddAnimation();
+                 if (IsInactive)
+                 {
+                     CantAddAnimation();
+                     cardShowerPresenter.HoveredOff(showCard);
+                 }
                  else addInvestigatorUseCase.Add(Id);
                  selectInvestigatorUseCase.Select(Id);
-                 cardShowerPresenter.HoveredOff();
              };
         }
 

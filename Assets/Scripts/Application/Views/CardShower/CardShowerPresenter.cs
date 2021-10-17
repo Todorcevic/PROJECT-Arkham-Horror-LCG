@@ -24,12 +24,13 @@ namespace Arkham.Application
             return showCard;
         }
 
-        public void HoveredOn(CardShowerDTO showableCard)
+        public ShowCard HoveredOn(CardShowerDTO showableCard)
         {
             ShowCard showCard = GetNewShowCard();
             MoveShowCard();
             SetShowCard();
             showCard.ShowAnimation(showableCard.FinalPosition);
+            return showCard;
 
             void MoveShowCard() => showCard.transform.position = showableCard.Position;
 
@@ -41,14 +42,7 @@ namespace Arkham.Application
             }
         }
 
-        public void HoveredOff()
-        {
-            if (!LastShowCard.IsMoving)
-            {
-                LastShowCard?.Hide();
-                showCards.FindAll(showCard => !showCard.IsMoving && showCard.IsActive).ForEach(s => s.Hide());
-            }
-        }
+        public void HoveredOff(ShowCard showCard) => showCards.FindAll(showCard => showCard.IsActive && !showCard.IsMoving).ForEach(showCard => showCard.Hide());
 
         public void MoveCard() => LastShowCard?.MoveAnimation(cardSelectorZone.position);
 

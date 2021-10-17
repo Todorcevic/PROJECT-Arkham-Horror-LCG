@@ -17,6 +17,7 @@ public class ShowCard : MonoBehaviour
     public string Id { get; private set; }
     public bool IsActive => Id != string.Empty;
     public bool IsMoving => DOTween.IsTweening(MoveTweenId);
+    public bool IsShowing => DOTween.IsTweening(ShowTweenId);
 
     private string ShowTweenId => "Show" + transform.name;
     private string MoveTweenId => "Move" + transform.name;

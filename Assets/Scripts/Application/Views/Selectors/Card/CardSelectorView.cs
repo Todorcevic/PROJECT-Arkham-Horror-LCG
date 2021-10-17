@@ -11,7 +11,8 @@ namespace Arkham.Application
     public class CardSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private Tween cantComplete;
-        [Inject] private readonly CardShowerPresenter cardShower;
+        private ShowCard showCard;
+        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Inject] private readonly RemoveCardUseCase removeCardUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
         [Title("RESOURCES")]
@@ -69,7 +70,7 @@ namespace Arkham.Application
             if (CanBeRemoved)
             {
                 removeCardUseCase.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId);
-                cardShower.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: false));
+                OnPointerEnter(null);
             }
             else CantRemoveAnimation();
 
@@ -82,11 +83,11 @@ namespace Arkham.Application
             }
         }
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        public void OnPointerEnter(PointerEventData eventData)
         {
-            if (eventData.dragging) return;
+            if (eventData?.dragging ?? false) return;
             HoverOnEffect();
-            cardShower.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: false));
+            showCard = cardShowerPresenter.HoveredOn(new CardShowerDTO(Id, transform.position, isInLeftSide: false));
 
             void HoverOnEffect()
             {
@@ -99,7 +100,7 @@ namespace Arkham.Application
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             HoverOffEffect();
-            cardShower.HoveredOff();
+            cardShowerPresenter.HoveredOff(showCard);
 
             void HoverOffEffect()
             {
