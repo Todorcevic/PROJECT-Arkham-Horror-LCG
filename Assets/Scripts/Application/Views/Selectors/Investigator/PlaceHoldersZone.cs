@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Arkham.Application
 {
-    public class PlaceHoldersZone : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class PlaceHoldersZone : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
         [SerializeField, Range(0, 1)] private float timeAnimation;
         [SerializeField] private Image glow;
@@ -30,6 +30,15 @@ namespace Arkham.Application
         public void OnPointerEnter(PointerEventData eventData)
         {
             glow.color = big;
+        }
+
+        public void OnDrop(PointerEventData eventData)
+        {
+            CardView cardView = eventData.pointerDrag.GetComponent<CardView>();
+            if (cardView is InvestigatorCardView investigatorCardView)
+            {
+                investigatorCardView.DropCard();
+            }
         }
     }
 }

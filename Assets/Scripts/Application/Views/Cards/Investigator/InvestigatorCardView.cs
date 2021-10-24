@@ -8,12 +8,12 @@ using DG.Tweening;
 
 namespace Arkham.Application
 {
-    public class InvestigatorCardView : CardView, IPointerClickHandler
+    public class InvestigatorCardView : CardView
     {
         private InvestigatorStateView currentState;
         [Inject] private readonly AddInvestigatorUseCase addInvestigatorUseCase;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
-        [Inject(Id = "InvestigatorSelector")] private readonly PlaceHoldersZone placeHoldersZone;
+        //[Inject(Id = "InvestigatorSelector")] private readonly PlaceHoldersZone placeHoldersZone;
         [Title("INVESTIGATOR RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private List<InvestigatorStateView> states;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken physicTrauma;
@@ -23,20 +23,36 @@ namespace Arkham.Application
         /*******************************************************************/
         private void Start()
         {
-            Clicked += () =>
-             {
-                 if (IsInactive)
-                 {
-                     CantAddAnimation();
-                     cardShowerPresenter.HideAllShowCards(showCard);
-                 }
-                 else addInvestigatorUseCase.Add(Id);
-                 selectInvestigatorUseCase.Select(Id);
-             };
+            Clicked += AddCard;
 
-            BeginDragged += () => placeHoldersZone.Activate(true);
+            BeginDragged += () => dropZone.Activate(!IsInactive);
 
-            EndDragged += () => placeHoldersZone.Activate(false);
+
+            EndDragged += () =>
+            {
+                if (IsInactive) showCard.MoveAnimation(transform.position);
+                dropZone.Activate(false);
+            };
+        }
+
+        public void AddCard()
+        {
+            if (IsInactive)
+            {
+                CantAddAnimation();
+                cardShowerPresenter.HideAllShowCards(showCard);
+            }
+            else addInvestigatorUseCase.Add(Id);
+            selectInvestigatorUseCase.Select(Id);
+        }
+
+        public void DropCard()
+        {
+            if (IsInactive) return;
+            //showCard.MoveAnimation(dropZone.transform.position);
+            addInvestigatorUseCase.Add(Id);
+            selectInvestigatorUseCase.Select(Id);
+
         }
 
         public void ChangeState(InvestigatorState state)

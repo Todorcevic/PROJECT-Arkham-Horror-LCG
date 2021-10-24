@@ -18,6 +18,7 @@ namespace Arkham.Application
         [Inject] protected readonly CardShowerPresenter cardShowerPresenter;
         private Tween cantAdd;
         [Title("RESOURCES")]
+        [SerializeField] protected PlaceHoldersZone dropZone;
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGlow;
@@ -80,7 +81,6 @@ namespace Arkham.Application
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
-            if (!showCard.IsShowing) showCard.MoveAnimation(transform.position);
             EndDragged?.Invoke();
         }
 

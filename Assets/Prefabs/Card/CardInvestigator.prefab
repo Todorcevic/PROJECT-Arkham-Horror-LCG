@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197d1408ba6f88640936ba2639fbf0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropZone: {fileID: 0}
   audioInteractable: {fileID: 3381794686743605097}
   canvasGroup: {fileID: 7192597132227724208}
   canvasGlow: {fileID: 7584511528615126907}
