@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -18,7 +19,6 @@ namespace Arkham.Application
         [Inject] protected readonly CardShowerPresenter cardShowerPresenter;
         private Tween cantAdd;
         [Title("RESOURCES")]
-        [SerializeField] protected PlaceHoldersZone dropZone;
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGlow;
@@ -62,7 +62,7 @@ namespace Arkham.Application
         {
             if (eventData.dragging) return;
             HoverOffEffect();
-            cardShowerPresenter.HideAllShowCards(showCard);
+            cardShowerPresenter.HideAllShowCards();
         }
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
@@ -81,6 +81,9 @@ namespace Arkham.Application
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
+            PlaceHoldersZone placeHolderZone = eventData.hovered.Select(c => c.GetComponent<PlaceHoldersZone>()).FirstOrDefault();
+            if (!showCard.IsShowing)
+                showCard?.MoveAnimation(placeHolderZone?.IsAtive ?? false ? placeHolderZone.transform.position : transform.position);
             EndDragged?.Invoke();
         }
 

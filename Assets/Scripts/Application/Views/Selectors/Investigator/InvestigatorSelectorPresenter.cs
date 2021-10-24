@@ -11,7 +11,7 @@ namespace Arkham.Application
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly SelectInvestigatorUseCase investigatorSelectUseCase;
-        [Inject(Id = "InvestigatorSelector")] private readonly PlaceHoldersZone placeHoldersZone;
+        [Inject(Id = "InvestigatorsSelector")] private readonly PlaceHoldersZone placeHoldersZone;
 
         private InvestigatorSelectorView LeadSelector => investigatorSelectorsManager.GetCurrentLeadSelector;
 

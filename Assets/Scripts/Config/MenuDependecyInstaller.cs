@@ -38,7 +38,7 @@ namespace Arkham.Config
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
             .InNamespace("Arkham").WithSuffix("Adapter")).AsSingle();
 
-            /*** Event Data ***/
+            /*** Use Cases ***/
             Container.Bind(x => x.AllNonAbstractClasses()
             .InNamespace("Arkham").WithSuffix("UseCase")).AsSingle();
 

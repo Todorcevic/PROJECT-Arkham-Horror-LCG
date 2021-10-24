@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: FrameSelectors
   m_Shader: {fileID: 4800000, guid: 6c5090a91d2a4b541bae3b54dd540880, type: 3}
-  m_ShaderKeywords: GLOW_ON POSTERIZEOUTLINE_ON _HitEffectGlow _POSTERIZEOUTLINE_ON
+  m_ShaderKeywords: HITEFFECT_ON POSTERIZEOUTLINE_ON _HitEffectGlow _POSTERIZEOUTLINE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -130,7 +130,7 @@ Material:
     - _HandDrawnAmount: 10
     - _HandDrawnSpeed: 5
     - _HitEffectBlend: 1
-    - _HitEffectGlow: 2
+    - _HitEffectGlow: 8
     - _HologramBlend: 1
     - _HologramMaxAlpha: 1
     - _HologramMinAlpha: 0

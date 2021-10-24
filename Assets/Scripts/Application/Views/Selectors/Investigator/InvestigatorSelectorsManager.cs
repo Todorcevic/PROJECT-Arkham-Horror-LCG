@@ -8,7 +8,7 @@ namespace Arkham.Application
     public class InvestigatorSelectorsManager
     {
         private string currentInvestigator;
-        [Inject(Id = "InvestigatorSelector")] private readonly PlaceHoldersZone placeHoldersZone;
+        [Inject(Id = "InvestigatorsSelector")] private readonly PlaceHoldersZone placeHoldersZone;
         [Inject] private readonly List<InvestigatorSelectorView> selectors;
 
         public string CurrentInvestigatorId => currentInvestigator;

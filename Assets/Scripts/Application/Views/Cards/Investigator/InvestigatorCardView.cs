@@ -13,7 +13,7 @@ namespace Arkham.Application
         private InvestigatorStateView currentState;
         [Inject] private readonly AddInvestigatorUseCase addInvestigatorUseCase;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
-        //[Inject(Id = "InvestigatorSelector")] private readonly PlaceHoldersZone placeHoldersZone;
+        [Inject(Id = "InvestigatorsSelector")] private readonly PlaceHoldersZone dropZone;
         [Title("INVESTIGATOR RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private List<InvestigatorStateView> states;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken physicTrauma;
@@ -24,15 +24,8 @@ namespace Arkham.Application
         private void Start()
         {
             Clicked += AddCard;
-
             BeginDragged += () => dropZone.Activate(!IsInactive);
-
-
-            EndDragged += () =>
-            {
-                if (IsInactive) showCard.MoveAnimation(transform.position);
-                dropZone.Activate(false);
-            };
+            EndDragged += () => dropZone.Activate(false);
         }
 
         public void AddCard()
@@ -40,20 +33,20 @@ namespace Arkham.Application
             if (IsInactive)
             {
                 CantAddAnimation();
-                cardShowerPresenter.HideAllShowCards(showCard);
+                cardShowerPresenter.HideAllShowCards();
             }
             else addInvestigatorUseCase.Add(Id);
             selectInvestigatorUseCase.Select(Id);
         }
 
-        public void DropCard()
-        {
-            if (IsInactive) return;
-            //showCard.MoveAnimation(dropZone.transform.position);
-            addInvestigatorUseCase.Add(Id);
-            selectInvestigatorUseCase.Select(Id);
+        //public void DropCard()
+        //{
+        //    if (IsInactive) return;
+        //    //showCard.MoveAnimation(dropZone.transform.position);
+        //    addInvestigatorUseCase.Add(Id);
+        //    selectInvestigatorUseCase.Select(Id);
 
-        }
+        //}
 
         public void ChangeState(InvestigatorState state)
         {

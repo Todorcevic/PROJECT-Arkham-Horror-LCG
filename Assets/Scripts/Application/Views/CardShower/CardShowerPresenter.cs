@@ -10,8 +10,12 @@ namespace Arkham.Application
     {
         [Inject] private readonly ICardImage imageCards;
         [Inject] private readonly List<ShowCard> showCards;
-        [Inject(Id = "CardSelectorZone")] private readonly RectTransform cardSelectorZone;
-        [Inject(Id = "MidZone")] private readonly RectTransform cardZone;
+        //[Inject(Id = "CardSelectorZone")] private readonly RectTransform cardSelectorZone;
+        //[Inject(Id = "MidZone")] private readonly RectTransform cardZone;
+        [Inject(Id = "InvestigatorsSelector")] private readonly PlaceHoldersZone investigatorsSelectorZone;
+        [Inject(Id = "Cards")] private readonly PlaceHoldersZone cardsZone;
+        [Inject(Id = "CardsSelector")] private readonly PlaceHoldersZone cardsSelectorZone;
+
 
         public ShowCard LastShowCard { get; private set; }
 
@@ -28,12 +32,14 @@ namespace Arkham.Application
             return showCard;
         }
 
-        public void HideAllShowCards(ShowCard showCard) => showCards.FindAll(showCard => showCard.IsActive && !showCard.IsMoving).ForEach(showCard => showCard.Hide());
+        public void HideAllShowCards() =>
+            showCards.FindAll(showCard => showCard.IsActive && !showCard.IsMoving).ForEach(showCard => showCard.Hide());
 
-        public void MoveCard() => LastShowCard?.MoveAnimation(cardSelectorZone.position);
+        public void MoveCard() => LastShowCard?.MoveAnimation(cardsSelectorZone.transform.position);
 
-        public void RemoveCard() => LastShowCard?.MoveAnimation(cardZone.position);
+        public void RemoveCard() => LastShowCard?.MoveAnimation(cardsZone.transform.position);
 
-        public Tween MoveInvestigator(Vector2 positionToMove) => LastShowCard.MoveAnimation(positionToMove);
+        public void MoveInvestigator(InvestigatorSelectorView selector) =>
+            LastShowCard.MoveAnimation(selector.PlaceHolderPosition).OnComplete(() => selector.SetImageAnimation());
     }
 }

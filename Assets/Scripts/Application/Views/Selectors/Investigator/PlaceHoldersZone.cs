@@ -1,18 +1,18 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Arkham.Application
 {
-    public class PlaceHoldersZone : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
+    public class PlaceHoldersZone : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler//, IDropHandler
     {
         [SerializeField, Range(0, 1)] private float timeAnimation;
-        [SerializeField] private Image glow;
-        [SerializeField] private RectTransform rectTransform;
-        [SerializeField] private Color normal;
-        [SerializeField] private Color big;
+        [SerializeField, Required] private Image glow;
+        [SerializeField, Required] private RectTransform rectTransform;
 
         public RectTransform RectTransform => rectTransform;
+        public bool IsAtive { get; private set; }
 
         /*******************************************************************/
         private void Start()
@@ -20,25 +20,29 @@ namespace Arkham.Application
             glow.CrossFadeAlpha(0, 0, true);
         }
 
-        public void Activate(bool isActivate) => glow.CrossFadeAlpha(isActivate ? 1 : 0, timeAnimation, true);
+        public void Activate(bool isActivate)
+        {
+            glow.CrossFadeAlpha(isActivate ? 1 : 0, timeAnimation, true);
+            IsAtive = isActivate;
+        }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            glow.color = normal;
+            //glow.color = normal;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            glow.color = big;
+            //glow.color = big;
         }
 
-        public void OnDrop(PointerEventData eventData)
-        {
-            CardView cardView = eventData.pointerDrag.GetComponent<CardView>();
-            if (cardView is InvestigatorCardView investigatorCardView)
-            {
-                investigatorCardView.DropCard();
-            }
-        }
+        //public void OnDrop(PointerEventData eventData)
+        //{
+        //    CardView cardView = eventData.pointerDrag.GetComponent<CardView>();
+        //    if (cardView is InvestigatorCardView investigatorCardView)
+        //    {
+        //        investigatorCardView.DropCard();
+        //    }
+        //}
     }
 }
