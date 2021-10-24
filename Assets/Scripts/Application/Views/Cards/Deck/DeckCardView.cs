@@ -9,6 +9,7 @@ namespace Arkham.Application
     {
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
         [Inject] private readonly AddCardUseCase addCardUseCase;
+        [Inject(Id = "DeckSelector")] private readonly PlaceHoldersZone placeHoldersZone;
 
         [Title("DECKCARD RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI textQuantity;
