@@ -28,22 +28,14 @@ namespace Arkham.Application
             BeginDragged += () => dropZone.Activate(!IsInactive);
             EndDragged += EndDrag;
 
-            void EndDrag(PointerEventData eventData)
+            void EndDrag(PlaceHoldersZone placeHolderZone)
             {
                 dropZone.Activate(false);
-                Debug.Log(eventData.hovered.Count);
-                foreach (var das in eventData.hovered)
-                    Debug.Log(das);
-                PlaceHoldersZone placeHolderZone = eventData.hovered.Select(c => c.GetComponent<PlaceHoldersZone>()).FirstOrDefault();
-                if (!showCard.IsShowing)
-                    showCard?.MoveAnimation(placeHolderZone?.IsAtive ?? false ? placeHolderZone.transform.position : transform.position);
                 AddCard(placeHolderZone);
             }
 
             void AddCard(PlaceHoldersZone placeHolderZone)
             {
-                Debug.Log(placeHolderZone);
-
                 if (IsInactive || placeHolderZone != dropZone)
                 {
                     CantAddAnimation();

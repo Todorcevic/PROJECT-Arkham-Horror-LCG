@@ -14,7 +14,7 @@ namespace Arkham.Application
     {
         protected Action Clicked;
         protected Action BeginDragged;
-        protected Action<PointerEventData> EndDragged;
+        protected Action<PlaceHoldersZone> EndDragged;
         protected ShowCard showCard;
         [Inject] protected readonly CardShowerPresenter cardShowerPresenter;
         private Tween cantAdd;
@@ -81,7 +81,10 @@ namespace Arkham.Application
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
-            EndDragged?.Invoke(eventData);
+            PlaceHoldersZone placeHolderZone = eventData.hovered.Find(c => c.GetComponent<PlaceHoldersZone>() != null)?.GetComponent<PlaceHoldersZone>();
+            if (!showCard.IsShowing)
+                showCard?.MoveAnimation(placeHolderZone?.IsAtive ?? false ? placeHolderZone.transform.position : transform.position);
+            EndDragged?.Invoke(placeHolderZone);
         }
 
         void IDropHandler.OnDrop(PointerEventData eventData)

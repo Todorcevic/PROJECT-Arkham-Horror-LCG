@@ -1,6 +1,8 @@
 ﻿using Sirenix.OdinInspector;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Arkham.Application
@@ -18,15 +20,25 @@ namespace Arkham.Application
         /*******************************************************************/
         private void Start()
         {
-            Clicked += () =>
+            Clicked += () => AddCard(dropZone, false);
+            BeginDragged += () => dropZone.Activate(!IsInactive);
+            EndDragged += EndDrag;
+
+            void EndDrag(PlaceHoldersZone placeHolderZone)
             {
-                if (IsInactive) CantAddAnimation();
+                dropZone.Activate(false);
+                AddCard(placeHolderZone, true);
+            }
+
+            void AddCard(PlaceHoldersZone placeHolderZone, bool isDragging)
+            {
+                if (IsInactive || placeHolderZone != dropZone) CantAddAnimation();
                 else
                 {
                     addCardUseCase.AddCard(Id, investigatorSelectorManager.CurrentInvestigatorId);
-                    OnPointerEnter(null);
+                    if (!isDragging) OnPointerEnter(null);
                 }
-            };
+            }
         }
 
         public void SetQuantity(int quantity) => textQuantity.text = FormatQuantity(quantity);
