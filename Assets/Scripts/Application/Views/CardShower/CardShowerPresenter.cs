@@ -10,8 +10,6 @@ namespace Arkham.Application
     {
         [Inject] private readonly ICardImage imageCards;
         [Inject] private readonly List<ShowCard> showCards;
-        //[Inject(Id = "CardSelectorZone")] private readonly RectTransform cardSelectorZone;
-        //[Inject(Id = "MidZone")] private readonly RectTransform cardZone;
         [Inject(Id = "InvestigatorsSelector")] private readonly PlaceHoldersZone investigatorsSelectorZone;
         [Inject(Id = "Cards")] private readonly PlaceHoldersZone cardsZone;
         [Inject(Id = "CardsSelector")] private readonly PlaceHoldersZone cardsSelectorZone;
@@ -20,7 +18,6 @@ namespace Arkham.Application
         public ShowCard LastShowCard { get; private set; }
 
         /*******************************************************************/
-
         public ShowCard SetAndShow(CardShowerDTO showableCard)
         {
             Sprite frontImage = imageCards.GetSprite(showableCard.CardId);
@@ -40,6 +37,6 @@ namespace Arkham.Application
         public void RemoveCard() => LastShowCard?.MoveAnimation(cardsZone.transform.position);
 
         public void MoveInvestigator(InvestigatorSelectorView selector) =>
-            LastShowCard.MoveAnimation(selector.PlaceHolderPosition).OnComplete(() => selector.SetImageAnimation());
+            LastShowCard.MoveAnimation(selector.PlaceHolderPosition).OnComplete(() => selector.SetImageAnimation()).SetId("asd");
     }
 }

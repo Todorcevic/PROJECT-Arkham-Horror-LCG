@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 using DG.Tweening;
+using System.Linq;
 
 namespace Arkham.Application
 {
@@ -23,29 +24,45 @@ namespace Arkham.Application
         /*******************************************************************/
         private void Start()
         {
-            Clicked += AddCard;
+            Clicked += () => AddCard(dropZone);
             BeginDragged += () => dropZone.Activate(!IsInactive);
-            EndDragged += () => dropZone.Activate(false);
-        }
+            EndDragged += EndDrag;
 
-        public void AddCard()
-        {
-            if (IsInactive)
+            void EndDrag(PointerEventData eventData)
             {
-                CantAddAnimation();
-                cardShowerPresenter.HideAllShowCards();
+                dropZone.Activate(false);
+                Debug.Log(eventData.hovered.Count);
+                foreach (var das in eventData.hovered)
+                    Debug.Log(das);
+                PlaceHoldersZone placeHolderZone = eventData.hovered.Select(c => c.GetComponent<PlaceHoldersZone>()).FirstOrDefault();
+                if (!showCard.IsShowing)
+                    showCard?.MoveAnimation(placeHolderZone?.IsAtive ?? false ? placeHolderZone.transform.position : transform.position);
+                AddCard(placeHolderZone);
             }
-            else addInvestigatorUseCase.Add(Id);
-            selectInvestigatorUseCase.Select(Id);
+
+            void AddCard(PlaceHoldersZone placeHolderZone)
+            {
+                Debug.Log(placeHolderZone);
+
+                if (IsInactive || placeHolderZone != dropZone)
+                {
+                    CantAddAnimation();
+                    cardShowerPresenter.HideAllShowCards();
+                }
+                else addInvestigatorUseCase.Add(Id);
+                selectInvestigatorUseCase.Select(Id);
+            }
         }
 
-        //public void DropCard()
+        //public void AddCard()
         //{
-        //    if (IsInactive) return;
-        //    //showCard.MoveAnimation(dropZone.transform.position);
-        //    addInvestigatorUseCase.Add(Id);
+        //    if (IsInactive)
+        //    {
+        //        CantAddAnimation();
+        //        cardShowerPresenter.HideAllShowCards();
+        //    }
+        //    else addInvestigatorUseCase.Add(Id);
         //    selectInvestigatorUseCase.Select(Id);
-
         //}
 
         public void ChangeState(InvestigatorState state)

@@ -42,6 +42,7 @@ namespace Arkham.Application
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
+            if (eventData.dragging) return;
             textField.fontStyle = FontStyles.Bold;
             icon.transform.DOScale(hoverScale, timeHoverAnimation);
         }

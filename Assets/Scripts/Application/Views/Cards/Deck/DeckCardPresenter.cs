@@ -16,9 +16,10 @@ namespace Arkham.Application
         [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitchView;
 
         /*******************************************************************/
+        private Investigator investigator => investigatorRepository.Get(investigatorSelectorManager.CurrentInvestigatorId);
+
         public void RefreshCardsVisibility()
         {
-            Investigator investigator = investigatorRepository.Get(investigatorSelectorManager.CurrentInvestigatorId);
             foreach (DeckCardView cardView in cardsManager.DeckList)
             {
                 Card card = cardRepository.Get(cardView.Id);

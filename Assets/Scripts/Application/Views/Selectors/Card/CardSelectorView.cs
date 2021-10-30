@@ -99,6 +99,7 @@ namespace Arkham.Application
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
+            if (eventData.dragging) return;
             HoverOffEffect();
             cardShowerPresenter.HideAllShowCards();
 

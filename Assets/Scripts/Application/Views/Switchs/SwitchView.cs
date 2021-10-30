@@ -66,7 +66,11 @@ namespace Arkham.Application
             ClickAction?.Invoke();
         }
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => SwitchHoverOn();
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        {
+            if (eventData.dragging) return;
+            SwitchHoverOn();
+        }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => SwitchHoverOff();
     }

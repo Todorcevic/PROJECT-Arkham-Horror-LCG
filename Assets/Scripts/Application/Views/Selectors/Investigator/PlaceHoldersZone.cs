@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Arkham.Application
 {
-    public class PlaceHoldersZone : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler//, IDropHandler
+    public class PlaceHoldersZone : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField, Range(0, 1)] private float timeAnimation;
         [SerializeField, Required] private Image glow;
@@ -17,7 +17,7 @@ namespace Arkham.Application
         /*******************************************************************/
         private void Start()
         {
-            glow.CrossFadeAlpha(0, 0, true);
+            Activate(false);
         }
 
         public void Activate(bool isActivate)
