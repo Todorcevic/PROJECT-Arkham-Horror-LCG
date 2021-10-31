@@ -14,7 +14,6 @@ namespace Arkham.Application
         [Inject(Id = "Cards")] private readonly PlaceHoldersZone cardsZone;
         [Inject(Id = "CardsSelector")] private readonly PlaceHoldersZone cardsSelectorZone;
 
-
         public ShowCard LastShowCard { get; private set; }
 
         /*******************************************************************/

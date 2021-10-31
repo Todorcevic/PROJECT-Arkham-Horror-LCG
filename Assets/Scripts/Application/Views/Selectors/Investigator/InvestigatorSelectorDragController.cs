@@ -25,7 +25,6 @@ namespace Arkham.Application
         [SerializeField, Range(1f, 2f)] private float scaleHoverEffect;
 
         public string Id { private get; set; }
-        public static bool IsDragging => isDragging;
         private Transform Card => canvasCard.transform;
 
         /*******************************************************************/
@@ -44,7 +43,7 @@ namespace Arkham.Application
 
             void HoverEnter()
             {
-                if (eventData.dragging || DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION) || cardShowerPresenter.LastShowCard.IsMoving) return;
+                if (eventData.dragging || DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION) || (cardShowerPresenter.LastShowCard?.IsMoving ?? true)) return;
                 HoverOnEffect();
 
                 void HoverOnEffect()
@@ -56,12 +55,11 @@ namespace Arkham.Application
 
             void DragEnter()
             {
-                if (!isDragging) return;
-                if (IsDragging()) return;
+                if (CheckDrag()) return;
                 audioInteractable.HoverOnSound();
                 investigatorChange.Swap(eventData.pointerDrag.transform.GetSiblingIndex(), Id);
 
-                bool IsDragging() => eventData.pointerDrag == gameObject;
+                bool CheckDrag() => !isDragging || eventData.pointerDrag == gameObject;
             }
         }
 
@@ -102,7 +100,6 @@ namespace Arkham.Application
                 CardView cardView = eventData.hovered.Find(gameObject => gameObject.GetComponent<CardView>())?.GetComponent<CardView>();
                 if (cardView != null) cardView.OnPointerEnter(null);
             }
-
 
             void EndDragEffect()
             {

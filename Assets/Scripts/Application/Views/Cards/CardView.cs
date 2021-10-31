@@ -81,7 +81,7 @@ namespace Arkham.Application
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
-            PlaceHoldersZone placeHolderZone = eventData.hovered.Find(c => c.GetComponent<PlaceHoldersZone>() != null)?.GetComponent<PlaceHoldersZone>();
+            PlaceHoldersZone placeHolderZone = eventData.hovered.Select(c => c.GetComponent<PlaceHoldersZone>()).Where(c => c != null).FirstOrDefault();
             if (!showCard.IsShowing)
                 showCard?.MoveAnimation(placeHolderZone?.IsAtive ?? false ? placeHolderZone.transform.position : transform.position);
             EndDragged?.Invoke(placeHolderZone);
