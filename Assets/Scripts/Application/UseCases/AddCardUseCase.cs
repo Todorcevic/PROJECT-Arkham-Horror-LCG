@@ -11,8 +11,9 @@ namespace Arkham.Application
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject] private readonly ReadyButtonPresenter readyButton;
-        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Inject] private readonly UpdateXpUseCase updateXpUseCase;
+        [Inject] private readonly ShowCard showCard;
+        [Inject(Id = "CardsSelector")] private readonly PlaceHoldersZone placeZone;
 
         /*******************************************************************/
         public void AddCard(string cardId, string investigatorId)
@@ -28,7 +29,7 @@ namespace Arkham.Application
 
         private void UpdateView(Card card, Investigator investigator)
         {
-            cardShowerPresenter.MoveCard();
+            showCard.MoveAnimation(placeZone.transform.position);
             cardSelector.SetCardInSelector(card, investigator);
             cardSelector.SetCanBeRemovedInSelectors(investigator.Id);
             deckCardPresenter.RefreshCardsSelectability();

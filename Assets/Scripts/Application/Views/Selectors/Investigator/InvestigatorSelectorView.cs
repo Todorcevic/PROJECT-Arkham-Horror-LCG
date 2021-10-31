@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -81,8 +82,8 @@ namespace Arkham.Application
 
         public Tween SetImageAnimation() => DOTween.Sequence()
             .PrependCallback(PosicionateCardOff)
-            .Append(CardVisual.DOScale(1, timeAnimation));
-
+            .Append(CardVisual.DOScale(1, timeAnimation))
+            .SetDelay(ShowCard.MoveTimeLeft(), true);
 
         public Tween RemoveAnimation() => DOTween.Sequence()
             .Join(CardVisual.DOMove(PlaceHolder.position, timeAnimation * 4).SetSpeedBased())

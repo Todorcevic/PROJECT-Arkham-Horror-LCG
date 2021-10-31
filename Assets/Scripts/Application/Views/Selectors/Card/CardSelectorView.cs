@@ -12,7 +12,7 @@ namespace Arkham.Application
     {
         private Tween cantComplete;
         private ShowCard showCard;
-        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
+        //[Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Inject] private readonly RemoveCardUseCase removeCardUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
         [Title("RESOURCES")]
@@ -87,7 +87,7 @@ namespace Arkham.Application
         {
             if (eventData?.dragging ?? false) return;
             HoverOnEffect();
-            showCard = cardShowerPresenter.SetAndShow(new CardShowerDTO(Id, transform.position, isInLeftSide: false));
+            //showCard = cardShowerPresenter.SetAndShow(new CardShowerDTO(Id, transform.position, isInLeftSide: false));
 
             void HoverOnEffect()
             {
@@ -101,7 +101,7 @@ namespace Arkham.Application
         {
             if (eventData.dragging) return;
             HoverOffEffect();
-            cardShowerPresenter.HideAllShowCards();
+            //cardShowerPresenter.HideAllShowCards();
 
             void HoverOffEffect()
             {

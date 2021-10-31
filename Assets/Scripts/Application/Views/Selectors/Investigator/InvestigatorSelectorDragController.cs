@@ -15,7 +15,7 @@ namespace Arkham.Application
         [Inject] private readonly RemoveInvestigatorUseCase removeInvestigatorUseCase;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
         [Inject] private readonly ChangeInvestigatorUseCase investigatorChange;
-        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
+        //[Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Inject(Id = "MidZone")] private readonly RectTransform removeZone;
         [Title("RESOURCES")]
         [SerializeField, Required] private Canvas canvasCard;
@@ -43,7 +43,7 @@ namespace Arkham.Application
 
             void HoverEnter()
             {
-                if (eventData.dragging || DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION) || (cardShowerPresenter.LastShowCard?.IsMoving ?? true)) return;
+                //if (eventData.dragging || DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION) || (cardShowerPresenter.LastShowCard?.IsMoving ?? true)) return;
                 HoverOnEffect();
 
                 void HoverOnEffect()
@@ -93,13 +93,13 @@ namespace Arkham.Application
             if (IsInRemoveZone()) removeInvestigatorUseCase.Remove(Id);
             else ArrangeAnimation();
 
-            cardShowerPresenter.LastShowCard?.MoveAnimation(transform.position).OnComplete(ReShow);
+            //cardShowerPresenter.LastShowCard?.MoveAnimation(transform.position).OnComplete(ReShow);
 
-            void ReShow()
-            {
-                CardView cardView = eventData.hovered.Find(gameObject => gameObject.GetComponent<CardView>())?.GetComponent<CardView>();
-                if (cardView != null) cardView.OnPointerEnter(null);
-            }
+            //void ReShow()
+            //{
+            //    CardView cardView = eventData.hovered.Find(gameObject => gameObject.GetComponent<CardView>())?.GetComponent<CardView>();
+            //    //if (cardView != null) cardView.OnPointerEnter(null);
+            //}
 
             void EndDragEffect()
             {

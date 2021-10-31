@@ -1,22 +1,14 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Arkham.Application
 {
-    public class CardView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+    public class CardView : MonoBehaviour
     {
-        protected Action Clicked;
-        protected Action BeginDragged;
-        protected Action<PlaceHoldersZone> EndDragged;
-        protected ShowCard showCard;
-        [Inject] protected readonly CardShowerPresenter cardShowerPresenter;
+        private Sprite backImage;
         private Tween cantAdd;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
@@ -27,72 +19,24 @@ namespace Arkham.Application
         [Title("SETTINGS")]
         [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
         [SerializeField, Range(0f, 1f)] private float timeShakeAnimation;
-
         [SerializeField] private Color enableColor;
         [SerializeField] private Color disableColor;
 
-        protected bool IsInactive { get; private set; }
+        public bool IsInactive { get; private set; }
         public string Id { get; private set; }
         public Sprite GetCardImage => image.sprite;
+        public Sprite GetBackImage => backImage;
 
         /*******************************************************************/
         [Inject]
-        private void Init(string id, Sprite sprite)
+        private void Init(string id, Sprite sprite, Sprite backImage = null)
         {
             name = Id = id;
             ChangeImage(sprite);
+            this.backImage = backImage;
         }
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
-        {
-            if (eventData.dragging) return;
-            ClickEffect();
-            Clicked?.Invoke();
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            if (eventData?.dragging ?? false) return;
-            HoverOnEffect();
-            showCard = cardShowerPresenter.SetAndShow(new CardShowerDTO(Id, transform.position, isInLeftSide: true));
-        }
-
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
-        {
-            if (eventData.dragging) return;
-            HoverOffEffect();
-            cardShowerPresenter.HideAllShowCards();
-        }
-
-        void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
-        {
-            if (showCard?.IsMoving ?? true) return;
-            if (!showCard.IsActive) showCard = cardShowerPresenter.SetAndShow(new CardShowerDTO(Id, eventData.position));
-            showCard.Dragging();
-            HoverOffEffect();
-            BeginDragged?.Invoke();
-        }
-
-        void IDragHandler.OnDrag(PointerEventData eventData)
-        {
-            showCard.transform.position = eventData.position;
-        }
-
-        void IEndDragHandler.OnEndDrag(PointerEventData eventData)
-        {
-            PlaceHoldersZone placeHolderZone = eventData.hovered.Select(c => c.GetComponent<PlaceHoldersZone>()).Where(c => c != null).FirstOrDefault();
-            if (!showCard.IsShowing)
-                showCard?.MoveAnimation(placeHolderZone?.IsAtive ?? false ? placeHolderZone.transform.position : transform.position);
-            EndDragged?.Invoke(placeHolderZone);
-        }
-
-        void IDropHandler.OnDrop(PointerEventData eventData)
-        {
-            showCard?.MoveAnimation(transform.position);
-            OnPointerEnter(null);
-        }
-
         public void ClickEffect() => audioInteractable.ClickSound();
 
         public void HoverOnEffect()
@@ -112,11 +56,7 @@ namespace Arkham.Application
 
         public void Show(bool isEnable)
         {
-            if (IsSeleted())
-            {
-                showCard?.Hide();
-                HoverOffEffect();
-            }
+            if (IsSeleted()) HoverOffEffect();
             gameObject.SetActive(isEnable);
 
             bool IsSeleted() => !isEnable && canvasGlow.alpha > 0;
@@ -128,11 +68,10 @@ namespace Arkham.Application
             image.sprite = sprite;
         }
 
-        protected void CantAddAnimation()
+        public void CantAddAnimation()
         {
             cantAdd.Complete();
             cantAdd = transform.DOPunchPosition(Vector3.right * 10, timeShakeAnimation, 20, 5);
         }
     }
 }
-

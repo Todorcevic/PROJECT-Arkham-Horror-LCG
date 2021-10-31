@@ -288,6 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7131878188277760170}
   - component: {fileID: 3428538249790762421}
+  - component: {fileID: 5197470306492400572}
   - component: {fileID: 7192597132227724208}
   - component: {fileID: 7918799787899769508}
   m_Layer: 5
@@ -330,7 +331,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197d1408ba6f88640936ba2639fbf0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropZone: {fileID: 0}
   audioInteractable: {fileID: 3381794686743605097}
   canvasGroup: {fileID: 7192597132227724208}
   canvasGlow: {fileID: 7584511528615126907}
@@ -347,6 +347,19 @@ MonoBehaviour:
   physicTrauma: {fileID: 2243245496653488814}
   mentalTrauma: {fileID: 2136586034364361448}
   xp: {fileID: 446024562793134213}
+--- !u!114 &5197470306492400572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120494878094766683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6640a91c5bb909469b6d486b8646f79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardView: {fileID: 3428538249790762421}
 --- !u!225 &7192597132227724208
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1218,11 +1231,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec8f10fb162ac84409822f9781ab2412, type: 3}
---- !u!224 &3570423078886559052 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7739451522199555394, guid: ec8f10fb162ac84409822f9781ab2412, type: 3}
-  m_PrefabInstance: {fileID: 6549569734288621582}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2136586034364361448 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5134687782990867174, guid: ec8f10fb162ac84409822f9781ab2412, type: 3}
@@ -1234,3 +1242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa97ed19f7a52848a4d435e4d18ff0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &3570423078886559052 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7739451522199555394, guid: ec8f10fb162ac84409822f9781ab2412, type: 3}
+  m_PrefabInstance: {fileID: 6549569734288621582}
+  m_PrefabAsset: {fileID: 0}

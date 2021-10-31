@@ -355,6 +355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7131878188277760170}
   - component: {fileID: 3206177030987578973}
+  - component: {fileID: 8842755236474906562}
   - component: {fileID: 7192597132227724208}
   - component: {fileID: 7918799787899769508}
   m_Layer: 5
@@ -397,7 +398,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15eb30c4490ccbe4798b172fdc1cd324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropZone: {fileID: 0}
   audioInteractable: {fileID: 910552761267311518}
   canvasGroup: {fileID: 7192597132227724208}
   canvasGlow: {fileID: 8267710214329079339}
@@ -409,6 +409,19 @@ MonoBehaviour:
   disableColor: {r: 0.23529412, g: 0.05882353, b: 0.05882353, a: 1}
   textQuantity: {fileID: 3509090138855255280}
   xpCost: {fileID: 5832507611220611513}
+--- !u!114 &8842755236474906562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120494878094766683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba69179195d51b04e8dac9dc88ce96bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardView: {fileID: 3206177030987578973}
 --- !u!225 &7192597132227724208
 CanvasGroup:
   m_ObjectHideFlags: 0
