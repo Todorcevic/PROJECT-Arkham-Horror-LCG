@@ -1,4 +1,7 @@
 ﻿using Arkham.Model;
+using Arkham.Services;
+using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Arkham.Application
@@ -11,8 +14,11 @@ namespace Arkham.Application
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject] private readonly CardSelectorPresenter cardSelector;
-        //[Inject] private readonly CardShowerPresenter cardShowerPresenter;
+        [Inject] private readonly ShowCard showCard;
+        [Inject] private readonly CardsManager cardsManager;
         [Inject(Id = "CardsButton")] private readonly ButtonView cardsButton;
+        [Inject(Id = "MidZone")] private readonly ScrollRect cardsScroll;
+
         /*******************************************************************/
         public void Remove(string cardId, string investigatorId)
         {
@@ -26,7 +32,6 @@ namespace Arkham.Application
 
         private void UpdateView(Card card, Investigator investigator)
         {
-            //cardShowerPresenter.RemoveCard();
             cardSelector.SetCardInSelector(card, investigator);
             cardSelector.SetCanBeRemovedInSelectors(investigator.Id);
             deckCardPresenter.RefreshCardsSelectability();
@@ -34,6 +39,8 @@ namespace Arkham.Application
             cardQuantity.Refresh(investigator);
             readyButton.AutoActivate();
             cardsButton.ExecuteClick();
+            cardsScroll.AutoFocus(cardsManager.GetDeckCard(card.Id).transform, out Vector2 cardPosition);
+            showCard.MoveAnimation(cardPosition);
         }
     }
 }

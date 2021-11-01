@@ -25,9 +25,6 @@ namespace Arkham.Application
             void AddAllInvestigators()
             {
                 foreach (string investigatorId in selectors.InvestigatorsIdInSelector)
-                    InitInvestigator(investigatorId);
-
-                void InitInvestigator(string investigatorId)
                 {
                     InvestigatorSelectorView selector = investigatorSelectorsManager.GetEmptySelector();
                     SetThisSelectorWithThisInvestigator(selector, investigatorId);

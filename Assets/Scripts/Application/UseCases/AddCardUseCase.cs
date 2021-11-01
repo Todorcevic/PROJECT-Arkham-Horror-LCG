@@ -1,4 +1,8 @@
 ﻿using Arkham.Model;
+using Arkham.Services;
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Arkham.Application
@@ -13,7 +17,7 @@ namespace Arkham.Application
         [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly UpdateXpUseCase updateXpUseCase;
         [Inject] private readonly ShowCard showCard;
-        [Inject(Id = "CardsSelector")] private readonly PlaceHoldersZone placeZone;
+        [Inject(Id = "CardsSelector")] private readonly ScrollRect cardSelectorScroll;
 
         /*******************************************************************/
         public void AddCard(string cardId, string investigatorId)
@@ -29,8 +33,9 @@ namespace Arkham.Application
 
         private void UpdateView(Card card, Investigator investigator)
         {
-            showCard.MoveAnimation(placeZone.transform.position);
-            cardSelector.SetCardInSelector(card, investigator);
+            CardSelectorView selector = cardSelector.SetCardInSelector(card, investigator);
+            cardSelectorScroll.AutoFocus(selector.SelectorTransform, out Vector2 selectorFinalPosition);
+            showCard.MoveAnimation(selectorFinalPosition);
             cardSelector.SetCanBeRemovedInSelectors(investigator.Id);
             deckCardPresenter.RefreshCardsSelectability();
             deckCardPresenter.SetQuantity(card);

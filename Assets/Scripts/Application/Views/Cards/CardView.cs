@@ -8,8 +8,6 @@ namespace Arkham.Application
 {
     public class CardView : MonoBehaviour
     {
-        private Sprite backImage;
-        private Tween cantAdd;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
@@ -25,7 +23,7 @@ namespace Arkham.Application
         public bool IsInactive { get; private set; }
         public string Id { get; private set; }
         public Sprite GetCardImage => image.sprite;
-        public Sprite GetBackImage => backImage;
+        public Sprite GetBackImage { get; private set; }
 
         /*******************************************************************/
         [Inject]
@@ -33,7 +31,13 @@ namespace Arkham.Application
         {
             name = Id = id;
             ChangeImage(sprite);
-            this.backImage = backImage;
+            GetBackImage = backImage;
+
+            void ChangeImage(Sprite sprite)
+            {
+                canvasGroup.alpha = sprite == null ? 0 : 1;
+                image.sprite = sprite;
+            }
         }
 
         /*******************************************************************/
@@ -56,22 +60,15 @@ namespace Arkham.Application
 
         public void Show(bool isEnable)
         {
-            if (IsSeleted()) HoverOffEffect();
+            bool IsSeleted = !isEnable && canvasGlow.alpha > 0;
+            if (IsSeleted) HoverOffEffect();
             gameObject.SetActive(isEnable);
-
-            bool IsSeleted() => !isEnable && canvasGlow.alpha > 0;
-        }
-
-        private void ChangeImage(Sprite sprite)
-        {
-            canvasGroup.alpha = sprite == null ? 0 : 1;
-            image.sprite = sprite;
         }
 
         public void CantAddAnimation()
         {
-            cantAdd.Complete();
-            cantAdd = transform.DOPunchPosition(Vector3.right * 10, timeShakeAnimation, 20, 5);
+            DOTween.Complete("CantAdd");
+            transform.DOPunchPosition(Vector3.right * 10, timeShakeAnimation, 20, 5).SetId("CantAdd");
         }
     }
 }

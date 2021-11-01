@@ -10,7 +10,7 @@ namespace Arkham.Application
 {
     public class ShowCard : MonoBehaviour
     {
-        private CardView cardView;
+        private CardShowDTO cardDTO;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image frontImage;
         [SerializeField, Required, ChildGameObjectsOnly] private Image backImage;
@@ -24,26 +24,26 @@ namespace Arkham.Application
 
         private static string ShowTweenId => "Show";
         private static string MoveTweenId => "Move";
-        private Vector2 ShowCardPosition => new Vector2(cardView.transform.position.x - 175, Screen.height * 0.5f);
+        private Vector2 ShowCardPosition => new Vector2(cardDTO.Position.x > Screen.width * 0.5f ? cardDTO.Position.x - 175 : cardDTO.Position.x + 175, Screen.height * 0.5f);
 
         /*******************************************************************/
-        public void Set(CardView cardView)
+        public void Set(CardShowDTO cardDTO)
         {
-            this.cardView = cardView;
-            transform.position = cardView.transform.position;
+            this.cardDTO = cardDTO;
+            transform.position = cardDTO.Position;
             ActiveFrontImage();
             ActiveBackImage();
 
             void ActiveFrontImage()
             {
-                frontImage.gameObject.SetActive(cardView.GetCardImage != null);
-                frontImage.sprite = cardView.GetCardImage;
+                frontImage.gameObject.SetActive(cardDTO.Front != null);
+                frontImage.sprite = cardDTO.Front;
             }
 
             void ActiveBackImage()
             {
-                backImage.gameObject.SetActive(cardView.GetBackImage != null);
-                backImage.sprite = cardView.GetBackImage;
+                backImage.gameObject.SetActive(cardDTO.Back != null);
+                backImage.sprite = cardDTO.Back;
             }
         }
 
@@ -51,7 +51,7 @@ namespace Arkham.Application
         {
             DOTween.Kill(ShowTweenId);
             transform.localScale = Vector2.zero;
-            cardView = null;
+            cardDTO = null;
         }
 
         public Tween ShowAnimation() => DOTween.Sequence()
@@ -74,8 +74,8 @@ namespace Arkham.Application
         private void ReShow()
         {
             DOTween.Complete(MoveTweenId);
-            if (cardView == null) return;
-            Set(cardView);
+            if (cardDTO == null) return;
+            Set(cardDTO);
             ShowAnimation();
         }
 

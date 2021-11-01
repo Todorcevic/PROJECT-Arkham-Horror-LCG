@@ -11,10 +11,9 @@ namespace Arkham.Application
     public class CardSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private Tween cantComplete;
-        private ShowCard showCard;
-        //[Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Inject] private readonly RemoveCardUseCase removeCardUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
+        [Inject] private readonly ShowCard showCard;
         [Title("RESOURCES")]
         [SerializeField, Required] private Transform card;
         [SerializeField, Required] private InteractableAudio interactableAudio;
@@ -30,6 +29,7 @@ namespace Arkham.Application
 
         public string Id { get; private set; } = null;
         public bool IsEmpty => string.IsNullOrEmpty(Id);
+        public Transform SelectorTransform => canvas.transform;
         private bool CanBeRemoved { get; set; }
 
         /*******************************************************************/
@@ -52,11 +52,15 @@ namespace Arkham.Application
 
         public void SetQuantity(int amount) => quantity.text = (amount <= 1) ? string.Empty : "x" + amount.ToString();
 
-        public void SetTransform(Transform toTransform)
+        public void SetTransform(RectTransform toTransform)
         {
             card.SetParent(toTransform, worldPositionStays: false);
             card.localPosition = Vector3.zero;
         }
+
+        public Tween ShowAnimation() => DOTween.Sequence()
+            .AppendCallback(() => SelectorTransform.localScale = Vector3.zero)
+            .Append(SelectorTransform.DOScale(1, timeAnimation).SetDelay(timeAnimation));
 
         public void SetCanBeRemoved(bool canBeRemoved)
         {
@@ -67,11 +71,7 @@ namespace Arkham.Application
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             ClickEffect();
-            if (CanBeRemoved)
-            {
-                removeCardUseCase.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId);
-                OnPointerEnter(null);
-            }
+            if (CanBeRemoved) removeCardUseCase.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId);
             else CantRemoveAnimation();
 
             void ClickEffect() => interactableAudio.ClickSound();
@@ -87,7 +87,8 @@ namespace Arkham.Application
         {
             if (eventData?.dragging ?? false) return;
             HoverOnEffect();
-            //showCard = cardShowerPresenter.SetAndShow(new CardShowerDTO(Id, transform.position, isInLeftSide: false));
+            showCard.Set(new CardShowDTO() { Position = transform.position, Front = image.sprite });
+            showCard.ShowAnimation();
 
             void HoverOnEffect()
             {
@@ -101,7 +102,7 @@ namespace Arkham.Application
         {
             if (eventData.dragging) return;
             HoverOffEffect();
-            //cardShowerPresenter.HideAllShowCards();
+            showCard.Hide();
 
             void HoverOffEffect()
             {

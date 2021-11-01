@@ -28,7 +28,7 @@ namespace Arkham.Application
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             cardView.HoverOnEffect();
-            showCard.Set(cardView);
+            showCard.Set(new CardShowDTO() { Position = transform.position, Front = cardView.GetCardImage, Back = cardView.GetBackImage });
             showCard.ShowAnimation();
         }
 
