@@ -1,40 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
-using DG.Tweening;
+using Sirenix.OdinInspector;
+using Arkham.Services;
 
 namespace Arkham.Application
 {
     public abstract class CardController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler//, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
+        [Inject] private readonly Animations animations;
         [Inject] private readonly ShowCard showCard;
-        [SerializeField] protected CardView cardView;
+        [SerializeField, Required] protected CardView cardView;
+        [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
 
         /*******************************************************************/
+        protected abstract void Clicked();
+
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            cardView.ClickEffect();
-            if (cardView.IsInactive) cardView.CantAddAnimation();
+            audioInteractable.ClickSound();
+            if (cardView.IsInactive) animations.CantAdd(cardView.transform);
             else Clicked();
         }
 
-        protected abstract void Clicked();
-
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            cardView.HoverOnEffect();
-            showCard.Set(new CardShowDTO() { Position = transform.position, Front = cardView.GetCardImage, Back = cardView.GetBackImage });
+            animations.GlowOn(cardView.Glow);
+            audioInteractable.HoverOnSound();
+            showCard.Set(cardView);
             showCard.ShowAnimation();
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            cardView.HoverOffEffect();
+            animations.GlowOff(cardView.Glow);
             showCard.Hide();
         }
 

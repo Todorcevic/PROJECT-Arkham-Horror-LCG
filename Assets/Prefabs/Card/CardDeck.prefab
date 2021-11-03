@@ -398,14 +398,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15eb30c4490ccbe4798b172fdc1cd324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioInteractable: {fileID: 910552761267311518}
   canvasGroup: {fileID: 7192597132227724208}
   canvasGlow: {fileID: 8267710214329079339}
   image: {fileID: 4100283504713718926}
   glow: {fileID: 1562410001402135089}
-  timeHoverAnimation: 0.1
-  timeShakeAnimation: 0.25
-  enableColor: {r: 0.05882353, g: 0.23529412, b: 0.05882353, a: 1}
+  enableColor: {r: 0.06, g: 0.24, b: 0.06, a: 1}
   disableColor: {r: 0.23529412, g: 0.05882353, b: 0.05882353, a: 1}
   textQuantity: {fileID: 3509090138855255280}
   xpCost: {fileID: 5832507611220611513}
@@ -422,6 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardView: {fileID: 3206177030987578973}
+  audioInteractable: {fileID: 910552761267311518}
 --- !u!225 &7192597132227724208
 CanvasGroup:
   m_ObjectHideFlags: 0

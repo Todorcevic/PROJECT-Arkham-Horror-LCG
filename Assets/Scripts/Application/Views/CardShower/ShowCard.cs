@@ -1,16 +1,14 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Arkham.Application
 {
     public class ShowCard : MonoBehaviour
     {
-        private CardShowDTO cardDTO;
+        private IShowable showableCard;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image frontImage;
         [SerializeField, Required, ChildGameObjectsOnly] private Image backImage;
@@ -24,26 +22,26 @@ namespace Arkham.Application
 
         private static string ShowTweenId => "Show";
         private static string MoveTweenId => "Move";
-        private Vector2 ShowCardPosition => new Vector2(cardDTO.Position.x > Screen.width * 0.5f ? cardDTO.Position.x - 175 : cardDTO.Position.x + 175, Screen.height * 0.5f);
+        private Vector2 ShowCardPosition => new Vector2(showableCard.Position.x > Screen.width * 0.5f ? showableCard.Position.x - 175 : showableCard.Position.x + 175, Screen.height * 0.5f);
 
         /*******************************************************************/
-        public void Set(CardShowDTO cardDTO)
+        public void Set(IShowable showableCard)
         {
-            this.cardDTO = cardDTO;
-            transform.position = cardDTO.Position;
+            this.showableCard = showableCard;
+            transform.position = showableCard.Position;
             ActiveFrontImage();
             ActiveBackImage();
 
             void ActiveFrontImage()
             {
-                frontImage.gameObject.SetActive(cardDTO.Front != null);
-                frontImage.sprite = cardDTO.Front;
+                frontImage.gameObject.SetActive(showableCard.FrontImage != null);
+                frontImage.sprite = showableCard.FrontImage;
             }
 
             void ActiveBackImage()
             {
-                backImage.gameObject.SetActive(cardDTO.Back != null);
-                backImage.sprite = cardDTO.Back;
+                backImage.gameObject.SetActive(showableCard.BackImage != null);
+                backImage.sprite = showableCard.BackImage;
             }
         }
 
@@ -51,7 +49,7 @@ namespace Arkham.Application
         {
             DOTween.Kill(ShowTweenId);
             transform.localScale = Vector2.zero;
-            cardDTO = null;
+            showableCard = null;
         }
 
         public Tween ShowAnimation() => DOTween.Sequence()
@@ -74,8 +72,8 @@ namespace Arkham.Application
         private void ReShow()
         {
             DOTween.Complete(MoveTweenId);
-            if (cardDTO == null) return;
-            Set(cardDTO);
+            if (showableCard == null) return;
+            Set(showableCard);
             ShowAnimation();
         }
 

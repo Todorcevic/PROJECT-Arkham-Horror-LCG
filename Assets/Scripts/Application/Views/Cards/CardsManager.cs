@@ -19,6 +19,6 @@ namespace Arkham.Application
 
         public void AddCard(string cardId, CardView cardView) => cards.Add(cardId, cardView);
 
-        public Sprite GetSpriteCard(string id) => id != null ? AllCards.Find(c => c.Id == id).GetCardImage : null;
+        public Sprite GetSpriteCard(string id) => id != null ? AllCards.Find(c => c.Id == id).FrontImage : null;
     }
 }

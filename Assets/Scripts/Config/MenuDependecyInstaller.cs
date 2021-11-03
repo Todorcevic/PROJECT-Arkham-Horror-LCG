@@ -15,6 +15,7 @@ namespace Arkham.Config
             Container.BindInterfacesTo<DoubleClickDetector>().AsSingle();
             Container.BindInterfacesTo<DataContext>().AsSingle();
             Container.BindInterfacesTo<DataMapper>().AsSingle();
+            Container.Bind<Animations>().AsSingle();
 
             /*** Controllers ***/
             Container.Bind(x => x.AllNonAbstractClasses()

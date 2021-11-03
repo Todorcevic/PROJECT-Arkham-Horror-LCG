@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+﻿using Assets.Scripts.Config;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,24 +6,20 @@ using Zenject;
 
 namespace Arkham.Application
 {
-    public class CardView : MonoBehaviour
+    public class CardView : MonoBehaviour, IShowable
     {
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGlow;
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
         [SerializeField, Required, ChildGameObjectsOnly] private Image glow;
-        [Title("SETTINGS")]
-        [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
-        [SerializeField, Range(0f, 1f)] private float timeShakeAnimation;
-        [SerializeField] private Color enableColor;
-        [SerializeField] private Color disableColor;
 
         public bool IsInactive { get; private set; }
         public string Id { get; private set; }
-        public Sprite GetCardImage => image.sprite;
-        public Sprite GetBackImage { get; private set; }
+        public CanvasGroup Glow => canvasGlow;
+        public Vector2 Position => transform.position;
+        public Sprite FrontImage => image.sprite;
+        public Sprite BackImage { get; private set; }
 
         /*******************************************************************/
         [Inject]
@@ -31,7 +27,7 @@ namespace Arkham.Application
         {
             name = Id = id;
             ChangeImage(sprite);
-            GetBackImage = backImage;
+            BackImage = backImage;
 
             void ChangeImage(Sprite sprite)
             {
@@ -41,34 +37,17 @@ namespace Arkham.Application
         }
 
         /*******************************************************************/
-        public void ClickEffect() => audioInteractable.ClickSound();
-
-        public void HoverOnEffect()
-        {
-            canvasGlow.DOFade(1, timeHoverAnimation);
-            audioInteractable.HoverOnSound();
-        }
-
-        public void HoverOffEffect() => canvasGlow.DOFade(0, timeHoverAnimation);
-
         public void Activate(bool isEnable)
         {
             IsInactive = !isEnable;
             image.color = isEnable ? Color.white : Color.gray;
-            glow.color = IsInactive ? disableColor : enableColor;
+            glow.color = IsInactive ? ViewValues.DISABLE_COLOR : ViewValues.ENABLE_COLOR;
         }
 
         public void Show(bool isEnable)
         {
-            bool IsSeleted = !isEnable && canvasGlow.alpha > 0;
-            if (IsSeleted) HoverOffEffect();
+            canvasGlow.alpha = 0;
             gameObject.SetActive(isEnable);
-        }
-
-        public void CantAddAnimation()
-        {
-            DOTween.Complete("CantAdd");
-            transform.DOPunchPosition(Vector3.right * 10, timeShakeAnimation, 20, 5).SetId("CantAdd");
         }
     }
 }

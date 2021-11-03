@@ -8,7 +8,7 @@ using Zenject;
 
 namespace Arkham.Application
 {
-    public class CardSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class CardSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IShowable
     {
         private Tween cantComplete;
         [Inject] private readonly RemoveCardUseCase removeCardUseCase;
@@ -31,6 +31,9 @@ namespace Arkham.Application
         public bool IsEmpty => string.IsNullOrEmpty(Id);
         public Transform SelectorTransform => canvas.transform;
         private bool CanBeRemoved { get; set; }
+        public Vector2 Position => transform.position;
+        public Sprite FrontImage => image.sprite;
+        public Sprite BackImage => null;
 
         /*******************************************************************/
         public void SetSelector(string cardId, Sprite cardSprite = null)
@@ -87,7 +90,7 @@ namespace Arkham.Application
         {
             if (eventData?.dragging ?? false) return;
             HoverOnEffect();
-            showCard.Set(new CardShowDTO() { Position = transform.position, Front = image.sprite });
+            showCard.Set(this);
             showCard.ShowAnimation();
 
             void HoverOnEffect()
