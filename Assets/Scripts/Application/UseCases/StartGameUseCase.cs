@@ -28,7 +28,7 @@ namespace Arkham.Application
             investigatorsButton.ExecuteClick();
             investigatorSelector.InitializeSelectors();
             investigatorSelector.SetLeadSelector();
-            campaignsManager.InitializeCampaigns(gameType);
+            if (gameType == StartGame.New) campaignsManager.InitializeCampaigns();
             investigatorsCard.InvestigatorStateResolve();
             investigatorsCard.RefreshInvestigatorsSelectability();
             investigatorsCard.RefreshInvestigatorsVisibility();

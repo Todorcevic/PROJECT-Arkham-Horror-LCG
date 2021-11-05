@@ -12,19 +12,14 @@ namespace Arkham.Application
         [Inject] private readonly List<CampaignStateSO> states;
 
         /*******************************************************************/
-        public void InitializeCampaigns(StartGame gameType)
+        public void InitializeCampaigns()
         {
-            if (gameType != StartGame.New) return;
             foreach (Campaign campaign in campaignRepository.Campaigns)
             {
-                CampaignView campaignView = GetCampaign(campaign.Id);
-                GetState(campaign.State.Id).ExecuteState(campaignView);
+                CampaignView campaignView = campaigns.Find(c => c.Id == campaign.Id);
+                states.Find(s => s.Id == campaign.State.Id).ExecuteState(campaignView);
                 campaignView.IsOpen = campaign.State.IsOpen;
             }
         }
-
-        private CampaignView GetCampaign(string campaignId) => campaigns.Find(c => c.Id == campaignId);
-
-        private CampaignStateSO GetState(string campaignState) => states.Find(s => s.Id == campaignState);
     }
 }

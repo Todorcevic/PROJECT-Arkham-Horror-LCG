@@ -8,6 +8,6 @@ namespace Arkham.Application
         [Inject(Id = "NewGameModal")] private readonly PanelView newGameModal;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => newGameButton.AddClickAction(() => newGameModal.Activate(true));
+        void IInitializable.Initialize() => newGameButton.ClickAction += () => newGameModal.Activate(true);
     }
 }

@@ -17,7 +17,7 @@ namespace Arkham.Application
         /*******************************************************************/
         void IInitializable.Initialize()
         {
-            continueButton.AddClickAction(Clicked);
+            continueButton.ClickAction += Clicked;
             continueButton.Desactive(!CanContinue);
         }
 

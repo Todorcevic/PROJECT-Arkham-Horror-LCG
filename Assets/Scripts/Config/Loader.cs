@@ -1,4 +1,5 @@
 ﻿using Arkham.Services;
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -17,6 +18,11 @@ namespace Arkham.Config
             cardFactory.BuildDeckCards();
             cardFactory.BuildInvestigatorCards();
             //mapper.SaveProgress();
+        }
+
+        private void OnDestroy()
+        {
+            DOTween.KillAll();
         }
     }
 }

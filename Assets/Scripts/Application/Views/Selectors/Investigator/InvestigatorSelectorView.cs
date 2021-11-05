@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Arkham.Config;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Linq;
 using UnityEngine;
@@ -17,8 +18,6 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorSelectorDragController dragSensor;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasSensor;
         [SerializeField, Required, ChildGameObjectsOnly] private Image leaderIcon;
-        [Title("SETTINGS")]
-        [SerializeField, Range(0f, 1f)] private float timeAnimation;
 
         private Transform CardVisual => canvasImage.transform;
         private Transform PlaceHolder => dragSensor.transform;
@@ -53,7 +52,7 @@ namespace Arkham.Application
 
         public void LeadIcon(bool isOn) => leaderIcon.enabled = isOn;
 
-        public void Glow(bool isOn) => canvasGlow.DOFade(isOn ? 1 : 0, timeAnimation);
+        public void Glow(bool isOn) => canvasGlow.DOFade(isOn ? 1 : 0, ViewValues.STANDARD_TIME);
 
         public void SetTransform(Transform toTransform = null)
         {
@@ -82,14 +81,14 @@ namespace Arkham.Application
 
         public Tween SetImageAnimation() => DOTween.Sequence()
             .PrependCallback(PosicionateCardOff)
-            .Append(CardVisual.DOScale(1, timeAnimation))
+            .Append(CardVisual.DOScale(1, ViewValues.STANDARD_TIME))
             .SetDelay(ShowCard.MoveTimeLeft(), true);
 
         public Tween RemoveAnimation() => DOTween.Sequence()
-            .Join(CardVisual.DOMove(PlaceHolder.position, timeAnimation * 4).SetSpeedBased())
-            .Join(CardVisual.DOScale(0, timeAnimation)).SetId(REMOVE_ANIMATION);
+            .Join(CardVisual.DOMove(PlaceHolder.position, ViewValues.STANDARD_TIME * 4).SetSpeedBased())
+            .Join(CardVisual.DOScale(0, ViewValues.STANDARD_TIME)).SetId(REMOVE_ANIMATION);
 
-        public void ArrangeAnimation() => CardVisual.DOMove(PlaceHolder.position, timeAnimation);
+        public void ArrangeAnimation() => CardVisual.DOMove(PlaceHolder.position, ViewValues.STANDARD_TIME);
 
         private void Activate(bool isOn) => canvasSensor.blocksRaycasts = canvasSensor.interactable = isOn;
     }

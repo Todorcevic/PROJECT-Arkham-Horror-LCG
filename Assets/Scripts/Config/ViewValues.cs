@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Config
+namespace Arkham.Config
 {
     public static class ViewValues
     {
@@ -10,5 +10,7 @@ namespace Assets.Scripts.Config
         public const float MAX_TIME = 0.75f;
         public static Color ENABLE_COLOR = new Color(0.06f, 0.24f, 0.06f);
         public static Color DISABLE_COLOR = new Color(0.24f, 0.06f, 0.06f);
+        public static Color ACTIVE_COLOR = new Color(0.15f, 0.15f, 0.15f);
+        public static Color DESACTIVE_COLOR = new Color(0.3f, 0.3f, 0.3f);
     }
 }

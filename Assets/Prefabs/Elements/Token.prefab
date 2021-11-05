@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 93.6
+  m_fontSize: 79.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8729351357657111659}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaa97ed19f7a52848a4d435e4d18ff0e, type: 3}
+  m_Script: {fileID: 11500000, guid: e027da9d9f6c73144bbe287c96ecdf2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   amount: {fileID: 3506458213031733785}

@@ -1,6 +1,5 @@
 ﻿using Zenject;
 using Arkham.Services;
-using Arkham.Model;
 
 namespace Arkham.Application
 {
@@ -16,7 +15,7 @@ namespace Arkham.Application
         {
             bool IsOnVisibility = playerPrefs.LoadCardsVisibility();
             visibilitySwitchView.SwitchAnimation(IsOnVisibility);
-            visibilitySwitchView.AddClickAction(Clicked);
+            visibilitySwitchView.ClickAction += Clicked;
         }
 
         /*******************************************************************/

@@ -1,3 +1,4 @@
+using Arkham.Config;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Linq;
@@ -8,18 +9,15 @@ namespace Arkham.Application
 {
     public class ShowCard : MonoBehaviour
     {
+        private const float SCALE = 1.6f;
+        private const float DRAG_SCALE = 0.6f;
         private IShowable showableCard;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image frontImage;
         [SerializeField, Required, ChildGameObjectsOnly] private Image backImage;
-        [Title("SETTINGS")]
-        [SerializeField, Range(0f, 1f)] private float timeAnimation;
-        [SerializeField, Range(1f, 2f)] private float scale;
-        [SerializeField, Range(0f, 1f)] private float dragScale;
 
         public bool IsMoving => DOTween.IsTweening(MoveTweenId);
         public bool IsShowing => DOTween.IsTweening(ShowTweenId);
-
         private static string ShowTweenId => "Show";
         private static string MoveTweenId => "Move";
         private Vector2 ShowCardPosition => new Vector2(showableCard.Position.x > Screen.width * 0.5f ? showableCard.Position.x - 175 : showableCard.Position.x + 175, Screen.height * 0.5f);
@@ -53,8 +51,8 @@ namespace Arkham.Application
         }
 
         public Tween ShowAnimation() => DOTween.Sequence()
-            .Append(transform.DOMove(ShowCardPosition, timeAnimation))
-            .Join(transform.DOScale(scale, timeAnimation))
+            .Append(transform.DOMove(ShowCardPosition, ViewValues.STANDARD_TIME))
+            .Join(transform.DOScale(SCALE, ViewValues.STANDARD_TIME))
             .SetDelay(MoveTimeLeft(), true).SetId(ShowTweenId);
 
         public static float MoveTimeLeft()
@@ -64,8 +62,8 @@ namespace Arkham.Application
         }
 
         public Tween MoveAnimation(Vector2 positionToMove) => DOTween.Sequence()
-            .Append(transform.DOMove(positionToMove, timeAnimation))
-            .Join(transform.DOScale(0, timeAnimation))
+            .Append(transform.DOMove(positionToMove, ViewValues.STANDARD_TIME))
+            .Join(transform.DOScale(0, ViewValues.STANDARD_TIME))
             .OnComplete(ReShow)
             .SetId(MoveTweenId);
 
@@ -81,7 +79,7 @@ namespace Arkham.Application
         {
             DOTween.Kill(ShowTweenId);
             DesactiveBackImage();
-            transform.DOScale(dragScale, timeAnimation);
+            transform.DOScale(DRAG_SCALE, ViewValues.STANDARD_TIME);
 
             void DesactiveBackImage()
             {

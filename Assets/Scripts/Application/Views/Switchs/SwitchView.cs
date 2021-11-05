@@ -10,7 +10,12 @@ namespace Arkham.Application
 {
     public class SwitchView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        private event Action ClickAction;
+        private const float TIME_MOVE = 0.5f;
+        private const float TIME_HOVER = 0.1f;
+        private const float SCALE = 1.25f;
+        private Color colorOn = Color.white;
+        private Color colorOff = Color.black;
+        public event Action ClickAction;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
         [SerializeField, Required] private Transform positionOn;
@@ -19,47 +24,10 @@ namespace Arkham.Application
         [SerializeField, Required] private Image background;
         [SerializeField, Required] private Image border;
         [SerializeField, Required] private TextMeshProUGUI title;
-        [Title("SETTINGS")]
-        [SerializeField, Range(0f, 1f)] private float timeMoveAnimation;
-        [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
-        [SerializeField, Range(1f, 2f)] private float hoverScale;
-        [SerializeField] private Color colorOn;
-        [SerializeField] private Color colorOff;
 
         public bool IsOn { get; private set; }
 
         /*******************************************************************/
-        public void AddClickAction(Action action) => ClickAction += action;
-
-        public void SwitchAnimation()
-        {
-            interactableAudio.ClickSound();
-            SwitchAnimation(!IsOn);
-        }
-
-        public void SwitchAnimation(bool isOn)
-        {
-            button.transform.DOMove(isOn ? positionOn.position : positionOff.position, timeMoveAnimation);
-            button.DOColor(isOn ? colorOff : colorOn, timeMoveAnimation);
-            border.DOColor(isOn ? colorOff : colorOn, timeMoveAnimation);
-            background.DOColor(isOn ? colorOn : colorOff, timeMoveAnimation);
-            IsOn = isOn;
-        }
-
-        private void SwitchHoverOn()
-        {
-            interactableAudio.HoverOnSound();
-            title.fontStyle = FontStyles.Bold;
-            button.transform.DOScale(hoverScale, timeHoverAnimation);
-        }
-
-        private void SwitchHoverOff()
-        {
-            interactableAudio.HoverOffSound();
-            title.fontStyle = FontStyles.Normal;
-            button.transform.DOScale(1f, timeHoverAnimation);
-        }
-
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             SwitchAnimation();
@@ -69,9 +37,31 @@ namespace Arkham.Application
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             if (eventData.dragging) return;
-            SwitchHoverOn();
+            interactableAudio.HoverOnSound();
+            title.fontStyle = FontStyles.Bold;
+            button.transform.DOScale(SCALE, TIME_HOVER);
         }
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => SwitchHoverOff();
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        {
+            interactableAudio.HoverOffSound();
+            title.fontStyle = FontStyles.Normal;
+            button.transform.DOScale(1f, TIME_HOVER);
+        }
+
+        public void SwitchAnimation()
+        {
+            interactableAudio.ClickSound();
+            SwitchAnimation(!IsOn);
+        }
+
+        public void SwitchAnimation(bool isOn)
+        {
+            button.transform.DOMove(isOn ? positionOn.position : positionOff.position, TIME_MOVE);
+            button.DOColor(isOn ? colorOff : colorOn, TIME_MOVE);
+            border.DOColor(isOn ? colorOff : colorOn, TIME_MOVE);
+            background.DOColor(isOn ? colorOn : colorOff, TIME_MOVE);
+            IsOn = isOn;
+        }
     }
 }

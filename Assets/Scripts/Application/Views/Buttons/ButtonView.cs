@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Arkham.Config;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using System;
 using TMPro;
@@ -12,19 +13,16 @@ namespace Arkham.Application
     {
         private bool isLock;
         private bool isInactive;
-        private event Action ClickAction;
+        public event Action ClickAction;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
         [SerializeField, Required, ChildGameObjectsOnly] private Image background;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI text;
-        [Title("SETTINGS")]
-        [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
-        [SerializeField] private Color desactiveColor;
 
         /*******************************************************************/
         public void Desactive(bool isOn)
         {
-            Desactivate(isOn);
+            ChangeTextColor(isOn ? ViewValues.DESACTIVE_COLOR : isLock ? Color.black : Color.white);
             isInactive = isOn;
         }
 
@@ -40,53 +38,32 @@ namespace Arkham.Application
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             if (eventData.dragging || isInactive) return;
-            ClickEffect();
+            interactableAudio.ClickSound();
             ClickAction?.Invoke();
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             if (eventData.dragging || isInactive) return;
-            HoverOnEffect();
+            interactableAudio.HoverOnSound();
+            HoverActivate(true);
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             if (eventData.dragging || isInactive) return;
-            HoverOffEffect();
-        }
-
-        public void AddClickAction(Action action) => ClickAction += action;
-
-        public void ClickEffect() => interactableAudio.ClickSound();
-
-        public void HoverOnEffect()
-        {
-            interactableAudio.HoverOnSound();
-            HoverActivate(true);
-        }
-
-        public void HoverOffEffect()
-        {
             interactableAudio.HoverOffSound();
             HoverActivate(false);
         }
 
+        //public void AddClickAction(Action action) => ClickAction += action;
+
         private void HoverActivate(bool isOn)
         {
             ChangeTextColor(isOn ? Color.black : Color.white);
-            FillBackground(isOn);
+            background.DOFillAmount(isOn ? 1 : 0, ViewValues.STANDARD_TIME);
         }
 
-        private void Desactivate(bool isOn) => ChangeTextColor(isOn ? desactiveColor : isLock ? Color.black : Color.white);
-
-        private void ChangeTextColor(Color color) => text.DOColor(color, timeHoverAnimation);
-
-        private void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, timeHoverAnimation);
-
-        private void OnDestroy()
-        {
-            DOTween.KillAll();
-        }
+        private void ChangeTextColor(Color color) => text.DOColor(color, ViewValues.STANDARD_TIME);
     }
 }

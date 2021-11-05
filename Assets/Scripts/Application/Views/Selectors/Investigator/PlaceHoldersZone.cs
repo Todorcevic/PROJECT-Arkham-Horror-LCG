@@ -1,3 +1,4 @@
+using Arkham.Config;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,7 +8,6 @@ namespace Arkham.Application
 {
     public class PlaceHoldersZone : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField, Range(0, 1)] private float timeAnimation;
         [SerializeField, Required] private Image glow;
         [SerializeField, Required] private RectTransform rectTransform;
 
@@ -22,7 +22,7 @@ namespace Arkham.Application
 
         public void Activate(bool isActivate)
         {
-            glow.CrossFadeAlpha(isActivate ? 1 : 0, timeAnimation, true);
+            glow.CrossFadeAlpha(isActivate ? 1 : 0, ViewValues.STANDARD_TIME, true);
             IsAtive = isActivate;
         }
 

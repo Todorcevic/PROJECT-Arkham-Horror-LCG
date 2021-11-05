@@ -12,7 +12,7 @@ namespace Arkham.Application
         [Inject(Id = "ChooseCampaignPanel")] private readonly PanelView chooseCampaignPanel;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => yesButton.AddClickAction(Clicked);
+        void IInitializable.Initialize() => yesButton.ClickAction += Clicked;
 
         private void Clicked()
         {

@@ -13,7 +13,7 @@ namespace Arkham.Application
         [Inject(Id = "MidZone")] private readonly ScrollRect scroll;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => cardsButton.AddClickAction(Clicked);
+        void IInitializable.Initialize() => cardsButton.ClickAction += Clicked;
 
         /*******************************************************************/
         private void Clicked()

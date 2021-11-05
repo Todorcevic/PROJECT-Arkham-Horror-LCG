@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Arkham.Config;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -22,10 +23,6 @@ namespace Arkham.Application
         [SerializeField, Required] private Image background;
         [SerializeField, Required] private TextMeshProUGUI cardName;
         [SerializeField, Required] private TextMeshProUGUI quantity;
-        [Title("SETTINGS")]
-        [SerializeField, Range(0f, 1f)] private float timeAnimation;
-        [SerializeField] private Color enableColor;
-        [SerializeField] private Color disableColor;
 
         public string Id { get; private set; } = null;
         public bool IsEmpty => string.IsNullOrEmpty(Id);
@@ -63,26 +60,24 @@ namespace Arkham.Application
 
         public Tween ShowAnimation() => DOTween.Sequence()
             .AppendCallback(() => SelectorTransform.localScale = Vector3.zero)
-            .Append(SelectorTransform.DOScale(1, timeAnimation).SetDelay(timeAnimation));
+            .Append(SelectorTransform.DOScale(1, ViewValues.STANDARD_TIME).SetDelay(ViewValues.STANDARD_TIME));
 
         public void SetCanBeRemoved(bool canBeRemoved)
         {
-            background.color = canBeRemoved ? enableColor : disableColor;
+            background.color = canBeRemoved ? ViewValues.ENABLE_COLOR : ViewValues.DISABLE_COLOR;
             CanBeRemoved = canBeRemoved;
         }
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            ClickEffect();
+            interactableAudio.ClickSound();
             if (CanBeRemoved) removeCardUseCase.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId);
             else CantRemoveAnimation();
-
-            void ClickEffect() => interactableAudio.ClickSound();
 
             void CantRemoveAnimation()
             {
                 cantComplete.Complete();
-                cantComplete = card.DOPunchPosition(Vector3.right * 10, timeAnimation, 20, 5);
+                cantComplete = card.DOPunchPosition(Vector3.right * 10, ViewValues.STANDARD_TIME, 20, 5);
             }
         }
 
@@ -117,10 +112,10 @@ namespace Arkham.Application
 
         private void ChangeTextColor(Color color)
         {
-            cardName.DOColor(color, timeAnimation);
-            quantity?.DOColor(color, timeAnimation);
+            cardName.DOColor(color, ViewValues.STANDARD_TIME);
+            quantity?.DOColor(color, ViewValues.STANDARD_TIME);
         }
 
-        private void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, timeAnimation);
+        private void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, ViewValues.STANDARD_TIME);
     }
 }

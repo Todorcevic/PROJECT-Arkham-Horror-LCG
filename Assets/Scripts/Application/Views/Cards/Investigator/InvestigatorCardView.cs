@@ -10,9 +10,9 @@ namespace Arkham.Application
         private InvestigatorStateView currentState;
         [Title("INVESTIGATOR RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private List<InvestigatorStateView> states;
-        [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken physicTrauma;
-        [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken mentalTrauma;
-        [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken xp;
+        [SerializeField, Required, ChildGameObjectsOnly] private TokenView physicTrauma;
+        [SerializeField, Required, ChildGameObjectsOnly] private TokenView mentalTrauma;
+        [SerializeField, Required, ChildGameObjectsOnly] private TokenView xp;
 
         /*******************************************************************/
         public void ChangeState(InvestigatorState state)

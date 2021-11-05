@@ -14,7 +14,7 @@ namespace Arkham.Application
         private void Awake()
         {
             foreach (ButtonView button in buttons)
-                button.AddClickAction(CloseThisModal);
+                button.ClickAction += CloseThisModal;
         }
 
         private void CloseThisModal() => modal.Activate(false);

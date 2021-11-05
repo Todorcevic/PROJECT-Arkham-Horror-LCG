@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Arkham.Config;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,8 +11,6 @@ namespace Arkham.Application
     {
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
-        [Title("SETTINGS")]
-        [SerializeField, Range(0f, 1f)] private float timeFadeAnimation;
 
         private bool IsCanvasVisible => canvasGroup.alpha == 1;
         private string ButtonName => IsCanvasVisible ? "Desactivate Alpha" : "Activate Alpha";
@@ -22,7 +21,7 @@ namespace Arkham.Application
         {
             canvasGroup.blocksRaycasts = toActivate;
             canvasGroup.interactable = toActivate;
-            canvasGroup.DOFade(toActivate ? 1 : 0, timeFadeAnimation);
+            canvasGroup.DOFade(toActivate ? 1 : 0, ViewValues.STANDARD_TIME);
         }
 
         [Button("$ButtonName", ButtonSizes.Gigantic), GUIColor("$ButtonColor")]

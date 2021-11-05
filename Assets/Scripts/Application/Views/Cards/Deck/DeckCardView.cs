@@ -8,7 +8,7 @@ namespace Arkham.Application
     {
         [Title("DECKCARD RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI textQuantity;
-        [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorToken xpCost;
+        [SerializeField, Required, ChildGameObjectsOnly] private TokenView xpCost;
 
         /*******************************************************************/
         public void SetQuantity(int quantity) => textQuantity.text = FormatQuantity(quantity);

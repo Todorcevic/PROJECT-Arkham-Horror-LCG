@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 using Sirenix.OdinInspector;
-using Arkham.Services;
+using DG.Tweening;
+using Arkham.Config;
 
 namespace Arkham.Application
 {
     public abstract class CardController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler//, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
-        [Inject] private readonly Animations animations;
         [Inject] private readonly ShowCard showCard;
         [SerializeField, Required] protected CardView cardView;
         [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
@@ -22,13 +19,19 @@ namespace Arkham.Application
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             audioInteractable.ClickSound();
-            if (cardView.IsInactive) animations.CantAdd(cardView.transform);
+            if (cardView.IsInactive) CantAdd();
             else Clicked();
+
+            void CantAdd()
+            {
+                DOTween.Complete(gameObject.GetInstanceID());
+                transform.DOPunchPosition(Vector3.right * 20, ViewValues.FAST_TIME, 40, 5).SetId(gameObject.GetInstanceID());
+            }
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            animations.GlowOn(cardView.Glow);
+            cardView.Glow.DOFade(1, ViewValues.STANDARD_TIME);
             audioInteractable.HoverOnSound();
             showCard.Set(cardView);
             showCard.ShowAnimation();
@@ -36,7 +39,7 @@ namespace Arkham.Application
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            animations.GlowOff(cardView.Glow);
+            cardView.Glow.DOFade(0, ViewValues.STANDARD_TIME);
             showCard.Hide();
         }
 
@@ -59,5 +62,7 @@ namespace Arkham.Application
         //{
         //    throw new NotImplementedException();
         //}
+
+
     }
 }

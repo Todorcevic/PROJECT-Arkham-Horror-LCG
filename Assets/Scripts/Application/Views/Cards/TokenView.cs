@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Arkham.Application
 {
-    public class InvestigatorToken : MonoBehaviour
+    public class TokenView : MonoBehaviour
     {
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI amount;
 

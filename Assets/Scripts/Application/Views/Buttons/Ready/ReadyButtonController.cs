@@ -8,7 +8,7 @@ namespace Arkham.Application
         [Inject] private readonly StartPlayUseCase startPlay;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => readyButton.AddClickAction(Clicked);
+        void IInitializable.Initialize() => readyButton.ClickAction += Clicked;
 
         /*******************************************************************/
         private void Clicked() => startPlay.Start();

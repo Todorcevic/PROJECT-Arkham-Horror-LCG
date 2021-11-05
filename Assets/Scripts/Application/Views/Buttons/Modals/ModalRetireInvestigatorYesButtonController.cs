@@ -14,7 +14,7 @@ namespace Arkham.Application
         [Inject(Id = "RetireInvestigatorYesButton")] private readonly ButtonView yesButton;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => yesButton.AddClickAction(Clicked);
+        void IInitializable.Initialize() => yesButton.ClickAction += Clicked;
 
         private void Clicked() => retireInvestigatorUseCase.Retire(investigatorSelectorManager.CurrentInvestigatorId);
     }

@@ -15,7 +15,7 @@ namespace Arkham.Application
         void IInitializable.Initialize()
         {
             foreach (ButtonView button in backButtons)
-                button.AddClickAction(Clicked);
+                button.ClickAction += Clicked;
         }
 
         /*******************************************************************/

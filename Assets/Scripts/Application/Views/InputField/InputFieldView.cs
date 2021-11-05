@@ -1,4 +1,4 @@
-using Arkham.Model;
+using Arkham.Config;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using System;
@@ -12,45 +12,39 @@ namespace Arkham.Application
     public class InputFieldView : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler,
         IPointerExitHandler, IUpdateSelectedHandler
     {
-        private event Action UpdateAction;
+        private const float SCALE = 1.2f;
+        public event Action UpdateAction;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private TMP_InputField field;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI textField;
         [SerializeField, Required, ChildGameObjectsOnly] private Image background;
         [SerializeField, Required, ChildGameObjectsOnly] private Image icon;
-        [Title("SETTINGS")]
-        [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
-        [SerializeField, Range(1f, 2f)] private float hoverScale;
-        [SerializeField] private Color deselectColor;
-        [SerializeField] private Color selectColor;
 
         public string CurrentText { get; private set; }
 
         /*******************************************************************/
-        public void AddUpdateAction(Action action) => UpdateAction += action;
+        void ISelectHandler.OnSelect(BaseEventData eventData) => background.color = ViewValues.ACTIVE_COLOR;
 
-        void ISelectHandler.OnSelect(BaseEventData eventData) => background.color = selectColor;
-
-        void IDeselectHandler.OnDeselect(BaseEventData eventData) => background.color = deselectColor;
+        void IDeselectHandler.OnDeselect(BaseEventData eventData) => background.color = ViewValues.DESACTIVE_COLOR;
 
         void IUpdateSelectedHandler.OnUpdateSelected(BaseEventData eventData)
         {
             if (field.text == CurrentText) return;
             CurrentText = field.text;
-            UpdateAction.Invoke();
+            UpdateAction?.Invoke();
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             if (eventData.dragging) return;
             textField.fontStyle = FontStyles.Bold;
-            icon.transform.DOScale(hoverScale, timeHoverAnimation);
+            icon.transform.DOScale(SCALE, ViewValues.STANDARD_TIME);
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             textField.fontStyle = FontStyles.Normal;
-            icon.transform.DOScale(1f, timeHoverAnimation);
+            icon.transform.DOScale(1f, ViewValues.STANDARD_TIME);
         }
     }
 }

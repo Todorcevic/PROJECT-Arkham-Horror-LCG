@@ -10,7 +10,7 @@ namespace Arkham.Application
         [Inject] private readonly DeckCardPresenter cardVisibility;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => inputFieldView.AddUpdateAction(Updated);
+        void IInitializable.Initialize() => inputFieldView.UpdateAction += Updated;
 
         /*******************************************************************/
         private void Updated()

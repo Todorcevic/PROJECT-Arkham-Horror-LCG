@@ -1,4 +1,5 @@
-﻿using Arkham.Services;
+﻿using Arkham.Config;
+using Arkham.Services;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -9,20 +10,17 @@ namespace Arkham.Application
 {
     public class InvestigatorSelectorDragController : MonoBehaviour, IPointerEnterHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerExitHandler
     {
+        private const float SCALE_HOver = 1.1f;
         public const string HOVEROFF = "HoverOff";
         private static bool isDragging;
         [Inject] private readonly IDoubleClickDetector clickDetector;
         [Inject] private readonly RemoveInvestigatorUseCase removeInvestigatorUseCase;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
         [Inject] private readonly ChangeInvestigatorUseCase investigatorChange;
-        //[Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Inject(Id = "MidZone")] private readonly RectTransform removeZone;
         [Title("RESOURCES")]
         [SerializeField, Required] private Canvas canvasCard;
         [SerializeField, Required] private InteractableAudio audioInteractable;
-        [Title("SETTINGS")]
-        [SerializeField, Range(0f, 1f)] private float timeHoverAnimation;
-        [SerializeField, Range(1f, 2f)] private float scaleHoverEffect;
 
         public string Id { private get; set; }
         private Transform Card => canvasCard.transform;
@@ -44,22 +42,15 @@ namespace Arkham.Application
             void HoverEnter()
             {
                 //if (eventData.dragging || DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION) || (cardShowerPresenter.LastShowCard?.IsMoving ?? true)) return;
-                HoverOnEffect();
-
-                void HoverOnEffect()
-                {
-                    audioInteractable.HoverOnSound();
-                    Card.DOScale(scaleHoverEffect, timeHoverAnimation);
-                }
+                audioInteractable.HoverOnSound();
+                Card.DOScale(SCALE_HOver, ViewValues.STANDARD_TIME);
             }
 
             void DragEnter()
             {
-                if (CheckDrag()) return;
+                if (!isDragging || eventData.pointerDrag == gameObject) return;
                 audioInteractable.HoverOnSound();
                 investigatorChange.Swap(eventData.pointerDrag.transform.GetSiblingIndex(), Id);
-
-                bool CheckDrag() => !isDragging || eventData.pointerDrag == gameObject;
             }
         }
 
@@ -67,21 +58,14 @@ namespace Arkham.Application
         {
             if (eventData.dragging) return;
             if (DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION)) return;
-            HoverOffEffect();
-
-            void HoverOffEffect()
-            {
-                audioInteractable.HoverOffSound();
-                Card.DOScale(1f, timeHoverAnimation).SetId(HOVEROFF);
-            }
+            audioInteractable.HoverOffSound();
+            Card.DOScale(1f, ViewValues.STANDARD_TIME).SetId(HOVEROFF);
         }
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
         {
             isDragging = true;
-            BeginDragEffect();
-
-            void BeginDragEffect() => canvasCard.sortingOrder = 2;
+            canvasCard.sortingOrder = 2;
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData) => Card.position = eventData.position;
@@ -90,8 +74,8 @@ namespace Arkham.Application
         {
             isDragging = false;
             EndDragEffect();
-            if (IsInRemoveZone()) removeInvestigatorUseCase.Remove(Id);
-            else ArrangeAnimation();
+            if (eventData.hovered.Contains(removeZone.gameObject)) removeInvestigatorUseCase.Remove(Id);
+            else Card.DOMove(transform.position, ViewValues.STANDARD_TIME);
 
             //cardShowerPresenter.LastShowCard?.MoveAnimation(transform.position).OnComplete(ReShow);
 
@@ -105,12 +89,8 @@ namespace Arkham.Application
             {
                 canvasCard.sortingOrder = 1;
                 if (eventData.pointerEnter != gameObject)
-                    Card.DOScale(1f, timeHoverAnimation);
+                    Card.DOScale(1f, ViewValues.STANDARD_TIME);
             }
-
-            bool IsInRemoveZone() => eventData.hovered.Contains(removeZone.gameObject);
-
-            void ArrangeAnimation() => Card.DOMove(transform.position, timeHoverAnimation);
         }
     }
 }
