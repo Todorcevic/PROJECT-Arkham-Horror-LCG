@@ -14,10 +14,8 @@ namespace Arkham.Application
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject] private readonly CardSelectorPresenter cardSelector;
-        [Inject] private readonly ShowCard showCard;
-        [Inject] private readonly CardsManager cardsManager;
+        [Inject] private readonly MultiAnimator multiAnimator;
         [Inject(Id = "CardsButton")] private readonly ButtonView cardsButton;
-        [Inject(Id = "MidZone")] private readonly ScrollRect cardsScroll;
 
         /*******************************************************************/
         public void Remove(string cardId, string investigatorId)
@@ -34,13 +32,12 @@ namespace Arkham.Application
         {
             cardSelector.SetCardInSelector(card, investigator);
             cardSelector.SetCanBeRemovedInSelectors(investigator.Id);
+            multiAnimator.RemoveCard(card.Id);
             deckCardPresenter.RefreshCardsSelectability();
             deckCardPresenter.SetQuantity(card);
             cardQuantity.Refresh(investigator);
             readyButton.AutoActivate();
             cardsButton.ExecuteClick();
-            cardsScroll.AutoFocus(cardsManager.GetDeckCard(card.Id).transform, out Vector2 cardPosition);
-            showCard.MoveAnimation(cardPosition);
         }
     }
 }

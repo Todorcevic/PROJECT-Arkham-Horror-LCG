@@ -16,7 +16,7 @@ namespace Arkham.Application
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
         [Inject] private readonly ShowCard showCard;
         [Title("RESOURCES")]
-        [SerializeField, Required] private Transform card;
+        [SerializeField, Required] private RectTransform card;
         [SerializeField, Required] private InteractableAudio interactableAudio;
         [SerializeField, Required] private CanvasGroup canvas;
         [SerializeField, Required] private Image image;
@@ -28,46 +28,12 @@ namespace Arkham.Application
         public bool IsEmpty => string.IsNullOrEmpty(Id);
         public Transform SelectorTransform => canvas.transform;
         private bool CanBeRemoved { get; set; }
-        public Vector2 Position => transform.position;
+        public Vector2 StartPosition => transform.position;
+        public Vector2 Position => new Vector2(transform.position.x + card.rect.width * 0.55f, Screen.height * 0.5f);
         public Sprite FrontImage => image.sprite;
         public Sprite BackImage => null;
 
         /*******************************************************************/
-        public void SetSelector(string cardId, Sprite cardSprite = null)
-        {
-            Id = cardId;
-            Activate(!IsEmpty);
-            ChangeImage(cardSprite);
-
-            void Activate(bool isOn) => canvas.blocksRaycasts = canvas.interactable = isOn;
-
-            void ChangeImage(Sprite cardSprite)
-            {
-                canvas.alpha = cardSprite == null ? 0 : 1;
-                image.sprite = cardSprite;
-            }
-        }
-
-        public void SetName(string cardName) => this.cardName.text = cardName;
-
-        public void SetQuantity(int amount) => quantity.text = (amount <= 1) ? string.Empty : "x" + amount.ToString();
-
-        public void SetTransform(RectTransform toTransform)
-        {
-            card.SetParent(toTransform, worldPositionStays: false);
-            card.localPosition = Vector3.zero;
-        }
-
-        public Tween ShowAnimation() => DOTween.Sequence()
-            .AppendCallback(() => SelectorTransform.localScale = Vector3.zero)
-            .Append(SelectorTransform.DOScale(1, ViewValues.STANDARD_TIME).SetDelay(ViewValues.STANDARD_TIME));
-
-        public void SetCanBeRemoved(bool canBeRemoved)
-        {
-            background.color = canBeRemoved ? ViewValues.ENABLE_COLOR : ViewValues.DISABLE_COLOR;
-            CanBeRemoved = canBeRemoved;
-        }
-
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             interactableAudio.ClickSound();
@@ -81,7 +47,7 @@ namespace Arkham.Application
             }
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             if (eventData?.dragging ?? false) return;
             HoverOnEffect();
@@ -108,6 +74,37 @@ namespace Arkham.Application
                 ChangeTextColor(Color.white);
                 FillBackground(false);
             }
+        }
+
+        public void SetSelector(string cardId, Sprite cardSprite = null)
+        {
+            Id = cardId;
+            Activate(!IsEmpty);
+            ChangeImage(cardSprite);
+
+            void Activate(bool isOn) => canvas.blocksRaycasts = canvas.interactable = isOn;
+
+            void ChangeImage(Sprite cardSprite)
+            {
+                canvas.alpha = cardSprite == null ? 0 : 1;
+                image.sprite = cardSprite;
+            }
+        }
+
+        public void SetName(string cardName) => this.cardName.text = cardName;
+
+        public void SetQuantity(int amount) => quantity.text = (amount <= 1) ? string.Empty : "x" + amount.ToString();
+
+        public void SetTransform(RectTransform toTransform)
+        {
+            card.SetParent(toTransform, worldPositionStays: false);
+            card.localPosition = Vector3.zero;
+        }
+
+        public void SetCanBeRemoved(bool canBeRemoved)
+        {
+            background.color = canBeRemoved ? ViewValues.ENABLE_COLOR : ViewValues.DISABLE_COLOR;
+            CanBeRemoved = canBeRemoved;
         }
 
         private void ChangeTextColor(Color color)

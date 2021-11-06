@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using Zenject;
 using Sirenix.OdinInspector;
 using DG.Tweening;
 using Arkham.Config;
@@ -9,38 +8,29 @@ namespace Arkham.Application
 {
     public abstract class CardController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler//, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
-        [Inject] private readonly ShowCard showCard;
         [SerializeField, Required] protected CardView cardView;
-        [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio audioInteractable;
+        [SerializeField, Required, ChildGameObjectsOnly] protected InteractableAudio audioInteractable;
 
         /*******************************************************************/
-        protected abstract void Clicked();
+        protected abstract void Clicked(PointerEventData eventData);
 
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
-        {
-            audioInteractable.ClickSound();
-            if (cardView.IsInactive) CantAdd();
-            else Clicked();
-
-            void CantAdd()
-            {
-                DOTween.Complete(gameObject.GetInstanceID());
-                transform.DOPunchPosition(Vector3.right * 20, ViewValues.FAST_TIME, 40, 5).SetId(gameObject.GetInstanceID());
-            }
-        }
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData) => Clicked(eventData);
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             cardView.Glow.DOFade(1, ViewValues.STANDARD_TIME);
             audioInteractable.HoverOnSound();
-            showCard.Set(cardView);
-            showCard.ShowAnimation();
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             cardView.Glow.DOFade(0, ViewValues.STANDARD_TIME);
-            showCard.Hide();
+        }
+
+        protected void CantAdd()
+        {
+            DOTween.Complete(gameObject.GetInstanceID());
+            transform.DOPunchPosition(Vector3.right * 20, ViewValues.FAST_TIME, 40, 5).SetId(gameObject.GetInstanceID());
         }
 
         //void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)

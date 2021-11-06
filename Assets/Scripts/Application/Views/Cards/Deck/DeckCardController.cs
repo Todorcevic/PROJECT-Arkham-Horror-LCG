@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using UnityEngine.EventSystems;
+using Zenject;
 
 namespace Arkham.Application
 {
@@ -8,8 +9,11 @@ namespace Arkham.Application
         [Inject] private readonly AddCardUseCase addCardUseCase;
 
         /*******************************************************************/
-        protected override void Clicked() =>
-            addCardUseCase.AddCard(cardView.Id, investigatorSelectorManager.CurrentInvestigatorId);
-
+        protected override void Clicked(PointerEventData eventData)
+        {
+            audioInteractable.ClickSound();
+            if (cardView.IsInactive) CantAdd();
+            else addCardUseCase.AddCard(cardView.Id, investigatorSelectorManager.CurrentInvestigatorId);
+        }
     }
 }

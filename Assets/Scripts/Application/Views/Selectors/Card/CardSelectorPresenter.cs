@@ -40,7 +40,6 @@ namespace Arkham.Application
                 selector.SetName(cardRow.Name);
                 selector.SetTransform(placeHolderZone);
                 LayoutRebuilder.ForceRebuildLayoutImmediate(placeHolderZone);
-                selector.ShowAnimation();
             }
         }
 

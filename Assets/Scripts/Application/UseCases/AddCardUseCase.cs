@@ -16,7 +16,7 @@ namespace Arkham.Application
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly UpdateXpUseCase updateXpUseCase;
-        [Inject] private readonly ShowCard showCard;
+        [Inject] private readonly MultiAnimator multiAnimator;
         [Inject(Id = "CardsSelector")] private readonly ScrollRect cardSelectorScroll;
 
         /*******************************************************************/
@@ -34,8 +34,7 @@ namespace Arkham.Application
         private void UpdateView(Card card, Investigator investigator)
         {
             CardSelectorView selector = cardSelector.SetCardInSelector(card, investigator);
-            cardSelectorScroll.AutoFocus(selector.SelectorTransform, out Vector2 selectorFinalPosition);
-            showCard.MoveAnimation(selectorFinalPosition);
+            multiAnimator.AddCard(selector, card.Id);
             cardSelector.SetCanBeRemovedInSelectors(investigator.Id);
             deckCardPresenter.RefreshCardsSelectability();
             deckCardPresenter.SetQuantity(card);

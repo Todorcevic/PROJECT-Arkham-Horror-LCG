@@ -9,24 +9,27 @@ namespace Arkham.Application
 {
     public class ShowCard : MonoBehaviour
     {
+        private IShowable showableCard;
         private const float SCALE = 1.6f;
         private const float DRAG_SCALE = 0.6f;
-        private IShowable showableCard;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image frontImage;
         [SerializeField, Required, ChildGameObjectsOnly] private Image backImage;
 
-        public bool IsMoving => DOTween.IsTweening(MoveTweenId);
-        public bool IsShowing => DOTween.IsTweening(ShowTweenId);
         private static string ShowTweenId => "Show";
         private static string MoveTweenId => "Move";
-        private Vector2 ShowCardPosition => new Vector2(showableCard.Position.x > Screen.width * 0.5f ? showableCard.Position.x - 175 : showableCard.Position.x + 175, Screen.height * 0.5f);
+        public bool IsShowing => showableCard != null;
 
         /*******************************************************************/
+        public void Set()
+        {
+            if (!IsShowing) Set(showableCard);
+        }
+
         public void Set(IShowable showableCard)
         {
             this.showableCard = showableCard;
-            transform.position = showableCard.Position;
+            transform.position = showableCard.StartPosition;
             ActiveFrontImage();
             ActiveBackImage();
 
@@ -43,17 +46,17 @@ namespace Arkham.Application
             }
         }
 
+        public Tween ShowAnimation() => DOTween.Sequence()
+            .Append(transform.DOMove(showableCard.Position, ViewValues.STANDARD_TIME))
+            .Join(transform.DOScale(SCALE, ViewValues.STANDARD_TIME))
+            .SetDelay(MoveTimeLeft(), true).SetId(ShowTweenId);
+
         public void Hide()
         {
             DOTween.Kill(ShowTweenId);
             transform.localScale = Vector2.zero;
             showableCard = null;
         }
-
-        public Tween ShowAnimation() => DOTween.Sequence()
-            .Append(transform.DOMove(ShowCardPosition, ViewValues.STANDARD_TIME))
-            .Join(transform.DOScale(SCALE, ViewValues.STANDARD_TIME))
-            .SetDelay(MoveTimeLeft(), true).SetId(ShowTweenId);
 
         public static float MoveTimeLeft()
         {
@@ -64,16 +67,7 @@ namespace Arkham.Application
         public Tween MoveAnimation(Vector2 positionToMove) => DOTween.Sequence()
             .Append(transform.DOMove(positionToMove, ViewValues.STANDARD_TIME))
             .Join(transform.DOScale(0, ViewValues.STANDARD_TIME))
-            .OnComplete(ReShow)
-            .SetId(MoveTweenId);
-
-        private void ReShow()
-        {
-            DOTween.Complete(MoveTweenId);
-            if (showableCard == null) return;
-            Set(showableCard);
-            ShowAnimation();
-        }
+            .OnComplete(Hide).SetId(MoveTweenId);
 
         public void Dragging()
         {

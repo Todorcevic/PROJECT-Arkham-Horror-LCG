@@ -30,7 +30,8 @@ namespace Arkham.Application
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            SwitchAnimation();
+            interactableAudio.ClickSound();
+            SwitchAnimation(!IsOn);
             ClickAction?.Invoke();
         }
 
@@ -47,12 +48,6 @@ namespace Arkham.Application
             interactableAudio.HoverOffSound();
             title.fontStyle = FontStyles.Normal;
             button.transform.DOScale(1f, TIME_HOVER);
-        }
-
-        public void SwitchAnimation()
-        {
-            interactableAudio.ClickSound();
-            SwitchAnimation(!IsOn);
         }
 
         public void SwitchAnimation(bool isOn)

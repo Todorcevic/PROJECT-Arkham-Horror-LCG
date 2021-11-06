@@ -12,18 +12,19 @@ namespace Arkham.Application
     public class ButtonIcon : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private bool isInactive;
+        private const float SCALE = 1.1f;
         public event Action<PointerEventData> ClickAction;
         public event Action<PointerEventData> EnterAction;
         public event Action<PointerEventData> ExitAction;
         [Title("RESOURCES")]
         [SerializeField, Required] private InteractableAudio interactableAudio;
-        [SerializeField, Required] private Image glow;
-        [SerializeField, Required] private TextMeshProUGUI text;
+        [SerializeField] private Image glow;
+        [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private CanvasGroup canvas;
         [Title("SETTINGS")]
-        [SerializeField, Range(1f, 2f)] private float scaleAnimation;
         [SerializeField] private string textToShow;
         [SerializeField] private bool clickSound;
+        [SerializeField] private bool customHover;
 
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
@@ -36,14 +37,14 @@ namespace Arkham.Application
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             if (eventData.dragging) return;
-            HoverOnEffect();
+            if (!customHover) HoverOnEffect();
             EnterAction?.Invoke(eventData);
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             if (eventData.dragging) return;
-            HoverOffEffect();
+            if (!customHover) HoverOffEffect();
             ExitAction?.Invoke(eventData);
         }
 
@@ -63,17 +64,17 @@ namespace Arkham.Application
         private void HoverOnEffect()
         {
             interactableAudio.HoverOnSound();
-            glow.DOFillAmount(1, ViewValues.STANDARD_TIME);
-            text.DOText(textToShow, ViewValues.STANDARD_TIME);
-            transform.DOScale(scaleAnimation, ViewValues.STANDARD_TIME);
+            glow.DOFillAmount(1, ViewValues.FAST_TIME);
+            text.DOText(textToShow, ViewValues.FAST_TIME);
+            transform.DOScale(SCALE, ViewValues.FAST_TIME);
         }
 
         private void HoverOffEffect()
         {
             interactableAudio.HoverOffSound();
-            glow.DOFillAmount(0, ViewValues.STANDARD_TIME);
-            text.DOText(string.Empty, ViewValues.STANDARD_TIME);
-            transform.DOScale(1f, ViewValues.STANDARD_TIME);
+            glow.DOFillAmount(0, ViewValues.FAST_TIME);
+            text.DOText(string.Empty, ViewValues.FAST_TIME);
+            transform.DOScale(1f, ViewValues.FAST_TIME);
         }
 
         private void CantAdd()
