@@ -10,23 +10,23 @@ namespace Arkham.Application
     public class ButtonShow : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         private const float SCALE = 1.1f;
-        [Inject] protected readonly ShowCard showCard;
+        [Inject] private readonly ShowCard showCard;
         [SerializeField, Required] private CardView cardView;
-        [SerializeField, Required] protected InteractableAudio audioInteractable;
+        [SerializeField, Required] private InteractableAudio audioInteractable;
 
         /*******************************************************************/
-        public void OnPointerEnter(PointerEventData eventData)
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            if (eventData.pointerDrag) return;
+            if (eventData.pointerDrag || showCard.IsMoving || showCard.IsShow) return;
             showCard.Set(cardView);
             showCard.ShowAnimation();
             audioInteractable.HoverOnSound();
             transform.DOScale(SCALE, ViewValues.FAST_TIME);
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            if (eventData.pointerDrag) return;
+            //if (eventData.pointerDrag) return;
             showCard.Hide();
             audioInteractable.HoverOffSound();
             transform.DOScale(1f, ViewValues.FAST_TIME);

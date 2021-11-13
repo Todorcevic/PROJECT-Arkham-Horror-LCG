@@ -49,7 +49,8 @@ namespace Arkham.Application
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            if (eventData?.dragging ?? false) return;
+            if ((eventData?.dragging ?? false)) return;
+
             HoverOnEffect();
             showCard.Set(this);
             showCard.ShowAnimation();

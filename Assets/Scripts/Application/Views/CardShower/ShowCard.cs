@@ -18,18 +18,20 @@ namespace Arkham.Application
 
         private static string ShowTweenId => "Show";
         private static string MoveTweenId => "Move";
-        public bool IsShowing => showableCard != null;
+        public bool IsShow => showableCard != null;
+        public bool IsMoving => DOTween.IsTweening(MoveTweenId);
 
         /*******************************************************************/
         public void Set()
         {
-            if (!IsShowing) Set(showableCard);
+            if (!IsShow) Set(showableCard);
         }
 
-        public void Set(IShowable showableCard)
+        public void Set(IShowable showableCard, bool withBack = true)
         {
             this.showableCard = showableCard;
             transform.position = showableCard.StartPosition;
+
             ActiveFrontImage();
             ActiveBackImage();
 
@@ -41,15 +43,21 @@ namespace Arkham.Application
 
             void ActiveBackImage()
             {
-                backImage.gameObject.SetActive(showableCard.BackImage != null);
+                backImage.gameObject.SetActive(withBack && showableCard.BackImage != null);
                 backImage.sprite = showableCard.BackImage;
             }
         }
 
         public Tween ShowAnimation() => DOTween.Sequence()
+            .Prepend(transform.DOMove(showableCard.StartPosition, 0))
             .Append(transform.DOMove(showableCard.Position, ViewValues.STANDARD_TIME))
             .Join(transform.DOScale(SCALE, ViewValues.STANDARD_TIME))
             .SetDelay(MoveTimeLeft(), true).SetId(ShowTweenId);
+
+        public Tween MoveAnimation(Vector2 positionToMove) => DOTween.Sequence()
+            .Append(transform.DOMove(positionToMove, ViewValues.STANDARD_TIME).SetSpeedBased(true))
+            .Join(transform.DOScale(0, ViewValues.STANDARD_TIME).SetSpeedBased(true))
+            .OnComplete(Hide).SetId(MoveTweenId);
 
         public void Hide()
         {
@@ -63,11 +71,6 @@ namespace Arkham.Application
             Tween move = DOTween.TweensById(MoveTweenId)?.FirstOrDefault();
             return move?.Duration() - move?.Elapsed() ?? 0;
         }
-
-        public Tween MoveAnimation(Vector2 positionToMove) => DOTween.Sequence()
-            .Append(transform.DOMove(positionToMove, ViewValues.STANDARD_TIME))
-            .Join(transform.DOScale(0, ViewValues.STANDARD_TIME))
-            .OnComplete(Hide).SetId(MoveTweenId);
 
         public void Dragging()
         {

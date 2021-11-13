@@ -56,8 +56,6 @@ namespace Arkham.Application
             HoverActivate(false);
         }
 
-        //public void AddClickAction(Action action) => ClickAction += action;
-
         private void HoverActivate(bool isOn)
         {
             ChangeTextColor(isOn ? Color.black : Color.white);

@@ -76,8 +76,6 @@ namespace Arkham.Application
             }
         }
 
-        public void SelectInvestigator(string activeInvestigatorId) => investigatorSelectorsManager.SelectInvestigator(activeInvestigatorId);
-
         private void SetThisSelectorWithThisInvestigator(InvestigatorSelectorView selector, string investigatorId)
         {
             Sprite spriteCard = cardsManager.GetSpriteCard(investigatorId);

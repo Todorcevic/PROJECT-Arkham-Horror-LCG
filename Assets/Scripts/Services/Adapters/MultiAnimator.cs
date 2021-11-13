@@ -17,30 +17,27 @@ namespace Arkham.Services
         /*******************************************************************/
         public void AddInvestigator(InvestigatorSelectorView selector, string investigatorId)
         {
-            Sequence sequence = DOTween.Sequence().Append(showCard.MoveAnimation(selector.PlaceHolderPosition))
-                .Append(selector.SetImageAnimation());
-
-            if (!showCard.IsShowing)
+            if (!showCard.IsShow)
             {
                 CardView cardView = cardManager.GetInvestigatorCard(investigatorId);
-                showCard.Set(cardView);
-                sequence.Prepend(showCard.transform.DOScale(1, ViewValues.FAST_TIME));
-            }
-            sequence.Play();
+                showCard.Set(cardView, withBack: false);
+                showCard.transform.localScale = Vector3.one;
+            };
+            DOTween.Sequence().Append(showCard.MoveAnimation(selector.PlaceHolderPosition))
+                .Append(selector.SetImageAnimation());
         }
 
         public void AddCard(CardSelectorView selector, string cardId)
         {
             cardSelectorScroll.AutoFocus(selector.SelectorTransform, out Vector2 selectorFinalPosition);
-            Sequence sequence = DOTween.Sequence().Append(showCard.MoveAnimation(selectorFinalPosition));
 
-            if (!showCard.IsShowing)
+            if (!showCard.IsShow)
             {
                 CardView cardView = cardManager.GetDeckCard(cardId);
                 showCard.Set(cardView);
-                sequence.Prepend(showCard.transform.DOScale(1, ViewValues.FAST_TIME));
+                showCard.transform.localScale = Vector3.one;
             }
-            sequence.Play();
+            showCard.MoveAnimation(selectorFinalPosition);
         }
 
         public void RemoveCard(string cardId)
@@ -50,7 +47,7 @@ namespace Arkham.Services
 
             void ReShow()
             {
-                if (!showCard.IsShowing) return;
+                if (!showCard.IsShow) return;
                 showCard.Set();
                 showCard.ShowAnimation();
             }
