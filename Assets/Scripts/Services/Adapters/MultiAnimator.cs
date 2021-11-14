@@ -17,26 +17,18 @@ namespace Arkham.Services
         /*******************************************************************/
         public void AddInvestigator(InvestigatorSelectorView selector, string investigatorId)
         {
-            if (!showCard.IsShow)
-            {
-                CardView cardView = cardManager.GetInvestigatorCard(investigatorId);
-                showCard.Set(cardView, withBack: false);
-                showCard.transform.localScale = Vector3.one;
-            };
-            DOTween.Sequence().Append(showCard.MoveAnimation(selector.PlaceHolderPosition))
-                .Append(selector.SetImageAnimation());
+            CardView cardView = cardManager.GetInvestigatorCard(investigatorId);
+            showCard.Set(cardView, withBack: false);
+            showCard.transform.localScale = Vector3.one;
+            showCard.MoveAnimation(selector.PlaceHolderPosition).OnComplete(() => selector.SetImageAnimation());
         }
 
         public void AddCard(CardSelectorView selector, string cardId)
         {
             cardSelectorScroll.AutoFocus(selector.SelectorTransform, out Vector2 selectorFinalPosition);
-
-            if (!showCard.IsShow)
-            {
-                CardView cardView = cardManager.GetDeckCard(cardId);
-                showCard.Set(cardView);
-                showCard.transform.localScale = Vector3.one;
-            }
+            CardView cardView = cardManager.GetDeckCard(cardId);
+            showCard.Set(cardView);
+            showCard.transform.localScale = Vector3.one;
             showCard.MoveAnimation(selectorFinalPosition);
         }
 

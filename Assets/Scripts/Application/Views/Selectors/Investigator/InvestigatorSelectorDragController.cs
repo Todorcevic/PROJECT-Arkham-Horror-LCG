@@ -41,7 +41,6 @@ namespace Arkham.Application
 
             void HoverEnter()
             {
-                //if (eventData.dragging || DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION) || (cardShowerPresenter.LastShowCard?.IsMoving ?? true)) return;
                 audioInteractable.HoverOnSound();
                 Card.DOScale(SCALE_HOVER, ViewValues.STANDARD_TIME);
             }
@@ -76,14 +75,6 @@ namespace Arkham.Application
             EndDragEffect();
             if (eventData.hovered.Contains(removeZone.gameObject)) removeInvestigatorUseCase.Remove(Id);
             else Card.DOMove(transform.position, ViewValues.STANDARD_TIME);
-
-            //cardShowerPresenter.LastShowCard?.MoveAnimation(transform.position).OnComplete(ReShow);
-
-            //void ReShow()
-            //{
-            //    CardView cardView = eventData.hovered.Find(gameObject => gameObject.GetComponent<CardView>())?.GetComponent<CardView>();
-            //    //if (cardView != null) cardView.OnPointerEnter(null);
-            //}
 
             void EndDragEffect()
             {

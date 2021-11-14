@@ -6,7 +6,7 @@ using Arkham.Config;
 
 namespace Arkham.Application
 {
-    public abstract class CardController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler//, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+    public abstract class CardController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField, Required] protected CardView cardView;
         [SerializeField, Required, ChildGameObjectsOnly] protected InteractableAudio audioInteractable;
@@ -32,27 +32,5 @@ namespace Arkham.Application
             DOTween.Complete(gameObject.GetInstanceID());
             transform.DOPunchPosition(Vector3.right * 20, ViewValues.FAST_TIME, 40, 5).SetId(gameObject.GetInstanceID());
         }
-
-        //void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //void IDragHandler.OnDrag(PointerEventData eventData)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //void IDropHandler.OnDrop(PointerEventData eventData)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //void IEndDragHandler.OnEndDrag(PointerEventData eventData)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
     }
 }

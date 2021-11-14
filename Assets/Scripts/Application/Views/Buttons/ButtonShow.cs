@@ -26,7 +26,6 @@ namespace Arkham.Application
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            //if (eventData.pointerDrag) return;
             showCard.Hide();
             audioInteractable.HoverOffSound();
             transform.DOScale(1f, ViewValues.FAST_TIME);
