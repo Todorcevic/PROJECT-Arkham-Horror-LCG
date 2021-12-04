@@ -14,7 +14,7 @@ namespace Arkham.Application
         private Tween cantComplete;
         [Inject] private readonly RemoveCardUseCase removeCardUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
-        [Inject] private readonly ShowCard showCard;
+        [Inject] private readonly CardShower cardShower;
         [Title("RESOURCES")]
         [SerializeField, Required] private RectTransform card;
         [SerializeField, Required] private InteractableAudio interactableAudio;
@@ -29,7 +29,7 @@ namespace Arkham.Application
         public Transform SelectorTransform => canvas.transform;
         private bool CanBeRemoved { get; set; }
         public Vector2 StartPosition => transform.position;
-        public Vector2 Position => new Vector2(transform.position.x + card.rect.width * 0.55f, Screen.height * 0.5f);
+        public Vector2 ShowPosition => new Vector2(transform.position.x + card.rect.width * 0.55f, Screen.height * 0.5f);
         public Sprite FrontImage => image.sprite;
         public Sprite BackImage => null;
 
@@ -52,8 +52,7 @@ namespace Arkham.Application
             if ((eventData?.dragging ?? false)) return;
 
             HoverOnEffect();
-            showCard.Set(this);
-            showCard.ShowAnimation();
+            cardShower.AddShowableAndShow(this);
 
             void HoverOnEffect()
             {
@@ -67,7 +66,7 @@ namespace Arkham.Application
         {
             if (eventData.dragging) return;
             HoverOffEffect();
-            showCard.Hide();
+            cardShower.RemoveShowableAndHide();
 
             void HoverOffEffect()
             {

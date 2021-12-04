@@ -3,11 +3,13 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using DG.Tweening;
 using Arkham.Config;
+using Zenject;
 
 namespace Arkham.Application
 {
     public abstract class CardController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        [Inject] private readonly CardShower cardShower;
         [SerializeField, Required] protected CardView cardView;
         [SerializeField, Required, ChildGameObjectsOnly] protected InteractableAudio audioInteractable;
 
@@ -20,11 +22,13 @@ namespace Arkham.Application
         {
             cardView.Glow.DOFade(1, ViewValues.STANDARD_TIME);
             audioInteractable.HoverOnSound();
+            cardShower.AddShowableAndShow(cardView);
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             cardView.Glow.DOFade(0, ViewValues.STANDARD_TIME);
+            cardShower.RemoveShowableAndHide();
         }
 
         protected void CantAdd()

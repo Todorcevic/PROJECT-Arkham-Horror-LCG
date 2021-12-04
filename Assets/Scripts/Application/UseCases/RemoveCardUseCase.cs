@@ -30,9 +30,9 @@ namespace Arkham.Application
 
         private void UpdateView(Card card, Investigator investigator)
         {
+            multiAnimator.RemoveCard(card.Id);
             cardSelector.SetCardInSelector(card, investigator);
             cardSelector.SetCanBeRemovedInSelectors(investigator.Id);
-            multiAnimator.RemoveCard(card.Id);
             deckCardPresenter.RefreshCardsSelectability();
             deckCardPresenter.SetQuantity(card);
             cardQuantity.Refresh(investigator);

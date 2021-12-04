@@ -81,8 +81,7 @@ namespace Arkham.Application
 
         public Tween SetImageAnimation() => DOTween.Sequence()
             .PrependCallback(PosicionateCardOff)
-            .Append(CardVisual.DOScale(1, ViewValues.STANDARD_TIME))
-            .SetDelay(ShowCard.MoveTimeLeft(), true);
+            .Append(CardVisual.DOScale(1, ViewValues.STANDARD_TIME));
 
         public Tween RemoveAnimation() => DOTween.Sequence()
             .Join(CardVisual.DOMove(PlaceHolder.position, ViewValues.STANDARD_TIME * 4).SetSpeedBased())

@@ -19,7 +19,7 @@ namespace Arkham.Application
         public string Id { get; private set; }
         public CanvasGroup Glow => canvasGlow;
         public Vector2 StartPosition => transform.position;
-        public Vector2 Position
+        public Vector2 ShowPosition
         {
             get
             {
