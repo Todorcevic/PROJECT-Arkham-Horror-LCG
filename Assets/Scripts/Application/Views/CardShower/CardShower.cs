@@ -63,8 +63,8 @@ namespace Arkham.Application
             DOTween.Kill(MoveTweenId);
             if (isShow)
             {
-                DOTween.Sequence().Append(transform.DOMove(positionToMove, ViewValues.STANDARD_TIME).SetSpeedBased(true))
-                .Join(transform.DOScale(0, ViewValues.STANDARD_TIME).SetSpeedBased(true))
+                DOTween.Sequence().Append(transform.DOMove(positionToMove, ViewValues.STANDARD_TIME))
+                .Join(transform.DOScale(0, ViewValues.STANDARD_TIME))
                 .OnComplete(CheckShowableCard).SetId(MoveTweenId);
             }
             else
@@ -73,8 +73,8 @@ namespace Arkham.Application
                 DOTween.Sequence()
                 .Append(transform.DOMove(showableCard.ShowPosition, ViewValues.STANDARD_TIME))
                 .Join(transform.DOScale(SCALE, ViewValues.STANDARD_TIME))
-                .Append(transform.DOMove(positionToMove, ViewValues.STANDARD_TIME).SetSpeedBased(true))
-                .Join(transform.DOScale(0, ViewValues.STANDARD_TIME).SetSpeedBased(true))
+                .Append(transform.DOMove(positionToMove, ViewValues.STANDARD_TIME))
+                .Join(transform.DOScale(0, ViewValues.STANDARD_TIME))
                 .OnComplete(CheckShowableCard).SetId(MoveTweenId);
             }
 
