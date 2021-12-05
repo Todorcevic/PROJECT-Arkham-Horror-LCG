@@ -1,105 +1,38 @@
-using Arkham.Config;
-using DG.Tweening;
 using Sirenix.OdinInspector;
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Arkham.Application
 {
     public class CardShower : MonoBehaviour
     {
-        private bool isShow;
-        private IShowable showableCard;
-        private const float SCALE = 1.6f;
-        private const float DRAG_SCALE = 0.6f;
-        private const string ShowTweenId = "Show";
-        private const string MoveTweenId = "Move";
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private Image frontImage;
-        [SerializeField, Required, ChildGameObjectsOnly] private Image backImage;
+        [SerializeField, Required, ChildGameObjectsOnly] private List<ShowCard> showCards;
 
         /*******************************************************************/
-        public void AddShowableAndShow(IShowable currentShowableCard)
+        public void AddShowableAndShow(IShowable showableCard)
         {
-            showableCard = currentShowableCard;
-            CheckShowableCard();
+            ShowCard showCard = GetFreeShowCard();
+            showCard.SetShowableCard(showableCard);
+            showCard.ShowAnimation(showableCard.ShowPosition);
         }
 
-        public void RemoveShowableAndHide()
+        public void RemoveShowableAndHide(IShowable showableCar)
         {
-            showableCard = null;
-            Hide();
+            ShowCard showCard = GetThisShowCard(showableCar);
+            showCard.Clean();
+            showCard.Hide();
         }
 
-        private void CheckShowableCard()
+        public void Move(IShowable showableCard, Vector2 positionToMove)
         {
-            if (showableCard == null) return;
-            if (DOTween.IsTweening(MoveTweenId)) return;
-            if (isShow) return;
-            PrepareShowableCard();
-            Show();
+            ShowCard showCard = GetThisShowCard(showableCard);
+            if (showCard.IsShowing) AddShowableAndShow(showableCard);
+            showCard.Clean();
+            showCard.MoveAnimation(positionToMove);
         }
 
-        private void Show()
-        {
-            DOTween.Sequence()
-           .Append(transform.DOMove(showableCard.ShowPosition, ViewValues.STANDARD_TIME))
-           .Join(transform.DOScale(SCALE, ViewValues.STANDARD_TIME))
-           .SetId(ShowTweenId);
-            isShow = true;
-        }
-
-        private void Hide()
-        {
-            if (DOTween.IsTweening(MoveTweenId)) return;
-            DOTween.Kill(ShowTweenId);
-            transform.localScale = Vector2.zero;
-            isShow = false;
-        }
-
-        public void Move(Vector2 positionToMove)
-        {
-            DOTween.Kill(MoveTweenId);
-            if (isShow)
-            {
-                DOTween.Sequence().Append(transform.DOMove(positionToMove, ViewValues.STANDARD_TIME))
-                .Join(transform.DOScale(0, ViewValues.STANDARD_TIME))
-                .OnComplete(CheckShowableCard).SetId(MoveTweenId);
-            }
-            else
-            {
-                PrepareShowableCard();
-                DOTween.Sequence()
-                .Append(transform.DOMove(showableCard.ShowPosition, ViewValues.STANDARD_TIME))
-                .Join(transform.DOScale(SCALE, ViewValues.STANDARD_TIME))
-                .Append(transform.DOMove(positionToMove, ViewValues.STANDARD_TIME))
-                .Join(transform.DOScale(0, ViewValues.STANDARD_TIME))
-                .OnComplete(CheckShowableCard).SetId(MoveTweenId);
-            }
-
-            isShow = false;
-        }
-
-        private void PrepareShowableCard()
-        {
-            transform.localScale = Vector3.zero;
-            transform.position = showableCard.StartPosition;
-            if (frontImage.sprite != showableCard.FrontImage) ActiveFrontImage();
-            if (backImage.sprite != showableCard.BackImage) ActiveBackImage();
-
-            void ActiveFrontImage()
-            {
-                frontImage.gameObject.SetActive(showableCard.FrontImage != null);
-                frontImage.sprite = showableCard.FrontImage;
-            }
-
-            void ActiveBackImage()
-            {
-                bool withBack = backImage.sprite != null;
-                backImage.gameObject.SetActive(withBack && showableCard.BackImage != null);
-                backImage.sprite = showableCard.BackImage;
-            }
-        }
+        private ShowCard GetFreeShowCard() => showCards.Find(showCard => !showCard.IsShowing && !showCard.IsMoving);
+        private ShowCard GetThisShowCard(IShowable showable) => showCards.Find(showCard => showCard.ShowableCard == showable);
     }
 }

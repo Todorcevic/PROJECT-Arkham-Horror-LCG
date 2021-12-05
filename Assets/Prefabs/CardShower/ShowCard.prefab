@@ -10,10 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6242000737049106309}
   - component: {fileID: 6242000737049106315}
-  - component: {fileID: 8242097868142664430}
   - component: {fileID: 6242000737049106308}
   - component: {fileID: 6242000737049106314}
-  - component: {fileID: 5765660689500243053}
+  - component: {fileID: 8745368688522076915}
   m_Layer: 5
   m_Name: ShowCard
   m_TagString: Untagged
@@ -50,20 +49,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6242000737049106310}
   m_CullTransparentMesh: 0
---- !u!114 &8242097868142664430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6242000737049106310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4492c3852c0f3d44fa60f4bfb01427d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frontImage: {fileID: 6242000737230218484}
-  backImage: {fileID: 6242000737664078058}
 --- !u!114 &6242000737049106308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +96,7 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 3
   m_TargetDisplay: 0
---- !u!114 &5765660689500243053
+--- !u!114 &8745368688522076915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,15 +105,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6242000737049106310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Script: {fileID: 11500000, guid: c9652695590514f42823fe504c1adda6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 8242097868142664430}
-  _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 0
+  frontImage: {fileID: 6242000737230218484}
+  backImage: {fileID: 6242000737664078058}
 --- !u!1 &6242000737230218486
 GameObject:
   m_ObjectHideFlags: 0

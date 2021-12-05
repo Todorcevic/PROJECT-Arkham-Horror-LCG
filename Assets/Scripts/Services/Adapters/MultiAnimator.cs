@@ -10,26 +10,30 @@ namespace Arkham.Services
     {
         [Inject] private readonly CardShower cardShower;
         [Inject] private readonly CardsManager cardManager;
+        [Inject] private readonly CardSelectorsManager cardSelectorManager;
         [Inject(Id = "CardsSelector")] private readonly ScrollRect cardSelectorScroll;
         [Inject(Id = "MidZone")] private readonly ScrollRect cardsScroll;
 
         /*******************************************************************/
         public void AddInvestigator(InvestigatorSelectorView selector, string investigatorId)
         {
-            cardShower.Move(selector.PlaceHolderPosition);
+            IShowable showablewCard = cardManager.GetInvestigatorCard(investigatorId);
+            cardShower.Move(showablewCard, selector.PlaceHolderPosition);
             selector.SetImageAnimation();
         }
 
         public void AddCard(CardSelectorView selector, string cardId)
         {
             cardSelectorScroll.AutoFocus(selector.SelectorTransform, out Vector2 selectorFinalPosition);
-            cardShower.Move(selectorFinalPosition);
+            IShowable showablewCard = cardManager.GetDeckCard(cardId);
+            cardShower.Move(showablewCard, selectorFinalPosition);
         }
 
         public void RemoveCard(string cardId)
         {
             cardsScroll.AutoFocus(cardManager.GetDeckCard(cardId).transform, out Vector2 cardPosition);
-            cardShower.Move(cardPosition);
+            IShowable showablewCard = cardSelectorManager.GetSelectorByCardIdOrEmpty(cardId);
+            cardShower.Move(showablewCard, cardPosition);
         }
     }
 }

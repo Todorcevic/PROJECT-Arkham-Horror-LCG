@@ -11,6 +11,7 @@ namespace Arkham.Application
 {
     public class CardSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IShowable
     {
+        private const float positionThreshold = 0.6f;
         private Tween cantComplete;
         [Inject] private readonly RemoveCardUseCase removeCardUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
@@ -29,7 +30,7 @@ namespace Arkham.Application
         public Transform SelectorTransform => canvas.transform;
         private bool CanBeRemoved { get; set; }
         public Vector2 StartPosition => transform.position;
-        public Vector2 ShowPosition => new Vector2(transform.position.x + card.rect.width * 0.55f, Screen.height * 0.5f);
+        public Vector2 ShowPosition => new Vector2(transform.position.x + card.rect.width * positionThreshold, Screen.height * 0.5f);
         public Sprite FrontImage => image.sprite;
         public Sprite BackImage => null;
 
@@ -49,8 +50,7 @@ namespace Arkham.Application
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            if ((eventData?.dragging ?? false)) return;
-
+            if (eventData.dragging) return;
             HoverOnEffect();
             cardShower.AddShowableAndShow(this);
 
@@ -66,7 +66,7 @@ namespace Arkham.Application
         {
             if (eventData.dragging) return;
             HoverOffEffect();
-            cardShower.RemoveShowableAndHide();
+            cardShower.RemoveShowableAndHide(this);
 
             void HoverOffEffect()
             {

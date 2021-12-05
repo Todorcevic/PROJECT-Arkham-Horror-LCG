@@ -20,6 +20,7 @@ namespace Arkham.Application
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
+            if (eventData.dragging) return;
             cardView.Glow.DOFade(1, ViewValues.STANDARD_TIME);
             audioInteractable.HoverOnSound();
             cardShower.AddShowableAndShow(cardView);
@@ -27,8 +28,9 @@ namespace Arkham.Application
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
+            if (eventData.dragging) return;
             cardView.Glow.DOFade(0, ViewValues.STANDARD_TIME);
-            cardShower.RemoveShowableAndHide();
+            cardShower.RemoveShowableAndHide(cardView);
         }
 
         protected void CantAdd()
