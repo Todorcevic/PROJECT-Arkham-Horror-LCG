@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &403525839284536559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 761330007542133724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daa0c013aabbbe146971c45028770d6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leader: {fileID: 7265454255991843019}
-  dragController: {fileID: 3183701225739591869}
 --- !u!1 &2588791632986258448
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +133,6 @@ MonoBehaviour:
   dragSensor: {fileID: 3183701225739591869}
   canvasSensor: {fileID: 4453454765105130133}
   leaderIcon: {fileID: 8165776995303661140}
-  timeAnimation: 0.25
 --- !u!114 &8081987424911631509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,9 +383,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasCard: {fileID: 6507702765034026266}
   audioInteractable: {fileID: 1385225813015163964}
-  timeHoverAnimation: 0.25
-  scaleHoverEffect: 1.1
-  leaderIcon: {fileID: 7265454255991843019}
 --- !u!222 &34041437426948442
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -591,6 +573,18 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4329434936648613502, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329434936648613502, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329434936648613502, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329434936648613502, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: m_IgnoreParentGroups
       value: 1
       objectReference: {fileID: 0}
@@ -680,6 +674,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &403525839284536559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761330007542133724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa0c013aabbbe146971c45028770d6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leader: {fileID: 7265454255991843019}
+  dragController: {fileID: 3183701225739591869}
 --- !u!1001 &8610192574271832416
 PrefabInstance:
   m_ObjectHideFlags: 0

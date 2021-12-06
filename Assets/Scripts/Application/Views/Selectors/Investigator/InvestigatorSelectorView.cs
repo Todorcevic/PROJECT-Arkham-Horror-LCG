@@ -84,11 +84,11 @@ namespace Arkham.Application
             .Append(CardVisual.DOScale(1, ViewValues.STANDARD_TIME));
 
         public Tween RemoveAnimation() => DOTween.Sequence()
-            .Join(CardVisual.DOMove(PlaceHolder.position, ViewValues.STANDARD_TIME * 4).SetSpeedBased())
+            .Join(CardVisual.DOMove(PlaceHolder.position, ViewValues.STANDARD_TIME))
             .Join(CardVisual.DOScale(0, ViewValues.STANDARD_TIME)).SetId(REMOVE_ANIMATION);
 
         public void ArrangeAnimation() => CardVisual.DOMove(PlaceHolder.position, ViewValues.STANDARD_TIME);
 
-        private void Activate(bool isOn) => canvasSensor.blocksRaycasts = canvasSensor.interactable = isOn;
+        public void Activate(bool isOn) => canvasSensor.blocksRaycasts = canvasSensor.interactable = isOn;
     }
 }

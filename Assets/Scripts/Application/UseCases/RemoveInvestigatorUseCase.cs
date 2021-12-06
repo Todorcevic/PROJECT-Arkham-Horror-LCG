@@ -29,8 +29,8 @@ namespace Arkham.Application
         private void UpdateView(string investigatorId)
         {
             investigatorVisibility.RefreshInvestigatorsSelectability();
-            investigatorSelector.RemoveInvestigator(investigatorId);
             investigatorSelector.SetLeadSelector();
+            investigatorSelector.RemoveInvestigator(investigatorId);     
             readyButton.AutoActivate();
             investigatorsButton.ExecuteClick();
         }

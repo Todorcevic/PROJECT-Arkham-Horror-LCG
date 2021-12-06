@@ -17,6 +17,7 @@ namespace Arkham.Application
         [Inject] private readonly RemoveInvestigatorUseCase removeInvestigatorUseCase;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
         [Inject] private readonly ChangeInvestigatorUseCase investigatorChange;
+        [Inject] private readonly CardShower cardShower;
         [Inject(Id = "MidZone")] private readonly RectTransform removeZone;
         [Title("RESOURCES")]
         [SerializeField, Required] private Canvas canvasCard;
@@ -80,7 +81,7 @@ namespace Arkham.Application
             {
                 canvasCard.sortingOrder = 1;
                 if (eventData.pointerEnter != gameObject)
-                    Card.DOScale(1f, ViewValues.STANDARD_TIME);
+                    Card.DOScale(1f, ViewValues.STANDARD_TIME).SetId("Removed");
             }
         }
     }

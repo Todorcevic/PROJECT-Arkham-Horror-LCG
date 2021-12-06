@@ -52,6 +52,7 @@ namespace Arkham.Application
         {
             InvestigatorSelectorView selector = investigatorSelectorsManager.GetSelectorById(investigatorId);
             selector.SetTransform();
+            selector.Activate(false);
             Animation();
 
             void Animation()

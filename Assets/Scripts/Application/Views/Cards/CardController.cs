@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Arkham.Application
 {
-    public abstract class CardController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public abstract class CardController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
         [Inject] private readonly CardShower cardShower;
         [SerializeField, Required] protected CardView cardView;
@@ -28,9 +28,15 @@ namespace Arkham.Application
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            if (eventData.dragging) return;
             cardView.Glow.DOFade(0, ViewValues.STANDARD_TIME);
             cardShower.RemoveShowableAndHide(cardView);
+        }
+
+        void IDropHandler.OnDrop(PointerEventData eventData)
+        {
+            cardView.Glow.DOFade(1, ViewValues.STANDARD_TIME);
+            audioInteractable.HoverOnSound();
+            cardShower.AddShowableAndShow(cardView);
         }
 
         protected void CantAdd()
