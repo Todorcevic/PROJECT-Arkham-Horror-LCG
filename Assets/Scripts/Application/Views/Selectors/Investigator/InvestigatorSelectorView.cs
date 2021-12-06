@@ -4,12 +4,14 @@ using Sirenix.OdinInspector;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Arkham.Application
 {
     public class InvestigatorSelectorView : MonoBehaviour
     {
-        public const string REMOVE_ANIMATION = "RemoveAnimation";
+        public const string MOVE_ANIMATION = "MoveAnimation";
+        [Inject(Id = "PlaceHoldersZone")] private readonly RectTransform placeHoldersZone;
 
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGlow;
@@ -20,17 +22,17 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private Image leaderIcon;
 
         private Transform CardVisual => canvasImage.transform;
-        private Transform PlaceHolder => dragSensor.transform;
+        private Transform Sensor => dragSensor.transform;
         public InvestigatorSelectorDragController DragSensor => dragSensor;
-        public Vector2 PlaceHolderPosition => PlaceHolder.position;
-        public string Id { get; protected set; }
+        public Vector2 SensorPosition => Sensor.position;
+        public string Id { get; private set; }
         public bool IsLeader => leaderIcon.enabled;
 
         /*******************************************************************/
         public void SetSelector(string cardId, Sprite cardSprite)
         {
             Id = dragSensor.Id = cardId;
-            Activate(true);
+            ActivateSensor(true);
             canvasImage.alpha = 1;
             image.sprite = cardSprite;
         }
@@ -38,57 +40,48 @@ namespace Arkham.Application
         public void EmptySelector()
         {
             Id = null;
-            Activate(false);
             canvasImage.alpha = 0;
             image.sprite = null;
         }
 
-        public void ResetSelector()
+        public void ActivateSensor(bool isOn)
         {
-            EmptySelector();
-            Glow(false);
-            SetTransform();
+            canvasSensor.blocksRaycasts = canvasSensor.interactable = isOn;
+            Sensor.SetParent(isOn ? placeHoldersZone : transform);
+            Sensor.localPosition = Vector3.zero;
         }
 
         public void LeadIcon(bool isOn) => leaderIcon.enabled = isOn;
 
         public void Glow(bool isOn) => canvasGlow.DOFade(isOn ? 1 : 0, ViewValues.STANDARD_TIME);
 
-        public void SetTransform(Transform toTransform = null)
-        {
-            PlaceHolder.SetParent(toTransform ? toTransform : transform, worldPositionStays: false);
-            PlaceHolder.localPosition = Vector3.zero;
-        }
-
         public void PosicionateCardOn()
         {
             CardVisual.localScale = Vector3.one;
-            CardVisual.position = PlaceHolder.position;
+            CardVisual.position = Sensor.position;
         }
 
         public void PosicionateCardOff()
         {
             CardVisual.localScale = Vector3.zero;
-            CardVisual.position = PlaceHolder.position;
+            CardVisual.position = Sensor.position;
         }
 
         public void SwapPlaceHoldersWith(InvestigatorSelectorView otherSelector)
         {
-            int selector1Index = PlaceHolder.GetSiblingIndex();
-            PlaceHolder.SetSiblingIndex(otherSelector.PlaceHolder.GetSiblingIndex());
-            otherSelector.PlaceHolder.SetSiblingIndex(selector1Index);
+            int selector1Index = Sensor.GetSiblingIndex();
+            Sensor.SetSiblingIndex(otherSelector.Sensor.GetSiblingIndex());
+            otherSelector.Sensor.SetSiblingIndex(selector1Index);
         }
 
         public Tween SetImageAnimation() => DOTween.Sequence()
             .PrependCallback(PosicionateCardOff)
-            .Append(CardVisual.DOScale(1, ViewValues.STANDARD_TIME));
+            .Append(CardVisual.DOScale(1, ViewValues.SLOW_TIME));
 
         public Tween RemoveAnimation() => DOTween.Sequence()
-            .Join(CardVisual.DOMove(PlaceHolder.position, ViewValues.STANDARD_TIME * 4).SetSpeedBased())
-            .Join(CardVisual.DOScale(0, ViewValues.STANDARD_TIME)).SetId(REMOVE_ANIMATION);
+            .Join(CardVisual.DOMove(Sensor.position, ViewValues.SLOW_TIME).SetId(MOVE_ANIMATION))
+            .Join(CardVisual.DOScale(0, ViewValues.SLOW_TIME));
 
-        public void ArrangeAnimation() => CardVisual.DOMove(PlaceHolder.position, ViewValues.STANDARD_TIME);
-
-        private void Activate(bool isOn) => canvasSensor.blocksRaycasts = canvasSensor.interactable = isOn;
+        public void ArrangeAnimation() => CardVisual.DOMove(Sensor.position, ViewValues.SLOW_TIME).SetId(MOVE_ANIMATION);
     }
 }

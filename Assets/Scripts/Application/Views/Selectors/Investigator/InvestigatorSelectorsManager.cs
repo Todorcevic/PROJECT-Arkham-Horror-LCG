@@ -19,7 +19,7 @@ namespace Arkham.Application
         /*******************************************************************/
         public InvestigatorSelectorView GetEmptySelector()
         {
-            DOTween.Complete(InvestigatorSelectorView.REMOVE_ANIMATION);
+            //DOTween.Complete(InvestigatorSelectorView.REMOVE_ANIMATION);
             return selectors.Find(selector => selector.Id == null);
         }
 
@@ -28,12 +28,23 @@ namespace Arkham.Application
 
         public void ResetSelectors()
         {
-            selectors.ForEach(selector => selector.ResetSelector());
+            selectors.ForEach(selector => ResetSelector(selector));
             RebuildPlaceHolders();
             selectors.ForEach(selector => selector.PosicionateCardOff());
+
+            void ResetSelector(InvestigatorSelectorView selector)
+            {
+                selector.EmptySelector();
+                selector.ActivateSensor(false);
+                selector.Glow(false);
+            }
         }
 
-        public void ArrangeAllSelectors() => selectors.ForEach(s => s.ArrangeAnimation());
+        public void ArrangeAllSelectors()
+        {
+            RebuildPlaceHolders();
+            selectors.ForEach(s => s.ArrangeAnimation());
+        }
 
         public void RebuildPlaceHolders() => LayoutRebuilder.ForceRebuildLayoutImmediate(placeHoldersZone);
 

@@ -41,6 +41,7 @@ namespace Arkham.Application
 
             void HoverEnter()
             {
+                if (DOTween.IsTweening(InvestigatorSelectorView.MOVE_ANIMATION)) return;
                 audioInteractable.HoverOnSound();
                 Card.DOScale(SCALE_HOVER, ViewValues.STANDARD_TIME);
             }
@@ -56,7 +57,7 @@ namespace Arkham.Application
         public void OnPointerExit(PointerEventData eventData)
         {
             if (eventData.dragging) return;
-            if (DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION)) return;
+            if (DOTween.IsTweening(InvestigatorSelectorView.MOVE_ANIMATION)) return;
             audioInteractable.HoverOffSound();
             Card.DOScale(1f, ViewValues.STANDARD_TIME).SetId(HOVEROFF);
         }
@@ -80,7 +81,7 @@ namespace Arkham.Application
             {
                 canvasCard.sortingOrder = 1;
                 if (eventData.pointerEnter != gameObject)
-                    Card.DOScale(1f, ViewValues.STANDARD_TIME);
+                    Card.DOScale(1f, ViewValues.STANDARD_TIME).SetId("Removed");
             }
         }
     }

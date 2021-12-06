@@ -18,7 +18,7 @@ namespace Arkham.Services
         public void AddInvestigator(InvestigatorSelectorView selector, string investigatorId)
         {
             IShowable showablewCard = cardManager.GetInvestigatorCard(investigatorId);
-            cardShower.Move(showablewCard, selector.PlaceHolderPosition);
+            cardShower.Move(showablewCard, selector.SensorPosition);
             selector.SetImageAnimation();
         }
 

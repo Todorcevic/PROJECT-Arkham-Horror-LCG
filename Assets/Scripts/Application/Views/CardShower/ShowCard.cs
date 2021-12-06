@@ -62,15 +62,15 @@ namespace Arkham.Application
         public void ShowAnimation(Vector3 toPosition)
         {
             DOTween.Sequence()
-               .Append(transform.DOMove(toPosition, ViewValues.STANDARD_TIME))
-               .Join(transform.DOScale(SCALE, ViewValues.STANDARD_TIME))
+               .Append(transform.DOMove(toPosition, ViewValues.SLOW_TIME))
+               .Join(transform.DOScale(SCALE, ViewValues.SLOW_TIME))
                .SetId(ShowTweenId + GetInstanceID());
         }
 
         public void MoveAnimation(Vector3 toPosition)
         {
-            DOTween.Sequence().Append(transform.DOMove(toPosition, ViewValues.STANDARD_TIME))
-                .Join(transform.DOScale(0, ViewValues.STANDARD_TIME)).SetId(MoveTweenId + GetInstanceID());
+            DOTween.Sequence().Append(transform.DOMove(toPosition, ViewValues.SLOW_TIME))
+                .Join(transform.DOScale(0, ViewValues.SLOW_TIME)).SetId(MoveTweenId + GetInstanceID());
         }
     }
 }

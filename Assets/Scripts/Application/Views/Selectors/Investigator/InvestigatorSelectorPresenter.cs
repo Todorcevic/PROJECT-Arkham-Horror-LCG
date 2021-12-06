@@ -11,7 +11,6 @@ namespace Arkham.Application
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly SelectInvestigatorUseCase investigatorSelectUseCase;
-        [Inject(Id = "PlaceHoldersZone")] private readonly RectTransform placeHoldersZone;
 
         private InvestigatorSelectorView LeadSelector => investigatorSelectorsManager.GetCurrentLeadSelector;
 
@@ -48,15 +47,21 @@ namespace Arkham.Application
             return selector;
         }
 
+        private void SetThisSelectorWithThisInvestigator(InvestigatorSelectorView selector, string investigatorId)
+        {
+            Sprite spriteCard = cardsManager.GetSpriteCard(investigatorId);
+            selector.SetSelector(investigatorId, spriteCard);
+            investigatorSelectorsManager.RebuildPlaceHolders();
+        }
+
         public void RemoveInvestigator(string investigatorId)
         {
             InvestigatorSelectorView selector = investigatorSelectorsManager.GetSelectorById(investigatorId);
-            selector.SetTransform();
+            selector.ActivateSensor(false);
             Animation();
 
             void Animation()
             {
-                investigatorSelectorsManager.RebuildPlaceHolders();
                 investigatorSelectorsManager.ArrangeAllSelectors();
                 selector.RemoveAnimation().OnComplete(selector.EmptySelector);
             }
@@ -74,14 +79,6 @@ namespace Arkham.Application
                 investigatorSelectorsManager.RebuildPlaceHolders();
                 selector1.ArrangeAnimation();
             }
-        }
-
-        private void SetThisSelectorWithThisInvestigator(InvestigatorSelectorView selector, string investigatorId)
-        {
-            Sprite spriteCard = cardsManager.GetSpriteCard(investigatorId);
-            selector.SetTransform(placeHoldersZone);
-            selector.SetSelector(investigatorId, spriteCard);
-            investigatorSelectorsManager.RebuildPlaceHolders();
         }
     }
 }

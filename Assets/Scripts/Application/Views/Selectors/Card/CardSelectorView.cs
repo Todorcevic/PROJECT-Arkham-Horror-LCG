@@ -9,7 +9,7 @@ using Zenject;
 
 namespace Arkham.Application
 {
-    public class CardSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IShowable
+    public class CardSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IDropHandler, IShowable
     {
         private const float positionThreshold = 0.6f;
         private Tween cantComplete;
@@ -53,18 +53,10 @@ namespace Arkham.Application
             if (eventData.dragging) return;
             HoverOnEffect();
             cardShower.AddShowableAndShow(this);
-
-            void HoverOnEffect()
-            {
-                interactableAudio.HoverOnSound();
-                ChangeTextColor(Color.black);
-                FillBackground(true);
-            }
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            if (eventData.dragging) return;
             HoverOffEffect();
             cardShower.RemoveShowableAndHide(this);
 
@@ -74,6 +66,12 @@ namespace Arkham.Application
                 ChangeTextColor(Color.white);
                 FillBackground(false);
             }
+        }
+
+        void IDropHandler.OnDrop(PointerEventData eventData)
+        {
+            HoverOnEffect();
+            cardShower.AddShowableAndShow(this);
         }
 
         public void SetSelector(string cardId, Sprite cardSprite = null)
@@ -114,5 +112,12 @@ namespace Arkham.Application
         }
 
         private void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, ViewValues.STANDARD_TIME);
+
+        private void HoverOnEffect()
+        {
+            interactableAudio.HoverOnSound();
+            ChangeTextColor(Color.black);
+            FillBackground(true);
+        }
     }
 }
