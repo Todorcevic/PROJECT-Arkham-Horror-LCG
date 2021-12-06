@@ -20,9 +20,11 @@ namespace Arkham.Application
 
         public void RemoveShowableAndHide(IShowable showableCar)
         {
-            ShowCard showCard = GetThisShowCard(showableCar);
-            showCard?.Clean();
-            showCard?.Hide();
+            foreach (ShowCard showCard in GetAllThisShowCards(showableCar))
+            {
+                showCard.Clean();
+                showCard.Hide();
+            }
         }
 
         public void Move(IShowable showableCard, Vector2 positionToMove)
@@ -33,7 +35,12 @@ namespace Arkham.Application
             showCard.MoveAnimation(positionToMove);
         }
 
+        public bool CheckIsShow(IShowable showable) => GetThisShowCard(showable)?.IsShowing ?? false;
+
         private ShowCard GetFreeShowCard() => showCards.Last(showCard => !showCard.IsShowing && !showCard.IsMoving);
+
         private ShowCard GetThisShowCard(IShowable showable) => showCards.Find(showCard => showCard.ShowableCard == showable);
+
+        private IEnumerable<ShowCard> GetAllThisShowCards(IShowable showable) => showCards.FindAll(showCard => showCard.ShowableCard == showable);
     }
 }

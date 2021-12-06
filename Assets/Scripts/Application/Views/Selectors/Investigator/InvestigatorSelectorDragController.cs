@@ -17,7 +17,6 @@ namespace Arkham.Application
         [Inject] private readonly RemoveInvestigatorUseCase removeInvestigatorUseCase;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
         [Inject] private readonly ChangeInvestigatorUseCase investigatorChange;
-        [Inject] private readonly CardShower cardShower;
         [Inject(Id = "MidZone")] private readonly RectTransform removeZone;
         [Title("RESOURCES")]
         [SerializeField, Required] private Canvas canvasCard;
@@ -42,6 +41,7 @@ namespace Arkham.Application
 
             void HoverEnter()
             {
+                if (DOTween.IsTweening(InvestigatorSelectorView.MOVE_ANIMATION)) return;
                 audioInteractable.HoverOnSound();
                 Card.DOScale(SCALE_HOVER, ViewValues.STANDARD_TIME);
             }
@@ -57,7 +57,7 @@ namespace Arkham.Application
         public void OnPointerExit(PointerEventData eventData)
         {
             if (eventData.dragging) return;
-            if (DOTween.IsTweening(InvestigatorSelectorView.REMOVE_ANIMATION)) return;
+            if (DOTween.IsTweening(InvestigatorSelectorView.MOVE_ANIMATION)) return;
             audioInteractable.HoverOffSound();
             Card.DOScale(1f, ViewValues.STANDARD_TIME).SetId(HOVEROFF);
         }

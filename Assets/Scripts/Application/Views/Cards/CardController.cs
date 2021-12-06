@@ -34,6 +34,7 @@ namespace Arkham.Application
 
         void IDropHandler.OnDrop(PointerEventData eventData)
         {
+            if (cardShower.CheckIsShow(cardView)) return;
             cardView.Glow.DOFade(1, ViewValues.STANDARD_TIME);
             audioInteractable.HoverOnSound();
             cardShower.AddShowableAndShow(cardView);
