@@ -32,6 +32,7 @@ namespace Arkham.Application
             investigatorSelector.SetLeadSelector();
             selectInvestigatorUseCase.Select(investigatorId);
             investigatorVisibility.RefreshInvestigatorsSelectability();
+            multiAnimator.ReshowCardInvestigator(investigatorId);
             readyButton.AutoActivate();
         }
     }

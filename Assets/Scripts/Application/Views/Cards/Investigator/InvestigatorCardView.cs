@@ -15,6 +15,8 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private TokenView xp;
 
         /*******************************************************************/
+        public override bool MustReshow => false;
+
         public void ChangeState(InvestigatorState state)
         {
             currentState?.Activate(false);

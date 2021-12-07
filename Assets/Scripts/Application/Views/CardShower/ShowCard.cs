@@ -33,17 +33,16 @@ namespace Arkham.Application
 
             void ActiveFrontImage()
             {
-                if (frontImage.sprite == showableCard.FrontImage) return;
                 frontImage.gameObject.SetActive(showableCard.FrontImage != null);
                 frontImage.sprite = showableCard.FrontImage;
+                frontImage.color = showableCard.IsInactive ? Color.gray : Color.white;
             }
 
             void ActiveBackImage()
             {
-                if (backImage.sprite == showableCard.BackImage) return;
-                bool withBack = backImage.sprite != null;
-                backImage.gameObject.SetActive(withBack && showableCard.BackImage != null);
+                backImage.gameObject.SetActive(showableCard.BackImage != null);
                 backImage.sprite = showableCard.BackImage;
+                backImage.color = showableCard.IsInactive ? Color.gray : Color.white;
             }
         }
 

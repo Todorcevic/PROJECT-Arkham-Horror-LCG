@@ -17,7 +17,6 @@ namespace Arkham.Application
         [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly UpdateXpUseCase updateXpUseCase;
         [Inject] private readonly MultiAnimator multiAnimator;
-        [Inject(Id = "CardsSelector")] private readonly ScrollRect cardSelectorScroll;
 
         /*******************************************************************/
         public void AddCard(string cardId, string investigatorId)
@@ -39,6 +38,7 @@ namespace Arkham.Application
             deckCardPresenter.RefreshCardsSelectability();
             deckCardPresenter.SetQuantity(card);
             cardQuantity.Refresh(investigator);
+            multiAnimator.ReshowCardDeck(card.Id);
             readyButton.AutoActivate();
         }
     }

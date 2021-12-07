@@ -26,6 +26,8 @@ namespace Arkham.Application
         [SerializeField, Required] private TextMeshProUGUI quantity;
 
         public string Id { get; private set; } = null;
+        public bool MustReshow => !IsEmpty;
+        public bool IsInactive => false;
         public bool IsEmpty => string.IsNullOrEmpty(Id);
         public Transform SelectorTransform => canvas.transform;
         private bool CanBeRemoved { get; set; }

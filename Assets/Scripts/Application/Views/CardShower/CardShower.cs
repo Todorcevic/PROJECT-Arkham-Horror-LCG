@@ -30,7 +30,6 @@ namespace Arkham.Application
         public void Move(IShowable showableCard, Vector2 positionToMove)
         {
             ShowCard showCard = GetThisShowCard(showableCard);
-            if (showCard.IsShowing) AddShowableAndShow(showableCard);
             showCard.Clean();
             showCard.MoveAnimation(positionToMove);
         }

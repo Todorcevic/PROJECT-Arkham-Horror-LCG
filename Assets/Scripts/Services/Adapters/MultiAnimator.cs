@@ -35,5 +35,23 @@ namespace Arkham.Services
             IShowable showablewCard = cardSelectorManager.GetSelectorByCardIdOrEmpty(cardId);
             cardShower.Move(showablewCard, cardPosition);
         }
+
+        public void ReshowCardDeck(string cardId)
+        {
+            IShowable showablewCard = cardManager.GetDeckCard(cardId);
+            if (showablewCard.MustReshow) cardShower.AddShowableAndShow(showablewCard);
+        }
+
+        public void ReshowCardSelector(string cardId)
+        {
+            IShowable showablewCard = cardSelectorManager.GetSelectorByCardIdOrEmpty(cardId);
+            if (showablewCard.MustReshow) cardShower.AddShowableAndShow(showablewCard);
+        }
+
+        public void ReshowCardInvestigator(string cardId)
+        {
+            IShowable showablewCard = cardManager.GetInvestigatorCard(cardId);
+            if (showablewCard.MustReshow) cardShower.AddShowableAndShow(showablewCard);
+        }
     }
 }

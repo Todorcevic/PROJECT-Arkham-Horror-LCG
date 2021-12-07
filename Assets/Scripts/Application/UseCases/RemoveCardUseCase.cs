@@ -36,6 +36,7 @@ namespace Arkham.Application
             deckCardPresenter.RefreshCardsSelectability();
             deckCardPresenter.SetQuantity(card);
             cardQuantity.Refresh(investigator);
+            multiAnimator.ReshowCardSelector(card.Id);
             readyButton.AutoActivate();
             cardsButton.ExecuteClick();
         }

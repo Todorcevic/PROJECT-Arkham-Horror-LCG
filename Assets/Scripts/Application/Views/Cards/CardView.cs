@@ -1,12 +1,13 @@
 ﻿using Arkham.Config;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Arkham.Application
 {
-    public class CardView : MonoBehaviour, IShowable
+    public abstract class CardView : MonoBehaviour, IShowable
     {
         private const float positionThreshold = 0.75f;
         [Title("RESOURCES")]
@@ -16,6 +17,7 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
         [SerializeField, Required, ChildGameObjectsOnly] private Image glow;
 
+        public abstract bool MustReshow { get; }
         public bool IsInactive { get; private set; }
         public string Id { get; private set; }
         public CanvasGroup Glow => canvasGlow;
