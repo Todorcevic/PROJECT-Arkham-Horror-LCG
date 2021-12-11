@@ -1,10 +1,12 @@
 ﻿using Arkham.Model;
+using Arkham.Services;
 using Zenject;
 
 namespace Arkham.Application
 {
     public class InvestigatorsCardPresenter
     {
+        [Inject] private readonly ICardImage imageCards;
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorSelectionInteractor investigatorSelectionFilter;
         [Inject] private readonly InvestigatorRepository investigatorRepository;

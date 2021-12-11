@@ -16,7 +16,7 @@ namespace Arkham.Application
         [Inject] private readonly IDoubleClickDetector clickDetector;
         [Inject] private readonly RemoveInvestigatorUseCase removeInvestigatorUseCase;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
-        [Inject] private readonly ChangeInvestigatorUseCase investigatorChange;
+        [Inject] private readonly ChangeInvestigatorUseCase changeInvestigatorUseCase;
         [Inject(Id = "MidZone")] private readonly RectTransform removeZone;
         [Title("RESOURCES")]
         [SerializeField, Required] private Canvas canvasCard;
@@ -36,6 +36,7 @@ namespace Arkham.Application
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (eventData.pointerDrag == gameObject) return;
             HoverEnter();
             DragEnter();
 
@@ -48,9 +49,8 @@ namespace Arkham.Application
 
             void DragEnter()
             {
-                if (!isDragging || eventData.pointerDrag == gameObject) return;
-                audioInteractable.HoverOnSound();
-                investigatorChange.Swap(eventData.pointerDrag.transform.GetSiblingIndex(), Id);
+                if (!isDragging) return;
+                changeInvestigatorUseCase.Swap(eventData.pointerDrag.transform.GetSiblingIndex(), Id);
             }
         }
 
@@ -73,13 +73,17 @@ namespace Arkham.Application
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
             isDragging = false;
-            EndDragEffect();
-            if (eventData.hovered.Contains(removeZone.gameObject)) removeInvestigatorUseCase.Remove(Id);
+            canvasCard.sortingOrder = 1;
+            CheckIfRecoverScale();
+            if (eventData.hovered.Contains(removeZone.gameObject))
+            {
+                audioInteractable.ClickSound();
+                removeInvestigatorUseCase.Remove(Id);
+            }
             else Card.DOMove(transform.position, ViewValues.STANDARD_TIME);
 
-            void EndDragEffect()
+            void CheckIfRecoverScale()
             {
-                canvasCard.sortingOrder = 1;
                 if (eventData.pointerEnter != gameObject)
                     Card.DOScale(1f, ViewValues.STANDARD_TIME).SetId("Removed");
             }

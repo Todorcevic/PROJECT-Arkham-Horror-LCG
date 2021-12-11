@@ -1,6 +1,5 @@
 ﻿using Arkham.Config;
 using Sirenix.OdinInspector;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -9,13 +8,14 @@ namespace Arkham.Application
 {
     public abstract class CardView : MonoBehaviour, IShowable
     {
-        private const float POSITION_THRESHOLD = 0.75f;
+        private const float positionThreshold = 0.75f;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private RectTransform rect;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGlow;
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
         [SerializeField, Required, ChildGameObjectsOnly] private Image glow;
+        [SerializeField, Required, ChildGameObjectsOnly] private ChangeCardImageController changeImageController;
 
         public abstract bool MustReshow { get; }
         public bool IsInactive { get; private set; }
@@ -27,7 +27,7 @@ namespace Arkham.Application
             get
             {
                 int axis = transform.position.x < Screen.width * 0.5f ? 1 : -1;
-                return new Vector2(transform.position.x + (rect.rect.width * POSITION_THRESHOLD * axis), Screen.height * 0.5f);
+                return new Vector2(transform.position.x + (rect.rect.width * positionThreshold * axis), Screen.height * 0.5f);
             }
         }
         public Sprite FrontImage => image.sprite;
@@ -35,20 +35,20 @@ namespace Arkham.Application
 
         /*******************************************************************/
         [Inject]
-        private void Init(string id, Sprite sprite, Sprite backImage = null)
+        private void Init(string id)
         {
             name = Id = id;
-            ChangeImage(sprite);
-            BackImage = backImage;
-
-            void ChangeImage(Sprite sprite)
-            {
-                canvasGroup.alpha = sprite == null ? 0 : 1;
-                image.sprite = sprite;
-            }
+            changeImageController.Init(this);
         }
 
         /*******************************************************************/
+        public void ChangeImage(Sprite sprite, Sprite backImage)
+        {
+            canvasGroup.alpha = sprite == null ? 0 : 1;
+            image.sprite = sprite;
+            BackImage = backImage;
+        }
+
         public void Activate(bool isEnable)
         {
             IsInactive = !isEnable;

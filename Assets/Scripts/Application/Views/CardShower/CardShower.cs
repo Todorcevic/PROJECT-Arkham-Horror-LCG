@@ -13,7 +13,7 @@ namespace Arkham.Application
         /*******************************************************************/
         public void AddShowableAndShow(IShowable showableCard)
         {
-            ShowCard showCard = GetFreeShowCard();
+            ShowCard showCard = GetVoidShowCard();
             showCard.SetShowableCard(showableCard);
             showCard.ShowAnimation(showableCard.ShowPosition);
         }
@@ -36,7 +36,7 @@ namespace Arkham.Application
 
         public bool CheckIsShow(IShowable showable) => GetThisShowCard(showable)?.IsShowing ?? false;
 
-        private ShowCard GetFreeShowCard() => showCards.Last(showCard => !showCard.IsShowing && !showCard.IsMoving);
+        private ShowCard GetVoidShowCard() => showCards.Last(showCard => !showCard.IsShowing && !showCard.IsMoving);
 
         private ShowCard GetThisShowCard(IShowable showable) => showCards.Find(showCard => showCard.ShowableCard == showable);
 

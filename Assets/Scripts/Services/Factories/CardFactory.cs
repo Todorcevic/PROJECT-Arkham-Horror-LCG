@@ -35,7 +35,7 @@ namespace Arkham.Services
         {
             foreach (string cardId in DeckCards)
             {
-                object[] args = new object[] { cardId, imageCards.GetSprite(cardId) };
+                object[] args = new object[] { cardId };
                 DeckCardView cardView = diContainer.InstantiatePrefabForComponent<DeckCardView>(cardPrefab, cardZone, args);
                 cardsManager.AddCard(cardId, cardView);
             }
@@ -45,7 +45,7 @@ namespace Arkham.Services
         {
             foreach (string investigatorId in InvestigatorCards)
             {
-                object[] args = new object[] { investigatorId, imageCards.GetSprite(investigatorId), imageCards.GetBackSprite(investigatorId) };
+                object[] args = new object[] { investigatorId };
                 InvestigatorCardView cardView = diContainer.InstantiatePrefabForComponent<InvestigatorCardView>(investigatorPrefab, investigatorZone, args);
                 cardsManager.AddCard(investigatorId, cardView);
             }

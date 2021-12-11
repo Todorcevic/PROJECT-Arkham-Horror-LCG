@@ -8,14 +8,13 @@ namespace Arkham.Model
     {
         private List<Card> cardList;
         private Dictionary<string, Card> cardDict;
-
         public IEnumerable<Card> AllCards => cardList;
 
         /*******************************************************************/
         public void CreateWith(List<Card> cards)
         {
             cardList = cards;
-            cardDict = cards.ToDictionary(c => c.Id);
+            cardDict = cards.ToDictionary(card => card.Id);
         }
 
         public Card Get(string cardId) => cardDict[cardId];

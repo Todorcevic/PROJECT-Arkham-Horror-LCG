@@ -96,7 +96,7 @@ MonoBehaviour:
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 8
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -277,10 +277,9 @@ MonoBehaviour:
   glow: {fileID: 1367093268569259750}
   text: {fileID: 1053936175102139686}
   canvas: {fileID: 4329434936648613502}
-  timeHoverAnimation: 0.1
-  scaleAnimation: 1.1
   textToShow: 
-  isClickable: 0
+  clickSound: 0
+  customHover: 0
 --- !u!1 &8867609605388215213
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,5 +7,6 @@ namespace Arkham.Services
         bool ExistThisSprite(string id);
         Sprite GetSprite(string id);
         Sprite GetBackSprite(string id);
+        bool CanChange(string id);
     }
 }
