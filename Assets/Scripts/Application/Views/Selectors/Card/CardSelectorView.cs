@@ -40,7 +40,7 @@ namespace Arkham.Application
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             interactableAudio.ClickSound();
-            if (CanBeRemoved) removeCardUseCase.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId);
+            if (CanBeRemoved) removeCardUseCase.Remove(Id, investigatorSelectorManager.InvestigatorSelected);
             else CantRemoveAnimation();
 
             void CantRemoveAnimation()

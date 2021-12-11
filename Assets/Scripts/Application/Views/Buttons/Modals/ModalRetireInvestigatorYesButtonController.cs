@@ -16,6 +16,6 @@ namespace Arkham.Application
         /*******************************************************************/
         void IInitializable.Initialize() => yesButton.ClickAction += Clicked;
 
-        private void Clicked() => retireInvestigatorUseCase.Retire(investigatorSelectorManager.CurrentInvestigatorId);
+        private void Clicked() => retireInvestigatorUseCase.Retire(investigatorSelectorManager.InvestigatorSelected);
     }
 }

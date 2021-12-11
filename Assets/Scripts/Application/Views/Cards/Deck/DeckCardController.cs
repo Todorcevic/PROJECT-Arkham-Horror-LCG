@@ -13,7 +13,7 @@ namespace Arkham.Application
         {
             audioInteractable.ClickSound();
             if (cardView.IsInactive) CantAdd();
-            else addCardUseCase.AddCard(cardView.Id, investigatorSelectorManager.CurrentInvestigatorId);
+            else addCardUseCase.AddCard(cardView.Id, investigatorSelectorManager.InvestigatorSelected);
         }
     }
 }
