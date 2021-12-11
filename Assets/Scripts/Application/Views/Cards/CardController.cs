@@ -9,6 +9,7 @@ namespace Arkham.Application
 {
     public abstract class CardController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
+        private const string SHAKE = "Shake";
         [Inject] private readonly CardShower cardShower;
         [SerializeField, Required] protected CardView cardView;
         [SerializeField, Required, ChildGameObjectsOnly] protected InteractableAudio audioInteractable;
@@ -42,8 +43,8 @@ namespace Arkham.Application
 
         protected void CantAdd()
         {
-            DOTween.Complete(gameObject.GetInstanceID());
-            transform.DOPunchPosition(Vector3.right * 20, ViewValues.FAST_TIME, 40, 5).SetId(gameObject.GetInstanceID());
+            DOTween.Complete(SHAKE + gameObject.GetInstanceID());
+            transform.DOPunchPosition(Vector3.right * 20, ViewValues.FAST_TIME, 40, 5).SetId(SHAKE + gameObject.GetInstanceID());
         }
     }
 }

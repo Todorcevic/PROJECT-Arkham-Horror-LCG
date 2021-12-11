@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.UI;
 using Zenject;
-using DG.Tweening;
 using UnityEngine;
 
 namespace Arkham.Application
@@ -12,16 +11,12 @@ namespace Arkham.Application
         [Inject(Id = "PlaceHoldersZone")] private readonly RectTransform placeHoldersZone;
         [Inject] private readonly List<InvestigatorSelectorView> selectors;
 
-        public string CurrentInvestigatorId => currentInvestigator;
+        public string InvestigatorSelected => currentInvestigator;
         public InvestigatorSelectorView GetCurrentLeadSelector => selectors.Find(invSelectorView => invSelectorView.IsLeader);
         public InvestigatorSelectorView GetRealLeadSelector => selectors[0];
 
         /*******************************************************************/
-        public InvestigatorSelectorView GetEmptySelector()
-        {
-            //DOTween.Complete(InvestigatorSelectorView.REMOVE_ANIMATION);
-            return selectors.Find(selector => selector.Id == null);
-        }
+        public InvestigatorSelectorView GetEmptySelector() => selectors.Find(selector => selector.Id == null);
 
         public InvestigatorSelectorView GetSelectorById(string cardId) =>
             selectors.Find(selector => selector.Id == cardId);

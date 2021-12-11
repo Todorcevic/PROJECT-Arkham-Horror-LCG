@@ -16,7 +16,7 @@ namespace Arkham.Application
         [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitchView;
 
         /*******************************************************************/
-        private Investigator investigator => investigatorRepository.Get(investigatorSelectorManager.CurrentInvestigatorId);
+        private Investigator investigator => investigatorRepository.Get(investigatorSelectorManager.InvestigatorSelected);
 
         public void RefreshCardsVisibility()
         {
@@ -40,7 +40,7 @@ namespace Arkham.Application
         {
             foreach (DeckCardView cardView in cardsManager.DeckList)
             {
-                bool canBeSelected = cardSelectionFilter.CanThisCardBeSelected(cardView.Id, investigatorSelectorManager.CurrentInvestigatorId);
+                bool canBeSelected = cardSelectionFilter.CanThisCardBeSelected(cardView.Id, investigatorSelectorManager.InvestigatorSelected);
                 cardView.Activate(canBeSelected);
                 SetXp(cardView);
             }
@@ -64,7 +64,7 @@ namespace Arkham.Application
 
         private void SetXp(DeckCardView cardView)
         {
-            int xpCost = xpInteractor.XpPayCost(cardView.Id, investigatorSelectorManager.CurrentInvestigatorId);
+            int xpCost = xpInteractor.XpPayCost(cardView.Id, investigatorSelectorManager.InvestigatorSelected);
             cardView.SetXpCost(xpCost);
         }
     }

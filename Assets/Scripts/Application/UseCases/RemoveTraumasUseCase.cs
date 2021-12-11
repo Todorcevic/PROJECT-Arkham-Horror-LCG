@@ -18,14 +18,14 @@ namespace Arkham.Application
 
         public void RemovePhysicTrauma()
         {
-            Investigator investigator = investigatorRepository.Get(investigatorSelectorsManager.CurrentInvestigatorId);
+            Investigator investigator = investigatorRepository.Get(investigatorSelectorsManager.InvestigatorSelected);
             UpdatePhysicTraumaModel(investigator);
             UpdateView(investigator);
         }
 
         public void RemoveMentalTrauma()
         {
-            Investigator investigator = investigatorRepository.Get(investigatorSelectorsManager.CurrentInvestigatorId);
+            Investigator investigator = investigatorRepository.Get(investigatorSelectorsManager.InvestigatorSelected);
             UpdateMentalTraumaModel(investigator);
             UpdateView(investigator);
         }

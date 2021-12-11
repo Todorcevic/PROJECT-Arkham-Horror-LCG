@@ -10,6 +10,8 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI textQuantity;
         [SerializeField, Required, ChildGameObjectsOnly] private TokenView xpCost;
 
+        public override bool MustReshow => true;
+
         /*******************************************************************/
         public void SetQuantity(int quantity) => textQuantity.text = FormatQuantity(quantity);
 

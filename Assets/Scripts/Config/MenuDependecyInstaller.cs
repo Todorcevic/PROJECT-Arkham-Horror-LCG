@@ -29,10 +29,10 @@ namespace Arkham.Config
            .InNamespace("Arkham").WithSuffix("Manager")).AsSingle();
 
             /*** Presenters ***/
-            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
+            Container.Bind(x => x.AllNonAbstractClasses()
             .InNamespace("Arkham").WithSuffix("Presenter")).AsCached();
 
-            Container.Bind(x => x.AllNonAbstractClasses()
+            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
             .InNamespace("Arkham").WithSuffix("Presenter")).AsCached();
 
             /*** Adapters ***/

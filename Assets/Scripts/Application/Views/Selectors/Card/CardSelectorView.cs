@@ -26,6 +26,8 @@ namespace Arkham.Application
         [SerializeField, Required] private TextMeshProUGUI quantity;
 
         public string Id { get; private set; } = null;
+        public bool MustReshow => !IsEmpty;
+        public bool IsInactive => false;
         public bool IsEmpty => string.IsNullOrEmpty(Id);
         public Transform SelectorTransform => canvas.transform;
         private bool CanBeRemoved { get; set; }
@@ -38,7 +40,7 @@ namespace Arkham.Application
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             interactableAudio.ClickSound();
-            if (CanBeRemoved) removeCardUseCase.Remove(Id, investigatorSelectorManager.CurrentInvestigatorId);
+            if (CanBeRemoved) removeCardUseCase.Remove(Id, investigatorSelectorManager.InvestigatorSelected);
             else CantRemoveAnimation();
 
             void CantRemoveAnimation()
