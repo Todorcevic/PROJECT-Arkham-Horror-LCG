@@ -2,7 +2,7 @@
 
 namespace Arkham.Services
 {
-    public class DoubleClickDetector : IDoubleClickDetector
+    public class DoubleClickDetector
     {
         private const float DOUBLE_CLICK_TIME_LIMIT = 0.5f;
         private float lastClickTime;

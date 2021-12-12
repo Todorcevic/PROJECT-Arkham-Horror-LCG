@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Arkham.Config;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,7 @@ namespace Arkham.Services
             scroll.verticalNormalizedPosition = scrollPosition;
             finalItemPosition = itemTransform.position;
             scroll.verticalNormalizedPosition = originalScrollPosition;
-            scroll.DOVerticalNormalizedPos(scrollPosition, 0.25f);
+            scroll.DOVerticalNormalizedPos(scrollPosition, ViewValues.STANDARD_TIME);
         }
     }
 }

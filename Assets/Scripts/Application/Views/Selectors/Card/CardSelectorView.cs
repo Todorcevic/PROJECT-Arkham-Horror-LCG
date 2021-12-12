@@ -15,7 +15,7 @@ namespace Arkham.Application
         private Tween cantComplete;
         [Inject] private readonly RemoveCardUseCase removeCardUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
-        [Inject] private readonly CardShower cardShower;
+        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Title("RESOURCES")]
         [SerializeField, Required] private RectTransform card;
         [SerializeField, Required] private InteractableAudio interactableAudio;
@@ -54,13 +54,13 @@ namespace Arkham.Application
         {
             if (eventData.dragging) return;
             HoverOnEffect();
-            cardShower.AddShowableAndShow(this);
+            cardShowerPresenter.AddShowableAndShow(this);
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             HoverOffEffect();
-            cardShower.RemoveShowableAndHide(this);
+            cardShowerPresenter.RemoveShowableAndHide(this);
 
             void HoverOffEffect()
             {
@@ -73,7 +73,7 @@ namespace Arkham.Application
         void IDropHandler.OnDrop(PointerEventData eventData)
         {
             HoverOnEffect();
-            cardShower.AddShowableAndShow(this);
+            cardShowerPresenter.AddShowableAndShow(this);
         }
 
         public void SetSelector(string cardId, Sprite cardSprite = null)

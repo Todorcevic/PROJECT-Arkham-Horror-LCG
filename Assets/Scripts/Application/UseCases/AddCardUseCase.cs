@@ -16,7 +16,7 @@ namespace Arkham.Application
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly UpdateXpUseCase updateXpUseCase;
-        [Inject] private readonly MultiAnimator multiAnimator;
+        [Inject] private readonly CardShowerPresenter multiAnimator;
 
         /*******************************************************************/
         public void AddCard(string cardId, string investigatorId)

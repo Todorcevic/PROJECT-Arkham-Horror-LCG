@@ -14,7 +14,7 @@ namespace Arkham.Application
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject] private readonly CardSelectorPresenter cardSelector;
-        [Inject] private readonly MultiAnimator multiAnimator;
+        [Inject] private readonly CardShowerPresenter multiAnimator;
         [Inject(Id = "CardsButton")] private readonly ButtonView cardsButton;
 
         /*******************************************************************/

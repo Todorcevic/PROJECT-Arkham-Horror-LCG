@@ -8,10 +8,10 @@ using Zenject;
 
 namespace Arkham.Services
 {
-    public class CardFactory : MonoBehaviour, ICardFactory
+    public class CardFactory : MonoBehaviour
     {
         [Inject] private readonly DiContainer diContainer;
-        [Inject] private readonly ICardImage imageCards;
+        [Inject] private readonly ImagesCard imagesCard;
         [Inject] private readonly CardRepository cardCollection;
         [Inject] private readonly CardsManager cardsManager;
         [SerializeField, Required, AssetsOnly] private DeckCardView cardPrefab;
@@ -24,10 +24,10 @@ namespace Arkham.Services
                || c.Type_code == "skill")
                && (c.Subtype_code != "basicweakness"
                && c.Subtype_code != "weakness")
-               && imageCards.ExistThisSprite(c.Id)).OrderBy(c => c.Faction_code).ThenBy(c => c.Id).Select(c => c.Id);
+               && imagesCard.ExistThisSprite(c.Id)).OrderBy(c => c.Faction_code).ThenBy(c => c.Id).Select(c => c.Id);
 
         private IEnumerable<string> InvestigatorCards => cardCollection
-                .FindAll(c => c.Type_code == "investigator" && imageCards.ExistThisSprite(c.Id))
+                .FindAll(c => c.Type_code == "investigator" && imagesCard.ExistThisSprite(c.Id))
                 .OrderBy(c => c.Faction_code).ThenBy(c => c.Id).Select(c => c.Id);
 
         /*******************************************************************/

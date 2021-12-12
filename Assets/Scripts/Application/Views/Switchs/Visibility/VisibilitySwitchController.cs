@@ -8,7 +8,7 @@ namespace Arkham.Application
         [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitchView;
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
         [Inject] private readonly DeckCardPresenter cardVisibility;
-        [Inject] private readonly IPlayerPrefsAdapter playerPrefs;
+        [Inject] private readonly PlayerPrefsAdapter playerPrefs;
 
         /*******************************************************************/
         void IInitializable.Initialize()

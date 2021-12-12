@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Arkham.Services
 {
-    public class JsonNewtonsoftAdapter : ISerializer
+    public class JsonNewtonsoftAdapter
     {
         private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
         {

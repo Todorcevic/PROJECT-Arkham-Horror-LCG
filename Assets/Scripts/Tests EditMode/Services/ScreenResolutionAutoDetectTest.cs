@@ -22,9 +22,9 @@ namespace Tests
             //Arrange
             Resolution resolutionFullHDMock = new Resolution() { width = 1920, height = 1080 };
             Resolution resolutionHDMock = new Resolution() { width = 1280, height = 720 };
-            IScreenResolutionAdapter screenResolutionAdapter = Substitute.For<IScreenResolutionAdapter>();
+            ScreenResolutionAdapter screenResolutionAdapter = Substitute.For<ScreenResolutionAdapter>();
             screenResolutionAdapter.ResolutionsSupported.Returns(new Resolution[] { resolutionFullHDMock, resolutionHDMock });
-            Container.Bind<IScreenResolutionAdapter>().FromInstance(screenResolutionAdapter);
+            Container.Bind<ScreenResolutionAdapter>().FromInstance(screenResolutionAdapter);
 
             ScreenResolutionAutoDetect resolutionSetter = Container.Resolve<ScreenResolutionAutoDetect>();
 
@@ -40,9 +40,9 @@ namespace Tests
         {
             //Arrange
             Resolution resolutionHDMock = new Resolution() { width = 1280, height = 720 };
-            IScreenResolutionAdapter screenResolutionAdapter = Substitute.For<IScreenResolutionAdapter>();
+            ScreenResolutionAdapter screenResolutionAdapter = Substitute.For<ScreenResolutionAdapter>();
             screenResolutionAdapter.ResolutionsSupported.Returns(new Resolution[] { resolutionHDMock });
-            Container.Bind<IScreenResolutionAdapter>().FromInstance(screenResolutionAdapter);
+            Container.Bind<ScreenResolutionAdapter>().FromInstance(screenResolutionAdapter);
 
             ScreenResolutionAutoDetect resolutionSetter = Container.Resolve<ScreenResolutionAutoDetect>();
 
@@ -61,10 +61,10 @@ namespace Tests
         public void SettingResolution_WhenCall_CheckResolutionNotSupported(int width, int height)
         {
             //Arrange
-            IScreenResolutionAdapter screenResolutionAdapter = Substitute.For<IScreenResolutionAdapter>();
+            ScreenResolutionAdapter screenResolutionAdapter = Substitute.For<ScreenResolutionAdapter>();
             Resolution resolutionMock = new Resolution() { width = width, height = height };
             screenResolutionAdapter.ResolutionsSupported.Returns(new Resolution[] { resolutionMock });
-            Container.Bind<IScreenResolutionAdapter>().FromInstance(screenResolutionAdapter);
+            Container.Bind<ScreenResolutionAdapter>().FromInstance(screenResolutionAdapter);
 
             ScreenResolutionAutoDetect resolutionSetter = Container.Resolve<ScreenResolutionAutoDetect>();
 

@@ -10,7 +10,8 @@ namespace Arkham.Application
     public abstract class CardController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
         private const string SHAKE = "Shake";
-        [Inject] private readonly CardShower cardShower;
+        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
+        [Inject] private readonly CardShowerManager cardShowerManager;
         [SerializeField, Required] protected CardView cardView;
         [SerializeField, Required, ChildGameObjectsOnly] protected InteractableAudio audioInteractable;
 
@@ -24,21 +25,21 @@ namespace Arkham.Application
             if (eventData.dragging) return;
             cardView.Glow.DOFade(1, ViewValues.STANDARD_TIME);
             audioInteractable.HoverOnSound();
-            cardShower.AddShowableAndShow(cardView);
+            cardShowerPresenter.AddShowableAndShow(cardView);
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             cardView.Glow.DOFade(0, ViewValues.STANDARD_TIME);
-            cardShower.RemoveShowableAndHide(cardView);
+            cardShowerPresenter.RemoveShowableAndHide(cardView);
         }
 
         void IDropHandler.OnDrop(PointerEventData eventData)
         {
-            if (cardShower.CheckIsShow(cardView)) return;
+            if (cardShowerManager.CheckIsShow(cardView)) return;
             cardView.Glow.DOFade(1, ViewValues.STANDARD_TIME);
             audioInteractable.HoverOnSound();
-            cardShower.AddShowableAndShow(cardView);
+            cardShowerPresenter.AddShowableAndShow(cardView);
         }
 
         protected void CantAdd()

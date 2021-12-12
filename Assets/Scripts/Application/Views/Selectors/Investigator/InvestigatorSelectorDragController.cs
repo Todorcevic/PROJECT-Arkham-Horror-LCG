@@ -13,7 +13,7 @@ namespace Arkham.Application
         private const float SCALE_HOVER = 1.1f;
         public const string HOVEROFF = "HoverOff";
         private static bool isDragging;
-        [Inject] private readonly IDoubleClickDetector clickDetector;
+        [Inject] private readonly DoubleClickDetector clickDetector;
         [Inject] private readonly RemoveInvestigatorUseCase removeInvestigatorUseCase;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
         [Inject] private readonly ChangeInvestigatorUseCase changeInvestigatorUseCase;
