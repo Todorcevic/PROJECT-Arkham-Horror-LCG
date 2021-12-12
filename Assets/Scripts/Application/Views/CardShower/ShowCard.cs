@@ -10,7 +10,7 @@ namespace Arkham.Application
     {
         private const float SCALE = 1.6f;
         private const string ShowTweenId = "Show";
-        public const string MoveTweenId = "Move";
+        private const string MoveTweenId = "Move";
 
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image frontImage;
