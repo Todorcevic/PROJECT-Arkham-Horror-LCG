@@ -8,7 +8,7 @@ namespace Arkham.Application
 {
     public abstract class CardView : MonoBehaviour, IShowable
     {
-        private const float positionThreshold = 0.75f;
+        private const float positionThreshold = 0.285f;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private RectTransform rect;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
@@ -27,7 +27,7 @@ namespace Arkham.Application
             get
             {
                 int axis = transform.position.x < Screen.width * 0.5f ? 1 : -1;
-                return new Vector2(transform.position.x + (rect.rect.width * positionThreshold * axis), Screen.height * 0.5f);
+                return new Vector2(transform.position.x + (Screen.width * positionThreshold * axis), Screen.height * 0.5f);
             }
         }
         public Sprite FrontImage => image.sprite;

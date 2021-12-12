@@ -1,12 +1,9 @@
 using Arkham.Services;
 using Sirenix.OdinInspector;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using Zenject;
-using System.Linq;
+using DG.Tweening;
+using Arkham.Config;
 
 namespace Arkham.Application
 {
@@ -28,6 +25,8 @@ namespace Arkham.Application
             SetController();
             CheckActivateButton();
             ChangeCardImage();
+
+            void CheckActivateButton() => changeImage.gameObject.SetActive(imageCards.CanChange(cardView.Id));
         }
 
         private void SetController()
@@ -39,12 +38,18 @@ namespace Arkham.Application
             {
                 imageNumber++;
                 if (!imageCards.ExistThisSprite(CardImageName)) imageNumber = 0;
-                ChangeCardImage();
+                ChangeCardImageAnimation();
                 playerPref.SaveChangeImage(cardView.Id, imageNumber);
             }
-        }
 
-        private void CheckActivateButton() => changeImage.gameObject.SetActive(imageCards.CanChange(cardView.Id));
+            void ChangeCardImageAnimation()
+            {
+                DOTween.Sequence()
+                    .Append(cardView.transform.DORotate(Vector3.up * 90, ViewValues.FAST_TIME))
+                    .AppendCallback(ChangeCardImage)
+                    .Append(cardView.transform.DORotate(Vector3.zero, ViewValues.FAST_TIME));
+            }
+        }
 
         private void ChangeCardImage() => cardView.ChangeImage(imageCards.GetSprite(CardImageName), imageCards.GetBackSprite(CardImageName));
     }

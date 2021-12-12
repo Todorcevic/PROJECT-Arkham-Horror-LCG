@@ -449,6 +449,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractableAudio
       objectReference: {fileID: 0}
+    - target: {fileID: 7225114169980597596, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
+      propertyPath: clips
+      value: 
+      objectReference: {fileID: 11400000, guid: 21c29a7b976a0b24eb7dee751d8c0ea4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
 --- !u!4 &6990803258602575455 stripped

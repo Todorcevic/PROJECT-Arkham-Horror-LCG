@@ -539,7 +539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 728046689199323153, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: textToShow
-      value: Change Image
+      value: Change Art
       objectReference: {fileID: 0}
     - target: {fileID: 2277753048493198990, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: m_Sprite
