@@ -11,11 +11,10 @@ namespace Arkham.Config
         public override void InstallBindings()
         {
             /*** Services ***/
-            Container.BindInterfacesTo<ScreenResolutionAutoDetect>().AsSingle();
-            Container.BindInterfacesTo<DoubleClickDetector>().AsSingle();
-            Container.BindInterfacesTo<DataContext>().AsSingle();
-            Container.BindInterfacesTo<DataMapper>().AsSingle();
-            Container.Bind<MultiAnimator>().AsSingle();
+            Container.Bind<ScreenResolutionAutoDetect>().AsSingle();
+            Container.Bind<DoubleClickDetector>().AsSingle();
+            Container.Bind<DataContext>().AsSingle();
+            Container.Bind<DataMapper>().AsSingle();
 
             /*** Controllers ***/
             Container.Bind(x => x.AllNonAbstractClasses()
@@ -36,7 +35,7 @@ namespace Arkham.Config
             .InNamespace("Arkham").WithSuffix("Presenter")).AsCached();
 
             /*** Adapters ***/
-            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
+            Container.Bind(x => x.AllNonAbstractClasses()
             .InNamespace("Arkham").WithSuffix("Adapter")).AsSingle();
 
             /*** Use Cases ***/
@@ -55,7 +54,7 @@ namespace Arkham.Config
             Container.Bind<CampaignStateSO>().FromScriptableObjectResource(gamefiles.CAMPAIGNS_STATES).AsSingle();
 
             /*** Factories ***/
-            Container.BindInterfacesTo<NameConventionFactory>().AsSingle();
+            Container.Bind<NameConventionFactory>().AsSingle();
         }
     }
 }

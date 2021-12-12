@@ -7,9 +7,9 @@ namespace Arkham.Config
 {
     public class Loader : MonoBehaviour
     {
-        [Inject] private readonly IResolutionSet resolutionSetter;
-        [Inject] private readonly ICardFactory cardFactory;
-        [Inject] private readonly IDataPersistence dataContext;
+        [Inject] private readonly ScreenResolutionAutoDetect resolutionSetter;
+        [Inject] private readonly CardFactory cardFactory;
+        [Inject] private readonly DataContext dataContext;
 
         private void Awake()
         {

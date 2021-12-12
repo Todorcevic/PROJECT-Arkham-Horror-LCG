@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Arkham.Services
 {
-    public class NameConventionFactory : IConventionFactory
+    public class NameConventionFactory
     {
         [Inject] private readonly DiContainer diContainer;
 

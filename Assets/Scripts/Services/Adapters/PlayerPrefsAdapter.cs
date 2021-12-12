@@ -2,7 +2,7 @@
 
 namespace Arkham.Services
 {
-    public class PlayerPrefsAdapter : IPlayerPrefsAdapter
+    public class PlayerPrefsAdapter
     {
         private const string KEY_VISIBILITY = "CardsVisibility";
         private const string PREFIX_IMAGE = "ImageCard";

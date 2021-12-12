@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6242000737049106308}
   - component: {fileID: 6242000737049106314}
   - component: {fileID: 8745368688522076915}
+  - component: {fileID: 1871772349764124708}
   m_Layer: 5
   m_Name: ShowCard
   m_TagString: Untagged
@@ -110,6 +111,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frontImage: {fileID: 6242000737230218484}
   backImage: {fileID: 6242000737664078058}
+--- !u!114 &1871772349764124708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6242000737049106310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 8745368688522076915}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &6242000737230218486
 GameObject:
   m_ObjectHideFlags: 0

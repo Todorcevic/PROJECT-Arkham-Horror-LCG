@@ -5,10 +5,10 @@ using Zenject;
 
 namespace Arkham.Services
 {
-    public class DataContext : IDataPersistence
+    public class DataContext
     {
-        [Inject] private readonly ISerializer serializer;
-        [Inject] private readonly IMapper mapper;
+        [Inject] private readonly JsonNewtonsoftAdapter serializer;
+        [Inject] private readonly DataMapper mapper;
         [Inject] private readonly GameFiles gameFiles;
         [Inject] private readonly CardRepository cardRepository;
 

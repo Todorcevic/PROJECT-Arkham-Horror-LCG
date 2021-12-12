@@ -13,7 +13,7 @@ namespace Arkham.Application
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
-        [Inject] private readonly MultiAnimator multiAnimator;
+        [Inject] private readonly CardShowerPresenter multiAnimator;
 
         /*******************************************************************/
         public void Add(string investigatorId)
