@@ -39,14 +39,6 @@
     ],
     "InvestigatorsList": [
         {
-            "Id": "98010",
-            "PhysicTrauma": 0,
-            "MentalTrauma": 0,
-            "Xp": 0,
-            "Deck": [],
-            "MandatoryCards": []
-        },
-        {
             "Id": "01001",
             "PhysicTrauma": 3,
             "MentalTrauma": 3,
