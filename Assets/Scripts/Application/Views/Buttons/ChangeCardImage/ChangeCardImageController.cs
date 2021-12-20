@@ -1,9 +1,7 @@
-using Arkham.Services;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 using DG.Tweening;
-using Arkham.Config;
 
 namespace Arkham.Application
 {

@@ -1,6 +1,4 @@
-﻿using Arkham.Config;
-
-namespace Arkham.Model
+﻿namespace Arkham.Model
 {
     public class CampaignState
     {

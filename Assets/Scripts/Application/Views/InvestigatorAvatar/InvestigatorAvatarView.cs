@@ -1,4 +1,4 @@
-﻿using Arkham.Config;
+﻿using Arkham.Model;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;

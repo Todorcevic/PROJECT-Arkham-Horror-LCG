@@ -1,7 +1,6 @@
 using UnityEngine;
 using Zenject;
 using UnityEngine.UI;
-using Arkham.Services;
 
 namespace Arkham.Application
 {

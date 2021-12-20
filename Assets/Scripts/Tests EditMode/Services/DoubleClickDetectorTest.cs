@@ -1,6 +1,6 @@
 using Zenject;
 using NUnit.Framework;
-using Arkham.Services;
+using Arkham.Application;
 using UnityEngine;
 
 namespace Tests

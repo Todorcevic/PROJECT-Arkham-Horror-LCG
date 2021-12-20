@@ -1,5 +1,4 @@
-﻿using Arkham.Config;
-using Arkham.Services;
+﻿using Arkham.Application;
 using Zenject;
 
 namespace Tests

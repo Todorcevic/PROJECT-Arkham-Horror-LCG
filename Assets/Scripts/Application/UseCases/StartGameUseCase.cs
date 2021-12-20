@@ -1,5 +1,5 @@
-﻿using Arkham.Config;
-using Arkham.Services;
+﻿using Arkham.Application;
+using Arkham.Model;
 using Zenject;
 
 namespace Arkham.Application

@@ -1,5 +1,4 @@
-﻿using Arkham.Config;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Arkham.Model

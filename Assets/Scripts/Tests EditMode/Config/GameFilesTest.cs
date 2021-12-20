@@ -1,6 +1,6 @@
-﻿using Arkham.Config;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using UnityEngine;
+using Arkham.Application;
 
 namespace Tests
 {

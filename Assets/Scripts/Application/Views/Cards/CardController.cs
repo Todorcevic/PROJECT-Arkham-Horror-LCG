@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using DG.Tweening;
-using Arkham.Config;
+using Arkham.Application;
 using Zenject;
 
 namespace Arkham.Application

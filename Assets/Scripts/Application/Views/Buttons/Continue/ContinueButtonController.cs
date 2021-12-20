@@ -1,6 +1,6 @@
-﻿using Arkham.Config;
-using System.IO;
+﻿using System.IO;
 using Zenject;
+using Arkham.Model;
 
 namespace Arkham.Application
 {

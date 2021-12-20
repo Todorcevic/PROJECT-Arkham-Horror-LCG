@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using System;
-using Arkham.Config;
+using Arkham.Application;
 
 namespace Arkham.Application
 {
