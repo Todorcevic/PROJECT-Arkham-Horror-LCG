@@ -14,7 +14,7 @@ namespace Tests
         {
             get
             {
-                Investigator inv = new Investigator(5, 5, 5, true, true, CardOne, new DeckBuildingRules());
+                Investigator inv = new Investigator(5, 5, 5, true, true, CardOne, new DeckBuildingRules01001());
                 for (int i = 0; i < inv.DeckBuilding.DeckSize; i++)
                     inv.AddToDeck(new Card());
                 return inv;
@@ -25,7 +25,7 @@ namespace Tests
         {
             get
             {
-                Investigator inv = new Investigator(5, 5, 5, true, true, CardOne, new DeckBuildingRules());
+                Investigator inv = new Investigator(5, 5, 5, true, true, CardOne, new DeckBuildingRules01001());
                 inv.AddToDeck(new Card());
                 inv.AddToDeck(new Card());
                 inv.AddToDeck(new Card());
@@ -39,8 +39,8 @@ namespace Tests
             CardTwo = new Card() { Id = "01002", Real_name = "Marie", Health = 4, Sanity = 8 };
             CardThree = new Card() { Id = "01080", Real_name = "Knife", Health = 0, Sanity = 0 };
 
-            InvestigatorOne = new Investigator(5, 5, 5, true, true, CardOne, new DeckBuildingRules());
-            InvestigatorTwo = new Investigator(8, 8, 8, false, false, CardTwo, new DeckBuildingRules());
+            InvestigatorOne = new Investigator(5, 5, 5, true, true, CardOne, new DeckBuildingRules01001());
+            InvestigatorTwo = new Investigator(8, 8, 8, false, false, CardTwo, new DeckBuildingRules01001());
         }
     }
 }

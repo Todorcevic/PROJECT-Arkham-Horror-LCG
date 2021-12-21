@@ -3,19 +3,18 @@ using Zenject;
 
 namespace Arkham.Model
 {
-    public class DeckBuildingRules
+    public abstract class DeckBuildingRulesBase : DeckBuildingRules
     {
         private List<Card> allowedCards;
         [Inject] private readonly CardRepository cardRepository;
 
-        public virtual int DeckSize => 30;
-        protected virtual List<string> DeckBuildingFactionConditions => new List<string>();
-        protected virtual List<int> DeckBuildingXpConditions => new List<int>();
-        public List<Card> AllowedCards => allowedCards ?? (allowedCards = Rules());
+        public int DeckSize => 30;
+        protected abstract List<string> DeckBuildingFactionConditions { get; }
+        protected abstract List<int> DeckBuildingXpConditions { get; }
+        public List<Card> AllowedCards => allowedCards ??= Rules();
 
         /*******************************************************************/
-
-        protected virtual List<Card> Rules()
+        private List<Card> Rules()
         {
             List<Card> deckBuildingResult = new List<Card>();
             int i = 0;

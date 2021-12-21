@@ -1,6 +1,6 @@
 {
     "name": "Model",
-    "rootNamespace": "Model",
+    "rootNamespace": "Arkham.Model",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

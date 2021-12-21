@@ -2,6 +2,6 @@
 {
     public class ScenarioRCORE : Scenario
     {
-        public override string Id => "RCORE";
+        public string Id => "RCORE";
     }
 }

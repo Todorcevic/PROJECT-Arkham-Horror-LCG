@@ -2,7 +2,7 @@
 {
     public class CampaignStateComplete : CampaignState
     {
-        public override string Id => "Complete";
-        public override bool IsOpen => false;
+        public string Id => "Complete";
+        public bool IsOpen => false;
     }
 }

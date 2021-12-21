@@ -13,7 +13,7 @@ namespace Tests
         public void Start()
         {
             fakes = new Fakes();
-            investigator = new Investigator(5, 5, 5, true, true, fakes.CardOne, new DeckBuildingRules());
+            investigator = new Investigator(5, 5, 5, true, true, fakes.CardOne, new DeckBuildingRules01001());
         }
 
         [Test]
@@ -138,7 +138,7 @@ namespace Tests
         {
             //Arrange
             Investigator investigator =
-                new Investigator(physicalTrauma, mentalTrauma, 5, true, isRetired, fakes.CardOne, new DeckBuildingRules());
+                new Investigator(physicalTrauma, mentalTrauma, 5, true, isRetired, fakes.CardOne, new DeckBuildingRules01001());
 
             //Act
             InvestigatorState state = investigator.State;

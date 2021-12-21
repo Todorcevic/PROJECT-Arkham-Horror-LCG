@@ -7,6 +7,7 @@ namespace Arkham.Application
 {
     public class NameConventionFactory
     {
+        private const string NULL_SUFFIX = "Null";
         [Inject] private readonly DiContainer diContainer;
 
         /*******************************************************************/
@@ -20,8 +21,8 @@ namespace Arkham.Application
             return (T)instance;
 
             string ResolvingTypeName() => assembly.GetTypes()
-                .Where(type => type.Namespace == instanceType.Namespace).Select(type => type.Name)
-                .Contains(instanceNameComplete) ? instanceNameComplete : instanceType.Name;
+                .Where(type => type.Namespace == instanceType.Namespace && !type.IsInterface).Select(type => type.Name)
+                .Contains(instanceNameComplete) ? instanceNameComplete : instanceType.Name + NULL_SUFFIX;
 
             void InjectingDependency() => diContainer.Inject(instance);
         }
