@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using System;
-using Arkham.Application;
 
 namespace Arkham.Application
 {
@@ -14,8 +13,6 @@ namespace Arkham.Application
         private bool isInactive;
         private const float SCALE = 1.1f;
         public event Action<PointerEventData> ClickAction;
-        public event Action<PointerEventData> EnterAction;
-        public event Action<PointerEventData> ExitAction;
         [Title("RESOURCES")]
         [SerializeField, Required] private InteractableAudio interactableAudio;
         [SerializeField] private Image glow;
@@ -24,29 +21,22 @@ namespace Arkham.Application
         [Title("SETTINGS")]
         [SerializeField] private string textToShow;
         [SerializeField] private bool clickSound;
-        [SerializeField] private bool customHover;
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        public void OnPointerClick(PointerEventData eventData)
         {
             if (clickSound) interactableAudio.ClickSound();
             if (isInactive) CantAdd();
             else ClickAction?.Invoke(eventData);
         }
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        public void OnPointerEnter(PointerEventData eventData)
         {
             if (eventData.dragging) return;
-            if (!customHover) HoverOnEffect();
-            EnterAction?.Invoke(eventData);
+            HoverOnEffect();
         }
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
-        {
-            if (eventData.dragging) return;
-            if (!customHover) HoverOffEffect();
-            ExitAction?.Invoke(eventData);
-        }
+        public void OnPointerExit(PointerEventData eventData) => HoverOffEffect();
 
         public void Activate(bool isActive)
         {

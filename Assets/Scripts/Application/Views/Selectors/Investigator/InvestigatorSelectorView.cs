@@ -19,13 +19,13 @@ namespace Arkham.Application
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
         [SerializeField, Required, ChildGameObjectsOnly] private InvestigatorSelectorDragController dragSensor;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasSensor;
-        [SerializeField, Required, ChildGameObjectsOnly] private Image leaderIcon;
+        [SerializeField, Required, ChildGameObjectsOnly] private ButtonIcon leaderIcon;
 
         private Transform CardVisual => canvasImage.transform;
         private Transform Sensor => dragSensor.transform;
         public Vector2 SensorPosition => Sensor.position;
         public string Id { get; private set; }
-        public bool IsLeader => leaderIcon.enabled;
+        public bool IsLeader { get; private set; }
 
         /*******************************************************************/
         public void SetSelector(string cardId, Sprite cardSprite)
@@ -50,7 +50,11 @@ namespace Arkham.Application
             Sensor.localPosition = Vector3.zero;
         }
 
-        public void LeadIcon(bool isOn) => leaderIcon.enabled = isOn;
+        public void LeadIcon(bool isOn)
+        {
+            leaderIcon.Activate(isOn);
+            IsLeader = isOn;
+        }
 
         public void Glow(bool isOn) => canvasGlow.DOFade(isOn ? 1 : 0, ViewValues.STANDARD_TIME);
 

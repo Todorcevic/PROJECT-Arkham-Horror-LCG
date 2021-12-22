@@ -17,11 +17,11 @@ namespace Arkham.Application
         [Inject] private readonly ChangeInvestigatorUseCase changeInvestigatorUseCase;
         [Inject(Id = "MidZone")] private readonly RectTransform removeZone;
         [Title("RESOURCES")]
-        [SerializeField, Required] private Canvas canvasCard;
+        [SerializeField, Required] private Transform cardImageTransform;
         [SerializeField, Required] private InteractableAudio audioInteractable;
 
         public string Id { private get; set; }
-        private Transform Card => canvasCard.transform;
+        private Transform Card => cardImageTransform;
 
         /*******************************************************************/
         public void OnPointerClick(PointerEventData eventData)
@@ -40,8 +40,8 @@ namespace Arkham.Application
 
             void HoverEnter()
             {
-                if (DOTween.IsTweening(InvestigatorSelectorView.MOVE_ANIMATION)) return;
                 audioInteractable.HoverOnSound();
+                if (DOTween.IsTweening(InvestigatorSelectorView.MOVE_ANIMATION)) return;
                 Card.DOScale(SCALE_HOVER, ViewValues.STANDARD_TIME);
             }
 
@@ -63,7 +63,9 @@ namespace Arkham.Application
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
         {
             isDragging = true;
-            canvasCard.sortingOrder = 2;
+            ShowOver();
+
+            void ShowOver() => Card.parent.SetAsLastSibling();
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData) => Card.position = eventData.position;
@@ -71,7 +73,6 @@ namespace Arkham.Application
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
             isDragging = false;
-            canvasCard.sortingOrder = 1;
             CheckIfRecoverScale();
             if (eventData.hovered.Contains(removeZone.gameObject))
             {

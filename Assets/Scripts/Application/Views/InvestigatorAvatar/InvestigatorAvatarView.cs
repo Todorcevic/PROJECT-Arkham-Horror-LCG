@@ -10,9 +10,9 @@ namespace Arkham.Application
         [Title("RESOURCES")]
         [SerializeField, Required] private CanvasGroup canvasGroup;
         [SerializeField, Required] private Image image;
-        [SerializeField, Required, ChildGameObjectsOnly] private TokenView physicTrauma;
-        [SerializeField, Required, ChildGameObjectsOnly] private TokenView mentalTrauma;
-        [SerializeField, Required, ChildGameObjectsOnly] private TokenView xp;
+        [SerializeField, Required] private TokenView physicTrauma;
+        [SerializeField, Required] private TokenView mentalTrauma;
+        [SerializeField, Required] private TokenView xp;
         [SerializeField] private ButtonIcon physicTraumaButton;
         [SerializeField] private ButtonIcon mentalTraumaButton;
 

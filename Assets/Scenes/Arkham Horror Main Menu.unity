@@ -23582,7 +23582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886318122298897614, guid: 7b9e9e2bbaaf69c438d20f156699680f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 3886318122298897614, guid: 7b9e9e2bbaaf69c438d20f156699680f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -28177,36 +28177,10 @@ PrefabInstance:
       objectReference: {fileID: 524110201}
     - target: {fileID: 8165776995303661140, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
---- !u!1 &1042774413 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8590450183605477844, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
-  m_PrefabInstance: {fileID: 1548662820}
-  m_PrefabAsset: {fileID: 0}
---- !u!223 &1042774417
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1042774413}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 1
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 1
-  m_TargetDisplay: 0
 --- !u!1 &1043274435
 GameObject:
   m_ObjectHideFlags: 0
@@ -42898,7 +42872,7 @@ PrefabInstance:
     - target: {fileID: 3183701225739591869, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
       propertyPath: canvasCard
       value: 
-      objectReference: {fileID: 1042774417}
+      objectReference: {fileID: 0}
     - target: {fileID: 4040927172998764470, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
       propertyPath: m_Name
       value: Investigator Selector 2
@@ -42917,7 +42891,7 @@ PrefabInstance:
       objectReference: {fileID: 524110201}
     - target: {fileID: 8165776995303661140, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9214756760449780945, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
       propertyPath: m_Enabled
@@ -43575,9 +43549,17 @@ PrefabInstance:
       propertyPath: removeZone
       value: 
       objectReference: {fileID: 524110201}
+    - target: {fileID: 6507702765034026266, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7720209778145928328, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8165776995303661140, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
@@ -44701,9 +44683,17 @@ PrefabInstance:
       propertyPath: removeZone
       value: 
       objectReference: {fileID: 524110201}
+    - target: {fileID: 6507702765034026266, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7720209778145928328, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8165776995303661140, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9086390471356268452, guid: b1c5ec99db5f3ce46a56c0cda0dba12c, type: 3}
       propertyPath: m_BlockingMask.m_Bits
