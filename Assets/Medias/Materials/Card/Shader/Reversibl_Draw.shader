@@ -35,7 +35,7 @@ fixed4 _Color;
 
 void surf (Input IN, inout SurfaceOutputStandard o)
 {
-fixed4 c = tex2D (_MainTex2, IN.uv_MainTex) * _Color;
+fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
 o.Albedo = c.rgb;
 o.Metallic = _Metallic;
 o.Smoothness = _Glossiness;
@@ -51,12 +51,11 @@ CGPROGRAM
 #pragma surface surf Standard alphatest:_Cutoff fullforwardshadows vertex:vert
 #pragma target 3.0
 
-sampler2D _MainTex;
-
+sampler2D _MainTex2;
 
 struct Input
 {
-float2 uv_MainTex;
+float2 uv_MainTex2;
 };
 
 void vert (inout appdata_full v)
@@ -68,10 +67,10 @@ half _Glossiness;
 half _Metallic;
 fixed4 _Color;
 
-
 void surf (Input IN, inout SurfaceOutputStandard o)
 {
-fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+IN.uv_MainTex2.x = 1 - IN.uv_MainTex2.x;
+fixed4 c = tex2D (_MainTex2, IN.uv_MainTex2) * _Color;
 o.Albedo = c.rgb;
 o.Metallic = _Metallic;
 o.Smoothness = _Glossiness;
