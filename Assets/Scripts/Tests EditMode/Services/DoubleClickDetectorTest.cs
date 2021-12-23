@@ -8,7 +8,7 @@ namespace Tests
     [TestFixture]
     public class DoubleClickDetectorTest : ZenjectUnitTestFixture
     {
-        private DoubleClickDetector doubleClickDetector;
+        private DoubleClickDetectorService doubleClickDetector;
         private GameObject item1;
         private GameObject item2;
         private float fastTimeElapse;
@@ -17,7 +17,7 @@ namespace Tests
         [SetUp]
         public void CommonInstall()
         {
-            doubleClickDetector = new DoubleClickDetector();
+            doubleClickDetector = new DoubleClickDetectorService();
             item1 = new GameObject();
             item2 = new GameObject();
             fastTimeElapse = 0.1f;

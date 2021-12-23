@@ -2,7 +2,7 @@
 
 namespace Arkham.Application
 {
-    public class PlayerPrefsAdapter
+    public class PlayerPrefsService
     {
         private const string KEY_VISIBILITY = "CardsVisibility";
         private const string PREFIX_IMAGE = "ImageCard";

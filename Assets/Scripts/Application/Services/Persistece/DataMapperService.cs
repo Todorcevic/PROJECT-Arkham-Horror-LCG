@@ -3,14 +3,14 @@ using Zenject;
 
 namespace Arkham.Application
 {
-    public class DataMapper
+    public class DataMapperService
     {
         [Inject] private readonly CardRepository cardRepository;
         [Inject] private readonly CampaignRepository campaignRepository;
         [Inject] private readonly InvestigatorRepository investigatorRepository;
         [Inject] private readonly SelectorRepository selectorRepository;
         [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
-        [Inject] private readonly NameConventionFactory factory;
+        [Inject] private readonly NameConventionFactoryService factory;
 
         /*******************************************************************/
         public FullDTO CreateDTO()

@@ -3,9 +3,9 @@ using Zenject;
 
 namespace Arkham.Application
 {
-    public class ScreenResolutionAutoDetect
+    public class ScreenResolutionAutoDetectService
     {
-        [Inject] private readonly ScreenResolutionAdapter screenAdapter;
+        [Inject] private readonly ScreenResolutionService screenAdapter;
 
         /*******************************************************************/
         public void SettingResolution()

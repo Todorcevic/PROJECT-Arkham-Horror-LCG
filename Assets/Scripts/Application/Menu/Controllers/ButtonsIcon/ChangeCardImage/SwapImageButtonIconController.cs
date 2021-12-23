@@ -10,7 +10,7 @@ namespace Arkham.Application
         private int imageNumber;
         private CardView cardView;
         [Inject] private readonly ImagesCardManager imageCards;
-        [Inject] private readonly PlayerPrefsAdapter playerPref;
+        [Inject] private readonly PlayerPrefsService playerPref;
         [SerializeField, Required] private ButtonIconView changeImage;
 
         private string CardImageName => cardView.Id + (imageNumber > 0 ? "-" + imageNumber : string.Empty);

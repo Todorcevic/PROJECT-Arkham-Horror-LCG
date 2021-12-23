@@ -6,7 +6,7 @@ namespace Arkham.Application
 {
     public class StartGameUseCase
     {
-        [Inject] private readonly DataContext dataPersistence;
+        [Inject] private readonly DataContextService dataPersistence;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
         [Inject] private readonly InvestigatorsCardPresenter investigatorsCard;
         [Inject] private readonly DeckCardPresenter deckCardPresenter;

@@ -1,5 +1,4 @@
-﻿using Arkham.Application;
-using Zenject;
+﻿using Zenject;
 
 namespace Arkham.Application
 {
@@ -10,10 +9,8 @@ namespace Arkham.Application
         public override void InstallBindings()
         {
             /*** Services ***/
-            Container.Bind<ScreenResolutionAutoDetect>().AsSingle();
-            Container.Bind<DoubleClickDetector>().AsSingle();
-            Container.Bind<DataContext>().AsSingle();
-            Container.Bind<DataMapper>().AsSingle();
+            Container.Bind(x => x.AllNonAbstractClasses()
+            .InNamespace("Arkham").WithSuffix("Service")).AsSingle();
 
             /*** Controllers ***/
             Container.Bind(x => x.AllNonAbstractClasses()
@@ -28,14 +25,7 @@ namespace Arkham.Application
 
             /*** Presenters ***/
             Container.Bind(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham").WithSuffix("Presenter")).AsCached();
-
-            Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham").WithSuffix("Presenter")).AsCached();
-
-            /*** Adapters ***/
-            Container.Bind(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham").WithSuffix("Adapter")).AsSingle();
+            .InNamespace("Arkham").WithSuffix("Presenter")).AsSingle();
 
             /*** Use Cases ***/
             Container.Bind(x => x.AllNonAbstractClasses()
@@ -51,9 +41,6 @@ namespace Arkham.Application
 
             /*** Resources ***/
             Container.Bind<CampaignStateSO>().FromScriptableObjectResource(gamefiles.CAMPAIGNS_STATES).AsSingle();
-
-            /*** Factories ***/
-            Container.Bind<NameConventionFactory>().AsSingle();
         }
     }
 }

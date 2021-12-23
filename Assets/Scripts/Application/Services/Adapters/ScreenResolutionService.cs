@@ -2,7 +2,7 @@
 
 namespace Arkham.Application
 {
-    public class ScreenResolutionAdapter
+    public class ScreenResolutionService
     {
         public Resolution[] ResolutionsSupported => Screen.resolutions;
 

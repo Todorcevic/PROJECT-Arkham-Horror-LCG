@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Arkham.Application
 {
-    public class NameConventionFactory
+    public class NameConventionFactoryService
     {
         private const string NULL_SUFFIX = "Null";
         [Inject] private readonly DiContainer diContainer;
