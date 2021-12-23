@@ -11,7 +11,7 @@ namespace Arkham.Application
         [Inject] private readonly DeckCardPresenter cardVisibility;
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject] private readonly InvestigatorAvatarView investigatorAvatar;
-        [Inject(Id = "RetireButton")] private readonly ButtonIcon retireButton;
+        [Inject(Id = "RetireButton")] private readonly ButtonIconView retireButton;
         [Inject] private readonly CardSelectorPresenter cardSelector;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly CardsManager investigatorCardsManager;

@@ -1,64 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &2557956115638621037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 15634261444514112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9a81b3dd9f56024c8fa5953110258d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactableAudio: {fileID: 8091184282828450129}
-  glow: {fileID: 2947613413951468456}
-  text: {fileID: 1774001995625100355}
-  canvas: {fileID: 0}
-  timeHoverAnimation: 0.1
-  scaleAnimation: 1.1
-  timeShakeAnimation: 0.1
-  textToShow: 8 Xp
-  clickSound: 1
-  enableColor: {r: 0.05882353, g: 0.23529412, b: 0.05882353, a: 1}
-  disableColor: {r: 0.23529412, g: 0.05882353, b: 0.05882353, a: 1}
---- !u!114 &6323891619124160295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 15634261444514112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 2557956115638621037}
-  _identifier: MentalTraumaButton
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 0
---- !u!114 &5453986080626348822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 727674700742876900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 7232189419699815923}
-  _identifier: RetireButton
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 0
 --- !u!1 &2620530937855834698
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,47 +114,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
---- !u!114 &2781308589390935725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3790328268216626689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 8898580354546220259}
-  _identifier: PhysicTraumaButton
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 0
---- !u!114 &8898580354546220259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3790328268216626689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9a81b3dd9f56024c8fa5953110258d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactableAudio: {fileID: 8091184282828450129}
-  glow: {fileID: 1442500795205615847}
-  text: {fileID: 1341772128775563455}
-  canvas: {fileID: 0}
-  timeHoverAnimation: 0.1
-  scaleAnimation: 1.1
-  timeShakeAnimation: 0.1
-  textToShow: 8 Xp
-  clickSound: 1
-  enableColor: {r: 0.05882353, g: 0.23529412, b: 0.05882353, a: 1}
-  disableColor: {r: 0.23529412, g: 0.05882353, b: 0.05882353, a: 1}
 --- !u!1 &4066093535154912078
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,6 +697,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
+--- !u!4 &880116505994337593 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1746173441245118772, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
+  m_PrefabInstance: {fileID: 1444927822016748557}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8091184282828450129 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7225114169980597596, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
@@ -808,11 +713,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038d7dc22c3565849878ed7593cc2df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &880116505994337593 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1746173441245118772, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
-  m_PrefabInstance: {fileID: 1444927822016748557}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2245975100092630547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -951,7 +851,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaa97ed19f7a52848a4d435e4d18ff0e, type: 3}
+  m_Script: {fileID: 11500000, guid: e027da9d9f6c73144bbe287c96ecdf2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &5601652980900541034
@@ -1079,6 +979,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec8f10fb162ac84409822f9781ab2412, type: 3}
+--- !u!1 &3790328268216626689 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8729351357657111659, guid: ec8f10fb162ac84409822f9781ab2412, type: 3}
+  m_PrefabInstance: {fileID: 5601652980900541034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &792355222283409548 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5134687782990867174, guid: ec8f10fb162ac84409822f9781ab2412, type: 3}
@@ -1087,7 +992,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3790328268216626689}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaa97ed19f7a52848a4d435e4d18ff0e, type: 3}
+  m_Script: {fileID: 11500000, guid: e027da9d9f6c73144bbe287c96ecdf2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &2798177457027039016 stripped
@@ -1095,11 +1000,42 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7739451522199555394, guid: ec8f10fb162ac84409822f9781ab2412, type: 3}
   m_PrefabInstance: {fileID: 5601652980900541034}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3790328268216626689 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8729351357657111659, guid: ec8f10fb162ac84409822f9781ab2412, type: 3}
-  m_PrefabInstance: {fileID: 5601652980900541034}
+--- !u!114 &2781308589390935725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790328268216626689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 8898580354546220259}
+  _identifier: PhysicTraumaButton
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
+--- !u!114 &8898580354546220259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790328268216626689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b939389bed3bc64096e44ee445c1449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableAudio: {fileID: 8091184282828450129}
+  glow: {fileID: 1442500795205615847}
+  text: {fileID: 1341772128775563455}
+  canvas: {fileID: 0}
+  textToShow: 8 XP
+  clickSound: 1
 --- !u!1001 &7946442589447929314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1227,9 +1163,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 727674700742876900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9a81b3dd9f56024c8fa5953110258d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b939389bed3bc64096e44ee445c1449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5453986080626348822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727674700742876900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 7232189419699815923}
+  _identifier: RetireButton
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1001 &8724432937845525803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1359,11 +1313,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec8f10fb162ac84409822f9781ab2412, type: 3}
---- !u!1 &15634261444514112 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8729351357657111659, guid: ec8f10fb162ac84409822f9781ab2412, type: 3}
-  m_PrefabInstance: {fileID: 8724432937845525803}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1331772116639383657 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7739451522199555394, guid: ec8f10fb162ac84409822f9781ab2412, type: 3}
@@ -1377,6 +1326,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 15634261444514112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaa97ed19f7a52848a4d435e4d18ff0e, type: 3}
+  m_Script: {fileID: 11500000, guid: e027da9d9f6c73144bbe287c96ecdf2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &15634261444514112 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8729351357657111659, guid: ec8f10fb162ac84409822f9781ab2412, type: 3}
+  m_PrefabInstance: {fileID: 8724432937845525803}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2557956115638621037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15634261444514112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b939389bed3bc64096e44ee445c1449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableAudio: {fileID: 8091184282828450129}
+  glow: {fileID: 2947613413951468456}
+  text: {fileID: 1774001995625100355}
+  canvas: {fileID: 0}
+  textToShow: 8 XP
+  clickSound: 1
+--- !u!114 &6323891619124160295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15634261444514112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 2557956115638621037}
+  _identifier: MentalTraumaButton
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0

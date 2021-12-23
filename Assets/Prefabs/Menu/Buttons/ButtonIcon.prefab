@@ -270,7 +270,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7232313873091879686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9a81b3dd9f56024c8fa5953110258d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b939389bed3bc64096e44ee445c1449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactableAudio: {fileID: 2124352082400043575}
@@ -279,7 +279,6 @@ MonoBehaviour:
   canvas: {fileID: 4329434936648613502}
   textToShow: 
   clickSound: 0
-  customHover: 0
 --- !u!1 &8867609605388215213
 GameObject:
   m_ObjectHideFlags: 0

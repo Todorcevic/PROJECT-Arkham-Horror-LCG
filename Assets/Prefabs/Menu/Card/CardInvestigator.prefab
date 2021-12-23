@@ -337,7 +337,7 @@ MonoBehaviour:
   canvasGlow: {fileID: 7584511528615126907}
   image: {fileID: 7254246650819031572}
   glow: {fileID: 7901705940009983470}
-  changeImageController: {fileID: 1574753754355522923}
+  changeImageController: {fileID: 3647824578705925238}
   states:
   - {fileID: 6651706689059554810}
   - {fileID: 7149418375056321704}
@@ -889,6 +889,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4329434936648613502, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6383684541787554902, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
@@ -932,7 +936,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6434310686253223757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9a81b3dd9f56024c8fa5953110258d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b939389bed3bc64096e44ee445c1449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &1485568076417343980 stripped
@@ -940,7 +944,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2992879549137472935, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
   m_PrefabInstance: {fileID: 4401446598901165131}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1574753754355522923
+--- !u!114 &3647824578705925238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
