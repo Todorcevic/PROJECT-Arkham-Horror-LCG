@@ -1,8 +1,8 @@
 ﻿namespace Arkham.Model
 {
-    public interface CampaignState
+    public class CampaignState
     {
-        string Id { get; }
-        bool IsOpen { get; }
+        public virtual string Id { get; }
+        public virtual bool IsOpen { get; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace Arkham.Model
 {
-    public interface Scenario
+    public class Scenario
     {
-        string Id { get; }
+        public virtual string Id { get; }
     }
 }

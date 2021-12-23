@@ -8,10 +8,10 @@ namespace Arkham.Model
         private List<Card> allowedCards;
         [Inject] private readonly CardRepository cardRepository;
 
-        public int DeckSize => 30;
+        public override int DeckSize => 30;
+        public override List<Card> AllowedCards => allowedCards ??= Rules();
         protected abstract List<string> DeckBuildingFactionConditions { get; }
         protected abstract List<int> DeckBuildingXpConditions { get; }
-        public List<Card> AllowedCards => allowedCards ??= Rules();
 
         /*******************************************************************/
         private List<Card> Rules()

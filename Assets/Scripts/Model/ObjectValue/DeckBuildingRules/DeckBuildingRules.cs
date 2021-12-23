@@ -2,9 +2,9 @@
 
 namespace Arkham.Model
 {
-    public interface DeckBuildingRules
+    public class DeckBuildingRules
     {
-        int DeckSize { get; }
-        List<Card> AllowedCards { get; }
+        public virtual int DeckSize { get; }
+        public virtual List<Card> AllowedCards { get; } = new List<Card>();
     }
 }
