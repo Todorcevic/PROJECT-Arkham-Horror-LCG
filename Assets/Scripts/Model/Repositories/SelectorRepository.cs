@@ -5,7 +5,7 @@ namespace Arkham.Model
 {
     public class SelectorRepository
     {
-        private List<Investigator> investigators = new List<Investigator>();
+        private readonly List<Investigator> investigators = new List<Investigator>();
 
         public Investigator Lead => investigators.FirstOrDefault();
         public int AmontInvestigatorsSelected => investigators.Count;

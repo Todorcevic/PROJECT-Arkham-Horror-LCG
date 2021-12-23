@@ -6,7 +6,7 @@ namespace Arkham.Application
     public class ChangeInvestigatorUseCase
     {
         [Inject] private readonly InvestigatorRepository investigatorRepository;
-        [Inject] private readonly SelectorRepository selector;
+        [Inject] private readonly SelectorRepository selectorRepository;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
 
         /*******************************************************************/
@@ -18,7 +18,7 @@ namespace Arkham.Application
         }
 
         private string UpdateModel(int positionToSwap, Investigator investigatorToSwap) =>
-            selector.Swap(positionToSwap, investigatorToSwap).Id;
+            selectorRepository.Swap(positionToSwap, investigatorToSwap).Id;
 
         private void UpdateView(string investigatorToSwapId, string investigatorFromSwapId)
         {

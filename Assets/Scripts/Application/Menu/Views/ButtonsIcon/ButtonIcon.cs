@@ -12,7 +12,7 @@ namespace Arkham.Application
     {
         private bool isInactive;
         private const float SCALE = 1.1f;
-        public event Action<PointerEventData> ClickAction;
+        public event Action ClickAction;
         [Title("RESOURCES")]
         [SerializeField, Required] private InteractableAudio interactableAudio;
         [SerializeField] private Image glow;
@@ -27,7 +27,7 @@ namespace Arkham.Application
         {
             if (clickSound) interactableAudio.ClickSound();
             if (isInactive) CantAdd();
-            else ClickAction?.Invoke(eventData);
+            else ClickAction?.Invoke();
         }
 
         public void OnPointerEnter(PointerEventData eventData)

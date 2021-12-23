@@ -3,7 +3,7 @@ using Zenject;
 namespace Arkham.Application
 {
 
-    public class TraumasController : IInitializable
+    public class TraumasButtonIconController : IInitializable
     {
         [Inject] private readonly RemoveTraumasUseCase removeTraumasUseCase;
         [Inject(Id = "PhysicTraumaButton")] private readonly ButtonIcon physicTraumaButton;
@@ -12,8 +12,8 @@ namespace Arkham.Application
         /*******************************************************************/
         public void Initialize()
         {
-            physicTraumaButton.ClickAction += (_) => removeTraumasUseCase.RemovePhysicTrauma();
-            mentalTraumaButton.ClickAction += (_) => removeTraumasUseCase.RemoveMentalTrauma();
+            physicTraumaButton.ClickAction += removeTraumasUseCase.RemovePhysicTrauma;
+            mentalTraumaButton.ClickAction += removeTraumasUseCase.RemoveMentalTrauma;
         }
     }
 }

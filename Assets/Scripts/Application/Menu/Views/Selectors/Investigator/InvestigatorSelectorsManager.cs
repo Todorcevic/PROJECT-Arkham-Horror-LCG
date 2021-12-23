@@ -13,7 +13,6 @@ namespace Arkham.Application
 
         public string InvestigatorSelected => currentInvestigator;
         public InvestigatorSelectorView GetCurrentLeadSelector => selectors.Find(invSelectorView => invSelectorView.IsLeader);
-        public InvestigatorSelectorView GetRealLeadSelector => selectors[0];
 
         /*******************************************************************/
         public InvestigatorSelectorView GetEmptySelector() => selectors.Find(selector => selector.Id == null);
@@ -38,7 +37,7 @@ namespace Arkham.Application
         public void ArrangeAllSelectors()
         {
             RebuildPlaceHolders();
-            selectors.ForEach(s => s.ArrangeAnimation());
+            selectors.ForEach(selector => selector.ArrangeAnimation());
         }
 
         public void RebuildPlaceHolders() => LayoutRebuilder.ForceRebuildLayoutImmediate(placeHoldersZone);

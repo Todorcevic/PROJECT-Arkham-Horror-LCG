@@ -7,7 +7,7 @@ namespace Arkham.Application
 {
     public class InvestigatorSelectorPresenter
     {
-        [Inject] private readonly SelectorRepository selectors;
+        [Inject] private readonly SelectorRepository selectorRepository;
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly SelectInvestigatorUseCase investigatorSelectUseCase;
@@ -23,7 +23,7 @@ namespace Arkham.Application
 
             void AddAllInvestigators()
             {
-                foreach (string investigatorId in selectors.InvestigatorsIdInSelector)
+                foreach (string investigatorId in selectorRepository.InvestigatorsIdInSelector)
                 {
                     InvestigatorSelectorView selector = investigatorSelectorsManager.GetEmptySelector();
                     SetThisSelectorWithThisInvestigator(selector, investigatorId);
@@ -34,7 +34,7 @@ namespace Arkham.Application
 
         public void SetLeadSelector()
         {
-            string realLeadInvestigator = selectors.Lead?.Id;
+            string realLeadInvestigator = selectorRepository.Lead?.Id;
             if (realLeadInvestigator == null || realLeadInvestigator == LeadSelector?.Id) return;
             LeadSelector?.LeadIcon(false);
             investigatorSelectorsManager.GetSelectorById(realLeadInvestigator).LeadIcon(true);

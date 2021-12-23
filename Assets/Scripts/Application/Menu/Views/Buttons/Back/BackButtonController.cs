@@ -1,5 +1,4 @@
-﻿using Arkham.Application;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Zenject;
 
 namespace Arkham.Application
@@ -12,11 +11,7 @@ namespace Arkham.Application
         [Inject] private readonly DataContext dataPersistence;
 
         /*******************************************************************/
-        void IInitializable.Initialize()
-        {
-            foreach (ButtonView button in backButtons)
-                button.ClickAction += Clicked;
-        }
+        void IInitializable.Initialize() => backButtons.ForEach(button => button.ClickAction += Clicked);
 
         /*******************************************************************/
         private void Clicked()

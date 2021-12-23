@@ -17,8 +17,8 @@ namespace Arkham.Application
             SelectCampaignUpdateView();
         }
 
-        void SelectCampaignUpdateModel(string campaignId) => campaignRepository.SelectFirstScenarioOf(campaignId);
+        private void SelectCampaignUpdateModel(string campaignId) => campaignRepository.SelectFirstScenarioOf(campaignId);
 
-        void SelectCampaignUpdateView() => continueButton.Desactive(campaignRepository.CurrentScenario == null);
+        private void SelectCampaignUpdateView() => continueButton.Desactive(campaignRepository.CurrentScenario == null);
     }
 }

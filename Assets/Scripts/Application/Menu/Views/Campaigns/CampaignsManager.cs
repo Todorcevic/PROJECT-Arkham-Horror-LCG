@@ -1,5 +1,4 @@
-﻿using Arkham.Application;
-using Arkham.Model;
+﻿using Arkham.Model;
 using System.Collections.Generic;
 using Zenject;
 
@@ -16,8 +15,8 @@ namespace Arkham.Application
         {
             foreach (Campaign campaign in campaignRepository.Campaigns)
             {
-                CampaignView campaignView = campaigns.Find(c => c.Id == campaign.Id);
-                states.Find(s => s.Id == campaign.State.Id).ExecuteState(campaignView);
+                CampaignView campaignView = campaigns.Find(campaignview => campaignview.Id == campaign.Id);
+                states.Find(state => state.Id == campaign.State.Id).ExecuteState(campaignView);
                 campaignView.IsOpen = campaign.State.IsOpen;
             }
         }

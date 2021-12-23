@@ -29,7 +29,7 @@ namespace Arkham.Application
         private void SetController()
         {
             imageNumber = playerPref.LoadImageNumber(cardView.Id);
-            changeImage.ClickAction += (_) => ChangeImage();
+            changeImage.ClickAction += ChangeImage;
 
             void ChangeImage()
             {
@@ -48,6 +48,7 @@ namespace Arkham.Application
             }
         }
 
-        private void ChangeCardImage() => cardView.ChangeImage(imageCards.GetSprite(CardImageName), imageCards.GetBackSprite(CardImageName));
+        private void ChangeCardImage() =>
+            cardView.ChangeImage(imageCards.GetSprite(CardImageName), imageCards.GetBackSprite(CardImageName));
     }
 }
