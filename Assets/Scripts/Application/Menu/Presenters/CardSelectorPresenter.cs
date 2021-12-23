@@ -12,7 +12,7 @@ namespace Arkham.Application
         [Inject(Id = "CardPlaceHolderZone")] private readonly RectTransform placeHolderZone;
         [Inject] private readonly CardSelectorsManager cardSelectorsManager;
         [Inject] private readonly SelectorSelectionInteractor selectorSelectionInteractor;
-        [Inject] private readonly ImagesCardManagerr imageCards;
+        [Inject] private readonly ImagesCardManager imageCards;
 
         /*******************************************************************/
         public void ShowAllCards(Investigator investigator)

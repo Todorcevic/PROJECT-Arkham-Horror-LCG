@@ -9,7 +9,7 @@ namespace Arkham.Application
     {
         private int imageNumber;
         private CardView cardView;
-        [Inject] private readonly ImagesCardManagerr imageCards;
+        [Inject] private readonly ImagesCardManager imageCards;
         [Inject] private readonly PlayerPrefsAdapter playerPref;
         [SerializeField, Required] private ButtonIconView changeImage;
 
