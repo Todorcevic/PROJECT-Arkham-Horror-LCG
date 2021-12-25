@@ -16,7 +16,8 @@ namespace Arkham.Application
         {
             resolutionSetter.SettingResolution();
             dataContext.LoadDataCards();
-            imagesCardManager.Load();
+            //imagesCardManager.Load();
+            imagesCardManager.Build();
             cardFactory.BuildDeckCards();
             cardFactory.BuildInvestigatorCards();
             //mapper.SaveProgress();
