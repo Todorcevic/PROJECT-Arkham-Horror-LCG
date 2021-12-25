@@ -1,6 +1,4 @@
-﻿using Arkham.Application;
-using Arkham.Model;
-using Zenject;
+﻿using Zenject;
 
 namespace Arkham.Application
 {

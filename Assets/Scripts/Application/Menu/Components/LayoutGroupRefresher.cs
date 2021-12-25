@@ -5,7 +5,11 @@ namespace Arkham.Application
 {
     public class LayoutGroupRefresher : MonoBehaviour
     {
-        private void Start() => Refresh();
+        private void Start()
+        {
+            Refresh();
+            Destroy(gameObject);
+        }
 
         private void Refresh()
         {

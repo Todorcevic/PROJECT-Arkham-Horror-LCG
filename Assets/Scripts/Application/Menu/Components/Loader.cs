@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Arkham.Application
@@ -24,6 +25,12 @@ namespace Arkham.Application
         private void OnDestroy()
         {
             DOTween.KillAll();
+        }
+
+        public void LoadScene(string sceneId)
+        {
+            DOTween.CompleteAll();
+            SceneManager.LoadScene(sceneId);
         }
     }
 }

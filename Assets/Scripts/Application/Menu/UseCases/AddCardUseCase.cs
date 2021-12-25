@@ -1,8 +1,4 @@
 ﻿using Arkham.Model;
-using Arkham.Application;
-using DG.Tweening;
-using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Arkham.Application

@@ -1,7 +1,5 @@
 ﻿using Arkham.Model;
 using DG.Tweening;
-using System.Collections;
-using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -11,6 +9,7 @@ namespace Arkham.Application
     {
         [Inject] private readonly SelectorRepository selector;
         [Inject] private readonly CampaignRepository campaignRepository;
+        [Inject] private readonly Loader loader;
 
         /*******************************************************************/
         public void Start()
@@ -21,10 +20,6 @@ namespace Arkham.Application
 
         private void UpdateModel() => selector.ReadyAllInvestigators();
 
-        private void UpdateView()
-        {
-            DOTween.CompleteAll();
-            SceneManager.LoadScene(campaignRepository.CurrentScenario.Id);
-        }
+        private void UpdateView() => loader.LoadScene(campaignRepository.CurrentScenario.Id);
     }
 }

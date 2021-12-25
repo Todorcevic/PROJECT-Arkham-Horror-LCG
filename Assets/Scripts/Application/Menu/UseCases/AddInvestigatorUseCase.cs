@@ -1,6 +1,4 @@
 ﻿using Arkham.Model;
-using Arkham.Application;
-using DG.Tweening;
 using Zenject;
 
 namespace Arkham.Application

@@ -1,7 +1,4 @@
 ﻿using Arkham.Model;
-using Arkham.Application;
-using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Arkham.Application
@@ -13,8 +10,8 @@ namespace Arkham.Application
         [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CardsQuantityView cardQuantity;
-        [Inject] private readonly CardSelectorPresenter cardSelector;
-        [Inject] private readonly CardShowerPresenter multiAnimator;
+        [Inject] private readonly CardSelectorPresenter cardSelectorPresenter;
+        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Inject(Id = "CardsButton")] private readonly ButtonView cardsButton;
 
         /*******************************************************************/
@@ -30,13 +27,13 @@ namespace Arkham.Application
 
         private void UpdateView(Card card, Investigator investigator)
         {
-            multiAnimator.RemoveCard(card.Id);
-            cardSelector.SetCardInSelector(card, investigator);
-            cardSelector.SetCanBeRemovedInSelectors(investigator.Id);
+            cardShowerPresenter.RemoveCard(card.Id);
+            cardSelectorPresenter.SetCardInSelector(card, investigator);
+            cardSelectorPresenter.SetCanBeRemovedInSelectors(investigator.Id);
             deckCardPresenter.RefreshCardsSelectability();
             deckCardPresenter.SetQuantity(card);
             cardQuantity.Refresh(investigator);
-            multiAnimator.ReshowCardSelector(card.Id);
+            cardShowerPresenter.ReshowCardSelector(card.Id);
             readyButton.AutoActivate();
             cardsButton.ExecuteClick();
         }
