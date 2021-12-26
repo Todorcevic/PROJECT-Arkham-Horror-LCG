@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using DG.Tweening;
 using Zenject;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public abstract class CardController : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {

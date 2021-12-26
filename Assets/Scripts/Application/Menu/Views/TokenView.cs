@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class TokenView : MonoBehaviour
     {

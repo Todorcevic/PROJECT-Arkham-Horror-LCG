@@ -4,8 +4,6 @@ using System.Linq;
 
 namespace Arkham.Model
 {
-    public enum InvestigatorState { None, Killed, Insane, Retired }
-
     public class Investigator
     {
         private bool isRetired;

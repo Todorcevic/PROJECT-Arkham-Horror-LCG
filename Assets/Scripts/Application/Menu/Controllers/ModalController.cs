@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class ModalController : MonoBehaviour
     {

@@ -1,10 +1,9 @@
-﻿using Arkham.Application;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class PanelView : MonoBehaviour

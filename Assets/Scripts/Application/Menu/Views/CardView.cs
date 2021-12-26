@@ -1,10 +1,9 @@
-﻿using Arkham.Application;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public abstract class CardView : MonoBehaviour, IShowable
     {

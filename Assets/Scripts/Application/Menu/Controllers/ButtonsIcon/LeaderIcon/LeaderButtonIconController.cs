@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class LeaderButtonIconController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {

@@ -1,9 +1,7 @@
 ﻿using Arkham.Model;
-using DG.Tweening;
-using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class StartPlayUseCase
     {

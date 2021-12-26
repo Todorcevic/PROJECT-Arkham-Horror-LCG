@@ -1,7 +1,7 @@
 ﻿using UnityEngine.EventSystems;
 using Zenject;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class DeckCardController : CardController
     {

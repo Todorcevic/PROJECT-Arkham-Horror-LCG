@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class LayoutGroupRefresher : MonoBehaviour
     {

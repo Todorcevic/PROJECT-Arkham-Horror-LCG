@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public enum InstancesInjected
     {

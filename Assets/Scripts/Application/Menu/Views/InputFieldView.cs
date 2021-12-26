@@ -1,4 +1,3 @@
-using Arkham.Application;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using System;
@@ -7,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class InputFieldView : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler,
         IPointerExitHandler, IUpdateSelectedHandler

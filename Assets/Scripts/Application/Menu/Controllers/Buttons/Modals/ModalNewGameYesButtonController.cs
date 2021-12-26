@@ -1,6 +1,6 @@
 ﻿using Zenject;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class ModalNewGameYesButtonController : IInitializable
     {

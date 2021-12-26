@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5644537657517472392}
   - component: {fileID: 9077669025050693591}
+  - component: {fileID: 5900590192062197086}
   m_Layer: 0
   m_Name: SimpleZone
   m_TagString: Untagged
@@ -43,3 +44,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c0491becf1e9c24a9433124c7fbfc4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5900590192062197086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5231787143035082905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 9077669025050693591}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0

@@ -2,7 +2,7 @@
 using Zenject;
 using Arkham.Model;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class ContinueButtonController : IInitializable
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class PlaceHoldersZoneView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public interface IShowable
     {

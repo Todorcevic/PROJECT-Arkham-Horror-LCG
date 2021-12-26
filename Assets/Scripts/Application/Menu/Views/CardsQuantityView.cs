@@ -2,9 +2,8 @@
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
-using Zenject;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class CardsQuantityView : MonoBehaviour
     {

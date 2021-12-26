@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class InvestigatorCardView : CardView
     {

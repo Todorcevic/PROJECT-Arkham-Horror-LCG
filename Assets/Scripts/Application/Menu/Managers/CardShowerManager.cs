@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Zenject;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class CardShowerManager
     {

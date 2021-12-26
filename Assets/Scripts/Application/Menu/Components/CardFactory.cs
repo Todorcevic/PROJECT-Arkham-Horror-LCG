@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class CardFactory : MonoBehaviour
     {

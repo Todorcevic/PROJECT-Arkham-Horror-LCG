@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class ButtonIconView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {

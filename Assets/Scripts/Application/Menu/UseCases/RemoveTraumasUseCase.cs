@@ -1,7 +1,7 @@
 ﻿using Arkham.Model;
 using Zenject;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class RemoveTraumasUseCase
     {

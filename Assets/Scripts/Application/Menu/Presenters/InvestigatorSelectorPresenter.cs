@@ -3,7 +3,7 @@ using UnityEngine;
 using Arkham.Model;
 using DG.Tweening;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class InvestigatorSelectorPresenter
     {

@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     [CreateAssetMenu(fileName = "InteractableClips", menuName = "InteractableClips", order = 1)]
     public class ClipsInteractable : ScriptableObject

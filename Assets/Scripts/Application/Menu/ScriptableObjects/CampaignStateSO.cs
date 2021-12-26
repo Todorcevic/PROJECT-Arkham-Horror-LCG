@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     [CreateAssetMenu(fileName = "BasicCampaignState", menuName = "BasicCampaignState", order = 1)]
     public class CampaignStateSO : ScriptableObject

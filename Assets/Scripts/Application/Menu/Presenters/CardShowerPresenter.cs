@@ -2,7 +2,7 @@ using UnityEngine;
 using Zenject;
 using UnityEngine.UI;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class CardShowerPresenter
     {

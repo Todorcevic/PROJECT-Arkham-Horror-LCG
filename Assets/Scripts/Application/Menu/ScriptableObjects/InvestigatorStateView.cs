@@ -1,7 +1,7 @@
 using Arkham.Model;
 using UnityEngine;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class InvestigatorStateView : MonoBehaviour
     {

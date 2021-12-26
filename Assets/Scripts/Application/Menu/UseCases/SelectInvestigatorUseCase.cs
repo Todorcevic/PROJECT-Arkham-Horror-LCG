@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class SelectInvestigatorUseCase
     {

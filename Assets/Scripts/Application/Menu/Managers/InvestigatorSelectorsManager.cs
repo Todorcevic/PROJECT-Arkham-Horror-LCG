@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using Zenject;
 using UnityEngine;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class InvestigatorSelectorsManager
     {

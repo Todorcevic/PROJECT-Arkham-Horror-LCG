@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Arkham.Application
+namespace Arkham.Application.MainMenu
 {
     public class CardsManager
     {
