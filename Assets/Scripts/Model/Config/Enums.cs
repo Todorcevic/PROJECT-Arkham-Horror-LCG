@@ -5,7 +5,7 @@ namespace Arkham.Model
     public enum InvestigatorState { None, Killed, Insane, Retired }
 
     [Flags]
-    public enum Zone
+    public enum ZoneType
     {
         None = 0,
         Investigator = 1,

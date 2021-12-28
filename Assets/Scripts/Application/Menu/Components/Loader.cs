@@ -23,10 +23,7 @@ namespace Arkham.Application.MainMenu
             //mapper.SaveProgress();
         }
 
-        private void OnDestroy()
-        {
-            DOTween.KillAll();
-        }
+        private void OnDestroy() => DOTween.KillAll();
 
         public void LoadScene(string sceneId)
         {

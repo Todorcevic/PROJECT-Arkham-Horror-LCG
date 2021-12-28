@@ -22,7 +22,7 @@ namespace Tests
         public void ContainText(string textToSearch, bool expected)
         {
             //Arrange
-            Card card = new Card() { Id = "01001", Real_name = "Roland Banks" };
+            CardInfo card = new CardInfo() { Id = "01001", Real_name = "Roland Banks" };
 
             //Act
             bool result = card.ContainThisText(textToSearch);

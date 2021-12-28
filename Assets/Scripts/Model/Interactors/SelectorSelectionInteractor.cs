@@ -10,7 +10,7 @@ namespace Arkham.Model
         /*******************************************************************/
         public bool CanThisSelectorBeRemoved(string cardId, string investigatorId)
         {
-            Card card = cardRepository.Get(cardId);
+            CardInfo card = cardRepository.Get(cardId);
             Investigator investigator = investigatorRepository.Get(investigatorId);
 
             if (investigator == null) return false;

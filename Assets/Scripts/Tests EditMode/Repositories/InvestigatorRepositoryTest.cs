@@ -42,7 +42,7 @@ namespace Tests
         {
             //Arrange
             repository.Reset();
-            Card cardToCheck = fakes.CardThree;
+            CardInfo cardToCheck = fakes.CardThree;
             fakes.InvestigatorOne.AddToDeck(cardToCheck);
             fakes.InvestigatorOne.AddToDeck(cardToCheck);
             fakes.InvestigatorTwo.AddToDeck(cardToCheck);

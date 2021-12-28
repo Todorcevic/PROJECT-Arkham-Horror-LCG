@@ -19,11 +19,11 @@ namespace Arkham.Application.MainMenu
             CleanAllSelectors();
             if (investigator != null) SetAllCards();
 
-            void SetAllCards() => investigator.FullDeck.ForEach(i => SetCardInSelector(i, investigator));
+            void SetAllCards() => investigator.FullDeck.ForEach(cardInfo => SetCardInSelector(cardInfo, investigator));
             void CleanAllSelectors() => cardSelectorsManager.GetAllFilledSelectors().ForEach(selector => DesactivateSelector(selector));
         }
 
-        public CardSelectorView SetCardInSelector(Card cardRow, Investigator investigator)
+        public CardSelectorView SetCardInSelector(CardInfo cardRow, Investigator investigator)
         {
             CardSelectorView selector = cardSelectorsManager.GetSelectorByCardIdOrEmpty(cardRow.Id);
             int quantity = investigator.GetAmountOfThisCardInDeck(cardRow);

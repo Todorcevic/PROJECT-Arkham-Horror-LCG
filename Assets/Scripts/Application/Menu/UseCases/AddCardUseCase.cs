@@ -17,16 +17,16 @@ namespace Arkham.Application.MainMenu
         /*******************************************************************/
         public void AddCard(string cardId, string investigatorId)
         {
-            Card card = cardRepository.Get(cardId);
+            CardInfo card = cardRepository.Get(cardId);
             Investigator investigator = investigatorRepository.Get(investigatorId);
             updateXpUseCase.PayCardXp(investigator, card);
             UpdateModel(card, investigator);
             UpdateView(card, investigator);
         }
 
-        private void UpdateModel(Card card, Investigator investigator) => investigator.AddToDeck(card);
+        private void UpdateModel(CardInfo card, Investigator investigator) => investigator.AddToDeck(card);
 
-        private void UpdateView(Card card, Investigator investigator)
+        private void UpdateView(CardInfo card, Investigator investigator)
         {
             CardSelectorView selector = cardSelector.SetCardInSelector(card, investigator);
             multiAnimator.AddCard(selector, card.Id);

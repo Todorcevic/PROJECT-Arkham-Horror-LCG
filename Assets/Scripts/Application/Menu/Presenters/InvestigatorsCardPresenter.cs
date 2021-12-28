@@ -17,7 +17,7 @@ namespace Arkham.Application.MainMenu
         {
             foreach (CardView cardView in cardsManager.InvestigatorList)
             {
-                Card card = investigatorRepository.Get(cardView.Id).Info;
+                CardInfo card = investigatorRepository.Get(cardView.Id).Info;
                 cardView.Show(CanbeShowed());
 
                 bool CanbeShowed()

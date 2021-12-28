@@ -8,8 +8,10 @@ namespace Arkham.Application.Gameplay
     {
         [Inject] private readonly List<ZoneView> allZones;
 
+        public IEnumerable<ZoneView> AllZones => allZones;
+
         /*******************************************************************/
 
-        public ZoneView GetZoneByType(Zone zoneType) => allZones.Find(zone => zone.ZoneType == zoneType);
+        public ZoneView GetZoneByType(ZoneType zoneType) => allZones.Find(zone => zone.ZoneType == zoneType);
     }
 }

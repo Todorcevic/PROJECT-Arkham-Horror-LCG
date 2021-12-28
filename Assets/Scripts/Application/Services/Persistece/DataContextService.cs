@@ -14,7 +14,7 @@ namespace Arkham.Application
         /*******************************************************************/
         public void LoadDataCards()
         {
-            List<Card> cards = serializer.CreateDataFromResources<List<Card>>(gameFiles.CardsDataFilePath);
+            List<CardInfo> cards = serializer.CreateDataFromResources<List<CardInfo>>(gameFiles.CardsDataFilePath);
             cardRepository.CreateWith(cards);
         }
 
@@ -23,10 +23,10 @@ namespace Arkham.Application
         public void LoadProgress(StartGame gameType)
         {
             FullDTO repositoryDTO = gameType == StartGame.New ? LoadNewGame() : LoadContinue();
-            mapper.MapCampaigns(repositoryDTO);
-            mapper.MapInvestigator(repositoryDTO);
-            mapper.MapSelector(repositoryDTO);
-            mapper.MapUnlockCards(repositoryDTO);
+            mapper.MapCampaigns(repositoryDTO.CampaignsList, repositoryDTO.CurrentScenario);
+            mapper.MapInvestigator(repositoryDTO.InvestigatorsList);
+            mapper.MapSelector(repositoryDTO.InvestigatorsSelectedList);
+            mapper.MapUnlockCards(repositoryDTO.UnlockCards);
         }
 
         private FullDTO LoadNewGame() => serializer.CreateDataFromResources<FullDTO>(gameFiles.PlayerProgressDefaultFilePath);

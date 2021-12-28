@@ -27,7 +27,7 @@ namespace Tests
         public void WhenAddMandatoryCard_ShouldContainInFullDeck()
         {
             //Arrange
-            Card cardToCheck = fakes.CardThree;
+            CardInfo cardToCheck = fakes.CardThree;
 
             //Act
             investigator.AddToMandatory(cardToCheck);
@@ -40,7 +40,7 @@ namespace Tests
         public void WhenCheckACard_ShouldReturnFalseIfNotWasAdded()
         {
             //Arrange
-            Card cardToCheck = fakes.CardThree;
+            CardInfo cardToCheck = fakes.CardThree;
 
             //Act
             bool result = investigator.IsMandatoryCard(cardToCheck);
@@ -53,7 +53,7 @@ namespace Tests
         public void WhenCheckACard_ShouldReturnTrueIfWasAdded()
         {
             //Arrange
-            Card cardToCheck = fakes.CardThree;
+            CardInfo cardToCheck = fakes.CardThree;
             investigator.AddToMandatory(cardToCheck);
 
             //Act
@@ -74,7 +74,7 @@ namespace Tests
         public void WhenAddToDeck_ShouldContainInFullDeck()
         {
             //Arrange
-            Card cardToAdd = fakes.CardThree;
+            CardInfo cardToAdd = fakes.CardThree;
 
             //Act
             investigator.AddToDeck(cardToAdd);
@@ -87,7 +87,7 @@ namespace Tests
         public void WhenRemoveToDeck_ShouldNotContainInFullDeck()
         {
             //Arrange
-            Card cardToRemove = fakes.CardThree;
+            CardInfo cardToRemove = fakes.CardThree;
             investigator.AddToDeck(cardToRemove);
 
             //Act
@@ -101,7 +101,7 @@ namespace Tests
         public void WhenGetAmount_ShouldReturnCorrectQuantity()
         {
             //Arrange
-            Card cardToCheck = fakes.CardThree;
+            CardInfo cardToCheck = fakes.CardThree;
             investigator.AddToDeck(cardToCheck);
             investigator.AddToDeck(cardToCheck);
             const int expected = 2;
@@ -117,7 +117,7 @@ namespace Tests
         public void WhenFindInDeck_ShouldReturnAListWithTheCard()
         {
             //Arrange
-            Card card = fakes.CardThree;
+            CardInfo card = fakes.CardThree;
             investigator.AddToDeck(card);
 
             //Act

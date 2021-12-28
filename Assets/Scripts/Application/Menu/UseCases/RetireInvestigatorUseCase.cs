@@ -17,15 +17,12 @@ namespace Arkham.Application.MainMenu
             Investigator investigator = investigatorRepository.Get(investigatorId);
             removeInvestigatorUseCase.Remove(investigatorId);
             UpdateModel(investigator);
-            UpdateView(investigator);
+            UpdateView();
         }
 
-        private void UpdateModel(Investigator investigator)
-        {
-            investigator.Retire();
-        }
+        private void UpdateModel(Investigator investigator) => investigator.Retire();
 
-        private void UpdateView(Investigator investigator)
+        private void UpdateView()
         {
             investigatorCardsPresenter.InvestigatorStateResolve();
             investigatorCardsPresenter.RefreshInvestigatorsVisibility();

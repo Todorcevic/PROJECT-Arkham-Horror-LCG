@@ -9,7 +9,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly CardXpCostInteractor XpCostInteractor;
 
         /*******************************************************************/
-        public void PayCardXp(Investigator investigator, Card card)
+        public void PayCardXp(Investigator investigator, CardInfo card)
         {
             UpdateModel(investigator, XpCostInteractor.XpPayCost(card.Id, investigator.Id));
             UpdateView(investigator);

@@ -1,4 +1,6 @@
-﻿namespace Arkham.Model
+﻿using System.Collections.Generic;
+
+namespace Arkham.Model
 {
     public class ScenarioCORE1 : Scenario
     {

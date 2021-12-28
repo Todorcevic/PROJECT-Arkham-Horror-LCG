@@ -1,4 +1,6 @@
-﻿using Arkham.Model;
+﻿using Arkham.Application.Gameplay;
+using Arkham.Model;
+using System.Collections.Generic;
 using Zenject;
 
 namespace Arkham.Application
@@ -11,6 +13,8 @@ namespace Arkham.Application
         [Inject] private readonly SelectorRepository selectorRepository;
         [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
         [Inject] private readonly NameConventionFactoryService factory;
+        [Inject] private readonly ZonesRepository zonesRepository;
+        [Inject] private readonly ZonesManager zonesManager;
 
         /*******************************************************************/
         public FullDTO CreateDTO()
@@ -49,24 +53,24 @@ namespace Arkham.Application
             return fullDTO;
         }
 
-        public void MapUnlockCards(FullDTO repositoryDTO)
+        public void MapUnlockCards(List<string> unlockCards)
         {
             unlockCardsRepository.Reset();
-            foreach (string cardId in repositoryDTO.UnlockCards)
+            foreach (string cardId in unlockCards)
                 unlockCardsRepository.Add(cardRepository.Get(cardId));
         }
 
-        public void MapSelector(FullDTO repositoryDTO)
+        public void MapSelector(List<string> investigatorsSelected)
         {
             selectorRepository.Reset();
-            foreach (string investigatorId in repositoryDTO.InvestigatorsSelectedList)
+            foreach (string investigatorId in investigatorsSelected)
                 selectorRepository.Add(investigatorRepository.Get(investigatorId));
         }
 
-        public void MapInvestigator(FullDTO repositoryDTO)
+        public void MapInvestigator(List<InvestigatorDTO> investigators)
         {
             investigatorRepository.Reset();
-            foreach (InvestigatorDTO investigator in repositoryDTO.InvestigatorsList)
+            foreach (InvestigatorDTO investigator in investigators)
             {
                 Investigator newInvestigator = new Investigator(
                     investigator.PhysicTrauma,
@@ -86,10 +90,10 @@ namespace Arkham.Application
             }
         }
 
-        public void MapCampaigns(FullDTO repositoryDTO)
+        public void MapCampaigns(List<CampaignDTO> campaigns, string currentScenario)
         {
             campaignRepository.Reset();
-            foreach (CampaignDTO campaign in repositoryDTO.CampaignsList)
+            foreach (CampaignDTO campaign in campaigns)
             {
                 Campaign newCampaing = new Campaign()
                 {
@@ -98,7 +102,21 @@ namespace Arkham.Application
                     FirstScenario = factory.CreateInstance<Scenario>(campaign.FirstScenario)
                 };
                 campaignRepository.Add(newCampaing);
-                campaignRepository.CurrentScenario = factory.CreateInstance<Scenario>(repositoryDTO.CurrentScenario);
+                campaignRepository.CurrentScenario = factory.CreateInstance<Scenario>(currentScenario);
+            }
+        }
+
+        public void MapZones()
+        {
+            zonesRepository.Reset();
+            foreach (ZoneView zone in zonesManager.AllZones)
+            {
+                Zone newZone = new Zone()
+                {
+                    Guid = zone.Guid,
+                    Type = zone.ZoneType
+                };
+                zonesRepository.Add(newZone);
             }
         }
     }

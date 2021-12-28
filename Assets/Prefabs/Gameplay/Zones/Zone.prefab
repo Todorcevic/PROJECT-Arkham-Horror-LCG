@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9077669025050693591}
   - component: {fileID: 5900590192062197086}
   m_Layer: 0
-  m_Name: SimpleZone
+  m_Name: Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

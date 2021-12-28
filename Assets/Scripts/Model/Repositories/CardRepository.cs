@@ -6,19 +6,20 @@ namespace Arkham.Model
 {
     public class CardRepository
     {
-        private List<Card> cardList;
-        private Dictionary<string, Card> cardDict;
-        public IEnumerable<Card> AllCards => cardList;
+        private List<CardInfo> cardList;
+        private Dictionary<string, CardInfo> cardDict;
+
+        public IEnumerable<CardInfo> AllCards => cardList;
 
         /*******************************************************************/
-        public void CreateWith(List<Card> cards)
+        public void CreateWith(List<CardInfo> cards)
         {
             cardList = cards;
             cardDict = cards.ToDictionary(card => card.Id);
         }
 
-        public Card Get(string cardId) => cardDict[cardId];
+        public CardInfo Get(string cardId) => cardDict[cardId];
 
-        public List<Card> FindAll(Predicate<Card> filter) => cardList.FindAll(filter);
+        public List<CardInfo> FindAll(Predicate<CardInfo> filter) => cardList.FindAll(filter);
     }
 }

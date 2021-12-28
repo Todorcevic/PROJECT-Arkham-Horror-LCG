@@ -11,7 +11,7 @@ namespace Arkham.Model
         /*******************************************************************/
         public bool CanThisCardBeSelected(string cardId, string investigatorId)
         {
-            Card card = cardRepository.Get(cardId);
+            CardInfo card = cardRepository.Get(cardId);
             Investigator investigator = investigatorRepository.Get(investigatorId);
 
             if (investigator == null) return false;
@@ -25,7 +25,7 @@ namespace Arkham.Model
             return true;
         }
 
-        public bool IsThisCardAllowed(Card card, Investigator investigator)
+        public bool IsThisCardAllowed(CardInfo card, Investigator investigator)
         {
             if (card.IsInvestigator) return true;
             if (investigator == null) return false;
@@ -34,13 +34,13 @@ namespace Arkham.Model
             return true;
         }
 
-        private bool IsThisCardWasted(Card card) =>
+        private bool IsThisCardWasted(CardInfo card) =>
             card.Quantity - investigatorRepository.AmountSelectedOfThisCard(card) <= 0;
 
-        private bool IsThisCardInMax(Card card, Investigator investigator) =>
+        private bool IsThisCardInMax(CardInfo card, Investigator investigator) =>
             investigator.GetAmountOfThisCardInDeck(card) >= GameValues.MAX_SIMILARS_CARDS_IN_DECK;
 
-        private bool CanPayThisdCard(Card card, Investigator investigator)
+        private bool CanPayThisdCard(CardInfo card, Investigator investigator)
         {
             if (investigator.IsPlaying && card.Xp <= investigator.Xp) return true;
             return false;

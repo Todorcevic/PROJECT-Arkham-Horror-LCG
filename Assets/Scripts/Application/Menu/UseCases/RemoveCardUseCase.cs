@@ -17,15 +17,15 @@ namespace Arkham.Application.MainMenu
         /*******************************************************************/
         public void Remove(string cardId, string investigatorId)
         {
-            Card card = cardRepository.Get(cardId);
+            CardInfo card = cardRepository.Get(cardId);
             Investigator investigator = investigatorRepository.Get(investigatorId);
             UpdateModel(card, investigator);
             UpdateView(card, investigator);
         }
 
-        private void UpdateModel(Card card, Investigator investigator) => investigator.RemoveToDeck(card);
+        private void UpdateModel(CardInfo card, Investigator investigator) => investigator.RemoveToDeck(card);
 
-        private void UpdateView(Card card, Investigator investigator)
+        private void UpdateView(CardInfo card, Investigator investigator)
         {
             cardShowerPresenter.RemoveCard(card.Id);
             cardSelectorPresenter.SetCardInSelector(card, investigator);

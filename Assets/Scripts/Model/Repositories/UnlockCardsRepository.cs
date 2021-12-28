@@ -4,14 +4,14 @@ namespace Arkham.Model
 {
     public class UnlockCardsRepository
     {
-        private List<Card> cards = new List<Card>();
+        private List<CardInfo> cards = new List<CardInfo>();
 
         /*******************************************************************/
-        public bool IsThisCardUnlocked(Card card) => cards.Contains(card);
+        public bool IsThisCardUnlocked(CardInfo card) => cards.Contains(card);
 
-        public void Reset() => cards = new List<Card>();
+        public void Reset() => cards = new List<CardInfo>();
 
-        public void Add(Card card) => cards.Add(card);
+        public void Add(CardInfo card) => cards.Add(card);
 
         public List<string> Serialize() => cards.ConvertAll(card => card.Id);
     }

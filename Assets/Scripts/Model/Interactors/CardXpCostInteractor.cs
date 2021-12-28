@@ -11,7 +11,7 @@ namespace Arkham.Model
         /*******************************************************************/
         public int XpPayCost(string cardId, string investigatorId)
         {
-            Card card = cardRepository.Get(cardId);
+            CardInfo card = cardRepository.Get(cardId);
             Investigator investigator = investigatorRepository.Get(investigatorId);
             bool canBeSelected = cardSelectionFilter.CanThisCardBeSelected(cardId, investigatorId);
 

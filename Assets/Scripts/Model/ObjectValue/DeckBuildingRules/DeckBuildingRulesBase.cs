@@ -5,18 +5,18 @@ namespace Arkham.Model
 {
     public abstract class DeckBuildingRulesBase : DeckBuildingRules
     {
-        private List<Card> allowedCards;
+        private List<CardInfo> allowedCards;
         [Inject] private readonly CardRepository cardRepository;
 
         public override int DeckSize => 30;
-        public override List<Card> AllowedCards => allowedCards ??= Rules();
+        public override List<CardInfo> AllowedCards => allowedCards ??= Rules();
         protected abstract List<string> DeckBuildingFactionConditions { get; }
         protected abstract List<int> DeckBuildingXpConditions { get; }
 
         /*******************************************************************/
-        private List<Card> Rules()
+        private List<CardInfo> Rules()
         {
-            List<Card> deckBuildingResult = new List<Card>();
+            List<CardInfo> deckBuildingResult = new List<CardInfo>();
             int i = 0;
             foreach (string faction in DeckBuildingFactionConditions)
             {

@@ -49,7 +49,7 @@ namespace Tests
         public void WithCards_AllCardsShouldContainCard()
         {
             //Arrange
-            repository.CreateWith(new List<Card>() { fakes.CardOne, fakes.CardTwo });
+            repository.CreateWith(new List<CardInfo>() { fakes.CardOne, fakes.CardTwo });
 
             //Assert
             CollectionAssert.Contains(repository.AllCards, fakes.CardOne);
@@ -61,7 +61,7 @@ namespace Tests
         public void WithCards_GetShouldGetCard()
         {
             //Arrange
-            repository.CreateWith(new List<Card>() { fakes.CardOne, fakes.CardTwo });
+            repository.CreateWith(new List<CardInfo>() { fakes.CardOne, fakes.CardTwo });
 
             //Act
             var cardOne = repository.Get("01001");
@@ -74,7 +74,7 @@ namespace Tests
         public void WithCards_GetShouldThrowException()
         {
             //Arrange
-            repository.CreateWith(new List<Card>() { fakes.CardOne, fakes.CardTwo });
+            repository.CreateWith(new List<CardInfo>() { fakes.CardOne, fakes.CardTwo });
 
             //Act
             void Exception() => repository.Get("xxx");
@@ -87,7 +87,7 @@ namespace Tests
         public void WithCards_FindAllShouldFindCards()
         {
             //Arrange
-            repository.CreateWith(new List<Card>() { fakes.CardOne, fakes.CardTwo });
+            repository.CreateWith(new List<CardInfo>() { fakes.CardOne, fakes.CardTwo });
 
             //Act
             var cards = repository.FindAll(c => c.Id == "01001" && c.Real_name == "Roland");
@@ -100,7 +100,7 @@ namespace Tests
         public void WithCards_FindAllShouldNotFindCards()
         {
             //Arrange
-            repository.CreateWith(new List<Card>() { fakes.CardOne, fakes.CardTwo });
+            repository.CreateWith(new List<CardInfo>() { fakes.CardOne, fakes.CardTwo });
 
             //Act
             var cards = repository.FindAll(c => c.Id == "01001" && c.Real_name == "xxx");

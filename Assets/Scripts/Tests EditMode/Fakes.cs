@@ -4,9 +4,9 @@ namespace Tests
 {
     public class Fakes
     {
-        public Card CardOne { get; }
-        public Card CardTwo { get; }
-        public Card CardThree { get; }
+        public CardInfo CardOne { get; }
+        public CardInfo CardTwo { get; }
+        public CardInfo CardThree { get; }
         public Investigator InvestigatorOne { get; }
         public Investigator InvestigatorTwo { get; }
 
@@ -16,7 +16,7 @@ namespace Tests
             {
                 Investigator inv = new Investigator(5, 5, 5, true, true, CardOne, new DeckBuildingRules01001());
                 for (int i = 0; i < inv.DeckBuilding.DeckSize; i++)
-                    inv.AddToDeck(new Card());
+                    inv.AddToDeck(new CardInfo());
                 return inv;
             }
         }
@@ -26,18 +26,18 @@ namespace Tests
             get
             {
                 Investigator inv = new Investigator(5, 5, 5, true, true, CardOne, new DeckBuildingRules01001());
-                inv.AddToDeck(new Card());
-                inv.AddToDeck(new Card());
-                inv.AddToDeck(new Card());
+                inv.AddToDeck(new CardInfo());
+                inv.AddToDeck(new CardInfo());
+                inv.AddToDeck(new CardInfo());
                 return inv;
             }
         }
 
         public Fakes()
         {
-            CardOne = new Card() { Id = "01001", Real_name = "Roland", Health = 8, Sanity = 4 };
-            CardTwo = new Card() { Id = "01002", Real_name = "Marie", Health = 4, Sanity = 8 };
-            CardThree = new Card() { Id = "01080", Real_name = "Knife", Health = 0, Sanity = 0 };
+            CardOne = new CardInfo() { Id = "01001", Real_name = "Roland", Health = 8, Sanity = 4 };
+            CardTwo = new CardInfo() { Id = "01002", Real_name = "Marie", Health = 4, Sanity = 8 };
+            CardThree = new CardInfo() { Id = "01080", Real_name = "Knife", Health = 0, Sanity = 0 };
 
             InvestigatorOne = new Investigator(5, 5, 5, true, true, CardOne, new DeckBuildingRules01001());
             InvestigatorTwo = new Investigator(8, 8, 8, false, false, CardTwo, new DeckBuildingRules01001());

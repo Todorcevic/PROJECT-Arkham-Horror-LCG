@@ -22,7 +22,7 @@ namespace Arkham.Application.MainMenu
         {
             foreach (DeckCardView cardView in cardsManager.DeckList)
             {
-                Card card = cardRepository.Get(cardView.Id);
+                CardInfo card = cardRepository.Get(cardView.Id);
                 cardView.Show(CanbeShowed());
 
                 bool CanbeShowed()
@@ -50,13 +50,13 @@ namespace Arkham.Application.MainMenu
         {
             foreach (DeckCardView cardView in cardsManager.DeckList)
             {
-                Card card = cardRepository.Get(cardView.Id);
+                CardInfo card = cardRepository.Get(cardView.Id);
                 int quantity = investigatorRepository.AmountLeftOfThisCard(card);
                 cardView.SetQuantity(quantity);
             }
         }
 
-        public void SetQuantity(Card card)
+        public void SetQuantity(CardInfo card)
         {
             int quantity = investigatorRepository.AmountLeftOfThisCard(card);
             cardsManager.GetDeckCard(card.Id).SetQuantity(quantity);

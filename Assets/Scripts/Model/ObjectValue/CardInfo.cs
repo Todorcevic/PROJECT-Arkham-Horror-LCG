@@ -2,7 +2,7 @@
 
 namespace Arkham.Model
 {
-    public class Card
+    public class CardInfo
     {
         [JsonProperty("Code")] public string Id { get; set; }
         public string Pack_code { get; set; }
