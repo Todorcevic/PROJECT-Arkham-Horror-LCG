@@ -1,6 +1,7 @@
 ﻿namespace Arkham.Model
 {
-    public class Asset : Card
+    public class TreacheryCard : Card
     {
+
     }
 }

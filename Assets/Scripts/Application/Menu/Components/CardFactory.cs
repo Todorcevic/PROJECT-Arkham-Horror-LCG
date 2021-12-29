@@ -10,7 +10,7 @@ namespace Arkham.Application.MainMenu
     public class CardFactory : MonoBehaviour
     {
         [Inject] private readonly DiContainer diContainer;
-        [Inject] private readonly ImagesCardManager imagesCard;
+        [Inject] private readonly ImagesCardService imagesCard;
         [Inject] private readonly CardRepository cardCollection;
         [Inject] private readonly CardsManager cardsManager;
         [SerializeField, Required, AssetsOnly] private DeckCardView cardPrefab;

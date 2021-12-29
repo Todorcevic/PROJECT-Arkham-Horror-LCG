@@ -10,14 +10,14 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly ScreenResolutionAutoDetectService resolutionSetter;
         [Inject] private readonly CardFactory cardFactory;
         [Inject] private readonly DataContextService dataContext;
-        [Inject] private readonly ImagesCardManager imagesCardManager;
+        [Inject] private readonly ImagesCardService imagesCard;
 
         private void Awake()
         {
             resolutionSetter.SettingResolution();
-            dataContext.LoadDataCards();
+            dataContext.LoadInfoCards();
             //imagesCardManager.Load();
-            imagesCardManager.Build();
+            imagesCard.Build();
             cardFactory.BuildDeckCards();
             cardFactory.BuildInvestigatorCards();
             //mapper.SaveProgress();

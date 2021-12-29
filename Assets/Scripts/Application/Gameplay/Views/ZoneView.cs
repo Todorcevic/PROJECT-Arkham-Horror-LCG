@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Arkham.Application.Gameplay
+namespace Arkham.Application.GamePlay
 {
     public class ZoneView : MonoBehaviour
     {

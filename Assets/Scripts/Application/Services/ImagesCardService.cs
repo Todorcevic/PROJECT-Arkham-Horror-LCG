@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
-namespace Arkham.Application.MainMenu
+namespace Arkham.Application
 {
-    public class ImagesCardManager
+    public class ImagesCardService
     {
         private const string BACK_SUFFIX = "b";
         private Dictionary<string, Sprite> cardImagesEN = new Dictionary<string, Sprite>();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arkham.Model
 {
-    public class CardLogic
+    public class GameAction
     {
     }
 }

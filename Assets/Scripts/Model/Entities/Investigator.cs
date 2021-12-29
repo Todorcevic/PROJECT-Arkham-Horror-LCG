@@ -4,12 +4,14 @@ using System.Linq;
 
 namespace Arkham.Model
 {
-    public class Investigator : Card
+    public class Investigator
     {
         private bool isRetired;
         private readonly List<CardInfo> deck = new List<CardInfo>();
         private readonly List<CardInfo> mandatoryCards = new List<CardInfo>();
 
+        public string Id => Info.Id;
+        public CardInfo Info { get; }
         public DeckBuildingRules DeckBuilding { get; }
         public int PhysicTrauma { get; set; }
         public int MentalTrauma { get; set; }
@@ -32,7 +34,7 @@ namespace Arkham.Model
         public List<string> CardsInDeckIds => deck.ConvertAll(card => card.Id);
         public List<string> MandatoryCardsIds => mandatoryCards.ConvertAll(card => card.Id);
         public CardInfo LastCardRemoved { get; private set; }
-   
+
         /*******************************************************************/
         public Investigator(int physicTrauma, int mentalTrauma, int xp, bool isPlaying, bool isRetired, CardInfo info, DeckBuildingRules deckBuilding)
         {

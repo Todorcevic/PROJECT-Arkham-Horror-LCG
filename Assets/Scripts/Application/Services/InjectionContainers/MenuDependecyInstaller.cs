@@ -8,10 +8,7 @@ namespace Arkham.Application.MainMenu
 
         public override void InstallBindings()
         {
-            /*** Services ***/
-            Container.Bind(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham").WithSuffix("Service")).AsSingle();
-
+            /*******************************************************************************/
             /*** Controllers ***/
             Container.Bind(x => x.AllNonAbstractClasses()
            .InNamespace("Arkham").WithSuffix("Controller")).AsCached();
@@ -30,6 +27,11 @@ namespace Arkham.Application.MainMenu
             /*** Use Cases ***/
             Container.Bind(x => x.AllNonAbstractClasses()
             .InNamespace("Arkham").WithSuffix("UseCase")).AsSingle();
+
+            /*******************************************************************************/
+            /*** Services ***/
+            Container.Bind(x => x.AllNonAbstractClasses()
+            .InNamespace("Arkham").WithSuffix("Service")).AsSingle();
 
             /*** Repositories***/
             Container.Bind(x => x.AllNonAbstractClasses()

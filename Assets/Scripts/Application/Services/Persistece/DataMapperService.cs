@@ -1,4 +1,4 @@
-﻿using Arkham.Application.Gameplay;
+﻿using Arkham.Application.GamePlay;
 using Arkham.Model;
 using System.Collections.Generic;
 using Zenject;
@@ -14,7 +14,7 @@ namespace Arkham.Application
         [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
         [Inject] private readonly NameConventionFactoryService factory;
         [Inject] private readonly ZonesRepository zonesRepository;
-        [Inject] private readonly ZonesManager zonesManager;
+        [Inject] private readonly CardInGameRepository cardsInGameRepository;
 
         /*******************************************************************/
         public FullDTO CreateDTO()
@@ -53,21 +53,21 @@ namespace Arkham.Application
             return fullDTO;
         }
 
-        public void MapUnlockCards(List<string> unlockCards)
+        public void MapUnlockCards(IEnumerable<string> unlockCards)
         {
             unlockCardsRepository.Reset();
             foreach (string cardId in unlockCards)
                 unlockCardsRepository.Add(cardRepository.Get(cardId));
         }
 
-        public void MapSelector(List<string> investigatorsSelected)
+        public void MapSelector(IEnumerable<string> investigatorsSelected)
         {
             selectorRepository.Reset();
             foreach (string investigatorId in investigatorsSelected)
                 selectorRepository.Add(investigatorRepository.Get(investigatorId));
         }
 
-        public void MapInvestigator(List<InvestigatorDTO> investigators)
+        public void MapInvestigator(IEnumerable<InvestigatorDTO> investigators)
         {
             investigatorRepository.Reset();
             foreach (InvestigatorDTO investigator in investigators)
@@ -82,15 +82,13 @@ namespace Arkham.Application
                     factory.CreateInstance<DeckBuildingRules>(investigator.Id)
                     );
 
-                foreach (string card in investigator.MandatoryCards)
-                    newInvestigator.AddToMandatory(cardRepository.Get(card));
-                foreach (string card in investigator.Deck)
-                    newInvestigator.AddToDeck(cardRepository.Get(card));
+                investigator.MandatoryCards.ForEach(card => newInvestigator.AddToMandatory(cardRepository.Get(card)));
+                investigator.Deck.ForEach(card => newInvestigator.AddToDeck(cardRepository.Get(card)));
                 investigatorRepository.Add(newInvestigator);
             }
         }
 
-        public void MapCampaigns(List<CampaignDTO> campaigns, string currentScenario)
+        public void MapCampaigns(IEnumerable<CampaignDTO> campaigns, string currentScenario)
         {
             campaignRepository.Reset();
             foreach (CampaignDTO campaign in campaigns)
@@ -106,10 +104,10 @@ namespace Arkham.Application
             }
         }
 
-        public void MapZones()
+        public void MapZones(IEnumerable<ZoneView> allZones)
         {
             zonesRepository.Reset();
-            foreach (ZoneView zone in zonesManager.AllZones)
+            foreach (ZoneView zone in allZones)
             {
                 Zone newZone = new Zone()
                 {
@@ -117,6 +115,17 @@ namespace Arkham.Application
                     Type = zone.ZoneType
                 };
                 zonesRepository.Add(newZone);
+            }
+        }
+
+        public void MapCard(IEnumerable<string> encounterCards)
+        {
+            cardsInGameRepository.Reset();
+            foreach (string cardId in encounterCards)
+            {
+                Card newCard = factory.CreateInstance<Card>(cardId);
+                newCard.CreateWithThisCard(cardRepository.Get(cardId));
+                cardsInGameRepository.Add(newCard);
             }
         }
     }

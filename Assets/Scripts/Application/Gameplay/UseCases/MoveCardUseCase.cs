@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace Arkham.Application.Gameplay
+namespace Arkham.Application.GamePlay
 {
     public class MoveCardUseCase
     {
@@ -27,7 +27,12 @@ namespace Arkham.Application.Gameplay
             UpdateModel(card, zone);
         }
 
-        private void UpdateModel(Card card, Zone zone) => card.MoveTo(zone);
+        private void UpdateModel(Card card, Zone zone)
+        {
+            card.CurrentZone?.ExitThisCard(card);
+            zone.EnterThisCard(card);
+            card.CurrentZone = zone;
+        }
 
         private void UpdateView()
         {

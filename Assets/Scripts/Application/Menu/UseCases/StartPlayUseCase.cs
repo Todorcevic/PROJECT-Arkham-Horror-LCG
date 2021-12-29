@@ -1,4 +1,5 @@
 ﻿using Arkham.Model;
+using UnityEngine;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
@@ -8,6 +9,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly SelectorRepository selector;
         [Inject] private readonly CampaignRepository campaignRepository;
         [Inject] private readonly Loader loader;
+        [Inject] private readonly DataContextService dataPersistence;
 
         /*******************************************************************/
         public void Start()
@@ -18,6 +20,11 @@ namespace Arkham.Application.MainMenu
 
         private void UpdateModel() => selector.ReadyAllInvestigators();
 
-        private void UpdateView() => loader.LoadScene(campaignRepository.CurrentScenario.Id);
+        private void UpdateView()
+        {
+            Debug.Log("be:" + campaignRepository.CurrentScenario.Id);
+            dataPersistence.SaveProgress();
+            loader.LoadScene(campaignRepository.CurrentScenario.Id);
+        }
     }
 }

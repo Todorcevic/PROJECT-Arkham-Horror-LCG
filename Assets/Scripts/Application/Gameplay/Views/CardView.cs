@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Arkham.Application.Gameplay
+namespace Arkham.Application.GamePlay
 {
     public class CardView : MonoBehaviour
     {
