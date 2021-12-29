@@ -22,7 +22,6 @@ namespace Arkham.Application.MainMenu
 
         private void UpdateView()
         {
-            Debug.Log("be:" + campaignRepository.CurrentScenario.Id);
             dataPersistence.SaveProgress();
             loader.LoadScene(campaignRepository.CurrentScenario.Id);
         }

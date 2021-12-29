@@ -1,5 +1,4 @@
-﻿using Arkham.Application.GamePlay;
-using Arkham.Model;
+﻿using Arkham.Model;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,7 +13,6 @@ namespace Arkham.Application
         [Inject] private readonly GameFiles gameFiles;
         [Inject] private readonly CardRepository cardRepository;
         [Inject] private readonly CampaignRepository campaignRepository;
-        [Inject] private readonly ZonesManager zonesManager;
         [Inject] private readonly SelectorRepository selectorRepository;
 
         /*******************************************************************/
@@ -38,19 +36,13 @@ namespace Arkham.Application
             FullDTO LoadContinue() => serializer.CreateDataFromFile<FullDTO>(gameFiles.PlayerProgressFilePath);
         }
 
-        public void LoadScene()
-        {
-            mapper.MapZones(zonesManager.AllZones);
-        }
-
         public void LoadScenarioCards()
         {
             List<string> allScenarioCards = new List<string>();
             foreach (string cardType in gameFiles.ALL_SCENARIO_CARDS_FILES)
             {
-                Debug.Log("esce:" + campaignRepository.CurrentScenario);
                 string encounterPath = gameFiles.DECK_PATH(campaignRepository.CurrentScenario.Id) + cardType;
-                allScenarioCards.AddRange(serializer.CreateDataFromFile<List<string>>(encounterPath));
+                allScenarioCards.AddRange(serializer.CreateDataFromResources<List<string>>(encounterPath));
             }
             mapper.MapCard(allScenarioCards);
         }

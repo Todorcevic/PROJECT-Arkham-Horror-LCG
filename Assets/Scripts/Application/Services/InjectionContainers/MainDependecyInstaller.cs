@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace Arkham.Application
 {
-    public enum InstancesInjected { allCardsEN }
+    //public enum InstancesInjected { allCardsEN }
 
     public class MainDependecyInstaller : MonoInstaller
     {
@@ -19,8 +19,7 @@ namespace Arkham.Application
             Container.Bind<GameFiles>().AsSingle();
             Container.BindInstance(allCardsEN).WithId(InstancesInjected.allCardsEN);
 
-            if (SceneManager.GetSceneByBuildIndex(0) == SceneManager.GetActiveScene()) MenuDependecyInstaller.Install(Container);
-            if (SceneManager.GetSceneByBuildIndex(1) == SceneManager.GetActiveScene()) GameDependecyInstaller.Install(Container);
+            //ViewDependecyInstaller.Install(Container);
         }
     }
 }

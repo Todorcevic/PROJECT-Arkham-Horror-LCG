@@ -17,7 +17,7 @@ namespace Arkham.Application
         //public const string NEW_INVESTIGATORS_FILE = "InvestigatorsDataDefault";
         //public const string CURRENT_INVESTIGATORS_FILE = "InvestigatorsDataSave";
         //public const string TEST_INVESTIGATORS_FILE = "InvestigatorsDataTest";
-        public string PLAYER_PROGRESS_FILE => "PlayerProgress";
+        public string PLAYER_PROGRESS_FILE => "PlayerProgress" + DATAFILE_EXTENSION;
         public string PLAYER_PROGRESS_DEFAULT_FILE => "PlayerProgressDefault";
         private string ENCOUNTER_JSON => "Encounter";
         private string ACT_JSON => "Act";
@@ -40,12 +40,12 @@ namespace Arkham.Application
         //public static string StartedGameFilePath => Application.persistentDataPath + "/" + CURRENT_INVESTIGATORS_FILE + ".json";
 
         public string CardsDataFilePath => JSON_ROOT_DIRECTORY + ALL_CARDS_DATA_FILE;
-        public string PlayerProgressFilePath => UnityEngine.Application.persistentDataPath + "/" + PLAYER_PROGRESS_FILE + DATAFILE_EXTENSION;
+        public string PlayerProgressFilePath => UnityEngine.Application.persistentDataPath + "/" + PLAYER_PROGRESS_FILE;
         public string PlayerProgressDefaultFilePath => JSON_ROOT_DIRECTORY + PLAYER_PROGRESS_DEFAULT_FILE;
 
         /*******************************************************************/
-        public string DECK_PATH(string scenario) => CAMPAIGNS_DIRECTORY + scenario + "Decks/";
-        public string CHAOS_BAG_PATH(string scenario) => CAMPAIGNS_DIRECTORY + scenario + "ChaosBag/";
-        public string HistoriesFilePath(string scenario) => CAMPAIGNS_DIRECTORY + scenario + "Histories" + DATAFILE_EXTENSION;
+        public string DECK_PATH(string scenario) => CAMPAIGNS_DIRECTORY + scenario + "/Decks/";
+        public string CHAOS_BAG_PATH(string scenario) => CAMPAIGNS_DIRECTORY + scenario + "/ChaosBag/";
+        public string HistoriesFilePath(string scenario) => CAMPAIGNS_DIRECTORY + scenario + "/Histories" + DATAFILE_EXTENSION;
     }
 }

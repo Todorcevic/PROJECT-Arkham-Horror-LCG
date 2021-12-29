@@ -1,6 +1,7 @@
 ﻿using Arkham.Application.GamePlay;
 using Arkham.Model;
 using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 namespace Arkham.Application
@@ -12,9 +13,9 @@ namespace Arkham.Application
         [Inject] private readonly InvestigatorRepository investigatorRepository;
         [Inject] private readonly SelectorRepository selectorRepository;
         [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
-        [Inject] private readonly NameConventionFactoryService factory;
         [Inject] private readonly ZonesRepository zonesRepository;
         [Inject] private readonly CardInGameRepository cardsInGameRepository;
+        [Inject] private readonly NameConventionFactoryService factory;
 
         /*******************************************************************/
         public FullDTO CreateDTO()
@@ -127,6 +128,7 @@ namespace Arkham.Application
                 newCard.CreateWithThisCard(cardRepository.Get(cardId));
                 cardsInGameRepository.Add(newCard);
             }
+            Debug.Log(cardsInGameRepository.AllCards.Count);
         }
     }
 }

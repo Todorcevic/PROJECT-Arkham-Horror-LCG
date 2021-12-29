@@ -8,6 +8,8 @@ namespace Arkham.Model
     {
         private Dictionary<Guid, Card> allCards;
 
+        public Dictionary<Guid, Card> AllCards => allCards;
+
         /*******************************************************************/
         public void Add(Card card) => allCards.Add(card.Guid, card);
 
