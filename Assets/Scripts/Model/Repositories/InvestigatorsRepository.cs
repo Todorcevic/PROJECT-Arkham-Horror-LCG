@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Arkham.Model
@@ -13,11 +12,6 @@ namespace Arkham.Model
         /*******************************************************************/
         public Investigator Get(string investigatorId) =>
             investigators.Find(investigator => investigator.Id == investigatorId);
-
-        public List<Investigator> FindAll(Predicate<Investigator> filter) =>
-            investigators.FindAll(filter);
-
-        public bool Exists(Predicate<Investigator> filter) => investigators.Exists(filter);
 
         public int AmountSelectedOfThisCard(CardInfo card) =>
             investigators.Select(investigator => investigator.GetAmountOfThisCardInDeck(card)).Sum();

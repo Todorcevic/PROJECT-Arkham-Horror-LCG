@@ -1,6 +1,5 @@
 ﻿using Arkham.Model;
 using System.Collections.Generic;
-using System.Linq;
 using Zenject;
 
 namespace Arkham.Application
@@ -13,6 +12,8 @@ namespace Arkham.Application
         [Inject] private readonly CardsRepository cardRepository;
         [Inject] private readonly CampaignsRepository campaignRepository;
         [Inject] private readonly SelectorsRepository selectorRepository;
+        [Inject] private readonly PlayersRepository playersRepository;
+        [Inject] private readonly CardsInGameRepository cardsInGameRepository;
 
         /*******************************************************************/
         public void LoadInfoCards()
@@ -37,29 +38,28 @@ namespace Arkham.Application
 
         public void LoadGameCards()
         {
-            IEnumerable<string> allCards = GetScenarioCards().Concat(GetInvestigatorsCards());
-            mapper.MapCard(allCards);
+            cardsInGameRepository.Reset();
+            SetScenarioCards();
+            SetInvestigatorsCardsAndPlayers();
 
-            List<string> GetScenarioCards()
+            void SetScenarioCards()
             {
-                List<string> allScenarioCards = new List<string>();
                 foreach (string cardType in gameFiles.ALL_SCENARIO_CARDS_FILES)
                 {
                     string encounterPath = gameFiles.DeckPath(campaignRepository.CurrentScenario.Id) + cardType;
-                    allScenarioCards.AddRange(serializer.CreateDataFromResources<List<string>>(encounterPath));
+                    serializer.CreateDataFromResources<List<string>>(encounterPath).ForEach(cardId => mapper.MapCard(cardId));
                 }
-                return allScenarioCards;
             }
 
-            List<string> GetInvestigatorsCards()
+            void SetInvestigatorsCardsAndPlayers()
             {
-                List<string> allInvestigatorCards = new List<string>();
+                playersRepository.Reset();
                 foreach (Investigator investigator in selectorRepository.InvestigatorsInSelector)
                 {
-                    allInvestigatorCards.Add(investigator.Id);
-                    allInvestigatorCards.AddRange(investigator.FullDeckId);
+                    Player newPlayer = new Player(investigator, mapper.MapCard(investigator.Id) as InvestigatorCard);
+                    investigator.FullDeckId.ForEach(cardId => newPlayer.AddCardInDeck(mapper.MapCard(cardId)));
+                    playersRepository.AddPlayer(newPlayer);
                 }
-                return allInvestigatorCards;
             }
         }
     }

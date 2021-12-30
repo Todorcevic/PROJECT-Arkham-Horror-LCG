@@ -25,8 +25,8 @@ namespace Arkham.Application.GamePlay
             {
                 Sprite front = imagesCard.GetSprite(card.Value.Id);
                 Sprite back = imagesCard.GetBackSprite(card.Value.Id)
-                    ?? imagesCard.GetSprite(card.Value.IsPlayerCard
-                    ? gameFiles.INVESTIGATOR_BACK_IMAGE : gameFiles.ENCOUNTER_BACK_IMAGE);
+                    ?? imagesCard.GetSprite(card.Value.IsScenarioCard
+                    ? gameFiles.ENCOUNTER_BACK_IMAGE : gameFiles.INVESTIGATOR_BACK_IMAGE);
 
                 CardView prefab = front.rect.height > front.rect.width ? cardVPrefab : cardHPrefab;
                 CardView cardView = Instantiate(prefab, zonesManager.GetZoneByType(ZoneType.Outside).transform);

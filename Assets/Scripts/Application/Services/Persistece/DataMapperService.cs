@@ -1,6 +1,6 @@
-﻿using Arkham.Application.GamePlay;
-using Arkham.Model;
+﻿using Arkham.Model;
 using System.Collections.Generic;
+using System.Linq;
 using Zenject;
 
 namespace Arkham.Application
@@ -14,6 +14,7 @@ namespace Arkham.Application
         [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
         [Inject] private readonly ZonesRepository zonesRepository;
         [Inject] private readonly CardsInGameRepository cardsInGameRepository;
+        [Inject] private readonly PlayersRepository playersRepository;
         [Inject] private readonly NameConventionFactoryService factory;
 
         /*******************************************************************/
@@ -104,29 +105,39 @@ namespace Arkham.Application
             }
         }
 
-        public void MapZones(IEnumerable<ZoneView> allZones)
+        public Card MapCard(string cardId)
         {
-            zonesRepository.Reset();
-            foreach (ZoneView zone in allZones)
-            {
-                Zone newZone = new Zone
-                {
-                    Guid = zone.Guid,
-                    Type = zone.ZoneType
-                };
-                zonesRepository.Add(newZone);
-            }
+            Card newCard = factory.CreateInstance<Card>(cardId);
+            newCard.CreateWithThisCard(cardRepository.Get(cardId));
+            return newCard;
         }
 
-        public void MapCard(IEnumerable<string> encounterCards)
+        public void MapZones()
         {
-            cardsInGameRepository.Reset();
-            foreach (string cardId in encounterCards)
+            zonesRepository.Reset();
+            zonesRepository.Add(zonesRepository.EncounterZone);
+            zonesRepository.Add(zonesRepository.DiscardZone);
+            zonesRepository.Add(zonesRepository.ScenarioZone);
+            zonesRepository.Add(zonesRepository.ActZone);
+            zonesRepository.Add(zonesRepository.AgendaZone);
+            zonesRepository.Add(zonesRepository.PlayingZone);
+            zonesRepository.Add(zonesRepository.SkillTestZone);
+            zonesRepository.Add(zonesRepository.OutSideZone);
+            zonesRepository.Add(zonesRepository.VictoryZone);
+            for (int i = 0; i < 12; i++)
+                zonesRepository.Locations.Add(new Zone(ZoneType.Location));
+            zonesRepository.AddRange(zonesRepository.Locations);
+
+            foreach (Player player in playersRepository.AllPlayers)
             {
-                Card newCard = factory.CreateInstance<Card>(cardId);
-                newCard.CreateWithThisCard(cardRepository.Get(cardId));
-                cardsInGameRepository.Add(newCard);
+                zonesRepository.Add(player.InvestigatorZone);
+                zonesRepository.Add(player.HandZone);
+                zonesRepository.Add(player.DeckZone);
+                zonesRepository.Add(player.DiscardZone);
+                zonesRepository.Add(player.AssetZone);
+                zonesRepository.Add(player.ThreatZone);
             }
+            zonesRepository.AddRange(cardsInGameRepository.AllListCards.Select(card => card.CardZone));
         }
     }
 }

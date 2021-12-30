@@ -31,7 +31,6 @@ namespace Arkham.Application.GamePlay
         {
             card.CurrentZone?.ExitThisCard(card);
             zone.EnterThisCard(card);
-            card.CurrentZone = zone;
         }
 
         private void UpdateView()

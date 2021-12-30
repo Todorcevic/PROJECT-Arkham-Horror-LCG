@@ -21,7 +21,6 @@ namespace Arkham.Model
             if (!IsThisCardAllowed(card, investigator)) return false;
             if (IsThisCardWasted(card)) return false;
             if (IsThisCardInMax(card, investigator)) return false;
-            //if (!CanPayThisdCard(card, investigator)) return false;
             return true;
         }
 
@@ -39,11 +38,5 @@ namespace Arkham.Model
 
         private bool IsThisCardInMax(CardInfo card, Investigator investigator) =>
             investigator.GetAmountOfThisCardInDeck(card) >= GameValues.MAX_SIMILARS_CARDS_IN_DECK;
-
-        private bool CanPayThisdCard(CardInfo card, Investigator investigator)
-        {
-            if (investigator.IsPlaying && card.Xp <= investigator.Xp) return true;
-            return false;
-        }
     }
 }

@@ -9,16 +9,15 @@ namespace Arkham.Application.GamePlay
         [Inject] private readonly DataContextService dataContext;
         [Inject] private readonly DataMapperService mapper;
         [Inject] private readonly CardFactory cardFactory;
-        [Inject] private readonly ZonesManager zonesManager;
 
         /*******************************************************************/
         private void Awake()
         {
-            mapper.MapZones(zonesManager.AllZones);
             dataContext.LoadGameCards();
+            mapper.MapZones();
             cardFactory.BuildCards();
         }
 
-        private void OnDestroy() => DOTween.KillAll();
+        private void OnDestroy() => DOTween.Clear();
     }
 }
