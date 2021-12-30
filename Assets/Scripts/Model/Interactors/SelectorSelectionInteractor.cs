@@ -4,8 +4,8 @@ namespace Arkham.Model
 {
     public class SelectorSelectionInteractor
     {
-        [Inject] private readonly InvestigatorRepository investigatorRepository;
-        [Inject] private readonly CardRepository cardRepository;
+        [Inject] private readonly InvestigatorsRepository investigatorRepository;
+        [Inject] private readonly CardsRepository cardRepository;
 
         /*******************************************************************/
         public bool CanThisSelectorBeRemoved(string cardId, string investigatorId)

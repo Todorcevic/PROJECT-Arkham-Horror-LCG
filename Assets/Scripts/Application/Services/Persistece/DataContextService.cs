@@ -1,7 +1,6 @@
 ﻿using Arkham.Model;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using Zenject;
 
 namespace Arkham.Application
@@ -11,9 +10,9 @@ namespace Arkham.Application
         [Inject] private readonly JsonNewtonsoftService serializer;
         [Inject] private readonly DataMapperService mapper;
         [Inject] private readonly GameFiles gameFiles;
-        [Inject] private readonly CardRepository cardRepository;
-        [Inject] private readonly CampaignRepository campaignRepository;
-        [Inject] private readonly SelectorRepository selectorRepository;
+        [Inject] private readonly CardsRepository cardRepository;
+        [Inject] private readonly CampaignsRepository campaignRepository;
+        [Inject] private readonly SelectorsRepository selectorRepository;
 
         /*******************************************************************/
         public void LoadInfoCards()
@@ -36,26 +35,32 @@ namespace Arkham.Application
             FullDTO LoadContinue() => serializer.CreateDataFromFile<FullDTO>(gameFiles.PlayerProgressFilePath);
         }
 
-        public void LoadScenarioCards()
+        public void LoadGameCards()
         {
-            List<string> allScenarioCards = new List<string>();
-            foreach (string cardType in gameFiles.ALL_SCENARIO_CARDS_FILES)
-            {
-                string encounterPath = gameFiles.DECK_PATH(campaignRepository.CurrentScenario.Id) + cardType;
-                allScenarioCards.AddRange(serializer.CreateDataFromResources<List<string>>(encounterPath));
-            }
-            mapper.MapCard(allScenarioCards);
-        }
+            IEnumerable<string> allCards = GetScenarioCards().Concat(GetInvestigatorsCards());
+            mapper.MapCard(allCards);
 
-        public void LoadInvestigatorsCards()
-        {
-            List<string> allInvestigatorCards = new List<string>();
-            foreach (Investigator investigator in selectorRepository.InvestigatorsInSelector)
+            List<string> GetScenarioCards()
             {
-                allInvestigatorCards.Add(investigator.Id);
-                allInvestigatorCards.AddRange(investigator.FullDeck.Select(investigator => investigator.Id));
+                List<string> allScenarioCards = new List<string>();
+                foreach (string cardType in gameFiles.ALL_SCENARIO_CARDS_FILES)
+                {
+                    string encounterPath = gameFiles.DeckPath(campaignRepository.CurrentScenario.Id) + cardType;
+                    allScenarioCards.AddRange(serializer.CreateDataFromResources<List<string>>(encounterPath));
+                }
+                return allScenarioCards;
             }
-            mapper.MapCard(allInvestigatorCards);
+
+            List<string> GetInvestigatorsCards()
+            {
+                List<string> allInvestigatorCards = new List<string>();
+                foreach (Investigator investigator in selectorRepository.InvestigatorsInSelector)
+                {
+                    allInvestigatorCards.Add(investigator.Id);
+                    allInvestigatorCards.AddRange(investigator.FullDeckId);
+                }
+                return allInvestigatorCards;
+            }
         }
     }
 }

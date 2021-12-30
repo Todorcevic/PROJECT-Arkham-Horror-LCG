@@ -5,7 +5,7 @@ namespace Arkham.Application.MainMenu
 {
     public class ReadyButtonPresenter
     {
-        [Inject] private readonly SelectorRepository selectorRepository;
+        [Inject] private readonly SelectorsRepository selectorRepository;
         [Inject(Id = "ReadyButton")] private readonly ButtonView readyButton;
 
         /*******************************************************************/

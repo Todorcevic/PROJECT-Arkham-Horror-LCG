@@ -7,7 +7,7 @@ namespace Arkham.Application.MainMenu
     {
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorSelectionInteractor investigatorSelectionFilter;
-        [Inject] private readonly InvestigatorRepository investigatorRepository;
+        [Inject] private readonly InvestigatorsRepository investigatorRepository;
         [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
         [Inject(Id = "InputSearch")] private readonly InputFieldView inputSearch;
         [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitchView;

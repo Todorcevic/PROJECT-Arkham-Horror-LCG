@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Arkham.Model
 {
-    public class SelectorRepository
+    public class SelectorsRepository
     {
         private readonly List<Investigator> investigators = new List<Investigator>();
 

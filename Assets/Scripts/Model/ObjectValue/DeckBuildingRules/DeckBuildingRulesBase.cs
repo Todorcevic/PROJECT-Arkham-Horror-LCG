@@ -6,7 +6,7 @@ namespace Arkham.Model
     public abstract class DeckBuildingRulesBase : DeckBuildingRules
     {
         private List<CardInfo> allowedCards;
-        [Inject] private readonly CardRepository cardRepository;
+        [Inject] private readonly CardsRepository cardRepository;
 
         public override int DeckSize => 30;
         public override List<CardInfo> AllowedCards => allowedCards ??= Rules();

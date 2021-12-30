@@ -7,7 +7,7 @@ namespace Arkham.Application.MainMenu
     {
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly InvestigatorsCardPresenter investigatorCardsPresenter;
-        [Inject] private readonly InvestigatorRepository investigatorRepository;
+        [Inject] private readonly InvestigatorsRepository investigatorRepository;
         [Inject] private readonly InvestigatorAvatarView investigatorAvatar;
 
         public void RemovePhysicTrauma()

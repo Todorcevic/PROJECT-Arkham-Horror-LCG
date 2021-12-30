@@ -5,8 +5,8 @@ namespace Arkham.Application.MainMenu
 {
     public class RemoveCardUseCase
     {
-        [Inject] private readonly CardRepository cardRepository;
-        [Inject] private readonly InvestigatorRepository investigatorRepository;
+        [Inject] private readonly CardsRepository cardRepository;
+        [Inject] private readonly InvestigatorsRepository investigatorRepository;
         [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CardsQuantityView cardQuantity;

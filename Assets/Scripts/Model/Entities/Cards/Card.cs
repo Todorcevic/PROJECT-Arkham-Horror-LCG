@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Arkham.Model
 {
@@ -10,6 +11,7 @@ namespace Arkham.Model
         public Zone CurrentZone { get; set; }
         public Investigator Owner { get; set; }
         public Investigator Control { get; set; }
+        public bool IsPlayerCard => this is AssetCard || this is EventCard || this is SkillCard || this is InvestigatorCard;
 
         /*******************************************************************/
         public void CreateWithThisCard(CardInfo cardInfo)

@@ -9,7 +9,7 @@ namespace Arkham.Application.GamePlay
 {
     public class MoveCardUseCase
     {
-        [Inject] private readonly CardInGameRepository cardInGameRepository;
+        [Inject] private readonly CardsInGameRepository cardInGameRepository;
         [Inject] private readonly ZonesRepository zoneRepository;
 
         /*******************************************************************/

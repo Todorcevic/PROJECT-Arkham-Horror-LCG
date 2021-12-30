@@ -6,7 +6,7 @@ namespace Arkham.Application.MainMenu
 {
     public class CampaignsManager
     {
-        [Inject] private readonly CampaignRepository campaignRepository;
+        [Inject] private readonly CampaignsRepository campaignRepository;
         [Inject] private readonly List<CampaignView> campaigns;
         [Inject] private readonly List<CampaignStateSO> states;
 

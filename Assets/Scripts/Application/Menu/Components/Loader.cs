@@ -27,7 +27,7 @@ namespace Arkham.Application.MainMenu
 
         public void LoadScene(string sceneId)
         {
-            DOTween.CompleteAll();
+            DOTween.KillAll();
             SceneManager.LoadScene(sceneId);
         }
     }

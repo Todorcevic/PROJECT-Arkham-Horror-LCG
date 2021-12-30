@@ -5,8 +5,8 @@ namespace Arkham.Application.MainMenu
 {
     public class AddCardUseCase
     {
-        [Inject] private readonly CardRepository cardRepository;
-        [Inject] private readonly InvestigatorRepository investigatorRepository;
+        [Inject] private readonly CardsRepository cardsRepository;
+        [Inject] private readonly InvestigatorsRepository investigatorsRepository;
         [Inject] private readonly CardSelectorPresenter cardSelector;
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CardsQuantityView cardQuantity;
@@ -17,8 +17,8 @@ namespace Arkham.Application.MainMenu
         /*******************************************************************/
         public void AddCard(string cardId, string investigatorId)
         {
-            CardInfo card = cardRepository.Get(cardId);
-            Investigator investigator = investigatorRepository.Get(investigatorId);
+            CardInfo card = cardsRepository.Get(cardId);
+            Investigator investigator = investigatorsRepository.Get(investigatorId);
             updateXpUseCase.PayCardXp(investigator, card);
             UpdateModel(card, investigator);
             UpdateView(card, investigator);

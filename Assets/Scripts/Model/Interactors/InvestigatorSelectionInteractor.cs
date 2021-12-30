@@ -5,8 +5,8 @@ namespace Arkham.Model
 {
     public class InvestigatorSelectionInteractor
     {
-        [Inject] private readonly InvestigatorRepository investigatorRepository;
-        [Inject] private readonly SelectorRepository selectorRepository;
+        [Inject] private readonly InvestigatorsRepository investigatorRepository;
+        [Inject] private readonly SelectorsRepository selectorRepository;
         [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
 
         /*******************************************************************/

@@ -5,7 +5,7 @@ namespace Arkham.Application.MainMenu
 {
     public class RetireInvestigatorUseCase
     {
-        [Inject] private readonly InvestigatorRepository investigatorRepository;
+        [Inject] private readonly InvestigatorsRepository investigatorRepository;
         [Inject] private readonly InvestigatorsCardPresenter investigatorCardsPresenter;
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly RemoveInvestigatorUseCase removeInvestigatorUseCase;

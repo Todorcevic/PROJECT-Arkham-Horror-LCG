@@ -6,8 +6,8 @@ namespace Arkham.Application.MainMenu
 {
     public class StartPlayUseCase
     {
-        [Inject] private readonly SelectorRepository selector;
-        [Inject] private readonly CampaignRepository campaignRepository;
+        [Inject] private readonly SelectorsRepository selector;
+        [Inject] private readonly CampaignsRepository campaignRepository;
         [Inject] private readonly Loader loader;
         [Inject] private readonly DataContextService dataPersistence;
 

@@ -2,7 +2,7 @@
 
 namespace Arkham.Model
 {
-    public class CampaignRepository
+    public class CampaignsRepository
     {
         private List<Campaign> campaigns;
 

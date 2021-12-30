@@ -1,20 +1,19 @@
 ﻿using Arkham.Application.GamePlay;
 using Arkham.Model;
 using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
 
 namespace Arkham.Application
 {
     public class DataMapperService
     {
-        [Inject] private readonly CardRepository cardRepository;
-        [Inject] private readonly CampaignRepository campaignRepository;
-        [Inject] private readonly InvestigatorRepository investigatorRepository;
-        [Inject] private readonly SelectorRepository selectorRepository;
+        [Inject] private readonly CardsRepository cardRepository;
+        [Inject] private readonly CampaignsRepository campaignRepository;
+        [Inject] private readonly InvestigatorsRepository investigatorRepository;
+        [Inject] private readonly SelectorsRepository selectorRepository;
         [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
         [Inject] private readonly ZonesRepository zonesRepository;
-        [Inject] private readonly CardInGameRepository cardsInGameRepository;
+        [Inject] private readonly CardsInGameRepository cardsInGameRepository;
         [Inject] private readonly NameConventionFactoryService factory;
 
         /*******************************************************************/
@@ -24,7 +23,7 @@ namespace Arkham.Application
 
             foreach (Campaign campaign in campaignRepository.Campaigns)
             {
-                CampaignDTO campaignDTO = new CampaignDTO()
+                CampaignDTO campaignDTO = new CampaignDTO
                 {
                     Id = campaign.Id,
                     State = campaign.State.Id
@@ -34,7 +33,7 @@ namespace Arkham.Application
 
             foreach (Investigator investigator in investigatorRepository.Investigators)
             {
-                InvestigatorDTO investigatorDTO = new InvestigatorDTO()
+                InvestigatorDTO investigatorDTO = new InvestigatorDTO
                 {
                     Id = investigator.Id,
                     PhysicTrauma = investigator.PhysicTrauma,
@@ -94,7 +93,7 @@ namespace Arkham.Application
             campaignRepository.Reset();
             foreach (CampaignDTO campaign in campaigns)
             {
-                Campaign newCampaing = new Campaign()
+                Campaign newCampaing = new Campaign
                 {
                     Id = campaign.Id,
                     State = factory.CreateInstance<CampaignState>(campaign.State),
@@ -110,7 +109,7 @@ namespace Arkham.Application
             zonesRepository.Reset();
             foreach (ZoneView zone in allZones)
             {
-                Zone newZone = new Zone()
+                Zone newZone = new Zone
                 {
                     Guid = zone.Guid,
                     Type = zone.ZoneType
@@ -128,7 +127,6 @@ namespace Arkham.Application
                 newCard.CreateWithThisCard(cardRepository.Get(cardId));
                 cardsInGameRepository.Add(newCard);
             }
-            Debug.Log(cardsInGameRepository.AllCards.Count);
         }
     }
 }

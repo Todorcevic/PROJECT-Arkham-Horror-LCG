@@ -5,7 +5,7 @@ namespace Arkham.Application.MainMenu
 {
     public class SelectScenarioUseCase
     {
-        [Inject] private readonly CampaignRepository campaignRepository;
+        [Inject] private readonly CampaignsRepository campaignRepository;
         [Inject(Id = "ContinueButton")] private readonly ButtonView continueButton;
 
         /*******************************************************************/

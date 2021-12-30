@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Arkham.Model
 {
-    public class CardInGameRepository
+    public class CardsInGameRepository
     {
         private Dictionary<Guid, Card> allCards;
 

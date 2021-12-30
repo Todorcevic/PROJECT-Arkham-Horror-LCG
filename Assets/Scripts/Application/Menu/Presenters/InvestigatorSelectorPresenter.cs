@@ -7,7 +7,7 @@ namespace Arkham.Application.MainMenu
 {
     public class InvestigatorSelectorPresenter
     {
-        [Inject] private readonly SelectorRepository selectorRepository;
+        [Inject] private readonly SelectorsRepository selectorRepository;
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly SelectInvestigatorUseCase investigatorSelectUseCase;

@@ -5,8 +5,8 @@ namespace Arkham.Application.MainMenu
 {
     public class AddInvestigatorUseCase
     {
-        [Inject] private readonly InvestigatorRepository investigatorRepository;
-        [Inject] private readonly SelectorRepository selectorRepository;
+        [Inject] private readonly InvestigatorsRepository investigatorRepository;
+        [Inject] private readonly SelectorsRepository selectorRepository;
         [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
