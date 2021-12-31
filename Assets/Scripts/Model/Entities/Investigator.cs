@@ -68,8 +68,6 @@ namespace Arkham.Model
 
         public void AddToMandatory(CardInfo card) => mandatoryCards.Add(card);
 
-        public List<CardInfo> FindInDeck(Predicate<CardInfo> filter) => deck.FindAll(filter);
-
         public void Retire()
         {
             isRetired = true;

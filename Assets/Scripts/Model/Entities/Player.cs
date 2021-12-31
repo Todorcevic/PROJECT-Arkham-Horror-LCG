@@ -7,7 +7,6 @@ namespace Arkham.Model
     {
         private List<Card> deck = new List<Card>();
 
-        public Investigator Investigator { get; }
         public InvestigatorCard InvestigatorCard { get; }
         public Zone InvestigatorZone { get; } = new Zone(ZoneType.Investigator);
         public Zone HandZone { get; } = new Zone(ZoneType.Hand);
@@ -18,9 +17,8 @@ namespace Arkham.Model
         public ReadOnlyCollection<Card> Deck => deck.AsReadOnly();
 
         /*******************************************************************/
-        public Player(Investigator investigator, InvestigatorCard investigatorCard)
+        public Player(InvestigatorCard investigatorCard)
         {
-            Investigator = investigator;
             InvestigatorCard = investigatorCard;
         }
 

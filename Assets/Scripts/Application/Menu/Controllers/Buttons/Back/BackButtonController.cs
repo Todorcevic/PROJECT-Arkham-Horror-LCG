@@ -8,7 +8,7 @@ namespace Arkham.Application.MainMenu
         [Inject(Id = "BackButton")] private readonly List<ButtonView> backButtons;
         [Inject(Id = "MainPanelsManager")] private readonly PanelsMediator panelsManager;
         [Inject(Id = "HomePanel")] private readonly PanelView homePanel;
-        [Inject] private readonly DataContextService dataPersistence;
+        [Inject] private readonly DataMapperService dataPersistence;
 
         /*******************************************************************/
         void IInitializable.Initialize() => backButtons.ForEach(button => button.ClickAction += Clicked);

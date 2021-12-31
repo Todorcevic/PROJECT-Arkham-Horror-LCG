@@ -11,6 +11,7 @@ namespace Arkham.Application.GamePlay
         [Inject] private readonly ImagesCardService imagesCard;
         [Inject] private readonly CardsInGameRepository cardsInGameRepository;
         [Inject] private readonly ZonesManager zonesManager;
+        [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly GameFiles gameFiles;
         [SerializeField] private CardView cardHPrefab;
         [SerializeField] private CardView cardVPrefab;
@@ -19,8 +20,6 @@ namespace Arkham.Application.GamePlay
         /*******************************************************************/
         public void BuildCards()
         {
-            Dictionary<string, Material> allMaterials = new Dictionary<string, Material>(); //Probably delete, maybe need one material foreach card. Ex: Grayscale in wasted cards
-
             foreach (KeyValuePair<Guid, Card> card in cardsInGameRepository.AllCards)
             {
                 Sprite front = imagesCard.GetSprite(card.Value.Id);
@@ -31,16 +30,11 @@ namespace Arkham.Application.GamePlay
                 CardView prefab = front.rect.height > front.rect.width ? cardVPrefab : cardHPrefab;
                 CardView cardView = Instantiate(prefab, zonesManager.GetZoneByType(ZoneType.Outside).transform);
 
-                if (allMaterials.TryGetValue(card.Value.Id, out Material cardMaterial))
-                    cardView.Init(card.Key, cardMaterial, card.Value.Id);
-                else
-                {
-                    cardMaterial = new Material(materialBase);
-                    cardMaterial.SetTexture("_MainTex", front.texture);
-                    cardMaterial.SetTexture("_MainTex2", back.texture);
-                    cardView.Init(card.Key, cardMaterial, card.Value.Id);
-                    allMaterials.Add(card.Value.Id, cardMaterial);
-                }
+                Material cardMaterial = new Material(materialBase);
+                cardMaterial.SetTexture("_MainTex", front.texture);
+                cardMaterial.SetTexture("_MainTex2", back.texture);
+                cardView.Init(card.Key, cardMaterial, card.Value.Id);
+                cardsManager.AddCard(cardView);
             }
         }
     }

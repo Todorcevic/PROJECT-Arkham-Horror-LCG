@@ -11,6 +11,7 @@ namespace Arkham.Application.GamePlay
     {
         [Inject] private readonly CardsInGameRepository cardInGameRepository;
         [Inject] private readonly ZonesRepository zoneRepository;
+        [Inject] private readonly CardMovementPresenter cardMovementPresenter;
 
         /*******************************************************************/
         public void MoveCard(Guid cardGuid, Guid zoneGuid)
@@ -18,6 +19,7 @@ namespace Arkham.Application.GamePlay
             Card card = cardInGameRepository.GetCard(cardGuid);
             Zone zone = zoneRepository.GetZoneById(zoneGuid);
             UpdateModel(card, zone);
+            UpdateView(card, zone);
         }
 
         public void MoveCard(Guid cardGuid, ZoneType zoneType)
@@ -25,6 +27,7 @@ namespace Arkham.Application.GamePlay
             Card card = cardInGameRepository.GetCard(cardGuid);
             Zone zone = zoneRepository.GetZoneByType(zoneType);
             UpdateModel(card, zone);
+            UpdateView(card, zone);
         }
 
         private void UpdateModel(Card card, Zone zone)
@@ -33,9 +36,9 @@ namespace Arkham.Application.GamePlay
             zone.EnterThisCard(card);
         }
 
-        private void UpdateView()
+        private void UpdateView(Card card, Zone zone)
         {
-
+            cardMovementPresenter.MoveCard(card.Guid, zone.Type);
         }
     }
 }

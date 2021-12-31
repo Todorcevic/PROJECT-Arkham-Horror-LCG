@@ -9,7 +9,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly SelectorsRepository selector;
         [Inject] private readonly CampaignsRepository campaignRepository;
         [Inject] private readonly Loader loader;
-        [Inject] private readonly DataContextService dataPersistence;
+        [Inject] private readonly DataMapperService dataPersistence;
 
         /*******************************************************************/
         public void Start()

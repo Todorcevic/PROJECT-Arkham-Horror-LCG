@@ -9,7 +9,7 @@ namespace Arkham.Application.MainMenu
     {
         [Inject] private readonly ScreenResolutionAutoDetectService resolutionSetter;
         [Inject] private readonly CardFactory cardFactory;
-        [Inject] private readonly DataContextService dataContext;
+        [Inject] private readonly DataMapperService dataContext;
         [Inject] private readonly ImagesCardService imagesCard;
 
         private void Awake()
