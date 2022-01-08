@@ -3,17 +3,19 @@ using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class DeckCardController : CardController
+    public class DeckCardController : CardController, IPointerClickHandler
     {
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
         [Inject] private readonly AddCardUseCase addCardUseCase;
 
+        DeckCardView DeckCardView => cardView as DeckCardView;
+
         /*******************************************************************/
-        protected override void Clicked(PointerEventData eventData)
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            audioInteractable.ClickSound();
-            if (cardView.IsInactive) CantAdd();
-            else addCardUseCase.AddCard(cardView.Id, investigatorSelectorManager.InvestigatorSelected);
+            DeckCardView.PointerClick();
+            if (!cardView.IsInactive)
+                addCardUseCase.AddCard(cardView.Id, investigatorSelectorManager.InvestigatorSelected);
         }
     }
 }

@@ -17,6 +17,12 @@ namespace Arkham.Application.MainMenu
 
         public void SetXpCost(int quantity) => xpCost.UpdateAmount(quantity);
 
+        public void PointerClick()
+        {
+            audioInteractable.ClickSound();
+            if (IsInactive) CantAdd();
+        }
+
         private string FormatQuantity(int quantity) => quantity > 1 ? "x" + quantity : string.Empty;
     }
 }

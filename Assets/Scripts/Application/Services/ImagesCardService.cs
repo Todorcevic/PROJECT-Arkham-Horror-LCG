@@ -12,6 +12,7 @@ namespace Arkham.Application
         private Dictionary<string, Sprite> cardImagesEN = new Dictionary<string, Sprite>();
         [Inject(Id = InstancesInjected.allCardsEN)] private readonly List<Sprite> imagesEN;
         [Inject] private readonly GameFiles gameFiles;
+        [Inject] private readonly PlayerPrefsService playerPref;
 
         /*******************************************************************/
         public void Build() => cardImagesEN = imagesEN.ToDictionary(sprite => sprite.name);
@@ -22,16 +23,17 @@ namespace Arkham.Application
         /*******************************************************************/
         public bool ExistThisSprite(string id) => cardImagesEN.TryGetValue(id, out Sprite _);
 
-        public Sprite GetSprite(string id)
+        public Sprite GetSprite(string id, bool isBack = false)
         {
-            cardImagesEN.TryGetValue(id, out Sprite sprite);
+            string realId = GetRealId();
+            cardImagesEN.TryGetValue(realId, out Sprite sprite);
             return sprite;
-        }
 
-        public Sprite GetBackSprite(string id)
-        {
-            cardImagesEN.TryGetValue(id + BACK_SUFFIX, out Sprite sprite);
-            return sprite;
+            string GetRealId()
+            {
+                int imageNumber = playerPref.LoadImageNumber(id);
+                return id + (isBack ? BACK_SUFFIX : string.Empty) + (imageNumber > 0 ? "-" + imageNumber : string.Empty);
+            }
         }
 
         public bool CanChange(string id) => ExistThisSprite(id + "-1");

@@ -10,8 +10,9 @@ namespace Arkham.Application
         [Inject] private readonly GameFiles gamefiles;
         [SerializeField] private Assambly assambly;
 
-        private string AssamblyName => "Arkham.Application." + assambly;
+        private string AssamblyName => GetType().Namespace + "." + assambly;
 
+        /*******************************************************************/
         public override void InstallBindings()
         {
             /*** Controllers ***/

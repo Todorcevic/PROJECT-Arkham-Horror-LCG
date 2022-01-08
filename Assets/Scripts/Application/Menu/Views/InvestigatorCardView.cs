@@ -29,5 +29,11 @@ namespace Arkham.Application.MainMenu
         public void UpdateMentalTrauma(int amount) => mentalTrauma.UpdateAmount(amount);
 
         public void UpdateXp(int amount) => xp.UpdateAmount(amount);
+
+        public void PointerClick()
+        {
+            audioInteractable.ClickSound();
+            if (IsInactive) CantAdd();
+        }
     }
 }

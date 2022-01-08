@@ -8,10 +8,11 @@ namespace Arkham.Application
         private const string PREFIX_IMAGE = "ImageCard";
 
         /*******************************************************************/
-        public bool LoadCardsVisibility() => bool.Parse(PlayerPrefs.GetString(KEY_VISIBILITY, bool.FalseString));
-
         public void SaveCardsVisibility(bool isOn) => PlayerPrefs.SetString(KEY_VISIBILITY, isOn.ToString());
 
+        public bool LoadCardsVisibility() => bool.Parse(PlayerPrefs.GetString(KEY_VISIBILITY, bool.FalseString));
+
+        /*******************************************************************/
         public void SaveChangeImage(string cardId, int imageNumber)
         {
             if (imageNumber == 0) PlayerPrefs.DeleteKey(PREFIX_IMAGE + cardId);

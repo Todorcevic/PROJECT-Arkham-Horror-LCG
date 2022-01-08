@@ -13,19 +13,23 @@ namespace Arkham.Application.GamePlay
         [Inject] private readonly ZonesManager zonesManager;
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly GameFiles gameFiles;
+        [Inject] private readonly PlayerPrefsService playerPref;
         [SerializeField] private CardView cardHPrefab;
         [SerializeField] private CardView cardVPrefab;
         [SerializeField] private Material materialBase;
+
+        //private string CardImageName => cardView.Id + (imageNumber > 0 ? "-" + imageNumber : string.Empty);
 
         /*******************************************************************/
         public void BuildCards()
         {
             foreach (KeyValuePair<Guid, Card> card in cardsInGameRepository.AllCards)
             {
+                int imageNumber = playerPref.LoadImageNumber(card.Value.Id);
+                string frontImage = card.Value.Id + (imageNumber > 0 ? "-" + imageNumber : string.Empty);
                 Sprite front = imagesCard.GetSprite(card.Value.Id);
-                Sprite back = imagesCard.GetBackSprite(card.Value.Id)
-                    ?? imagesCard.GetSprite(card.Value.IsScenarioCard
-                    ? gameFiles.ENCOUNTER_BACK_IMAGE : gameFiles.INVESTIGATOR_BACK_IMAGE);
+                Sprite back = imagesCard.GetSprite(card.Value.Id, isBack: true)
+                    ?? imagesCard.GetSprite(card.Value.IsScenarioCard ? gameFiles.ENCOUNTER_BACK_IMAGE : gameFiles.INVESTIGATOR_BACK_IMAGE);
 
                 CardView prefab = front.rect.height > front.rect.width ? cardVPrefab : cardHPrefab;
                 CardView cardView = Instantiate(prefab, zonesManager.GetZoneByType(ZoneType.Outside).transform);

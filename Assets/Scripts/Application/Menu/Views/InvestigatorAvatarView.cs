@@ -25,7 +25,7 @@ namespace Arkham.Application.MainMenu
             SetXp(xpAmount);
         }
 
-        private void ChangeImage(Sprite sprite)
+        public void ChangeImage(Sprite sprite)
         {
             bool isActive = sprite != null;
             canvasGroup.alpha = isActive ? 1 : 0;

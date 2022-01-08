@@ -32,8 +32,10 @@ namespace Arkham.Application.MainMenu
             Id = dragSensor.Id = cardId;
             ActivateSensor(true);
             canvasImage.alpha = 1;
-            image.sprite = cardSprite;
+            ChangeImage(cardSprite);
         }
+
+        public void ChangeImage(Sprite cardSprite) => image.sprite = cardSprite;
 
         public void EmptySelector()
         {

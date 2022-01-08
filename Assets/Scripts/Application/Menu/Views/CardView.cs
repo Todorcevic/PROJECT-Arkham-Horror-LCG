@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using DG.Tweening;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -7,19 +8,19 @@ namespace Arkham.Application.MainMenu
 {
     public abstract class CardView : MonoBehaviour, IShowable
     {
+        private const string SHAKE = "Shake";
         private const float positionThreshold = 0.285f;
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private RectTransform rect;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGlow;
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
         [SerializeField, Required, ChildGameObjectsOnly] private Image glow;
-        [SerializeField, Required] private SwapImageButtonIconController changeImageController;
+        [SerializeField, Required, ChildGameObjectsOnly] protected InteractableAudio audioInteractable;
+        [SerializeField, Required, ChildGameObjectsOnly] private SwapImageButtonIconController changeImageController;
 
         public abstract bool MustReshow { get; }
         public bool IsInactive { get; private set; }
         public string Id { get; private set; }
-        public CanvasGroup Glow => canvasGlow;
         public Vector2 StartPosition => transform.position;
         public Vector2 ShowPosition
         {
@@ -60,5 +61,19 @@ namespace Arkham.Application.MainMenu
             canvasGlow.alpha = 0;
             gameObject.SetActive(isEnable);
         }
+
+        public void CantAdd()
+        {
+            DOTween.Complete(SHAKE + gameObject.GetInstanceID());
+            transform.DOPunchPosition(Vector3.right * 20, ViewValues.FAST_TIME, 40, 5).SetId(SHAKE + gameObject.GetInstanceID());
+        }
+
+        public void PointerEnter()
+        {
+            canvasGlow.DOFade(1, ViewValues.STANDARD_TIME);
+            audioInteractable.HoverOnSound();
+        }
+
+        public void PointerExit() => canvasGlow.DOFade(0, ViewValues.STANDARD_TIME);
     }
 }

@@ -4,21 +4,22 @@ using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class InvestigatorCardController : CardController
+    public class InvestigatorCardController : CardController, IPointerClickHandler
     {
         [Inject] private readonly AddInvestigatorUseCase addInvestigatorUseCase;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectors;
 
+        InvestigatorCardView InvestigatorCardView => cardView as InvestigatorCardView;
+
         /*******************************************************************/
-        protected override void Clicked(PointerEventData eventData)
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             if (DOTween.IsTweening(InvestigatorSelectorView.MOVE_ANIMATION)) return;
-            audioInteractable.ClickSound();
+            InvestigatorCardView.PointerClick();
             if (investigatorSelectors.InvestigatorSelected != cardView.Id)
                 selectInvestigatorUseCase.Select(cardView.Id);
-            if (cardView.IsInactive) CantAdd();
-            else addInvestigatorUseCase.Add(cardView.Id);
+            if (!cardView.IsInactive) addInvestigatorUseCase.Add(cardView.Id);
         }
     }
 }

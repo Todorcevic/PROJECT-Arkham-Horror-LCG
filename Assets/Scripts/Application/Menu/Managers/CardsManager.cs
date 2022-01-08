@@ -13,6 +13,8 @@ namespace Arkham.Application.MainMenu
         public List<InvestigatorCardView> InvestigatorList => cards.Values.OfType<InvestigatorCardView>().ToList();
 
         /*******************************************************************/
+        public CardView GetCard(string cardId) => cards[cardId];
+
         public InvestigatorCardView GetInvestigatorCard(string cardId) => (InvestigatorCardView)cards[cardId];
 
         public DeckCardView GetDeckCard(string cardId) => (DeckCardView)cards[cardId];

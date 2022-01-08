@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Arkham.Application
+namespace Arkham
 {
     public enum InstancesInjected { allCardsEN }
 
@@ -10,23 +10,26 @@ namespace Arkham.Application
     {
         [SerializeField] private List<Sprite> allCardsEN;
 
+        private string AssamblyName => GetType().Namespace;
+
+        /*******************************************************************/
         public override void InstallBindings()
         {
             /*** Basics ***/
-            Container.Bind<GameFiles>().AsSingle();
+            Container.Bind<Application.GameFiles>().AsSingle();
             Container.BindInstance(allCardsEN).WithId(InstancesInjected.allCardsEN);
 
             /*** Services ***/
             Container.Bind(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham").WithSuffix("Service")).AsSingle();
+            .InNamespace(AssamblyName).WithSuffix("Service")).AsSingle();
 
             /*** Repositories***/
             Container.Bind(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham").WithSuffix("Repository")).AsSingle();
+            .InNamespace(AssamblyName).WithSuffix("Repository")).AsSingle();
 
             /*** Interactors ***/
             Container.Bind(x => x.AllNonAbstractClasses()
-            .InNamespace("Arkham").WithSuffix("Interactor")).AsSingle();
+            .InNamespace(AssamblyName).WithSuffix("Interactor")).AsSingle();
         }
     }
 }
