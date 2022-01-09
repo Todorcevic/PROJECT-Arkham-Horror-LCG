@@ -337,7 +337,7 @@ MonoBehaviour:
   image: {fileID: 7254246650819031572}
   glow: {fileID: 7901705940009983470}
   audioInteractable: {fileID: 3381794686743605097}
-  changeImageController: {fileID: 3647824578705925238}
+  swapImageController: {fileID: 3647824578705925238}
   states:
   - {fileID: 6651706689059554810}
   - {fileID: 7149418375056321704}
@@ -914,7 +914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7232313873091879686, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: m_Name
-      value: ChangeImageButton
+      value: SwapImageButton
       objectReference: {fileID: 0}
     - target: {fileID: 7232313873091879686, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: m_IsActive
@@ -956,7 +956,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swapImageButton: {fileID: 3967564378043389018}
-  cardView: {fileID: 3428538249790762421}
 --- !u!1001 &4715985345489359459
 PrefabInstance:
   m_ObjectHideFlags: 0

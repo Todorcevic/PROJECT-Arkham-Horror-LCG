@@ -16,7 +16,7 @@ namespace Arkham.Application.MainMenu
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
         [SerializeField, Required, ChildGameObjectsOnly] private Image glow;
         [SerializeField, Required, ChildGameObjectsOnly] protected InteractableAudio audioInteractable;
-        [SerializeField, Required, ChildGameObjectsOnly] private SwapImageButtonIconController changeImageController;
+        [SerializeField, Required, ChildGameObjectsOnly] private SwapImageButtonIconController swapImageController;
 
         public abstract bool MustReshow { get; }
         public bool IsInactive { get; private set; }
@@ -35,18 +35,13 @@ namespace Arkham.Application.MainMenu
 
         /*******************************************************************/
         [Inject]
-        private void Init(string id)
+        private void Init(string id, bool canSwapImage)
         {
             name = Id = id;
+            swapImageController.Init(Id, canSwapImage);
         }
 
         /*******************************************************************/
-        public void ActiveSwapImageButton(bool isActive)
-        {
-            changeImageController.gameObject.SetActive(isActive);
-            if (isActive) changeImageController.Init(Id);
-        }
-
         public void ChangeImage(Sprite sprite, Sprite backImage)
         {
             canvasGroup.alpha = sprite == null ? 0 : 1;

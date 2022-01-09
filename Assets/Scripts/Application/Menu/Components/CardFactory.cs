@@ -35,7 +35,7 @@ namespace Arkham.Application.MainMenu
         {
             foreach (string cardId in DeckCards)
             {
-                object[] args = new object[] { cardId };
+                object[] args = new object[] { cardId, imagesCard.CanChange(cardId) };
                 DeckCardView cardView = diContainer.InstantiatePrefabForComponent<DeckCardView>(cardPrefab, cardZone, args);
                 SetCard(cardView);
             }
@@ -45,7 +45,7 @@ namespace Arkham.Application.MainMenu
         {
             foreach (string investigatorId in InvestigatorCards)
             {
-                object[] args = new object[] { investigatorId };
+                object[] args = new object[] { investigatorId, imagesCard.CanChange(investigatorId) };
                 InvestigatorCardView cardView = diContainer.InstantiatePrefabForComponent<InvestigatorCardView>(investigatorPrefab, investigatorZone, args);
                 SetCard(cardView);
             }
@@ -53,7 +53,6 @@ namespace Arkham.Application.MainMenu
 
         private void SetCard(CardView cardView)
         {
-            cardView.ActiveSwapImageButton(imagesCard.CanChange(cardView.Id));
             cardImagePresenter.SetCardImage(cardView);
             cardsManager.AddCard(cardView.Id, cardView);
         }

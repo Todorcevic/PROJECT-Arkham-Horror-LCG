@@ -10,7 +10,11 @@ namespace Arkham.Application.MainMenu
         [SerializeField, Required] private ButtonIconView swapImageButton;
 
         /*******************************************************************/
-        public void Init(string cardId) =>
-            swapImageButton.ClickAction += () => swapImageCardUseCase.ChangeCardImage(cardId);
+        public void Init(string cardId, bool isActive)
+        {
+            gameObject.SetActive(isActive);
+            if (isActive)
+                swapImageButton.ClickAction += () => swapImageCardUseCase.ChangeCardImage(cardId);
+        }
     }
 }
