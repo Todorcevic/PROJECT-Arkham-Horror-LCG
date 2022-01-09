@@ -6,19 +6,19 @@ namespace Arkham.Application.MainMenu
     public class SelectScenarioUseCase
     {
         [Inject] private readonly CampaignsRepository campaignRepository;
-        [Inject(Id = "ContinueButton")] private readonly ButtonView continueButton;
+        [Inject] private readonly ButtonsPresenter buttonsPresenter;
 
         /*******************************************************************/
         public void Reset() => SelectFirstScenarioOf(null);
 
         public void SelectFirstScenarioOf(string campaignId)
         {
-            SelectCampaignUpdateModel(campaignId);
-            SelectCampaignUpdateView();
+            UpdateModel(campaignId);
+            UpdateView();
         }
 
-        private void SelectCampaignUpdateModel(string campaignId) => campaignRepository.SelectFirstScenarioOf(campaignId);
+        private void UpdateModel(string campaignId) => campaignRepository.SelectFirstScenarioOf(campaignId);
 
-        private void SelectCampaignUpdateView() => continueButton.Desactive(campaignRepository.CurrentScenario == null);
+        private void UpdateView() => buttonsPresenter.AutoActivateContinueButton();
     }
 }

@@ -9,21 +9,20 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly InvestigatorsCardPresenter investigatorsCard;
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CampaignsManager campaignsManager;
-        [Inject] private readonly ReadyButtonPresenter readyButton;
-        [Inject(Id = "InvestigatorsButton")] private readonly ButtonView investigatorsButton;
+        [Inject] private readonly ButtonsPresenter buttonsPresenter;
 
         /*******************************************************************/
         public void Init(StartGame gameType)
         {
-            UpdateModel(gameType);
+            UpdateApplication(gameType);
             UpdateView(gameType);
         }
 
-        private void UpdateModel(StartGame gameType) => dataPersistence.LoadProgress(gameType);
+        private void UpdateApplication(StartGame gameType) => dataPersistence.LoadProgress(gameType);
 
         private void UpdateView(StartGame gameType)
         {
-            investigatorsButton.ExecuteClick();
+            buttonsPresenter.ExecuteInvestigatorsButton();
             investigatorSelector.InitializeSelectors();
             investigatorSelector.SetLeadSelector();
             if (gameType == StartGame.New) campaignsManager.InitializeCampaigns();
@@ -31,7 +30,7 @@ namespace Arkham.Application.MainMenu
             investigatorsCard.RefreshInvestigatorsSelectability();
             investigatorsCard.RefreshInvestigatorsVisibility();
             deckCardPresenter.RefresQuantity();
-            readyButton.AutoActivate();
+            buttonsPresenter.AutoActivateReadyButton();
         }
     }
 }

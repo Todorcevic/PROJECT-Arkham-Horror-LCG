@@ -6,12 +6,12 @@ namespace Arkham.Application.MainMenu
     public class UpdateXpUseCase
     {
         [Inject] private readonly AvatarPresenter avatarPresenter;
-        [Inject] private readonly CardXpCostInteractor XpCostInteractor;
+        [Inject] private readonly CardXpCostInteractor xpCostInteractor;
 
         /*******************************************************************/
         public void PayCardXp(Investigator investigator, CardInfo card)
         {
-            UpdateModel(investigator, XpCostInteractor.XpPayCost(card.Id, investigator.Id));
+            UpdateModel(investigator, xpCostInteractor.XpPayCost(card.Id, investigator.Id));
             UpdateView(investigator);
         }
 

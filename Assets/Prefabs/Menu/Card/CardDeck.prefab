@@ -700,6 +700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swapImageButton: {fileID: 3318373205203516671}
+  cardView: {fileID: 3206177030987578973}
 --- !u!1001 &7558779498368558786
 PrefabInstance:
   m_ObjectHideFlags: 0

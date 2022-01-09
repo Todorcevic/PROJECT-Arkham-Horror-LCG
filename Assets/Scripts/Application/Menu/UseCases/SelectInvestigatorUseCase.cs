@@ -1,5 +1,4 @@
 ﻿using Arkham.Model;
-using UnityEngine;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
@@ -10,7 +9,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly InvestigatorsRepository investigatorRepository;
         [Inject] private readonly DeckCardPresenter cardVisibility;
         [Inject] private readonly CardsQuantityView cardQuantity;
-        [Inject(Id = "RetireButton")] private readonly ButtonIconView retireButton;
+        [Inject] private readonly ButtonsPresenter buttonsPresenter;
         [Inject] private readonly CardSelectorPresenter cardSelector;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly AvatarPresenter avatarPresenter;
@@ -22,7 +21,7 @@ namespace Arkham.Application.MainMenu
         {
             Investigator investigator = investigatorRepository.Get(investigatorId);
             avatarPresenter.SetAvatar(investigator);
-            retireButton.Activate(investigator?.State == InvestigatorState.None && investigator!.IsPlaying);
+            buttonsPresenter.AutoActivateRetireButton(investigator);
             investigatorSelectorsManager.SelectInvestigator(investigatorId);
             cardQuantity.Refresh(investigator);
             cardVisibility.RefreshCardsSelectability();

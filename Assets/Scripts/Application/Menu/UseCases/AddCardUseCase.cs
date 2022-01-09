@@ -10,7 +10,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly CardSelectorPresenter cardSelector;
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CardsQuantityView cardQuantity;
-        [Inject] private readonly ReadyButtonPresenter readyButton;
+        [Inject] private readonly ButtonsPresenter buttonsPresenter;
         [Inject] private readonly UpdateXpUseCase updateXpUseCase;
         [Inject] private readonly CardShowerPresenter multiAnimator;
 
@@ -35,7 +35,7 @@ namespace Arkham.Application.MainMenu
             deckCardPresenter.SetQuantity(card);
             cardQuantity.Refresh(investigator);
             multiAnimator.ReshowCardDeck(card.Id);
-            readyButton.AutoActivate();
+            buttonsPresenter.AutoActivateReadyButton();
         }
     }
 }

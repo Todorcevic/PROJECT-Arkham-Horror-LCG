@@ -1,5 +1,4 @@
 ﻿using Arkham.Model;
-using UnityEngine;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
@@ -15,12 +14,12 @@ namespace Arkham.Application.MainMenu
         public void Start()
         {
             UpdateModel();
-            UpdateView();
+            UpdateApplication();
         }
 
         private void UpdateModel() => selector.ReadyAllInvestigators();
 
-        private void UpdateView()
+        private void UpdateApplication()
         {
             dataPersistence.SaveProgress();
             loader.LoadScene(campaignRepository.CurrentScenario.Id);

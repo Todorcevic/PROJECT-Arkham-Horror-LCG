@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Zenject;
-using Arkham.Model;
 
 namespace Arkham.Application.MainMenu
 {

@@ -343,11 +343,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableAudio: {fileID: 6282047614073122101}
-  canvas: {fileID: 7484273481519661322}
   background: {fileID: 5700855835450385730}
   text: {fileID: 5844591669556902260}
-  timeHoverAnimation: 0.25
-  desactiveColor: {r: 0.29411766, g: 0.29411766, b: 0.29411766, a: 1}
 --- !u!114 &6038229258631111471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,7 +414,7 @@ MonoBehaviour:
   _identifier: 
   _useSceneContext: 0
   _context: {fileID: 0}
-  _bindType: 2
+  _bindType: 0
 --- !u!1001 &3704934223061096553
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,12 +7,11 @@ namespace Arkham.Application.MainMenu
     {
         [Inject] private readonly CardsRepository cardRepository;
         [Inject] private readonly InvestigatorsRepository investigatorRepository;
-        [Inject] private readonly ReadyButtonPresenter readyButton;
+        [Inject] private readonly ButtonsPresenter buttonsPresenter;
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly CardsQuantityView cardQuantity;
         [Inject] private readonly CardSelectorPresenter cardSelectorPresenter;
         [Inject] private readonly CardShowerPresenter cardShowerPresenter;
-        [Inject(Id = "CardsButton")] private readonly ButtonView cardsButton;
 
         /*******************************************************************/
         public void Remove(string cardId, string investigatorId)
@@ -34,8 +33,8 @@ namespace Arkham.Application.MainMenu
             deckCardPresenter.SetQuantity(card);
             cardQuantity.Refresh(investigator);
             cardShowerPresenter.ReshowCardSelector(card.Id);
-            readyButton.AutoActivate();
-            cardsButton.ExecuteClick();
+            buttonsPresenter.AutoActivateReadyButton();
+            buttonsPresenter.ExecuteCardsButton();
         }
     }
 }

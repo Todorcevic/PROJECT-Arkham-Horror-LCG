@@ -7,7 +7,7 @@ namespace Arkham.Application.MainMenu
     {
         [Inject] private readonly InvestigatorsRepository investigatorRepository;
         [Inject] private readonly SelectorsRepository selectorRepository;
-        [Inject] private readonly ReadyButtonPresenter readyButton;
+        [Inject] private readonly ButtonsPresenter buttonsPresenter;
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
@@ -31,7 +31,7 @@ namespace Arkham.Application.MainMenu
             selectInvestigatorUseCase.Select(investigatorId);
             investigatorVisibility.RefreshInvestigatorsSelectability();
             multiAnimator.ReshowCardInvestigator(investigatorId);
-            readyButton.AutoActivate();
+            buttonsPresenter.AutoActivateReadyButton();
         }
     }
 }
