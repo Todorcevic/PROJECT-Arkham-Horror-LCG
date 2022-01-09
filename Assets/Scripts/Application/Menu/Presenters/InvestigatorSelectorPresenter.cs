@@ -11,7 +11,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly SelectInvestigatorUseCase investigatorSelectUseCase;
-
+        [Inject] private readonly DotweenService dotweenService;
         private InvestigatorSelectorView LeadSelector => investigatorSelectorsManager.GetCurrentLeadSelector;
 
         /*******************************************************************/
@@ -83,8 +83,15 @@ namespace Arkham.Application.MainMenu
 
         public void SwapImageSelector(string cardId)
         {
-            Sprite image = cardsManager.GetCard(cardId).FrontImage;
-            investigatorSelectorsManager.GetSelectorById(cardId)?.ChangeImage(image);
+            InvestigatorSelectorView selector = investigatorSelectorsManager.GetSelectorById(cardId);
+            if (selector == null) return;
+            dotweenService.SwapImage(selector.CardVisual, SetSelector);
+
+            void SetSelector()
+            {
+                Sprite image = cardsManager.GetCard(cardId).FrontImage;
+                selector?.ChangeImage(image);
+            }
         }
     }
 }

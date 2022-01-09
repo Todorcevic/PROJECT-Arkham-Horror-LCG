@@ -20,7 +20,7 @@ namespace Arkham.Application.MainMenu
         [SerializeField, Required] private CanvasGroup canvasSensor;
         [SerializeField, Required] private ButtonIconView leaderIcon;
 
-        private Transform CardVisual => canvasImage.transform;
+        public Transform CardVisual => canvasImage.transform;
         private Transform Sensor => dragSensor.transform;
         public Vector2 SensorPosition => Sensor.position;
         public string Id { get; private set; }

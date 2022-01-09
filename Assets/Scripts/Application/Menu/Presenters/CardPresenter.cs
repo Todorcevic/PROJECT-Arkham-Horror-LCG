@@ -1,5 +1,4 @@
 ﻿using DG.Tweening;
-using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -9,14 +8,13 @@ namespace Arkham.Application.MainMenu
     {
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly ImagesCardService imageCards;
+        [Inject] private readonly DotweenService dotweenService;
 
         /*******************************************************************/
         public Tween ChangeImagesWithAnimation(string cardId)
         {
             CardView cardView = cardsManager.GetCard(cardId);
-            return DOTween.Sequence().Append(cardView.transform.DORotate(Vector3.up * 90, ViewValues.FAST_TIME))
-                    .AppendCallback(() => SetCardImage(cardView))
-                    .Append(cardView.transform.DORotate(Vector3.zero, ViewValues.FAST_TIME));
+            return dotweenService.SwapImage(cardView.transform, () => SetCardImage(cardView));
         }
 
         public void SetCardImage(CardView cardView)
