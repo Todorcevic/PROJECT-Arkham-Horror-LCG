@@ -8,7 +8,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly InvestigatorsCardPresenter investigatorCardsPresenter;
         [Inject] private readonly InvestigatorsRepository investigatorRepository;
-        [Inject] private readonly InvestigatorAvatarView investigatorAvatar;
+        [Inject] private readonly AvatarPresenter avatarPresenter;
 
         public void RemovePhysicTrauma()
         {
@@ -38,9 +38,7 @@ namespace Arkham.Application.MainMenu
 
         private void UpdateView(Investigator investigator)
         {
-            investigatorAvatar.SetPhysicTrauma(investigator.PhysicTrauma);
-            investigatorAvatar.SetMentalTrauma(investigator.MentalTrauma);
-            investigatorAvatar.SetXp(investigator.Xp);
+            avatarPresenter.SetAvatar(investigator);
             investigatorCardsPresenter.RefreshTokens(investigator);
         }
     }

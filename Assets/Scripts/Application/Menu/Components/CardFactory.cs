@@ -13,7 +13,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly ImagesCardService imagesCard;
         [Inject] private readonly CardsRepository cardCollection;
         [Inject] private readonly CardsManager cardsManager;
-        [Inject] private readonly CardImagePresenter cardImagePresenter;
+        [Inject] private readonly CardPresenter cardImagePresenter;
         [SerializeField, Required, AssetsOnly] private DeckCardView cardPrefab;
         [SerializeField, Required, AssetsOnly] private InvestigatorCardView investigatorPrefab;
         [SerializeField, Required, SceneObjectsOnly] private Transform cardZone;
@@ -37,8 +37,7 @@ namespace Arkham.Application.MainMenu
             {
                 object[] args = new object[] { cardId };
                 DeckCardView cardView = diContainer.InstantiatePrefabForComponent<DeckCardView>(cardPrefab, cardZone, args);
-                cardImagePresenter.SetCardImage(cardView);
-                cardsManager.AddCard(cardId, cardView);
+                SetCard(cardView);
             }
         }
 
@@ -48,9 +47,15 @@ namespace Arkham.Application.MainMenu
             {
                 object[] args = new object[] { investigatorId };
                 InvestigatorCardView cardView = diContainer.InstantiatePrefabForComponent<InvestigatorCardView>(investigatorPrefab, investigatorZone, args);
-                cardImagePresenter.SetCardImage(cardView);
-                cardsManager.AddCard(investigatorId, cardView);
+                SetCard(cardView);
             }
+        }
+
+        private void SetCard(CardView cardView)
+        {
+            cardView.ActiveSwapImageButton(imagesCard.CanChange(cardView.Id));
+            cardImagePresenter.SetCardImage(cardView);
+            cardsManager.AddCard(cardView.Id, cardView);
         }
     }
 }

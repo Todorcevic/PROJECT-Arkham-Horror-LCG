@@ -5,7 +5,7 @@ namespace Arkham.Application.MainMenu
 {
     public class UpdateXpUseCase
     {
-        [Inject] private readonly InvestigatorAvatarView investigatorAvatar;
+        [Inject] private readonly AvatarPresenter avatarPresenter;
         [Inject] private readonly CardXpCostInteractor XpCostInteractor;
 
         /*******************************************************************/
@@ -17,6 +17,6 @@ namespace Arkham.Application.MainMenu
 
         private void UpdateModel(Investigator investigator, int amount) => investigator.Xp -= amount;
 
-        private void UpdateView(Investigator investigator) => investigatorAvatar.SetXp(investigator.Xp);
+        private void UpdateView(Investigator investigator) => avatarPresenter.SetAvatar(investigator);
     }
 }

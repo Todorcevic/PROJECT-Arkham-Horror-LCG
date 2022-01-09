@@ -12,7 +12,7 @@ namespace Arkham.Application
         private Dictionary<string, Sprite> cardImagesEN = new Dictionary<string, Sprite>();
         [Inject(Id = InstancesInjected.allCardsEN)] private readonly List<Sprite> imagesEN;
         [Inject] private readonly GameFiles gameFiles;
-        [Inject] private readonly PlayerPrefsService playerPref;
+        [Inject] private readonly PlayerPrefService playerPref;
 
         /*******************************************************************/
         public void Build() => cardImagesEN = imagesEN.ToDictionary(sprite => sprite.name);
@@ -37,5 +37,12 @@ namespace Arkham.Application
         }
 
         public bool CanChange(string id) => ExistThisSprite(id + "-1");
+
+        public void SaveImageSelected(string cardId)
+        {
+            int imageNumber = playerPref.LoadImageNumber(cardId) + 1;
+            if (!ExistThisSprite(cardId + "-" + imageNumber)) imageNumber = 0;
+            playerPref.SaveChangeImage(cardId, imageNumber);
+        }
     }
 }

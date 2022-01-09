@@ -13,7 +13,7 @@ namespace Arkham.Application.GamePlay
         [Inject] private readonly ZonesManager zonesManager;
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly GameFiles gameFiles;
-        [Inject] private readonly PlayerPrefsService playerPref;
+        [Inject] private readonly PlayerPrefService playerPref;
         [SerializeField] private CardView cardHPrefab;
         [SerializeField] private CardView cardVPrefab;
         [SerializeField] private Material materialBase;

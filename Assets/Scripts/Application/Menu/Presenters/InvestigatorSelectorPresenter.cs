@@ -80,5 +80,11 @@ namespace Arkham.Application.MainMenu
                 selector1.ArrangeAnimation();
             }
         }
+
+        public void SwapImageSelector(string cardId)
+        {
+            Sprite image = cardsManager.GetCard(cardId).FrontImage;
+            investigatorSelectorsManager.GetSelectorById(cardId)?.ChangeImage(image);
+        }
     }
 }

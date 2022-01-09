@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Arkham.Application.MainMenu
 {
-    public class InvestigatorAvatarView : MonoBehaviour
+    public class AvatarView : MonoBehaviour
     {
         [Title("RESOURCES")]
         [SerializeField, Required] private CanvasGroup canvasGroup;
@@ -33,11 +33,11 @@ namespace Arkham.Application.MainMenu
             image.sprite = sprite;
         }
 
-        public void SetPhysicTrauma(int amount) => physicTrauma.UpdateAmount(amount);
+        private void SetPhysicTrauma(int amount) => physicTrauma.UpdateAmount(amount);
 
-        public void SetMentalTrauma(int amount) => mentalTrauma.UpdateAmount(amount);
+        private void SetMentalTrauma(int amount) => mentalTrauma.UpdateAmount(amount);
 
-        public void SetXp(int amount)
+        private void SetXp(int amount)
         {
             xp.UpdateAmount(amount);
             CheckActiveTraumas(amount);

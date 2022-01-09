@@ -6,18 +6,11 @@ namespace Arkham.Application.MainMenu
 {
     public class SwapImageButtonIconController : MonoBehaviour
     {
-        [Inject] private readonly ImagesCardService imageCards;
-        [Inject] private readonly CardImagePresenter cardImagePresenter;
-        [SerializeField, Required] private ButtonIconView changeImage;
+        [Inject] private readonly SwapImageCardUseCase swapImageCardUseCase;
+        [SerializeField, Required] private ButtonIconView swapImageButton;
 
         /*******************************************************************/
-        public void Init(CardView cardView)
-        {
-            changeImage.ClickAction += Clicked;
-            CheckShowButton();
-
-            void Clicked() => cardImagePresenter.ChangeAllImagesWithAnimation(cardView.Id);
-            void CheckShowButton() => changeImage.gameObject.SetActive(imageCards.CanChange(cardView.Id));
-        }
+        public void Init(string cardId) =>
+            swapImageButton.ClickAction += () => swapImageCardUseCase.ChangeCardImage(cardId);
     }
 }

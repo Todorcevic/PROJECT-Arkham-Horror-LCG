@@ -38,10 +38,15 @@ namespace Arkham.Application.MainMenu
         private void Init(string id)
         {
             name = Id = id;
-            changeImageController.Init(this);
         }
 
         /*******************************************************************/
+        public void ActiveSwapImageButton(bool isActive)
+        {
+            changeImageController.gameObject.SetActive(isActive);
+            if (isActive) changeImageController.Init(Id);
+        }
+
         public void ChangeImage(Sprite sprite, Sprite backImage)
         {
             canvasGroup.alpha = sprite == null ? 0 : 1;

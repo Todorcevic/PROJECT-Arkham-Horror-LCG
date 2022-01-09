@@ -13,7 +13,6 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly ReadyButtonPresenter readyButton;
         [Inject] private readonly UpdateXpUseCase updateXpUseCase;
         [Inject] private readonly CardShowerPresenter multiAnimator;
-        [Inject] private readonly NameConventionFactoryService factory;
 
         /*******************************************************************/
         public void AddCard(string cardId, string investigatorId)
