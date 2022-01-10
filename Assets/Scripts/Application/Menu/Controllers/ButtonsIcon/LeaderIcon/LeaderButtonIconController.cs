@@ -8,13 +8,13 @@ namespace Arkham.Application.MainMenu
         [SerializeField] private ButtonIconView leader;
 
         /*******************************************************************/
-        public void OnPointerEnter(PointerEventData eventData)
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             if (eventData.dragging) return;
             leader.OnPointerEnter(eventData);
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             leader.OnPointerExit(eventData);
         }

@@ -16,8 +16,8 @@ namespace Arkham.Application.MainMenu
             foreach (Campaign campaign in campaignRepository.Campaigns)
             {
                 CampaignView campaignView = campaigns.Find(campaignview => campaignview.Id == campaign.Id);
-                states.Find(state => state.Id == campaign.State.Id).ExecuteState(campaignView);
-                campaignView.IsOpen = campaign.State.IsOpen;
+                CampaignStateSO state = states.Find(state => state.Id == campaign.State);
+                campaignView.SetState(state);
             }
         }
     }

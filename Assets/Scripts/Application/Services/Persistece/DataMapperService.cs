@@ -39,7 +39,7 @@ namespace Arkham.Application
                     CampaignDTO campaignDTO = new CampaignDTO
                     {
                         Id = campaign.Id,
-                        State = campaign.State.Id
+                        State = campaign.State
                     };
                     fullDTO.CampaignsList.Add(campaignDTO);
                 }
@@ -86,7 +86,7 @@ namespace Arkham.Application
                     Campaign newCampaing = new Campaign
                     {
                         Id = campaign.Id,
-                        State = factory.CreateInstance<CampaignState>(campaign.State),
+                        State = campaign.State,
                         FirstScenario = factory.CreateInstance<Scenario>(campaign.FirstScenario)
                     };
                     campaignRepository.Add(newCampaing);

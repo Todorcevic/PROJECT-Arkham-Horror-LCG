@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c10cdf779853c842aca803829ee0a7b, type: 3}
-  m_Name: Open
+  m_Name: Unlock
   m_EditorClassIdentifier: 
   isClickable: 1
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 31e924f499bbd494faff853950d8870e, type: 3}

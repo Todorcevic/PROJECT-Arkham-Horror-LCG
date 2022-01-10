@@ -16,6 +16,7 @@ namespace Arkham
         public override void InstallBindings()
         {
             /*** Basics ***/
+            Container.Bind<Application.ApplicationValues>().AsSingle();
             Container.Bind<Application.GameFiles>().AsSingle();
             Container.BindInstance(allCardsEN).WithId(InstancesInjected.allCardsEN);
 
