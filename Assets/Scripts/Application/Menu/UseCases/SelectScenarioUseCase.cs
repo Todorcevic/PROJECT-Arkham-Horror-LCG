@@ -1,4 +1,5 @@
 ﻿using Arkham.Model;
+using UnityEngine;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
@@ -6,19 +7,15 @@ namespace Arkham.Application.MainMenu
     public class SelectScenarioUseCase
     {
         [Inject] private readonly CampaignsRepository campaignRepository;
-        [Inject] private readonly ButtonsPresenter buttonsPresenter;
+        [Inject] private readonly PanelPresenter panelPresenter;
 
         /*******************************************************************/
-        public void Reset() => SelectFirstScenarioOf(null);
+        public void SelectFirstScenarioOf(string campaignId) => UpdateModel(campaignId);
 
-        public void SelectFirstScenarioOf(string campaignId)
+        private void UpdateModel(string campaignId)
         {
-            UpdateModel(campaignId);
-            UpdateView();
+            campaignRepository.SelectFirstScenarioOf(campaignId);
+            panelPresenter.ChooseCardPanel();
         }
-
-        private void UpdateModel(string campaignId) => campaignRepository.SelectFirstScenarioOf(campaignId);
-
-        private void UpdateView() => buttonsPresenter.AutoActivateContinueButton();
     }
 }

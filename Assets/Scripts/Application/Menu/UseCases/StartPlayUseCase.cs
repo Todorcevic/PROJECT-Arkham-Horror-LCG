@@ -7,8 +7,8 @@ namespace Arkham.Application.MainMenu
     {
         [Inject] private readonly SelectorsRepository selector;
         [Inject] private readonly CampaignsRepository campaignRepository;
-        [Inject] private readonly Loader loader;
         [Inject] private readonly DataMapperService dataPersistence;
+        [Inject] private readonly SceneLoaderService sceneLoaderService;
 
         /*******************************************************************/
         public void Start()
@@ -22,7 +22,7 @@ namespace Arkham.Application.MainMenu
         private void UpdateApplication()
         {
             dataPersistence.SaveProgress();
-            loader.LoadScene(campaignRepository.CurrentScenario.Id);
+            sceneLoaderService.LoadScene(campaignRepository.CurrentScenario.Id);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly InvestigatorsRepository investigatorsRepository;
         [Inject] private readonly CardSelectorPresenter cardSelector;
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
-        [Inject] private readonly CardsQuantityView cardQuantity;
+        [Inject] private readonly CardsQuantityPresenter cardQuantityPresenter;
         [Inject] private readonly ButtonsPresenter buttonsPresenter;
         [Inject] private readonly UpdateXpUseCase updateXpUseCase;
         [Inject] private readonly CardShowerPresenter multiAnimator;
@@ -33,7 +33,7 @@ namespace Arkham.Application.MainMenu
             cardSelector.SetCanBeRemovedInSelectors(investigator.Id);
             deckCardPresenter.RefreshCardsSelectability();
             deckCardPresenter.SetQuantity(card);
-            cardQuantity.Refresh(investigator);
+            cardQuantityPresenter.Update(investigator);
             multiAnimator.ReshowCardDeck(card.Id);
             buttonsPresenter.AutoActivateReadyButton();
         }

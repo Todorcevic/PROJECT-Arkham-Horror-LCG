@@ -1,5 +1,6 @@
 ﻿using Arkham.Model;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Zenject;
 
@@ -9,6 +10,7 @@ namespace Arkham.Application
     {
         [Inject] private readonly JsonNewtonsoftService serializer;
         [Inject] private readonly GameFiles gameFiles;
+        [Inject] private readonly ApplicationValues applicationValues;
         [Inject] private readonly CardsRepository cardRepository;
         [Inject] private readonly CampaignsRepository campaignRepository;
         [Inject] private readonly SelectorsRepository selectorRepository;
@@ -32,14 +34,15 @@ namespace Arkham.Application
 
             FullDTO CreateDTO()
             {
-                FullDTO fullDTO = new FullDTO { CurrentScenario = campaignRepository.CurrentScenario.Id };
+                FullDTO fullDTO = new FullDTO { CurrentScenario = campaignRepository.CurrentScenario?.Id };
 
                 foreach (Campaign campaign in campaignRepository.Campaigns)
                 {
                     CampaignDTO campaignDTO = new CampaignDTO
                     {
                         Id = campaign.Id,
-                        State = campaign.State
+                        State = campaign.State,
+                        FirstScenario = campaign.FirstScenario.Id
                     };
                     fullDTO.CampaignsList.Add(campaignDTO);
                 }
@@ -67,9 +70,11 @@ namespace Arkham.Application
             }
         }
 
-        public void LoadProgress(StartGame gameType)
+        public void RemoveProgress() => File.Delete(gameFiles.PlayerProgressFilePath);
+
+        public void LoadProgress()
         {
-            FullDTO repositoryDTO = gameType == StartGame.New ? NewGameData() : ContinueData();
+            FullDTO repositoryDTO = applicationValues.CanContinue ? ContinueData() : NewGameData();
             LoadCampaigns(repositoryDTO.CampaignsList, repositoryDTO.CurrentScenario);
             LoadInvestigators(repositoryDTO.InvestigatorsList);
             LoadSelectors(repositoryDTO.InvestigatorsSelectedList);

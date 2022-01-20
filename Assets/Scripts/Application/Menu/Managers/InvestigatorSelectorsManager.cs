@@ -49,7 +49,6 @@ namespace Arkham.Application.MainMenu
             ActiveGlowInNewInvestigator();
 
             void RemoveGlowInOldInvestigator() => GetSelectorById(currentInvestigator)?.Glow(false);
-
             void ActiveGlowInNewInvestigator() => GetSelectorById(currentInvestigator)?.Glow(true);
         }
     }

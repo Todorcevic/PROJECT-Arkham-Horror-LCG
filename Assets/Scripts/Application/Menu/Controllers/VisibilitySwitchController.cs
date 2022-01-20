@@ -1,28 +1,18 @@
-﻿using Zenject;
+﻿using System;
+using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class VisibilitySwitchController : IInitializable
+    public class VisibilitySwitchController : IInitializable, IDisposable
     {
         [Inject(Id = "VisibilitySwitch")] private readonly SwitchView visibilitySwitchView;
-        [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
-        [Inject] private readonly DeckCardPresenter cardVisibility;
-        [Inject] private readonly PlayerPrefService playerPrefs;
+        [Inject] private readonly SwitchVisibilityUseCase switchVisibilityUseCase;
 
         /*******************************************************************/
-        void IInitializable.Initialize()
-        {
-            bool IsOnVisibility = playerPrefs.LoadCardsVisibility();
-            visibilitySwitchView.SwitchAnimation(IsOnVisibility);
-            visibilitySwitchView.ClickAction += Clicked;
-        }
+        void IInitializable.Initialize() => visibilitySwitchView.ClickAction += Clicked;
+        void IDisposable.Dispose() => visibilitySwitchView.ClickAction -= Clicked;
 
         /*******************************************************************/
-        public void Clicked()
-        {
-            playerPrefs.SaveCardsVisibility(visibilitySwitchView.IsOn);
-            investigatorVisibility.RefreshInvestigatorsVisibility();
-            cardVisibility.RefreshCardsVisibility();
-        }
+        private void Clicked() => switchVisibilityUseCase.Switch(visibilitySwitchView.IsOn);
     }
 }

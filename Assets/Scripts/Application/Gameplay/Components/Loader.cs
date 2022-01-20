@@ -38,7 +38,7 @@ namespace Arkham.Application.GamePlay
         {
             dataPersistence.LoadInfoCards();
             imagesCard.Build();
-            dataPersistence.LoadProgress(StartGame.Continue);
+            dataPersistence.LoadProgress();
         }
     }
 }

@@ -8,6 +8,10 @@ namespace Arkham.Application
 {
     public class ImagesCardService
     {
+        /*************** DEBUG ****************/
+        private bool isAddressables = false;
+        /**************************************/
+
         private const string BACK_SUFFIX = "b";
         private Dictionary<string, Sprite> cardImagesEN = new Dictionary<string, Sprite>();
         [Inject(Id = InstancesInjected.allCardsEN)] private readonly List<Sprite> imagesEN;
@@ -15,10 +19,14 @@ namespace Arkham.Application
         [Inject] private readonly PlayerPrefService playerPref;
 
         /*******************************************************************/
-        public void Build() => cardImagesEN = imagesEN.ToDictionary(sprite => sprite.name);
+        public void Build()
+        {
+            if (isAddressables) LoadAddressables();
+            else cardImagesEN = imagesEN.ToDictionary(sprite => sprite.name);
 
-        public void Load() => Addressables.LoadAssetsAsync<Sprite>(gameFiles.ALL_CARDS_IMAGE_EN,
-                sprite => cardImagesEN.Add(sprite.name, sprite)).WaitForCompletion();
+            void LoadAddressables() => Addressables.LoadAssetsAsync<Sprite>(gameFiles.ALL_CARDS_IMAGE_EN,
+                    sprite => cardImagesEN.Add(sprite.name, sprite)).WaitForCompletion();
+        }
 
         /*******************************************************************/
         public bool ExistThisSprite(string id) => cardImagesEN.TryGetValue(id, out Sprite _);

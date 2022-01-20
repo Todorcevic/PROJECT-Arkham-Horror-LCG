@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
@@ -12,21 +11,20 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly CardFactory cardFactory;
         [Inject] private readonly DataMapperService dataContext;
         [Inject] private readonly ImagesCardService imagesCard;
-        [Inject(Id = "ContinueButton")] private readonly ButtonView continueButton;
+        [Inject] private readonly StartApplicationUseCase startApplicationUseCase;
 
         /*******************************************************************/
         private void Awake()
         {
             LoadDependendies();
             BuildCards();
-            if (applicationValues.ContinueGame) continueButton.ExecuteClick();
+            startApplicationUseCase.Init();
 
             void LoadDependendies()
             {
                 if (applicationValues.DependenciesLoaded) return;
                 resolutionSetter.SettingResolution();
                 dataContext.LoadInfoCards();
-                //imagesCardManager.Load();
                 imagesCard.Build();
                 applicationValues.DependenciesLoaded = true;
             }
@@ -39,12 +37,5 @@ namespace Arkham.Application.MainMenu
         }
 
         private void OnDestroy() => DOTween.Clear();
-
-        /*******************************************************************/
-        public void LoadScene(string sceneId)
-        {
-            //DOTween.Clear();
-            SceneManager.LoadScene(sceneId);
-        }
     }
 }
