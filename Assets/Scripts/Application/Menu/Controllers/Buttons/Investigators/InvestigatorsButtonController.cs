@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class InvestigatorsButtonController : IInitializable
+    public class InvestigatorsButtonController : IInitializable, IDisposable
     {
         [Inject(Id = "InvestigatorsButton")] private readonly ButtonView investigatorsButton;
         [Inject(Id = "MidPanelsManager")] private readonly PanelsMediator panelsManager;
@@ -14,6 +15,8 @@ namespace Arkham.Application.MainMenu
 
         /*******************************************************************/
         void IInitializable.Initialize() => investigatorsButton.ClickAction += Clicked;
+
+        void IDisposable.Dispose() => investigatorsButton.ClickAction -= Clicked;
 
         /*******************************************************************/
         private void Clicked()

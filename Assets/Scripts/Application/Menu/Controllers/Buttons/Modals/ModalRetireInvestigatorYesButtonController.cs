@@ -1,8 +1,9 @@
-﻿using Zenject;
+﻿using System;
+using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class ModalRetireInvestigatorYesButtonController : IInitializable
+    public class ModalRetireInvestigatorYesButtonController : IInitializable, IDisposable
     {
         [Inject] private readonly RetireInvestigatorUseCase retireInvestigatorUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
@@ -11,6 +12,9 @@ namespace Arkham.Application.MainMenu
         /*******************************************************************/
         void IInitializable.Initialize() => yesButton.ClickAction += Clicked;
 
+        void IDisposable.Dispose() => yesButton.ClickAction -= Clicked;
+
+        /*******************************************************************/
         private void Clicked() => retireInvestigatorUseCase.Retire(investigatorSelectorManager.InvestigatorSelected);
     }
 }
