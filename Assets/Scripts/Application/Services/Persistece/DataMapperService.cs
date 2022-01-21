@@ -95,7 +95,7 @@ namespace Arkham.Application
                         FirstScenario = factory.CreateInstance<Scenario>(campaign.FirstScenario)
                     };
                     campaignRepository.Add(newCampaing);
-                    campaignRepository.CurrentScenario = factory.CreateInstance<Scenario>(currentScenario);
+                    campaignRepository.SetScenario(factory.CreateInstance<Scenario>(currentScenario));
                 }
             }
 

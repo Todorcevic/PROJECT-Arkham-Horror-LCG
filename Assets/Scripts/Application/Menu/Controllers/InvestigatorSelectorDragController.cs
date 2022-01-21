@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class InvestigatorSelectorDragController : MonoBehaviour, IPointerEnterHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerExitHandler
+    public class InvestigatorSelectorDragController : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         private const float SCALE_HOVER = 1.1f;
         public const string HOVEROFF = "HoverOff";
@@ -24,7 +24,7 @@ namespace Arkham.Application.MainMenu
         private Transform Card => cardImageTransform;
 
         /*******************************************************************/
-        public void OnPointerClick(PointerEventData eventData)
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             if (clickDetector.IsDoubleClick(eventData.clickTime, eventData.pointerPress))
                 removeInvestigatorUseCase.Remove(Id);
@@ -32,7 +32,7 @@ namespace Arkham.Application.MainMenu
             audioInteractable.ClickSound();
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             if (eventData.pointerDrag == gameObject) return;
             HoverEnter();
@@ -52,7 +52,7 @@ namespace Arkham.Application.MainMenu
             }
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             if (eventData.dragging) return;
             if (DOTween.IsTweening(InvestigatorSelectorView.MOVE_ANIMATION)) return;

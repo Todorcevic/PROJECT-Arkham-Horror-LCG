@@ -1,5 +1,4 @@
 ﻿using Arkham.Model;
-using UnityEngine;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
@@ -27,7 +26,7 @@ namespace Arkham.Application.MainMenu
 
         public void ContinueGame()
         {
-            if (string.IsNullOrEmpty(campaignRepository.CurrentScenario?.Id)) panelPresenter.ChooseCampaignPanel();
+            if (campaignRepository.IsNotScenario) panelPresenter.ChooseCampaignPanel();
             else panelPresenter.ChooseCardPanel();
         }
     }

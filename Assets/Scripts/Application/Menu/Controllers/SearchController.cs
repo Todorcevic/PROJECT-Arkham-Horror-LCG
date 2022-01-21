@@ -1,9 +1,9 @@
-﻿using Arkham.Model;
+﻿using System;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class SearchController : IInitializable
+    public class SearchController : IInitializable, IDisposable
     {
         [Inject(Id = "InputSearch")] private readonly InputFieldView inputFieldView;
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
@@ -11,6 +11,7 @@ namespace Arkham.Application.MainMenu
 
         /*******************************************************************/
         void IInitializable.Initialize() => inputFieldView.UpdateAction += Updated;
+        void IDisposable.Dispose() => inputFieldView.UpdateAction -= Updated;
 
         /*******************************************************************/
         private void Updated()

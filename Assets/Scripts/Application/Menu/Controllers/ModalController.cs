@@ -11,7 +11,9 @@ namespace Arkham.Application.MainMenu
         [SerializeField, ChildGameObjectsOnly] private List<ButtonView> buttons;
 
         /*******************************************************************/
-        private void Awake() => buttons.ForEach(button => button.ClickAction += CloseThisModal);
+        private void OnEnable() => buttons.ForEach(button => button.ClickAction += CloseThisModal);
+
+        private void OnDisable() => buttons.ForEach(button => button.ClickAction -= CloseThisModal);
 
         private void CloseThisModal() => modal.Activate(false);
     }

@@ -1,12 +1,18 @@
 ﻿using Arkham.Model;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class InvestigatorCardView : CardView
+    public class InvestigatorCardView : CardView, IPointerClickHandler
     {
+        [Inject] private readonly AddInvestigatorUseCase addInvestigatorUseCase;
+        [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
+        [Inject] private readonly InvestigatorSelectorsManager investigatorSelectors;
         private InvestigatorStateView currentState;
         [Title("INVESTIGATOR RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private List<InvestigatorStateView> states;
@@ -17,6 +23,12 @@ namespace Arkham.Application.MainMenu
         public override bool MustReshow => false;
 
         /*******************************************************************/
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        {
+            if (DOTween.IsTweening(InvestigatorSelectorView.MOVE_ANIMATION)) return;
+            PointerClick();
+        }
+
         public void ChangeState(InvestigatorState state)
         {
             currentState?.Activate(false);
@@ -33,7 +45,9 @@ namespace Arkham.Application.MainMenu
         public void PointerClick()
         {
             audioInteractable.ClickSound();
+            if (investigatorSelectors.InvestigatorSelected != Id) selectInvestigatorUseCase.Select(Id);
             if (IsInactive) CantAdd();
+            else addInvestigatorUseCase.Add(Id);
         }
     }
 }

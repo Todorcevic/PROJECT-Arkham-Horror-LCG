@@ -1,12 +1,15 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class CampaignView : MonoBehaviour
+    public class CampaignView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        [Inject] private readonly CampaignChooserUseCase campaignChooserUseCase;
         private const float YOFFSET_HOVER = 15f;
         private const float ZOOM_PARALAX = 1.25f;
         private CampaignStateSO currentState;
@@ -21,12 +24,22 @@ namespace Arkham.Application.MainMenu
         [SerializeField, Required, HideInPrefabAssets] private string id;
 
         public string Id => id;
-        public bool IsClickable => currentState.Isclickable;
 
         /*******************************************************************/
-        public void ClickEffect() => interactableAudio.ClickSound();
+        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        {
+            if (!currentState.Isclickable) return;
+            ClickEffect();
+            campaignChooserUseCase.ChooseCampaign(Id);
+        }
 
-        public void HoverOnEffect()
+        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => HoverOnEffect();
+
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => HoverOffEffect();
+
+        private void ClickEffect() => interactableAudio.ClickSound();
+
+        private void HoverOnEffect()
         {
             interactableAudio.HoverOnSound();
             chapterImage.transform.DOScale(ZOOM_PARALAX, ViewValues.STANDARD_TIME);
@@ -34,7 +47,7 @@ namespace Arkham.Application.MainMenu
             highlightedTextBox.transform.DOLocalMoveY(YOFFSET_HOVER, ViewValues.STANDARD_TIME);
         }
 
-        public void HoverOffEffect()
+        private void HoverOffEffect()
         {
             interactableAudio.HoverOffSound();
             chapterImage.transform.DOScale(1f, ViewValues.STANDARD_TIME);

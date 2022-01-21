@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
 namespace Arkham.Model
 {
@@ -7,11 +6,14 @@ namespace Arkham.Model
     {
         private List<Campaign> campaigns;
 
-        public Scenario CurrentScenario { get; set; }
+        public bool IsNotScenario => string.IsNullOrEmpty(CurrentScenario?.Id);
+        public Scenario CurrentScenario { get; private set; }
         public IEnumerable<Campaign> Campaigns => campaigns;
 
         /*******************************************************************/
         public Campaign Get(string campaignId) => campaigns.Find(campaign => campaign.Id == campaignId);
+
+        public void SetScenario(Scenario scenario) => CurrentScenario = scenario;
 
         public void Reset()
         {

@@ -28,11 +28,9 @@ namespace Arkham.Application.MainMenu
             void CheckInvestigator()
             {
                 Investigator investigator = investigatorsRepository.Get(cardId);
-                if (investigator != null)
-                {
-                    avatarPresenter.SetAvatar(investigator);
-                    investigatorSelectorPresenter.SwapImageSelector(cardId);
-                }
+                if (investigator == null) return;
+                avatarPresenter.SetAvatar(investigator);
+                investigatorSelectorPresenter.SwapImageSelector(cardId);
             }
         }
     }

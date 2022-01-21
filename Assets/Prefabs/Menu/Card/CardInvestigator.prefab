@@ -289,7 +289,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7131878188277760170}
   - component: {fileID: 3428538249790762421}
-  - component: {fileID: 5197470306492400572}
   - component: {fileID: 7192597132227724208}
   - component: {fileID: 7918799787899769508}
   m_Layer: 5
@@ -345,19 +344,6 @@ MonoBehaviour:
   physicTrauma: {fileID: 2243245496653488814}
   mentalTrauma: {fileID: 2136586034364361448}
   xp: {fileID: 446024562793134213}
---- !u!114 &5197470306492400572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120494878094766683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6640a91c5bb909469b6d486b8646f79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardView: {fileID: 3428538249790762421}
 --- !u!225 &7192597132227724208
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -628,6 +614,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd48b5e36240d854b8cca2a6701bca13, type: 3}
+--- !u!224 &6918023500218580246 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4905681816346861054, guid: bd48b5e36240d854b8cca2a6701bca13, type: 3}
+  m_PrefabInstance: {fileID: 2600189034431488232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7149418375056321704 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -4097593944340804544, guid: bd48b5e36240d854b8cca2a6701bca13, type: 3}
@@ -639,11 +630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c1a399fcb977f04984a0ee07049be6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &6918023500218580246 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4905681816346861054, guid: bd48b5e36240d854b8cca2a6701bca13, type: 3}
-  m_PrefabInstance: {fileID: 2600189034431488232}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3266550330816568726
 PrefabInstance:
   m_ObjectHideFlags: 0

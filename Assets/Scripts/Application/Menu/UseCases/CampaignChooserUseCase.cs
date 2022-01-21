@@ -1,16 +1,15 @@
 ﻿using Arkham.Model;
-using UnityEngine;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class SelectScenarioUseCase
+    public class CampaignChooserUseCase
     {
         [Inject] private readonly CampaignsRepository campaignRepository;
         [Inject] private readonly PanelPresenter panelPresenter;
 
         /*******************************************************************/
-        public void SelectFirstScenarioOf(string campaignId) => UpdateModel(campaignId);
+        public void ChooseCampaign(string campaignId) => UpdateModel(campaignId);
 
         private void UpdateModel(string campaignId)
         {

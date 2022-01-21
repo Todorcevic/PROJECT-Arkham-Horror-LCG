@@ -356,7 +356,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7131878188277760170}
   - component: {fileID: 3206177030987578973}
-  - component: {fileID: 8842755236474906562}
   - component: {fileID: 7192597132227724208}
   - component: {fileID: 7918799787899769508}
   m_Layer: 5
@@ -407,19 +406,6 @@ MonoBehaviour:
   swapImageController: {fileID: 8971600257542979593}
   textQuantity: {fileID: 3509090138855255280}
   xpCost: {fileID: 5832507611220611513}
---- !u!114 &8842755236474906562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120494878094766683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba69179195d51b04e8dac9dc88ce96bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardView: {fileID: 3206177030987578973}
 --- !u!225 &7192597132227724208
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -757,6 +743,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
+--- !u!4 &8132808894358513654 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1746173441245118772, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
+  m_PrefabInstance: {fileID: 7558779498368558786}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &910552761267311518 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7225114169980597596, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
@@ -768,8 +759,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038d7dc22c3565849878ed7593cc2df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &8132808894358513654 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1746173441245118772, guid: 48aa73d19d41c8a40af8bd2ec832d685, type: 3}
-  m_PrefabInstance: {fileID: 7558779498368558786}
-  m_PrefabAsset: {fileID: 0}

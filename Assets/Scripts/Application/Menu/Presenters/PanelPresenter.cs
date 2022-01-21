@@ -1,13 +1,9 @@
-﻿using Arkham.Model;
-using UnityEngine;
-using Zenject;
+﻿using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
     public class PanelPresenter
     {
-        [Inject] private readonly CampaignsRepository campaignRepository;
-
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
         [Inject] private readonly InvestigatorsCardPresenter investigatorsCard;
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
