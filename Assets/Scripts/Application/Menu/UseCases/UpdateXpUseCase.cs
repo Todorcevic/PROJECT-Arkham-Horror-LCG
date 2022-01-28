@@ -17,6 +17,6 @@ namespace Arkham.Application.MainMenu
 
         private void UpdateModel(Investigator investigator, int amount) => investigator.Xp -= amount;
 
-        private void UpdateView(Investigator investigator) => avatarPresenter.SetAvatar(investigator);
+        private void UpdateView(Investigator investigator) => avatarPresenter.UpdateAvatar(investigator);
     }
 }

@@ -38,7 +38,7 @@ namespace Arkham.Application.MainMenu
 
         private void UpdateView(Investigator investigator)
         {
-            avatarPresenter.SetAvatar(investigator);
+            avatarPresenter.UpdateAvatar(investigator);
             investigatorCardsPresenter.RefreshTokens(investigator);
         }
     }
