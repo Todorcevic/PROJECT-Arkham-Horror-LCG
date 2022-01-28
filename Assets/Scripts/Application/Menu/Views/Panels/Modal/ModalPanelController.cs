@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Arkham.Application.MainMenu
 {
-    public class ModalController : MonoBehaviour
+    public class ModalPanelController : MonoBehaviour
     {
         [Title("RESOURCES")]
         [SerializeField, ChildGameObjectsOnly] private PanelView modal;

@@ -16,7 +16,7 @@ namespace Arkham.Application.MainMenu
         [SerializeField, Required] private CanvasGroup canvasGlow;
         [SerializeField, Required] private CanvasGroup canvasImage;
         [SerializeField, Required] private Image image;
-        [SerializeField, Required] private InvestigatorSelectorDragController dragSensor;
+        [SerializeField, Required] private InvestigatorSelectorDragView dragSensor;
         [SerializeField, Required] private CanvasGroup canvasSensor;
         [SerializeField, Required] private ButtonIconView leaderIcon;
 

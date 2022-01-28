@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class InvestigatorSelectorDragController : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class InvestigatorSelectorDragView : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         private const float SCALE_HOVER = 1.1f;
         public const string HOVEROFF = "HoverOff";

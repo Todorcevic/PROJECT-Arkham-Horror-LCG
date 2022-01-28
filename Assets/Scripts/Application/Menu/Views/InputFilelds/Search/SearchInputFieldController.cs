@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class SearchController : IInitializable, IDisposable
+    public class SearchInputFieldController : IInitializable, IDisposable
     {
         [Inject(Id = "InputSearch")] private readonly InputFieldView inputFieldView;
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
