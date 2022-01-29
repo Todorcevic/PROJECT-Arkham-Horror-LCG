@@ -10,7 +10,6 @@ namespace Arkham.Application.MainMenu
 
         /*******************************************************************/
         void IInitializable.Initialize() => continueButton.ClickAction += Clicked;
-
         void IDisposable.Dispose() => continueButton.ClickAction -= Clicked;
 
         /*******************************************************************/

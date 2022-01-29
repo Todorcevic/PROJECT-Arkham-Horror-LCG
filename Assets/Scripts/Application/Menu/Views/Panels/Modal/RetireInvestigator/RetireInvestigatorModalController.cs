@@ -3,16 +3,15 @@ using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class ModalRetireInvestigatorYesButtonController : IInitializable, IDisposable
+    public class RetireInvestigatorModalController : IInitializable, IDisposable
     {
         [Inject] private readonly RetireInvestigatorUseCase retireInvestigatorUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
-        [Inject(Id = "RetireInvestigatorYesButton")] private readonly ButtonView yesButton;
+        [Inject(Id = "RetireInvestigatorModal")] private readonly ModalPanelView retireInvestigatorModal;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => yesButton.ClickAction += Clicked;
-
-        void IDisposable.Dispose() => yesButton.ClickAction -= Clicked;
+        void IInitializable.Initialize() => retireInvestigatorModal.YesButton.ClickAction += Clicked;
+        void IDisposable.Dispose() => retireInvestigatorModal.YesButton.ClickAction -= Clicked;
 
         /*******************************************************************/
         private void Clicked() => retireInvestigatorUseCase.Retire(investigatorSelectorManager.InvestigatorSelected);

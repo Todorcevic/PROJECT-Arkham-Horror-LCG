@@ -5,8 +5,8 @@ namespace Arkham.Application.MainMenu
     public class SwitchVisibilityUseCase
     {
         [Inject] private readonly PlayerPrefService playerPrefs;
-        [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
-        [Inject] private readonly DeckCardPresenter cardVisibility;
+        [Inject] private readonly InvestigatorsCardPresenter investigatorCardPresenter;
+        [Inject] private readonly DeckCardPresenter deckCardPresenter;
 
         /*******************************************************************/
         public void Switch(bool isOn)
@@ -19,8 +19,8 @@ namespace Arkham.Application.MainMenu
 
         private void UpdateView()
         {
-            investigatorVisibility.RefreshInvestigatorsVisibility();
-            cardVisibility.RefreshCardsVisibility();
+            investigatorCardPresenter.RefreshInvestigatorsVisibility();
+            deckCardPresenter.RefreshCardsVisibility();
         }
     }
 }

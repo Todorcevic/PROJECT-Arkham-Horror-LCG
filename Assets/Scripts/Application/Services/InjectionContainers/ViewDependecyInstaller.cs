@@ -16,9 +16,6 @@ namespace Arkham.Application
         public override void InstallBindings()
         {
             /*** Controllers ***/
-           // Container.Bind(x => x.AllNonAbstractClasses()
-           //.InNamespace(AssamblyName).WithSuffix("Controller")).AsCached();
-
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
            .InNamespace(AssamblyName).WithSuffix("Controller")).AsSingle();
 

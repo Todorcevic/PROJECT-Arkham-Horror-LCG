@@ -12,6 +12,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly CardsQuantityPresenter cardQuantityPresenter;
         [Inject] private readonly CardSelectorPresenter cardSelectorPresenter;
         [Inject] private readonly CardShowerPresenter cardShowerPresenter;
+        [Inject] private readonly MidPanelPresenter midPanelPresenter;
 
         /*******************************************************************/
         public void Remove(string cardId, string investigatorId)
@@ -34,7 +35,7 @@ namespace Arkham.Application.MainMenu
             cardQuantityPresenter.Update(investigator);
             cardShowerPresenter.ReshowCardSelector(card.Id);
             buttonsPresenter.AutoActivateReadyButton();
-            buttonsPresenter.ExecuteCardsButton();
+            midPanelPresenter.SelectCardsPanel();
         }
     }
 }

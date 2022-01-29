@@ -403,7 +403,7 @@ MonoBehaviour:
   image: {fileID: 4100283504713718926}
   glow: {fileID: 1562410001402135089}
   audioInteractable: {fileID: 910552761267311518}
-  swapImageController: {fileID: 8971600257542979593}
+  swapImageButton: {fileID: 3318373205203516671}
   textQuantity: {fileID: 3509090138855255280}
   xpCost: {fileID: 5832507611220611513}
 --- !u!225 &7192597132227724208
@@ -648,15 +648,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7232313873091879686, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
---- !u!1 &4632488109149186024 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7232313873091879686, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
-  m_PrefabInstance: {fileID: 2600741107374195950}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &981617961495513417 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2992879549137472935, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
@@ -667,25 +662,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 728046689199323153, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
   m_PrefabInstance: {fileID: 2600741107374195950}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4632488109149186024}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b939389bed3bc64096e44ee445c1449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8971600257542979593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4632488109149186024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2327efb7a41804489f94beaed53431a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swapImageButton: {fileID: 3318373205203516671}
 --- !u!1001 &7558779498368558786
 PrefabInstance:
   m_ObjectHideFlags: 0

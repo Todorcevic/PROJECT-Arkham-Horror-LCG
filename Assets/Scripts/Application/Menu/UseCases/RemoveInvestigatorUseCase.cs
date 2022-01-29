@@ -11,6 +11,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
+        [Inject] private readonly MidPanelPresenter midPanelPresenter;
 
         /*******************************************************************/
         public void Remove(string investigatorId)
@@ -30,7 +31,7 @@ namespace Arkham.Application.MainMenu
             investigatorSelector.RemoveInvestigator(investigatorId);
             investigatorVisibility.RefreshInvestigatorsSelectability();
             buttonsPresenter.AutoActivateReadyButton();
-            buttonsPresenter.ExecuteInvestigatorsButton();
+            midPanelPresenter.SelectInvestigatorsPanel();
         }
     }
 }

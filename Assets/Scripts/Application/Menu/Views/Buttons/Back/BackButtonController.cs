@@ -11,7 +11,6 @@ namespace Arkham.Application.MainMenu
 
         /*******************************************************************/
         void IInitializable.Initialize() => backButtons.ForEach(button => button.ClickAction += Clicked);
-
         void IDisposable.Dispose() => backButtons.ForEach(button => button.ClickAction -= Clicked);
 
         /*******************************************************************/

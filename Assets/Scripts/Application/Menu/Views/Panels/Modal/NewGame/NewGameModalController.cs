@@ -3,15 +3,14 @@ using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class ModalNewGameYesButtonController : IInitializable, IDisposable
+    public class NewGameModalController : IInitializable, IDisposable
     {
         [Inject] private readonly StartGameUseCase startGameUseCase;
-        [Inject(Id = "ModalNewGameYesButton")] private readonly ButtonView yesButton;
+        [Inject(Id = "NewGameModal")] private readonly ModalPanelView newGameModal;
 
         /*******************************************************************/
-        void IInitializable.Initialize() => yesButton.ClickAction += Clicked;
-
-        void IDisposable.Dispose() => yesButton.ClickAction -= Clicked;
+        void IInitializable.Initialize() => newGameModal.YesButton.ClickAction += Clicked;
+        void IDisposable.Dispose() => newGameModal.YesButton.ClickAction -= Clicked;
 
         /*******************************************************************/
         private void Clicked() => startGameUseCase.StartNewGame();

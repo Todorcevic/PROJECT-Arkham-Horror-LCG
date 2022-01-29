@@ -14,9 +14,6 @@ namespace Arkham.Application.MainMenu
             leader.OnPointerEnter(eventData);
         }
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
-        {
-            leader.OnPointerExit(eventData);
-        }
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => leader.OnPointerExit(eventData);
     }
 }

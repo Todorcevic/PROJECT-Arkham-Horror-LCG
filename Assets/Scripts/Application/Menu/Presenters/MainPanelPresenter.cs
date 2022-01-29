@@ -2,43 +2,42 @@
 
 namespace Arkham.Application.MainMenu
 {
-    public class PanelPresenter
+    public class MainPanelPresenter
     {
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
-        [Inject] private readonly InvestigatorsCardPresenter investigatorsCard;
+        [Inject] private readonly InvestigatorsCardPresenter investigatorsCardPresenter;
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly ButtonsPresenter buttonsPresenter;
         [Inject] private readonly CampaignPresenter campaignPresenter;
-        [Inject(Id = "NewGameModal")] private readonly PanelView newGameModal;
+        [Inject] private readonly MidPanelPresenter midPanelPresenter;
         [Inject(Id = "MainPanelsManager")] private readonly PanelsMediator mainPanelsManager;
         [Inject(Id = "ChooseCampaignPanel")] private readonly PanelView chooseCampaignPanel;
         [Inject(Id = "ChooseCardPanel")] private readonly PanelView chooseCardPanel;
         [Inject(Id = "HomePanel")] private readonly PanelView homePanel;
 
         /*******************************************************************/
-        public void NewGameModal(bool isOpen) => newGameModal.Activate(isOpen);
-
         public void ChooseCampaignPanel()
         {
             campaignPresenter.InitializeCampaigns();
             mainPanelsManager.SelectPanel(chooseCampaignPanel);
         }
 
-        public void ChooseCardPanel()
+        public void ChooseSelectionPanel()
         {
-            UpdateCardPanel();
+            UpdateSelectionPanel();
             mainPanelsManager.SelectPanel(chooseCardPanel);
 
-            void UpdateCardPanel()
+            void UpdateSelectionPanel()
             {
-                buttonsPresenter.ExecuteInvestigatorsButton();
+                midPanelPresenter.SelectInvestigatorsPanel();
                 investigatorSelector.InitializeSelectors();
                 investigatorSelector.SetLeadSelector();
-                investigatorsCard.InvestigatorStateResolve();
-                investigatorsCard.RefreshInvestigatorsSelectability();
-                investigatorsCard.RefreshInvestigatorsVisibility();
+                investigatorsCardPresenter.InvestigatorStateResolve();
+                investigatorsCardPresenter.RefreshInvestigatorsSelectability();
+                investigatorsCardPresenter.RefreshInvestigatorsVisibility();
+                deckCardPresenter.RefreshCardsSelectability();
+                deckCardPresenter.RefreshCardsVisibility();
                 deckCardPresenter.RefresQuantity();
-                buttonsPresenter.AutoActivateVisibilitySwitch();
                 buttonsPresenter.AutoActivateReadyButton();
             }
         }

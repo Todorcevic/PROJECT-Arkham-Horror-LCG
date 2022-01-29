@@ -6,7 +6,7 @@ namespace Arkham.Application.MainMenu
     public class StartGameUseCase
     {
         [Inject] private readonly DataMapperService dataPersistence;
-        [Inject] private readonly PanelPresenter panelPresenter;
+        [Inject] private readonly MainPanelPresenter panelPresenter;
         [Inject] private readonly CampaignsRepository campaignRepository;
 
         /*******************************************************************/
@@ -27,7 +27,7 @@ namespace Arkham.Application.MainMenu
         public void ContinueGame()
         {
             if (campaignRepository.IsNotScenario) panelPresenter.ChooseCampaignPanel();
-            else panelPresenter.ChooseCardPanel();
+            else panelPresenter.ChooseSelectionPanel();
         }
     }
 }

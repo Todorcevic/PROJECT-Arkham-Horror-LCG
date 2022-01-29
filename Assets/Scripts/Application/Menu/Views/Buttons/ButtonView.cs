@@ -19,21 +19,6 @@ namespace Arkham.Application.MainMenu
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI text;
 
         /*******************************************************************/
-        public void Desactive(bool isOn)
-        {
-            ChangeTextColor(isOn ? ViewValues.DESACTIVE_COLOR : isLock ? Color.black : Color.white);
-            isInactive = isOn;
-        }
-
-        public void Lock(bool isOn)
-        {
-            HoverActivate(isOn);
-            isInactive = isOn;
-            isLock = isOn;
-        }
-
-        public void ExecuteClick() => ClickAction?.Invoke();
-
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             if (eventData.dragging || isInactive) return;
@@ -53,6 +38,19 @@ namespace Arkham.Application.MainMenu
             if (eventData.dragging || isInactive) return;
             interactableAudio.HoverOffSound();
             HoverActivate(false);
+        }
+
+        public void Desactive(bool isOn)
+        {
+            ChangeTextColor(isOn ? ViewValues.DESACTIVE_COLOR : isLock ? Color.black : Color.white);
+            isInactive = isOn;
+        }
+
+        public void Lock(bool isOn)
+        {
+            HoverActivate(isOn);
+            isInactive = isOn;
+            isLock = isOn;
         }
 
         private void HoverActivate(bool isOn)
