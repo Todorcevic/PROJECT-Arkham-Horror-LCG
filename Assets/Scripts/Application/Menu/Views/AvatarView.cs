@@ -46,8 +46,8 @@ namespace Arkham.Application.MainMenu
         private void CheckActiveTraumas(int xpAmount)
         {
             bool isInactive = xpAmount < GameValues.TRAUMA_COST;
-            physicTraumaButton.IsInactive(isInactive);
-            mentalTraumaButton.IsInactive(isInactive);
+            physicTraumaButton.Desactive(isInactive);
+            mentalTraumaButton.Desactive(isInactive);
         }
     }
 }

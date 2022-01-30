@@ -45,7 +45,7 @@ namespace Arkham.Application.MainMenu
             canvas.blocksRaycasts = isActive;
         }
 
-        public void IsInactive(bool isInactive)
+        public void Desactive(bool isInactive)
         {
             this.isInactive = isInactive;
             glow.color = isInactive ? ViewValues.DISABLE_COLOR : ViewValues.ENABLE_COLOR;

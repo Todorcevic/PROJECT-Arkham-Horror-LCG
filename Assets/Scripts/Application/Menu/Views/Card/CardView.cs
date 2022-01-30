@@ -11,7 +11,6 @@ namespace Arkham.Application.MainMenu
     {
         [Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Inject] private readonly CardShowerManager cardShowerManager;
-        [Inject] private readonly SwapImageCardUseCase swapImageCardUseCase;
         private const string SHAKE = "Shake";
         private const float positionThreshold = 0.285f;
         [Title("RESOURCES")]
@@ -20,7 +19,6 @@ namespace Arkham.Application.MainMenu
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
         [SerializeField, Required, ChildGameObjectsOnly] private Image glow;
         [SerializeField, Required, ChildGameObjectsOnly] protected InteractableAudio audioInteractable;
-        [SerializeField, Required, ChildGameObjectsOnly] private ButtonIconView swapImageButton;
 
         public abstract bool MustReshow { get; }
         public bool IsInactive { get; private set; }
@@ -39,16 +37,7 @@ namespace Arkham.Application.MainMenu
 
         /*******************************************************************/
         [Inject]
-        private void Init(string id, bool canSwapImage)
-        {
-            name = Id = id;
-            swapImageButton.Activate(canSwapImage);
-        }
-
-        private void OnEnable() => swapImageButton.ClickAction += Clicked;
-        private void OnDisable() => swapImageButton.ClickAction -= Clicked;
-
-        private void Clicked() => swapImageCardUseCase.ChangeCardImage(Id);
+        private void Init(string id) => name = Id = id;
 
         /*******************************************************************/
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
