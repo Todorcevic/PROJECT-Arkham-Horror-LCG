@@ -18,7 +18,7 @@ namespace Arkham.Application.MainMenu
         [Inject(Id = "MidZone")] private readonly RectTransform removeZone;
         [Title("RESOURCES")]
         [SerializeField, Required] private Transform cardImageTransform;
-        [SerializeField, Required] private InteractableAudio audioInteractable;
+        [Inject] private InteractableAudio audioInteractable;
 
         public string Id { private get; set; }
         private Transform Card => cardImageTransform;

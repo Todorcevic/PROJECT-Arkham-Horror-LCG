@@ -16,7 +16,7 @@ namespace Arkham.Application.MainMenu
         [Title("RESOURCES")]
         [SerializeField, Required] private CanvasGroup canvasIcon;
         [SerializeField, Required] private Image icon;
-        [SerializeField, Required] private InteractableAudio interactableAudio;
+        [Inject] private InteractableAudio interactableAudio;
         [SerializeField, Required] private Image chapterImage;
         [SerializeField, Required] private CanvasGroup highlighted;
         [SerializeField, Required] private Transform highlightedTextBox;

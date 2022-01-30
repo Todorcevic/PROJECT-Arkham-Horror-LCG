@@ -17,7 +17,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Title("RESOURCES")]
         [SerializeField, Required] private RectTransform card;
-        [SerializeField, Required] private InteractableAudio interactableAudio;
+        [Inject] private InteractableAudio interactableAudio;
         [SerializeField, Required] private CanvasGroup canvas;
         [SerializeField, Required] private Image image;
         [SerializeField, Required] private Image background;

@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
@@ -17,7 +18,7 @@ namespace Arkham.Application.MainMenu
         private Color colorOff = Color.black;
         public event Action ClickAction;
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
+        [Inject] private InteractableAudio interactableAudio;
         [SerializeField, Required] private Transform positionOn;
         [SerializeField, Required] private Transform positionOff;
         [SerializeField, Required] private Image button;

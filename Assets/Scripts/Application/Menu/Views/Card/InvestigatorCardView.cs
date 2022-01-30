@@ -10,10 +10,10 @@ namespace Arkham.Application.MainMenu
 {
     public class InvestigatorCardView : CardView, IPointerClickHandler
     {
+        private InvestigatorStateView currentState;
         [Inject] private readonly AddInvestigatorUseCase addInvestigatorUseCase;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectors;
-        private InvestigatorStateView currentState;
         [Title("INVESTIGATOR RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private List<InvestigatorStateView> states;
         [SerializeField, Required, ChildGameObjectsOnly] private TokenView physicTrauma;

@@ -1,4 +1,5 @@
 ﻿using Arkham.Model;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +26,7 @@ namespace Arkham.Application.MainMenu
             SetXp(xpAmount);
         }
 
-        public void ChangeImage(Sprite sprite)
+        private void ChangeImage(Sprite sprite)
         {
             bool isActive = sprite != null;
             canvasGroup.alpha = isActive ? 1 : 0;

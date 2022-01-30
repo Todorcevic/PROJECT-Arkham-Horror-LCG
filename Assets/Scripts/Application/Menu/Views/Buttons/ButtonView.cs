@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
@@ -14,7 +15,7 @@ namespace Arkham.Application.MainMenu
         private bool isInactive;
         public event Action ClickAction;
         [Title("RESOURCES")]
-        [SerializeField, Required, ChildGameObjectsOnly] private InteractableAudio interactableAudio;
+        [Inject] private InteractableAudio interactableAudio;
         [SerializeField, Required, ChildGameObjectsOnly] private Image background;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI text;
 

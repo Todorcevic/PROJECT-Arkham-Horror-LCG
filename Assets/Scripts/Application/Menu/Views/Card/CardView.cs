@@ -18,7 +18,7 @@ namespace Arkham.Application.MainMenu
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGlow;
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
         [SerializeField, Required, ChildGameObjectsOnly] private Image glow;
-        [SerializeField, Required, ChildGameObjectsOnly] protected InteractableAudio audioInteractable;
+        [Inject] protected InteractableAudio audioInteractable;
 
         public abstract bool MustReshow { get; }
         public bool IsInactive { get; private set; }

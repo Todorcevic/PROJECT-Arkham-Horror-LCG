@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
@@ -14,7 +15,7 @@ namespace Arkham.Application.MainMenu
         private const float SCALE = 1.1f;
         public event Action ClickAction;
         [Title("RESOURCES")]
-        [SerializeField, Required] private InteractableAudio interactableAudio;
+        [Inject] private InteractableAudio interactableAudio;
         [SerializeField] private Image glow;
         [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private CanvasGroup canvas;
