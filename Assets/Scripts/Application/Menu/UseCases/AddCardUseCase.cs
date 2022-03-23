@@ -12,7 +12,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly CardsQuantityPresenter cardQuantityPresenter;
         [Inject] private readonly ButtonsPresenter buttonsPresenter;
         [Inject] private readonly UpdateXpUseCase updateXpUseCase;
-        [Inject] private readonly CardShowerPresenter multiAnimator;
+        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
 
         /*******************************************************************/
         public void AddCard(string cardId, string investigatorId)
@@ -29,12 +29,12 @@ namespace Arkham.Application.MainMenu
         private void UpdateView(CardInfo card, Investigator investigator)
         {
             CardSelectorView selector = cardSelector.SetCardInSelector(card, investigator);
-            multiAnimator.AddCard(selector, card.Id);
+            cardShowerPresenter.AddCard(selector, card.Id);
             cardSelector.SetCanBeRemovedInSelectors(investigator.Id);
             deckCardPresenter.RefreshCardsSelectability();
             deckCardPresenter.SetQuantity(card);
             cardQuantityPresenter.Update(investigator);
-            multiAnimator.ReshowCardDeck(card.Id);
+            cardShowerPresenter.ReshowCardDeck(card.Id);
             buttonsPresenter.AutoActivateReadyButton();
         }
     }
