@@ -9,6 +9,8 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
 
         /*******************************************************************/
+        public void Switch() => UpdateView();
+
         public void Switch(bool isOn)
         {
             UpdateApplication(isOn);

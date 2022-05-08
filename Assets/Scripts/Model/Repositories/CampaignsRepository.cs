@@ -6,7 +6,7 @@ namespace Arkham.Model
     {
         private List<Campaign> campaigns;
 
-        public bool IsNotScenario => string.IsNullOrEmpty(CurrentScenario?.Id);
+        public bool IsScenarioFinished => string.IsNullOrEmpty(CurrentScenario?.Id);
         public Scenario CurrentScenario { get; private set; }
         public IEnumerable<Campaign> Campaigns => campaigns;
 

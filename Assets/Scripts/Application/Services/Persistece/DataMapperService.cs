@@ -86,6 +86,7 @@ namespace Arkham.Application
             void LoadCampaigns(IEnumerable<CampaignDTO> campaigns, string currentScenario)
             {
                 campaignRepository.Reset();
+                campaignRepository.SetScenario(factory.CreateInstance<Scenario>(currentScenario));
                 foreach (CampaignDTO campaign in campaigns)
                 {
                     Campaign newCampaing = new Campaign
@@ -95,7 +96,6 @@ namespace Arkham.Application
                         FirstScenario = factory.CreateInstance<Scenario>(campaign.FirstScenario)
                     };
                     campaignRepository.Add(newCampaing);
-                    campaignRepository.SetScenario(factory.CreateInstance<Scenario>(currentScenario));
                 }
             }
 
@@ -120,18 +120,18 @@ namespace Arkham.Application
                 }
             }
 
-            void LoadUnlockCards(IEnumerable<string> unlockCards)
-            {
-                unlockCardsRepository.Reset();
-                foreach (string cardId in unlockCards)
-                    unlockCardsRepository.Add(cardRepository.Get(cardId));
-            }
-
             void LoadSelectors(IEnumerable<string> investigatorsSelected)
             {
                 selectorRepository.Reset();
                 foreach (string investigatorId in investigatorsSelected)
                     selectorRepository.Add(investigatorRepository.Get(investigatorId));
+            }
+
+            void LoadUnlockCards(IEnumerable<string> unlockCards)
+            {
+                unlockCardsRepository.Reset();
+                foreach (string cardId in unlockCards)
+                    unlockCardsRepository.Add(cardRepository.Get(cardId));
             }
         }
 

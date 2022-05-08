@@ -7,8 +7,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly ApplicationValues applicationValues;
         [Inject] private readonly DataMapperService dataMapperService;
         [Inject] private readonly MainPanelPresenter panelPresenter;
-        [Inject] private readonly StartGameUseCase startGame;
-        [Inject] private readonly ButtonsPresenter buttonsPresenter;
+        [Inject] private readonly ContinueGameUseCase continueGameUseCase;
 
         /*******************************************************************/
         public void Init()
@@ -20,8 +19,7 @@ namespace Arkham.Application.MainMenu
 
             void UpdateView()
             {
-                buttonsPresenter.AutoActivateVisibilitySwitch();
-                if (applicationValues.ContinueGame) startGame.ContinueGame();
+                if (applicationValues.IsContinuosGame) continueGameUseCase.ContinueGame();
                 else panelPresenter.ChooseHomePanel();
             }
         }

@@ -9,7 +9,7 @@ namespace Arkham.Application
 
         /*******************************************************************/
         public bool DependenciesLoaded { get; set; }
-        public bool ContinueGame { get; set; }
+        public bool IsContinuosGame { get; set; }
         public bool CanContinue => File.Exists(gameFiles.PlayerProgressFilePath);
     }
 }
