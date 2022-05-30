@@ -45,7 +45,7 @@ namespace Arkham.Application.MainMenu
                 deckCardPresenter.RefreshCardsSelectability();
                 deckCardPresenter.RefreshCardsVisibility();
                 deckCardPresenter.RefresQuantity();
-                switchVisibilityUseCase.Switch();
+                switchVisibilityUseCase.RefreshVisibility();
                 buttonsPresenter.AutoActivateReadyButton();
             }
         }
