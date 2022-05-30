@@ -4,7 +4,7 @@ using Zenject;
 namespace Arkham.Application.MainMenu
 {
 
-    public class TraumasButtonIconController : IInitializable, IDisposable
+    public class TraumasButtonIconEventHandler : IInitializable, IDisposable
     {
         [Inject] private readonly RemoveTraumasUseCase removeTraumasUseCase;
         [Inject(Id = "PhysicTraumaButton")] private readonly ButtonIconView physicTraumaButton;

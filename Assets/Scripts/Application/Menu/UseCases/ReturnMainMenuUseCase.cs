@@ -8,7 +8,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly MainPanelPresenter panelPresenter;
 
         /*******************************************************************/
-        public void Init()
+        public void ReturnHome()
         {
             UpdateApplication();
             UpdateView();

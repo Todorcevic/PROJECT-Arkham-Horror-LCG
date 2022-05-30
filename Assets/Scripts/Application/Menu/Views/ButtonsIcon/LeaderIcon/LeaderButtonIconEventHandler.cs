@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace Arkham.Application.MainMenu
 {
-    public class LeaderButtonIconController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class LeaderButtonIconEventHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private ButtonIconView leader;
 

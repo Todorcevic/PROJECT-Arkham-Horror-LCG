@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class BackButtonController : IInitializable, IDisposable
+    public class BackButtonEventHandler : IInitializable, IDisposable
     {
         [Inject(Id = "BackButton")] private readonly List<ButtonView> backButtons;
         [Inject] private readonly ReturnMainMenuUseCase returnMainMenuUseCase;
@@ -14,6 +14,6 @@ namespace Arkham.Application.MainMenu
         void IDisposable.Dispose() => backButtons.ForEach(button => button.ClickAction -= Clicked);
 
         /*******************************************************************/
-        private void Clicked() => returnMainMenuUseCase.Init();
+        private void Clicked() => returnMainMenuUseCase.ReturnHome();
     }
 }

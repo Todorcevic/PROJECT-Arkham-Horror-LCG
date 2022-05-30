@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class InvestigatorsButtonController : IInitializable, IDisposable
+    public class InvestigatorsButtonEventHandler : IInitializable, IDisposable
     {
         [Inject] private readonly MidPanelPresenter midPanelPresenter;
         [Inject(Id = "InvestigatorsButton")] private readonly ButtonView investigatorsButton;

@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class ContinueButtonController : IInitializable, IDisposable
+    public class ContinueButtonEventHandler : IInitializable, IDisposable
     {
         [Inject] private readonly StartGameUseCase startGame;
         [Inject(Id = "ContinueButton")] private readonly ButtonView continueButton;

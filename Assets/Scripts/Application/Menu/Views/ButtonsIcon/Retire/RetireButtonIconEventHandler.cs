@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class RetireButtonIconController : IInitializable, IDisposable
+    public class RetireButtonIconEventHandler : IInitializable, IDisposable
     {
         [Inject(Id = "RetireButton")] private readonly ButtonIconView retireButton;
         [Inject(Id = "RetireInvestigatorModal")] private readonly ModalPanelView retireInvestigatorModal;

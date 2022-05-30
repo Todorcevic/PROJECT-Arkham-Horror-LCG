@@ -17,7 +17,7 @@ namespace Arkham.Application
         {
             /*** Controllers ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
-           .InNamespace(AssamblyName).WithSuffix("Controller")).AsSingle();
+           .InNamespace(AssamblyName).WithSuffix("EventHandler")).AsSingle();
 
             /*** Managers ***/
             Container.Bind(x => x.AllNonAbstractClasses()

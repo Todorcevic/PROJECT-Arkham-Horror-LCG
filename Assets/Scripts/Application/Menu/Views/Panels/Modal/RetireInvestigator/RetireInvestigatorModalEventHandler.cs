@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class RetireInvestigatorModalController : IInitializable, IDisposable
+    public class RetireInvestigatorModalEventHandler : IInitializable, IDisposable
     {
         [Inject] private readonly RetireInvestigatorUseCase retireInvestigatorUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
