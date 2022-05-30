@@ -5,7 +5,7 @@ namespace Arkham.Application.MainMenu
 {
     public class ContinueButtonEventHandler : IInitializable, IDisposable
     {
-        [Inject] private readonly StartGameUseCase startGame;
+        [Inject] private readonly ContinueGameUseCase continueGameUseCase;
         [Inject(Id = "ContinueButton")] private readonly ButtonView continueButton;
 
         /*******************************************************************/
@@ -13,6 +13,6 @@ namespace Arkham.Application.MainMenu
         void IDisposable.Dispose() => continueButton.ClickAction -= Clicked;
 
         /*******************************************************************/
-        private void Clicked() => startGame.ContinueGame();
+        private void Clicked() => continueGameUseCase.ContinueGame();
     }
 }

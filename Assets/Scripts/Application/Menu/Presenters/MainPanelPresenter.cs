@@ -9,13 +9,21 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
         [Inject] private readonly ButtonsPresenter buttonsPresenter;
         [Inject] private readonly CampaignPresenter campaignPresenter;
-        [Inject] private readonly MidPanelPresenter midPanelPresenter;
+
+        [Inject] private readonly SwitchVisibilityUseCase switchVisibilityUseCase;
+
         [Inject(Id = "MainPanelsManager")] private readonly PanelsMediator mainPanelsManager;
         [Inject(Id = "ChooseCampaignPanel")] private readonly PanelView chooseCampaignPanel;
         [Inject(Id = "ChooseCardPanel")] private readonly PanelView chooseCardPanel;
         [Inject(Id = "HomePanel")] private readonly PanelView homePanel;
 
         /*******************************************************************/
+        public void ChooseHomePanel()
+        {
+            buttonsPresenter.AutoActivateContinueButton();
+            mainPanelsManager.SelectPanel(homePanel);
+        }
+
         public void ChooseCampaignPanel()
         {
             campaignPresenter.InitializeCampaigns();
@@ -29,7 +37,6 @@ namespace Arkham.Application.MainMenu
 
             void UpdateSelectionPanel()
             {
-                midPanelPresenter.SelectInvestigatorsPanel();
                 investigatorSelector.InitializeSelectors();
                 investigatorSelector.SetLeadSelector();
                 investigatorsCardPresenter.InvestigatorStateResolve();
@@ -38,14 +45,9 @@ namespace Arkham.Application.MainMenu
                 deckCardPresenter.RefreshCardsSelectability();
                 deckCardPresenter.RefreshCardsVisibility();
                 deckCardPresenter.RefresQuantity();
+                switchVisibilityUseCase.Switch();
                 buttonsPresenter.AutoActivateReadyButton();
             }
-        }
-
-        public void ChooseHomePanel()
-        {
-            buttonsPresenter.AutoActivateContinueButton();
-            mainPanelsManager.SelectPanel(homePanel);
         }
     }
 }

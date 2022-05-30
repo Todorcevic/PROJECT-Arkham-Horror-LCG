@@ -18,7 +18,7 @@ namespace Arkham.Application.MainMenu
         private void Start() => SelectButton(FirstButton);
 
         /*******************************************************************/
-        private void SelectButton(ButtonView button)
+        public void SelectButton(ButtonView button)
         {
             currentButton?.Lock(false);
             button.Lock(true);
