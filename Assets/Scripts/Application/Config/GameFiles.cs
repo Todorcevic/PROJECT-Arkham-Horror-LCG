@@ -13,10 +13,11 @@ namespace Arkham.Application
         public string ENCOUNTER_BACK_IMAGE => "EncounterBack";
         public string ALL_CARDS_DATA_FILE => "AllCardsData";
         public string ALL_CARDS_IMAGE_EN => "AllCardsEN";
-        //public string SCENARIO_DATA_FILE => "ScenarioInfo";
+
         //public const string NEW_INVESTIGATORS_FILE = "InvestigatorsDataDefault";
         //public const string CURRENT_INVESTIGATORS_FILE = "InvestigatorsDataSave";
         //public const string TEST_INVESTIGATORS_FILE = "InvestigatorsDataTest";
+
         public string PLAYER_PROGRESS_FILE => "PlayerProgress" + DATAFILE_EXTENSION;
         public string PLAYER_PROGRESS_DEFAULT_FILE => "PlayerProgressDefault";
         public List<string> ALL_SCENARIO_CARDS_FILES => new List<string>

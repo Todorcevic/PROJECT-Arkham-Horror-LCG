@@ -174,18 +174,8 @@ namespace Arkham.Application
             void LoadZones()
             {
                 zonesRepository.Reset();
-                zonesRepository.Add(zonesRepository.EncounterZone);
-                zonesRepository.Add(zonesRepository.DiscardZone);
-                zonesRepository.Add(zonesRepository.ScenarioZone);
-                zonesRepository.Add(zonesRepository.ActZone);
-                zonesRepository.Add(zonesRepository.AgendaZone);
-                zonesRepository.Add(zonesRepository.PlayingZone);
-                zonesRepository.Add(zonesRepository.SkillTestZone);
-                zonesRepository.Add(zonesRepository.OutSideZone);
-                zonesRepository.Add(zonesRepository.VictoryZone);
-                for (int i = 0; i < 12; i++)
-                    zonesRepository.Locations.Add(new Zone(ZoneType.Location));
-                zonesRepository.AddRange(zonesRepository.Locations);
+                zonesRepository.BuildZones();
+                zonesRepository.BuildLocationsZones(campaignRepository.CurrentScenario.LocationsAmount);
 
                 foreach (Player player in playersRepository.AllPlayers)
                 {

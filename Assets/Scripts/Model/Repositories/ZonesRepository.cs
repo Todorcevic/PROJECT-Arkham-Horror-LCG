@@ -36,5 +36,25 @@ namespace Arkham.Model
         public Zone GetZoneById(Guid zoneGuid) => allZones.Find(zone => zone.Guid == zoneGuid);
 
         public Zone GetZoneWithThisCard(Card card) => allZones.Find(zone => zone.ContainThisCard(card));
+
+        public void BuildZones()
+        {
+            Add(EncounterZone);
+            Add(DiscardZone);
+            Add(ScenarioZone);
+            Add(ActZone);
+            Add(AgendaZone);
+            Add(PlayingZone);
+            Add(SkillTestZone);
+            Add(OutSideZone);
+            Add(VictoryZone);
+        }
+
+        public void BuildLocationsZones(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+                Locations.Add(new Zone(ZoneType.Location));
+            AddRange(Locations);
+        }
     }
 }
