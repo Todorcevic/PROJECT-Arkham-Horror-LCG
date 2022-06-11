@@ -15,10 +15,10 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly RemoveInvestigatorUseCase removeInvestigatorUseCase;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
         [Inject] private readonly ChangeInvestigatorUseCase changeInvestigatorUseCase;
+        [Inject] private readonly InteractableAudio audioInteractable;
         [Inject(Id = "MidZone")] private readonly RectTransform removeZone;
         [Title("RESOURCES")]
         [SerializeField, Required] private Transform cardImageTransform;
-        [Inject] private InteractableAudio audioInteractable;
 
         public string Id { private get; set; }
         private Transform Card => cardImageTransform;

@@ -15,7 +15,7 @@ namespace Arkham.Application
         /*******************************************************************/
         public override void InstallBindings()
         {
-            /*** Controllers ***/
+            /*** EventHandler ***/
             Container.Bind(x => x.AllInterfaces()).To(x => x.AllNonAbstractClasses()
            .InNamespace(AssamblyName).WithSuffix("EventHandler")).AsSingle();
 

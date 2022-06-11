@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using System;
@@ -9,13 +8,11 @@ using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class ButtonIconView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class ButtonIconView : MonoBehaviour
     {
-        private bool isInactive;
         private const float SCALE = 1.1f;
-        public event Action ClickAction;
-        [Title("RESOURCES")]
         [Inject] private InteractableAudio interactableAudio;
+        [Title("RESOURCES")]
         [SerializeField] private Image glow;
         [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private CanvasGroup canvas;
@@ -23,22 +20,11 @@ namespace Arkham.Application.MainMenu
         [SerializeField] private string textToShow;
         [SerializeField] private bool clickSound;
 
+        public bool IsInactive { get; private set; }
+        public bool IsClickSound => clickSound;
+        public Action ClickAction { get; set; }
+
         /*******************************************************************/
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (clickSound) interactableAudio.ClickSound();
-            if (isInactive) CantAdd();
-            else ClickAction?.Invoke();
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            if (eventData.dragging) return;
-            HoverOnEffect();
-        }
-
-        public void OnPointerExit(PointerEventData eventData) => HoverOffEffect();
-
         public void Activate(bool isActive)
         {
             canvas.alpha = isActive ? 1 : 0;
@@ -48,19 +34,29 @@ namespace Arkham.Application.MainMenu
 
         public void Desactive(bool isInactive)
         {
-            this.isInactive = isInactive;
+            IsInactive = isInactive;
             glow.color = isInactive ? ViewValues.DISABLE_COLOR : ViewValues.ENABLE_COLOR;
         }
 
-        private void HoverOnEffect()
+        public void PointerClick()
+        {
+            if (IsClickSound) interactableAudio.ClickSound();
+            if (IsInactive) CantAdd();
+            else ClickAction?.Invoke();
+        }
+
+        public void HoverOnEffect()
         {
             interactableAudio.HoverOnSound();
-            glow.DOFillAmount(1, ViewValues.FAST_TIME);
-            text.DOText(textToShow, ViewValues.FAST_TIME);
+            if (!string.IsNullOrEmpty(textToShow))
+            {
+                glow.DOFillAmount(1, ViewValues.FAST_TIME);
+                text.DOText(textToShow, ViewValues.FAST_TIME);
+            }
             transform.DOScale(SCALE, ViewValues.FAST_TIME);
         }
 
-        private void HoverOffEffect()
+        public void HoverOffEffect()
         {
             interactableAudio.HoverOffSound();
             glow.DOFillAmount(0, ViewValues.FAST_TIME);

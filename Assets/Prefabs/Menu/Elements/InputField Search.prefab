@@ -217,6 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 124458689363173548}
   - component: {fileID: 5982373962326525468}
+  - component: {fileID: 1284707886708894479}
   - component: {fileID: 124458689363173545}
   - component: {fileID: 124458689363173546}
   - component: {fileID: 124458689363173547}
@@ -265,10 +266,19 @@ MonoBehaviour:
   textField: {fileID: 124458689520005681}
   background: {fileID: 124458689363173546}
   icon: {fileID: 124458689397075270}
-  timeHoverAnimation: 0.25
-  hoverScale: 1.2
-  deselectColor: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 1}
-  selectColor: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
+--- !u!114 &1284707886708894479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124458689363173549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d5c310e809190c4eb1efa2d1ccbeca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputFieldView: {fileID: 5982373962326525468}
 --- !u!222 &124458689363173545
 CanvasRenderer:
   m_ObjectHideFlags: 0

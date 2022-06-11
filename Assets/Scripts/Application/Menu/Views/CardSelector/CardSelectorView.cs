@@ -2,22 +2,22 @@
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class CardSelectorView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IDropHandler, IShowable
+    public class CardSelectorView : MonoBehaviour, IShowable
     {
         private const float positionThreshold = 0.26f;
-        private Tween cantComplete;
+        private const string CANT_COMPLETE = "CantComplete";
         [Inject] private readonly RemoveCardUseCase removeCardUseCase;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
         [Inject] private readonly CardShowerPresenter cardShowerPresenter;
+        [Inject] private readonly InteractableAudio interactableAudio;
         [Title("RESOURCES")]
         [SerializeField, Required] private RectTransform card;
-        [Inject] private InteractableAudio interactableAudio;
+        [SerializeField, Required] private RectTransform placeHolder;
         [SerializeField, Required] private CanvasGroup canvas;
         [SerializeField, Required] private Image image;
         [SerializeField, Required] private Image background;
@@ -30,13 +30,13 @@ namespace Arkham.Application.MainMenu
         public bool IsEmpty => string.IsNullOrEmpty(Id);
         public Transform SelectorTransform => canvas.transform;
         private bool CanBeRemoved { get; set; }
-        public Vector2 StartPosition => transform.position;
-        public Vector2 ShowPosition => new Vector2(transform.position.x + Screen.width * positionThreshold, Screen.height * 0.5f);
+        public Vector2 StartPosition => placeHolder.position;
+        public Vector2 ShowPosition => new Vector2(placeHolder.position.x + Screen.width * positionThreshold, Screen.height * 0.5f);
         public Sprite FrontImage => image.sprite;
         public Sprite BackImage => null;
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        public void PointerClick()
         {
             interactableAudio.ClickSound();
             if (CanBeRemoved) removeCardUseCase.Remove(Id, investigatorSelectorManager.InvestigatorSelected);
@@ -44,19 +44,18 @@ namespace Arkham.Application.MainMenu
 
             void CantRemoveAnimation()
             {
-                cantComplete.Complete();
-                cantComplete = card.DOPunchPosition(Vector3.right * 10, ViewValues.STANDARD_TIME, 20, 5);
+                DOTween.Complete(CANT_COMPLETE);
+                card.DOPunchPosition(Vector3.right * 10, ViewValues.STANDARD_TIME, 20, 5).SetId(CANT_COMPLETE);
             }
         }
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        public void PointerEnter()
         {
-            if (eventData.dragging) return;
             HoverOnEffect();
             cardShowerPresenter.AddShowableAndShow(this);
         }
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        public void PointerExit()
         {
             HoverOffEffect();
             cardShowerPresenter.RemoveShowableAndHide(this);
@@ -69,7 +68,7 @@ namespace Arkham.Application.MainMenu
             }
         }
 
-        void IDropHandler.OnDrop(PointerEventData eventData)
+        public void Drop()
         {
             HoverOnEffect();
             cardShowerPresenter.AddShowableAndShow(this);

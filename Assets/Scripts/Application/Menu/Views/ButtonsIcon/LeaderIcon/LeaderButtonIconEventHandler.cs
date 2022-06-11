@@ -11,9 +11,9 @@ namespace Arkham.Application.MainMenu
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             if (eventData.dragging) return;
-            leader.OnPointerEnter(eventData);
+            leader.HoverOnEffect();
         }
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => leader.OnPointerExit(eventData);
+        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => leader.HoverOffEffect();
     }
 }

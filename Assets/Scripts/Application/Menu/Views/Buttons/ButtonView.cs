@@ -3,44 +3,22 @@ using Sirenix.OdinInspector;
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class ButtonView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class ButtonView : MonoBehaviour
     {
         private bool isLock;
         private bool isInactive;
         public event Action ClickAction;
-        [Title("RESOURCES")]
         [Inject] private InteractableAudio interactableAudio;
+        [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image background;
         [SerializeField, Required, ChildGameObjectsOnly] private TextMeshProUGUI text;
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
-        {
-            if (eventData.dragging || isInactive) return;
-            interactableAudio.ClickSound();
-            ClickAction?.Invoke();
-        }
-
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
-        {
-            if (eventData.dragging || isInactive) return;
-            interactableAudio.HoverOnSound();
-            HoverActivate(true);
-        }
-
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
-        {
-            if (eventData.dragging || isInactive) return;
-            interactableAudio.HoverOffSound();
-            HoverActivate(false);
-        }
-
         public void Desactive(bool isOn)
         {
             ChangeTextColor(isOn ? ViewValues.DESACTIVE_COLOR : isLock ? Color.black : Color.white);
@@ -52,6 +30,27 @@ namespace Arkham.Application.MainMenu
             HoverActivate(isOn);
             isInactive = isOn;
             isLock = isOn;
+        }
+
+        public void PointerClick()
+        {
+            if (isInactive) return;
+            interactableAudio.ClickSound();
+            ClickAction?.Invoke();
+        }
+
+        public void HoverOnEffect()
+        {
+            if (isInactive) return;
+            interactableAudio.HoverOnSound();
+            HoverActivate(true);
+        }
+
+        public void HoverOffEffect()
+        {
+            if (isInactive) return;
+            interactableAudio.HoverOffSound();
+            HoverActivate(false);
         }
 
         private void HoverActivate(bool isOn)

@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 2992879549137472935}
   - component: {fileID: 4329434936648613502}
   - component: {fileID: 728046689199323153}
+  - component: {fileID: 4375355174816158816}
   m_Layer: 5
   m_Name: ButtonIcon
   m_TagString: Untagged
@@ -277,6 +278,19 @@ MonoBehaviour:
   canvas: {fileID: 4329434936648613502}
   textToShow: 
   clickSound: 0
+--- !u!114 &4375355174816158816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7232313873091879686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7c5e570e78cda49a46fd402bed8698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonIconView: {fileID: 728046689199323153}
 --- !u!1 &8867609605388215213
 GameObject:
   m_ObjectHideFlags: 0

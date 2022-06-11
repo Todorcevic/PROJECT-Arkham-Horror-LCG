@@ -13,10 +13,10 @@ namespace Arkham.Application.MainMenu
 
         /*******************************************************************/
         private void Start() => Activate(imagesCard.CanChange(cardView.Id));
-        private void OnEnable() => ClickAction += Clicked;
-        private void OnDisable() => ClickAction -= Clicked;
+        private void OnEnable() => ClickAction += OnClicked;
+        private void OnDisable() => ClickAction -= OnClicked;
 
         /*******************************************************************/
-        private void Clicked() => swapImageCardUseCase.ChangeCardImage(cardView.Id);
+        private void OnClicked() => swapImageCardUseCase.ChangeCardImage(cardView.Id);
     }
 }

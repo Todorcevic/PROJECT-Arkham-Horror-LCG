@@ -1,18 +1,17 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class CampaignView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
-    {
-        [Inject] private readonly CampaignChooserUseCase campaignChooserUseCase;
+    public class CampaignView : MonoBehaviour
+    {     
         private const float YOFFSET_HOVER = 15f;
         private const float ZOOM_PARALAX = 1.25f;
         private CampaignStateSO currentState;
+        [Inject] private readonly CampaignChooserUseCase campaignChooserUseCase;
         [Title("RESOURCES")]
         [SerializeField, Required] private CanvasGroup canvasIcon;
         [SerializeField, Required] private Image icon;
@@ -26,20 +25,14 @@ namespace Arkham.Application.MainMenu
         public string Id => id;
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        public void PointerClick()
         {
             if (!currentState.Isclickable) return;
-            ClickEffect();
+            interactableAudio.ClickSound();
             campaignChooserUseCase.ChooseCampaign(Id);
         }
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => HoverOnEffect();
-
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => HoverOffEffect();
-
-        private void ClickEffect() => interactableAudio.ClickSound();
-
-        private void HoverOnEffect()
+        public void HoverOnEffect()
         {
             interactableAudio.HoverOnSound();
             chapterImage.transform.DOScale(ZOOM_PARALAX, ViewValues.STANDARD_TIME);
@@ -47,7 +40,7 @@ namespace Arkham.Application.MainMenu
             highlightedTextBox.transform.DOLocalMoveY(YOFFSET_HOVER, ViewValues.STANDARD_TIME);
         }
 
-        private void HoverOffEffect()
+        public void HoverOffEffect()
         {
             interactableAudio.HoverOffSound();
             chapterImage.transform.DOScale(1f, ViewValues.STANDARD_TIME);

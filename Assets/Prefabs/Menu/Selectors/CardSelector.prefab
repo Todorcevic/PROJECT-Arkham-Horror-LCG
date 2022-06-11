@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6920108898983775684}
+  - component: {fileID: 8159044989744718724}
   - component: {fileID: 6396499959933405539}
+  - component: {fileID: 1586551561399317526}
   m_Layer: 5
   m_Name: CardSelector
   m_TagString: Untagged
@@ -38,6 +40,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8159044989744718724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167292358315829728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab6e96f211313c49936da3da12a0a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card: {fileID: 6920108898983775684}
+  placeHolder: {fileID: 1415816774028238464}
+  canvas: {fileID: 6396499959933405539}
+  image: {fileID: 904807066180061608}
+  background: {fileID: 4850368526312077242}
+  cardName: {fileID: 4121154858783106769}
+  quantity: {fileID: 223955344760844326}
 --- !u!225 &6396499959933405539
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -50,6 +71,24 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &1586551561399317526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167292358315829728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 8159044989744718724}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 2
 --- !u!1 &1348962347046350789
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,10 +412,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1415816774028238464}
-  - component: {fileID: 1793695089744892512}
+  - component: {fileID: 3956069476042557730}
   - component: {fileID: 8745428860228659470}
   - component: {fileID: 3486222184269014596}
-  - component: {fileID: 7825192997222086779}
   m_Layer: 5
   m_Name: PlaceHolder
   m_TagString: Untagged
@@ -403,7 +441,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1793695089744892512
+--- !u!114 &3956069476042557730
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -412,15 +450,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5119236372189376633}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab6e96f211313c49936da3da12a0a22, type: 3}
+  m_Script: {fileID: 11500000, guid: da767c6c50983e44691cdad40a50fc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 6920108898983775684}
-  canvas: {fileID: 6396499959933405539}
-  image: {fileID: 904807066180061608}
-  background: {fileID: 4850368526312077242}
-  cardName: {fileID: 4121154858783106769}
-  quantity: {fileID: 223955344760844326}
+  cardSelectorView: {fileID: 8159044989744718724}
 --- !u!222 &8745428860228659470
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -459,24 +492,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7825192997222086779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5119236372189376633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 1793695089744892512}
-  _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 2
 --- !u!1 &6132597068351022863
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,7 +597,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Roland Banks y va
+  m_text: 'Roland Banks y va
+
+    Double'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c42b08014842b5f4fbad8fe13fd60d57, type: 2}
   m_sharedMaterial: {fileID: -8829851309082975395, guid: c42b08014842b5f4fbad8fe13fd60d57, type: 2}
@@ -609,7 +626,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.55
+  m_fontSize: 17.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -621,7 +638,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: -32
+  m_lineSpacing: -50
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

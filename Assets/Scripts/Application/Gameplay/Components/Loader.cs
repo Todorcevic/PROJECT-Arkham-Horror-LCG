@@ -20,7 +20,8 @@ namespace Arkham.Application.GamePlay
         /*******************************************************************/
         private void Awake()
         {
-            DebugInitialization();
+            DebugInitialization(); //Just for debug
+
             dataPersistence.LoadGameData();
             cardFactory.BuildCards();
 

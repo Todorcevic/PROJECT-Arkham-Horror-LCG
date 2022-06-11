@@ -3,13 +3,12 @@ using Sirenix.OdinInspector;
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class SwitchView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class SwitchView : MonoBehaviour
     {
         private const float TIME_MOVE = 0.5f;
         private const float TIME_HOVER = 0.1f;
@@ -29,29 +28,28 @@ namespace Arkham.Application.MainMenu
         public bool IsOn { get; private set; }
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        public void PointerClick()
         {
             interactableAudio.ClickSound();
             SwitchAnimation(!IsOn);
             ClickAction?.Invoke();
         }
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        public void HoverOnEffect()
         {
-            if (eventData.dragging) return;
             interactableAudio.HoverOnSound();
             title.fontStyle = FontStyles.Bold;
             button.transform.DOScale(SCALE, TIME_HOVER);
         }
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+        public void HoverOffEffect()
         {
             interactableAudio.HoverOffSound();
             title.fontStyle = FontStyles.Normal;
             button.transform.DOScale(1f, TIME_HOVER);
         }
 
-        public void SwitchAnimation(bool isOn)
+        private void SwitchAnimation(bool isOn)
         {
             button.transform.DOMove(isOn ? positionOn.position : positionOff.position, TIME_MOVE);
             button.DOColor(isOn ? colorOff : colorOn, TIME_MOVE);

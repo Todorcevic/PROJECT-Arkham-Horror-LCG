@@ -1,24 +1,22 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public abstract class CardView : MonoBehaviour, IShowable, IPointerEnterHandler, IPointerExitHandler, IDropHandler
+    public abstract class CardView : MonoBehaviour, IShowable
     {
-        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
-        [Inject] private readonly CardShowerManager cardShowerManager;
         private const string SHAKE = "Shake";
         private const float positionThreshold = 0.285f;
+        [Inject] protected InteractableAudio audioInteractable;
+        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGlow;
         [SerializeField, Required, ChildGameObjectsOnly] private Image image;
         [SerializeField, Required, ChildGameObjectsOnly] private Image glow;
-        [Inject] protected InteractableAudio audioInteractable;
 
         public abstract bool MustReshow { get; }
         public bool IsInactive { get; private set; }
@@ -40,23 +38,8 @@ namespace Arkham.Application.MainMenu
         private void Init(string id) => name = Id = id;
 
         /*******************************************************************/
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
-        {
-            if (eventData.dragging) return;
-            PointerEnter();
-        }
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
-        {
-            PointerExit();
-            cardShowerPresenter.RemoveShowableAndHide(this);
-        }
-
-        void IDropHandler.OnDrop(PointerEventData eventData)
-        {
-            if (cardShowerManager.CheckIsShow(this)) return;
-            PointerEnter();
-        }
+        public abstract void PointerClick();
 
         public void ChangeImage(Sprite sprite, Sprite backImage)
         {
@@ -84,13 +67,17 @@ namespace Arkham.Application.MainMenu
             transform.DOPunchPosition(Vector3.right * 20, ViewValues.FAST_TIME, 40, 5).SetId(SHAKE + gameObject.GetInstanceID());
         }
 
-        private void PointerEnter()
+        public void PointerEnter()
         {
             canvasGlow.DOFade(1, ViewValues.STANDARD_TIME);
             audioInteractable.HoverOnSound();
             cardShowerPresenter.AddShowableAndShow(this);
         }
 
-        private void PointerExit() => canvasGlow.DOFade(0, ViewValues.STANDARD_TIME);
+        public void PointerExit()
+        {
+            canvasGlow.DOFade(0, ViewValues.STANDARD_TIME);
+            cardShowerPresenter.RemoveShowableAndHide(this);
+        }
     }
 }

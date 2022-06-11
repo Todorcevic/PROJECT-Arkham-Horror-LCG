@@ -3,13 +3,11 @@ using Sirenix.OdinInspector;
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Arkham.Application.MainMenu
 {
-    public class InputFieldView : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler,
-        IPointerExitHandler, IUpdateSelectedHandler
+    public class InputFieldView : MonoBehaviour
     {
         private const float SCALE = 1.2f;
         public event Action UpdateAction;
@@ -22,25 +20,23 @@ namespace Arkham.Application.MainMenu
         public string CurrentText { get; private set; }
 
         /*******************************************************************/
-        void ISelectHandler.OnSelect(BaseEventData eventData) => background.color = ViewValues.ACTIVE_COLOR;
+        public void Selected(bool isSelected) => background.color = isSelected ? ViewValues.ACTIVE_COLOR : ViewValues.DESACTIVE_COLOR;
 
-        void IDeselectHandler.OnDeselect(BaseEventData eventData) => background.color = ViewValues.DESACTIVE_COLOR;
-
-        void IUpdateSelectedHandler.OnUpdateSelected(BaseEventData eventData)
+        public void UpdateText()
         {
             if (field.text == CurrentText) return;
             CurrentText = field.text;
             UpdateAction?.Invoke();
         }
 
-        void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
+        public void HoverOnEffect()
         {
-            if (eventData.dragging) return;
             textField.fontStyle = FontStyles.Bold;
             icon.transform.DOScale(SCALE, ViewValues.STANDARD_TIME);
         }
 
-        void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
+
+        public void HoverOffEffect()
         {
             textField.fontStyle = FontStyles.Normal;
             icon.transform.DOScale(1f, ViewValues.STANDARD_TIME);

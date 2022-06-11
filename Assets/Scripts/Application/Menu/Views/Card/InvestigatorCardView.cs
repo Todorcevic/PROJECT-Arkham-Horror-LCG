@@ -3,12 +3,11 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class InvestigatorCardView : CardView, IPointerClickHandler
+    public class InvestigatorCardView : CardView
     {
         private InvestigatorStateView currentState;
         [Inject] private readonly AddInvestigatorUseCase addInvestigatorUseCase;
@@ -23,10 +22,13 @@ namespace Arkham.Application.MainMenu
         public override bool MustReshow => false;
 
         /*******************************************************************/
-        void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        public override void PointerClick()
         {
             if (DOTween.IsTweening(InvestigatorSelectorView.MOVE_ANIMATION)) return;
-            PointerClick();
+            audioInteractable.ClickSound();
+            if (investigatorSelectors.InvestigatorSelected != Id) selectInvestigatorUseCase.Select(Id);
+            if (IsInactive) CantAdd();
+            else addInvestigatorUseCase.Add(Id);
         }
 
         public void ChangeState(InvestigatorState state)
@@ -41,13 +43,5 @@ namespace Arkham.Application.MainMenu
         public void UpdateMentalTrauma(int amount) => mentalTrauma.UpdateAmount(amount);
 
         public void UpdateXp(int amount) => xp.UpdateAmount(amount);
-
-        public void PointerClick()
-        {
-            audioInteractable.ClickSound();
-            if (investigatorSelectors.InvestigatorSelected != Id) selectInvestigatorUseCase.Select(Id);
-            if (IsInactive) CantAdd();
-            else addInvestigatorUseCase.Add(Id);
-        }
     }
 }
