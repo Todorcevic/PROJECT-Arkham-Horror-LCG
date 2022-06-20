@@ -35,7 +35,6 @@ namespace Arkham.Application.MainMenu
             icon.transform.DOScale(SCALE, ViewValues.STANDARD_TIME);
         }
 
-
         public void HoverOffEffect()
         {
             textField.fontStyle = FontStyles.Normal;

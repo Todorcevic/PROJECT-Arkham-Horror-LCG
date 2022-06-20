@@ -2,20 +2,18 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
     public class CampaignView : MonoBehaviour
-    {     
+    {
         private const float YOFFSET_HOVER = 15f;
         private const float ZOOM_PARALAX = 1.25f;
         private CampaignStateSO currentState;
-        [Inject] private readonly CampaignChooserUseCase campaignChooserUseCase;
         [Title("RESOURCES")]
         [SerializeField, Required] private CanvasGroup canvasIcon;
         [SerializeField, Required] private Image icon;
-        [Inject] private InteractableAudio interactableAudio;
+
         [SerializeField, Required] private Image chapterImage;
         [SerializeField, Required] private CanvasGroup highlighted;
         [SerializeField, Required] private Transform highlightedTextBox;
@@ -23,18 +21,11 @@ namespace Arkham.Application.MainMenu
         [SerializeField, Required, HideInPrefabAssets] private string id;
 
         public string Id => id;
+        public bool IsClickable => currentState.Isclickable;
 
         /*******************************************************************/
-        public void PointerClick()
-        {
-            if (!currentState.Isclickable) return;
-            interactableAudio.ClickSound();
-            campaignChooserUseCase.ChooseCampaign(Id);
-        }
-
         public void HoverOnEffect()
         {
-            interactableAudio.HoverOnSound();
             chapterImage.transform.DOScale(ZOOM_PARALAX, ViewValues.STANDARD_TIME);
             highlighted.DOFade(1, ViewValues.STANDARD_TIME);
             highlightedTextBox.transform.DOLocalMoveY(YOFFSET_HOVER, ViewValues.STANDARD_TIME);
@@ -42,7 +33,6 @@ namespace Arkham.Application.MainMenu
 
         public void HoverOffEffect()
         {
-            interactableAudio.HoverOffSound();
             chapterImage.transform.DOScale(1f, ViewValues.STANDARD_TIME);
             highlighted.DOFade(0, ViewValues.STANDARD_TIME);
             highlightedTextBox.transform.DOLocalMoveY(0, ViewValues.STANDARD_TIME);

@@ -10,8 +10,6 @@ namespace Arkham.Application.MainMenu
     {
         private const string SHAKE = "Shake";
         private const float positionThreshold = 0.285f;
-        [Inject] protected InteractableAudio audioInteractable;
-        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGroup;
         [SerializeField, Required, ChildGameObjectsOnly] private CanvasGroup canvasGlow;
@@ -38,8 +36,9 @@ namespace Arkham.Application.MainMenu
         private void Init(string id) => name = Id = id;
 
         /*******************************************************************/
+        public void PointerEnter() => canvasGlow.DOFade(1, ViewValues.STANDARD_TIME);
 
-        public abstract void PointerClick();
+        public void PointerExit() => canvasGlow.DOFade(0, ViewValues.STANDARD_TIME);
 
         public void ChangeImage(Sprite sprite, Sprite backImage)
         {
@@ -65,19 +64,6 @@ namespace Arkham.Application.MainMenu
         {
             DOTween.Complete(SHAKE + gameObject.GetInstanceID());
             transform.DOPunchPosition(Vector3.right * 20, ViewValues.FAST_TIME, 40, 5).SetId(SHAKE + gameObject.GetInstanceID());
-        }
-
-        public void PointerEnter()
-        {
-            canvasGlow.DOFade(1, ViewValues.STANDARD_TIME);
-            audioInteractable.HoverOnSound();
-            cardShowerPresenter.AddShowableAndShow(this);
-        }
-
-        public void PointerExit()
-        {
-            canvasGlow.DOFade(0, ViewValues.STANDARD_TIME);
-            cardShowerPresenter.RemoveShowableAndHide(this);
         }
     }
 }

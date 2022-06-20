@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
-    public class InvestigatorSelectorDragView : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class InvestigatorSelectorInput : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         private const float SCALE_HOVER = 1.1f;
         public const string HOVEROFF = "HoverOff";
@@ -56,7 +56,6 @@ namespace Arkham.Application.MainMenu
         {
             if (eventData.dragging) return;
             if (DOTween.IsTweening(InvestigatorSelectorView.MOVE_ANIMATION)) return;
-            audioInteractable.HoverOffSound();
             Card.DOScale(1f, ViewValues.STANDARD_TIME).SetId(HOVEROFF);
         }
 

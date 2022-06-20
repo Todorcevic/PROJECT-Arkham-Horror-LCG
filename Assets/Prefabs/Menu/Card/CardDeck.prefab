@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4035640422877748176}
   - component: {fileID: 5891145957348657355}
-  - component: {fileID: 4322408533724353103}
+  - component: {fileID: 3171874114245324720}
   - component: {fileID: 4100283504713718926}
   m_Layer: 5
   m_Name: Front
@@ -134,7 +134,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4367755412011960891}
   m_CullTransparentMesh: 0
---- !u!114 &4322408533724353103
+--- !u!114 &3171874114245324720
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4367755412011960891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a869ed9968fc074f9a70c364c6b2eaf, type: 3}
+  m_Script: {fileID: 11500000, guid: 434f931bba08576428fdd8e7dee6e2c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardView: {fileID: 3206177030987578973}

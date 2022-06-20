@@ -4,14 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
-using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
     public class ButtonIconView : MonoBehaviour
     {
         private const float SCALE = 1.1f;
-        [Inject] private InteractableAudio interactableAudio;
         [Title("RESOURCES")]
         [SerializeField] private Image glow;
         [SerializeField] private TextMeshProUGUI text;
@@ -22,7 +20,7 @@ namespace Arkham.Application.MainMenu
 
         public bool IsInactive { get; private set; }
         public bool IsClickSound => clickSound;
-        public Action ClickAction { get; set; }
+        public event Action ClickAction;
 
         /*******************************************************************/
         public void Activate(bool isActive)
@@ -38,16 +36,10 @@ namespace Arkham.Application.MainMenu
             glow.color = isInactive ? ViewValues.DISABLE_COLOR : ViewValues.ENABLE_COLOR;
         }
 
-        public void PointerClick()
-        {
-            if (IsClickSound) interactableAudio.ClickSound();
-            if (IsInactive) CantAdd();
-            else ClickAction?.Invoke();
-        }
+        public void PointerClick() => ClickAction?.Invoke();
 
         public void HoverOnEffect()
         {
-            interactableAudio.HoverOnSound();
             if (!string.IsNullOrEmpty(textToShow))
             {
                 glow.DOFillAmount(1, ViewValues.FAST_TIME);
@@ -58,13 +50,12 @@ namespace Arkham.Application.MainMenu
 
         public void HoverOffEffect()
         {
-            interactableAudio.HoverOffSound();
             glow.DOFillAmount(0, ViewValues.FAST_TIME);
             text.DOText(string.Empty, ViewValues.FAST_TIME);
             transform.DOScale(1f, ViewValues.FAST_TIME);
         }
 
-        private void CantAdd()
+        public void CantAdd()
         {
             DOTween.Complete(gameObject.GetInstanceID());
             transform.DOPunchPosition(Vector3.right * 20, ViewValues.FAST_TIME, 40, 5).SetId(gameObject.GetInstanceID());

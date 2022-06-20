@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
     public class InputFieldInput : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerExitHandler, IUpdateSelectedHandler
     {
+        [Inject] private readonly InteractableAudio interactableAudio;
         [SerializeField] private InputFieldView inputFieldView;
 
         /*******************************************************************/
@@ -17,6 +19,7 @@ namespace Arkham.Application.MainMenu
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             if (eventData.dragging) return;
+            interactableAudio.HoverOnSound();
             inputFieldView.HoverOnEffect();
         }
 

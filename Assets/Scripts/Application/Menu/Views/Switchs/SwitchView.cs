@@ -17,7 +17,6 @@ namespace Arkham.Application.MainMenu
         private Color colorOff = Color.black;
         public event Action ClickAction;
         [Title("RESOURCES")]
-        [Inject] private InteractableAudio interactableAudio;
         [SerializeField, Required] private Transform positionOn;
         [SerializeField, Required] private Transform positionOff;
         [SerializeField, Required] private Image button;
@@ -30,21 +29,18 @@ namespace Arkham.Application.MainMenu
         /*******************************************************************/
         public void PointerClick()
         {
-            interactableAudio.ClickSound();
             SwitchAnimation(!IsOn);
             ClickAction?.Invoke();
         }
 
         public void HoverOnEffect()
         {
-            interactableAudio.HoverOnSound();
             title.fontStyle = FontStyles.Bold;
             button.transform.DOScale(SCALE, TIME_HOVER);
         }
 
         public void HoverOffEffect()
         {
-            interactableAudio.HoverOffSound();
             title.fontStyle = FontStyles.Normal;
             button.transform.DOScale(1f, TIME_HOVER);
         }

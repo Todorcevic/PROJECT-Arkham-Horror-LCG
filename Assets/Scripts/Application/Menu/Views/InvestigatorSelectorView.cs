@@ -11,12 +11,11 @@ namespace Arkham.Application.MainMenu
     {
         public const string MOVE_ANIMATION = "MoveAnimation";
         [Inject(Id = "PlaceHoldersZone")] private readonly RectTransform placeHoldersZone;
-
         [Title("RESOURCES")]
         [SerializeField, Required] private CanvasGroup canvasGlow;
         [SerializeField, Required] private CanvasGroup canvasImage;
         [SerializeField, Required] private Image image;
-        [SerializeField, Required] private InvestigatorSelectorDragView dragSensor;
+        [SerializeField, Required] private InvestigatorSelectorInput dragSensor;
         [SerializeField, Required] private CanvasGroup canvasSensor;
         [SerializeField, Required] private ButtonIconView leaderIcon;
 

@@ -11,10 +11,6 @@ namespace Arkham.Application.MainMenu
     {
         private const float positionThreshold = 0.26f;
         private const string CANT_COMPLETE = "CantComplete";
-        [Inject] private readonly RemoveCardUseCase removeCardUseCase;
-        [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
-        [Inject] private readonly CardShowerPresenter cardShowerPresenter;
-        [Inject] private readonly InteractableAudio interactableAudio;
         [Title("RESOURCES")]
         [SerializeField, Required] private RectTransform card;
         [SerializeField, Required] private RectTransform placeHolder;
@@ -29,49 +25,25 @@ namespace Arkham.Application.MainMenu
         public bool IsInactive => false;
         public bool IsEmpty => string.IsNullOrEmpty(Id);
         public Transform SelectorTransform => canvas.transform;
-        private bool CanBeRemoved { get; set; }
+        public bool CanBeRemoved { get; set; }
         public Vector2 StartPosition => placeHolder.position;
         public Vector2 ShowPosition => new Vector2(placeHolder.position.x + Screen.width * positionThreshold, Screen.height * 0.5f);
         public Sprite FrontImage => image.sprite;
         public Sprite BackImage => null;
 
         /*******************************************************************/
-        public void PointerClick()
-        {
-            interactableAudio.ClickSound();
-            if (CanBeRemoved) removeCardUseCase.Remove(Id, investigatorSelectorManager.InvestigatorSelected);
-            else CantRemoveAnimation();
 
-            void CantRemoveAnimation()
-            {
-                DOTween.Complete(CANT_COMPLETE);
-                card.DOPunchPosition(Vector3.right * 10, ViewValues.STANDARD_TIME, 20, 5).SetId(CANT_COMPLETE);
-            }
-        }
 
         public void PointerEnter()
         {
-            HoverOnEffect();
-            cardShowerPresenter.AddShowableAndShow(this);
+            ChangeTextColor(Color.black);
+            FillBackground(true);
         }
 
         public void PointerExit()
         {
-            HoverOffEffect();
-            cardShowerPresenter.RemoveShowableAndHide(this);
-
-            void HoverOffEffect()
-            {
-                interactableAudio.HoverOffSound();
-                ChangeTextColor(Color.white);
-                FillBackground(false);
-            }
-        }
-
-        public void Drop()
-        {
-            HoverOnEffect();
-            cardShowerPresenter.AddShowableAndShow(this);
+            ChangeTextColor(Color.white);
+            FillBackground(false);
         }
 
         public void SetSelector(string cardId, Sprite cardSprite = null)
@@ -105,6 +77,12 @@ namespace Arkham.Application.MainMenu
             CanBeRemoved = canBeRemoved;
         }
 
+        public void CantRemoveAnimation()
+        {
+            DOTween.Complete(CANT_COMPLETE);
+            card.DOPunchPosition(Vector3.right * 10, ViewValues.STANDARD_TIME, 20, 5).SetId(CANT_COMPLETE);
+        }
+
         private void ChangeTextColor(Color color)
         {
             cardName.DOColor(color, ViewValues.STANDARD_TIME);
@@ -112,12 +90,5 @@ namespace Arkham.Application.MainMenu
         }
 
         private void FillBackground(bool toFill) => background.DOFillAmount(toFill ? 1 : 0, ViewValues.STANDARD_TIME);
-
-        private void HoverOnEffect()
-        {
-            interactableAudio.HoverOnSound();
-            ChangeTextColor(Color.black);
-            FillBackground(true);
-        }
     }
 }
