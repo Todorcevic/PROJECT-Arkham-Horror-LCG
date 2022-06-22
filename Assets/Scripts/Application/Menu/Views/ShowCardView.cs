@@ -14,6 +14,7 @@ namespace Arkham.Application.MainMenu
         [Title("RESOURCES")]
         [SerializeField, Required, ChildGameObjectsOnly] private Image frontImage;
         [SerializeField, Required, ChildGameObjectsOnly] private Image backImage;
+        [SerializeField, Required, ChildGameObjectsOnly] private Transform glow;
 
         public bool IsShowing { get; set; }
         public bool IsMoving => DOTween.IsTweening(MoveTweenId + GetInstanceID());
@@ -29,6 +30,7 @@ namespace Arkham.Application.MainMenu
 
             ActiveFrontImage();
             ActiveBackImage();
+            SetGlow();
 
             void ActiveFrontImage()
             {
@@ -42,6 +44,11 @@ namespace Arkham.Application.MainMenu
                 backImage.gameObject.SetActive(showableCard.BackImage != null);
                 backImage.sprite = showableCard.BackImage;
                 backImage.color = showableCard.IsInactive ? Color.gray : Color.white;
+            }
+
+            void SetGlow()
+            {
+                glow.localScale = showableCard.BackImage == null ? Vector3.one * 0.8f : Vector3.one * 1.1f;
             }
         }
 
