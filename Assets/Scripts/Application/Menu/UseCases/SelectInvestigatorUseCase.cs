@@ -13,7 +13,6 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly CardSelectorPresenter cardSelector;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorsManager;
         [Inject] private readonly AvatarPresenter avatarPresenter;
-        [Inject] private readonly AvatarView avatartView;
 
         /*******************************************************************/
         public void SelectLead() => Select(selector.Lead?.Id);

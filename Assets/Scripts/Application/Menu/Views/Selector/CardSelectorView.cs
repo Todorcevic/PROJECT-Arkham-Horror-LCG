@@ -3,7 +3,6 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Arkham.Application.MainMenu
 {
@@ -32,8 +31,6 @@ namespace Arkham.Application.MainMenu
         public Sprite BackImage => null;
 
         /*******************************************************************/
-
-
         public void PointerEnter()
         {
             ChangeTextColor(Color.black);

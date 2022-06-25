@@ -10,7 +10,7 @@ namespace Arkham.Application.MainMenu
     public class InvestigatorSelectorView : MonoBehaviour
     {
         public const string MOVE_ANIMATION = "MoveAnimation";
-        [Inject(Id = "PlaceHoldersZone")] private readonly RectTransform placeHoldersZone;
+        [Inject(Id = "InvestigatorsSelectorPlaceHolders")] private readonly RectTransform placeHoldersZone;
         [Title("RESOURCES")]
         [SerializeField, Required] private CanvasGroup canvasGlow;
         [SerializeField, Required] private CanvasGroup canvasImage;
@@ -79,6 +79,7 @@ namespace Arkham.Application.MainMenu
 
         public Tween SetImageAnimation() => DOTween.Sequence()
             .PrependCallback(PosicionateCardOff)
+            .PrependInterval(ViewValues.STANDARD_TIME)
             .Append(CardVisual.DOScale(1, ViewValues.SLOW_TIME));
 
         public Tween RemoveAnimation() => DOTween.Sequence()

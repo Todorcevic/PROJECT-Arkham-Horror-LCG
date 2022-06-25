@@ -11,7 +11,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly InvestigatorsCardPresenter investigatorVisibility;
         [Inject] private readonly InvestigatorSelectorPresenter investigatorSelector;
         [Inject] private readonly SelectInvestigatorUseCase selectInvestigatorUseCase;
-        [Inject] private readonly CardShowerPresenter multiAnimator;
+        [Inject] private readonly CardShowerPresenter cardShoerPresenter;
 
         /*******************************************************************/
         public void Add(string investigatorId)
@@ -26,11 +26,11 @@ namespace Arkham.Application.MainMenu
         private void UpdateView(string investigatorId)
         {
             InvestigatorSelectorView selector = investigatorSelector.AddInvestigatorToSelector(investigatorId);
-            multiAnimator.AddInvestigator(selector, investigatorId);
+            cardShoerPresenter.AddInvestigator(selector, investigatorId);
             investigatorSelector.SetLeadSelector();
             selectInvestigatorUseCase.Select(investigatorId);
             investigatorVisibility.RefreshInvestigatorsSelectability();
-            multiAnimator.ReshowCardInvestigator(investigatorId);
+            cardShoerPresenter.ReshowCardInvestigator(investigatorId);
             buttonsPresenter.AutoActivateReadyButton();
         }
     }
