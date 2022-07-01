@@ -12,12 +12,11 @@ namespace Arkham.Application.GamePlay
         [Inject] private readonly ZonesManager zonesManager;
 
         /*******************************************************************/
-
-        public void MoveCard(Guid cardGuid, ZoneType zoneType)
+        public void MoveCard(Card card, Zone zone)
         {
-            CardView card = cardsManager.Get(cardGuid);
-            ZoneView zone = zonesManager.GetZoneByType(zoneType);
-            card.transform.SetParent(zone.transform, false);
+            CardView cardView = cardsManager.Get(card);
+            ZoneView zoneView = zonesManager.GetZoneView(zone);
+            cardView.transform.SetParent(zoneView.transform, false);
         }
     }
 }

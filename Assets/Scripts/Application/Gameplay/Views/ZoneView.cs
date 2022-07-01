@@ -8,7 +8,6 @@ namespace Arkham.Application.GamePlay
     {
         [SerializeField] private ZoneType zoneType;
 
-        public Guid Guid { get; } = Guid.NewGuid();
         public ZoneType ZoneType => zoneType;
 
         /*******************************************************************/

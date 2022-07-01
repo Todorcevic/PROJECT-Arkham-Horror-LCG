@@ -11,6 +11,7 @@ namespace Arkham.Application.GamePlay
     {
         [Inject] private readonly DataMapperService dataPersistence;
         [Inject] private readonly CardFactory cardFactory;
+        [Inject] private readonly ZonesManager zoneManager;
 
         /*** Debug dependencies ***/
         [Inject] private readonly ImagesCardService imagesCard;
@@ -24,12 +25,11 @@ namespace Arkham.Application.GamePlay
 
             dataPersistence.LoadGameData();
             cardFactory.BuildCards();
+            zoneManager.BuildZones();
 
-            Guid zoneGuid = playersRepository.PlayerLead.InvestigatorZone.Guid;
-
-            foreach (Guid cardGuid in playersRepository.PlayerLead.Deck.Where(card => card is AssetCard).Select(card => card.Guid))
+            foreach (Card card in playersRepository.PlayerLead.Deck)
             {
-                moveCardUseCase.MoveCard(cardGuid, zoneGuid);
+                moveCardUseCase.MoveCard(card, playersRepository.PlayerLead.HandZone);
             }
         }
 

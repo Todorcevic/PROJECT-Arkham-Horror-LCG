@@ -8,12 +8,12 @@ namespace Arkham.Model
         private List<Card> deck = new List<Card>();
 
         public InvestigatorCard InvestigatorCard { get; }
-        public Zone InvestigatorZone { get; } = new Zone(ZoneType.Investigator);
-        public Zone HandZone { get; } = new Zone(ZoneType.Hand);
-        public Zone DeckZone { get; } = new Zone(ZoneType.InvestigatorDeck);
-        public Zone DiscardZone { get; } = new Zone(ZoneType.InvestigatorDiscard);
-        public Zone AssetZone { get; } = new Zone(ZoneType.Assets);
-        public Zone ThreatZone { get; } = new Zone(ZoneType.Threats);
+        public Zone InvestigatorZone { get; } = new Zone();
+        public Zone HandZone { get; } = new Zone();
+        public Zone DeckZone { get; } = new Zone();
+        public Zone DiscardZone { get; } = new Zone();
+        public Zone AssetZone { get; } = new Zone();
+        public Zone ThreatZone { get; } = new Zone();
         public ReadOnlyCollection<Card> Deck => deck.AsReadOnly();
 
         /*******************************************************************/

@@ -6,17 +6,14 @@ namespace Arkham.Model
 {
     public class CardsInGameRepository
     {
-        private Dictionary<Guid, Card> allCards;
+        private List<Card> allCards;
 
-        public Dictionary<Guid, Card> AllCards => allCards;
-        public IEnumerable<Card> AllListCards => allCards.Values;
+        public IEnumerable<Card> AllListCards => allCards;
 
         /*******************************************************************/
-        public void Add(Card card) => allCards.Add(card.Guid, card);
+        public void Add(Card card) => allCards.Add(card);
 
-        public void Reset() => allCards = new Dictionary<Guid, Card>();
-
-        public Card GetCard(Guid guid) => allCards[guid];
+        public void Reset() => allCards = new List<Card>();
 
         public List<T> GetAllCardsOfType<T>() where T : Card => AllListCards.OfType<T>().ToList();
 

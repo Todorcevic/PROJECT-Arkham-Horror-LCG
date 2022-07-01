@@ -167,26 +167,14 @@ namespace Arkham.Application
             Card MapCard(string cardId)
             {
                 Card newCard = factory.CreateInstance<Card>(cardId);
-                newCard.CreateWithThisCard(cardRepository.Get(cardId));
+                newCard.CreateWithThisInfo(cardRepository.Get(cardId));
                 return newCard;
             }
 
             void LoadZones()
             {
                 zonesRepository.Reset();
-                zonesRepository.BuildZones();
                 zonesRepository.BuildLocationsZones(campaignRepository.CurrentScenario.LocationsAmount);
-
-                foreach (Player player in playersRepository.AllPlayers)
-                {
-                    zonesRepository.Add(player.InvestigatorZone);
-                    zonesRepository.Add(player.HandZone);
-                    zonesRepository.Add(player.DeckZone);
-                    zonesRepository.Add(player.DiscardZone);
-                    zonesRepository.Add(player.AssetZone);
-                    zonesRepository.Add(player.ThreatZone);
-                }
-                zonesRepository.AddRange(cardsInGameRepository.AllListCards.Select(card => card.CardZone));
             }
 
             void SetCardsInZone()

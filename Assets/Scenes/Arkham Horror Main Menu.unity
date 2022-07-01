@@ -31769,7 +31769,7 @@ GameObject:
   - component: {fileID: 1100158920}
   - component: {fileID: 1100158921}
   m_Layer: 5
-  m_Name: PlaceHolders
+  m_Name: Investigators Selector PlaceHolders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31842,7 +31842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _components:
   - {fileID: 1100158917}
-  _identifier: PlaceHoldersZone
+  _identifier: InvestigatorsSelectorPlaceHolders
   _useSceneContext: 0
   _context: {fileID: 0}
   _bindType: 0
@@ -39030,7 +39030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2992879549137472935, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.00012207031
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2992879549137472935, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -48355,7 +48355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2992879549137472935, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00012207031
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2992879549137472935, guid: 6aad5b4dc446ed54dbd60ea3c75d7894, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -63503,7 +63503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8975436882729597062, guid: 345257c5c60595341bd8452659ace7e1, type: 3}
       propertyPath: m_Name
-      value: Frame Zone
+      value: Investigators Selector Frame Zone
       objectReference: {fileID: 0}
     - target: {fileID: 8975436882729597063, guid: 345257c5c60595341bd8452659ace7e1, type: 3}
       propertyPath: m_Pivot.x
