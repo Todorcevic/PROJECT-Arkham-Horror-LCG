@@ -1,5 +1,4 @@
 using Arkham.Model;
-using System;
 using System.Collections.Generic;
 using Zenject;
 
@@ -7,7 +6,7 @@ namespace Arkham.Application.GamePlay
 {
     public class ZonesManager
     {
-        private Dictionary<Zone, ZoneView> allRealZones = new Dictionary<Zone, ZoneView>();
+        private readonly Dictionary<Zone, ZoneView> allRealZones = new Dictionary<Zone, ZoneView>();
         [Inject] private readonly PlayersRepository playerRepository;
         [Inject] private readonly List<ZoneView> allZones;
 

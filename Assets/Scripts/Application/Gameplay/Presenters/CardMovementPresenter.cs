@@ -14,7 +14,7 @@ namespace Arkham.Application.GamePlay
         /*******************************************************************/
         public void MoveCard(Card card, Zone zone)
         {
-            CardView cardView = cardsManager.Get(card);
+            CardView cardView = cardsManager.GetCardView(card);
             ZoneView zoneView = zonesManager.GetZoneView(zone);
             cardView.transform.SetParent(zoneView.transform, false);
         }

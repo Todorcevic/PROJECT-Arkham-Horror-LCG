@@ -5,7 +5,7 @@ namespace Arkham.Application.MainMenu
 {
     public class RemoveCardUseCase
     {
-        [Inject] private readonly CardsRepository cardRepository;
+        [Inject] private readonly CardsInfoRepository cardRepository;
         [Inject] private readonly InvestigatorsRepository investigatorRepository;
         [Inject] private readonly ButtonsPresenter buttonsPresenter;
         [Inject] private readonly DeckCardPresenter deckCardPresenter;
@@ -17,7 +17,7 @@ namespace Arkham.Application.MainMenu
         /*******************************************************************/
         public void Remove(string cardId, string investigatorId)
         {
-            CardInfo card = cardRepository.Get(cardId);
+            CardInfo card = cardRepository.GetInfo(cardId);
             Investigator investigator = investigatorRepository.Get(investigatorId);
             UpdateModel(card, investigator);
             UpdateView(card, investigator);

@@ -5,13 +5,13 @@ namespace Arkham.Model
     public class CardXpCostInteractor
     {
         [Inject] private readonly InvestigatorsRepository investigatorRepository;
-        [Inject] private readonly CardsRepository cardRepository;
+        [Inject] private readonly CardsInfoRepository cardRepository;
         [Inject] private readonly CardSelectionInteractor cardSelectionFilter;
 
         /*******************************************************************/
         public int XpPayCost(string cardId, string investigatorId)
         {
-            CardInfo card = cardRepository.Get(cardId);
+            CardInfo card = cardRepository.GetInfo(cardId);
             Investigator investigator = investigatorRepository.Get(investigatorId);
             bool canBeSelected = cardSelectionFilter.CanThisCardBeSelected(cardId, investigatorId);
 

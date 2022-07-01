@@ -5,13 +5,13 @@ namespace Arkham.Model
     public class CardSelectionInteractor
     {
         [Inject] private readonly InvestigatorsRepository investigatorRepository;
-        [Inject] private readonly CardsRepository cardRepository;
+        [Inject] private readonly CardsInfoRepository cardRepository;
         [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
 
         /*******************************************************************/
         public bool CanThisCardBeSelected(string cardId, string investigatorId)
         {
-            CardInfo card = cardRepository.Get(cardId);
+            CardInfo card = cardRepository.GetInfo(cardId);
             Investigator investigator = investigatorRepository.Get(investigatorId);
 
             if (investigator == null) return false;

@@ -9,7 +9,7 @@ namespace Arkham.Application.MainMenu
         [Inject] private readonly CardSelectionInteractor cardSelectionFilter;
         [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
         [Inject] private readonly InvestigatorSelectorsManager investigatorSelectorManager;
-        [Inject] private readonly CardsRepository cardRepository;
+        [Inject] private readonly CardsInfoRepository cardRepository;
         [Inject] private readonly InvestigatorsRepository investigatorRepository;
         [Inject] private readonly CardXpCostInteractor xpInteractor;
         [Inject(Id = "InputSearch")] private readonly InputFieldView inputSearch;
@@ -22,7 +22,7 @@ namespace Arkham.Application.MainMenu
         {
             foreach (DeckCardView cardView in cardsManager.DeckList)
             {
-                CardInfo card = cardRepository.Get(cardView.Id);
+                CardInfo card = cardRepository.GetInfo(cardView.Id);
                 cardView.Show(CanbeShowed());
 
                 bool CanbeShowed()
@@ -50,7 +50,7 @@ namespace Arkham.Application.MainMenu
         {
             foreach (DeckCardView cardView in cardsManager.DeckList)
             {
-                CardInfo card = cardRepository.Get(cardView.Id);
+                CardInfo card = cardRepository.GetInfo(cardView.Id);
                 int quantity = investigatorRepository.AmountLeftOfThisCard(card);
                 cardView.SetQuantity(quantity);
             }

@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Zenject;
 
 namespace Arkham.Model
 {
     public class Zone
     {
-        private List<Card> cards = new List<Card>();
+        private readonly List<Card> cards = new List<Card>();
+        [Inject] private readonly ZonesRepository zonesRepository;
 
         public ReadOnlyCollection<Card> Cards => cards.AsReadOnly();
+
+        /*******************************************************************/
+        public Zone()
+        {
+            zonesRepository.AddNewZone(this);
+        }
 
         /*******************************************************************/
         public void EnterThisCard(Card card) => cards.Add(card);

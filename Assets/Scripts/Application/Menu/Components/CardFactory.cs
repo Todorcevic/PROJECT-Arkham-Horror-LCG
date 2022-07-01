@@ -11,7 +11,7 @@ namespace Arkham.Application.MainMenu
     {
         [Inject] private readonly DiContainer diContainer;
         [Inject] private readonly ImagesCardService imagesCard;
-        [Inject] private readonly CardsRepository cardCollection;
+        [Inject] private readonly CardsInfoRepository cardCollection;
         [Inject] private readonly CardsManager cardsManager;
         [Inject] private readonly CardPresenter cardImagePresenter;
         [SerializeField, Required, AssetsOnly] private DeckCardView cardPrefab;

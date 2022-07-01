@@ -11,7 +11,7 @@ namespace Arkham.Application
         [Inject] private readonly JsonNewtonsoftService serializer;
         [Inject] private readonly GameFiles gameFiles;
         [Inject] private readonly ApplicationValues applicationValues;
-        [Inject] private readonly CardsRepository cardRepository;
+        [Inject] private readonly CardsInfoRepository cardInfoRepository;
         [Inject] private readonly CampaignsRepository campaignRepository;
         [Inject] private readonly SelectorsRepository selectorRepository;
         [Inject] private readonly InvestigatorsRepository investigatorRepository;
@@ -19,13 +19,14 @@ namespace Arkham.Application
         [Inject] private readonly PlayersRepository playersRepository;
         [Inject] private readonly CardsInGameRepository cardsInGameRepository;
         [Inject] private readonly ZonesRepository zonesRepository;
+        [Inject] private readonly CardFactoryService cardFactory;
         [Inject] private readonly NameConventionFactoryService factory;
 
         /*******************************************************************/
         public void LoadInfoCards()
         {
             List<CardInfo> cards = serializer.CreateDataFromResources<List<CardInfo>>(gameFiles.CardsDataFilePath);
-            cardRepository.CreateWith(cards);
+            cardInfoRepository.CreateWith(cards);
         }
 
         public void SaveProgress()
@@ -110,12 +111,12 @@ namespace Arkham.Application
                         investigator.Xp,
                         investigator.IsPlaying,
                         investigator.IsRetired,
-                        cardRepository.Get(investigator.Id),
+                        cardInfoRepository.GetInfo(investigator.Id),
                         factory.CreateInstance<DeckBuildingRules>(investigator.Id)
                         );
 
-                    investigator.MandatoryCards.ForEach(card => newInvestigator.AddToMandatory(cardRepository.Get(card)));
-                    investigator.Deck.ForEach(card => newInvestigator.AddToDeck(cardRepository.Get(card)));
+                    investigator.MandatoryCards.ForEach(card => newInvestigator.AddToMandatory(cardInfoRepository.GetInfo(card)));
+                    investigator.Deck.ForEach(card => newInvestigator.AddToDeck(cardInfoRepository.GetInfo(card)));
                     investigatorRepository.Add(newInvestigator);
                 }
             }
@@ -131,7 +132,7 @@ namespace Arkham.Application
             {
                 unlockCardsRepository.Reset();
                 foreach (string cardId in unlockCards)
-                    unlockCardsRepository.Add(cardRepository.Get(cardId));
+                    unlockCardsRepository.Add(cardInfoRepository.GetInfo(cardId));
             }
         }
 
@@ -148,7 +149,7 @@ namespace Arkham.Application
                 foreach (string cardType in gameFiles.ALL_SCENARIO_CARDS_FILES)
                 {
                     string encounterPath = gameFiles.DeckPath(campaignRepository.CurrentScenario.Id) + cardType;
-                    serializer.CreateDataFromResources<List<string>>(encounterPath).ForEach(cardId => MapCard(cardId));
+                    serializer.CreateDataFromResources<List<string>>(encounterPath).ForEach(cardId => cardFactory.BuildCard(cardId));
                 }
             }
 
@@ -157,18 +158,11 @@ namespace Arkham.Application
                 playersRepository.Reset();
                 foreach (Investigator investigator in selectorRepository.InvestigatorsInSelector)
                 {
-                    InvestigatorCard investigatorCard = MapCard(investigator.Id) as InvestigatorCard;
+                    InvestigatorCard investigatorCard = cardFactory.BuildCard(investigator.Id) as InvestigatorCard;
                     Player newPlayer = new Player(investigatorCard);
-                    investigator.FullDeckId.ForEach(cardId => newPlayer.AddCardInDeck(MapCard(cardId)));
+                    investigator.FullDeckId.ForEach(cardId => newPlayer.AddCardInDeck(cardFactory.BuildCard(cardId)));
                     playersRepository.AddPlayer(newPlayer);
                 }
-            }
-
-            Card MapCard(string cardId)
-            {
-                Card newCard = factory.CreateInstance<Card>(cardId);
-                newCard.CreateWithThisInfo(cardRepository.Get(cardId));
-                return newCard;
             }
 
             void LoadZones()

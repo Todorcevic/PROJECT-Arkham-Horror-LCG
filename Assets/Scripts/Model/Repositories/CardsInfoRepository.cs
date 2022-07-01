@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Arkham.Model
 {
-    public class CardsRepository
+    public class CardsInfoRepository
     {
         private List<CardInfo> cardList;
         private Dictionary<string, CardInfo> cardDict;
@@ -18,7 +18,7 @@ namespace Arkham.Model
             cardDict = cards.ToDictionary(card => card.Id);
         }
 
-        public CardInfo Get(string cardId) => cardDict[cardId];
+        public CardInfo GetInfo(string cardId) => cardDict[cardId];
 
         public List<CardInfo> FindAll(Predicate<CardInfo> filter) => cardList.FindAll(filter);
     }
