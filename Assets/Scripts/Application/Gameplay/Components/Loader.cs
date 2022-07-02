@@ -13,12 +13,9 @@ namespace Arkham.Application.GamePlay
 
         /*** Debug dependencies ***/
         [Inject] private readonly ImagesCardService imagesCard;
-        [Inject] private readonly CardMovementPresenter cardMovementPresenter;
         [Inject] private readonly SelectPlayerUseCase selectPlayerUseCase;
         [Inject] private readonly MoveCardUseCase moveCardUseCase;
         [Inject] private readonly PlayersRepository playersRepository;
-        [Inject] private readonly CardsInGameRepository cardsInGame;
-        [Inject] private readonly ZonesRepository zonesRepository;
 
         /*******************************************************************/
         private void Awake()
@@ -27,9 +24,9 @@ namespace Arkham.Application.GamePlay
 
             dataPersistence.LoadGameData();
             cardFactory.BuildCards();
-            zonesManager.BuildZones();
+            zonesManager.LinkZones();
 
-            Testing();
+            Testing(); //Just for debug
         }
 
         private void Testing()

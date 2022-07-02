@@ -1,5 +1,4 @@
 ﻿using Arkham.Model;
-using System.Collections.Generic;
 using Zenject;
 
 namespace Arkham.Application.GamePlay
@@ -13,10 +12,11 @@ namespace Arkham.Application.GamePlay
         /*******************************************************************/
         public void Select(Player playerSelected)
         {
+            currentSelected ??= playerSelected;
             zonesManager.DeselectPlayerZones(currentSelected);
             zonesManager.SelectedPlayerZones(playerSelected);
 
-            foreach (Card card in currentSelected?.Deck ?? new List<Card>())
+            foreach (Card card in currentSelected.Deck)
             {
                 cardMovementPresenter.MoveCard(card, card.CurrentZone);
             }

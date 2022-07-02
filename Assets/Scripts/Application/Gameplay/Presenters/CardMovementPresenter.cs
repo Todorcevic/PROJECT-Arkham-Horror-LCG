@@ -1,5 +1,6 @@
 using Arkham.Model;
 using Zenject;
+using DG.Tweening;
 
 namespace Arkham.Application.GamePlay
 {
@@ -13,7 +14,8 @@ namespace Arkham.Application.GamePlay
         {
             CardView cardView = cardsManager.GetCardView(card);
             ZoneView zoneView = zonesManager.GetZoneView(zone);
-            cardView.transform.SetParent(zoneView.transform, false);
+            cardView.transform.SetParent(zoneView.transform, true);
+            cardView.transform.DOMove(zoneView.transform.position, 0.25f);
         }
     }
 }

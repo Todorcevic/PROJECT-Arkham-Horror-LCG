@@ -23,12 +23,13 @@ namespace Arkham.Application.GamePlay
             zonesCorrespondecy.Add(zone, zoneView);
         }
 
-        public void BuildZones()
+        public void LinkZones()
         {
-            BuildSingleZones();
-            BuildPlayersZones();
+            LinkSingleZones();
+            LinkPlayersZones();
+            LinkRealtionLocations();
 
-            void BuildSingleZones()
+            void LinkSingleZones()
             {
                 zonesCorrespondecy.Add(zonesRepository.EncounterDiscardZone, GetZoneByType(ZoneType.EncounterDiscard));
                 zonesCorrespondecy.Add(zonesRepository.ScenarioZone, GetZoneByType(ZoneType.Scenario));
@@ -40,7 +41,7 @@ namespace Arkham.Application.GamePlay
                 zonesCorrespondecy.Add(zonesRepository.VictoryZone, GetZoneByType(ZoneType.Outside));
             }
 
-            void BuildPlayersZones()
+            void LinkPlayersZones()
             {
                 foreach (Player player in playersRepository.AllPlayers)
                 {
@@ -51,6 +52,16 @@ namespace Arkham.Application.GamePlay
                     zonesCorrespondecy.Add(player.AssetZone, GetZoneByType(ZoneType.Assets));
                     zonesCorrespondecy.Add(player.ThreatZone, GetZoneByType(ZoneType.Threats));
                 }
+            }
+
+            void LinkRealtionLocations()
+            {
+                foreach (Zone zoneLocation in zonesRepository.Locations)
+                {
+                    zonesCorrespondecy.Add(zoneLocation, GetVoidLocation());
+                }
+
+                ZoneView GetVoidLocation() => allZones.Find(zone => zone.ZoneType == ZoneType.Location && !zonesCorrespondecy.ContainsValue(zone));
             }
         }
 

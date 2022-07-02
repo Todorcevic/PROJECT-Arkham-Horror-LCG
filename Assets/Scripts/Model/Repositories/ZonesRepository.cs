@@ -4,8 +4,6 @@ namespace Arkham.Model
 {
     public class ZonesRepository
     {
-        //private readonly List<Zone> allZones = new List<Zone>();
-
         public Zone EncounterDiscardZone { get; } = new Zone();
         public Zone ScenarioZone { get; } = new Zone();
         public Zone ActZone { get; } = new Zone();
@@ -27,9 +25,5 @@ namespace Arkham.Model
             for (int i = 0; i < amount; i++)
                 Locations.Add(new Zone());
         }
-
-        //public void AddNewZone(Zone newZone) => allZones.Add(newZone);
-
-        // public Zone GetZoneWithThisCard(Card card) => allZones.Find(zone => zone.ContainThisCard(card));
     }
 }
