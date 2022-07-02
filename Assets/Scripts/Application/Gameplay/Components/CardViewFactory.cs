@@ -1,12 +1,10 @@
 ﻿using Arkham.Model;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 namespace Arkham.Application.GamePlay
 {
-    public class CardFactory : MonoBehaviour
+    public class CardViewFactory : MonoBehaviour
     {
         [Inject] private readonly ImagesCardService imagesCard;
         [Inject] private readonly CardsInGameRepository cardsInGameRepository;

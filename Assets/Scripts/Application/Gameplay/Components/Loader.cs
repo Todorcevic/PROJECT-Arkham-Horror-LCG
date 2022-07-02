@@ -8,13 +8,14 @@ namespace Arkham.Application.GamePlay
     public class Loader : MonoBehaviour
     {
         [Inject] private readonly DataMapperService dataPersistence;
-        [Inject] private readonly CardFactory cardFactory;
+        [Inject] private readonly CardViewFactory cardFactory;
         [Inject] private readonly ZonesManager zonesManager;
 
         /*** Debug dependencies ***/
         [Inject] private readonly ImagesCardService imagesCard;
         [Inject] private readonly CardMovementPresenter cardMovementPresenter;
         [Inject] private readonly SelectPlayerUseCase selectPlayerUseCase;
+        [Inject] private readonly MoveCardUseCase moveCardUseCase;
         [Inject] private readonly PlayersRepository playersRepository;
         [Inject] private readonly CardsInGameRepository cardsInGame;
         [Inject] private readonly ZonesRepository zonesRepository;
@@ -33,13 +34,30 @@ namespace Arkham.Application.GamePlay
 
         private void Testing()
         {
-            foreach (Card card in cardsInGame.AllCards)
+            foreach (Player player in playersRepository.AllPlayers)
             {
-                cardMovementPresenter.MoveCard(card, zonesRepository.OutSideZone);
+                foreach (Card card in player.Deck)
+                {
+                    moveCardUseCase.MoveCard(card, player.HandZone);
+                }
             }
 
-            selectPlayerUseCase.Select(playersRepository.PlayerLead);
+            //selectPlayerUseCase.Select(playersRepository.PlayerLead);
         }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                selectPlayerUseCase.Select(playersRepository.PlayerLead);
+            }
+
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                selectPlayerUseCase.Select(playersRepository.Player2);
+            }
+        }
+
 
         private void OnDestroy() => DOTween.Clear();
 

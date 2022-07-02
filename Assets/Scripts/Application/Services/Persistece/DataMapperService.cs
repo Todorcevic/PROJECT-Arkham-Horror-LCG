@@ -1,7 +1,6 @@
 ﻿using Arkham.Model;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Zenject;
 
 namespace Arkham.Application
@@ -21,6 +20,7 @@ namespace Arkham.Application
         [Inject] private readonly ZonesRepository zonesRepository;
         [Inject] private readonly CardFactoryService cardFactory;
         [Inject] private readonly NameConventionFactoryService factory;
+        [Inject] private readonly PlayerFactoryService playerFactoryService;
 
         /*******************************************************************/
         public void LoadInfoCards()
@@ -75,6 +75,7 @@ namespace Arkham.Application
 
         public void LoadProgress()
         {
+            ResetAll();
             FullDTO repositoryDTO = applicationValues.CanContinue ? ContinueData() : NewGameData();
             LoadCampaigns(repositoryDTO.CampaignsList, repositoryDTO.CurrentScenario);
             LoadInvestigators(repositoryDTO.InvestigatorsList);
@@ -84,9 +85,16 @@ namespace Arkham.Application
             FullDTO NewGameData() => serializer.CreateDataFromResources<FullDTO>(gameFiles.PlayerProgressDefaultFilePath);
             FullDTO ContinueData() => serializer.CreateDataFromFile<FullDTO>(gameFiles.PlayerProgressFilePath);
 
-            void LoadCampaigns(IEnumerable<CampaignDTO> campaigns, string currentScenario)
+            void ResetAll()
             {
                 campaignRepository.Reset();
+                investigatorRepository.Reset();
+                selectorRepository.Reset();
+                unlockCardsRepository.Reset();
+            }
+
+            void LoadCampaigns(IEnumerable<CampaignDTO> campaigns, string currentScenario)
+            {
                 campaignRepository.SetScenario(factory.CreateInstance<Scenario>(currentScenario));
                 foreach (CampaignDTO campaign in campaigns)
                 {
@@ -102,7 +110,6 @@ namespace Arkham.Application
 
             void LoadInvestigators(IEnumerable<InvestigatorDTO> investigators)
             {
-                investigatorRepository.Reset();
                 foreach (InvestigatorDTO investigator in investigators)
                 {
                     Investigator newInvestigator = new Investigator(
@@ -123,14 +130,12 @@ namespace Arkham.Application
 
             void LoadSelectors(IEnumerable<string> investigatorsSelected)
             {
-                selectorRepository.Reset();
                 foreach (string investigatorId in investigatorsSelected)
                     selectorRepository.Add(investigatorRepository.Get(investigatorId));
             }
 
             void LoadUnlockCards(IEnumerable<string> unlockCards)
             {
-                unlockCardsRepository.Reset();
                 foreach (string cardId in unlockCards)
                     unlockCardsRepository.Add(cardInfoRepository.GetInfo(cardId));
             }
@@ -138,10 +143,17 @@ namespace Arkham.Application
 
         public void LoadGameData()
         {
-            cardsInGameRepository.Reset();
+            ResetAll();
             LoadScenarioCards();
             LoadInvestigatorsCardsAndPlayers();
             LoadZones();
+
+            void ResetAll()
+            {
+                cardsInGameRepository.Reset();
+                playersRepository.Reset();
+                zonesRepository.Reset();
+            }
 
             void LoadScenarioCards()
             {
@@ -154,26 +166,16 @@ namespace Arkham.Application
 
             void LoadInvestigatorsCardsAndPlayers()
             {
-                playersRepository.Reset();
                 foreach (Investigator investigator in selectorRepository.InvestigatorsInSelector)
                 {
-                    InvestigatorCard investigatorCard = cardFactory.BuildCard(investigator.Id) as InvestigatorCard;
-                    Player newPlayer = new Player(investigatorCard, cardsInGameRepository);
-                    investigatorCard.Owner = newPlayer;
-                    investigatorCard.CurrentZone = newPlayer.InvestigatorZone;
-                    investigator.FullDeckId.ForEach(cardId =>
-                    {
-                        Card newCard = cardFactory.BuildCard(cardId);
-                        newCard.Owner = newPlayer;
-                        newCard.CurrentZone = newPlayer.HandZone;
-                    });
-                    playersRepository.AddPlayer(newPlayer);
+                    Player newPlayer = playerFactoryService.BuildPlayer();
+                    InvestigatorCard investigatorCard = cardFactory.BuildCard(investigator.Id, newPlayer) as InvestigatorCard;
+                    investigator.FullDeckId.ForEach(cardId => cardFactory.BuildCard(cardId, newPlayer));
                 }
             }
 
             void LoadZones()
             {
-                zonesRepository.Reset();
                 zonesRepository.BuildLocationsZones(campaignRepository.CurrentScenario.LocationsAmount);
             }
         }
