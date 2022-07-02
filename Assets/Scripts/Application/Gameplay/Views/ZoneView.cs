@@ -1,6 +1,7 @@
 using Arkham.Model;
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Arkham.Application.GamePlay
 {

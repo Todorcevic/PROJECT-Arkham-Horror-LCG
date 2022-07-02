@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Arkham.Model
 {
@@ -16,6 +12,7 @@ namespace Arkham.Model
         public Player Player2 => allPlayers[1];
         public Player Player3 => allPlayers[2];
         public Player Player4 => allPlayers[3];
+        public Player PlayerSelected { get; set; }
 
         /*******************************************************************/
         public void AddPlayer(Player player) => allPlayers.Add(player);

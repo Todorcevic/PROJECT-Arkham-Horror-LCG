@@ -142,7 +142,6 @@ namespace Arkham.Application
             LoadScenarioCards();
             LoadInvestigatorsCardsAndPlayers();
             LoadZones();
-            SetCardsInZone();
 
             void LoadScenarioCards()
             {
@@ -159,8 +158,15 @@ namespace Arkham.Application
                 foreach (Investigator investigator in selectorRepository.InvestigatorsInSelector)
                 {
                     InvestigatorCard investigatorCard = cardFactory.BuildCard(investigator.Id) as InvestigatorCard;
-                    Player newPlayer = new Player(investigatorCard);
-                    investigator.FullDeckId.ForEach(cardId => newPlayer.AddCardInDeck(cardFactory.BuildCard(cardId)));
+                    Player newPlayer = new Player(investigatorCard, cardsInGameRepository);
+                    investigatorCard.Owner = newPlayer;
+                    investigatorCard.CurrentZone = newPlayer.InvestigatorZone;
+                    investigator.FullDeckId.ForEach(cardId =>
+                    {
+                        Card newCard = cardFactory.BuildCard(cardId);
+                        newCard.Owner = newPlayer;
+                        newCard.CurrentZone = newPlayer.HandZone;
+                    });
                     playersRepository.AddPlayer(newPlayer);
                 }
             }
@@ -169,12 +175,6 @@ namespace Arkham.Application
             {
                 zonesRepository.Reset();
                 zonesRepository.BuildLocationsZones(campaignRepository.CurrentScenario.LocationsAmount);
-            }
-
-            void SetCardsInZone()
-            {
-                foreach (Card card in cardsInGameRepository.AllListCards)
-                    zonesRepository.OutSideZone.EnterThisCard(card);
             }
         }
     }

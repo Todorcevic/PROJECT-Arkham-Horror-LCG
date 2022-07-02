@@ -20,7 +20,7 @@ namespace Arkham.Application.GamePlay
         /*******************************************************************/
         public void BuildCards()
         {
-            foreach (Card card in cardsInGameRepository.AllListCards)
+            foreach (Card card in cardsInGameRepository.AllCards)
             {
                 Sprite front = imagesCard.GetSprite(card.Id);
                 Sprite back = imagesCard.GetSprite(card.Id, isBack: true)
@@ -30,6 +30,7 @@ namespace Arkham.Application.GamePlay
                 CardView cardView = Instantiate(prefab, zonesManager.GetZoneByType(ZoneType.Outside).transform);
 
                 SetMaterialAndMapped();
+                MapZone();
 
                 void SetMaterialAndMapped()
                 {
@@ -40,6 +41,8 @@ namespace Arkham.Application.GamePlay
                     cardView.Init(cardMaterial, card.Id);
                     cardsManager.AddCard(cardView, card);
                 }
+
+                void MapZone() => zonesManager.AddZone(card.CardZone, cardView.CardZoneView);
             }
         }
     }

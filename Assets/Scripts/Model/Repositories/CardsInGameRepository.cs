@@ -8,19 +8,19 @@ namespace Arkham.Model
     {
         private List<Card> allCards;
 
-        public IEnumerable<Card> AllListCards => allCards;
+        public IEnumerable<Card> AllCards => allCards;
 
         /*******************************************************************/
         public void Add(Card card) => allCards.Add(card);
 
         public void Reset() => allCards = new List<Card>();
 
-        public List<T> GetAllCardsOfType<T>() where T : Card => AllListCards.OfType<T>().ToList();
+        public List<T> GetAllCardsOfType<T>() where T : Card => AllCards.OfType<T>().ToList();
 
         public List<Card> GetAllCardsOfThisPlayer(Player player) =>
-            AllListCards.Where(card => card.Owner == player).ToList();
+            AllCards.Where(card => card.Owner == player).ToList();
 
         public List<T> GetCardsOfTypeForThisPlayer<T>(Player player) where T : Card =>
-            AllListCards.OfType<T>().Where(card => card.Owner == player).ToList();
+            AllCards.OfType<T>().Where(card => card.Owner == player).ToList();
     }
 }

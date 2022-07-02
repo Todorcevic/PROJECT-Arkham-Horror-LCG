@@ -7,11 +7,14 @@ namespace Arkham.Application.GamePlay
     {
         [SerializeField] private MeshRenderer mesh;
 
+        public string Id { get; private set; }
+        public ZoneView CardZoneView { get; set; }
+
         /*******************************************************************/
-        public void Init(Material cardMaterial, string name)
+        public void Init(Material cardMaterial, string cardId)
         {
             mesh.material = cardMaterial;
-            this.name = name;
+            Id = name = cardId;
         }
     }
 }

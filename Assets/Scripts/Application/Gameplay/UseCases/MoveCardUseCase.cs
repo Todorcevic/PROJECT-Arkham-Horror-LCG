@@ -14,7 +14,7 @@ namespace Arkham.Application.GamePlay
             UpdateView(card, zone);
         }
 
-        private void UpdateModel(Card card, Zone zone) => card.EnterInThisZone(zone);
+        private void UpdateModel(Card card, Zone zone) => card.CurrentZone = zone;
 
         private void UpdateView(Card card, Zone zone) => cardMovementPresenter.MoveCard(card, zone);
     }
