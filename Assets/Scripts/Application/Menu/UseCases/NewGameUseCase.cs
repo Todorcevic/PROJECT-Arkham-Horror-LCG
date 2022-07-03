@@ -4,7 +4,7 @@ namespace Arkham.Application.MainMenu
 {
     public class NewGameUseCase
     {
-        [Inject] private readonly DataMapperService dataMapperService;
+        [Inject] private readonly MainMenuPersistenceService dataMapperService;
         [Inject] private readonly MainPanelPresenter panelPresenter;
 
         /*******************************************************************/

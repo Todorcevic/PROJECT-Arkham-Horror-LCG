@@ -16,7 +16,9 @@ namespace Arkham.Application.GamePlay
         /*******************************************************************/
         public ZoneView GetZoneView(Zone zone) => zonesCorrespondecy[zone];
 
-        public ZoneView GetZoneByType(ZoneType zoneType) => allZones.Find(zone => zone.ZoneType == zoneType);
+        public ZoneView GetZoneByType(ZoneType zoneType) => allZones.Find(zoneView => zoneView.ZoneType == zoneType);
+
+        private ZoneView GetVoidLocation() => allZones.Find(zoneView => zoneView.ZoneType == ZoneType.Location && !zonesCorrespondecy.ContainsValue(zoneView));
 
         public void AddZone(Zone zone, ZoneView zoneView)
         {
@@ -60,8 +62,6 @@ namespace Arkham.Application.GamePlay
                 {
                     zonesCorrespondecy.Add(zoneLocation, GetVoidLocation());
                 }
-
-                ZoneView GetVoidLocation() => allZones.Find(zone => zone.ZoneType == ZoneType.Location && !zonesCorrespondecy.ContainsValue(zone));
             }
         }
 
@@ -77,7 +77,7 @@ namespace Arkham.Application.GamePlay
 
         public void DeselectPlayerZones(Player player)
         {
-            if (player == null) return;
+            if (player is NullPlayer) return;
             zonesCorrespondecy[player.InvestigatorZone] = GetZoneByType(ZoneType.Outside);
             zonesCorrespondecy[player.HandZone] = GetZoneByType(ZoneType.Outside);
             zonesCorrespondecy[player.DeckZone] = GetZoneByType(ZoneType.Outside);

@@ -5,14 +5,13 @@ namespace Arkham.Application.GamePlay
 {
     public class SwapPlayerPresenter
     {
-        private Player currentSelected;
+        private Player currentSelected = new NullPlayer();
         [Inject] private readonly ZonesManager zonesManager;
         [Inject] private readonly CardMovementPresenter cardMovementPresenter;
 
         /*******************************************************************/
         public void Select(Player playerSelected)
         {
-            currentSelected ??= playerSelected;
             zonesManager.DeselectPlayerZones(currentSelected);
             zonesManager.SelectedPlayerZones(playerSelected);
 

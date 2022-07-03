@@ -7,7 +7,7 @@ namespace Arkham.Application.MainMenu
     {
         [Inject] private readonly SelectorsRepository selector;
         [Inject] private readonly CampaignsRepository campaignRepository;
-        [Inject] private readonly DataMapperService dataPersistence;
+        [Inject] private readonly MainMenuPersistenceService dataPersistence;
         [Inject] private readonly SceneLoaderService sceneLoaderService;
 
         /*******************************************************************/

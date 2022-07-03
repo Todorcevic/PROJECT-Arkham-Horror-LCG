@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Arkham.Application
 {
-    public class DataMapperService
+    public class MainMenuPersistenceService
     {
         [Inject] private readonly JsonNewtonsoftService serializer;
         [Inject] private readonly GameFiles gameFiles;
@@ -15,12 +15,7 @@ namespace Arkham.Application
         [Inject] private readonly SelectorsRepository selectorRepository;
         [Inject] private readonly InvestigatorsRepository investigatorRepository;
         [Inject] private readonly UnlockCardsRepository unlockCardsRepository;
-        [Inject] private readonly PlayersRepository playersRepository;
-        [Inject] private readonly CardsInGameRepository cardsInGameRepository;
-        [Inject] private readonly ZonesRepository zonesRepository;
-        [Inject] private readonly CardFactoryService cardFactory;
         [Inject] private readonly NameConventionFactoryService factory;
-        [Inject] private readonly PlayerFactoryService playerFactoryService;
 
         /*******************************************************************/
         public void LoadInfoCards()
@@ -138,45 +133,6 @@ namespace Arkham.Application
             {
                 foreach (string cardId in unlockCards)
                     unlockCardsRepository.Add(cardInfoRepository.GetInfo(cardId));
-            }
-        }
-
-        public void LoadGameData()
-        {
-            ResetAll();
-            LoadScenarioCards();
-            LoadInvestigatorsCardsAndPlayers();
-            LoadZones();
-
-            void ResetAll()
-            {
-                cardsInGameRepository.Reset();
-                playersRepository.Reset();
-                zonesRepository.Reset();
-            }
-
-            void LoadScenarioCards()
-            {
-                foreach (string cardType in gameFiles.ALL_SCENARIO_CARDS_FILES)
-                {
-                    string encounterPath = gameFiles.DeckPath(campaignRepository.CurrentScenario.Id) + cardType;
-                    serializer.CreateDataFromResources<List<string>>(encounterPath).ForEach(cardId => cardFactory.BuildCard(cardId));
-                }
-            }
-
-            void LoadInvestigatorsCardsAndPlayers()
-            {
-                foreach (Investigator investigator in selectorRepository.InvestigatorsInSelector)
-                {
-                    Player newPlayer = playerFactoryService.BuildPlayer();
-                    InvestigatorCard investigatorCard = cardFactory.BuildCard(investigator.Id, newPlayer) as InvestigatorCard;
-                    investigator.FullDeckId.ForEach(cardId => cardFactory.BuildCard(cardId, newPlayer));
-                }
-            }
-
-            void LoadZones()
-            {
-                zonesRepository.BuildLocationsZones(campaignRepository.CurrentScenario.LocationsAmount);
             }
         }
     }

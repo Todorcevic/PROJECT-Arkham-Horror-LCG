@@ -7,7 +7,8 @@ namespace Arkham.Application.GamePlay
 {
     public class Loader : MonoBehaviour
     {
-        [Inject] private readonly DataMapperService dataPersistence;
+        [Inject] private readonly MainMenuPersistenceService mainMenuPersistence;
+        [Inject] private readonly GamePlayPersistenceService gamePlayPersistence;
         [Inject] private readonly CardViewFactory cardFactory;
         [Inject] private readonly ZonesManager zonesManager;
 
@@ -22,12 +23,14 @@ namespace Arkham.Application.GamePlay
         {
             DebugInitialization(); //Just for debug
 
-            dataPersistence.LoadGameData();
+            gamePlayPersistence.LoadGameData();
             cardFactory.BuildCards();
             zonesManager.LinkZones();
 
             Testing(); //Just for debug
         }
+
+        private void OnDestroy() => DOTween.Clear();
 
         private void Testing()
         {
@@ -38,8 +41,6 @@ namespace Arkham.Application.GamePlay
                     moveCardUseCase.MoveCard(card, player.HandZone);
                 }
             }
-
-            //selectPlayerUseCase.Select(playersRepository.PlayerLead);
         }
 
         private void Update()
@@ -56,13 +57,13 @@ namespace Arkham.Application.GamePlay
         }
 
 
-        private void OnDestroy() => DOTween.Clear();
+
 
         private void DebugInitialization()
         {
-            dataPersistence.LoadInfoCards();
+            mainMenuPersistence.LoadInfoCards();
             imagesCard.Build();
-            dataPersistence.LoadProgress();
+            mainMenuPersistence.LoadProgress();
         }
     }
 }
