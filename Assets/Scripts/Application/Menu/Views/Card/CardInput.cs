@@ -15,9 +15,7 @@ namespace Arkham.Application.MainMenu
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
             if (eventData.dragging) return;
-            audioInteractable.HoverOnSound();
-            cardView.PointerEnter();
-            cardShowerPresenter.AddShowableAndShow(cardView);
+            SelectCard();
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
@@ -29,7 +27,14 @@ namespace Arkham.Application.MainMenu
         void IDropHandler.OnDrop(PointerEventData eventData)
         {
             if (cardShowerManager.CheckIsShow(cardView)) return;
+            SelectCard();
+        }
+
+        private void SelectCard()
+        {
+            audioInteractable.HoverOnSound();
             cardView.PointerEnter();
+            cardShowerPresenter.AddShowableAndShow(cardView);
         }
     }
 }

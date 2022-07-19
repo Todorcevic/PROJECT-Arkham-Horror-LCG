@@ -16,7 +16,7 @@ namespace Arkham.Model
         public Zone DiscardZone { get; } = new Zone();
         public Zone AssetZone { get; } = new Zone();
         public Zone ThreatZone { get; } = new Zone();
-        public virtual List<Card> Deck => cardsInGameRepository.GetAllCardsOfThisPlayer(this);
+        public List<Card> Deck => cardsInGameRepository.GetAllCardsOfThisPlayer(this);
 
         /*******************************************************************/
     }

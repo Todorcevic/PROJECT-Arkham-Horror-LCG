@@ -1,13 +1,9 @@
-﻿using Zenject;
-
-namespace Arkham.Model
+﻿namespace Arkham.Model
 {
     public class Card
     {
-        [Inject] protected readonly CardsInfoRepository cardsInfoRepository;
-
         public string Id { get; private set; }
-        public CardInfo Info => cardsInfoRepository.GetInfo(Id);
+        public CardInfo Info { get; private set; }
         public Zone CurrentZone { get; set; }
         public Player Owner { get; set; }
         public Investigator Control { get; set; }
@@ -15,9 +11,10 @@ namespace Arkham.Model
         public Zone CardZone { get; } = new Zone();
 
         /*******************************************************************/
-        public void Init(string cardId)
+        public void Init(string cardId, CardInfo cardInfo)
         {
             Id = cardId;
+            Info = cardInfo;
         }
 
         /*******************************************************************/

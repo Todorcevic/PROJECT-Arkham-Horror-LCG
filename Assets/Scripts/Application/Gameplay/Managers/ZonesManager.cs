@@ -56,13 +56,8 @@ namespace Arkham.Application.GamePlay
                 }
             }
 
-            void LinkRealtionLocations()
-            {
-                foreach (Zone zoneLocation in zonesRepository.Locations)
-                {
-                    zonesCorrespondecy.Add(zoneLocation, GetVoidLocation());
-                }
-            }
+            void LinkRealtionLocations() =>
+                zonesRepository.Locations.ForEach(zoneLocation => zonesCorrespondecy.Add(zoneLocation, GetVoidLocation()));
         }
 
         public void SelectedPlayerZones(Player player)
@@ -77,7 +72,7 @@ namespace Arkham.Application.GamePlay
 
         public void DeselectPlayerZones(Player player)
         {
-            if (player is NullPlayer) return;
+            if (player is null) return;
             zonesCorrespondecy[player.InvestigatorZone] = GetZoneByType(ZoneType.Outside);
             zonesCorrespondecy[player.HandZone] = GetZoneByType(ZoneType.Outside);
             zonesCorrespondecy[player.DeckZone] = GetZoneByType(ZoneType.Outside);

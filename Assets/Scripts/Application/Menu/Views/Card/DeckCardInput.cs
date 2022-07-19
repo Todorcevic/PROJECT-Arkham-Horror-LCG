@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using UnityEngine.EventSystems;
+﻿using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Arkham.Application.MainMenu
@@ -12,7 +11,7 @@ namespace Arkham.Application.MainMenu
         /*******************************************************************/
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            if (DOTween.IsTweening(InvestigatorSelectorView.MOVE_ANIMATION)) return;
+            if (InvestigatorSelectorView.IsMoving) return;
             audioInteractable.ClickSound();
             if (cardView.IsInactive) cardView.CantAdd();
             else addCardUseCase.AddCard(cardView.Id, investigatorSelectorManager.InvestigatorSelected);

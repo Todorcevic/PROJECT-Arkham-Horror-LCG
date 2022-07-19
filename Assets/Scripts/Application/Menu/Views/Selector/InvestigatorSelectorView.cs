@@ -9,7 +9,7 @@ namespace Arkham.Application.MainMenu
 {
     public class InvestigatorSelectorView : MonoBehaviour
     {
-        public const string MOVE_ANIMATION = "MoveAnimation";
+        private const string MOVE_ANIMATION = "MoveAnimation";
         [Inject(Id = "InvestigatorsSelectorPlaceHolders")] private readonly RectTransform placeHoldersZone;
         [Title("RESOURCES")]
         [SerializeField, Required] private CanvasGroup canvasGlow;
@@ -24,6 +24,8 @@ namespace Arkham.Application.MainMenu
         public Vector2 SensorPosition => Sensor.position;
         public string Id { get; private set; }
         public bool IsLeader { get; private set; }
+
+        public static bool IsMoving => DOTween.IsTweening(MOVE_ANIMATION);
 
         /*******************************************************************/
         public void SetSelector(string cardId, Sprite cardSprite)

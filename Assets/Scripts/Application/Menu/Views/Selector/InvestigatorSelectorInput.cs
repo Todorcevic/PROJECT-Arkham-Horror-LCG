@@ -9,7 +9,7 @@ namespace Arkham.Application.MainMenu
     public class InvestigatorSelectorInput : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         private const float SCALE_HOVER = 1.1f;
-        public const string HOVEROFF = "HoverOff";
+        private const string HOVEROFF = "HoverOff";
         private static bool isDragging;
         [Inject] private readonly DoubleClickDetectorService clickDetector;
         [Inject] private readonly RemoveInvestigatorUseCase removeInvestigatorUseCase;
@@ -41,7 +41,7 @@ namespace Arkham.Application.MainMenu
             void HoverEnter()
             {
                 audioInteractable.HoverOnSound();
-                if (DOTween.IsTweening(InvestigatorSelectorView.MOVE_ANIMATION)) return;
+                if (InvestigatorSelectorView.IsMoving) return;
                 Card.DOScale(SCALE_HOVER, ViewValues.STANDARD_TIME);
             }
 
@@ -55,7 +55,7 @@ namespace Arkham.Application.MainMenu
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
             if (eventData.dragging) return;
-            if (DOTween.IsTweening(InvestigatorSelectorView.MOVE_ANIMATION)) return;
+            if (InvestigatorSelectorView.IsMoving) return;
             Card.DOScale(1f, ViewValues.STANDARD_TIME).SetId(HOVEROFF);
         }
 

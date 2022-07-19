@@ -19,6 +19,7 @@ namespace Arkham.Application.MainMenu
 
         public void Select(string investigatorId)
         {
+            if (investigatorSelectorsManager.InvestigatorSelected == investigatorId) return;
             Investigator investigator = investigatorRepository.Get(investigatorId);
             avatarPresenter.SetAvatar(investigator);
             buttonsPresenter.AutoActivateRetireButton(investigator);

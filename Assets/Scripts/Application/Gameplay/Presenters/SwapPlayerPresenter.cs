@@ -5,7 +5,7 @@ namespace Arkham.Application.GamePlay
 {
     public class SwapPlayerPresenter
     {
-        private Player currentSelected = new NullPlayer();
+        private Player currentSelected;
         [Inject] private readonly ZonesManager zonesManager;
         [Inject] private readonly CardMovementPresenter cardMovementPresenter;
 
@@ -15,16 +15,8 @@ namespace Arkham.Application.GamePlay
             zonesManager.DeselectPlayerZones(currentSelected);
             zonesManager.SelectedPlayerZones(playerSelected);
 
-            foreach (Card card in currentSelected.Deck)
-            {
-                cardMovementPresenter.MoveCard(card, card.CurrentZone);
-            }
-
-            foreach (Card card in playerSelected.Deck)
-            {
-                cardMovementPresenter.MoveCard(card, card.CurrentZone);
-            }
-
+            currentSelected?.Deck.ForEach(card => cardMovementPresenter.MoveCard(card, card.CurrentZone));
+            playerSelected.Deck.ForEach(card => cardMovementPresenter.MoveCard(card, card.CurrentZone));
             currentSelected = playerSelected;
         }
     }
